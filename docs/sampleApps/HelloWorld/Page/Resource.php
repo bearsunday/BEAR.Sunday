@@ -23,7 +23,7 @@ class Resource extends PageResource
      */
     public function onGet()
     {
-        $params = $this->params->get()->setUri('ro://self/HelloWorld');
+        $params = $this->params->get()->setUri('app://self/HelloWorld');
         $this->resource->get($params)->set('message');
     }
 }

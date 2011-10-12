@@ -5,12 +5,12 @@ use BEAR\Framework\FrameworkModule,
 
 // init
 $injector = new Injector(new Container(new Forge(new Config(new Annotation)), new AppModule(new FrameworkModule)));
-$resouce = $injector->getInstance('BEAR\Resource\Resource');
-$page = $injector->getInstance('BEAR\Framework\HelloWorld\HelloWorld');
+$resouce = $injector->getInstance('BEAR\Resource\Client');
+$params = $injector->getInstance('BEAR\Resource\ParamsProvider')->get();
 
 // main
 try {
-    $ro = $resource->request($page)->link('html://self/helloWorld.tpl')->getResourceObject();
+    $ro = $resource->get($params->setUri('page://self/helloWorld'))->link('html://self/helloWorld')->getResourceObject();
     $ro->output('http');
 } catch (Exception $e) {
     echo $e;

@@ -1,32 +1,31 @@
 <?php
 namespace BEAR\Framework\HelloWorld;
-use BEAR\ResourceObject\Page as PageResource;
+use BEAR\Resource\ResourceObject\Resource;
+use BEAR\Resource\ResourceObject\Page;
+use BEAR\Resource\Cleint;
 
-class HelloWorld extends PageResource
+class HelloWorld extends Page
 {
     /**
      * Constructor
      *
-     * @param Resource $resource
      * @Inject
+	 * @Named("greeting=greeting")
      */
-    public function __construct(Resource $resource, Provider $params)
-    {
-        $this->resource = $resource;
-        $this->params = $params;
+    public function __construct(
+		Client $client,
+		Resource $greeting
+	) {
+        $this->client = $client;
+        $this->greeting = $greeting;
     }
 
     /**
-     * Get
-     *
-     * @return void
-     *
-     * @Inject
-     * @Named("lang=user_lang");
+     * @Get
      */
     public function onGet($lang)
     {
-        $params = $this->params->get()->setUri('ro://self/Greetings')->setParams(['lang' => $lang]);
-        $this->resource->read($params)->set('greetings');
+       $this->greeting->setQuery(['lang' => $lang]);
+        $this->client->get($this->greeting)->set('greetings');
     }
 }

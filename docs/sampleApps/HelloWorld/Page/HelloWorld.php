@@ -1,8 +1,8 @@
 <?php
 namespace BEAR\Framework\HelloWorld;
-use BEAR\ResourceObject\Page as PageResource;
+use BEAR\ResourceObject\Page;
 
-class HelloWorld extends PageResource
+class HelloWorld extends Page
 {
     public function onGet()
     {

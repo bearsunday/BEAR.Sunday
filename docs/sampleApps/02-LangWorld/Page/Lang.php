@@ -4,28 +4,35 @@ use BEAR\Resource\ResourceObject\Resource;
 use BEAR\Resource\ResourceObject\Page;
 use BEAR\Resource\Cleint;
 
-class HelloWorld extends Page
+class LangWorld extends Page
 {
     /**
      * Constructor
      *
      * @Inject
-	 * @Named("greeting=greeting")
+	 * @Named("varName")
      */
     public function __construct(
-		Client $client,
-		Resource $greeting
+		Resource $resource,
+		Ro $greeting
 	) {
-        $this->client = $client;
+        $this->resource = $resource;
         $this->greeting = $greeting;
     }
 
+    /**
+     * @Web
+     */
+    public function onWeb()
+    {
+        $this->injectGet('lang', 'ja');
+    }
+    
     /**
      * @Get
      */
     public function onGet($lang)
     {
-       $this->greeting->setQuery(['lang' => $lang]);
-        $this->client->get($this->greeting)->set('greetings');
+       $this->resource->get($this->greeting, ['lang' => $lang])->set('greetings');
     }
 }

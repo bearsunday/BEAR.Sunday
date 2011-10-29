@@ -1,12 +1,8 @@
 <?php
 namespace BEAR\Framework\HelloWorld;
-use BEAR\ResourceObject\ResourceObject;
+use BEAR\ResourceObject\Page;
 
-/**
- *
- * @Template("greeting.tpl")
- */
-class HelloWorld extends ResourceObject
+class HelloWorld extends Page
 {
     public function onGet()
     {

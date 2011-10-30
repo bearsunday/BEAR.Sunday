@@ -3,7 +3,8 @@
 /**
  * HelloWorld without bootstrap script.
  */
-namespace BEAR\Di;
+namespace BEAR\App\HelloWorld;
+
 use BEAR\Framework\FrameworkModule,
     BEAR\App\HelloWorld\Modules\AppModule,
     Ray\Di\Injector,

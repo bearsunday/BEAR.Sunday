@@ -4,6 +4,9 @@ use BEAR\Resource\ResourceObject\Resource;
 use BEAR\Resource\ResourceObject\Page;
 use BEAR\Resource\Cleint;
 
+/**
+ * Lang by query
+ */
 class LangWorld extends Page
 {
     /**

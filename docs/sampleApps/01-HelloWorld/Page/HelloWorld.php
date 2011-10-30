@@ -1,6 +1,7 @@
 <?php
-namespace BEAR\Framework\HelloWorld;
-use BEAR\ResourceObject\Page;
+namespace BEAR\App\HelloWorld;
+
+use BEAR\Resource\ResourceObject\Page;
 
 class HelloWorld extends Page
 {

@@ -2,6 +2,9 @@
 namespace BEAR\Framework\HelloWorld;
 use Aura\Web\Context as WebContext;
 
+/**
+ * Lang by cookie
+ */
 class LangCookie extends LangWorld
 {
     /**

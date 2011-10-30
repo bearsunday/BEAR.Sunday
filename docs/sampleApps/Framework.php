@@ -1,10 +1,10 @@
 <?php
 
-namespace BEAR\Di\Modules;
+namespace Ray\Di\Modules;
 
-use BEAR\Di\AbstractModule;
+use Ray\Di\AbstractModule;
 
-class AppModule extends AbstractModule
+class FrameworkModule extends AbstractModule
 {
     protected function configure()
     {

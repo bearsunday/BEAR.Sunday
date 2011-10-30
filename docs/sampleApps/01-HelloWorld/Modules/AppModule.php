@@ -1,8 +1,9 @@
 <?php
 
-namespace BEAR\Di\Modules;
+namespace BEAR\App\HelloWorld;
 
-use BEAR\Di\AbstractModule;
+use Ray\Di\AbstractModule;
+
 
 class AppModule extends AbstractModule
 {

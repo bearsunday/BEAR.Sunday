@@ -1,14 +1,12 @@
 <?php
 
-namespace Aura\Framework;
-use Aura\Autoload\Loader;
-use Aura\Di\Manager;
-use Aura\Di\Forge;
-use Aura\Di\Config;
+namespace Ray\Framework;
 
-namespace BEAR\Di;
-use BEAR\Framework\FrameworkModule,
-BEAR\App\HelloWorld\Modules\AppModule;
+use Ray\Autoload\Loader;
+use Ray\Di\Manager;
+use Ray\Di\Forge;
+use Ray\Di\Config;
+use BEAR\App\HelloWorld\Modules\AppModule;
 
 /**
  * Setup.

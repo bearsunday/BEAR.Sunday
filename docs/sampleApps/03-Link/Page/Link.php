@@ -1,8 +1,9 @@
 <?php
 namespace BEAR\Framework\HelloWorld;
-use BEAR\Resource\ResourceObject\Resource;
-use BEAR\Resource\ResourceObject\Page;
-use BEAR\Resource\Cleint;
+
+use BEAR\Resource\Resource,
+    BEAR\Resource\ResourceObject\AbstractsPage,
+    BEAR\Resource\Object as Ro;
 
 class LangWorld extends Page
 {
@@ -20,35 +21,30 @@ class LangWorld extends Page
         $this->greeting = $greeting;
     }
 
-    /**
-     * @Web
-     */
     public function onWeb()
     {
         $this->injectGet('lang', 'ja');
     }
     
-    /**
-     * @Get
-     */
     public function onGet($nickname)
     {
        $this->resource->get($this->user, ['nickname' => $nickname])->set('user');
     }
     
+    /**
+     * @param Ro $result
+     */
     public function onLinkProfile(Ro $result)
     {
         return '/user/' . $result['user']['nickname'] . '/profile'
     }
 
     
+    /**
+     * @param Ro $result
+     */
     public function onLinkTwitter(Ro $result)
     {
         return 'http://twitter.com/#!/' . $result['user']['twitter_id'] '/';
-    }
-    
-    public function onLinkHtml(Ro $result)
-    {
-        return 'view://self/user/special';
     }
 }

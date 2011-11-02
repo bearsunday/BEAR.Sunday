@@ -14,7 +14,7 @@ use BEAR\Framework\FrameworkModule,
     Ray\Di\Annotation;
 
 // di
-$di = new Injector(new Container(new Forge(new Config(new Annotation)), new AppModule(new FrameworkModule)));
+$di = new Injector(new Container(new Forge(new Config(new Annotation()), new AppModule(new FrameworkModule)));
 $resource = $di->getInstance('BEAR\Resource\Resource');
 
 try {

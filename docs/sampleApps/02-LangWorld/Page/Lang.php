@@ -1,8 +1,9 @@
 <?php
 namespace BEAR\Framework\HelloWorld;
-use BEAR\Resource\ResourceObject\Resource;
-use BEAR\Resource\ResourceObject\Page;
-use BEAR\Resource\Cleint;
+
+use BEAR\Resource\ResourceObject\Resource,
+    BEAR\Resource\ResourceObject\Page,
+    BEAR\Resource\Cleint;
 
 /**
  * Lang by query
@@ -13,16 +14,14 @@ class LangWorld extends Page
      * Constructor
      *
      * @Inject
-	 * @Named("varName")
+     * @Named("varName")
      */
-    public function __construct(
-		Resource $resource,
-		Ro $greeting
-	) {
+    public function __construct(Resource $resource, Ro $greeting)
+    {
         $this->resource = $resource;
         $this->greeting = $greeting;
     }
-
+    
     /**
      * @Web
      */

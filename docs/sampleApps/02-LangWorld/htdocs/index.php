@@ -7,11 +7,11 @@
  * 
  */
 namespace BEAR\App\HelloWorld;
-require '/path/to/BEAR.Sunday/scripts/bootscrap.php'
+require '/path/to/BEAR.Sunday/scripts/bootscrap.php';
 
 try {
     $resource->$method($page, $query)->link('html')->link('http');
-} catch (Exception $e) {
+} catch (\Exception $e) {
     echo $e;
     exit(1);
 }

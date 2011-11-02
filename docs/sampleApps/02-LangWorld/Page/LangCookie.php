@@ -25,6 +25,7 @@ class LangCookie extends LangWorld
      */
     public function onWeb(WebContext $webContext)
     {
-        $this->inject('lang', $this->webContext->getCookie('lan', 'ja'); // by cookie
-    }    
+        // by cookie
+        $this->inject('lang', $this->webContext->getCookie('lan', 'ja'));
+    }
 }

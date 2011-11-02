@@ -1,1 +1,6 @@
-<h2>{$resource.body.greeting}</h2>
+<html>
+    <head>Hello World</head>
+    <body>
+        {$greeting}
+    </body>
+</html>

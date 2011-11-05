@@ -28,14 +28,14 @@ class User extends Page
 	    // instance
 		$this['title'] = 'User Page';
 		// resource request;
-		$this['weather'] = $this->resource($this->weather)->get();
+		$this['weather'] = $this->resource->object($this->weather)->get();
 		// rsource link request
-		$this['user'] = $this->resource($this->user)->link('friend')->get(['id' => $userId]);
+		$this['user'] = $this->resource->object($this->user)->link('friend')->get(['id' => $userId]);
 		// resource uri request
-		$this['news'] = $this->resource('csv://path/tp/news.csv')->lazy->get();
+		$this['news'] = $this->resource->object('csv://path/tp/news.csv')->lazy->get();
 		// rsouce eager request
-		$this['news'] = $this->resource('csv://path/tp/news.csv')->eager->get();
-		$this['news'] = $this->resource('csv://path/tp/news.csv')->intercept('@Cache')->get();
+		$this['news'] = $this->resource->object('csv://path/tp/news.csv')->eager->get();
+		$this['news'] = $this->resource->object('csv://path/tp/news.csv')->intercept('@Cache')->get();
 		$this['time'] = function(){ return new \DateTime;};
 	}
 	

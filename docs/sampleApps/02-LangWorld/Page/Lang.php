@@ -35,6 +35,6 @@ class LangWorld extends Page
      */
     public function onGet($lang)
     {
-       $this['greeting'] = $this->resource($this->greeting)->read(['lang' => $lang]));
+       $this['greeting'] = $this->resource->object($this->greeting)->read(['lang' => $lang]));
     }
 }

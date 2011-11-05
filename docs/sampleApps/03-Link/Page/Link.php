@@ -28,7 +28,7 @@ class LangWorld extends Page
     
     public function onGet($nickname)
     {
-       $this['user'] = $this->resource($this->user)->get(['nickname' => $nickname]);
+       $this['user'] = $this->resource->objcet($this->user)->get(['nickname' => $nickname]);
     }
     
     /**

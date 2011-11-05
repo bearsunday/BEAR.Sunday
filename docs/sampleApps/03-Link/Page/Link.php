@@ -28,7 +28,7 @@ class LangWorld extends Page
     
     public function onGet($nickname)
     {
-       $this->resource->get($this->user, ['nickname' => $nickname])->set('user');
+       $this['user'] = $this->resource($this->user)->get(['nickname' => $nickname]);
     }
     
     /**
@@ -36,7 +36,7 @@ class LangWorld extends Page
      */
     public function onLinkProfile(Ro $result)
     {
-        return '/user/' . $result['user']['nickname'] . '/profile'
+        return 'page://self/user/' . $result['user']['nickname'] . '/profile'
     }
 
     

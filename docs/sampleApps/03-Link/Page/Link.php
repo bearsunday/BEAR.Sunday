@@ -5,38 +5,14 @@ use BEAR\Resource\Resource,
     BEAR\Resource\ResourceObject\AbstractsPage,
     BEAR\Resource\Object as Ro;
 
-class LangWorld extends Page
+class LinkWorld extends QueryWorld
 {
-    /**
-     * Constructor
-     *
-     * @Inject
-	 * @Named("varName")
-     */
-    public function __construct(
-		Resource $resource,
-		Ro $greeting
-	) {
-        $this->resource = $resource;
-        $this->greeting = $greeting;
-    }
-
-    public function onWeb()
-    {
-        $this->injectGet('lang', 'ja');
-    }
-    
-    public function onGet($nickname)
-    {
-       $this->resource->get($this->user, ['nickname' => $nickname])->set('user');
-    }
-    
     /**
      * @param Ro $result
      */
-    public function onLinkProfile(Ro $result)
+    public function onLinkProfile()
     {
-        return '/user/' . $result['user']['nickname'] . '/profile'
+        return '/user/' . $this['user']['nickname'] . '/profile'
     }
 
     
@@ -45,6 +21,6 @@ class LangWorld extends Page
      */
     public function onLinkTwitter(Ro $result)
     {
-        return 'http://twitter.com/#!/' . $result['user']['twitter_id'] '/';
+        return 'http://twitter.com/#!/' . $this['user']['twitter_id'] '/';
     }
 }

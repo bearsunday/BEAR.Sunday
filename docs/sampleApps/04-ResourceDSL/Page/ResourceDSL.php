@@ -2,10 +2,14 @@
 
 namespace BEAR\App\sample;
 
-// Page Class
-class ResourceDSL extends Page
+use BEAR\Resource\Object as Ro;
+
+/**
+ * Resource Link DSL sample page
+ */
+class ResourceDSL extends Ro
 {
-use DefaultView;
+    use DefaultViewLink;
     
     /**
      * @Inject
@@ -15,7 +19,8 @@ use DefaultView;
         Resource $resource,
         Ro $wheather,
         Ro $user,
-        Ro $news
+        Ro $news,
+        Session $session
     ){
         $this->resource = $resouce;
         $this->weather = $weather;
@@ -56,12 +61,13 @@ use DefaultView;
     
     public function onPostLogin($id, $pass)
     {
-        $this->body['isAuthValid'] = $this->resource
+        $this['isAuthValid'] = $this->resource
         ->post
         ->object($this->auth)
         ->withQuery(['id' => $id, 'pass' => $pass])
         ->csrf
         ->poe
         ->request()['is_valid'];
+        return $this;
     }
 }

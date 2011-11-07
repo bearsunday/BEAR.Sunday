@@ -17,7 +17,7 @@ require '/path/to/BEAR.Sunday/scripts/bootscrap.php';
 // string $mthod
 
 try {
-    $resource->$method($page, $query)->link('html')->link('http');
+    $resource->object($page)->link('html')->link('http')->$method($query);
 } catch (Exception $e) {
     echo $e;
     exit(1);

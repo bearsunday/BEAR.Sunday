@@ -14,6 +14,6 @@ class Greeting implements ResourceObjcet
         if ($lang === 'en') {
             return 'Hello World';
         }
-        return 'ã“ã‚“ã«ã¡ã¯ä¸–ç•Œ';
+        return '‚±‚ñ‚É‚¿‚Í¢ŠE';
     }
 }

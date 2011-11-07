@@ -19,7 +19,7 @@ $resource = $di->getInstance('BEAR\Resource\Resource');
 
 try {
     $page = $resource->newInstance('page://self/helloWorld');
-    $resource->get($page)->link('html')->link('http');
+    $resource->object($page)->link('html')->link('http')->get();
 } catch (Exception $e) {
     echo $e;
     exit(1);

@@ -8,11 +8,21 @@ use BEAR\Resource\Resource,
 class LinkWorld extends QueryWorld
 {
     /**
-     * @param Ro $result
+     * Constructor
+     *
+     * @Inject
      */
+    public function __construct(
+        Resource $resource,
+        Ro $greeting
+    ){
+        $this->resource = $resource;
+        $this->greeting = $greeting;
+    }
+
     public function onLinkProfile()
     {
-        return '/user/' . $this['user']['nickname'] . '/profile'
+        return 'page://self/user/' . $result['user']['nickname'] . '/profile'
     }
 
     

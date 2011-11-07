@@ -35,7 +35,7 @@ class ProvidesWorld extends Page
      */
     public function provideLang()
     {
-        $lang = $webContext->getQuery('lang', 'ja');
+        $lang = $this->webContext->getQuery('lang', 'ja');
         return $lang;
     }    
 }

@@ -8,7 +8,7 @@ use BEAR\Resource\Object as Ro;
  * Resource Link DSL sample page
  */
 class User extends Ro
-{    
+{
     /**
      * @Inject
      */
@@ -17,10 +17,10 @@ class User extends Ro
     ){
         $this->query = $query;
     }
-    
+
     /**
      * @param int $userId
-     * 
+     *
      * @Auth("role=member")
      * @Validate
      * @Cache("time=30")
@@ -31,6 +31,6 @@ class User extends Ro
     {
         $this['user'] = $this->query->select($sql1);
         $this['frined'] = $this->query->select($sql2);
-        return $result;
+        return $this;
     }
 }

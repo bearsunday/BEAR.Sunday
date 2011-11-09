@@ -5,25 +5,14 @@ use Aura\Web\Context as WebContext;
 /**
  * Lang by cookie
  */
-class CookieWorld extends Page
+class CookieWorld extends LnagWorld
 {
     /**
-     * @Inject
-     * @Named("greeitng=greeting")
+     * @Provides("lang")
      */
-    public function __construct(
-        Resource $resource,
-        Ro $greeting
-    ){
-        $this->resource = $resource;
-        $this->greeting = $greeting;
-    }
-    
-    /**
-     * @Linked
-     */
-    public function onGet($lang)
+    public function onProvideLang()
     {
-       $this['greeting'] = $this->resource->get->object($this->greeting)->withQuery(['lang' => $lang])->request();
+        $lang = $this->webContext->getCookie('lang', 'ja');
+        return $lang;
     }
 }

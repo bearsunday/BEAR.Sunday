@@ -10,29 +10,38 @@ use BEAR\Resource\ResourceObject\Resource,
  */
 class QueryWorld extends Page
 {
+    private $resouce;
+    private $greeting;
+    private $webContext;
+
     /**
      * @Inject
      * @Named("greeitng=greeting")
      */
     public function __construct(
         Resource $resource,
-        Ro $greeting
+        Ro $greeting,
+        Webcontext $webContext
     ){
         $this->resource = $resource;
         $this->greeting = $greeting;
+        $this->webContext $webContext
     }
-    
+
     /**
-     * @Web
+     * @param string $lang
      */
     public function onGet($lang)
     {
        $this['greeting'] = $this->resource->get->object($this->greeting)->withQuery(['lang' => $lang])->request();
     }
 
-    public function onWeb(Webcontext $webContext)
+    /**
+     * @Provides("lang")
+     */
+    public function onProvideLang()
     {
-        $args = $webContext->getQuery('lang', 'ja');
-        return $args;
-    }    
+        $lang = $this->webContext->getQuery('lang', 'ja');
+        return $lang;
+    }
 }

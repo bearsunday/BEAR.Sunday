@@ -15,4 +15,4 @@
 	url = git://github.com/crodas/Haanga.git
 [submodule "vendors/Smarty3"]
 	path = vendors/Smarty3
-	url = git@github.com:koriym/Smarty3.git
+	url = git://github.com/koriym/Smarty3.git

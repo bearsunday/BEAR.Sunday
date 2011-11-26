@@ -1,0 +1,18 @@
+[submodule "vendors/Ray.Di"]
+	path = vendors/Ray.Di
+	url = git://github.com/koriym/Ray.Di.git
+[submodule "vendors/Ray.Aop"]
+	path = vendors/Ray.Aop
+	url = git://github.com/koriym/Ray.Aop.git
+[submodule "vendors/BEAR.Resource"]
+	path = vendors/BEAR.Resource
+	url = git://github.com/koriym/BEAR.Resource.git
+[submodule "vendors/Twig"]
+	path = vendors/Twig
+	url = https://github.com/fabpot/Twig.git
+[submodule "vendors/haanga"]
+	path = vendors/haanga
+	url = git://github.com/crodas/Haanga.git
+[submodule "vendors/Smarty3"]
+	path = vendors/Smarty3
+	url = git@github.com:koriym/Smarty3.git

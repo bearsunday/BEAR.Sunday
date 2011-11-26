@@ -1,11 +1,14 @@
-# this file is taken from Aura.system and modified.
 <IfModule mod_rewrite.c>
     # turn on rewriting
     RewriteEngine On
     
     # turn empty reqests into requests for "index.php",
     # keeping the query string intact
-    RewriteRule ^$ index.php [QSA]
+    #RewriteRule ^$ /index.php [QSA]
+    
+    # look for cached versions of files in $system/web/cache/*
+    #RewriteCond %{DOCUMENT_ROOT}/cache%{REQUEST_URI} -f
+    #RewriteRule ^(.*)$ cache/$1 [L]
     
     # for all files not found in the file system,
     # reroute to "index.php" bootstrap script,
@@ -13,5 +16,5 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !favicon.ico$
-    RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+    RewriteRule ^(.*)$ /index.php [QSA,L]
 </IfModule>

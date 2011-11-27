@@ -4,10 +4,14 @@ BEAR, a resource oriented framework.
 
 PHP5.4専用フレームワークBEAR(Sunday)の評価用プロトタイプです。
 
+## Requirement
+
+ * php 5.4RC1+
+ 
 ## Install
     $ git clone git://github.com/koriym/BEAR.Sunday.git
-    $ git submodule update --init
     $ cd BEAR.Sunday
+    $ git submodule update --init
 
 ## CLI
 

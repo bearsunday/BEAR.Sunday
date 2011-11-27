@@ -37,7 +37,8 @@ class HelloResource extends Page
      *
      * @Inject
      */
-    public function __construct(Resource $resource){
+    public function __construct(Resource $resource)
+    {
         $this->resource = $resource;
         $this->greeting = $resource->newInstance('app://self/greeting');
     }

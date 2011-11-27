@@ -13,7 +13,8 @@ class Hello extends Page
 {
     use PhpView;
 
-    public function __construct(){
+    public function __construct()
+    {
     }
 
     /**

@@ -15,26 +15,9 @@ class DevRouter
 
     private $opt;
 
-    /**
-     * Get page key
-     *
-     * @return array [$method, $pagekey]
-     * @throws \InvalidArgumentException
-     */
-    private function getKey()
+    public function __construct(array $global)
     {
-        if (isset($_SERVER['REQUEST_URI'])) {
-            $url = $_SERVER['REQUEST_URI'];
-            goto found;
-        }
-        if (isset($this->opt['url'])) {
-            $url = $this->opt['url'];
-            goto found;
-        }
-        throw new \InvalidArgumentException('URL needed. (ex --url /hello --method get)');
-        found:
-        $pageKey = substr($url, 1);
-        return $pageKey;
+        $this->global = $global;
     }
 
     /**
@@ -44,24 +27,33 @@ class DevRouter
      */
     private function getMethod()
     {
-        if (isset($_GET[self::METHOD_OVERRIDE])) {
-            return $_GET[self::METHOD_OVERRIDE];
+        if (isset($this->global['_GET'][self::METHOD_OVERRIDE])) {
+            return $this->global['_GET'][self::METHOD_OVERRIDE];
         }
-        if (isset($_POST[self::METHOD_OVERRIDE])) {
-            return $_POST[self::METHOD_OVERRIDE];
+        if (isset($this->global['_POST'][self::METHOD_OVERRIDE])) {
+            return $this->global['_POST'][self::METHOD_OVERRIDE];
         }
-        $method = isset($this->opt['method']) ? $this->opt['method'] : 'get';
         return $method;
     }
 
     /**
-     * Get method and page key
+     * Get page key
      *
-     * @return array
+     * @return array [$method, $pagekey]
+     * @throws \InvalidArgumentException
      */
-    public function get($opt)
+    private function getKey()
     {
-        $this->opt = $opt;
-        return [$this->getMethod(), $this->getKey()];
+        if (!isset($this->global['_SERVER']['REQUEST_URI'])) {
+            return '404';
+        }
+        $pageKey = str_replace('/', '\\', substr($this->global['_SERVER']['REQUEST_URI'], 1));
+        return $pageKey;
+    }
+
+    public function get()
+    {
+        $result = array($this->getMethod(), $this->getKey());
+        return $result;
     }
 }

@@ -22,3 +22,6 @@
 [submodule "vendors/Aura.Autoload"]
 	path = vendors/Aura.Autoload
 	url = https://github.com/auraphp/Aura.Autoload.git
+[submodule "vendors/guzzle"]
+	path = vendors/guzzle
+	url = git://github.com/guzzle/guzzle.git

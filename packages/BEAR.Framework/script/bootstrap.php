@@ -22,17 +22,20 @@ use Ray\Di\Annotation,
     BEAR\Framework\Router,
     BEAR\Framework\Exception\NotFound;
 
-$start = microtime(true);
-$opt = getopt('', array('url:', 'method::'));
-list($method, $pageKey) = (new DevRouter)->get($opt);
 
-$cacheFile = $appPath . "/tmp/resource/%%RES%%{$pageKey}";
-if (file_exists($cacheFile) === true) {
-    list($di, $resource, $page) = unserialize(file_get_contents($cacheFile));
-    $dir = (dirname(dirname(dirname($cacheFile))));
-    $page->headers['DEV_cache'] = 'X-Cache-Since: ' . date ("r", filemtime($cacheFile)) . ' (' . filesize($cacheFile) . ')';
-    $start = microtime(true);
-    return array($di, $resource, $page, $method);
+// router
+$globals = (PHP_SAPI !== 'cli') ? $GLOBALS : array(
+	'_GET' => array(DevRouter::METHOD_OVERRIDE => $argv[1]),
+	'_SERVER' => array('REQUEST_URI' => $argv[2])
+);
+list($method, $pageKey) = (new DevRouter($globals))->get();
+$objectCache = $appPath . "/tmp/%%RES%%{$pageKey}";
+
+// get page
+if (file_exists($objectCache) === true) {
+    list($di, $resource, $page) = unserialize(file_get_contents($objectCache));
+    $dir = (dirname(dirname(dirname($objectCache))));
+    $page->headers[] = 'X-Cache-Since: ' . date ("r", filemtime($objectCache)) . ' (' . filesize($objectCache) . ')';
 } else {
     // application fixed instance ($di, $resource)
     $appModule =  '\\' . $appName. '\\Module\\AppModule';
@@ -45,10 +48,9 @@ if (file_exists($cacheFile) === true) {
     try {
         $page = $resource->newInstance("page://self/{$pageKey}");
     } catch (\ReflectionException $e) {
-        throw new NotFound($pageKey);
+        $page = $resource->newInstance("page://self/code404");
     } catch (\Exception $e) {
         throw $e;
     }
-    file_put_contents($cacheFile, serialize(array($di, $resource, $page)));
-    return array($di, $resource, $page, $method);
+    file_put_contents($objectCache, serialize(array($di, $resource, $page)));
 }

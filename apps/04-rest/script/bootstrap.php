@@ -10,15 +10,18 @@
  */
 namespace restWorld;
 
-// app boot
-$appStart = microtime(true);
+if (php_sapi_name() == 'cli-server') {
+    // route static assets and return false
+    if (preg_match('/\.(?:png|jpg|jpeg|gif|js)$/', $_SERVER["REQUEST_URI"])) {
+        return false;
+    }
+}
 $appName = __NAMESPACE__;
 $system = dirname(dirname(dirname(__DIR__)));
 $appPath  = dirname(__DIR__);
 
-include __DIR__ . 'loader/auto_loader.php';
-include __DIR__ . 'exceptionHandler/dev.php';
+require $appPath . '/script/loader/manual_loader.php';
+require $appPath . '/script/exception_handler/standard_handler.php';
 // system boot
-include $system . '/packages/BEAR.Framework/script/bootstrap.php';
-
+require $system . '/packages/BEAR.Framework/script/bootstrap.php';
 // end of boot

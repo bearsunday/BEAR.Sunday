@@ -11,12 +11,6 @@
  */
 namespace restWorld;
 
-if (php_sapi_name() == 'cli-server') {
-    // route static assets and return false
-    if (preg_match('/\.(?:png|jpg|jpeg|gif|js)$/', $_SERVER["REQUEST_URI"])) {
-        return false;
-    }
-}
 // app boot
 $appStart = microtime(true);
 $appName = __NAMESPACE__;

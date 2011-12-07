@@ -1,12 +1,12 @@
 <?php
 /**
- * CLI / built-in web server script.
+ * CLI / Built-in web server script.
  *
  * @package BEAR.Framework
  *
- * @global $method
- * @global $ro
- * @global $query
+ * @global string               $method
+ * @global BEAR\Resource\Client $resource
+ * @global BEAR\Resource\Object $page
  */
 use BEAR\Resource\Object as ResourceObject;
 
@@ -18,7 +18,6 @@ if (php_sapi_name() == 'cli-server') {
 }
 
 // app define
-$appStart = microtime(true);
 $appName = 'restWorld';
 $system = (dirname(dirname(dirname(__DIR__))));
 $appPath  = dirname(__DIR__);
@@ -38,5 +37,4 @@ if (!($response instanceof ResourceObject)) {
     $response = $ro;
 }
 
-// output
 include $appPath . '/script/output/api.output.php';

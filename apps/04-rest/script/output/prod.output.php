@@ -7,13 +7,17 @@
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
 
+$code = new BEAR\Resource\Code;
+$statusText =  (isset($code->statusText[$response->code])) ? $code->statusText[$response->code] : '';
+
 if (PHP_SAPI === 'cli') {
     goto cli;
 }
 
 web:
     // code
-    header("{$_ENV['SERVER_PROTOCOL']} {$response->code} {$statusText}", true, $response->code);
+    $protocol = isset($_ENV['SERVER_PROTOCOL']) ? $_ENV['SERVER_PROTOCOL'] : 'HTTP/1.1';
+    header("{$protocol} {$response->code} {$statusText}", true, $response->code);
     // header
     foreach ($response->headers as $header) {
         header($header);

@@ -1,8 +1,12 @@
 <?php
 /**
- * CLI / built-in web server script.
+ * CLI / Built-in web server script.
  *
  * @package BEAR.Framework
+ *
+ * @global string               $method
+ * @global BEAR\Resource\Client $resource
+ * @global BEAR\Resource\Object $page
  */
 
 if (php_sapi_name() == 'cli-server') {
@@ -16,5 +20,4 @@ include dirname(__DIR__) . '/script/bootstrap.php';
 
 $response = $resource->$method->object($page)->linkSelf('view')->eager->request();
 
-// output
-include dirname(__DIR__) . '/script/output.php';
+include dirname(__DIR__) . '/script/output/prod.output.php';

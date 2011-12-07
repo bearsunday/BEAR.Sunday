@@ -1,6 +1,6 @@
 <?php
 
-namespace helloWorld\Module;
+namespace restWorld\Module;
 
 use Ray\Di\InjectorInterface,
     Ray\Di\ProviderInterface;
@@ -25,7 +25,7 @@ class ResourceAdapterProvider implements ProviderInterface
      */
     public function get()
     {
-        $schemeNamespace = ['self' => 'helloworld'];
+        $schemeNamespace = ['self' => 'restWorld'];
         $resourceAdapters = array(
             'app'  => new \BEAR\Resource\Adapter\App($this->injector, $schemeNamespace),
             'page' => new \BEAR\Resource\Adapter\Page($this->injector, $schemeNamespace)

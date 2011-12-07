@@ -5,63 +5,81 @@
  */
 namespace BEAR\Framework;
 
+use BEAR\Resource\Resource;
+
 /**
  * Router
  *
  */
+use Ray\Di\InjectorInterface;
+
 class DevRouter
 {
     const METHOD_OVERRIDE = 'X-HTTP-Method-Override';
 
     private $opt;
 
-    /**
-     * Get page key
-     *
-     * @return array [$method, $pagekey]
-     * @throws \InvalidArgumentException
-     */
-    private function getKey()
+    public function __construct(array $global)
     {
-        if (isset($_SERVER['REQUEST_URI'])) {
-            $url = $_SERVER['REQUEST_URI'];
-            goto found;
-        }
-        if (isset($this->opt['url'])) {
-            $url = $this->opt['url'];
-            goto found;
-        }
-        throw new \InvalidArgumentException('URL needed. (ex --url /hello --method get)');
-        found:
-        $pageKey = substr($url, 1);
-        return $pageKey;
+        $this->global = $global;
     }
 
     /**
-     * Get method
+     * Return request method
      *
      * @return string
      */
     private function getMethod()
     {
-        if (isset($_GET[self::METHOD_OVERRIDE])) {
-            return $_GET[self::METHOD_OVERRIDE];
+        if (isset($this->global['_GET'][self::METHOD_OVERRIDE])) {
+            return $this->global['_GET'][self::METHOD_OVERRIDE];
         }
-        if (isset($_POST[self::METHOD_OVERRIDE])) {
-            return $_POST[self::METHOD_OVERRIDE];
+        if (isset($this->global['_POST'][self::METHOD_OVERRIDE])) {
+            return $this->global['_POST'][self::METHOD_OVERRIDE];
         }
-        $method = isset($this->opt['method']) ? $this->opt['method'] : 'get';
+		$method = 'get';
         return $method;
     }
 
     /**
-     * Get method and page key
+     * Return page key
      *
-     * @return array
+     * @return array [$method, $pagekey]
+     * @throws \InvalidArgumentException
      */
-    public function get($opt)
+    private function getPageKey()
     {
-        $this->opt = $opt;
-        return [$this->getMethod(), $this->getKey()];
+        if (!isset($this->global['_SERVER']['REQUEST_URI'])) {
+            return '404';
+        }
+//         $pageKey = str_replace('/', '\\', substr($this->global['_SERVER']['REQUEST_URI'], 1));
+        $pageKey = substr($this->global['_SERVER']['REQUEST_URI'], 1);
+        return $pageKey;
+    }
+
+    /**
+     * Return page method and page key
+     *
+     * @return multitype:string Ambigous <multitype:, string, mixed>
+     */
+    public function get()
+    {
+        $result = array($this->getMethod(), $this->getPageKey());
+        return $result;
+    }
+
+    /**
+     * Dispacth
+     *
+     * @param Resource $resource
+     *
+     * @return array [string, Resource] multitype:string unknown
+     */
+    public function dispatch(Resource $resource)
+    {
+        $method = $this->getMethod();
+        $uri = $this->global['_SERVER']['REQUEST_URI'];
+        $ro = $resource->newInstance($uri);
+        return array($method, $ro);
     }
 }

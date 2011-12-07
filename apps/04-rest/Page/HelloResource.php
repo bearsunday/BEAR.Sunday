@@ -1,5 +1,5 @@
 <?php
-namespace helloWorld\Page;
+namespace restWorld\Page;
 
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
@@ -37,8 +37,7 @@ class HelloResource extends Page
      *
      * @Inject
      */
-    public function __construct(Resource $resource)
-    {
+    public function __construct(Resource $resource){
         $this->resource = $resource;
         $this->greeting = $resource->newInstance('app://self/greeting');
     }

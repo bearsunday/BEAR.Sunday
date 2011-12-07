@@ -12,7 +12,7 @@ class AppModule extends AbstractModule
 {
     protected function configure()
     {
-        $this->bind()->annotatedWith('ResourceAdapters')->toProvider('\helloWorld\Module\ResourceAdaptersProvider');
+        $this->bind()->annotatedWith('ResourceAdapter')->toProvider('\helloWorld\Module\ResourceAdapterProvider');
         $this->bind()->annotatedWith('GreetingMessage')->toInstance(['en' => 'Hello World', 'ja' => 'Konichiwa Sekai']);
     }
 }

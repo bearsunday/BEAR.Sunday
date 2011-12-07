@@ -1,5 +1,5 @@
 <?php
-namespace helloWorld\Page;
+namespace restWorld\Page\Aop;
 
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
@@ -9,7 +9,7 @@ use BEAR\Resource\Object as ResourceObject,
 /**
  * Hello World using resource
  */
-class HelloResource extends Page
+class Log extends Page
 {
     use PhpView;
 
@@ -37,10 +37,9 @@ class HelloResource extends Page
      *
      * @Inject
      */
-    public function __construct(Resource $resource)
-    {
+    public function __construct(Resource $resource){
         $this->resource = $resource;
-        $this->greeting = $resource->newInstance('app://self/greeting');
+        $this->greeting = $resource->newInstance('app://self/greeting/aop');
     }
 
     /**

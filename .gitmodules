@@ -1,18 +1,42 @@
-[submodule "vendors/Ray.Di"]
-	path = vendors/Ray.Di
+[submodule "vendor/Ray.Di"]
+	path = vendor/Ray.Di
 	url = git://github.com/koriym/Ray.Di.git
-[submodule "vendors/Ray.Aop"]
-	path = vendors/Ray.Aop
+[submodule "vendor/Ray.Aop"]
+	path = vendor/Ray.Aop
 	url = git://github.com/koriym/Ray.Aop.git
 [submodule "vendors/BEAR.Resource"]
 	path = vendors/BEAR.Resource
 	url = git://github.com/koriym/BEAR.Resource.git
-[submodule "vendors/Twig"]
-	path = vendors/Twig
+[submodule "vendor/Twig"]
+	path = vendor/Twig
 	url = https://github.com/fabpot/Twig.git
-[submodule "vendors/haanga"]
-	path = vendors/haanga
-	url = git://github.com/crodas/Haanga.git
-[submodule "vendors/Smarty3"]
-	path = vendors/Smarty3
+[submodule "vendor/Smarty3"]
+	path = vendor/Smarty3
 	url = git://github.com/koriym/Smarty3.git
+[submodule "vendor/Haanga"]
+	path = vendor/Haanga
+	url = git://github.com/crodas/Haanga.git
+[submodule "vendor/Guzzle"]
+	path = vendor/Guzzle
+	url = git://github.com/guzzle/guzzle.git
+[submodule "vendor/Aura.Autoload"]
+	path = vendor/Aura.Autoload
+	url = https://github.com/auraphp/Aura.Autoload.git
+[submodule "vendor/Aura.Web"]
+	path = vendor/Aura.Web
+	url = https://github.com/auraphp/Aura.Web.git
+[submodule "vendor/Aura.Router"]
+	path = vendor/Aura.Router
+	url = https://github.com/auraphp/Aura.Router.git
+[submodule "vendor/Symfony/Component/ClassLoader"]
+	path = vendor/Symfony/Component/ClassLoader
+	url = https://github.com/symfony/ClassLoader
+[submodule "vendor/Doctrine"]
+	path = vendor/Doctrine
+	url = https://github.com/doctrine/common
+[submodule "vendor/Monolog"]
+	path = vendor/Monolog
+	url = https://github.com/Seldaek/monolog.git
+[submodule "vendor/BEAR.Resource"]
+	path = vendor/BEAR.Resource
+	url = git://github.com/koriym/BEAR.Resource.git

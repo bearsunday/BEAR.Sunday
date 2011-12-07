@@ -22,7 +22,6 @@ use Ray\Di\Annotation,
     BEAR\Framework\Router,
     BEAR\Framework\Exception\NotFound;
 
-
 // router
 if  (PHP_SAPI !== 'cli') {
     $globals = $GLOBALS;
@@ -36,30 +35,25 @@ if  (PHP_SAPI !== 'cli') {
         '_SERVER' => array('REQUEST_URI' => $argv[2])
     );
 }
-list($method, $pageKey) = (new DevRouter($globals))->get();
-$objectCache = $appPath . '/tmp/%%RES%%' . str_replace('/', '-', $pageKey);
 
+$di = require $appPath . '/script/di.php';
+$resource = $di->getInstance('BEAR\Resource\Client');
+
+list($method, $ro) = (new DevRouter($globals))->dispatch($resource);
+$objectCache = $appPath . '/tmp/%%RES%%' . get_class($ro);
+
+$parsedUrl = parse_url($argv[2]);
+if (isset($parsedUrl['query'])) {
+    parse_str($parsedUrl['query'], $query);
+} else {
+    $query = array();
+}
+;
 // get page
 if (file_exists($objectCache) === true) {
-    $f = file_get_contents($objectCache);
-    list($di, $resource, $page) = unserialize($f);
+    list($di, $resource, $ro) = unserialize(file_get_contents($objectCache));
     $dir = (dirname(dirname(dirname($objectCache))));
     $page->headers[] = 'X-Cache-Since: ' . date ("r", filemtime($objectCache)) . ' (' . filesize($objectCache) . ')';
 } else {
-    // application fixed instance ($di, $resource)
-    $appModule =  '\\' . $appName. '\\Module\\AppModule';
-    $di = new Injector(new Container(new Forge(new Config(new Annotation))));
-    $module = new $appModule(new FrameWorkModule($di));
-    $di->setModule($module);
-    $resource = $di->getInstance('BEAR\Resource\Client');
-
-    // request URL based page resource instance ($page)
-    try {
-        $page = $resource->newInstance("page://self/{$pageKey}");
-    } catch (\ReflectionException $e) {
-        $page = $resource->newInstance("page://self/code404");
-    } catch (\Exception $e) {
-        throw $e;
-    }
-    file_put_contents($objectCache, serialize(array($di, $resource, $page)));
+    file_put_contents($objectCache, serialize(array($di, $resource, $ro)));
 }

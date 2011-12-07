@@ -6,8 +6,6 @@
  */
 namespace BEAR\Framework\Link\View;
 
-require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/vendors/Smarty3/libs/Smarty.class.php';
-
 /**
  * Trait for smarty view link.
  *

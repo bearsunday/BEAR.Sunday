@@ -1,17 +1,14 @@
 <?php
-namespace helloWorld\Page;
+namespace restWorld\Page\template;
 
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
-    BEAR\Framework\Link\View\Php as PhpView;
+    BEAR\Resource\Resource,
+    BEAR\Framework\Link\View\Smarty3 as SmartyView;
 
-/**
- * Hello World - page resource only
- *
- */
-class Hello extends Page
+class Smarty3 extends Page
 {
-    use PhpView;
+    use SmartyView;
 
     public function __construct()
     {
@@ -22,7 +19,7 @@ class Hello extends Page
      */
     public function onGet()
     {
-        $this['greeting'] = 'Hello World';
+        $this['greeting'] = 'Hello Smarty3';
         return $this;
     }
 }

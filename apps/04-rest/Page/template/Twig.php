@@ -1,17 +1,14 @@
 <?php
-namespace helloWorld\Page;
+namespace restWorld\Page\template;
 
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
-    BEAR\Framework\Link\View\Php as PhpView;
+    BEAR\Resource\Resource,
+    BEAR\Framework\Link\View\Twig as TwigView;
 
-/**
- * Hello World - page resource only
- *
- */
-class Hello extends Page
+class Twig extends Page
 {
-    use PhpView;
+    use TwigView;
 
     public function __construct()
     {
@@ -22,7 +19,7 @@ class Hello extends Page
      */
     public function onGet()
     {
-        $this['greeting'] = 'Hello World';
+        $this['greeting'] = 'Hello Twig';
         return $this;
     }
 }

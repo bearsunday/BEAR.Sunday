@@ -8,8 +8,6 @@ namespace BEAR\Framework\Link\View;
 
 use \BEAR\Resource\Object as ResourceObject;
 
-require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/vendors/haanga/lib/Haanga.php';
-
 /**
  * Trait for twig view link.
  *
@@ -18,6 +16,18 @@ require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/vendors/ha
  */
 trait Haanga
 {
+    /**
+     * @PostConstruct
+     */
+    public function onInitHaanga()
+    {
+        // Haanga static init
+        \Haanga::configure([
+                    'template_dir' => '/',
+                    'cache_dir' => '/tmp/haanga',
+        ]);
+    }
+
     /**
      * Haanga view link
      *

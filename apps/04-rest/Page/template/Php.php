@@ -1,15 +1,12 @@
 <?php
-namespace helloWorld\Page;
+namespace restWorld\Page\template;
 
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
+    BEAR\Resource\Resource,
     BEAR\Framework\Link\View\Php as PhpView;
 
-/**
- * Hello World - page resource only
- *
- */
-class Hello extends Page
+class Php extends Page
 {
     use PhpView;
 

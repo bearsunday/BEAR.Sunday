@@ -1,17 +1,18 @@
 <?php
-namespace helloWorld\Page;
+namespace restWorld\Page;
 
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
     BEAR\Framework\Link\View\Php as PhpView;
 
 /**
- * Hello World - page resource only
- *
+ * 404
  */
-class Hello extends Page
+class code404 extends Code
 {
     use PhpView;
+
+    public $code = 404;
 
     public function __construct()
     {
@@ -22,7 +23,7 @@ class Hello extends Page
      */
     public function onGet()
     {
-        $this['greeting'] = 'Hello World';
         return $this;
     }
+
 }

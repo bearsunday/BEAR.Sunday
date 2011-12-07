@@ -4,35 +4,51 @@ BEAR, a resource oriented framework.
 
 PHP5.4専用フレームワークBEAR(Sunday)の評価用プロトタイプです。
 
+## Requirement
+
+ * php 5.4RC1+
+ 
 ## Install
     $ git clone git://github.com/koriym/BEAR.Sunday.git
-    $ git submodule update --init
     $ cd BEAR.Sunday
+    $ git submodule update --init
 
 ## CLI
 
 ミニマム
 
-    $ php apps/01-helloworld/htdocs/index.php --url /Hello
+    $ php apps/04-rest/htdocs/dev.php get /hello
+
 +モデル（アプリケーションリソース）
 
-    $ php apps/01-helloworld/htdocs/index.php --url /HelloResource
+    $ php apps/04-rest/htdocs/dev.php get /helloresource
+
 +テンプレートエンジン
 
-    $ php apps/02-template-engine/htdocs/index.php --url /Php
-    $ php apps/02-template-engine/htdocs/index.php --url /Smarty3
-    $ php apps/02-template-engine/htdocs/index.php --url /Twig
-    $ php apps/02-template-engine/htdocs/index.php --url /Haanga
+    $ php apps/04-rest/htdocs/dev.php get /template/twig
+    $ php apps/04-rest/htdocs/dev.php get /template/smarty3
+    $ php apps/04-rest/htdocs/dev.php get /template/haanga
+    $ php apps/04-rest/htdocs/dev.php get /template/php
+
 +アスペクト指向
 
-    $ php apps/03-aop/htdocs/index.php --url /Log
+    $ php apps/04-rest/htdocs/dev.php get /aop/log
 
+## APIコール
+
+### app:// アプリケーションリソース
+    $ php apps/04-rest/htdocs/api.php get app://self/greeting?lang=en
+    $ php apps/04-rest/htdocs/api.php get app://self/greeting?lang=ja
+    
+### page:// ページリソース
+    $ php apps/04-rest/htdocs/api.php get page://self/hello
+    
 ## Built in web server
-    $ php -S localhost:8080 apps/01-helloworld/htdocs/index.php 
+    $ php -S localhost:8080 apps/04-rest/htdocs/dev.php 
 
 ブラウザで
 
-http://localhost:8080/Hello
+http://localhost:8080/hello
 
 ## 評価/検討点
 
@@ -54,7 +70,8 @@ http://localhost:8080/Hello
  * ユーザードライバビリティ、拡張性
  * フレームワークのメンテナンス性
  * アプリケーションのテストカバレッジ
- * 3rdパーティーライブラリの利用の仕方、容易さ
+ * 3rdパーティーライブラリの利用方法、容易さ
  * bootstrapスクリプト
  * 設定ファイル不使用
  * include_path不使用
+ 

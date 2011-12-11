@@ -14,15 +14,10 @@ namespace restWorld;
 // app boot
 $appStart = microtime(true);
 $appName = __NAMESPACE__;
-$system = dirname(dirname(dirname(__DIR__)));
-$appPath  = dirname(__DIR__);
+$appPath = dirname(__DIR__);
 
-// delete cacheå
-$tmpFiles = glob($appPath . '/tmp/*', GLOB_NOSORT);
-@array_map('unlink', $tmpFiles);
-
-require $appPath . '/script/loader/manual_loader.php';
+require $appPath . '/src.php';
+require $appPath . '/script/dev_tools/clear_cache.php';
 require $appPath . '/script/exception_handler/standard_handler.php';
-require $system . '/packages/BEAR.Framework/script/bootstrap.php';
-
+require dirname(dirname(dirname(__DIR__))) . '/packages/BEAR.Framework/script/bootstrap.php';
 // end of boot

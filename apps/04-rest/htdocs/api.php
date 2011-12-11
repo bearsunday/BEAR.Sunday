@@ -26,7 +26,7 @@ $appPath  = dirname(__DIR__);
 $tmpFiles = glob($appPath . '/tmp/*');
 @array_map('unlink', $tmpFiles);
 
-include $appPath . '/script/loader/manual_loader.php';
+include $appPath . '/src.php';
 include $appPath . '/script/exception_handler/standard_handler.php';
 include $system . '/packages/BEAR.Framework/script/api.bootstrap.php';
 

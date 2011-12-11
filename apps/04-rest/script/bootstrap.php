@@ -20,8 +20,6 @@ $appName = __NAMESPACE__;
 $system = dirname(dirname(dirname(__DIR__)));
 $appPath  = dirname(__DIR__);
 
-require $appPath . '/script/loader/manual_loader.php';
+require $appPath . '/src.php';
 require $appPath . '/script/exception_handler/standard_handler.php';
-// system boot
 require $system . '/packages/BEAR.Framework/script/bootstrap.php';
-// end of boot

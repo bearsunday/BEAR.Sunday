@@ -16,7 +16,7 @@ class Log implements MethodInterceptor
         $class = get_class($invocation->getThis());
         $input = $invocation->getArguments();
         $input = json_encode($input);
-        echo "[Log] target = $class, input = $input, result = $result\n";
+        $result .= PHP_EOL .  "[Log] target = $class, input = $input, result = $result" . PHP_EOL;
         return $result;
     }
 }

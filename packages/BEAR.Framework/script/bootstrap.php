@@ -8,8 +8,11 @@
  *
  * @package BEAR.Framework
  *
- * @input  void
- * @output array($di, $resource, $page)
+ * @global $appName
+ * @global $appPath
+ * @global $di
+ * @global $resource
+ * @global $page
  */
 namespace BEAR\Framework;
 

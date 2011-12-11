@@ -20,6 +20,7 @@ require_once __DIR__ . '/Page/template/Php.php';
 require_once __DIR__ . '/Page/template/Twig.php';
 require_once __DIR__ . '/Page/template/Smarty3.php';
 require_once __DIR__ . '/Page/template/Haanga.php';
+require_once __DIR__ . '/Page/http/GoogleNews.php';
 // code page
 require_once __DIR__ . '/Page/Code.php';
 require_once __DIR__ . '/Page/Code404.php';

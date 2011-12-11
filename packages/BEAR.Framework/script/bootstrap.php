@@ -57,7 +57,8 @@ if (file_exists($objectCache) === true) {
     try {
         $page = $resource->newInstance("page://self/{$pageKey}");
     } catch (\ReflectionException $e) {
-        $page = $resource->newInstance("page://self/code404");
+        throw $e;
+        $page->body = (string)$e;
     } catch (\Exception $e) {
         throw $e;
     }

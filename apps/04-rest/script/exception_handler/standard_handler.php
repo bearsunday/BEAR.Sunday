@@ -4,7 +4,6 @@ namespace BEAR\Resource\Exception;
 
 use Aura\Autoload\Exception\NotFound;
 use BEAR\Resource\Exception\BadRequest;
-
 set_exception_handler(function(\Exception $e) {
     try {
         include_once dirname(dirname(__DIR__)) . '/Page/Code.php';

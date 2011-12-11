@@ -42,6 +42,10 @@ PHP5.4専用フレームワークBEAR(Sunday)の評価用プロトタイプで�
     
 ### page:// ページリソース
     $ php apps/04-rest/htdocs/api.php get page://self/hello
+
+## マルチアプリケーションリソース
+
+    $ php apps/04-rest/htdocs/dev.php get /app/hello
     
 ## Built in web server
     $ php -S localhost:8080 apps/04-rest/htdocs/dev.php 
@@ -65,9 +69,16 @@ http://localhost:8080/hello
  * Thriftを使って他の言語にもリソースを実装してみる
  * デーモンとしてリソースサーバーを立ち上げてHTTPでAPIを提供するのとどちらが高速か調べてみる
  
-## 評価/検討点
+## 評価/検討点 A
 
- * ファイルレイアウト
+ * ファイル/ディレクトリ レイアウト
+ * ファイル/ディレクトリ 命名
+ * バインディング  
+ * 設定ファイルを使っていない点
+ * 全体構成、フローの把握のしやすさ、見通し感
+ * コードの読みやすさ
+ * リクエストDSLの
+ 
  * 基本パフォーマンス
  * オブジェクトグラフキャッシュ
  * マルチアプリケーション

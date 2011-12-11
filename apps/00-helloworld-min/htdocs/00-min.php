@@ -11,7 +11,7 @@ $appPath = dirname(__DIR__);
  * no page object graph cache
  */
 
-require $appPath . '/script/loader/auto_loader.php';
+require $appPath . '/script/auto_loader.php';
 $di = require $appPath . '/script/di.php';
 
 // resource request

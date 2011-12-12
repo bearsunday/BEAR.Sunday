@@ -1,5 +1,5 @@
 <?php
-namespace restworld\Interceptor;
+namespace restWorld\Interceptor;
 
 use Ray\Aop\MethodInterceptor,
     Ray\Aop\MethodInvocation;

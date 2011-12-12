@@ -33,7 +33,6 @@ class GoogleNews extends Page
     public function __construct(Resource $resource)
     {
         $this->resource = $resource;
-        $this->helloPpage = $resource->newInstance('page://helloworld/hello');
     }
 
     /**

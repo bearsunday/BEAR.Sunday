@@ -4,9 +4,10 @@
  *
  * @package BEAR.Framework
  *
- * @global string               $method
- * @global BEAR\Resource\Client $resource
- * @global BEAR\Resource\Object $page
+ * @global string               $method   Resource method
+ * @global BEAR\Resource\Client $resource Resource client
+ * @global BEAR\Resource\Object $page     Resource object (target)
+ * @global BEAR\Resource\Object $response Resource object (response)
  */
 if (php_sapi_name() == 'cli-server') {
     // route static assets and return false

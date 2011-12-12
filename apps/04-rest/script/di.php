@@ -1,4 +1,9 @@
 <?php
+/**
+ * Return application dependency injettor.
+ *
+ * @return \Ray\Di\InjectorInterface
+ */
 
 use Ray\Di\Annotation,
     Ray\Di\Config,
@@ -9,7 +14,5 @@ use Ray\Di\Annotation,
     restWorld\Module\AppModule;
 
 $di = new Injector(new Container(new Forge(new Config(new Annotation))));
-$module = new appModule(new FrameWorkModule($di));
-$di->setModule($module);
-
+$di->setModule(new AppModule(new FrameWorkModule($di)));
 return $di;

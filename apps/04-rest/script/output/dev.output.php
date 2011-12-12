@@ -32,8 +32,8 @@ cli:
     $label = "\033[1;32m";
     $label1 = "\033[1;33m";
     $close = "\033[0m";
-    if (isset($appStart)) {
-        $response->headers[] = 'X-Request-Per-Second: ' . (int)(1 / (microtime(true) - $appStart));
+    if (isset($_SERVER['REQUEST_TIME'])) {
+        $response->headers[] = 'X-Request-Per-Second: ' . (int)(1 / (microtime(true) - $_SERVER['REQUEST_TIME']));
         $response->headers[] = 'X-Memory-Peak-Usage: ' . number_format(memory_get_peak_usage(true));
     }
     echo "{$label}[CODE]{$close}{$response->code} {$statusText}" . PHP_EOL;

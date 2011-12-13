@@ -4,14 +4,15 @@ namespace restWorld\Page\Http;
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
     BEAR\Resource\Resource,
-    BEAR\Framework\Link\View\Php as PhpView;
+    BEAR\Framework\Link\View\Haanga as HaangaView;
 
 /**
- * Hello World using resource
+ * HTTP resource page
+ *
  */
 class GoogleNews extends Page
 {
-    use PhpView;
+    use HaangaView;
 
     /**
      * @var ResourceObject
@@ -36,13 +37,14 @@ class GoogleNews extends Page
     }
 
     /**
-     * @param string $lang laungauage
-     *
      * @return ResourceObject
      */
     public function onGet()
     {
-        $this['news'] = $this->resource->get->uri('http://news.google.com/news?hl=ja&ned=us&ie=UTF-8&oe=UTF-8&output=rss')->eager->request();
+        $uri = 'http://news.google.com/news?hl=ja&ned=us&ie=UTF-8&oe=UTF-8&output=rss';
+        $response = $this->resource->get->uri($uri)->eager->request();
+        $item = $response->body->channel->item;
+        $this['news'] = ['title' => $item->title, 'pubDate' => $item->pubDate, 'link' =>  $item->link];
         return $this;
     }
 }

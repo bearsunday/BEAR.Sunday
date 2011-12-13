@@ -34,6 +34,11 @@ PHP5.4専用フレームワークBEAR(Sunday)の評価用プロトタイプで�
 
     $ php apps/04-rest/htdocs/dev.php get /aop/log
 
++HTTPリソース
+
+    $ php apps/04-rest/htdocs/dev.php get /http/googlenews
+    $ php apps/04-rest/htdocs/dev.php get /http/multi
+
 ## APIコール
 
 ### app:// アプリケーションリソース

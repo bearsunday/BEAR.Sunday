@@ -6,7 +6,8 @@
  */
 namespace BEAR\Framework\Link\View;
 
-use \BEAR\Resource\Object as ResourceObject;
+use BEAR\Resource\Object as ResourceObject,
+    BEAR\Resource\Request;
 
 /**
  * Trait for twig view link.

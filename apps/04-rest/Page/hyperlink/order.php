@@ -2,16 +2,16 @@
 namespace restWorld\Page\HyperLink;
 
 use BEAR\Resource\Object as ResourceObject,
-BEAR\Resource\AbstractObject as Page,
-BEAR\Resource\Resource,
-BEAR\Framework\Link\View\Twig as TwigView;
+    BEAR\Resource\AbstractObject as Page,
+    BEAR\Resource\Resource,
+    BEAR\Framework\Link\View\Twig as TwigView;
 
 /**
  * Simple HATEOAS
  *
  * @see http://www.infoq.com/articles/webber-rest-workflow "How to GET a Cup of Coffee"
  */
-class RestBucks extends Page
+class Order extends Page
 {
     use TwigView;
 
@@ -37,10 +37,10 @@ class RestBucks extends Page
      */
     public function onGet($drink)
     {
-        $menu = $this->resource->get->uri('app://self/RestBucks/Menu')->withQuery(array('drink' => $drink))->eager->request();
-        $orderUri = $menu->headers['rel=order'];
-        $order = $this->resource->post->uri($orderUri)->addQuery(array('drink' => $menu['drink']))->request();
-        $this['order'] = $order;
+        $order = $this->resource->post->uri('app://self/RestBucks/Order')->withQuery(['drink' => $drink])->eager->request();
+        $paymentUri = $order->headers['rel=payment'];
+        $payment = array('credit_card_number' => '123456789', 'expires' => '07/07', 'name' => 'John Citizen', 'amount' => '4.00');
+        $this['payment'] = $this->resource->put->uri($paymentUri)->addQuery($payment)->request();
         return $this;
     }
 }

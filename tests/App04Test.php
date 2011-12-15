@@ -16,7 +16,6 @@ class App04Test extends \PHPUnit_Framework_TestCase
 
     public function testHello()
     {
-        // resource request
         $response = $this->resource->get->uri('page://self/hello')->withQuery(['lang' => 'en'])->eager->request();
         $this->assertSame(200, $response->code);
         $this->assertSame('Hello World', $response->body['greeting']);
@@ -24,7 +23,6 @@ class App04Test extends \PHPUnit_Framework_TestCase
 
     public function testHelloResource()
     {
-        // resource request
         $response = $this->resource->get->uri('page://self/helloresource')->withQuery(['lang' => 'ja'])->eager->request();
         $this->assertSame(200, $response->code);
         $this->assertSame('Konichiwa Sekai', $response->body['greeting']);
@@ -32,7 +30,6 @@ class App04Test extends \PHPUnit_Framework_TestCase
 
     public function testAopLog()
     {
-        // resource request
         $response = $this->resource->get->uri('page://self/aop/log')->withQuery(['lang' => 'en'])->eager->request();
         $this->assertSame(200, $response->code);
         $this->assertSame('Hello World' . PHP_EOL . '[Log] target = restWorld\ResourceObject\Greeting\Aop, input = ["en"], result = Hello World' . PHP_EOL, $response->body['greeting']);
@@ -40,7 +37,6 @@ class App04Test extends \PHPUnit_Framework_TestCase
 
     public function testAppHello()
     {
-        // resource request
         $response = $this->resource->get->uri('page://self/app/hello')->eager->request();
         $this->assertSame(200, $response->code);
         $this->assertSame('Hello another app', $response->body['greeting']->body);
@@ -48,7 +44,6 @@ class App04Test extends \PHPUnit_Framework_TestCase
 
     public function testTemplateHaanga()
     {
-        // resource request
         $response = $this->resource->get->uri('page://self/template/haanga')->eager->request();
         $this->assertSame(200, $response->code);
         $this->assertSame('Hello Haanga', $response->body['greeting']);
@@ -56,7 +51,6 @@ class App04Test extends \PHPUnit_Framework_TestCase
 
     public function testTemplatePhp()
     {
-        // resource request
         $response = $this->resource->get->uri('page://self/template/php')->eager->request();
         $this->assertSame(200, $response->code);
         $this->assertSame('Hello World', $response->body['greeting']);
@@ -64,7 +58,6 @@ class App04Test extends \PHPUnit_Framework_TestCase
 
     public function testTemplateSmarty3()
     {
-        // resource request
         $response = $this->resource->get->uri('page://self/template/smarty3')->eager->request();
         $this->assertSame(200, $response->code);
         $this->assertSame('Hello Smarty3', $response->body['greeting']);
@@ -75,7 +68,6 @@ class App04Test extends \PHPUnit_Framework_TestCase
      */
     public function testTemplateTwig()
     {
-        // resource request
         $response = $this->resource->get->uri('page://self/template/twig')->eager->request();
         $this->assertSame(200, $response->code);
         $this->assertSame('Hello Twig', $response->body['greeting']);
@@ -86,15 +78,25 @@ class App04Test extends \PHPUnit_Framework_TestCase
      */
     public function testHttpSingleRequestPageResource()
     {
-        // resource request
         $response = $this->resource->get->uri('page://self/http/googlenews')->eager->request();
         $this->assertSame(200, $response->code);
     }
 
     public function testHttpMultiRequesPageResource()
     {
-        // resource request
         $response = $this->resource->get->uri('page://self/http/multi')->eager->request();
+        $this->assertSame(200, $response->code);
+    }
+
+    public function testHyplerLinkRestBucks()
+    {
+        $response = $this->resource->get->uri('page://self/hyperlunk/restbucks')->withQuery(['drink' => 'latte'])->eager->request();
+        $this->assertSame(200, $response->code);
+    }
+
+    public function testHyplerLinkOrder()
+    {
+        $response = $this->resource->get->uri('page://self/hyperlunk/order')->withQuery(['drink' => 'latte'])->eager->request();
         $this->assertSame(200, $response->code);
     }
 

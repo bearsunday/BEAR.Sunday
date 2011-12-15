@@ -24,6 +24,7 @@ require_once __DIR__ . '/Page/template/Haanga.php';
 require_once __DIR__ . '/Page/http/GoogleNews.php';
 require_once __DIR__ . '/Page/http/Multi.php';
 require_once __DIR__ . '/Page/hyperlink/restbucks.php';
+require_once __DIR__ . '/Page/hyperlink/order.php';
 // code page
 require_once __DIR__ . '/Page/Code.php';
 require_once __DIR__ . '/Page/Code404.php';

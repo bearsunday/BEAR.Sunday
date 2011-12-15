@@ -17,9 +17,8 @@ if (php_sapi_name() == 'cli-server') {
     }
 }
 $appName = __NAMESPACE__;
-$system = dirname(dirname(dirname(__DIR__)));
 $appPath  = dirname(__DIR__);
 
 require $appPath . '/src.php';
 require $appPath . '/script/exception_handler/standard_handler.php';
-require $system . '/packages/BEAR.Framework/script/bootstrap.php';
+require dirname(dirname(dirname(__DIR__))) . '/packages/BEAR.Framework/script/bootstrap.php';

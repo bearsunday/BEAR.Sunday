@@ -42,6 +42,12 @@ if  (PHP_SAPI !== 'cli') {
 list($method, $pageKey) = (new DevRouter($globals))->get();
 $objectCache = $appPath . '/tmp/%%RES%%' . str_replace('/', '-', $pageKey);
 
+$parsedUrl = parse_url($argv[2]);
+if (isset($parsedUrl['query'])) {
+    parse_str($parsedUrl['query'], $query);
+} else {
+    $query = array();
+}
 // get page
 if (file_exists($objectCache) === true) {
     $f = file_get_contents($objectCache);

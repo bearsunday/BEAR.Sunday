@@ -48,7 +48,6 @@ if (isset($parsedUrl['query'])) {
 } else {
     $query = array();
 }
-;
 // get page
 if (file_exists($objectCache) === true) {
     list($di, $resource, $ro) = unserialize(file_get_contents($objectCache));

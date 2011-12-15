@@ -51,6 +51,11 @@ PHP5.4専用フレームワークBEAR(Sunday)の評価用プロトタイプで�
 ## マルチアプリケーションリソース
 
     $ php apps/04-rest/htdocs/dev.php get /app/hello
+
+## Hyper Link
+
+    $ php apps/04-rest/htdocs/dev.php get /hyperlink/restbucks?drink=latte
+    $ php apps/04-rest/htdocs/dev.php get /hyperlink/restbucks?drink=coffe
     
 ## Built in web server
     $ php -S localhost:8080 apps/04-rest/htdocs/dev.php 

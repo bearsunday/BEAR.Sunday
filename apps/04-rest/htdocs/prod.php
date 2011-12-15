@@ -4,9 +4,11 @@
  *
  * @package BEAR.Framework
  *
- * @global string               $method
- * @global BEAR\Resource\Client $resource
- * @global BEAR\Resource\Object $page
+ * @global string               $method   Resource method
+ * @global BEAR\Resource\Client $resource Resource client
+ * @global array                $query    Resource request query
+ * @global BEAR\Resource\Object $page     Resource object (target)
+ * @global BEAR\Resource\Object $response Resource object (response)
  */
 
 if (php_sapi_name() == 'cli-server') {
@@ -18,6 +20,6 @@ if (php_sapi_name() == 'cli-server') {
 
 include dirname(__DIR__) . '/script/bootstrap.php';
 
-$response = $resource->$method->object($page)->linkSelf('view')->eager->request();
+$response = $resource->$method->object($page)->withQuery($query)->linkSelf('view')->eager->request();
 
 include dirname(__DIR__) . '/script/output/prod.output.php';

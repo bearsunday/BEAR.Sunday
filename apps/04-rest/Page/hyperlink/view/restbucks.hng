@@ -1,0 +1,6 @@
+<html>
+    <body>
+    	<p class="code">code: {{ order.code }}</p>
+        <p class="code">order URI: {{ order.headers.Location }}</p>
+    </body>
+</html>

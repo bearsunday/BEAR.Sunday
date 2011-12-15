@@ -23,12 +23,16 @@ require_once __DIR__ . '/Page/template/Smarty3.php';
 require_once __DIR__ . '/Page/template/Haanga.php';
 require_once __DIR__ . '/Page/http/GoogleNews.php';
 require_once __DIR__ . '/Page/http/Multi.php';
+require_once __DIR__ . '/Page/hyperlink/restbucks.php';
 // code page
 require_once __DIR__ . '/Page/Code.php';
 require_once __DIR__ . '/Page/Code404.php';
 // app resource
 require_once __DIR__ . '/ResourceObject/Greeting.php';
 require_once __DIR__ . '/ResourceObject/Greeting/Aop.php';
+require_once __DIR__ . '/ResourceObject/RestBucks/Menu.php';
+require_once __DIR__ . '/ResourceObject/RestBucks/Order.php';
+require_once __DIR__ . '/ResourceObject/RestBucks/Payment.php';
 // interceptors
 require_once __DIR__ . '/Interceptor/Log.php';
 require_once $system . '/vendor/Twig/lib/Twig/Environment.php';

@@ -31,6 +31,7 @@
 	      <directory suffix=".php">apps/*/*/view/</directory>
 	      <directory suffix=".php">apps/01-hello-world-min/htdocs/</directory>
 	      <directory suffix=".php">apps/04-rest/htdocs/</directory>
+	      <directory suffix=".php">packages/BEAR.Framework/script/</directory>
 	  </exclude>
     </whitelist>
   </filter>

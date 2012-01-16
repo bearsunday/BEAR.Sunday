@@ -28,8 +28,8 @@ if (function_exists('apc_clear_cache')) {
     apc_clear_cache('opcode');
 }
 
-if (class_exists('Memcache')) {
-    Memcache::flush();
+if (class_exists('Memcache', false)) {
+    (new \Memcache)->flush();
 }
 
 clearstatcache();

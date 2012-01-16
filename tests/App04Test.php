@@ -90,13 +90,13 @@ class App04Test extends \PHPUnit_Framework_TestCase
 
     public function testHyplerLinkRestBucks()
     {
-        $response = $this->resource->get->uri('page://self/hyperlunk/restbucks')->withQuery(['drink' => 'latte'])->eager->request();
+        $response = $this->resource->get->uri('page://self/hyperlink/restbucks')->withQuery(['drink' => 'latte'])->eager->request();
         $this->assertSame(200, $response->code);
     }
 
     public function testHyplerLinkOrder()
     {
-        $response = $this->resource->get->uri('page://self/hyperlunk/order')->withQuery(['drink' => 'latte'])->eager->request();
+        $response = $this->resource->get->uri('page://self/hyperlink/order')->withQuery(['drink' => 'latte'])->eager->request();
         $this->assertSame(200, $response->code);
     }
 

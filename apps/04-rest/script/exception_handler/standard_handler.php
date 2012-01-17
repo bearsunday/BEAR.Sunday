@@ -1,6 +1,8 @@
 <?php
-
-namespace BEAR\Resource\Exception;
+/**
+ * Exception handler
+ */
+namespace BEAR\Application\Script;
 
 use Aura\Autoload\Exception\NotFound;
 use BEAR\Resource\Exception\BadRequest;

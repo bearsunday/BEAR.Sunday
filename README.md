@@ -57,6 +57,11 @@ PHP5.4専用フレームワークBEAR(Sunday)の評価用プロトタイプで�
     $ php apps/04-rest/htdocs/dev.php get /hyperlink/restbucks?drink=latte
     $ php apps/04-rest/htdocs/dev.php get /hyperlink/restbucks?drink=coffe
     
+## Router
+	$ php apps/04-rest/htdocs/router.php get /helloresource/ja
+	$ php apps/04-rest/htdocs/router.php get /helloresource/en
+
+
 ## Built in web server
     $ php -S localhost:8080 apps/04-rest/htdocs/dev.php 
 

@@ -1,13 +1,11 @@
 <?php
 /**
- * API Output script.
- *
- * @license http://opensource.org/licenses/bsd-license.php BSD
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * API Output
  */
+namespace BEAR\Application\Script;
+use BEAR\Resource\Code;
 
-$code = new BEAR\Resource\Code;
+$code = new Code;
 $statusText =  (isset($code->statusText[$response->code])) ? $code->statusText[$response->code] : '';
 
 if (PHP_SAPI === 'cli') {

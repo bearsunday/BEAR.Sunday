@@ -52,7 +52,6 @@ class DevRouter
         if (!isset($this->global['_SERVER']['REQUEST_URI'])) {
             return '404';
         }
-//         $pageKey = str_replace('/', '\\', substr($this->global['_SERVER']['REQUEST_URI'], 1));
         $pageKey = substr($this->global['_SERVER']['REQUEST_URI'], 1);
         return $pageKey;
     }

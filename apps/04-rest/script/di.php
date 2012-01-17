@@ -1,9 +1,10 @@
 <?php
 /**
- * Return application dependency injettor.
+ * Application Dependency Injettor.
  *
  * @return \Ray\Di\InjectorInterface
  */
+namespace BEAR\Application\Script;
 
 use Ray\Di\Annotation,
     Ray\Di\Config,

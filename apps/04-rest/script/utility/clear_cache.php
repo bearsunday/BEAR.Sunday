@@ -1,6 +1,9 @@
 <?php
-
-namespace BEAR\Framework\Utility;
+/**
+ * Clear cache
+ *
+ */
+namespace BEAR\Application\Script;
 
 /**
  * Delete a file or recursively delete a directory

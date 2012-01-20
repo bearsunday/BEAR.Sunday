@@ -1,0 +1,20 @@
+<html>
+    <body>
+    	<h1>Top news</h1>
+    	<h2>{{ news_top.title }}</h2>
+    	<p class="date">{{ news_top.updated }}</p>
+
+        <h1>Topic news</h1>
+        <h2>{{ news_topic.title }}</h2>
+        <p class="date">{{ news_topic.updated }}</p>
+
+        <h1>Science news</h1>
+        <h2>{{ news_science.title }}</h2>
+        <p class="date">{{ news_science.updated }}</p>
+        
+        <h1>PHP news</h1>
+        <h2>{{ news_php.title }}</h2>
+        <p class="date">{{ news_php.updated }}</p>
+        
+    </body>
+</html>

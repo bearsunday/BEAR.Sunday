@@ -1,0 +1,8 @@
+<html>
+    <body>
+    	<h1>Today's top news</h1>
+    	<h2>{{ news.title }}</h2>
+    	<p class="date">{{ news.pubDate }}</p>
+    	<p class="link">{{ news.link }}</p>
+  	</body>
+</html>

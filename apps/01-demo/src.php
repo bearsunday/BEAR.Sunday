@@ -12,6 +12,7 @@ require_once __DIR__ . '/Module/SmartyProvider.php';
 require_once __DIR__ . '/Module/TwigProvider.php';
 require_once __DIR__ . '/Module/AppModule.php';
 require_once __DIR__ . '/Module/SchemeCollectionProvider.php';
+require_once __DIR__ . '/Module/PdoProvider.php';
 // app page
 require_once __DIR__ . '/Page/Hello.php';
 require_once __DIR__ . '/Page/HelloResource.php';
@@ -25,6 +26,7 @@ require_once __DIR__ . '/Page/http/GoogleNews.php';
 require_once __DIR__ . '/Page/http/Multi.php';
 require_once __DIR__ . '/Page/hyperlink/restbucks.php';
 require_once __DIR__ . '/Page/hyperlink/order.php';
+require_once __DIR__ . '/Page/db/user/pdo.php';
 // code page
 require_once __DIR__ . '/Page/Code.php';
 require_once __DIR__ . '/Page/Code404.php';
@@ -34,8 +36,12 @@ require_once __DIR__ . '/ResourceObject/Greeting/Aop.php';
 require_once __DIR__ . '/ResourceObject/RestBucks/Menu.php';
 require_once __DIR__ . '/ResourceObject/RestBucks/Order.php';
 require_once __DIR__ . '/ResourceObject/RestBucks/Payment.php';
+require_once __DIR__ . '/ResourceObject/User/Pdo.php';
 // interceptors
 require_once __DIR__ . '/Interceptor/Log.php';
+// App
+require __DIR__ . '/App/Pdo.php';
+
 require_once $system . '/vendor/Twig/lib/Twig/Environment.php';
 // hello world app
 require_once dirname(__DIR__) . '/00-helloworld-min/src.php';

@@ -9,5 +9,8 @@ require_once __DIR__ . '/src/Link/View/Php.php';
 require_once __DIR__ . '/src/Link/View/Smarty3.php';
 require_once __DIR__ . '/src/Link/View/Twig.php';
 require_once __DIR__ . '/src/Link/View/Haanga.php';
+
+require_once __DIR__ . '/src/Module/Singleton.php';
+require_once __DIR__ . '/src/Interceptor/Transactional.php';
 // Exceptions
 require_once __DIR__ . '/src/Exception/NotFound.php';

@@ -1,5 +1,5 @@
 <?php
-namespace demoWorld\Page\Http;
+namespace restWorld\Page\Http;
 
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
@@ -7,7 +7,7 @@ use BEAR\Resource\Object as ResourceObject,
     BEAR\Framework\Link\View\Haanga as HaangaView;
 
 /**
- * User resource page
+ * HTTP resource page
  *
  */
 class GoogleNews extends Page

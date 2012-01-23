@@ -117,4 +117,9 @@ http://localhost:8080/hello
  * アプリケーションのテストカバレッジ
  * 3rdパーティーライブラリの利用方法、容易さ
  * bootstrapスクリプト
+<<<<<<< HEAD
  
+=======
+ * 設定ファイル不使用
+ * include_path不使用
+>>>>>>> 6cf4176912fd63c895fa2b719add6787ebb3dcc0

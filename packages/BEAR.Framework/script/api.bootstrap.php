@@ -55,4 +55,5 @@ if (file_exists($objectCache) === true) {
     $page->headers[] = 'X-Cache-Since: ' . date ("r", filemtime($objectCache)) . ' (' . filesize($objectCache) . ')';
 } else {
     file_put_contents($objectCache, serialize(array($di, $resource, $ro)));
+    list($di, $resource, $ro) = unserialize(file_get_contents($objectCache));
 }

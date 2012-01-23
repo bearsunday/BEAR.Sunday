@@ -49,8 +49,8 @@ class Dispatcher
     }
 
     /**
-     * Get
-     * Enter description here ...
+     * Get instance
+     * 
      * @param unknown_type $pageResource
      * @throws Exception
      */
@@ -74,6 +74,7 @@ class Dispatcher
             try {
                 $page = $resource->newInstance("page://self/{$pageResource}");
             } catch (\ReflectionException $e) {
+                throw $e;
                 $page = $resource->newInstance("page://self/code404");
                 $page->body = (string)$e;
             } catch (\Exception $e) {

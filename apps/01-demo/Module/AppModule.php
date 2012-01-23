@@ -4,6 +4,7 @@ namespace demoWorld\Module;
 
 use Ray\Di\AbstractModule,
     Ray\Di\InjectorInterface;
+use BEAR\Framework\Interceptor\Transactional;
 
 /**
  * Application default module
@@ -21,5 +22,8 @@ class AppModule extends AbstractModule
         $this->registerInterceptAnnotation('Log', $interceptors);
         $helloDi = include dirname(dirname(__DIR__)) . '/00-helloworld-min/script/di.php';
         $this->bind('Ray\Di\InjectorInterface')->annotatedWith('HelloDi')->toInstance($helloDi);
+        // PDO
+        $this->bind('Ray\Di\ProviderInterface')->annotatedWith('user_db')->to('\demoWorld\Module\PdoProvider');
+        $this->registerInterceptAnnotation('Transactional', array(new Transactional));
     }
 }

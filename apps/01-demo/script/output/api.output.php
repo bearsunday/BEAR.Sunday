@@ -4,7 +4,10 @@
  */
 namespace BEAR\Application\Script;
 use BEAR\Resource\Code;
-
+// v($response);
+// if ($response instanceof \Ray\Aop\Weaver) {
+//     $response = $response->object;
+// }
 $code = new Code;
 $statusText =  (isset($code->statusText[$response->code])) ? $code->statusText[$response->code] : '';
 
@@ -38,6 +41,7 @@ cli:
     }
     if (is_array($response->body) || $response->body instanceof \Traversal) {
         foreach ($response->body as $key => $body) {
+            $body = is_array($body) ? json_encode($body) : $body;
             echo "{$label}[BODY]{$label1}{$key}{$close}:" . $body. PHP_EOL;
         }
     } else {

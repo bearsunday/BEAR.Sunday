@@ -27,6 +27,7 @@ use Ray\Di\Annotation,
 
 
 // router
+<<<<<<< HEAD
 if  (PHP_SAPI !== 'cli') {
     $globals = $GLOBALS;
 } else {
@@ -52,6 +53,18 @@ if (isset($parsedUrl['query'])) {
 if (file_exists($objectCache) === true) {
     $f = file_get_contents($objectCache);
     list($di, $resource, $page) = unserialize($f);
+=======
+$globals = (PHP_SAPI !== 'cli') ? $GLOBALS : array(
+	'_GET' => array(DevRouter::METHOD_OVERRIDE => $argv[1]),
+	'_SERVER' => array('REQUEST_URI' => $argv[2])
+);
+list($method, $pageKey) = (new DevRouter($globals))->get();
+$objectCache = $appPath . "/tmp/%%RES%%{$pageKey}";
+
+// get page
+if (file_exists($objectCache) === true) {
+    list($di, $resource, $page) = unserialize(file_get_contents($objectCache));
+>>>>>>> 6cf4176912fd63c895fa2b719add6787ebb3dcc0
     $dir = (dirname(dirname(dirname($objectCache))));
     $page->headers[] = 'X-Cache-Since: ' . date ("r", filemtime($objectCache)) . ' (' . filesize($objectCache) . ')';
 } else {
@@ -66,10 +79,18 @@ if (file_exists($objectCache) === true) {
     try {
         $page = $resource->newInstance("page://self/{$pageKey}");
     } catch (\ReflectionException $e) {
+<<<<<<< HEAD
         throw $e;
         $page->body = (string)$e;
+=======
+        $page = $resource->newInstance("page://self/code404");
+>>>>>>> 6cf4176912fd63c895fa2b719add6787ebb3dcc0
     } catch (\Exception $e) {
         throw $e;
     }
     file_put_contents($objectCache, serialize(array($di, $resource, $page)));
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6cf4176912fd63c895fa2b719add6787ebb3dcc0

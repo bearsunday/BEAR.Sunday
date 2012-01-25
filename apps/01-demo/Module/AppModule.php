@@ -25,5 +25,7 @@ class AppModule extends AbstractModule
         // PDO
         $this->bind('Ray\Di\ProviderInterface')->annotatedWith('user_db')->to('\demoWorld\Module\PdoProvider');
         $this->registerInterceptAnnotation('Transactional', array(new Transactional));
+        // Doctrine DBAL
+        $this->bind('Ray\Di\ProviderInterface')->annotatedWith('doctorine_db')->to('\demoWorld\Module\DoctrineProvider');
     }
 }

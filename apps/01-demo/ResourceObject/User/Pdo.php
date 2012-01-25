@@ -33,6 +33,9 @@ class Pdo extends AbstractObject
         $this->dbProvider = $dbProvider;
     }
 
+    /**
+     * Init
+     */
     public function __wakeup()
     {
         $this->db = $this->dbProvider->get();

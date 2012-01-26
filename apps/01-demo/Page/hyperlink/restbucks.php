@@ -37,9 +37,9 @@ class RestBucks extends Page
      */
     public function onGet($drink)
     {
-        $menu = $this->resource->get->uri('app://self/RestBucks/Menu')->withQuery(array('drink' => $drink))->eager->request();
+        $menu = $this->resource->get->uri('app://self/RestBucks/Menu')->withQuery(['drink' => $drink])->eager->request();
         $orderUri = $menu->headers['rel=order'];
-        $order = $this->resource->post->uri($orderUri)->addQuery(array('drink' => $menu['drink']))->request();
+        $order = $this->resource->post->uri($orderUri)->addQuery(['drink' => $menu['drink']])->request();
         $this['order'] = $order;
         return $this;
     }

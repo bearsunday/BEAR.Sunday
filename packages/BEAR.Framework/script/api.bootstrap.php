@@ -9,7 +9,7 @@
  * @package BEAR.Framework
  *
  * @input  void
- * @output array($di, $resource, $page)
+ * @output [$di, $resource, $page]
  */
 namespace BEAR\Framework;
 
@@ -30,10 +30,10 @@ if  (PHP_SAPI !== 'cli') {
         echo 'usage: <method> <uri>' . PHP_EOL;
         exit(1);
     }
-    $globals = array(
-        '_GET' => array(DevRouter::METHOD_OVERRIDE => $argv[1]),
-        '_SERVER' => array('REQUEST_URI' => $argv[2])
-    );
+    $globals = [
+        '_GET' => [DevRouter::METHOD_OVERRIDE => $argv[1]],
+        '_SERVER' => ['REQUEST_URI' => $argv[2]]
+    ];
 }
 
 $di = require $appPath . '/script/di.php';
@@ -54,6 +54,6 @@ if (file_exists($objectCache) === true) {
     $dir = (dirname(dirname(dirname($objectCache))));
     $page->headers[] = 'X-Cache-Since: ' . date ("r", filemtime($objectCache)) . ' (' . filesize($objectCache) . ')';
 } else {
-    file_put_contents($objectCache, serialize(array($di, $resource, $ro)));
+    file_put_contents($objectCache, serialize([$di, $resource, $ro]));
     list($di, $resource, $ro) = unserialize(file_get_contents($objectCache));
 }

@@ -14,10 +14,10 @@ trait Singleton
     public function get()
     {
         static $instance;
-        
+
         if ($instance === null) {
             $instance = $this->newInstance();
         }
         return $instance;
-    }    
+    }
 }

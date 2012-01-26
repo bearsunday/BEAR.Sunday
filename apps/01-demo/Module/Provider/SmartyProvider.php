@@ -1,6 +1,6 @@
 <?php
 
-namespace demoWorld\Module;
+namespace demoWorld\Module\Provider;
 
 use Ray\Di\InjectorInterface,
     Ray\Di\ProviderInterface;

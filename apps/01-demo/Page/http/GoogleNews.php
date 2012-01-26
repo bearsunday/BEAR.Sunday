@@ -1,5 +1,5 @@
 <?php
-namespace restWorld\Page\Http;
+namespace demoWorld\Page\Http;
 
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,

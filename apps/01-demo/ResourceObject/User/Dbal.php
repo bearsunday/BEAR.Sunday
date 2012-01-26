@@ -3,43 +3,35 @@
 namespace demoWorld\ResourceObject\User;
 
 use BEAR\Resource\Object as ResourceObject,
-BEAR\Resource\AbstractObject;
-use Ray\Di\ProviderInterface as Provide;
-use BEAR\Framework\Module\AbstractSingletonProvider;
+    BEAR\Resource\AbstractObject;
+use Ray\Di\ProviderInterface;
+use Doctrine\DBAL\Connection;
 
 /**
- * User resource using native PDO
+ * User using Doctirine DBAL (PDO)
  *
  * @Aspect
  */
-class Pdo extends AbstractObject
+class Dbal extends AbstractObject
 {
     /**
      * Db
      *
-     * @var PDO
+     * @var Connection
      */
     private $db;
 
     /**
      * Constructor
      *
-     * @param Provide $dbProvider
+     * @param Connection $db
      *
      * @Inject
-     * @Named("dbProvider=pdo")
+     * @Named("db=dbal")
      */
-    public function __construct(Provide $dbProvider)
+    public function __construct(Connection $db)
     {
-        $this->dbProvider = $dbProvider;
-    }
-
-    /**
-     * Init
-     */
-    public function __wakeup()
-    {
-        $this->db = $this->dbProvider->get();
+        $this->db = $db;
     }
 
     /**

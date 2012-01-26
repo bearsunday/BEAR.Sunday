@@ -1,21 +1,19 @@
 <?php
 
-namespace demoWorld\Module;
+namespace demoWorld\Module\Provider;
 
 use Ray\Di\InjectorInterface,
-    Ray\Di\ProviderInterface;
-use BEAR\Framework\Module\Singleton;
+    Ray\Di\ProviderInterface as Provide;
+use BEAR\Framework\Module\AbstractSingletonProvider;
 
 /**
  * PDO provider
  */
-class DoctrineProvider implements ProviderInterface
+class PdoProvider extends AbstractSingletonProvider
 {
-    use Singleton;
-    
     /**
-     * Return new instance
-     * 
+     * New instance
+     *
      * @return \PDO
      */
     public function newInstance()
@@ -26,4 +24,5 @@ class DoctrineProvider implements ProviderInterface
         $instance->query("CREATE TABLE User (Id INTEGER PRIMARY KEY, Name TEXT, Age INTEGER)");
         return $instance;
     }
+
 }

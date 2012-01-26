@@ -29,7 +29,7 @@
 	path = vendor/Aura.Router
 	url = https://github.com/auraphp/Aura.Router.git
 [submodule "vendor/Symfony/Component/ClassLoader"]
-	path = vendor/Symfony/Component/ClassLoader
+	path = vendor/Symfony/src/Symfony/Component/ClassLoader
 	url = https://github.com/symfony/ClassLoader
 [submodule "vendor/Doctrine"]
 	path = vendor/Doctrine
@@ -49,3 +49,12 @@
 [submodule "vendors/guzzle"]
 	path = vendors/guzzle
 	url = git://github.com/guzzle/guzzle.git
+[submodule "vendor/Doctrine-DBAL"]
+	path = vendor/Doctrine-DBAL
+	url = https://github.com/doctrine/dbal
+[submodule "vendor/Symfony/src/Symfony/Component/EventDispatcher"]
+	path = vendor/Symfony/src/Symfony/Component/EventDispatcher
+	url = https://github.com/symfony/EventDispatcher.git
+[submodule "vendor/Symfony/src/Symfony/Component/Validator"]
+	path = vendor/Symfony/src/Symfony/Component/Validator
+	url = https://github.com/symfony/Validator.git

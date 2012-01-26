@@ -39,7 +39,7 @@ class Order extends Page
     {
         $order = $this->resource->post->uri('app://self/RestBucks/Order')->withQuery(['drink' => $drink])->eager->request();
         $paymentUri = $order->headers['rel=payment'];
-        $payment = array('credit_card_number' => '123456789', 'expires' => '07/07', 'name' => 'John Citizen', 'amount' => '4.00');
+        $payment = ['credit_card_number' => '123456789', 'expires' => '07/07', 'name' => 'John Citizen', 'amount' => '4.00'];
         $this['payment'] = $this->resource->put->uri($paymentUri)->addQuery($payment)->request();
         return $this;
     }

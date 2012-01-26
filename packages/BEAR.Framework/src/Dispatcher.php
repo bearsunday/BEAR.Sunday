@@ -50,7 +50,7 @@ class Dispatcher
 
     /**
      * Get instance
-     * 
+     *
      * @param unknown_type $pageResource
      * @throws Exception
      */
@@ -80,7 +80,7 @@ class Dispatcher
             } catch (\Exception $e) {
                 throw $e;
             }
-            file_put_contents($objectCache, serialize(array($di, $resource, $page)));
+            file_put_contents($objectCache, serialize([$di, $resource, $page]));
         }
         return [$resource, $page];
     }

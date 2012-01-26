@@ -10,7 +10,7 @@ class App04Test extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->di = require dirname(__DIR__) . '/apps/04-rest/script/di.php';
+        $this->di = require dirname(__DIR__) . '/apps/01-demo/script/di.php';
         $this->resource = $this->di->getInstance('\BEAR\Resource\Client');
     }
 

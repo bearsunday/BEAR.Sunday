@@ -18,7 +18,7 @@ class HelloResource extends Page
      *
      * @var array
      */
-    public $headers = array('Content-Type: text/html; charset=UTF-8');
+    public $headers = ['Content-Type: text/html; charset=UTF-8'];
 
     /**
      * @var ResourceObject

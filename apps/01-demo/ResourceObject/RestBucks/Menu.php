@@ -15,14 +15,14 @@ use BEAR\Resource\Object as ResourceObject,
 class Menu extends AbstractObject
 {
 
-    private $menu = array();
+    private $menu = [];
 
     /**
      * @param Resource $resource
      */
     public function __construct()
     {
-        $this->menu = array('coffee' => 300, 'latte' => 400);
+        $this->menu = ['coffee' => 300, 'latte' => 400];
     }
 
     public function onGet($drink = null)
@@ -31,7 +31,7 @@ class Menu extends AbstractObject
             $this->body = $this->menu;
             return $this;
         }
-        $this->headers['rel=order'] = new Uri('app://self/RestBucks/Order', array('drink' => $drink));
+        $this->headers['rel=order'] = new Uri('app://self/RestBucks/Order', ['drink' => $drink]);
         $this->body['drink'] = $drink;
         $this->body['price'] = $this->menu[$drink];
         return $this;

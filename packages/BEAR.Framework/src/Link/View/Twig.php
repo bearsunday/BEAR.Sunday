@@ -42,7 +42,7 @@ trait Twig
      */
     public function onLinkView(ResourceObject $page)
     {
-        $body = array();
+        $body = [];
         foreach ($page as $key => $resource) {
             if (is_callable($resource)) {
                 $resource = $resource();

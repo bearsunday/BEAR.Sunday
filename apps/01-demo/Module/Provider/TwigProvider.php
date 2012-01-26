@@ -1,6 +1,6 @@
 <?php
 
-namespace demoWorld\Module;
+namespace demoWorld\Module\Provider;
 
 use Ray\Di\InjectorInterface,
     Ray\Di\ProviderInterface;
@@ -19,10 +19,10 @@ class TwigProvider implements ProviderInterface
     {
         $twig = new \Twig_Environment(
             new \Twig_Loader_Filesystem('/'),
-            array(
+            [
                 'cache' => dirname(__DIR__) . '/tmp/twig',
                 'auto_reload' => true
-            )
+            ]
         );
         return $twig;
     }

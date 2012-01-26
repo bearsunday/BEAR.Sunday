@@ -26,14 +26,15 @@ if  (PHP_SAPI !== 'cli') {
         echo 'usage: <method> <uri>' . PHP_EOL;
         exit(1);
     }
-    $globals = array(
-        '_GET' => array(DevRouter::METHOD_OVERRIDE => $argv[1]),
-        '_SERVER' => array('REQUEST_URI' => $argv[2])
-    );
+    $globals = [
+        '_GET' => [DevRouter::METHOD_OVERRIDE => $argv[1]],
+        '_SERVER' => ['REQUEST_URI' => $argv[2]]
+    ];
 }
 $route = $map->match(parse_url($globals['_SERVER']['REQUEST_URI'], PHP_URL_PATH), $_SERVER);
 if ($route === false) {
     list($method, $pageResource) = (new DevRouter($globals))->get();
+    $parsedUrl = parse_url($globals['_SERVER']['REQUEST_URI']);
     if (isset($parsedUrl['query'])) {
         parse_str(parse_url($argv[2])['query'], $query);
     } else {

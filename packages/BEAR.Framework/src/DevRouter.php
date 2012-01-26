@@ -63,7 +63,7 @@ class DevRouter
      */
     public function get()
     {
-        $result = array($this->getMethod(), $this->getPageKey());
+        $result = [$this->getMethod(), $this->getPageKey()];
         return $result;
     }
 
@@ -79,6 +79,6 @@ class DevRouter
         $method = $this->getMethod();
         $uri = $this->global['_SERVER']['REQUEST_URI'];
         $ro = $resource->newInstance($uri);
-        return array($method, $ro);
+        return [$method, $ro];
     }
 }

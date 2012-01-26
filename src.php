@@ -2,11 +2,28 @@
 
 use \Symfony\Component\ClassLoader\UniversalClassLoader as ClassLoader;
 
-require_once __DIR__ . '/vendor/Ray.Aop/src.php';
-require_once __DIR__ . '/vendor/Ray.Di/src.php';
-require_once __DIR__ . '/vendor/BEAR.Resource/src.php';
-require_once __DIR__ . '/vendor/Smarty3/libs/Smarty.class.php';
-require_once __DIR__ . '/vendor/Haanga/lib/Haanga.php';
-require_once __DIR__ . '/packages/BEAR.Framework/src.php';
-require_once __DIR__ . '/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-require_once __DIR__ . '/vendor/Aura.Router/src.php';
+// vendor/* loader
+require __DIR__ . '/vendor/Symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+require __DIR__ . '/vendor/Ray.Aop/src.php';
+require __DIR__ . '/vendor/Ray.Di/src.php';
+require __DIR__ . '/vendor/BEAR.Resource/src.php';
+require __DIR__ . '/vendor/Smarty3/libs/Smarty.class.php';
+require __DIR__ . '/vendor/Haanga/lib/Haanga.php';
+require __DIR__ . '/vendor/Aura.Router/src.php';
+require __DIR__ . '/vendor/Twig/lib/Twig/Environment.php';
+
+$namespaces = array(
+    'Guzzle' => __DIR__ . '/vendor/Guzzle/src',
+    'Symfony' => __DIR__ . '/vendor/Symfony/src',
+    'Monolog' => __DIR__ . '/vendor/Monolog/src',
+    'Doctrine\Common' => __DIR__ . '/vendor/Doctrine/lib',
+    'Doctrine\DBAL' => __DIR__ . '/vendor/Doctrine-DBAL/lib',
+);
+
+$classLoader = new ClassLoader;
+$classLoader->registerNamespaces($namespaces);
+$classLoader->registerPrefix('Zend_', __DIR__ . '/vendor');
+$classLoader->register();
+
+// BEAR.Framework loader
+require __DIR__ . '/packages/BEAR.Framework/src.php';

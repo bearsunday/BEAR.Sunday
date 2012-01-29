@@ -25,6 +25,7 @@ require __DIR__ . '/Page/http/Multi.php';
 require __DIR__ . '/Page/hyperlink/restbucks.php';
 require __DIR__ . '/Page/hyperlink/order.php';
 require __DIR__ . '/Page/db/user/pdo.php';
+require __DIR__ . '/Page/cache/page.php';
 // code page
 require __DIR__ . '/Page/Code.php';
 require __DIR__ . '/Page/Code404.php';

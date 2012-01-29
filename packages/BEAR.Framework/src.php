@@ -17,6 +17,7 @@ require __DIR__ . '/src/Module/Singleton.php';
 require __DIR__ . '/src/Module/AbstractSingletonProvider.php';
 require __DIR__ . '/src/Module/AbstractPrototypeProvider.php';
 require __DIR__ . '/src/Interceptor/Transactional.php';
+require __DIR__ . '/src/Interceptor/Cacheable.php';
 // Exceptions
 require __DIR__ . '/src/Exception/NotFound.php';
 // vendor

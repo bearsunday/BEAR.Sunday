@@ -4,8 +4,10 @@ namespace demoWorld\Module;
 
 use Ray\Di\AbstractModule,
     Ray\Di\InjectorInterface;
-use BEAR\Framework\Interceptor\Transactional;
-
+use BEAR\Framework\Interceptor\Transactional,
+    BEAR\Framework\Interceptor\Cacheable;
+use Doctrine\Common\Cache\Cache,
+    Doctrine\Common\Cache\MemcacheCache as CacheAdapter;
 /**
  * Application default module
  */
@@ -13,7 +15,8 @@ class AppModule extends AbstractModule
 {
     protected function configure()
     {
-        $this->bind()->annotatedWith('AppName')->toInstance('demoWorld');
+        $appName = 'demoWorld';
+        $this->bind()->annotatedWith('AppName')->toInstance($appName);
         $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\demoWorld\Module\Provider\SchemeCollectionProvider');
         $this->bind()->annotatedWith('GreetingMessage')->toInstance(['en' => 'Hello World', 'ja' => 'Konichiwa Sekai']);
         $this->bind()->annotatedWith('Twig')->toProvider('\demoWorld\Module\Provider\TwigProvider');
@@ -29,5 +32,6 @@ class AppModule extends AbstractModule
         $this->bind('Doctrine\DBAL\Connection')->annotatedWith('dbal')->toProvider('\demoWorld\Module\Provider\DbalProvider');
         // Annotation
         $this->registerInterceptAnnotation('Transactional', [new Transactional]);
+        $this->registerInterceptAnnotation('Cacheable', [new Cacheable(new CacheAdapter, $appName, 2, 'localhost')]);
     }
 }

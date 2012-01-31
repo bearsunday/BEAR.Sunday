@@ -3,12 +3,13 @@ namespace BEAR\Framework\Interceptor;
 
 use Ray\Aop\MethodInterceptor,
     Ray\Aop\MethodInvocation;
-use Doctrine\Common\Cache\Cache,
+use Doctrine\Common\Cache\Cache as Cacheable,
     Doctrine\Common\Cache\MemcacheCache;
+
 /**
- * Cacheable interceptor
+ * Cache interceptor
  */
-class Cacheable implements MethodInterceptor
+class Cache implements MethodInterceptor
 {
     /**
      * Host
@@ -30,7 +31,7 @@ class Cacheable implements MethodInterceptor
      * @param Cache $cache
      * @param unknown_type $lifeTime
      */
-    public function __construct(Cache $cache, $appName, $lifeTime = 0, $host = 'locahost')
+    public function __construct(Cacheable $cache, $appName, $lifeTime = 0, $host = 'locahost')
     {
         $cache->setNamespace($appName);
         $this->cache = $cache;

@@ -6,7 +6,7 @@ use BEAR\Resource\Object as ResourceObject,
     BEAR\Framework\Link\View\Php as PhpView;
 
 /**
- * Hello World - page resource only
+ * Cache page
  *
  * @Aspect
  */
@@ -21,7 +21,7 @@ class Page extends AbstractPage
     /**
      * @return ResourceObject
      *
-     * @Cacheable
+     * @Cache
      */
     public function onGet($name)
     {
@@ -30,7 +30,7 @@ class Page extends AbstractPage
     }
 
     /**
-     * CachePush
+     * CacheUpdate("name")
      */
     public function onUpdate($name)
     {

@@ -58,3 +58,6 @@
 [submodule "vendor/Symfony/src/Symfony/Component/Validator"]
 	path = vendor/Symfony/src/Symfony/Component/Validator
 	url = https://github.com/symfony/Validator.git
+[submodule "vendor/Ray.Annotation"]
+	path = vendor/Ray.Annotation
+	url = git://github.com/koriym/Ray.Annotation.git

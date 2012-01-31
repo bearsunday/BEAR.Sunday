@@ -5,8 +5,7 @@ namespace demoWorld\Module;
 use Ray\Di\AbstractModule,
     Ray\Di\InjectorInterface;
 use BEAR\Framework\Interceptor\Transactional,
-    BEAR\Framework\Interceptor\Cacheable;
-use Doctrine\Common\Cache\Cache,
+    BEAR\Framework\Interceptor\Cache,
     Doctrine\Common\Cache\MemcacheCache as CacheAdapter;
 /**
  * Application default module
@@ -32,6 +31,7 @@ class AppModule extends AbstractModule
         $this->bind('Doctrine\DBAL\Connection')->annotatedWith('dbal')->toProvider('\demoWorld\Module\Provider\DbalProvider');
         // Annotation
         $this->registerInterceptAnnotation('Transactional', [new Transactional]);
-        $this->registerInterceptAnnotation('Cacheable', [new Cacheable(new CacheAdapter, $appName, 2, 'localhost')]);
+        $this->registerInterceptAnnotation('Cache', [new Cache(new CacheAdapter, $appName, 2, 'localhost')]);
+        $this->registerInterceptAnnotation('CacheUpdate', [new Cache(new CacheAdapter, $appName, 2, 'localhost')]);
     }
 }

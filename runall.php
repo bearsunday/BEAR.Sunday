@@ -51,3 +51,7 @@ echo "uri router\n";
 
 passthru('php apps/01-demo/htdocs/dev.php get /helloresource/ja');
 passthru('php apps/01-demo/htdocs/dev.php get /helloresource/en');
+
+echo "cache\n";
+
+passthru("php apps/01-demo/api/dev.php get 'page://self/cache/page?name=koriym'");

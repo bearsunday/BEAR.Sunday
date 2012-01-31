@@ -6,6 +6,7 @@ use \Symfony\Component\ClassLoader\UniversalClassLoader as ClassLoader;
 require __DIR__ . '/vendor/Symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 require __DIR__ . '/vendor/Ray.Aop/src.php';
 require __DIR__ . '/vendor/Ray.Di/src.php';
+require __DIR__ . '/vendor/Ray.Annotation/src.php';
 require __DIR__ . '/vendor/BEAR.Resource/src.php';
 require __DIR__ . '/vendor/Smarty3/libs/Smarty.class.php';
 require __DIR__ . '/vendor/Haanga/lib/Haanga.php';

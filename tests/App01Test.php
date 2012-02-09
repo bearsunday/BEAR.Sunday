@@ -14,7 +14,7 @@ class App04Test extends \PHPUnit_Framework_TestCase
         $this->resource = $this->di->getInstance('\BEAR\Resource\Client');
     }
 
-    public function testHello()
+    public function testHelloOnly()
     {
         $response = $this->resource->get->uri('page://self/hello')->withQuery(['lang' => 'en'])->eager->request();
         $this->assertSame(200, $response->code);
@@ -28,10 +28,13 @@ class App04Test extends \PHPUnit_Framework_TestCase
         $this->assertSame('Konichiwa Sekai', $response->body['greeting']);
     }
 
-    public function testAopLog()
+    public function atestAopLog()
     {
+        $r = $this->resource->get->uri('page://self/aop/log')->withQuery(['lang' => 'en'])->request();
+        vecho(($r));
         $response = $this->resource->get->uri('page://self/aop/log')->withQuery(['lang' => 'en'])->eager->request();
         $this->assertSame(200, $response->code);
+        v($response->body['greeting']);
         $this->assertSame('Hello World' . PHP_EOL . '[Log] target = demoWorld\ResourceObject\Greeting\Aop, input = ["en"], result = Hello World' . PHP_EOL, $response->body['greeting']);
     }
 
@@ -63,9 +66,6 @@ class App04Test extends \PHPUnit_Framework_TestCase
         $this->assertSame('Hello Smarty3', $response->body['greeting']);
     }
 
-    /**
-     * @backupGlobals disabled
-     */
     public function testTemplateTwig()
     {
         $response = $this->resource->get->uri('page://self/template/twig')->eager->request();
@@ -73,16 +73,13 @@ class App04Test extends \PHPUnit_Framework_TestCase
         $this->assertSame('Hello Twig', $response->body['greeting']);
     }
 
-    /**
-     * @backupGlobals disabled
-     */
     public function testHttpSingleRequestPageResource()
     {
         $response = $this->resource->get->uri('page://self/http/googlenews')->eager->request();
         $this->assertSame(200, $response->code);
     }
 
-    public function testHttpMultiRequesPageResource()
+    public function ____testHttpMultiRequesPageResource()
     {
         $response = $this->resource->get->uri('page://self/http/multi')->eager->request();
         $this->assertSame(200, $response->code);
@@ -94,6 +91,9 @@ class App04Test extends \PHPUnit_Framework_TestCase
         $this->assertSame(200, $response->code);
     }
 
+    /**
+     * @medium
+     */
     public function testHyplerLinkOrder()
     {
         $response = $this->resource->get->uri('page://self/hyperlink/order')->withQuery(['drink' => 'latte'])->eager->request();

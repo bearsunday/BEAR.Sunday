@@ -7,9 +7,17 @@
  */
 namespace helloWorld\Module;
 
-use Ray\Di\AbstractModule,
-    Ray\Di\InjectorInterface;
+use Ray\Di\Scope;
 
+use BEAR\Framework\Module\StandardModule;
+use Ray\Di\AbstractModule,
+    Ray\Di\InjectorInterface,
+    Ray\Di\Annotation,
+    Ray\Di\Config,
+    Ray\Di\Forge,
+    Ray\Di\Container,
+    Ray\Di\Injector,
+    Ray\Di\Definition;
 /**
  * Application module
  *
@@ -25,7 +33,6 @@ class AppModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind()->annotatedWith('AppName')->toInstance('helloWorld');
-        $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\helloWorld\Module\SchemeCollectionProvider');
+        $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\helloWorld\Module\SchemeCollectionProvider')->in(Scope::SINGLETON);
     }
 }

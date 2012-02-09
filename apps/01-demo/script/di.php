@@ -1,19 +1,28 @@
 <?php
-/**
- * Application Dependency Injettor.
- *
- * @return \Ray\Di\InjectorInterface
- */
-namespace BEAR\Application\Script;
+namespace demoWorld;
 
-use Ray\Di\Annotation,
+use BEAR\Framework\Module\StandardModule;
+
+use Ray\Aop\Bind,
+    Ray\Aop\Matcher;
+use Ray\Di\AbstractModule,
+    Ray\Di\InjectorInterface,
+    Ray\Di\Annotation,
     Ray\Di\Config,
     Ray\Di\Forge,
     Ray\Di\Container,
     Ray\Di\Injector,
-    BEAR\Framework\Module\StandardModule as FrameWorkModule,
-    demoWorld\Module\AppModule;
+    Ray\Di\Definition;
+use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
-$di = new Injector(new Container(new Forge(new Config(new Annotation))));
-$di->setModule(new AppModule(new FrameWorkModule($di)));
+/**
+ * Return application dependency injector.
+ *
+ * @package    demoWorld
+ * @subpackage script
+ *
+ * @return  Ray\Di\InjectorInterface
+ */
+$di = new Injector(new Container(new Forge(new Config(new Annotation(new Definition)))));
+$di->setModule(new Module\AppModule(new StandardModule($di, __NAMESPACE__)));
 return $di;

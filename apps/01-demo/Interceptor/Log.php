@@ -5,13 +5,13 @@ use Ray\Aop\MethodInterceptor,
     Ray\Aop\MethodInvocation;
 
 /**
- * @Log Interceptor
- *
+ * Log Interceptor
  */
 class Log implements MethodInterceptor
 {
     public function invoke(MethodInvocation $invocation)
     {
+        v();
         $result = $invocation->proceed();
         $class = get_class($invocation->getThis());
         $input = $invocation->getArguments();

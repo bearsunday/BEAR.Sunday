@@ -40,15 +40,6 @@
 [submodule "vendor/BEAR.Resource"]
 	path = vendor/BEAR.Resource
 	url = git://github.com/koriym/BEAR.Resource.git
-[submodule "vendors/Aura.Web"]
-	path = vendors/Aura.Web
-	url = git://github.com/auraphp/Aura.Web.git
-[submodule "vendors/Aura.Autoload"]
-	path = vendors/Aura.Autoload
-	url = https://github.com/auraphp/Aura.Autoload.git
-[submodule "vendors/guzzle"]
-	path = vendors/guzzle
-	url = git://github.com/guzzle/guzzle.git
 [submodule "vendor/Doctrine-DBAL"]
 	path = vendor/Doctrine-DBAL
 	url = https://github.com/doctrine/dbal

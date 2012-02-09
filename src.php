@@ -6,7 +6,6 @@ use \Symfony\Component\ClassLoader\UniversalClassLoader as ClassLoader;
 require __DIR__ . '/vendor/Symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 require __DIR__ . '/vendor/Ray.Aop/src.php';
 require __DIR__ . '/vendor/Ray.Di/src.php';
-require __DIR__ . '/vendor/Ray.Annotation/src.php';
 require __DIR__ . '/vendor/BEAR.Resource/src.php';
 require __DIR__ . '/vendor/Smarty3/libs/Smarty.class.php';
 require __DIR__ . '/vendor/Haanga/lib/Haanga.php';
@@ -19,6 +18,7 @@ $namespaces = array(
     'Monolog' => __DIR__ . '/vendor/Monolog/src',
     'Doctrine\Common' => __DIR__ . '/vendor/Doctrine/lib',
     'Doctrine\DBAL' => __DIR__ . '/vendor/Doctrine-DBAL/lib',
+    'Monolog' => __DIR__ . '/vendor/Monolog/src',
 );
 
 $classLoader = new ClassLoader;

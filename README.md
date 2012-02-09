@@ -122,4 +122,7 @@ http://localhost:8080/hello
 =======
  * 設定ファイル不使用
  * include_path不使用
+<<<<<<< HEAD
+>>>>>>> 6cf4176912fd63c895fa2b719add6787ebb3dcc0
+=======
 >>>>>>> 6cf4176912fd63c895fa2b719add6787ebb3dcc0

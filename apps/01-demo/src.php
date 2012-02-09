@@ -39,6 +39,10 @@ require __DIR__ . '/ResourceObject/User/Pdo.php';
 require __DIR__ . '/ResourceObject/User/Dbal.php';
 // interceptors
 require __DIR__ . '/Interceptor/Log.php';
+// annotations
+require __DIR__ . '/Annotation/Cache.php';
+require __DIR__ . '/Annotation/CacheUpdate.php';
+require __DIR__ . '/Annotation/Log.php';
 
 // hello world app
 require dirname(__DIR__) . '/00-helloworld-min/src.php';

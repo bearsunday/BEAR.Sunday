@@ -5,10 +5,11 @@ namespace demoWorld\ResourceObject\Greeting;
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject;
 
+use demowolrd\Annotation\Log;
+
 /**
- * Greeting resource with @Log
+ * Greeting resource with Log
  *
- * @Aspect
  */
 class Aop extends AbstractObject
 {

@@ -52,7 +52,10 @@ class Dispatcher
     /**
      * Get instance
      *
-     * @param unknown_type $pageResource
+     * @param string $pageResource Page resource name
+     *
+     * @return array [BEAR\Resource\Resource $resource, BEAR\Resource\Object $page]
+     *
      * @throws Exception
      */
     public function getInstance($pageResource)
@@ -60,7 +63,7 @@ class Dispatcher
         $objectCache = $this->appPath . '/tmp/%%RES%%' . str_replace('/', '-', $pageResource);
         if (file_exists($objectCache) === true) {
             $f = file_get_contents($objectCache);
-            list($di, $resource, $page) = unserialize($f);
+            list($resource, $page) = unserialize($f);
             $dir = (dirname(dirname(dirname($objectCache))));
             $page->headers[] = 'X-Cache-Since: ' . date ("r", filemtime($objectCache)) . ' (' . filesize($objectCache) . ')';
         } else {
@@ -80,7 +83,7 @@ class Dispatcher
             } catch (\Exception $e) {
                 throw $e;
             }
-            $serializedObject = serialize([$di, $resource, $page]);
+            $serializedObject = serialize([$resource, $page]);
             $r = file_put_contents($objectCache, $serializedObject);
         }
         $providesHandler = require dirname(dirname(dirname(__DIR__))) . '/vendor/BEAR.Resource/scripts/provides_handler.php';

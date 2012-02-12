@@ -12,11 +12,11 @@ namespace BEAR\Application\Script;
  */
 $recursiveDelete = function ($str) use (&$recursiveDelete){
     if(is_file($str)){
-        return @unlink($str);
+        return unlink($str);
     }
-    elseif(is_dir($str)){
-        $scan = glob(rtrim($str,'/').'/*');
-        foreach($scan as $index=>$path){
+    elseif (is_dir($str)) {
+        $scan = glob(rtrim($str,'/') . '/*');
+        foreach($scan as $index => $path){
             $recursiveDelete($path);
         }
         return @rmdir($str);

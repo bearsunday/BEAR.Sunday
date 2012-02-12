@@ -31,6 +31,7 @@ if  (PHP_SAPI !== 'cli') {
         '_SERVER' => ['REQUEST_URI' => $argv[2]]
     ];
 }
+
 $route = $map->match(parse_url($globals['_SERVER']['REQUEST_URI'], PHP_URL_PATH), $_SERVER);
 if ($route === false) {
     list($method, $pageResource) = (new DevRouter($globals))->get();
@@ -52,4 +53,5 @@ unset($map);
 unset($attach);
 unset($globals);
 unset($route);
+
 return [$method, $pageResource, $query];

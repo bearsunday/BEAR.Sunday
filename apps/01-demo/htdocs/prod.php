@@ -1,5 +1,4 @@
 <?php
-
 namespace demoWorld;
 
 use BEAR\Framework\Dispatcher;
@@ -21,21 +20,23 @@ if (php_sapi_name() == 'cli-server') {
         return false;
     }
 }
-
 // app define
 $appName = __NAMESPACE__;
 $appPath = dirname(__DIR__);
-
 // init
 require $appPath . '/src.php';
-include $appPath . '/script/utility/clear_cache.php';
+// include $appPath . '/script/utility/clear_cache.php';
 // include $appPath . '/script/exception_handler/standard_handler.php';
 
 // get instance
 list($method, $pageUri, $query) = require $appPath . '/script/router/standard_router.php';
+
+//list($method, $pageUri, $query) = require $appPath . '/script/router/no_router.php';
+
 list($resource, $page) = (new Dispatcher($appName, $appPath))->getInstance($pageUri);
+
 // page resource request
 $response = $resource->$method->object($page)->withQuery($query)->linkSelf('view')->eager->request();
 
 // output
-require $appPath . '/script/output/dev.output.php';
+require $appPath . '/script/output/prod.output.php';

@@ -25,7 +25,6 @@ web:
     }
     // body
     echo $response->body;
-    exit(0);
 
 cli:
     $label = "\033[1;32m";
@@ -41,4 +40,3 @@ cli:
     }
     echo "{$label}[BODY]{$close}\n" . $response->body;
     echo PHP_EOL;
-    exit(0);

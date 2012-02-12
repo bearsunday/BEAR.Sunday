@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Bootstrap
  *
@@ -57,3 +56,4 @@ if (file_exists($objectCache) === true) {
     file_put_contents($objectCache, serialize([$di, $resource, $ro]));
     list($di, $resource, $ro) = unserialize(file_get_contents($objectCache));
 }
+

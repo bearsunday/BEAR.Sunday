@@ -81,10 +81,10 @@ class Dispatcher
                 throw $e;
             }
             $serializedObject = serialize([$di, $resource, $page]);
-            file_put_contents($objectCache, $serializedObject);
-            $providesHandler = require dirname(dirname(dirname(__DIR__))) . '/vendor/BEAR.Resource/scripts/provides_handler.php';
-            $resource->attachArgProvider('Provides', $providesHandler);
+            $r = file_put_contents($objectCache, $serializedObject);
         }
+        $providesHandler = require dirname(dirname(dirname(__DIR__))) . '/vendor/BEAR.Resource/scripts/provides_handler.php';
+        $resource->attachArgProvider('Provides', $providesHandler);
         return [$resource, $page];
     }
 }

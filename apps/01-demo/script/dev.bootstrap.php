@@ -7,14 +7,14 @@
  * @global $appName application name
  * @global $appPath application root path
  */
-namespace demoWorld;
+// namespace demoWorld;
 
-// app boot
-$appName = __NAMESPACE__;
-$appPath = dirname(__DIR__);
+// // app boot
+// $appName = __NAMESPACE__;
+// $appPath = dirname(__DIR__);
 
-require $appPath . '/src.php';
-require dirname(dirname(dirname(__DIR__))) . '/packages/BEAR.Framework/script/bootstrap.php';
+// require $appPath . '/src.php';
+// require dirname(dirname(dirname(__DIR__))) . '/packages/BEAR.Framework/script/bootstrap.php';
 
-include $appPath . '/script/utility/clear_cache.php';
-include $appPath . '/script/exception_handler/standard_handler.php';
+// // include $appPath . '/script/utility/clear_cache.php';
+// include $appPath . '/script/exception_handler/standard_handler.php';

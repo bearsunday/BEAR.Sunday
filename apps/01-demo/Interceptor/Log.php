@@ -11,7 +11,6 @@ class Log implements MethodInterceptor
 {
     public function invoke(MethodInvocation $invocation)
     {
-        v();
         $result = $invocation->proceed();
         $class = get_class($invocation->getThis());
         $input = $invocation->getArguments();

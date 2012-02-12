@@ -52,3 +52,6 @@
 [submodule "vendor/Ray.Annotation"]
 	path = vendor/Ray.Annotation
 	url = git://github.com/koriym/Ray.Annotation.git
+[submodule "vendor/Aura.Signal"]
+	path = vendor/Aura.Signal
+	url = https://github.com/auraphp/Aura.Signal.git

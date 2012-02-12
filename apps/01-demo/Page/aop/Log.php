@@ -6,6 +6,8 @@ use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\Resource,
     BEAR\Framework\Link\View\Php as PhpView;
 
+use BEAR\Resource\Annotation\Provides;
+
 /**
  * Hello World using resource
  */

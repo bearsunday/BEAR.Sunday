@@ -6,7 +6,8 @@
 namespace BEAR\Framework;
 
 use BEAR\Resource\Resource;
-use Ray\Di\Annotation,
+use Ray\Di\Definition,
+    Ray\Di\Annotation,
     Ray\Di\Config,
     Ray\Di\Forge,
     Ray\Di\Container,
@@ -65,11 +66,10 @@ class Dispatcher
         } else {
             // application fixed instance ($di, $resource)
             $appModule =  '\\' . $this->appName. '\\Module\\AppModule';
-            $di = new Injector(new Container(new Forge(new Config(new Annotation))));
-            $module = new $appModule(new FrameWorkModule($di));
+            $di = new Injector(new Container(new Forge(new Config(new Annotation(new Definition)))));
+            $module = new $appModule(new FrameWorkModule($di, $this->appName));
             $di->setModule($module);
             $resource = $di->getInstance('BEAR\Resource\Client');
-
             // request URL based page resource instance ($page)
             try {
                 $page = $resource->newInstance("page://self/{$pageResource}");
@@ -80,7 +80,10 @@ class Dispatcher
             } catch (\Exception $e) {
                 throw $e;
             }
-            file_put_contents($objectCache, serialize([$di, $resource, $page]));
+            $serializedObject = serialize([$di, $resource, $page]);
+            file_put_contents($objectCache, $serializedObject);
+            $providesHandler = require dirname(dirname(dirname(__DIR__))) . '/vendor/BEAR.Resource/scripts/provides_handler.php';
+            $resource->attachArgProvider('Provides', $providesHandler);
         }
         return [$resource, $page];
     }

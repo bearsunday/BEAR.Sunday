@@ -5,6 +5,10 @@ namespace BEAR\Framework\Module;
 use Ray\Di\AbstractModule,
     Ray\Di\InjectorInterface as Inject,
     Ray\Di\Scope;
+use Aura\Signal\Manager,
+    Aura\Signal\HandlerFactory,
+    Aura\Signal\ResultFactory,
+    Aura\Signal\ResultCollection;
 /**
  * Framework default module
  */
@@ -32,5 +36,6 @@ class StandardModule extends AbstractModule
         $this->bind('BEAR\Resource\Resource')->to('BEAR\Resource\Client');
         $this->bind('BEAR\Resource\Invokable')->to('BEAR\Resource\Invoker');
         $this->bind('BEAR\Resource\Linkable')->to('BEAR\Resource\Linker');
+        $this->bind('Aura\Signal\Manager')->toInstance(new Manager(new HandlerFactory, new ResultFactory, new ResultCollection));
     }
 }

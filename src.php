@@ -10,6 +10,7 @@ require __DIR__ . '/vendor/BEAR.Resource/src.php';
 require __DIR__ . '/vendor/Smarty3/libs/Smarty.class.php';
 require __DIR__ . '/vendor/Haanga/lib/Haanga.php';
 require __DIR__ . '/vendor/Aura.Router/src.php';
+require __DIR__ . '/vendor/Aura.Signal/src.php';
 require __DIR__ . '/vendor/Twig/lib/Twig/Environment.php';
 
 $namespaces = array(

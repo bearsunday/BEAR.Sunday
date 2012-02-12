@@ -5,6 +5,9 @@ use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as AbstractPage,
     BEAR\Framework\Link\View\Php as PhpView;
 
+use demowolrd\Annotation\Cache,
+    demowolrd\Annotation\CacheUpdate;
+
 /**
  * Cache page
  *

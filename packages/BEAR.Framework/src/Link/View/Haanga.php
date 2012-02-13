@@ -18,14 +18,14 @@ use BEAR\Resource\Object as ResourceObject,
 trait Haanga
 {
     /**
-     * @PostConstruct
+     * Init on wakeup
      */
-    public function onInitHaanga()
+    public function __wakeup()
     {
         // Haanga static init
         \Haanga::configure([
                     'template_dir' => '/',
-                    'cache_dir' => '/tmp/haanga',
+                    'cache_dir' => dirname(dirname(dirname(__DIR__))) . '/tmp/'
         ]);
     }
 

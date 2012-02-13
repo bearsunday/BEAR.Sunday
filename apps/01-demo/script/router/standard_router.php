@@ -20,8 +20,11 @@ $map = new \Aura\Router\Map(new \Aura\Router\RouteFactory, $attach);
 
 // set $globals
 if  (PHP_SAPI !== 'cli') {
+    // web
     $globals = $GLOBALS;
+    $query = $_GET;
 } else {
+    // cli
     if (!isset($argv[1]) || !isset($argv[2])) {
         echo 'usage: <method> <uri>' . PHP_EOL;
         exit(1);
@@ -35,6 +38,9 @@ if  (PHP_SAPI !== 'cli') {
 $route = $map->match(parse_url($globals['_SERVER']['REQUEST_URI'], PHP_URL_PATH), $_SERVER);
 if ($route === false) {
     list($method, $pageResource) = (new DevRouter($globals))->get();
+    if  (PHP_SAPI !== 'cli') {
+        goto completed;
+    }
     $parsedUrl = parse_url($globals['_SERVER']['REQUEST_URI']);
     if (isset($parsedUrl['query'])) {
         parse_str(parse_url($argv[2])['query'], $query);
@@ -49,6 +55,7 @@ if ($route === false) {
         $query[$key] = $route->values[$key];
     }
 }
+completed:
 unset($map);
 unset($attach);
 unset($globals);

@@ -85,6 +85,8 @@ class Dispatcher
             }
             $serializedObject = serialize([$resource, $page]);
             $r = file_put_contents($objectCache, $serializedObject);
+            $sdi = serialize($di);
+            unserialize($sdi);
         }
         $providesHandler = require dirname(dirname(dirname(__DIR__))) . '/vendor/BEAR.Resource/scripts/provides_handler.php';
         $resource->attachArgProvider('Provides', $providesHandler);

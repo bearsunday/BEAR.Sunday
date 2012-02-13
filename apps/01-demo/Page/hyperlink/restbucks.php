@@ -22,6 +22,8 @@ class RestBucks extends Page
      */
     protected $resource;
 
+    protected $menu;
+
     /**
      * @param Resource $resource Resource Client
      *
@@ -30,6 +32,7 @@ class RestBucks extends Page
     public function __construct(Resource $resource)
     {
         $this->resource = $resource;
+        $this->menu = $resource->newInstance('app://self/RestBucks/Menu');
     }
 
     /**
@@ -37,7 +40,7 @@ class RestBucks extends Page
      */
     public function onGet($drink)
     {
-        $menu = $this->resource->get->uri('app://self/RestBucks/Menu')->withQuery(['drink' => $drink])->eager->request();
+        $menu = $this->resource->get->object($this->menu)->withQuery(['drink' => $drink])->eager->request();
         $orderUri = $menu->headers['rel=order'];
         $order = $this->resource->post->uri($orderUri)->addQuery(['drink' => $menu['drink']])->request();
         $this['order'] = $order;

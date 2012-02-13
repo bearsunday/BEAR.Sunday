@@ -29,10 +29,6 @@ echo "http resource\n";
 passthru('php apps/01-demo/htdocs/dev.php get /http/googlenews');
 passthru('php apps/01-demo/htdocs/dev.php get /http/multi');
 
-echo "template engine\n";
-
-passthru('php apps/01-demo/htdocs/dev.php get /template/php');
-
 echo "api app resource\n";
 
 passthru('php apps/01-demo/api/dev.php get app://self/greeting?lang=en');

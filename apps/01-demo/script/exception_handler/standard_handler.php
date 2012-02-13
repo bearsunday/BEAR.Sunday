@@ -33,14 +33,14 @@ set_exception_handler(function(\Exception $e) {
     }
 
 OK:
-    include dirname(__DIR__) . '/output/dev.output.php';
+    include dirname(__DIR__) . '/output/prod.output.php';
     exit(0);
 
 NOT_FOUND:
 BAD_REQUEST:
 METHOD_NOT_ALLOWED:
 SERVER_ERROR:
-    include dirname(__DIR__) . '/output/dev.output.php';
+    include dirname(__DIR__) . '/output/prod.output.php';
     exit(1);
 }
 );

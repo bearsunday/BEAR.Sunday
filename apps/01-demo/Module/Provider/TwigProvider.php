@@ -20,7 +20,7 @@ class TwigProvider implements ProviderInterface
         $twig = new \Twig_Environment(
             new \Twig_Loader_Filesystem('/'),
             [
-                'cache' => dirname(__DIR__) . '/tmp/twig',
+                'cache' => dirname(dirname(__DIR__)) . '/tmp/twig',
                 'auto_reload' => true
             ]
         );

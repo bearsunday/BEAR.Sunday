@@ -1,10 +1,14 @@
 <?php
+
 namespace demoWorld;
 
 use BEAR\Framework\Dispatcher;
 
 /**
  * CLI / Built-in web server script with router
+ *
+ * @example $ php dev.php get /hello (CLI)
+ * @example http://sunday.host/hello (Web)
  *
  * @package BEAR.Framework
  *
@@ -20,23 +24,24 @@ if (php_sapi_name() == 'cli-server') {
         return false;
     }
 }
-// app define
+
+// Init
 $appName = __NAMESPACE__;
 $appPath = dirname(__DIR__);
-// init
-require $appPath . '/src.php';
 // include $appPath . '/script/utility/clear_cache.php';
-// include $appPath . '/script/exception_handler/standard_handler.php';
+include $appPath . '/script/exception_handler/standard_handler.php';
 
-// get instance
+// Load
+require $appPath . '/src.php';
+
+// Route
 list($method, $pageUri, $query) = require $appPath . '/script/router/standard_router.php';
 
-//list($method, $pageUri, $query) = require $appPath . '/script/router/no_router.php';
-
+// Dispatch
 list($resource, $page) = (new Dispatcher($appName, $appPath))->getInstance($pageUri);
 
-// page resource request
+// Request
 $response = $resource->$method->object($page)->withQuery($query)->linkSelf('view')->eager->request();
 
-// output
+// Output
 require $appPath . '/script/output/prod.output.php';

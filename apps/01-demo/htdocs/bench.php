@@ -21,9 +21,9 @@ use BEAR\Framework\Dispatcher;
 // Init
 $appName = __NAMESPACE__;
 $appPath = dirname(__DIR__);
-include $appPath . '/script/utility/clear_cache.php';
+// include $appPath . '/script/utility/clear_cache.php';
 // $mark = microtime(true);
-include $appPath . '/script/exception_handler/standard_handler.php';
+// include $appPath . '/script/exception_handler/standard_handler.php';
 // echo '<h3>Init</h3>' . (microtime(true) - $mark) . '<br>';
 
 // Load

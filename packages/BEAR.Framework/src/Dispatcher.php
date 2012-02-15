@@ -60,12 +60,12 @@ class Dispatcher
      */
     public function getInstance($pageResource)
     {
-        $objectCache = $this->appPath . '/tmp/%%RES%%' . str_replace('/', '-', $pageResource);
-        if (file_exists($objectCache) === true) {
-            $f = file_get_contents($objectCache);
+        $cacheFile = $this->appPath . '/tmp/%%res_' . str_replace('/', '-', $pageResource) . '.php';
+        if (file_exists($cacheFile) === true) {
+            $f = file_get_contents($cacheFile);
             list($resource, $page) = unserialize($f);
-            $dir = (dirname(dirname(dirname($objectCache))));
-            $page->headers[] = 'X-Cache-Since: ' . date ("r", filemtime($objectCache)) . ' (' . filesize($objectCache) . ')';
+            $dir = (dirname(dirname(dirname($cacheFile))));
+            $page->headers[] = 'X-Cache-Since: ' . date ("r", filemtime($cacheFile)) . ' (' . filesize($cacheFile) . ')';
         } else {
             // application fixed instance ($di, $resource)
             $appModule =  '\\' . $this->appName. '\\Module\\AppModule';
@@ -84,7 +84,7 @@ class Dispatcher
                 throw $e;
             }
             $serializedObject = serialize([$resource, $page]);
-            $r = file_put_contents($objectCache, $serializedObject);
+            $r = file_put_contents($cacheFile, $serializedObject);
             $sdi = serialize($di);
             unserialize($sdi);
         }

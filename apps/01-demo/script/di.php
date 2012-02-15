@@ -3,8 +3,6 @@ namespace demoWorld;
 
 use BEAR\Framework\Module\StandardModule;
 
-use Ray\Aop\Bind,
-    Ray\Aop\Matcher;
 use Ray\Di\AbstractModule,
     Ray\Di\InjectorInterface,
     Ray\Di\Annotation,
@@ -13,7 +11,6 @@ use Ray\Di\AbstractModule,
     Ray\Di\Container,
     Ray\Di\Injector,
     Ray\Di\Definition;
-use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
 /**
  * Return application dependency injector.

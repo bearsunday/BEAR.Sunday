@@ -9,9 +9,6 @@ use Ray\Di\Annotation,
     Ray\Di\Container,
     Ray\Di\Injector,
     Ray\Di\Definition;
-use Ray\Aop\Bind,
-    Ray\Aop\Matcher;
-use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
 /**
  * Return application dependency injector.

@@ -33,12 +33,14 @@ class AppModule extends AbstractModule
         $helloDi = include dirname(dirname(__DIR__)) . '/00-helloworld-min/script/di.php';
         $this->bind('Ray\Di\InjectorInterface')->annotatedWith('HelloDi')->toInstance($helloDi);
         $this->bind()->annotatedWith('dsn')->toInstance('/tmp/demo01.sqlite3');
+
+        $this->bind('Doctrine\Common\Annotations\Annotation')->toInstance([]);
         // PDO
         $this->bind('Ray\Di\ProviderInterface')->annotatedWith('pdo')->to('\demoWorld\Module\Provider\PdoProvider')->in(Scope::SINGLETON);;
         // Doctrine DBAL
         $this->bind('Doctrine\DBAL\Connection')->annotatedWith('dbal')->toProvider('\demoWorld\Module\Provider\DbalProvider')->in(Scope::SINGLETON);;
         // Annotation
-        $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('Log'), [new Log]);
+        $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('\demoWorld\Interceptor\Log'), [new Log]);
 //         $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('Transactional'), [new Transactional]);
 //         $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('Cache'), [new Cache(new CacheAdapter, __NAMESPACE__, 2, 'localhost')]);
 //         $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('CacheUpdate'), [new Cache(new CacheAdapter, __NAMESPACE__, 2, 'localhost')]);

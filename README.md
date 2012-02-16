@@ -3,6 +3,7 @@ BEAR, a resource oriented framework.
 =============================
 
 PHP5.4専用フレームワークBEAR(Sunday)の評価用プロトタイプです。
+[![Build Status](https://secure.travis-ci.org/koriym/BEAR.Sunday.png)](http://travis-ci.org/koriym/BEAR.Sunday)
 
 ## Requirement
 

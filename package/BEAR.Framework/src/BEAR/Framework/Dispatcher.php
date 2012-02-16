@@ -47,6 +47,7 @@ class Dispatcher
     {
         $this->appName = $appName;
         $this->appPath = $appPath;
+        $this->systemPath = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
     }
 
     /**
@@ -61,8 +62,11 @@ class Dispatcher
     public function getInstance($pageResource)
     {
         $cacheFile = $this->appPath . '/tmp/%%res_' . str_replace('/', '-', $pageResource) . '.php';
-        if (file_exists($cacheFile) === true) {
-            $f = file_get_contents($cacheFile);
+        $f = apc_fetch($cacheFile);
+//         if (file_exists($cacheFile) === true) {
+        if ($f) {
+//             $f = apc_fetch($cacheFile, $serializedObject);
+//             $f = file_get_contents($cacheFile);
             list($resource, $page) = unserialize($f);
             $dir = (dirname(dirname(dirname($cacheFile))));
             $page->headers[] = 'X-Cache-Since: ' . date ("r", filemtime($cacheFile)) . ' (' . filesize($cacheFile) . ')';
@@ -84,11 +88,12 @@ class Dispatcher
                 throw $e;
             }
             $serializedObject = serialize([$resource, $page]);
-            $r = file_put_contents($cacheFile, $serializedObject);
+            apc_store($cacheFile, $serializedObject);
+            // for test
             $sdi = serialize($di);
             unserialize($sdi);
         }
-        $providesHandler = require dirname(dirname(dirname(__DIR__))) . '/vendor/BEAR.Resource/scripts/provides_handler.php';
+        $providesHandler = require $this->systemPath . '/vendor/BEAR.Resource/scripts/provides_handler.php';
         $resource->attachArgProvider('Provides', $providesHandler);
         return [$resource, $page];
     }

@@ -29,7 +29,7 @@ if (php_sapi_name() == 'cli-server') {
 $appName = __NAMESPACE__;
 $appPath = dirname(__DIR__);
 // include $appPath . '/script/utility/clear_cache.php';
-include $appPath . '/script/exception_handler/standard_handler.php';
+// include $appPath . '/script/exception_handler/standard_handler.php';
 
 // Load
 require $appPath . '/src.php';

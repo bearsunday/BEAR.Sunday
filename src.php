@@ -25,7 +25,8 @@ $namespaces = array(
 $classLoader = new ClassLoader;
 $classLoader->registerNamespaces($namespaces);
 $classLoader->registerPrefix('Zend_', __DIR__ . '/vendor');
+$classLoader->registerPrefix('Twig_', __DIR__ . '/vendor/Twig/lib');
 $classLoader->register();
 
 // BEAR.Framework loader
-require __DIR__ . '/packages/BEAR.Framework/src.php';
+require __DIR__ . '/package/BEAR.Framework/src.php';

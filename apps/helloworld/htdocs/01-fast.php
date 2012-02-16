@@ -9,6 +9,7 @@ namespace helloWorld;
  * no app resource
  * no page object graph cache
  */
+// include $appPath . '/script/utility/clear_cache.php';
 
 require dirname(__DIR__) . '/src.php';
 // require dirname(__DIR__) . '/script/auto_loader.php';
@@ -22,3 +23,4 @@ foreach ($response->headers as $header) {
     header($header);
 }
 echo $response->body;
+exit(0);

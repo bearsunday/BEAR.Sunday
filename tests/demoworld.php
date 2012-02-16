@@ -10,7 +10,7 @@ class App00Test extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->di = require dirname(__DIR__) . '/apps/00-helloworld-min/script/di.php';
+        $this->di = require dirname(__DIR__) . '/apps/helloworld/script/di.php';
     }
 
     public function testgetDefinitionScope()

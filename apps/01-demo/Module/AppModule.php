@@ -30,7 +30,7 @@ class AppModule extends AbstractModule
         $this->bind()->annotatedWith('GreetingMessage')->toInstance(['en' => 'Hello World', 'ja' => 'Konichiwa Sekai']);
         $this->bind()->annotatedWith('Twig')->toProvider('\demoWorld\Module\Provider\TwigProvider')->in(Scope::SINGLETON);;
         $this->bind()->annotatedWith('Smarty')->toProvider('\demoWorld\Module\Provider\SmartyProvider')->in(Scope::SINGLETON);;
-        $helloDi = include dirname(dirname(__DIR__)) . '/00-helloworld-min/script/di.php';
+        $helloDi = include dirname(dirname(__DIR__)) . '/helloworld/script/di.php';
         $this->bind('Ray\Di\InjectorInterface')->annotatedWith('HelloDi')->toInstance($helloDi);
         $this->bind()->annotatedWith('dsn')->toInstance('/tmp/demo01.sqlite3');
 

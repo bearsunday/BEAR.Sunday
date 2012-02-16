@@ -15,6 +15,6 @@ namespace BEARF\Framewokr\Annotation;
  * @package    Ray.Di
  * @subpackage Annotation
  */
-final class BindingAnnotation implements Annotation
+final class BindingAnnotation
 {
 }

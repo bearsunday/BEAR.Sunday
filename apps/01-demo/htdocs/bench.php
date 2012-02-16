@@ -17,7 +17,6 @@ use BEAR\Framework\Dispatcher;
  * @global BEAR\Resource\Object $response Resource object (response)
  */
 
-
 // Init
 $appName = __NAMESPACE__;
 $appPath = dirname(__DIR__);

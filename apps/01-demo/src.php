@@ -4,6 +4,7 @@
  */
 // BEAR.Sunday/src
 require_once dirname(dirname(__DIR__)) . '/src.php';
+
 // di modules
 require __DIR__ . '/Module/AppModule.php';
 require __DIR__ . '/Module/Provider/SmartyProvider.php';
@@ -44,4 +45,4 @@ require __DIR__ . '/Annotation/Cache.php';
 require __DIR__ . '/Annotation/CacheUpdate.php';
 require __DIR__ . '/Annotation/Log.php';
 // hello world app
-require dirname(__DIR__) . '/00-helloworld-min/src.php';
+require dirname(__DIR__) . '/helloworld/src.php';

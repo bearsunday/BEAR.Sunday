@@ -8,8 +8,8 @@ namespace BEAR\Framework\Link\View;
 
 use \BEAR\Resource\Object as ResourceObject;
 
-require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/vendor/Twig/lib/Twig/Autoloader.php';
-\Twig_Autoloader::register();
+// require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/vendor/Twig/lib/Twig/Autoloader.php';
+// \Twig_Autoloader::register();
 
 /**
  * Trait for twig view link.

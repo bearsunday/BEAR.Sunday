@@ -12,6 +12,6 @@ namespace BEAR\Framework\Exception;
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-class NotFound extends \BEAR\Resource\Exception
+class ResourceNotFound extends \BEAR\Resource\Exception
 {
 }

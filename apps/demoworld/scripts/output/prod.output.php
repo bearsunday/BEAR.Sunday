@@ -20,17 +20,18 @@ web:
     $protocol = isset($_ENV['SERVER_PROTOCOL']) ? $_ENV['SERVER_PROTOCOL'] : 'HTTP/1.1';
     header("{$protocol} {$response->code} {$statusText}", true, $response->code);
     // header
-    foreach ($response->headers as $header) {
-        header($header);
+    foreach ($response->headers as $key => $header) {
+        header("{$key}: $header");
     }
     // body
     echo $response->body;
     exit(0);
 cli:
-    echo "{$response->code} {$statusText}" ."\n";
-    foreach ($response->headers as $header) {
-        echo "{$header}\n";
+    echo "{$response->code} {$statusText} \n";
+    foreach ($response->headers as $headerKey => $header) {
+        echo "$headerKey: $header\n";
     }
+    echo "Content-Length: " . strlen($response->body) . "\n";
     echo "\n" . $response->body;
     echo PHP_EOL;
     exit(0);

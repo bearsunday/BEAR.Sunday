@@ -18,8 +18,7 @@ use BEAR\Resource\Object as ResourceObject;
 use demoworld\App;
 
 // Init
-include dirname(dirname(__DIR__)) . '/scripts/exception_handler/standard_handler.php';
-include dirname(dirname(__DIR__)) . '/scripts/utility/clear_cache.php';
+include dirname(dirname(__DIR__)) . '/scripts/exception_handler/api_handler.php';
 
 // Load
 require dirname(dirname(__DIR__)) . '/scripts/auto_loader.php';
@@ -37,12 +36,7 @@ $method = (new StandardRouter)->getMethod($globals);
 list($resource, $page) = (new Dispatcher(new App))->getInstance($uri);
 
 // Request
-$response = $resource->$method->object($page)->withQuery($query)->eager->request();
+$response = $resource->$method->object($page)->withQuery($query)->linkSelf('view')->eager->request();
 
-if (!($response instanceof ResourceObject)) {
-    $page->body = $response;
-    $response = $page;
-}
 // Output
 include dirname(dirname(__DIR__)) . '/scripts/output/api.output.php';
-

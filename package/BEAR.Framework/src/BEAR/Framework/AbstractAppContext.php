@@ -15,8 +15,10 @@ use Ray\Di\Definition,
 use BEAR\Framework\Module\StandardModule as FrameWorkModule;
 
 /**
- * App info
+ * Application context
  *
+ * @package BEAR.Framework
+ * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
 abstract class AbstractAppContext
 {
@@ -50,7 +52,7 @@ abstract class AbstractAppContext
      */
     public function getResourceFactory()
     {
-        return function ($appName, $pageUriPath){
+        return function ($appName, $pageUri){
             $appModule =  '\\' . $appName. '\\Module\\AppModule';
             $di = new Injector(new Container(new Forge(new Config(new Annotation(new Definition)))));
             $module = new $appModule(new FrameWorkModule($di, $appName));
@@ -58,7 +60,7 @@ abstract class AbstractAppContext
             $resource = $di->getInstance('BEAR\Resource\Client');
             // request URL based page resource instance ($page)
             try {
-                $page = $resource->newInstance("page://self/{$pageUriPath}");
+                $page = $resource->newInstance($pageUri);
             } catch (\ReflectionException $e) {
                 throw $e;
                 $page = $resource->newInstance("page://self/code404");

@@ -41,7 +41,7 @@ final class App extends AppContext
      *
      * @param string $appName
      */
-    public function __construct($appName)
+    public function __construct($appName = __NAMESPACE__)
     {
         $this->name = $appName;
         $this->path = __DIR__;

@@ -17,7 +17,7 @@ echo "template engine\n";
 
 passthru('php apps/demoworld/htdocs/dev.php get /template/twig');
 passthru('php apps/demoworld/htdocs/dev.php get /template/smarty3');
-//passthru('php apps/demoworld/htdocs/dev.php get /template/haanga');
+passthru('php apps/demoworld/htdocs/dev.php get /template/haanga');
 passthru('php apps/demoworld/htdocs/dev.php get /template/php');
 
 echo "AOP\n";
@@ -31,8 +31,8 @@ passthru('php apps/demoworld/htdocs/dev.php get /http/multi');
 
 echo "api app resource\n";
 
-passthru('php apps/demoworld/api/dev.php get app://self/greeting?lang=en');
-passthru('php apps/demoworld/api/dev.php get app://self/greeting?lang=ja');
+passthru('php apps/demoworld/htdocs/api/dev.php get app://self/greeting?lang=en');
+passthru('php apps/demoworld/htdocs/api/dev.php get app://self/greeting?lang=ja');
 
 echo "another app page as resource\n";
 

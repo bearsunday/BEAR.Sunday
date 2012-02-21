@@ -13,6 +13,7 @@ use \Doctrine\Common\Annotations\AnnotationRegistry;
 
 $appPath = dirname(__DIR__);
 $system = dirname(dirname($appPath));
+
 $loader = require  $system . '/vendor/Aura.Autoload/scripts/instance.php';
 $loader->setPaths([
     __NAMESPACE__ . '\\' => dirname($appPath),
@@ -31,18 +32,14 @@ $loader->setPaths([
     'Doctrine\Common\\' => $system . '/vendor/Doctrine/lib/',
     'Symfony\Component\\' => $system . '/vendor/Symfony/src/',
     'Guzzle\\' => $system . '/vendor/Guzzle/src/',
+    'Haanga_' => $system . '/vendor/Haanga/lib/',
+    'Twig_' => $system . '/vendor/Twig/lib/',
+    'smarty_' => $system . '/vendor/Smarty3/libs/sysplugins/',
 ]);
-
-// require_once $system . '/vendor/Twig/lib/Twig/Environment.php';
-require_once $system . '/vendor/Smarty3/libs/Smarty.class.php';
-$loader->add('Twig_', $system . '/vendor/Twig/lib/');
-$loader->add('Haanga_', $system . '/vendor/Haanga/lib/');
-require_once $system . '/vendor/Haanga/lib/Haanga.php';
-
-require $system . '/vendor/Haanga/lib/Haanga/Extension.php';
-require $system . '/vendor/Haanga/lib/Haanga/Extension/Tag.php';
-
+require_once $system .  '/vendor/Smarty3/libs/Smarty.class.php';
 $loader->register();
+
+// silent auto loader for annotation
 AnnotationRegistry::registerAutoloadNamespace("Ray\Di\Di", $system . '/vendor/Ray.Di/src/');
 AnnotationRegistry::registerAutoloadNamespace("BEAR\Resource\Annotation", $system . '/vendor/BEAR.Resource/src/');
 AnnotationRegistry::registerAutoloadNamespace("demoworld\Annotation", dirname($appPath));

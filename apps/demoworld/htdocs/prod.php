@@ -26,10 +26,11 @@ include dirname(__DIR__) . '/scripts/exception_handler/standard_handler.php';
 require dirname(__DIR__) . '/scripts/auto_loader.php';
 
 // Route
-list($method, $pageUri, $query) = require $appPath . '/scripts/router/standard_router.php';
+$route = require dirname(__DIR__) . '/scripts/router/standard_router.php';
+list($method, $pagePath, $query) = $route->match($GLOBALS);
 
 // Dispatch
-list($resource, $page) = (new Dispatcher(new App(__NAMESPACE__)))->getInstance($pageUri);
+list($resource, $page) = (new Dispatcher(new App))->getInstance('page://self/' . $pagePath);
 
 // Request
 $response = $resource->$method->object($page)->withQuery($query)->linkSelf('view')->eager->request();

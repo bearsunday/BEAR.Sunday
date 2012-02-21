@@ -4,61 +4,21 @@
  *
  * @global \Aura\Router\Map $map
  * @global array            $globals
- * @global array            $pageResource
+ * @global array            $pageUri
  * @global array            $query
  */
 namespace BEAR\Application\Script;
 
-use BEAR\Framework\DevRouter;
+use BEAR\Framework\StandardRouter;
+use Aura\Router\Map,
+    Aura\Router\RouteFactory;
+
 
 // get a routes array from each application packages
 $attach = [
     '/helloresource'  => require __DIR__ . '/routes/helloresource.php',
 ];
 // create a Map with attached route groups
-$map = new \Aura\Router\Map(new \Aura\Router\RouteFactory, $attach);
-
-// set $globals
-if  (PHP_SAPI !== 'cli') {
-    // web
-    $globals = $GLOBALS;
-    $query = $_GET;
-} else {
-    // cli
-    if (!isset($argv[1]) || !isset($argv[2])) {
-        echo 'usage: <method> <uri>' . PHP_EOL;
-        exit(1);
-    }
-    $globals = [
-        '_GET' => [DevRouter::METHOD_OVERRIDE => $argv[1]],
-        '_SERVER' => ['REQUEST_URI' => $argv[2]]
-    ];
-}
-
-$route = $map->match(parse_url($globals['_SERVER']['REQUEST_URI'], PHP_URL_PATH), $_SERVER);
-if ($route === false) {
-    list($method, $pageResource) = (new DevRouter($globals))->get();
-    if  (PHP_SAPI !== 'cli') {
-        goto completed;
-    }
-    $parsedUrl = parse_url($globals['_SERVER']['REQUEST_URI']);
-    if (isset($parsedUrl['query'])) {
-        parse_str(parse_url($argv[2])['query'], $query);
-    } else {
-        $query = [];
-    }
-} else {
-    $method = $route->values['action'];
-    $pageResource = $route->values['page'];
-    $query = [];
-    foreach ($route->params as $key => $params) {
-        $query[$key] = $route->values[$key];
-    }
-}
-completed:
-unset($map);
-unset($attach);
-unset($globals);
-unset($route);
-
-return [$method, $pageResource, $query];
+$map = new Map(new RouteFactory, $attach);
+$standardRouter = new StandardRouter($map);
+return $standardRouter;

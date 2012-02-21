@@ -4,8 +4,10 @@
  */
 namespace BEAR\Framework;
 
-    use BEAR\Framework\Exception\ResourceNotFound;
-use BEAR\Resource\Exception\BadRequest;
+use BEAR\Framework\Exception\ResourceNotFound;
+use BEAR\Resource\Exception\BadRequest,
+    BEAR\Resource\Exception\MethodNotAllowed;
+
 use demoworld\Page\Code;
 
 set_exception_handler(function(\Exception $e) {
@@ -37,8 +39,6 @@ set_exception_handler(function(\Exception $e) {
         $response->headers['X-EXCEPTION'] = get_class($e);
         $response->headers['X-EXCEPTION-CODE'] = $e->getCode();
         $response->headers['X-EXCEPTION-MESSAGE'] = $e->getMessage();
-        $response->headers['X-EXCEPTION-TRACE0'] = json_encode($e->getTrace()[0]);
-        $response->headers['X-EXCEPTION-TRACE1'] = json_encode($e->getTrace()[1]);
         $response->body = '<div class="trace">' . $e->getTraceAsString() . '</div>';
         $response->body = '<div class="trace">' . $e->getTraceAsString() . '</div>';
         goto SERVER_ERROR;

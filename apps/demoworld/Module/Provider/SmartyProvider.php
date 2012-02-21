@@ -5,6 +5,8 @@ namespace demoworld\Module\Provider;
 use Ray\Di\InjectorInterface,
     Ray\Di\ProviderInterface;
 
+use Smarty;
+
 /**
  * Smarty3
  *
@@ -17,7 +19,7 @@ class SmartyProvider implements ProviderInterface
      */
     public function get()
     {
-        $smarty = new \Smarty;
+        $smarty = new Smarty;
         $smarty->setCompileDir(dirname(dirname(__DIR__)) . '/tmp/smarty/template_c');
         $smarty->setCacheDir(dirname(dirname(__DIR__)) . '/tmp/smarty/cache');
         return $smarty;

@@ -9,6 +9,8 @@ namespace BEAR\Framework\Link\View;
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\Request;
 
+require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/vendor/Haanga/lib/Haanga.php';
+
 /**
  * Trait for twig view link.
  *
@@ -22,11 +24,10 @@ trait Haanga
      */
     public function __wakeup()
     {
-        v();
         // Haanga static init
         \Haanga::configure([
-                    'template_dir' => '/',
-                    'cache_dir' => dirname(dirname(dirname(__DIR__))) . '/tmp/'
+                            'template_dir' => '/',
+                            'cache_dir' => dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/tmp/'
         ]);
     }
 

@@ -28,12 +28,13 @@ echo '<h3>Load</h3>' . number_format((microtime(true) - $mark), 4) . "'<br>\n";
 
 // Route
 $mark = microtime(true);
-list($method, $pageUri, $query) = require $appPath . '/scripts/router/standard_router.php';
+$route = require dirname(__DIR__) . '/scripts/router/standard_router.php';
+list($method, $pagePath, $query) = $route->match($GLOBALS);
 echo '<h3>Route</h3>' . number_format((microtime(true) - $mark), 4) . "'<br>\n";
 
 // Dispatch
 $mark = microtime(true);
-list($resource, $page) = (new Dispatcher(new App(__NAMESPACE__)))->getInstance($pageUri);
+list($resource, $page) = (new Dispatcher(new App))->getInstance('page://self/' . $pagePath);
 echo '<h3>Dispatch</h3>' . number_format((microtime(true) - $mark), 4) . "'<br>\n";
 
 // Request

@@ -1,8 +1,9 @@
 <?php
-namespace helloworld\Page;
+namespace demoworld\Page;
 
 use BEAR\Resource\Object as ResourceObject,
-    BEAR\Resource\AbstractObject as Page;
+    BEAR\Resource\AbstractObject as Page,
+    BEAR\Framework\Link\View\Php as PhpView;
 
 /**
  * Hello World - page resource only
@@ -10,6 +11,8 @@ use BEAR\Resource\Object as ResourceObject,
  */
 class Hello extends Page
 {
+    use PhpView;
+
     public function __construct()
     {
     }
@@ -17,9 +20,9 @@ class Hello extends Page
     /**
      * @return ResourceObject
      */
-    public function onGet($name)
+    public function onGet()
     {
-        $this->body = 'Hello ' . $name;
+        $this['greeting'] = 'Hello World';
         return $this;
     }
 }

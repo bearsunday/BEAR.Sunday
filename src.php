@@ -4,13 +4,13 @@ use \Symfony\Component\ClassLoader\UniversalClassLoader as ClassLoader;
 
 // vendor/* loader
 require __DIR__ . '/vendor/Symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-require __DIR__ . '/vendor/Ray.Aop/src.php';
-require __DIR__ . '/vendor/Ray.Di/src.php';
-require __DIR__ . '/vendor/BEAR.Resource/src.php';
-require __DIR__ . '/vendor/Smarty3/libs/Smarty.class.php';
-require __DIR__ . '/vendor/Haanga/lib/Haanga.php';
-require __DIR__ . '/vendor/Aura.Router/src.php';
-require __DIR__ . '/vendor/Aura.Signal/src.php';
+// require __DIR__ . '/vendor/Ray.Aop/src.php';
+// require __DIR__ . '/vendor/Ray.Di/src.php';
+// require __DIR__ . '/vendor/BEAR.Resource/src.php';
+// require __DIR__ . '/vendor/Smarty3/libs/Smarty.class.php';
+// require __DIR__ . '/vendor/Haanga/lib/Haanga.php';
+// require __DIR__ . '/vendor/Aura.Router/src.php';
+// require __DIR__ . '/vendor/Aura.Signal/src.php';
 require __DIR__ . '/vendor/Twig/lib/Twig/Environment.php';
 
 $namespaces = array(

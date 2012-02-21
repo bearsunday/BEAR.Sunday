@@ -18,53 +18,53 @@ PHP5.4専用フレームワークBEAR(Sunday)の評価用プロトタイプで�
 
 ミニマム
 
-    $ php apps/01-demo/htdocs/dev.php get /hello
+    $ php apps/demoworld/htdocs/dev.php get /hello
 
 +モデル（アプリケーションリソース）
 
-    $ php apps/01-demo/htdocs/dev.php get /helloresource
+    $ php apps/demoworld/htdocs/dev.php get /helloresource
 
 +テンプレートエンジン
 
-    $ php apps/01-demo/htdocs/dev.php get /template/twig
-    $ php apps/01-demo/htdocs/dev.php get /template/smarty3
-    $ php apps/01-demo/htdocs/dev.php get /template/haanga
-    $ php apps/01-demo/htdocs/dev.php get /template/php
+    $ php apps/demoworld/htdocs/dev.php get /template/twig
+    $ php apps/demoworld/htdocs/dev.php get /template/smarty3
+    $ php apps/demoworld/htdocs/dev.php get /template/haanga
+    $ php apps/demoworld/htdocs/dev.php get /template/php
 
 +アスペクト指向
 
-    $ php apps/01-demo/htdocs/dev.php get /aop/log
+    $ php apps/demoworld/htdocs/dev.php get /aop/log
 
 +HTTPリソース
 
-    $ php apps/01-demo/htdocs/dev.php get /http/googlenews
-    $ php apps/01-demo/htdocs/dev.php get /http/multi
+    $ php apps/demoworld/htdocs/dev.php get /http/googlenews
+    $ php apps/demoworld/htdocs/dev.php get /http/multi
 
 ## APIコール
 
 ### app:// アプリケーションリソース
-    $ php apps/01-demo/htdocs/api.php get app://self/greeting?lang=en
-    $ php apps/01-demo/htdocs/api.php get app://self/greeting?lang=ja
+    $ php apps/demoworld/htdocs/api.php get app://self/greeting?lang=en
+    $ php apps/demoworld/htdocs/api.php get app://self/greeting?lang=ja
     
 ### page:// ページリソース
-    $ php apps/01-demo/htdocs/api.php get page://self/hello
+    $ php apps/demoworld/htdocs/api.php get page://self/hello
 
 ## マルチアプリケーションリソース
 
-    $ php apps/01-demo/htdocs/dev.php get /app/hello
+    $ php apps/demoworld/htdocs/dev.php get /app/hello
 
 ## Hyper Link
 
-    $ php apps/01-demo/htdocs/dev.php get /hyperlink/restbucks?drink=latte
-    $ php apps/01-demo/htdocs/dev.php get /hyperlink/restbucks?drink=coffe
+    $ php apps/demoworld/htdocs/dev.php get /hyperlink/restbucks?drink=latte
+    $ php apps/demoworld/htdocs/dev.php get /hyperlink/restbucks?drink=coffe
     
 ## Router
-	$ php apps/01-demo/htdocs/router.php get /helloresource/ja
-	$ php apps/01-demo/htdocs/router.php get /helloresource/en
+	$ php apps/demoworld/htdocs/router.php get /helloresource/ja
+	$ php apps/demoworld/htdocs/router.php get /helloresource/en
 
 
 ## Built in web server
-    $ php -S localhost:8080 apps/01-demo/htdocs/dev.php 
+    $ php -S localhost:8080 apps/demoworld/htdocs/dev.php 
 
 ブラウザで
 

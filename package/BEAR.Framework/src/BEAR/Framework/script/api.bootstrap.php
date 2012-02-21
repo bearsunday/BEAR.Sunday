@@ -35,7 +35,7 @@ if  (PHP_SAPI !== 'cli') {
     ];
 }
 
-$di = require $appPath . '/script/di.php';
+$di = require $appPath . '/scripts/di.php';
 $resource = $di->getInstance('BEAR\Resource\Client');
 
 list($method, $ro) = (new DevRouter($globals))->dispatch($resource);

@@ -22,6 +22,7 @@ trait Haanga
      */
     public function __wakeup()
     {
+        v();
         // Haanga static init
         \Haanga::configure([
                     'template_dir' => '/',

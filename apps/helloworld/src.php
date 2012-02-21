@@ -29,6 +29,7 @@ require_once $system . '/package/BEAR.Framework/src.php';
 // require_once $system . '/vendor/Aura.Signal/src.php';
 // require_once $system . '/vendor/Twig/lib/Twig/Environment.php';
 $namespaces = [
+           'helloworld' => __DIR__ . '/'    ,
            'Doctrine\Common' => $system . '/vendor/Doctrine/lib/',
            'Aura\Signal' => $system . '/vendor/Aura.Signal/src/',
 //         'Guzzle' => $system . '/vendor/Guzzle/src',

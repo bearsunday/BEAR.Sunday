@@ -2,10 +2,10 @@
 /**
  * Module
  *
- * @package    helloWorld
+ * @package    helloworld
  * @subpackage Module
  */
-namespace helloWorld\Module;
+namespace helloworld\Module;
 
 use Ray\Di\Scope;
 
@@ -18,10 +18,11 @@ use Ray\Di\AbstractModule,
     Ray\Di\Container,
     Ray\Di\Injector,
     Ray\Di\Definition;
+
 /**
  * Application module
  *
- * @package    helloWorld
+ * @package    helloworld
  * @subpackage Module
  */
 class AppModule extends AbstractModule
@@ -33,6 +34,6 @@ class AppModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\helloWorld\Module\SchemeCollectionProvider')->in(Scope::SINGLETON);
+        $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\helloworld\Module\SchemeCollectionProvider')->in(Scope::SINGLETON);
     }
 }

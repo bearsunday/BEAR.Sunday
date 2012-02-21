@@ -11,31 +11,32 @@ use Ray\Di\Definition,
     Ray\Di\Config,
     Ray\Di\Forge,
     Ray\Di\Container,
-    Ray\Di\Injector;
-use BEAR\Framework\Module\StandardModule as FrameWorkModule,
-    BEAR\Framework\Router,
+    Ray\Di\Injector,
+    Ray\Di\InjectorInterface as Inject;
+use BEAR\Framework\Router,
     BEAR\Framework\DevRouter,
-    BEAR\Framework\Exception\NotFound;
+    BEAR\Framework\Exception\NotFound,
+    BEAR\Framework\AbstractAppContext as AppContext;
 
 /**
  * Dispatcher
  *
  */
-class Dispatcher
+final class Dispatcher
 {
     /**
-     * App Name
+     * Application context
      *
-     * @var string
+     * @var AppContext
      */
-    private $appName;
+    private $app;
 
     /**
-     * App Path
+     * System path
      *
      * @var string
      */
-    private $appPath;
+    private $systemPath;
 
     /**
      * Constructor
@@ -43,58 +44,39 @@ class Dispatcher
      * @param string $appName
      * @param string $appPath
      */
-    public function __construct($appName, $appPath)
+    public function __construct(AppContext $app)
     {
-        $this->appName = $appName;
-        $this->appPath = $appPath;
+        $this->app = $app;
         $this->systemPath = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
     }
 
     /**
      * Get instance
      *
-     * @param string $pageResource Page resource name
+     * @param string $pageUriPath Page resource path ("/hello/world")
      *
      * @return array [BEAR\Resource\Resource $resource, BEAR\Resource\Object $page]
      *
      * @throws Exception
      */
-    public function getInstance($pageResource)
+    public function getInstance($pageUriPath)
     {
-        $cacheFile = $this->appPath . '/tmp/%%res_' . str_replace('/', '-', $pageResource) . '.php';
-        $f = apc_fetch($cacheFile);
-//         if (file_exists($cacheFile) === true) {
-        if ($f) {
-//             $f = apc_fetch($cacheFile, $serializedObject);
-//             $f = file_get_contents($cacheFile);
-            list($resource, $page) = unserialize($f);
-            $dir = (dirname(dirname(dirname($cacheFile))));
-            $page->headers[] = 'X-Cache-Since: ' . date ("r", filemtime($cacheFile)) . ' (' . filesize($cacheFile) . ')';
+        $key = (string)$this->app;
+        $fetched = apc_fetch($key, $hasCache);
+        if ($hasCache) {
+            list($resource, $page) = unserialize($fetched);
         } else {
+            $resourceFactory = $this->app->getResourceFactory();
+            list($resource, $page) =  $resourceFactory($this->app->name, $pageUriPath);
             // application fixed instance ($di, $resource)
-            $appModule =  '\\' . $this->appName. '\\Module\\AppModule';
-            $di = new Injector(new Container(new Forge(new Config(new Annotation(new Definition)))));
-            $module = new $appModule(new FrameWorkModule($di, $this->appName));
-            $di->setModule($module);
-            $resource = $di->getInstance('BEAR\Resource\Client');
-            // request URL based page resource instance ($page)
-            try {
-                $page = $resource->newInstance("page://self/{$pageResource}");
-            } catch (\ReflectionException $e) {
-                throw $e;
-                $page = $resource->newInstance("page://self/code404");
-                $page->body = (string)$e;
-            } catch (\Exception $e) {
-                throw $e;
-            }
-            $serializedObject = serialize([$resource, $page]);
-            apc_store($cacheFile, $serializedObject);
-            // for test
-            $sdi = serialize($di);
-            unserialize($sdi);
+            $appModule =  '\\' . $this->app->name. '\\Module\\AppModule';
+            apc_store($key, serialize([$resource, $page]));
+            // serializable test
+            unserialize(serialize($page));
         }
         $providesHandler = require $this->systemPath . '/vendor/BEAR.Resource/scripts/provides_handler.php';
-        $resource->attachArgProvider('Provides', $providesHandler);
+        /* @var $resource \BEAR\Resoure\Client */
+        $resource->attachParamProvider('Provides', $providesHandler);
         return [$resource, $page];
     }
 }

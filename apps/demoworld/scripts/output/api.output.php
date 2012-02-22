@@ -25,7 +25,6 @@ web:
     // body
     echo $response->body;
     exit(0);
-
 cli:
     $label = "\033[1;32m";
     $label1 = "\033[1;33m";

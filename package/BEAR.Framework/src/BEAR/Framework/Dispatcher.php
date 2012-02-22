@@ -18,6 +18,7 @@ use BEAR\Framework\Router,
     BEAR\Framework\DevRouter,
     BEAR\Framework\Exception\NotFound,
     BEAR\Framework\AbstractAppContext as AppContext;
+use Aura\Autoload\Exception\NotReadable;
 
 /**
  * Dispatcher
@@ -72,8 +73,10 @@ final class Dispatcher
             $resourceFactory = $this->app->getResourceFactory();
             try {
                 list($resource, $page) =  $resourceFactory($this->app->name, $pageUri);
-            } catch (\Exception $e) {
+            } catch (NotReadable $e) {
                 throw new Exception\ResourceNotFound($pageUri, 404, $e);
+            } catch (\Exception $e) {
+                throw $e;
             }
             // application fixed instance ($di, $resource)
             $appModule =  '\\' . $this->app->name. '\\Module\\AppModule';

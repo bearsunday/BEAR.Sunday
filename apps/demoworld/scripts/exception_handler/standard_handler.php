@@ -7,12 +7,13 @@ namespace BEAR\Framework;
 use BEAR\Framework\Exception\ResourceNotFound;
 use BEAR\Resource\Exception\BadRequest,
     BEAR\Resource\Exception\MethodNotAllowed;
+use Ray\Di\Exception\InvalidBinding;
 
 use demoworld\Page\Code;
 
 set_exception_handler(function(\Exception $e) {
     $mode = isset($_ENV['BEAR_OUTPUT_MODE']) ? $_ENV['BEAR_OUTPUT_MODE'] : 'prod';
-    try {
+        try {
         $response = new Code;
         throw $e;
     } catch (NotFound $e) {
@@ -34,12 +35,16 @@ set_exception_handler(function(\Exception $e) {
         $response->headers['X-EXCEPTION-MESSAGE'] = $e->getMessage();
         $response->body = 'The requested URI was not found on this service.';
         goto NOT_FOUND;
+    } catch (InvalidBinding $e) {
+        $response->code = 500;
+        $response->headers['X-EXCEPTION'] = get_class($e);
+        $response->headers['X-EXCEPTION-MESSAGE'] = $e->getMessage();
+        $response->body = 'Biding is invalid. Check the module.';
     } catch (\Exception $e) {
         $response->code = 500;
         $response->headers['X-EXCEPTION'] = get_class($e);
         $response->headers['X-EXCEPTION-CODE'] = $e->getCode();
         $response->headers['X-EXCEPTION-MESSAGE'] = $e->getMessage();
-        $response->body = '<div class="trace">' . $e->getTraceAsString() . '</div>';
         $response->body = '<div class="trace">' . $e->getTraceAsString() . '</div>';
         goto SERVER_ERROR;
     }

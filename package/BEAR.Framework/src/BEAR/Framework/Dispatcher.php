@@ -82,7 +82,7 @@ final class Dispatcher
             $appModule =  '\\' . $this->app->name. '\\Module\\AppModule';
             apc_store($key, serialize([$resource, $page]));
             // serializable test
-            unserialize(serialize($page));
+            $page = unserialize(serialize($page));
         }
         $providesHandler = require $this->systemPath . '/vendor/BEAR.Resource/scripts/provides_handler.php';
         /* @var $resource \BEAR\Resoure\Client */

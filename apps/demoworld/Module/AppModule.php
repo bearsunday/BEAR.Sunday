@@ -33,12 +33,12 @@ class AppModule extends AbstractModule
         $helloDi = include dirname(dirname(__DIR__)) . '/helloworld/scripts/di.php';
         $this->bind('Ray\Di\InjectorInterface')->annotatedWith('HelloDi')->toInstance($helloDi);
         $this->bind()->annotatedWith('dsn')->toInstance('/tmp/demo01.sqlite3');
-
-        $this->bind('Doctrine\Common\Annotations\Annotation')->toInstance([]);
         // PDO
         $this->bind('Ray\Di\ProviderInterface')->annotatedWith('pdo')->to('\demoworld\Module\Provider\PdoProvider')->in(Scope::SINGLETON);;
         // Doctrine DBAL
         $this->bind('Doctrine\DBAL\Connection')->annotatedWith('dbal')->toProvider('\demoworld\Module\Provider\DbalProvider')->in(Scope::SINGLETON);;
+        // Web context
+        $this->bind('Ray\Di\ProviderInterface')->annotatedWith('webContext')->to('\demoworld\Module\Provider\WebContextProvider')->in(Scope::SINGLETON);;
         // Annotation
         $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('\demoworld\Interceptor\Log'), [new Log]);
 //         $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('Transactional'), [new Transactional]);

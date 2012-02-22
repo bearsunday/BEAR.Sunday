@@ -40,6 +40,7 @@ require_once $system .  '/vendor/Smarty3/libs/Smarty.class.php';
 $loader->register();
 
 // silent auto loader for annotation
-AnnotationRegistry::registerAutoloadNamespace("Ray\Di\Di", $system . '/vendor/Ray.Di/src/');
-AnnotationRegistry::registerAutoloadNamespace("BEAR\Resource\Annotation", $system . '/vendor/BEAR.Resource/src/');
-AnnotationRegistry::registerAutoloadNamespace("demoworld\Annotation", dirname($appPath));
+AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di', $system . '/vendor/Ray.Di/src/');
+AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation', $system . '/vendor/BEAR.Resource/src/');
+AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation', $system . '/package/BEAR.Framework/src/');
+AnnotationRegistry::registerAutoloadNamespace('demoworld\Annotation', dirname($appPath));

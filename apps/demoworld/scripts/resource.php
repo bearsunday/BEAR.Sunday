@@ -11,6 +11,8 @@ use Ray\Di\AbstractModule,
     Ray\Di\Container,
     Ray\Di\Injector,
     Ray\Di\Definition;
+use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
+use Doctrine\Common\Cache\ArrayCache as Cache;
 
 /**
  * Return application dependency injector.
@@ -31,4 +33,8 @@ $annotations = [
 ];
 $di = new Injector(new Container(new Forge(new Config(new Annotation(new Definition, $annotations)))));
 $di->setModule(new Module\AppModule(new StandardModule($di, __NAMESPACE__)));
-return $di;
+$resource = $di->getInstance('BEAR\Resource\Client');
+$providesHandler = require dirname(dirname(dirname(__DIR__))) . '/vendor/BEAR.Resource/scripts/provides_handler.php';
+/* @var $resource \BEAR\Resoure\Client */
+$resource->attachParamProvider('Provides', $providesHandler);
+return $resource;

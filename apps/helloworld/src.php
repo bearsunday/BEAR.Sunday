@@ -35,7 +35,7 @@ $namespaces = [
 //         'Guzzle' => $system . '/vendor/Guzzle/src',
 //         'Symfony' => $system . '/vendor/Symfony/src',
 //         'Monolog' => $system . '/vendor/Monolog/src',
-//         'Doctrine\DBAL' => $system . '/vendor/Doctrine-DBAL/lib',
+//         'Doctrine\DBAL' => $system . '/vendor/Doctrine.Dbal/lib',
 ];
 $classLoader = new ClassLoader(__NAMESPACE__);
 $classLoader->registerNamespaces($namespaces);

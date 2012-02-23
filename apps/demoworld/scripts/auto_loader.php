@@ -29,7 +29,10 @@ $loader->setPaths([
         $system . '/vendor/Aura.Signal/src/',
         $system . '/vendor/Aura.Web/src/'
     ],
-    'Doctrine\Common\\' => $system . '/vendor/Doctrine/lib/',
+    'Doctrine\\' => [
+        $system . '/vendor/Doctrine.Common/lib/',
+        $system . '/vendor/Doctrine.Dbal/lib/',
+    ],
     'Symfony\Component\\' => $system . '/vendor/Symfony/src/',
     'Guzzle\\' => $system . '/vendor/Guzzle/src/',
     'Haanga_' => $system . '/vendor/Haanga/lib/',

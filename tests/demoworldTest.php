@@ -10,8 +10,8 @@ class demoworldTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->di = require dirname(__DIR__) . '/apps/demoworld/scripts/di.php';
-        $this->resource = $this->di->getInstance('\BEAR\Resource\Client');
+        $this->resource = require dirname(__DIR__) . '/apps/demoworld/scripts/resource.php';
+//         $this->resource = $this->di->getInstance('\BEAR\Resource\Client');
     }
 
     public function testHelloOnly()
@@ -95,6 +95,12 @@ class demoworldTest extends \PHPUnit_Framework_TestCase
     public function testHyplerLinkOrder()
     {
         $response = $this->resource->get->uri('page://self/hyperlink/order')->withQuery(['drink' => 'latte'])->eager->request();
+        $this->assertSame(200, $response->code);
+    }
+
+    public function testWebContextInjectionAndParameterProvider()
+    {
+        $response = $this->resource->get->uri('page://self/param/web')->withQuery([])->eager->request();
         $this->assertSame(200, $response->code);
     }
 

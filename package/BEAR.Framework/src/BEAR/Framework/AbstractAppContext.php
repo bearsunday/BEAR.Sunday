@@ -43,6 +43,27 @@ abstract class AbstractAppContext
     public $path;
 
     /**
+     * System path
+     *
+     * @var string
+     */
+    public $systemPath;
+
+    /**
+     * Annotation Settings
+     *
+     */
+    protected $annotations = [
+        'provides' => 'BEAR\Resource\Annotation\Provides',
+        'signal' => 'BEAR\Resource\Annotation\Signal',
+        'argsignal' => 'BEAR\Resource\Annotation\ParamSignal',
+        'get' => 'BEAR\Resource\Annotation\Get',
+        'post' => 'BEAR\Resource\Annotation\Post',
+        'put' => 'BEAR\Resource\Annotation\Put',
+        'delete' => 'BEAR\Resource\Annotation\Delete',
+    ];
+
+    /**
      * Return factory for resource client and page resource
      *
      * @return callable
@@ -54,7 +75,7 @@ abstract class AbstractAppContext
     {
         return function ($appName, $pageUri){
             $appModule =  '\\' . $appName. '\\Module\\AppModule';
-            $di = new Injector(new Container(new Forge(new Config(new Annotation(new Definition)))));
+            $di = new Injector(new Container(new Forge(new Config(new Annotation(new Definition, $this->annotations)))));
             $module = new $appModule(new FrameWorkModule($di, $appName));
             $di->setModule($module);
             $resource = $di->getInstance('BEAR\Resource\Client');

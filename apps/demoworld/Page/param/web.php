@@ -7,7 +7,8 @@ use BEAR\Resource\Object as ResourceObject,
     BEAR\Framework\Link\View\Php as PhpView;
 use BEAR\Resource\Annotation\Provides;
 use BEAR\Framework\Inject\WebContextInject;
-
+use BEAR\Resource\Annotation\Get;
+use BEAR\Resource\Annotation\Put;
 /**
  * Parameter injection
  */
@@ -37,7 +38,7 @@ class Web extends Page
      * [AT]CookieParam(var=role, alt="user")
      * [AT]FormParam(var=role, alt="user")
      */
-    public function onGet($lang, $role)
+    public function onPut($lang, $role)
     {
         $this['lang'] = $lang;
         $this['role'] = $role;

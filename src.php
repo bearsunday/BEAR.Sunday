@@ -18,7 +18,7 @@ $namespaces = array(
     'Symfony' => __DIR__ . '/vendor/Symfony/src',
     'Monolog' => __DIR__ . '/vendor/Monolog/src',
     'Doctrine\Common' => __DIR__ . '/vendor/Doctrine/lib',
-    'Doctrine\DBAL' => __DIR__ . '/vendor/Doctrine-DBAL/lib',
+    'Doctrine\DBAL' => __DIR__ . '/vendor/Doctrine.Dbal/lib',
     'Monolog' => __DIR__ . '/vendor/Monolog/src',
 );
 

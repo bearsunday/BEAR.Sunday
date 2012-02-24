@@ -27,6 +27,7 @@ trait Haanga
         // Haanga static init
         \Haanga::configure([
                             'template_dir' => '/',
+                            'autoload' => true,
                             'cache_dir' => dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/tmp/'
         ]);
     }

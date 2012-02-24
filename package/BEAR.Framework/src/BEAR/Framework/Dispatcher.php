@@ -70,9 +70,9 @@ final class Dispatcher
         if ($hasCache) {
             list($resource, $page) = unserialize($fetched);
         } else {
-            $resourceFactory = $this->app->getResourceFactory();
+            $resource = require $this->app->path . '/scripts/resource.php';
             try {
-                list($resource, $page) =  $resourceFactory($this->app->name, $pageUri);
+                $page = $resource->newInstance($pageUri);
             } catch (NotReadable $e) {
                 throw new Exception\ResourceNotFound($pageUri, 404, $e);
             } catch (\Exception $e) {
@@ -84,9 +84,6 @@ final class Dispatcher
             // serializable test
             $page = unserialize(serialize($page));
         }
-        $providesHandler = require $this->systemPath . '/vendor/BEAR.Resource/scripts/provides_handler.php';
-        /* @var $resource \BEAR\Resoure\Client */
-        $resource->attachParamProvider('Provides', $providesHandler);
         return [$resource, $page];
     }
 }

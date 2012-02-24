@@ -64,36 +64,6 @@ abstract class AbstractAppContext
     ];
 
     /**
-     * Return factory for resource client and page resource
-     *
-     * @return callable
-     *
-     * @throws \ReflectionException
-     * @throws \Exception
-     */
-    public function getResourceFactory()
-    {
-        return function ($appName, $pageUri){
-            $appModule =  '\\' . $appName. '\\Module\\AppModule';
-            $di = new Injector(new Container(new Forge(new Config(new Annotation(new Definition, $this->annotations)))));
-            $module = new $appModule(new FrameWorkModule($di, $appName));
-            $di->setModule($module);
-            $resource = $di->getInstance('BEAR\Resource\Client');
-            // request URL based page resource instance ($page)
-            try {
-                $page = $resource->newInstance($pageUri);
-            } catch (\ReflectionException $e) {
-                throw $e;
-                $page = $resource->newInstance("page://self/code404");
-                $page->body = (string)$e;
-            } catch (\Exception $e) {
-                throw $e;
-            }
-            return [$resource, $page];
-        };
-    }
-
-    /**
      * to string
      */
     public function __toString()

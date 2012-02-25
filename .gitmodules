@@ -1,21 +1,21 @@
 [submodule "vendor/Ray.Di"]
 	path = vendor/Ray.Di
-	url = git://github.com/koriym/Ray.Di.git
+	url = https://github.com/koriym/Ray.Di.git
 [submodule "vendor/Ray.Aop"]
 	path = vendor/Ray.Aop
-	url = git://github.com/koriym/Ray.Aop.git
+	url = https://github.com/koriym/Ray.Aop.git
 [submodule "vendors/BEAR.Resource"]
 	path = vendors/BEAR.Resource
-	url = git://github.com/koriym/BEAR.Resource.git
+	url = https://github.com/koriym/BEAR.Resource.git
 [submodule "vendor/Twig"]
 	path = vendor/Twig
 	url = https://github.com/fabpot/Twig.git
 [submodule "vendor/Haanga"]
 	path = vendor/Haanga
-	url = git://github.com/crodas/Haanga.git
+	url = https://github.com/crodas/Haanga.git
 [submodule "vendor/Guzzle"]
 	path = vendor/Guzzle
-	url = git://github.com/guzzle/guzzle.git
+	url = https://github.com/guzzle/guzzle.git
 [submodule "vendor/Aura.Autoload"]
 	path = vendor/Aura.Autoload
 	url = https://github.com/auraphp/Aura.Autoload.git
@@ -25,9 +25,9 @@
 [submodule "vendor/Aura.Router"]
 	path = vendor/Aura.Router
 	url = https://github.com/auraphp/Aura.Router.git
-[submodule "vendor/Symfony/Component/ClassLoader"]
-	path = vendor/Symfony/src/Symfony/Component/ClassLoader
-	url = https://github.com/symfony/ClassLoader
+;[submodule "vendor/Symfony/Component/ClassLoader"]
+;	path = vendor/Symfony/src/Symfony/Component/ClassLoader
+;	url = https://github.com/symfony/ClassLoader.git
 [submodule "vendor/Doctrine.Common"]
 	path = vendor/Doctrine.Common
 	url = https://github.com/doctrine/common.git
@@ -36,10 +36,10 @@
 	url = https://github.com/Seldaek/monolog.git
 [submodule "vendor/BEAR.Resource"]
 	path = vendor/BEAR.Resource
-	url = git://github.com/koriym/BEAR.Resource.git
+	url = https://github.com/koriym/BEAR.Resource.git
 [submodule "vendor/Doctrine.DBAL"]
 	path = vendor/Doctrine.DBAL
-	url = https://github.com/doctrine/dbal
+	url = https://github.com/doctrine/dbal.git
 [submodule "vendor/Symfony/src/Symfony/Component/EventDispatcher"]
 	path = vendor/Symfony/src/Symfony/Component/EventDispatcher
 	url = https://github.com/symfony/EventDispatcher.git
@@ -48,13 +48,13 @@
 	url = https://github.com/symfony/Validator.git
 [submodule "vendor/Ray.Annotation"]
 	path = vendor/Ray.Annotation
-	url = git://github.com/koriym/Ray.Annotation.git
+	url = https://github.com/koriym/Ray.Annotation.git
 [submodule "vendor/Aura.Signal"]
 	path = vendor/Aura.Signal
 	url = https://github.com/auraphp/Aura.Signal.git
 [submodule "vendor/Doctrine.Dbal"]
 	path = vendor/Doctrine.Dbal
-	url = git://github.com/doctrine/dbal.git
+	url = https://github.com/doctrine/dbal.git
 [submodule "vendor/Smarty"]
 	path = vendor/Smarty
 	url = https://koriym@github.com/koriym/Smarty3.git

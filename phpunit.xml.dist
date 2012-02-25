@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="tests/bootstrap.php"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         strict="true"
+         colors="true"
+         verbose="true">
+  <testsuites>
+    <testsuite name="BEAR.Sunday">
+      <directory suffix="Test.php">tests</directory>
+    </testsuite>
+  </testsuites>
+
+  <logging>
+    <log type="coverage-html" target="build/coverage" title="BEAR.Sunday"
+         charset="UTF-8" yui="true" highlight="true"
+         lowUpperBound="35" highLowerBound="70"/>
+    <log type="coverage-clover" target="build/logs/clover.xml"/>
+    <log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
+  </logging>
+
+  <filter>
+    <whitelist addUncoveredFilesFromWhitelist="true">
+      <directory suffix=".php">apps/*/Page</directory>
+      <directory suffix=".php">apps/*/Module</directory>
+      <directory suffix=".php">apps/*/ResourceObject</directory>
+      <directory suffix=".php">packages/BEAR.Framework</directory>
+	  <exclude>
+	      <directory suffix=".php">apps/*/Page/*/view/</directory>
+	      <directory suffix=".php">apps/*/*/view/</directory>
+	      <directory suffix=".php">apps/01-hello-world-min/htdocs/</directory>
+	      <directory suffix=".php">apps/04-rest/htdocs/</directory>
+	      <directory suffix=".php">packages/BEAR.Framework/script/</directory>
+	  </exclude>
+    </whitelist>
+  </filter>
+</phpunit>

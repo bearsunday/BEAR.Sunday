@@ -41,7 +41,7 @@ $loader->setPaths([
     'Twig_' => $system . '/vendor/Twig/lib/',
 ]);
 $loader->register();
-$loader->setMode(Loader::MODE_SILENT);
+// $loader->setMode(Loader::MODE_SILENT);
 
 // silent auto loader for annotation
 AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di', $system . '/vendor/Ray.Di/src/');

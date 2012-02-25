@@ -1,17 +1,14 @@
 <?php
-namespace demoworld\Resource\Page;
+namespace demoworld\Resource\Page\template;
 
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
-    BEAR\Framework\Link\View\Php as PhpView;
+    BEAR\Resource\Resource,
+    BEAR\Framework\Link\View\Haanga as HaangaView;
 
-/**
- * Hello World - page resource only
- *
- */
-class Hello extends Page
+class Haanga extends Page
 {
-    use PhpView;
+    use HaangaView;
 
     public function __construct()
     {
@@ -22,7 +19,7 @@ class Hello extends Page
      */
     public function onGet()
     {
-        $this['greeting'] = 'Hello World';
+        $this['greeting'] = 'Hello Haanga';
         return $this;
     }
 }

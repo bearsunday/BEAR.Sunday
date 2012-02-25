@@ -6,7 +6,7 @@
  */
 echo "min\n";
 
-//passthru('php apps/helloworld/htdocs/00-min.php');
+passthru('php apps/helloworld/htdocs/min.php');
 echo "\n";
 
 echo "app resource\n";

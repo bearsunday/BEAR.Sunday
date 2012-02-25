@@ -1,26 +1,17 @@
 <?php
-namespace demoworld\Resource\Page;
+namespace demoworld\Resource\Page\App;
 
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
     BEAR\Resource\Resource,
     BEAR\Framework\Link\View\Php as PhpView;
 
-use BEAR\Resource\Annotation\Provides;
-
 /**
  * Hello World using resource
  */
-class HelloResource extends Page
+class Hello extends Page
 {
     use PhpView;
-
-    /**
-     * HTTP headers
-     *
-     * @var array
-     */
-    public $headers = ['Content-Type: text/html; charset=UTF-8'];
 
     /**
      * @var ResourceObject
@@ -42,7 +33,7 @@ class HelloResource extends Page
     public function __construct(Resource $resource)
     {
         $this->resource = $resource;
-        $this->greeting = $resource->newInstance('app://self/greeting');
+        $this->helloPpage = $resource->newInstance('page://helloworld/hello');
     }
 
     /**
@@ -50,17 +41,9 @@ class HelloResource extends Page
      *
      * @return ResourceObject
      */
-    public function onGet($lang)
+    public function onGet()
     {
-        $this['greeting'] = $this->resource->get->object($this->greeting)->withQuery(['lang' => $lang])->eager->request();
+        $this['greeting'] = $this->resource->get->object($this->helloPpage)->withQuery(['name' => 'another app'])->eager->request();
         return $this;
-    }
-
-    /**
-     * @Provides("lang")
-     */
-    public function provideLang()
-    {
-        return 'en'; // return $_GET['lang'];
     }
 }

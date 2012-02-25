@@ -6,12 +6,13 @@ use BEAR\Resource\Object as ResourceObject,
     BEAR\Framework\Link\View\Php as PhpView;
 
 /**
- * Hello World - page resource only
- *
+ * Code page default
  */
-class Hello extends Page
+class Code extends Page
 {
     use PhpView;
+
+    public $code = 200;
 
     public function __construct()
     {
@@ -22,7 +23,7 @@ class Hello extends Page
      */
     public function onGet()
     {
-        $this['greeting'] = 'Hello World';
+        $this->body = '';
         return $this;
     }
 }

@@ -39,7 +39,7 @@ class SchemeCollectionProvider implements ProviderInterface
     public function get()
     {
         $schemeCollection = new SchemeCollection;
-        $schemeCollection->scheme('page')->host('self')->toAdapter(new App($this->injector, $this->namespace, 'Page'));
+        $schemeCollection->scheme('page')->host('self')->toAdapter(new App($this->injector, $this->namespace, 'Resource\Page'));
         return $schemeCollection;
     }
 }

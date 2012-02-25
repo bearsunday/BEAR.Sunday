@@ -9,7 +9,7 @@ use BEAR\Resource\Exception\BadRequest,
     BEAR\Resource\Exception\MethodNotAllowed;
 use Ray\Di\Exception\InvalidBinding;
 
-use demoworld\Page\Code;
+use demoworld\Resource\Page\Code;
 
 set_exception_handler(function(\Exception $e) {
     $mode = isset($_ENV['BEAR_OUTPUT_MODE']) ? $_ENV['BEAR_OUTPUT_MODE'] : 'prod';

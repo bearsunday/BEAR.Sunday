@@ -33,7 +33,7 @@ class demoworldTest extends \PHPUnit_Framework_TestCase
         $r = $this->resource->get->uri('page://self/aop/log')->withQuery(['lang' => 'en'])->request();
         $response = $this->resource->get->uri('page://self/aop/log')->withQuery(['lang' => 'en'])->eager->request();
         $this->assertSame(200, $response->code);
-        $this->assertSame('Hello World' . PHP_EOL . '[Log] target = demoworld\ResourceObject\Greeting\Aop, input = ["en"], result = Hello World' . PHP_EOL, $response->body['greeting']);
+        $this->assertSame('Hello World' . PHP_EOL . '[Log] target = demoworld\Resource\App\Greeting\Aop, input = ["en"], result = Hello World' . PHP_EOL, $response->body['greeting']);
     }
 
     public function testAppHello()

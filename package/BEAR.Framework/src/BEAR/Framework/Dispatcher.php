@@ -20,6 +20,9 @@ use BEAR\Framework\Router,
     BEAR\Framework\AbstractAppContext as AppContext;
 use Aura\Autoload\Exception\NotReadable;
 
+use Doctrine\Common\Cache\MemcacheCache as Cache;
+use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
+
 /**
  * Dispatcher
  *
@@ -48,9 +51,10 @@ final class Dispatcher
      * @param string $appName
      * @param string $appPath
      */
-    public function __construct(AppContext $app)
+    public function __construct(AppContext $app, Cache $cache = null)
     {
         $this->app = $app;
+        $this->cache = $cache;
         $this->systemPath = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
     }
 
@@ -65,10 +69,16 @@ final class Dispatcher
      */
     public function getInstance($pageUri)
     {
-        $key = (string)$this->app;
-        $fetched = apc_fetch($key, $hasCache);
-        if ($hasCache) {
-            list($resource, $page) = unserialize($fetched);
+        $mem = new \Memcache;
+        $mem->addServer('localhost');
+        $memcache = new Cache;
+        $memcache->setMemcache($mem);
+        $this->cache = new CacheAdapter($memcache);
+
+        $key = $this->app->name . md5($pageUri);
+        $cached = $this->cache->fetch($key);
+        if ($cached) {
+            list($resource, $page) = unserialize($cached);
         } else {
             $resource = require $this->app->path . '/scripts/resource.php';
             try {
@@ -78,9 +88,7 @@ final class Dispatcher
             } catch (\Exception $e) {
                 throw $e;
             }
-            // application fixed instance ($di, $resource)
-            $appModule =  '\\' . $this->app->name. '\\Module\\AppModule';
-            apc_store($key, serialize([$resource, $page]));
+            $this->cache->save($key, serialize([$resource, $page]));
             // serializable test
             $page = unserialize(serialize($page));
         }

@@ -1,5 +1,4 @@
 <?php
-
 namespace helloworld;
 
 use \Doctrine\Common\Annotations\AnnotationRegistry;
@@ -9,9 +8,14 @@ use \Doctrine\Common\Annotations\AnnotationRegistry;
  *
  * @package    hellowolrd
  * @subpackage script
+ *
+ * @global $system System path.
  */
 $appPath = dirname(__DIR__);
 $system = dirname(dirname($appPath));
+
+// load accerarater
+include $system . '/package/BEAR.Framework/scripts/core_loader.php';
 $loader = require  $system . '/vendor/Aura.Autoload/scripts/instance.php';
 $loader->setPaths([
     __NAMESPACE__ . '\\' => dirname($appPath),
@@ -26,8 +30,18 @@ $loader->setPaths([
         $system . '/vendor/Aura.Signal/src/',
         $system . '/vendor/Aura.Web/src/'
     ],
-    'Doctrine\Common\\' => $system . '/vendor/Doctrine/lib/',
+    'Doctrine\\' => [
+        $system . '/vendor/Doctrine.Common/lib/',
+        $system . '/vendor/Doctrine.Dbal/lib/',
+    ],
     'Symfony\Component\\' => $system . '/vendor/Symfony/src/',
+    'Guzzle\\' => $system . '/vendor/Guzzle/src/',
+    'Haanga_' => $system . '/vendor/Haanga/lib/',
+    'Twig_' => $system . '/vendor/Twig/lib/',
+    'smarty_' => $system . '/vendor/Smarty3/libs/sysplugins/',
 ]);
 $loader->register();
-AnnotationRegistry::registerAutoloadNamespace("Ray\Di\Di", $system . '/vendor/Ray.Di/src/');
+// silent auto loader for annotation
+AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di', $system . '/vendor/Ray.Di/src/');
+AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation', $system . '/vendor/BEAR.Resource/src/');
+AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation', $system . '/package/BEAR.Framework/src/');

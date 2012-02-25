@@ -20,7 +20,7 @@ use BEAR\Framework\Dispatcher;
  */
 
 // Init
-include dirname(__DIR__) . '/scripts/exception_handler/standard_handler.php';
+include dirname(__DIR__) . '/scripts/exception_handler/prod_handler.php';
 
 // Load
 require dirname(__DIR__) . '/scripts/auto_loader.php';
@@ -29,11 +29,9 @@ require dirname(__DIR__) . '/scripts/auto_loader.php';
 $route = require dirname(__DIR__) . '/scripts/router/standard_router.php';
 list($method, $pagePath, $query) = $route->match($GLOBALS);
 
-// Dispatch
-list($resource, $page) = (new Dispatcher(new App))->getInstance('page://self/' . $pagePath);
-
 // Request
-$response = $resource->$method->object($page)->withQuery($query)->linkSelf('view')->eager->request();
+$resource = require dirname(__DIR__). '/scripts/resource.php';
+$response = $resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->linkSelf('view')->eager->request();
 
 // Output
 include $appPath . '/scripts/output/prod.output.php';

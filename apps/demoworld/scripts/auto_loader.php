@@ -2,6 +2,7 @@
 namespace demoworld;
 
 use \Doctrine\Common\Annotations\AnnotationRegistry;
+use Aura\Autoload\Loader;
 
 /**
  * Auto Loader using Aura.Autoload.
@@ -14,6 +15,7 @@ use \Doctrine\Common\Annotations\AnnotationRegistry;
 $appPath = dirname(__DIR__);
 $system = dirname(dirname($appPath));
 
+include $system . '/package/BEAR.Framework/scripts/core_loader.php';
 $loader = require  $system . '/vendor/Aura.Autoload/scripts/instance.php';
 $loader->setPaths([
     __NAMESPACE__ . '\\' => dirname($appPath),
@@ -37,13 +39,12 @@ $loader->setPaths([
     'Guzzle\\' => $system . '/vendor/Guzzle/src/',
     'Haanga_' => $system . '/vendor/Haanga/lib/',
     'Twig_' => $system . '/vendor/Twig/lib/',
-    'smarty_' => $system . '/vendor/Smarty3/libs/sysplugins/',
 ]);
-require_once $system .  '/vendor/Smarty3/libs/Smarty.class.php';
 $loader->register();
+$loader->setMode(Loader::MODE_SILENT);
 
 // silent auto loader for annotation
 AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di', $system . '/vendor/Ray.Di/src/');
 AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation', $system . '/vendor/BEAR.Resource/src/');
 AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation', $system . '/package/BEAR.Framework/src/');
-AnnotationRegistry::registerAutoloadNamespace('demoworld\Annotation', dirname($appPath));
+AnnotationRegistry::registerAutoloadNamespace(__NAMESPACE__ . '\Annotation', dirname($appPath));

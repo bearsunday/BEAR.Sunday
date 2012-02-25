@@ -11,17 +11,17 @@ use BEAR\Framework\Dispatcher;
  * no app resource
  * no page object graph cache
  */
-// include $appPath . '/scripts/utility/clear_cache.php';
 
 require dirname(__DIR__) . '/scripts/auto_loader.php';
 
-list($resource, $page) = (new Dispatcher(new App(__NAMESPACE__)))->getInstance('hello');
-
-$response = $resource->get->object($page)->withQuery(['name' => 'Sunday'])->eager->request();
+// Request
+$resource = require dirname(__DIR__). '/scripts/resource.php';
+$response = $resource->get->uri('page://self/hello')->withQuery(['name' => 'Sunday, Basic.'])->eager->request();
 
 // output
 foreach ($response->headers as $header) {
     header($header);
 }
 echo $response->body;
+echo number_format((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 4);
 exit(0);

@@ -6,6 +6,7 @@ use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\Resource,
     BEAR\Framework\Link\View\Smarty3 as SmartyView;
 
+require dirname(dirname(dirname(dirname(__DIR__)))) . '/vendor/Smarty3/libs/Smarty.class.php';
 
 class Smarty3 extends Page
 {

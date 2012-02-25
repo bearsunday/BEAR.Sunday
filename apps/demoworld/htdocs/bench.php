@@ -1,6 +1,7 @@
 <?php
 namespace demoworld;
 
+// foreach (range(1,50000) as $i) ;
 echo '<h3>PHP Boot</h3>' . number_format((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 4) . "'<br>\n";
 
 use BEAR\Framework\Dispatcher;
@@ -18,12 +19,13 @@ use BEAR\Framework\Dispatcher;
  */
 
 // Init
-// include dirname(__DIR__) . '/scripts/exception_handler/standard_handler.php';
+include dirname(__DIR__) . '/scripts/exception_handler/standard_handler.php';
 // include dirname(__DIR__) . '/scripts/utility/clear_cache.php';
 
 // Load
 $mark = microtime(true);
 require dirname(__DIR__) . '/scripts/auto_loader.php';
+$resource = require dirname(__DIR__). '/scripts/resource.php';
 echo '<h3>Load</h3>' . number_format((microtime(true) - $mark), 4) . "'<br>\n";
 
 // Route
@@ -32,14 +34,10 @@ $route = require dirname(__DIR__) . '/scripts/router/standard_router.php';
 list($method, $pagePath, $query) = $route->match($GLOBALS);
 echo '<h3>Route</h3>' . number_format((microtime(true) - $mark), 4) . "'<br>\n";
 
-// Dispatch
-$mark = microtime(true);
-list($resource, $page) = (new Dispatcher(new App))->getInstance('page://self/' . $pagePath);
-echo '<h3>Dispatch</h3>' . number_format((microtime(true) - $mark), 4) . "'<br>\n";
-
 // Request
 $mark = microtime(true);
-$response = $resource->$method->object($page)->withQuery($query)->linkSelf('view')->eager->request();
+$resource->$method->uri('page://self/' . $pagePath)->withQuery($query);
+$response = $resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->linkSelf('view')->eager->request();
 echo '<h3>Request</h3>' . number_format((microtime(true) - $mark), 4) . "'<br>\n";
 
 // Output
@@ -49,6 +47,5 @@ foreach ($response->headers as $header) {
 }
 // body
 echo $response->body;
-echo '<h3>Output</h3>' . number_format((microtime(true) - $mark), 4) . "'<br>\n";
-echo '<h4>' . 1  / ((microtime(true) -$_SERVER['REQUEST_TIME_FLOAT']))  . ' #/sec</h4>';
+echo '<h4>' . 1  / ((microtime(true) -$_SERVER['REQUEST_TIME_FLOAT']))  . ' #/sec (' . (number_format((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 4)) .')</h4>';
 exit(0);

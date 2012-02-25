@@ -18,5 +18,5 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !favicon.ico$
-    RewriteRule ^(.*)$ /bench.php [QSA,L]
+    RewriteRule ^(.*)$ /prod.php [QSA,L]
 </IfModule>

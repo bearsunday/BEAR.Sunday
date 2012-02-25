@@ -45,7 +45,7 @@ final class StandardRouter
         $query = $globals['_GET'];
         $route = $this->map ? $this->map->match(parse_url($uri, PHP_URL_PATH), $globals['_SERVER']) : false;
         if ($route === false) {
-            $method = $this->getMethod($globals);
+            $method = strtolower($this->getMethod($globals));
             $pageUri = $this->getPageKey();
             $query = $globals['_GET'];
         } else {
@@ -67,12 +67,16 @@ final class StandardRouter
     public function getMethod($globals)
     {
         if ($globals['_SERVER']['REQUEST_METHOD'] === 'get' && isset($globals['_GET'][self::METHOD_OVERRIDE])) {
-            return $globals['_GET'][self::METHOD_OVERRIDE];
+            $method = $globals['_GET'][self::METHOD_OVERRIDE];
+            goto complete;
         }
         if ($globals['_SERVER']['REQUEST_METHOD'] === 'post' && isset($globals['_POST'][self::METHOD_OVERRIDE])) {
-            return $globals['_POST'][self::METHOD_OVERRIDE];
+            $method = $globals['_POST'][self::METHOD_OVERRIDE];
+            goto complete;
         }
-        return $globals['_SERVER']['REQUEST_METHOD'];
+        $method = $globals['_SERVER']['REQUEST_METHOD'];
+complete:
+        return strtolower($method);
     }
 
     /**

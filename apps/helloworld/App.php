@@ -4,7 +4,7 @@
  *
  * @package App.demoworld
  */
-namespace demoworld;
+namespace helloworld;
 
 use BEAR\Framework\AbstractAppContext as AppContext;
 

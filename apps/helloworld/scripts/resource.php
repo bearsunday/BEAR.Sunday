@@ -1,5 +1,5 @@
 <?php
-namespace demoworld;
+namespace helloworld;
 
 use BEAR\Framework\Module\StandardModule;
 
@@ -13,7 +13,7 @@ use Ray\Di\AbstractModule,
     Ray\Di\Definition;
 use BEAR\Resource\SignalHandler\Provides;
 // Cache Adapter
-
+use Doctrine\Common\Cache\ApcCache as Cache;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 
 /**
@@ -24,17 +24,7 @@ use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
  *
  * @return BEAR\Resource\Client
  */
-
-// use Doctrine\Common\Cache\MemcacheCache as CacheBackEnd;
-// $mem = new \Memcache;
-// $mem->addServer('localhost');
-// $memcache = new CacheBackEnd;
-// $memcache->setMemcache($mem);
-// $cache = new CacheAdapter($memcache);
-
-use Doctrine\Common\Cache\ApcCache as CacheBackEnd;
-$cache = new CacheAdapter(new CacheBackEnd);
-
+$cache = new CacheAdapter(new Cache);
 $resourceClientBuilder = function () use ($cache) {
     $annotations = [
         'provides' => 'BEAR\Resource\Annotation\Provides',
@@ -57,8 +47,8 @@ $resourceClientBuilder = function () use ($cache) {
 $key = __NAMESPACE__ . __FILE__;
 $resource = $cache->fetch($key);
 if ($resource) {
-    return $resource;
+    return unserialize($resource);
 }
 $resource = $resourceClientBuilder();
-$cache->save($key, $resource);
+$cache->save($key, serialize($resource));
 return $resource;

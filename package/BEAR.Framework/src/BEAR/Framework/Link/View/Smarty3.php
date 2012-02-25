@@ -14,9 +14,6 @@ namespace BEAR\Framework\Link\View;
  */
 use \BEAR\Resource\Object as ResourceObject;
 
-// require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/vendor/Smarty3/libs/Smarty.class.php';
-
-
 trait Smarty3
 {
     /**

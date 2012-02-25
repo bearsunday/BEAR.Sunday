@@ -58,3 +58,9 @@
 [submodule "vendor/Smarty"]
 	path = vendor/Smarty
 	url = https://koriym@github.com/koriym/Smarty3.git
+[submodule "Aura.Autoload"]
+	path = Aura.Autoload
+	url = https://github.com/auraphp/Aura.Autoload.git
+[submodule "vendor/Smarty3"]
+	path = vendor/Smarty3
+	url = https://koriym@github.com/koriym/Smarty3.git

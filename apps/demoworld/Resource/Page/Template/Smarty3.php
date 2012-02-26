@@ -16,6 +16,10 @@ class Smarty3 extends Page
     {
     }
 
+    public function __wakeup()
+    {
+    }
+
     /**
      * @return ResourceObject
      */

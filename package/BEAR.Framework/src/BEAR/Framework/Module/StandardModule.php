@@ -8,8 +8,9 @@
 namespace BEAR\Framework\Module;
 
 use Ray\Di\AbstractModule,
-    Ray\Di\InjectorInterface as Inject,
+    Ray\Di\InjectorInterface as Di,
     Ray\Di\Scope;
+use BEAR\Framework\AbstractAppContext as App;
 
 /**
  * Framework default module
@@ -27,26 +28,19 @@ class StandardModule extends AbstractModule
     private $injector;
 
     /**
-     * App name
-     *
-     * @var string
-     */
-    private $appName;
-
-    /**
      * Constructor
      *
      * @param Inject $injector
      * @param string $appName application name (= _NAMESPACE_)
      */
-    public function __construct(Inject $injector, $appName)
+    public function __construct(Di $injector, App $app)
     {
         $this->bindings = new \ArrayObject;
         $this->pointcuts = new \ArrayObject;
         $this->container = new \ArrayObject;
         $this->injector = $injector;
         $this->config = $injector->getContainer()->getForge()->getConfig();
-        $this->appName = $appName;
+        $this->app = $app;
         $this->configure();
     }
 
@@ -57,7 +51,6 @@ class StandardModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind()->annotatedWith('AppName')->toInstance($this->appName);
         $this->bind('Ray\Di\InjectorInterface')->toInstance($this->injector);
         $this->bind('Ray\Di\ConfigInterface')->toInstance($this->config);
         $this->bind('BEAR\Resource\Resource')->to('BEAR\Resource\Client')->in(Scope::SINGLETON);
@@ -65,5 +58,6 @@ class StandardModule extends AbstractModule
         $this->bind('BEAR\Resource\Linkable')->to('BEAR\Resource\Linker')->in(Scope::SINGLETON);
         $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Framework\Module\Provider\CacheProvider')->in(Scope::SINGLETON);
         $this->bind('Aura\Signal\Manager')->toProvider('BEAR\Framework\Module\Provider\SignalProvider')->in(Scope::SINGLETON);
+        $this->bind('BEAR\Framework\AbstractAppContext')->toInstance($this->app);
     }
 }

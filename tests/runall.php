@@ -7,6 +7,7 @@
 echo "min\n";
 
 passthru('php apps/helloworld/htdocs/min.php');
+passthru('php apps/helloworld/htdocs/basic.php');
 echo "\n";
 
 echo "app resource\n";
@@ -50,4 +51,4 @@ passthru('php apps/demoworld/htdocs/dev.php get /helloresource/en');
 
 echo "cache\n";
 
-passthru("php apps/demoworld/api/dev.php get 'page://self/cache/page?name=koriym'");
+passthru("php apps/demoworld/htdocs/api/dev.php get 'page://self/cache/page?name=koriym'");

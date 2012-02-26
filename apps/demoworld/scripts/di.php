@@ -30,5 +30,5 @@ $annotations = [
     'delete' => 'BEAR\Resource\Annotation\Delete',
 ];
 $di = new Injector(new Container(new Forge(new Config(new Annotation(new Definition, $annotations)))));
-$di->setModule(new Module\AppModule(new StandardModule($di, __NAMESPACE__)));
+$di->setModule(new Module\AppModule(new StandardModule($di, new App)));
 return $di;

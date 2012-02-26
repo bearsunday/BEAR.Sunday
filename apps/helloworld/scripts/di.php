@@ -19,5 +19,5 @@ use Ray\Di\Annotation,
  * @return  Ray\Di\InjectorInterface
  */
 $di = new Injector(new Container(new Forge(new Config(new Annotation(new Definition)))));
-$di->setModule(new Module\AppModule(new StandardModule($di, __NAMESPACE__)));
+$di->setModule(new Module\AppModule(new StandardModule($di, new App)));
 return $di;

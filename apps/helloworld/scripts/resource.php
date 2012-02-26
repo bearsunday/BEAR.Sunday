@@ -36,7 +36,7 @@ $resourceClientBuilder = function () use ($cache) {
         'delete' => 'BEAR\Resource\Annotation\Delete',
         ];
     $di = new Injector(new Container(new Forge(new Config(new Annotation(new Definition, $annotations), $cache))));
-    $di->setModule(new Module\AppModule(new StandardModule($di, __NAMESPACE__)));
+    $di->setModule(new Module\AppModule(new StandardModule($di, new App)));
     $resource = $di->getInstance('BEAR\Resource\Client');
     /* @var $resource \BEAR\Resoure\Client */
     $resource->attachParamProvider('Provides', new Provides);

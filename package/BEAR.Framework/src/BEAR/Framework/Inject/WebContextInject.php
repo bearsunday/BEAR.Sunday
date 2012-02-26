@@ -9,8 +9,7 @@ namespace BEAR\Framework\Inject;
 
 use Ray\Di\Definition,
     Ray\Di\ProviderInterface as Provider,
-    Ray\Di\ConfigInterface,
-    Ray\Di\Definition;
+    Ray\Di\ConfigInterface;
 
 /**
  * Inject web context

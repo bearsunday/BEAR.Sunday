@@ -35,6 +35,8 @@ class Pdo extends Page
     }
 
     /**
+     * Get
+     *
      * @param int $id
      *
      * @return ResourceObject

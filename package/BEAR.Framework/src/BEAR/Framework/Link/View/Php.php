@@ -7,6 +7,8 @@
  */
 namespace BEAR\Framework\Link\View;
 
+use BEAR\Resource\Object as ResourceObject;
+
 /**
  * Trait for php view link
  *
@@ -15,7 +17,7 @@ namespace BEAR\Framework\Link\View;
  */
 trait Php
 {
-    public function onLinkView($page)
+    public function onLinkView(ResourceObject $page)
     {
         foreach ($page as &$resource) {
             if (is_callable($resource)) {

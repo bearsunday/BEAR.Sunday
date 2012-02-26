@@ -1,13 +1,13 @@
 <?php
-
 namespace helloworld\Module;
 
-use Ray\Di\InjectorInterface,
-    Ray\Di\ProviderInterface;
+use Ray\Di\InjectorInterface as Di,
+    Ray\Di\ProviderInterface as Provide;
 
 use BEAR\Resource\Adapter\App,
     BEAR\Resource\Adapter\Page,
-    BEAR\Resource\SchemeCollection;
+    BEAR\Resource\SchemeCollection,
+    BEAR\Framework\AbstractAppContext as AppContext;
 
 /**
  * Application resource module
@@ -15,20 +15,20 @@ use BEAR\Resource\Adapter\App,
  * @package    helloworld
  * @subpackage Module
  */
-class SchemeCollectionProvider implements ProviderInterface
+class SchemeCollectionProvider implements Provide
 {
     /**
      * Constructor
      *
-     * @param InjectorInterface $injector
+     * @param Inject     $injector
+     * @param AppContext $app
      *
      * @Inject
-     * @Named("appName=AppName")
      */
-    public function __construct(InjectorInterface $injector, $appName)
+    public function __construct(Di $injector, AppContext $app)
     {
         $this->injector = $injector;
-        $this->namespace = $appName;
+        $this->namespace = $app->name;
     }
 
     /**

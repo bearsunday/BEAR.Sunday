@@ -33,9 +33,16 @@ $loader->setPaths([
     ],
     'Doctrine\\' => [
         $system . '/vendor/Doctrine.Common/lib/',
-        $system . '/vendor/Doctrine.Dbal/lib/',
+        $system . '/vendor/Doctrine.Dbal/lib/'
     ],
-    'Symfony\Component\\' => $system . '/vendor/Symfony/src/',
+    'Symfony\Component\\' => [
+        $system . '/vendor/Symfony.EventDispatcher/src/',
+        $system . '/vendor/Symfony.Validator/src/'
+    ],
+    'Zend\\' => [
+        $system . '/vendor/Zend.Cache/src/',
+        $system . '/vendor/Zend.Log/src/'
+    ],
     'Guzzle\\' => $system . '/vendor/Guzzle/src/',
     'Haanga_' => $system . '/vendor/Haanga/lib/',
     'Twig_' => $system . '/vendor/Twig/lib/',

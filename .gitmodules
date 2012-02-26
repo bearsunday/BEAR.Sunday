@@ -40,12 +40,6 @@
 [submodule "vendor/Doctrine.DBAL"]
 	path = vendor/Doctrine.DBAL
 	url = https://github.com/doctrine/dbal.git
-[submodule "vendor/Symfony/src/Symfony/Component/EventDispatcher"]
-	path = vendor/Symfony/src/Symfony/Component/EventDispatcher
-	url = https://github.com/symfony/EventDispatcher.git
-[submodule "vendor/Symfony/src/Symfony/Component/Validator"]
-	path = vendor/Symfony/src/Symfony/Component/Validator
-	url = https://github.com/symfony/Validator.git
 [submodule "vendor/Ray.Annotation"]
 	path = vendor/Ray.Annotation
 	url = https://github.com/koriym/Ray.Annotation.git
@@ -55,12 +49,18 @@
 [submodule "vendor/Doctrine.Dbal"]
 	path = vendor/Doctrine.Dbal
 	url = https://github.com/doctrine/dbal.git
-[submodule "vendor/Smarty"]
-	path = vendor/Smarty
-	url = https://koriym@github.com/koriym/Smarty3.git
-[submodule "Aura.Autoload"]
-	path = Aura.Autoload
-	url = https://github.com/auraphp/Aura.Autoload.git
 [submodule "vendor/Smarty3"]
 	path = vendor/Smarty3
 	url = https://koriym@github.com/koriym/Smarty3.git
+[submodule "vendor/Zend.Log/src/Zend/Log"]
+	path = vendor/Zend.Log/src/Zend/Log
+	url = https://github.com/KnpLabs/zend-log.git
+[submodule "vendor/Zend.Cache/src/Zend/Cache"]
+	path = vendor/Zend.Cache/src/Zend/Cache
+	url = https://github.com/KnpLabs/zend-cache.git
+[submodule "vendor/Symfony.EventDispatcher/src/Symfony/Component/EventDispatcher"]
+	path = vendor/Symfony.EventDispatcher/src/Symfony/Component/EventDispatcher
+	url = https://github.com/symfony/EventDispatcher.git
+[submodule "vendor/Symfony.Validator/src/Symfony/Component/Validator"]
+	path = vendor/Symfony.Validator/src/Symfony/Component/Validator
+	url = https://github.com/symfony/Validator.git

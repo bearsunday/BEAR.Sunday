@@ -26,7 +26,14 @@ trait Php
         }
         $paegFile = (new \ReflectionClass($page))->getFileName();
         $dir = pathinfo($paegFile, PATHINFO_DIRNAME);
-        $templateFile = $dir . '/view/' . basename($paegFile);
+        $templateFile = $dir . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . basename($paegFile);
+        if (! file_exists($templateFile)) {
+            $withoutExtention = substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
+            $templateFile =  $dir . DIRECTORY_SEPARATOR . $withoutExtention . 'tpl.php';
+            if (! file_exists($templateFile)) {
+                return $page;
+            }
+        }
         ob_start();
         include $templateFile;
         $body = ob_get_clean();

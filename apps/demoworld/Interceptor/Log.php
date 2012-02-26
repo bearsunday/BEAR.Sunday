@@ -9,6 +9,10 @@ use Ray\Aop\MethodInterceptor,
  */
 class Log implements MethodInterceptor
 {
+    /**
+     * (non-PHPdoc)
+     * @see Ray\Aop.MethodInterceptor::invoke()
+     */
     public function invoke(MethodInvocation $invocation)
     {
         $result = $invocation->proceed();

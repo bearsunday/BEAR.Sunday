@@ -5,15 +5,10 @@ use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page;
 
 /**
- * Hello World - page resource only
- *
+ * Hello World
  */
 class Hello extends Page
 {
-    public function __construct()
-    {
-    }
-
     /**
      * @return ResourceObject
      */

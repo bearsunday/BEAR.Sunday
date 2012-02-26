@@ -1,15 +1,24 @@
 <?php
-
 namespace demoworld;
 
 use BEAR\Framework\Dispatcher,
     BEAR\Framework\Globals;
 
 /**
- * CLI / Built-in web server script with router
+ * CLI / Built-in web server dev script
  *
- * @example $ php dev.php get /hello (CLI)
- * @example http://sunday.host/hello (Web)
+ * examaple:
+ *
+ * CLI:
+ * $ php dev.php get /hello
+ *
+ * Built-in web server:
+ *
+ * $ php -S localhost:8080 dev.php
+ *
+ * type URL:
+ *   http://localhost:8080/hello
+ *   http://localhost:8080/helloresource
  *
  * @package BEAR.Framework
  *

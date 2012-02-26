@@ -45,7 +45,7 @@ class Log extends Page
     }
 
     /**
-     * @param string $lang laungauage
+     * @param string $lang langauage
      *
      * @return ResourceObject
      */

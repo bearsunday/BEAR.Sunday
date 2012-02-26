@@ -1,5 +1,4 @@
 <?php
-
 namespace demoworld\Resource\App;
 
 use BEAR\Resource\Object as ResourceObject,

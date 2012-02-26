@@ -1,10 +1,8 @@
 <?php
-
 namespace demoworld\Resource\App\Greeting;
 
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject;
-
 use demoworld\Annotation\Log;
 
 /**

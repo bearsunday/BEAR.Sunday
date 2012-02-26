@@ -2,13 +2,10 @@
 namespace demoworld\Resource\Page\Db\User;
 
 use BEAR\Resource\Object as ResourceObject,
-BEAR\Resource\AbstractObject as Page,
-BEAR\Resource\Resource,
-BEAR\Framework\Link\View\Php as PhpView;
+    BEAR\Resource\AbstractObject as Page,
+    BEAR\Resource\Resource,
+    BEAR\Framework\Link\View\Php as PhpView;
 
-/**
- * PDO User
- */
 class Pdo extends Page
 {
     use PhpView;

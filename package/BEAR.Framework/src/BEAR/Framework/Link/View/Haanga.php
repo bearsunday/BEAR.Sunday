@@ -1,8 +1,9 @@
 <?php
 /**
- * BEAR.Resource
+ * BEAR.Framework;
  *
- * @license  http://opensource.org/licenses/bsd-license.php BSD
+ * @package BEAR.Resource
+ * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Link\View;
 
@@ -12,7 +13,7 @@ use BEAR\Resource\Object as ResourceObject,
 require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/vendor/Haanga/lib/Haanga.php';
 
 /**
- * Trait for twig view link.
+ * Trait for haanga view link.
  *
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>

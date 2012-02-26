@@ -75,7 +75,8 @@ final class StandardRouter
             goto complete;
         }
         $method = $globals['_SERVER']['REQUEST_METHOD'];
-complete:
+
+        complete:
         return strtolower($method);
     }
 

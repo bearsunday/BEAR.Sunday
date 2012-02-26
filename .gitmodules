@@ -25,9 +25,6 @@
 [submodule "vendor/Aura.Router"]
 	path = vendor/Aura.Router
 	url = https://github.com/auraphp/Aura.Router.git
-;[submodule "vendor/Symfony/Component/ClassLoader"]
-;	path = vendor/Symfony/src/Symfony/Component/ClassLoader
-;	url = https://github.com/symfony/ClassLoader.git
 [submodule "vendor/Doctrine.Common"]
 	path = vendor/Doctrine.Common
 	url = https://github.com/doctrine/common.git
@@ -37,9 +34,6 @@
 [submodule "vendor/BEAR.Resource"]
 	path = vendor/BEAR.Resource
 	url = https://github.com/koriym/BEAR.Resource.git
-[submodule "vendor/Doctrine.DBAL"]
-	path = vendor/Doctrine.DBAL
-	url = https://github.com/doctrine/dbal.git
 [submodule "vendor/Ray.Annotation"]
 	path = vendor/Ray.Annotation
 	url = https://github.com/koriym/Ray.Annotation.git
@@ -51,7 +45,7 @@
 	url = https://github.com/doctrine/dbal.git
 [submodule "vendor/Smarty3"]
 	path = vendor/Smarty3
-	url = https://koriym@github.com/koriym/Smarty3.git
+	url = https://github.com/koriym/Smarty3.git
 [submodule "vendor/Zend.Log/src/Zend/Log"]
 	path = vendor/Zend.Log/src/Zend/Log
 	url = https://github.com/KnpLabs/zend-log.git

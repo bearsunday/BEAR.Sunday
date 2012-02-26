@@ -1,5 +1,4 @@
 <?php
-
 namespace demoworld\Module;
 
 use Ray\Di\AbstractModule,
@@ -24,6 +23,11 @@ use \demoworld\Interceptor\Log;
  */
 class AppModule extends AbstractModule
 {
+    /**
+     * Binding configuration
+     *
+     * @return void
+     */
     protected function configure()
     {
         $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\demoworld\Module\Provider\SchemeCollectionProvider')->in(Scope::SINGLETON);

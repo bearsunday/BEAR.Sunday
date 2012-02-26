@@ -1,10 +1,13 @@
 <?php
 /**
- * BEAR.Resource
+ * BEAR.Framework;
  *
- * @license  http://opensource.org/licenses/bsd-license.php BSD
+ * @package BEAR.Resource
+ * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Link\View;
+
+use \BEAR\Resource\Object as ResourceObject;
 
 /**
  * Trait for smarty view link.
@@ -12,9 +15,7 @@ namespace BEAR\Framework\Link\View;
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-use \BEAR\Resource\Object as ResourceObject;
-
-trait Smarty3
+ trait Smarty3
 {
     /**
      * @var \Smarty

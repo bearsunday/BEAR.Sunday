@@ -1,14 +1,27 @@
 <?php
+/**
+ *  BEAR.Framework
+ *
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ */
 namespace BEAR\Framework;
 
 use ArrayObject;
 use BEAR\Resource\Exception\BadRequest,
     BEAR\Resource\Exception\MethodNotAllowed;
 
-
+/**
+ * Globals
+ *
+ * Emulates web $GLOBALS in CLI
+ *
+ * @package BEAR.Framework
+ * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ */
 class Globals extends ArrayObject
 {
     /**
+     * Constructor
      *
      * @param array $argv
      */

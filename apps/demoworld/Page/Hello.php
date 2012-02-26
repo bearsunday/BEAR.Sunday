@@ -13,10 +13,6 @@ class Hello extends Page
 {
     use PhpView;
 
-    public function __construct()
-    {
-    }
-
     /**
      * @return ResourceObject
      */

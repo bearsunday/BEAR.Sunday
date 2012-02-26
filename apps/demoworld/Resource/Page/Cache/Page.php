@@ -11,7 +11,6 @@ use demoworld\Annotation\Cache,
 /**
  * Cache page
  *
- * @Aspect
  */
 class Page extends AbstractPage
 {

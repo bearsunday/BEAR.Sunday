@@ -1,6 +1,6 @@
 <?php
 /**
- * Ray
+ * BEAR.Framework
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
@@ -12,8 +12,9 @@ namespace BEAR\Framework\Annotation;
  * @Annotation
  * @Target("METHOD")
  *
- * @package    Ray.Di
+ * @package    BEAR.Framework
  * @subpackage Annotation
+ * @author     Akihito Koriyama <akihito.koriyama@gmail.com>
  */
 final class WakeUp
 {

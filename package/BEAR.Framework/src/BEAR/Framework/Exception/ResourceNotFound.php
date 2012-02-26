@@ -1,6 +1,6 @@
 <?php
 /**
- *  BEAR.Framework
+ * BEAR.Framework
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */

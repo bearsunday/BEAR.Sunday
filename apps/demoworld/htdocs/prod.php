@@ -1,14 +1,10 @@
 <?php
-
 namespace demoworld;
 
 use BEAR\Framework\Dispatcher;
 
 /**
- * Web root for prodcution
- *
- * @example $ php dev.php get /hello (CLI)
- * @example http://sunday.host/hello (Web)
+ * Web script for prodcution use.
  *
  * @package BEAR.Framework
  *

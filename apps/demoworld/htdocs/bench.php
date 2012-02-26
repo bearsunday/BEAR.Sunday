@@ -1,13 +1,16 @@
 <?php
 namespace demoworld;
 
-// foreach (range(1,50000) as $i) ;
-echo '<h3>PHP Boot</h3>' . number_format((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 4) . "'<br>\n";
-
 use BEAR\Framework\Dispatcher;
 
 /**
  * Web server script for benchmark analysys.
+ *
+ * $ php -S localhost:8080 dev.php
+ *
+ * type URL:
+ *   http://localhost:8080/hello
+ *   http://localhost:8080/helloresource
  *
  * @package BEAR.Framework
  *
@@ -17,6 +20,9 @@ use BEAR\Framework\Dispatcher;
  * @global BEAR\Resource\Object $page     Resource object (target)
  * @global BEAR\Resource\Object $response Resource object (response)
  */
+
+// PHP boot
+echo '<h3>PHP Boot</h3>' . number_format((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 4) . "'<br>\n";
 
 // Init
 include dirname(__DIR__) . '/scripts/exception_handler/standard_handler.php';

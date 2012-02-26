@@ -1,16 +1,14 @@
 <?php
-
 namespace demoworld\Resource\App\User;
 
 use BEAR\Resource\Object as ResourceObject,
-BEAR\Resource\AbstractObject;
+    BEAR\Resource\AbstractObject;
 use Ray\Di\ProviderInterface as Provide;
 use BEAR\Framework\Module\AbstractSingletonProvider;
 
 /**
  * User resource using native PDO
  *
- * @Aspect
  */
 class Pdo extends AbstractObject
 {

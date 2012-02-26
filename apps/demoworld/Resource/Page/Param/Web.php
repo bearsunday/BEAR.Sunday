@@ -9,6 +9,7 @@ use BEAR\Resource\Annotation\Provides;
 use BEAR\Framework\Inject\WebContextInject;
 use BEAR\Resource\Annotation\Get;
 use BEAR\Resource\Annotation\Put;
+
 /**
  * Parameter injection
  */

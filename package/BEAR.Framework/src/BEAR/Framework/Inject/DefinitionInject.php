@@ -11,6 +11,9 @@ use Ray\Di\ConfigInterface as Config;
 
 /**
  * Inject class definition
+ *
+ * @package BEAR.Framework
+ * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
 trait DefinitionInject
 {

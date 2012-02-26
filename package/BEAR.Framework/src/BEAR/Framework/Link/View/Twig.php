@@ -1,15 +1,13 @@
 <?php
 /**
- * BEAR.Resource
+ * BEAR.Framework;
  *
- * @license  http://opensource.org/licenses/bsd-license.php BSD
+ * @package BEAR.Resource
+ * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Link\View;
 
 use \BEAR\Resource\Object as ResourceObject;
-
-// require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/vendor/Twig/lib/Twig/Autoloader.php';
-// \Twig_Autoloader::register();
 
 /**
  * Trait for twig view link.
@@ -20,10 +18,9 @@ use \BEAR\Resource\Object as ResourceObject;
 trait Twig
 {
     /**
-     * @var
+     * @var Twig_Environment
      */
     private $twig;
-
 
     /**
      * @Inject

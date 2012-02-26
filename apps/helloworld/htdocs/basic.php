@@ -1,20 +1,16 @@
 <?php
-namespace helloworld;
-
 use BEAR\Framework\Dispatcher;
 
 /**
- * Minimum Hello World
+ * Minimum Hello World using cache script (resource.php)
  *
  * no router
  * no view
  * no app resource
- * no page object graph cache
  */
-
 require dirname(__DIR__) . '/scripts/auto_loader.php';
 
-// Request
+// request
 $resource = require dirname(__DIR__). '/scripts/resource.php';
 $response = $resource->get->uri('page://self/hello')->withQuery(['name' => 'Sunday, Basic.'])->eager->request();
 

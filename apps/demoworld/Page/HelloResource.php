@@ -1,11 +1,10 @@
 <?php
 namespace demoworld\Resource\Page;
 
-use BEAR\Resource\Object as ResourceObject,
+use BEAR\Resource\Resource,
+    BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
-    BEAR\Resource\Resource,
     BEAR\Framework\Link\View\Php as PhpView;
-
 use BEAR\Resource\Annotation\Provides;
 
 /**
@@ -61,6 +60,6 @@ class HelloResource extends Page
      */
     public function provideLang()
     {
-        return 'en'; // return $_GET['lang'];
+        return 'en';
     }
 }

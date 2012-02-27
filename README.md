@@ -1,7 +1,6 @@
 BEAR, a resource oriented framework.
 =============================
 
- * PHP5.4専用フレームワークBEAR(Sunday)の評価用プロトタイプです。
  * preview release 2nd 
 
 ## Requirement
@@ -42,7 +41,9 @@ Dependency injection
 ### Bidning
 ```php
 <?php
-    $this->bind('Doctrine\Common\Annotations')->to('Doctrine\Common\Annotations\FileCacheReader')->in(Scope::SINGLETON);
+    $this->bind('Doctrine\Common\Annotations')
+         ->to('Doctrine\Common\Annotations\FileCacheReader')
+         ->in(Scope::SINGLETON);
 ```
 
 ### Consumer
@@ -93,7 +94,11 @@ Aspect oriented programing
 ### Weaving an Interceptor
 ```php
 <?php
-    $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('WeekendBlock'), [new WeekendBlocker]);
+    $this->bindInterceptor(
+    	$this->matcher->any(),
+    	$this->matcher->annotatedWith('WeekendBlock'),
+    	[new WeekendBlocker]
+    );
 ```
 
 Testing BEAR.Sunday

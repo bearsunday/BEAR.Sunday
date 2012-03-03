@@ -49,7 +49,7 @@ trait Twig
         $paegFile = (new \ReflectionClass($page))->getFileName();
         $pageDir = pathinfo($paegFile, PATHINFO_DIRNAME);
         $tmpDir = dirname(dirname(dirname(__DIR__))) . '/tmp/';
-        $templateFile = $pageDir . '/view/' . str_replace('.php', '.twig', basename($paegFile));
+        $templateFile = $pageDir . DIRECTORY_SEPARATOR . str_replace('.php', '.twig', basename($paegFile));
         $template = $this->twig->loadTemplate($templateFile);
         $page->body = $template->render($body);
         return $page;

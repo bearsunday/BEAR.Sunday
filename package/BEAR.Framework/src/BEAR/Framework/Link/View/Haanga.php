@@ -48,7 +48,7 @@ trait Haanga
         }
         $paegFile = (new \ReflectionClass($page))->getFileName();
         $pageDir = pathinfo($paegFile, PATHINFO_DIRNAME);
-        $templateFile = $pageDir . '/view/' . str_replace('.php', '.hng', basename($paegFile));
+        $templateFile = $pageDir . DIRECTORY_SEPARATOR . str_replace('.php', '.hng', basename($paegFile));
         $page->body = \Haanga::Load($templateFile, $page->body, true);
         return $page;
     }

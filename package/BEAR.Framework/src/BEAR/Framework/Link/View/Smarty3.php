@@ -45,9 +45,17 @@ use \BEAR\Resource\Object as ResourceObject;
             }
         }
         $paegFile = (new \ReflectionClass($page))->getFileName();
-        $pageDir = pathinfo($paegFile, PATHINFO_DIRNAME);
+        $dir = pathinfo($paegFile, PATHINFO_DIRNAME);
         $this->smarty->assign($page->body);
-        $templateFile = $pageDir . '/view/' . str_replace('.php', '.tpl', basename($paegFile));
+
+        $withoutExtention = substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
+        $templateFile =  $dir . DIRECTORY_SEPARATOR . $withoutExtention . 'tpl';
+            if (! file_exists($templateFile)) {
+            $templateFile =  $dir . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . $withoutExtention . 'tpl';
+            if (! file_exists($templateFile)) {
+                return $page;
+            }
+        }
         $page->body = $this->smarty->fetch($templateFile);
         return $page;
     }

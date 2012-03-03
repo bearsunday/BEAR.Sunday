@@ -49,6 +49,7 @@ NOT_FOUND:
 BAD_REQUEST:
 METHOD_NOT_ALLOWED:
 SERVER_ERROR:
+    error_log((string)$e);
     include dirname(__DIR__) . "/output/prod.output.php";
     exit(1);
 }

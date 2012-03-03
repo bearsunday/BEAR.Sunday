@@ -5,11 +5,12 @@ namespace BEAR\Framework;
 /**
  * Test class for Annotation.
  */
-class App00Test extends \PHPUnit_Framework_TestCase
+class HelloworldPageTest extends \PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
         parent::setUp();
+        apc_clear_cache("user");
         $this->di = require dirname(__DIR__) . '/apps/helloworld/scripts/di.php';
     }
 

@@ -58,3 +58,6 @@
 [submodule "vendor/Symfony.Validator/src/Symfony/Component/Validator"]
 	path = vendor/Symfony.Validator/src/Symfony/Component/Validator
 	url = https://github.com/symfony/Validator.git
+[submodule "vendor/Aura.Di"]
+	path = vendor/Aura.Di
+	url = https://github.com/auraphp/Aura.Di.git

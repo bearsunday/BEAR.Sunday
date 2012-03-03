@@ -29,11 +29,12 @@ require $system . '/vendor/Doctrine.Common/lib/Doctrine/Common/Cache/CacheProvid
 require $system . '/vendor/Doctrine.Common/lib/Doctrine/Common/Cache/ApcCache.php';
 require $system . '/vendor/Ray.Di/src/Ray/Di/InjectorInterface.php';
 require $system . '/vendor/Ray.Di/src/Ray/Di/Injector.php';
-require $system . '/vendor/Ray.Di/src/Ray/Di/ContainerInterface.php';
+require $system . '/vendor/Aura.Di/src/Aura/Di/ContainerInterface.php';
+require $system . '/vendor/Aura.Di/src/Aura/Di/Container.php';
 require $system . '/vendor/Ray.Di/src/Ray/Di/Container.php';
-require $system . '/vendor/Ray.Di/src/Ray/Di/ForgeInterface.php';
-require $system . '/vendor/Ray.Di/src/Ray/Di/Forge.php';
-require $system . '/vendor/Ray.Di/src/Ray/Di/ConfigInterface.php';
+require $system . '/vendor/Aura.Di/src/Aura/Di/ForgeInterface.php';
+require $system . '/vendor/Aura.Di/src/Aura/Di/Forge.php';
+require $system . '/vendor/Aura.Di/src/Aura/Di/ConfigInterface.php';
 require $system . '/vendor/Ray.Di/src/Ray/Di/Config.php';
 require $system . '/vendor/Ray.Di/src/Ray/Di/AnnotationInterface.php';
 require $system . '/vendor/Ray.Di/src/Ray/Di/Annotation.php';
@@ -60,6 +61,7 @@ require $system . '/package/BEAR.Framework/src/BEAR/Framework/Module/Provider/Si
 require $system . '/vendor/Doctrine.Common/lib/Doctrine/Common/Annotations/Reader.php';
 require $system . '/vendor/Doctrine.Common/lib/Doctrine/Common/Annotations/AnnotationReader.php';
 require $system . '/vendor/Doctrine.Common/lib/Doctrine/Common/Annotations/Annotation/IgnoreAnnotation.php';
+require $system . '/vendor/Ray.Aop/src/Ray/Aop/Matchable.php';
 require $system . '/vendor/Ray.Aop/src/Ray/Aop/Matcher.php';
 require $system . '/package/BEAR.Framework/src/BEAR/Framework/Module/AbstractSingletonProvider.php';
 require $system . '/vendor/Ray.Aop/src/Ray/Aop/Advice.php';

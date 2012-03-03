@@ -14,9 +14,16 @@ use BEAR\Framework\Dispatcher;
  * @global BEAR\Resource\Object $page     Resource object (target)
  * @global BEAR\Resource\Object $response Resource object (response)
  */
-
 // Init
+if (php_sapi_name() == 'cli-server') {
+    // route static assets and return false
+    if (preg_match('/\.(?:png|jpg|jpeg|gif|js)$/', $_SERVER["REQUEST_URI"])) {
+        return false;
+    }
+}
+
 include dirname(__DIR__) . '/scripts/exception_handler/prod_handler.php';
+ob_start();
 
 // Load
 require dirname(__DIR__) . '/scripts/auto_loader.php';

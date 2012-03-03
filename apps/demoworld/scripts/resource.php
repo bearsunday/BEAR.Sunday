@@ -7,9 +7,11 @@ use Ray\Di\AbstractModule,
     Ray\Di\InjectorInterface,
     Ray\Di\Annotation,
     Ray\Di\Config,
+    Ray\Di\ApcConfig,
     Ray\Di\Forge,
     Ray\Di\Container,
     Ray\Di\Injector,
+    Ray\Di\ApcInjector,
     Ray\Di\Definition;
 use BEAR\Resource\SignalHandler\Provides;
 // Cache Adapter
@@ -45,8 +47,10 @@ $resourceClientBuilder = function () use ($cache) {
         'put' => 'BEAR\Resource\Annotation\Put',
         'delete' => 'BEAR\Resource\Annotation\Delete',
         ];
-    $di = new Injector(new Container(new Forge(new Config(new Annotation(new Definition, $annotations), $cache))));
-    $di->setModule(new Module\AppModule(new StandardModule($di, new App)));
+    $di = new Injector(new Container(new Forge(new ApcConfig(new Annotation(new Definition, $annotations)))));
+    $module = new StandardModule($di, new App);
+    $module->install(new Module\AppModule);
+    $di->setModule($module);
     $resource = $di->getInstance('BEAR\Resource\Client');
     /* @var $resource \BEAR\Resoure\Client */
     $resource->attachParamProvider('Provides', new Provides);
@@ -54,7 +58,7 @@ $resourceClientBuilder = function () use ($cache) {
     return $resource;
 };
 
-$key = __NAMESPACE__ . __FILE__;
+$key = 'resource' . __FILE__;
 $resource = $cache->fetch($key);
 if ($resource) {
     return $resource;

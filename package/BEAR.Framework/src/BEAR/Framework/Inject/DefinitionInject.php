@@ -7,7 +7,7 @@
  */
 namespace BEAR\Framework\Inject;
 
-use Ray\Di\ConfigInterface as Config;
+use Aura\Di\ConfigInterface as Config;
 
 /**
  * Inject class definition

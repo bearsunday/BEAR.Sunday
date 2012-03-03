@@ -27,6 +27,7 @@ $loader->setPaths([
         $system . '/vendor/Ray.Di/src/'
     ],
     'Aura\\' => [
+        $system . '/vendor/Aura.Di/src/',
         $system . '/vendor/Aura.Router/src/',
         $system . '/vendor/Aura.Signal/src/',
         $system . '/vendor/Aura.Web/src/'

@@ -25,10 +25,10 @@ $namespaces += [
 ];
 $loader->setPaths($namespaces);
 $loader->register();
-$loader->setMode(Loader::MODE_SILENT);
+// $loader->setMode(Loader::MODE_SILENT);
 
 // silent auto loader for annotation
-AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di', $system . '/vendor/Ray.Di/src/');
-AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation', $system . '/vendor/BEAR/Resource/src/');
-AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation', $system . '/package/BEAR/Framework/src/');
+AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di', $system . '/vendor/Ray.Di/src');
+AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation', $system . '/vendor/BEAR/Resource/src');
+AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation', $system . '/package/BEAR/Framework/src');
 AnnotationRegistry::registerAutoloadNamespace(__NAMESPACE__ . '\Annotation', dirname($appPath));

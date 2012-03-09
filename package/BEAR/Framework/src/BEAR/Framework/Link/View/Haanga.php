@@ -10,7 +10,7 @@ namespace BEAR\Framework\Link\View;
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\Request;
 
-require dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))))) . '/vendor/crodas/Haanga/lib/Haanga.php';
+require dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))))) . '/vendor/crodas/haanga/lib/Haanga.php';
 
 /**
  * Trait for haanga view link.

@@ -83,16 +83,11 @@
         "Aura/Di": "dev-master",
         "Aura/Router": "dev-master",
         "Aura/Signal": "dev-master",
-        "Aura/Web": "dev-master",
         "BEAR/Resource": "dev-master",
         "doctrine/common": "2.2.*",
-        "doctrine/dbal": "dev-master",
         "guzzle/guzzle": "dev-master",
         "ray/aop": "dev-master",
-        "ray/di": "dev-master",
-        "smarty/smarty": "3.1.*",
-        "crodas/haanga": ">=1.0.4",
-        "twig/twig": "dev-master"
+        "ray/di": "dev-master"
     },
     "authors": [
         {
@@ -101,9 +96,13 @@
         }
     ],
     "suggest": {
-        "symfony/class-loader": "*",
+        "Aura/Web": "dev-master",
         "zend/cache": "*",
-        "zend/log": "*"
+        "zend/log": "*",
+        "doctrine/dbal": "dev-master",
+        "smarty/smarty": "3.1.*",
+        "crodas/haanga": ">=1.0.4",
+        "twig/twig": "dev-master"
     },
     "autoload": {
         "psr-0": {

@@ -41,7 +41,7 @@
         {
             "type": "package",
             "package": {
-                "name": "zend/zend-log",
+                "name": "zend/log",
                 "version": "2.0.0",
                 "autoload": { "psr-0": { "Zend\\Log": "" } },
                 "target-dir": "Zend/Log",
@@ -59,7 +59,7 @@
         {
             "type":"package",
             "package": {
-                "name": "zend/zend-cache",
+                "name": "zend/cache",
                 "version": "2.0.0",
                 "autoload": { "psr-0": { "Zend\\Cache": "" } },
                 "target-dir": "Zend/Cache",
@@ -102,8 +102,8 @@
     ],
     "suggest": {
         "symfony/class-loader": "*",
-        "zend/zend-cache": "*",
-        "zend/zend-log": "*"
+        "zend/cache": "*",
+        "zend/log": "*"
     },
     "autoload": {
         "psr-0": {

@@ -8,9 +8,9 @@
 namespace BEAR\Framework\Interceptor;
 
 use Ray\Aop\MethodInterceptor,
-    Ray\Aop\MethodInvocation;
-use Doctrine\Common\Cache\Cache as Cacheable,
-    Doctrine\Common\Cache\MemcacheCache;
+Ray\Aop\MethodInvocation;
+
+use Guzzle\Common\Cache\ZendCacheAdapter as Cacheable;
 
 /**
  * Cache interceptor
@@ -40,23 +40,9 @@ class Cache implements MethodInterceptor
      * @param Cache $cache
      * @param unknown_type $lifeTime
      */
-    public function __construct(Cacheable $cache, $appName, $lifeTime = 0, $host = 'locahost')
+    public function __construct(Cacheable $cache)
     {
-        $cache->setNamespace($appName);
         $this->cache = $cache;
-        $this->host = $host;
-        $this->lifeTime = $lifeTime;
-    }
-
-    /**
-     * Create memchace property in runtime init
-     *
-     */
-    public function __wakeup()
-    {
-        $memcahce = new \Memcache;
-        $memcahce->connect($this->host);
-        $this->cache->setMemcache($memcahce);
     }
 
     /**
@@ -68,11 +54,12 @@ class Cache implements MethodInterceptor
         $id = $this->getId($invocation, $invocation->getArguments());
         $saved = $this->cache->fetch($id);
         if ($saved) {
-            return $saved;
+            return unserialize($saved);
         }
         $data = $invocation->proceed();
-        $this->cache->save($id, $data, $this->lifeTime);
-        $saved = $this->cache->fetch($id);
+        $annotation = $invocation->getAnnotation();
+        $time = $annotation->time;
+        $r = $this->cache->save($id, serialize($data), $time);
         return $data;
     }
 
@@ -86,6 +73,6 @@ class Cache implements MethodInterceptor
     {
         $class = get_class($invocation->getThis());
         $method = $invocation->getMethod()->name;
-        return $class . $method . md5(serialize($args));
+        return $method . crc32($class . (serialize($args)));
     }
 }

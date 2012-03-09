@@ -21,9 +21,7 @@ class Page extends AbstractPage
     }
 
     /**
-     * @return ResourceObject
-     *
-     * @Cache
+     * @Cache(5)
      */
     public function onGet($name)
     {

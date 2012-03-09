@@ -13,10 +13,15 @@ use Ray\Di\AbstractModule,
 
 use BEAR\Framework\Module\StandardModule,
     BEAR\Framework\Interceptor\Transactional,
-    BEAR\Framework\Interceptor\Cache,
-    Doctrine\Common\Cache\MemcacheCache as CacheAdapter;
+    BEAR\Framework\Interceptor\Cache as CacheInterceptor;
 
 use \demoworld\Interceptor\Log;
+
+// use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
+// use Doctrine\Common\Cache\ApcCache as CacheBackEnd;
+
+use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
+use Zend\Cache\Backend\File as CacheBackEnd;
 
 /**
  * Application default module
@@ -46,7 +51,7 @@ class AppModule extends AbstractModule
         // Annotation
         $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('\demoworld\Interceptor\Log'), [new Log]);
 //         $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('Transactional'), [new Transactional]);
-//         $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('Cache'), [new Cache(new CacheAdapter, __NAMESPACE__, 2, 'localhost')]);
+        $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('demoworld\Annotation\Cache'), [new CacheInterceptor(new CacheAdapter(new CacheBackEnd))]);
 //         $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('CacheUpdate'), [new Cache(new CacheAdapter, __NAMESPACE__, 2, 'localhost')]);
     }
 }

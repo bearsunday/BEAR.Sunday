@@ -19,5 +19,4 @@ foreach ($response->headers as $header) {
     header($header);
 }
 echo $response->body;
-echo number_format((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 4);
 exit(0);

@@ -1,0 +1,117 @@
+{
+    "name": "BEAR/Resource",
+    "description": "BEAR.Sunday, a resource oriented framework",
+    "keywords": ["rest", "framework", "api"],
+    "homepage": "https://github.com/koriym/BEAR.Sunday",
+    "version": "0.1.0",
+    "license": "BSD",
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "smarty/smarty",
+                "version": "3.1.7",
+                "dist": {
+                    "url": "http://www.smarty.net/files/Smarty-3.1.8.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "http://smarty-php.googlecode.com/svn/",
+                    "type": "svn",
+                    "reference": "tags/Smarty_3_1_8/distribution/"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "crodas/haanga",
+                "version": "1.0.4",
+                "dist": {
+                    "url": "https://github.com/crodas/Haanga/zipball/master",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/crodas/Haanga.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "zend/zend-log",
+                "version": "2.0.0",
+                "autoload": { "psr-0": { "Zend\\Log": "" } },
+                "target-dir": "Zend/Log",
+                "dist": {
+                    "url": "https://github.com/KnpLabs/zend-log/zipball/master",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/KnpLabs/zend-log.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type":"package",
+            "package": {
+                "name": "zend/zend-cache",
+                "version": "2.0.0",
+                "autoload": { "psr-0": { "Zend\\Cache": "" } },
+                "target-dir": "Zend/Cache",
+                "dist": {
+                    "url": "https://github.com/KnpLabs/zend-cache/zipball/master",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/KnpLabs/zend-cache.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "ext-curl": "*",
+        "ext-apc": "*",
+        "Aura/Autoload": "dev-master",
+        "Aura/Di": "dev-master",
+        "Aura/Router": "dev-master",
+        "Aura/Signal": "dev-master",
+        "Aura/Web": "dev-master",
+        "BEAR/Resource": "dev-master",
+        "doctrine/common": "2.2.*",
+        "doctrine/dbal": "dev-master",
+        "guzzle/guzzle": "dev-master",
+        "ray/aop": "dev-master",
+        "ray/di": "dev-master",
+        "smarty/smarty": "3.1.*",
+        "crodas/haanga": ">=1.0.4",
+        "twig/twig": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "Akihito Koriyama",
+            "email": "akihito.koriyama@gmail.com"
+        }
+    ],
+    "suggest": {
+        "symfony/class-loader": "*",
+        "zend/zend-cache": "*",
+        "zend/zend-log": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "BEAR\\Sunday": "src/",
+            "Aura\\Di": "vendor/Aura/Di/src/",
+            "Aura\\Router": "vendor/Aura/Router/src/",
+            "Aura\\Signal": "vendor/Aura/Signal/src/",
+            "Aura\\Web": "vendor/Aura/Web/src/"
+        }
+    }
+}

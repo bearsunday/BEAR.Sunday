@@ -15,11 +15,11 @@ $appPath = dirname(__DIR__);
 $system = dirname(dirname($appPath));
 
 // load accerarater
-include $system . '/package/BEAR.Framework/scripts/core_loader.php';
-$loader = require  $system . '/vendor/Aura.Autoload/scripts/instance.php';
+include $system . '/package/BEAR/Framework/scripts/core_loader.php';
+$loader = require  $system . '/vendor/Aura/Autoload/scripts/instance.php';
 $loader->setPaths([
     __NAMESPACE__ . '\\' => dirname($appPath),
-    'BEAR\Framework\\' => $system . '/package/BEAR.Framework/src/',
+    'BEAR\Framework\\' => $system . '/package/BEAR/Framework/src/',
     'BEAR\Resource\\' => $system . '/vendor/BEAR.Resource/src',
     'Ray\\' => [
         $system . '/vendor/Ray.Aop/src/',
@@ -44,4 +44,4 @@ $loader->register();
 // silent auto loader for annotation
 AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di', $system . '/vendor/Ray.Di/src/');
 AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation', $system . '/vendor/BEAR.Resource/src/');
-AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation', $system . '/package/BEAR.Framework/src/');
+AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation', $system . '/package/BEAR/Framework/src/');

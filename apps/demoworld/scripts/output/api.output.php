@@ -4,10 +4,6 @@
  */
 namespace BEAR\Application\Script;
 use BEAR\Resource\Code;
-// v($response);
-// if ($response instanceof \Ray\Aop\Weaver) {
-//     $response = $response->object;
-// }
 $code = new Code;
 $statusText =  (isset($code->statusText[$response->code])) ? $code->statusText[$response->code] : '';
 

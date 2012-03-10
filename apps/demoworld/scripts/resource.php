@@ -49,7 +49,8 @@ $resourceClientBuilder = function () use ($cache) {
         ];
     $di = new Injector(new Container(new Forge(new ApcConfig(new Annotation(new Definition, $annotations)))));
     $module = new StandardModule($di, new App);
-    $module->install(new Module\AppModule);
+    $di->setModule($module);
+    $module->install(new Module\AppModule($di));
     $di->setModule($module);
     $resource = $di->getInstance('BEAR\Resource\Client');
     /* @var $resource \BEAR\Resoure\Client */

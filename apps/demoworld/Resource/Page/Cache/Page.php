@@ -5,8 +5,8 @@ use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as AbstractPage,
     BEAR\Framework\Link\View\Php as PhpView;
 
-use demoworld\Annotation\Cache,
-    demoworld\Annotation\CacheUpdate;
+use BEAR\Framework\Annotation\Cache,
+    BEAR\Framework\Annotation\CacheUpdate;
 
 /**
  * Cache page
@@ -21,18 +21,11 @@ class Page extends AbstractPage
     }
 
     /**
-     * @Cache(5)
+     * @Cache
      */
     public function onGet($name)
     {
         $this['greeting'] = "Hello {$name} " . time();
         return $this;
-    }
-
-    /**
-     * CacheUpdate("name")
-     */
-    public function onUpdate($name)
-    {
     }
 }

@@ -2,7 +2,7 @@
 namespace demoworld\Module;
 
 use Ray\Di\AbstractModule,
-    Ray\Di\InjectorInterface,
+    Ray\Di\InjectorInterface as Di,
     Ray\Di\Annotation,
     Ray\Di\Config,
     Ray\Di\Forge,
@@ -13,7 +13,8 @@ use Ray\Di\AbstractModule,
 
 use BEAR\Framework\Module\StandardModule,
     BEAR\Framework\Interceptor\Transactional,
-    BEAR\Framework\Interceptor\Cache as CacheInterceptor;
+    BEAR\Framework\Interceptor\CacheLoader as CacheLoadInterceptor,
+    BEAR\Framework\Interceptor\CacheUpdater as CacheUpdateInterceptor;
 
 use \demoworld\Interceptor\Log;
 
@@ -28,6 +29,12 @@ use Zend\Cache\Backend\File as CacheBackEnd;
  */
 class AppModule extends AbstractModule
 {
+    public function __construct(Di $injector)
+    {
+        $this->injector = $injector;
+        parent::__construct();
+    }
+
     /**
      * Binding configuration
      *
@@ -48,10 +55,30 @@ class AppModule extends AbstractModule
         $this->bind('Doctrine\DBAL\Connection')->annotatedWith('dbal')->toProvider('\demoworld\Module\Provider\DbalProvider')->in(Scope::SINGLETON);;
         // Web context
         $this->bind('Ray\Di\ProviderInterface')->annotatedWith('webContext')->to('\demoworld\Module\Provider\WebContextProvider')->in(Scope::SINGLETON);;
-        // Annotation
-        $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('\demoworld\Interceptor\Log'), [new Log]);
-//         $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('Transactional'), [new Transactional]);
-        $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('demoworld\Annotation\Cache'), [new CacheInterceptor(new CacheAdapter(new CacheBackEnd))]);
-//         $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('CacheUpdate'), [new Cache(new CacheAdapter, __NAMESPACE__, 2, 'localhost')]);
-    }
+
+//         v( $this->injector->getInstance('CacheUpdateInterceptor'));
+        // AOP
+        $this->bindInterceptor(
+                $this->matcher->any(),
+                $this->matcher->annotatedWith('\demoworld\Interceptor\Log'),
+                [new Log]
+        );
+        $cacheLoadInterceptor = new CacheLoadInterceptor(new CacheAdapter(new CacheBackEnd));
+        $this->bindInterceptor(
+                $this->matcher->any(),
+                $this->matcher->annotatedWith('BEAR\Framework\Annotation\Cache'),
+                [$cacheLoadInterceptor]
+        );
+        $cacheUpdateInterceptor = $this->injector->getInstance('BEAR\Framework\Interceptor\CacheUpdater', ['cache' => $cacheLoadInterceptor]);
+        $this->bindInterceptor(
+                $this->matcher->any(),
+                $this->matcher->annotatedWith('BEAR\Framework\Annotation\CacheUpdate'),
+                [$cacheUpdateInterceptor]
+        );
+//         $this->bindInterceptor(
+//                 $this->matcher->any(),
+//                 $this->matcher->annotatedWith('Transactional'),
+//                 [new Transactional]
+//         );
+     }
 }

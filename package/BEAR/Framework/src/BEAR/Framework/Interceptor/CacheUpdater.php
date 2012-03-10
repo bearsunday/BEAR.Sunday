@@ -9,54 +9,37 @@ namespace BEAR\Framework\Interceptor;
 
 use Ray\Aop\MethodInterceptor,
     Ray\Aop\MethodInvocation;
-use Doctrine\Common\Cache\Cache as Cacheable,
-    Doctrine\Common\Cache\MemcacheCache;
+use BEAR\Framework\Interceptor\Cachable as CacheInterceptor;
+use BEAR\Resource\Invoker;
+use BEAR\Resource\Request;
 
 /**
- * Cache interceptor
+ * Cache update interceptor
  *
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-class CacheUpdate implements MethodInterceptor
+class CacheUpdater implements MethodInterceptor
 {
-    /**
-     * Host
-     *
-     * @var string
-     */
-    private $host;
-
-    /**
-     * Life time
-     *
-     * @var int
-     */
-    private $lifeTime;
-
     /**
      * Constructor
      *
-     * @param Cache $cache
-     * @param unknown_type $lifeTime
+     * @param CacheInterceptor $cache
      */
-    public function __construct(Cacheable $cache, $appName, $lifeTime = 0, $host = 'locahost')
+    public function __construct(CacheInterceptor $cache)
     {
-        $cache->setNamespace($appName);
         $this->cache = $cache;
-        $this->host = $host;
-        $this->lifeTime = $lifeTime;
     }
 
     /**
-     * Create memchace property in runtime init
+     * @param Request $request
      *
+     * @return void
+     * @Inject
      */
-    public function __wakeup()
+    public function setRequest(Request $request)
     {
-        $memcahce = new \Memcache;
-        $memcahce->connect($this->host);
-        $this->cache->setMemcache($memcahce);
+        $this->request = $request;
     }
 
     /**
@@ -65,28 +48,27 @@ class CacheUpdate implements MethodInterceptor
      */
     public function invoke(MethodInvocation $invocation)
     {
-        v(MethodInvocation);
-        $data = $invocation->proceed();
-        $id = $this->getId($invocation, $invocation->getArguments());
-        $saved = $this->cache->fetch($id);
-        if ($saved) {
-            return $saved;
+        $invocationArgs = $invocation->getArguments();
+        $annotation = $invocation->getAnnotation();
+        $args = [];
+        $method = $invocation->getMethod();
+        $parameters = $method->getParameters();
+        foreach ($parameters as $parameter) {
+            if (in_array($parameter->name, $annotation->args)) {
+                $args[$parameter->name] = $invocationArgs[$parameter->getPosition()];
+            }
         }
-        $this->cache->save($id, $data, 0);
-        $saved = $this->cache->fetch($id);
-        return $data;
-    }
-
-    /**
-     * Return cache id
-     *
-     * @param MethodInvocation $invocation
-     * @param array $args
-     */
-    protected function getId(MethodInvocation $invocation, $args)
-    {
+        $object = $invocation->getThis();
+        // call @Get
+        $request = $this->request;
+        $request->ro = $object;
+        $request->method  = 'get';
+        $data = $request($args);
         $class = get_class($invocation->getThis());
-        $method = $invocation->getMethod()->name;
-        return $class . $method . md5(serialize($args));
+        // save cahce
+//         $this->cache->save($class, $args, $data);
+        $this->cache->delete($class, $args);
+        // call original @CacheUpdate annotated method
+        return $invocation->proceed();
     }
 }

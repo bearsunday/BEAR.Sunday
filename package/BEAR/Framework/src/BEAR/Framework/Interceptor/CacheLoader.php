@@ -8,9 +8,8 @@
 namespace BEAR\Framework\Interceptor;
 
 use Ray\Aop\MethodInterceptor,
-Ray\Aop\MethodInvocation;
-
-use Guzzle\Common\Cache\ZendCacheAdapter as Cacheable;
+    Ray\Aop\MethodInvocation;
+use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;
 
 /**
  * Cache interceptor
@@ -18,61 +17,81 @@ use Guzzle\Common\Cache\ZendCacheAdapter as Cacheable;
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-class Cache implements MethodInterceptor
+class CacheLoader implements Cachable, MethodInterceptor
 {
-    /**
-     * Host
-     *
-     * @var string
-     */
-    private $host;
+	/**
+	 * Host
+	 *
+	 * @var string
+	 */
+	private $host;
 
-    /**
-     * Life time
-     *
-     * @var int
-     */
-    private $lifeTime;
+	/**
+	 * Life time
+	 *
+	 * @var int
+	 */
+	private $lifeTime;
 
-    /**
-     * Constructor
-     *
-     * @param Cache $cache
-     * @param unknown_type $lifeTime
-     */
-    public function __construct(Cacheable $cache)
-    {
-        $this->cache = $cache;
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param Cache $cache
+	 * @param unknown_type $lifeTime
+	 */
+	public function __construct( $cache) {
+		$this->cache = $cache;
+	}
 
-    /**
-     * (non-PHPdoc)
-     * @see Ray\Aop.MethodInterceptor::invoke()
-     */
-    public function invoke(MethodInvocation $invocation)
-    {
-        $id = $this->getId($invocation, $invocation->getArguments());
-        $saved = $this->cache->fetch($id);
-        if ($saved) {
-            return unserialize($saved);
-        }
-        $data = $invocation->proceed();
-        $annotation = $invocation->getAnnotation();
-        $time = $annotation->time;
-        $r = $this->cache->save($id, serialize($data), $time);
-        return $data;
-    }
+	/**
+	 * (non-PHPdoc)
+	 * @see Ray\Aop.MethodInterceptor::invoke()
+	 */
+	public function invoke(MethodInvocation $invocation) {
+	    $class = get_class($invocation->getThis());
+	    $args = $invocation->getArguments();
+		$id = $this->getId($class, $args);
+		$saved = $this->cache->fetch($id);
+		if ($saved) {
+			return unserialize($saved);
+		}
+		$data = $invocation->proceed();
+		$data = $invocation->proceed();
+		$annotation = $invocation->getAnnotation();
+		$time = $annotation->time;
+		$r = $this->cache->save($id, serialize($data), $time);
+		return $data;
+	}
 
-    /**
-     * Return cache id
-     *
-     * @param MethodInvocation $invocation
-     * @param array $args
-     */
-    protected function getId(MethodInvocation $invocation, $args)
-    {
-        $class = get_class($invocation->getThis());
-        $method = $invocation->getMethod()->name;
-        return $method . crc32($class . (serialize($args)));
-    }
+	/**
+	 * Return cache id
+	 *
+	 * @param string $class
+	 * @param array  $args
+	 *
+	 * @return string
+	 */
+	protected function getId($class, array $args) {
+		return $class . crc32(serialize($args));
+	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see BEAR\Framework\Interceptor\Cachable::delete()
+	 */
+	public function delete($class, array $args)
+	{
+	    $id = $this->getId($class, $args);
+	    $this->cache->delete($id);
+	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see BEAR\Framework\Interceptor\Cachable::save()
+	 */
+	public function save($class, $args, $data)
+	{
+	    $id = $this->getId($class, $args);
+	    $this->cache->save($id, serialize($data), 1);
+	}
 }

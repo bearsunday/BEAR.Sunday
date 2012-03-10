@@ -1,8 +1,8 @@
 <?php
-namespace demoworld\Annotation;
+namespace BEAR\Framework\Annotation;
 
 /**
- * Cache Update
+ * Cache
  *
  * @Annotation
  * @Target("METHOD")
@@ -10,7 +10,7 @@ namespace demoworld\Annotation;
  * @package    demoworld
  * @subpackage Annotation
  */
-final class CacheUpdate
+final class Cache
 {
-    public $keys = ['id'];
+    public $time = false;
 }

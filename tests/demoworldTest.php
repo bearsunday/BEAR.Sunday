@@ -104,4 +104,49 @@ class demoworldTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(200, $response->code);
     }
 
+    public function testCachePage()
+    {
+        $response1 = $this->resource->get->uri('page://self/cache/page')->withQuery(['name' => 'Cache boy'])->eager->request();
+        $response2 = $this->resource->get->uri('page://self/cache/page')->withQuery(['name' => 'Cache boy'])->eager->request();
+        $this->assertSame($response1->body, $response2->body);
+    }
+
+    /**
+     * @medium
+     */
+    public function testCachePageOneSec_Cached()
+    {
+        //cache clear
+        $this->resource->put->uri('page://self/cache/page/onesec')->withQuery(['name' => 'Cache boy'])->eager->request();
+        // same
+        $response1 = $this->resource->get->uri('page://self/cache/page/onesec')->withQuery(['name' => 'Cache boy'])->eager->request();
+        $response2 = $this->resource->get->uri('page://self/cache/page/onesec')->withQuery(['name' => 'Cache boy'])->eager->request();
+        $this->assertSame($response1->body, $response2->body);
+    }
+
+    /**
+     * @medium
+     */
+    public function testCachePageOneSec_CacheUpdateByTime()
+    {
+        //cache clear
+        $this->resource->put->uri('page://self/cache/page/onesec')->withQuery(['name' => 'Cache boy'])->eager->request();
+        // same
+        $response1 = $this->resource->get->uri('page://self/cache/page/onesec')->withQuery(['name' => 'Cache boy'])->eager->request();
+        sleep(2);
+        // cleared
+        $response2 = $this->resource->put->uri('page://self/cache/page/onesec')->withQuery(['name' => 'Cache boy'])->eager->request();
+        $this->assertNotSame($response1->body, $response2->body);
+    }
+
+    public function testCachePageOneSec_CacheUpdateByPutMethodWithCacheUpateAnotation()
+    {
+        //cache clear
+        $response1 = $this->resource->get->uri('page://self/cache/page/onesec')->withQuery(['name' => 'Cache boy'])->eager->request();
+        $this->resource->put->uri('page://self/cache/page/onesec')->withQuery(['name' => 'Cache boy'])->eager->request();
+        // cleared
+        $response2 = $this->resource->put->uri('page://self/cache/page/onesec')->withQuery(['name' => 'Cache boy'])->eager->request();
+        $this->assertNotSame($response1->body, $response2->body);
+    }
+
 }

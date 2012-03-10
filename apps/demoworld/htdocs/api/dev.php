@@ -18,7 +18,7 @@ use BEAR\Resource\Object as ResourceObject;
 use demoworld\App;
 
 // Init
-include dirname(dirname(__DIR__)) . '/scripts/exception_handler/standard_handler.php';
+// include dirname(dirname(__DIR__)) . '/scripts/exception_handler/standard_handler.php';
 include dirname(dirname(__DIR__)) . '/scripts/utility/clear_cache.php';
 
 // Load

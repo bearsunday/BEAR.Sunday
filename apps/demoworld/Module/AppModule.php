@@ -55,8 +55,6 @@ class AppModule extends AbstractModule
         $this->bind('Doctrine\DBAL\Connection')->annotatedWith('dbal')->toProvider('\demoworld\Module\Provider\DbalProvider')->in(Scope::SINGLETON);;
         // Web context
         $this->bind('Ray\Di\ProviderInterface')->annotatedWith('webContext')->to('\demoworld\Module\Provider\WebContextProvider')->in(Scope::SINGLETON);;
-
-//         v( $this->injector->getInstance('CacheUpdateInterceptor'));
         // AOP
         $this->bindInterceptor(
                 $this->matcher->any(),

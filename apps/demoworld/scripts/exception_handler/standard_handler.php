@@ -8,8 +8,9 @@ use BEAR\Framework\Exception\ResourceNotFound;
 use BEAR\Resource\Exception\BadRequest,
     BEAR\Resource\Exception\MethodNotAllowed;
 use Ray\Di\Exception\InvalidBinding;
-
 use demoworld\Resource\Page\Code;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Helper\FormatterHelper as Formatter;
 
 set_exception_handler(function(\Exception $e) {
     $mode = isset($_ENV['BEAR_OUTPUT_MODE']) ? $_ENV['BEAR_OUTPUT_MODE'] : 'prod';
@@ -45,7 +46,7 @@ set_exception_handler(function(\Exception $e) {
         $response->headers['X-EXCEPTION'] = get_class($e);
         $response->headers['X-EXCEPTION-CODE'] = $e->getCode();
         $response->headers['X-EXCEPTION-MESSAGE'] = $e->getMessage();
-        $response->body = '<div class="trace">' . $e->getTraceAsString() . '</div>';
+        $response->body = print_r($e->getTrace()[1] , true);
         goto SERVER_ERROR;
     }
 
@@ -57,7 +58,16 @@ NOT_FOUND:
 BAD_REQUEST:
 METHOD_NOT_ALLOWED:
 SERVER_ERROR:
-    include dirname(__DIR__) . "/output/{$mode}.output.php";
+	$log = print_r($e->getTrace(), true);
+	file_put_contents('.trace.log', $log);
+	file_put_contents('.trace.log.' . get_class($e) . md5(serialize($e->getTrace())), $log);
+	(new ConsoleOutput)->writeln([
+        '',
+	    (new Formatter)->formatBlock('Exception: ' . get_class($e), 'bg=red;fg=white', true),
+	    ''
+	]);	
+// 			echo $msg;
+	include dirname(__DIR__) . "/output/dev.output.php";
     exit(1);
 }
 );

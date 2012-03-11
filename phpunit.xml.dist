@@ -5,6 +5,7 @@
          backupStaticAttributes="false"
          strict="true"
          colors="true"
+         timeoutForSmallTests="5"
          verbose="true">
   <testsuites>
     <testsuite name="BEAR.Sunday">

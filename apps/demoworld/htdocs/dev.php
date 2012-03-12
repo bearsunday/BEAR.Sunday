@@ -3,6 +3,7 @@ namespace demoworld;
 
 use BEAR\Framework\Dispatcher,
     BEAR\Framework\Globals;
+use BEAR\Framework\Output\HttpFoundation as Output;
 
 /**
  * CLI / Built-in web server dev script
@@ -36,7 +37,7 @@ if (php_sapi_name() == 'cli-server') {
 }
 
 // Init
-// include dirname(__DIR__) . '/scripts/exception_handler/standard_handler.php';
+include dirname(__DIR__) . '/scripts/exception_handler/standard_handler.php';
 include dirname(__DIR__) . '/scripts/utility/clear_cache.php';
 
 // Load
@@ -52,4 +53,4 @@ $resource = require dirname(__DIR__). '/scripts/resource.php';
 $response = $resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->linkSelf('view')->eager->request();
 
 // Output
-include $appPath . '/scripts/output/dev.output.php';
+(new Output)->setResource($response)->debug()->prepare()->output();

@@ -13,8 +13,10 @@
 use BEAR\Framework\StandardRouter;
 
 use BEAR\Framework\Dispatcher,
-    BEAR\Framework\Globals;
+    BEAR\Framework\Globals,
+    BEAR\Framework\Output\HttpFoundation as Output;
 use BEAR\Resource\Object as ResourceObject;
+
 use demoworld\App;
 
 // Init
@@ -45,5 +47,4 @@ if (!($response instanceof ResourceObject)) {
 }
 
 // Output
-include dirname(dirname(__DIR__)) . '/scripts/output/api.output.php';
-
+(new Output)->setResource($response)->debug()->output();

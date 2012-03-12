@@ -87,7 +87,7 @@
         "doctrine/common": "2.2.*",
         "guzzle/guzzle": "dev-master",
 		"symfony/console": "2.0.*",
-        "symfony/process": "2.0.*",
+        "symfony/http-foundation": "2.0.*",
         "ray/aop": "dev-master",
         "ray/di": "dev-master"
     },

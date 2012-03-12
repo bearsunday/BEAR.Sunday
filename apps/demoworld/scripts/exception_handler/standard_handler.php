@@ -6,15 +6,18 @@ namespace BEAR\Framework;
 
 use BEAR\Framework\Exception\ResourceNotFound;
 use BEAR\Resource\Exception\BadRequest,
-    BEAR\Resource\Exception\MethodNotAllowed;
+    BEAR\Resource\Exception\MethodNotAllowed,
+    BEAR\Resource\Exception\InvalidParameter,
+    BEAR\Resource\Exception\InvalidScheme;
+
 use Ray\Di\Exception\InvalidBinding;
 use demoworld\Resource\Page\Code;
-use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Helper\FormatterHelper as Formatter;
+
+use BEAR\Framework\Output\HttpFoundation as Output;
 
 set_exception_handler(function(\Exception $e) {
     $mode = isset($_ENV['BEAR_OUTPUT_MODE']) ? $_ENV['BEAR_OUTPUT_MODE'] : 'prod';
-        try {
+    try {
         $response = new Code;
         throw $e;
     } catch (NotFound $e) {
@@ -25,6 +28,14 @@ set_exception_handler(function(\Exception $e) {
         $response->code = 400;
         $response->body = 'You sent a request that this service cound not understand.';
         goto METHOD_NOT_ALLOWED;
+    } catch (InvalidParameter $e) {
+        $response->code = 400;
+        $response->body = 'You sent a request that query is not valid.';
+        goto BAD_REQUEST;
+    } catch (InvalidScheme $e) {
+        $response->code = 400;
+        $response->body = 'You sent a request that scheme is not valid.';
+        goto BAD_REQUEST;
     } catch (MethodNotAllowed $e) {
         $response->code = 405;
         $response->body = 'The requested method is not allowed for this URI.';
@@ -51,23 +62,13 @@ set_exception_handler(function(\Exception $e) {
     }
 
 OK:
-    include dirname(__DIR__) . '/output/prod.output.php';
+    (new Output)->setResource($response)->prepare()->output();
     exit(0);
 
 NOT_FOUND:
 BAD_REQUEST:
 METHOD_NOT_ALLOWED:
 SERVER_ERROR:
-	$log = print_r($e->getTrace(), true);
-	file_put_contents('.trace.log', $log);
-	file_put_contents('.trace.log.' . get_class($e) . md5(serialize($e->getTrace())), $log);
-	(new ConsoleOutput)->writeln([
-        '',
-	    (new Formatter)->formatBlock('Exception: ' . get_class($e), 'bg=red;fg=white', true),
-	    ''
-	]);	
-// 			echo $msg;
-	include dirname(__DIR__) . "/output/dev.output.php";
+    (new Output)->setResource($response)->setException($e)->output();
     exit(1);
-}
-);
+});

@@ -84,7 +84,11 @@ final class Dispatcher
             try {
                 $page = $resource->newInstance($pageUri);
             } catch (NotReadable $e) {
-                throw new Exception\ResourceNotFound($pageUri, 404, $e);
+                try {
+                    $page = $resource->newInstance($pageUri . 'index');
+                } catch (NotReadable $e) {
+                    throw new Exception\ResourceNotFound($pageUri, 404, $e);
+                }
             } catch (\Exception $e) {
                 throw $e;
             }

@@ -45,12 +45,12 @@ trait Dev
             }
         }
         ob_start();
-        $responce = [
+        $response = [
             'code'=> $page->code,
             'headers' => $page->headers,
             'body' => $body
         ];
-        var_export($responce);
+        var_export($response);
         $buffer = ob_get_clean();
         $this->body = $buffer;
         return $page;

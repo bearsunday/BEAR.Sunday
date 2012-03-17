@@ -29,9 +29,8 @@ use Zend\Cache\Backend\File as CacheBackEnd;
  */
 class AppModule extends AbstractModule
 {
-    public function __construct(Di $injector)
+    public function __construct()
     {
-        $this->injector = $injector;
         parent::__construct();
     }
 
@@ -67,7 +66,7 @@ class AppModule extends AbstractModule
                 $this->matcher->annotatedWith('BEAR\Framework\Annotation\Cache'),
                 [$cacheLoadInterceptor]
         );
-        $cacheUpdateInterceptor = $this->injector->getInstance('BEAR\Framework\Interceptor\CacheUpdater', ['cache' => $cacheLoadInterceptor]);
+        $cacheUpdateInterceptor = Injector::create()->getInstance('BEAR\Framework\Interceptor\CacheUpdater', ['cache' => $cacheLoadInterceptor]);
         $this->bindInterceptor(
                 $this->matcher->any(),
                 $this->matcher->annotatedWith('BEAR\Framework\Annotation\CacheUpdate'),

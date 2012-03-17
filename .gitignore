@@ -1,2 +1,3 @@
 vendor
 .trace.log*
+package/BEAR/Framework/src/BEAR/Framework/tmp/twig

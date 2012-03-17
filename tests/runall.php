@@ -12,43 +12,43 @@ echo "\n";
 
 echo "app resource\n";
 
-passthru('php apps/demoworld/htdocs/dev.php get /helloresource');
+passthru('php apps/demoworld/htdocs/dev.web.php get /helloresource');
 
 echo "template engine\n";
 
-passthru('php apps/demoworld/htdocs/dev.php get /template/twig');
-passthru('php apps/demoworld/htdocs/dev.php get /template/smarty3');
-passthru('php apps/demoworld/htdocs/dev.php get /template/haanga');
-passthru('php apps/demoworld/htdocs/dev.php get /template/php');
+passthru('php apps/demoworld/htdocs/dev.web.php get /template/twig');
+passthru('php apps/demoworld/htdocs/dev.web.php get /template/smarty3');
+passthru('php apps/demoworld/htdocs/dev.web.php get /template/haanga');
+passthru('php apps/demoworld/htdocs/dev.web.php get /template/php');
 
 echo "AOP\n";
 
-passthru('php apps/demoworld/htdocs/dev.php get /aop/log');
+passthru('php apps/demoworld/htdocs/dev.web.php get /aop/log');
 
 echo "http resource\n";
 
-passthru('php apps/demoworld/htdocs/dev.php get /http/googlenews');
-passthru('php apps/demoworld/htdocs/dev.php get /http/multi');
+passthru('php apps/demoworld/htdocs/dev.web.php get /http/googlenews');
+passthru('php apps/demoworld/htdocs/dev.web.php get /http/multi');
 
 echo "api app resource\n";
 
-passthru('php apps/demoworld/htdocs/api/dev.php get app://self/greeting?lang=en');
-passthru('php apps/demoworld/htdocs/api/dev.php get app://self/greeting?lang=ja');
+passthru('php apps/demoworld/htdocs/dev.api.php get app://self/greeting?lang=en');
+passthru('php apps/demoworld/htdocs/dev.api.php get app://self/greeting?lang=ja');
 
 echo "another app page as resource\n";
 
-passthru('php apps/demoworld/htdocs/dev.php get /app/hello');
+passthru('php apps/demoworld/htdocs/dev.web.php get /app/hello');
 
 echo "hyper link api\n";
 
-passthru('php apps/demoworld/htdocs/dev.php get /hyperlink/restbucks?drink=latte');
-passthru('php apps/demoworld/htdocs/dev.php get /hyperlink/restbucks?drink=coffee');
+passthru('php apps/demoworld/htdocs/dev.web.php get /hyperlink/restbucks?drink=latte');
+passthru('php apps/demoworld/htdocs/dev.web.php get /hyperlink/restbucks?drink=coffee');
 
 echo "uri router\n";
 
-passthru('php apps/demoworld/htdocs/dev.php get /helloresource/ja');
-passthru('php apps/demoworld/htdocs/dev.php get /helloresource/en');
+passthru('php apps/demoworld/htdocs/dev.web.php get /helloresource/ja');
+passthru('php apps/demoworld/htdocs/dev.web.php get /helloresource/en');
 
 echo "cache\n";
 
-passthru("php apps/demoworld/htdocs/api/dev.php get 'page://self/cache/page?name=koriym'");
+passthru("php apps/demoworld/htdocs/api/dev.web.php get 'page://self/cache/page?name=koriym'");

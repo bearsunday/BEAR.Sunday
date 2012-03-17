@@ -1,6 +1,8 @@
 <?php
 namespace helloworld;
 
+require __DIR__ . '/auto_loader.php';
+
 use BEAR\Framework\Module\StandardModule;
 
 use Ray\Di\Annotation,

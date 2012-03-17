@@ -10,6 +10,7 @@ namespace BEAR\Framework\Interceptor;
 use Ray\Aop\MethodInterceptor,
     Ray\Aop\MethodInvocation;
 use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;
+use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
 
 /**
  * Cache interceptor
@@ -39,7 +40,7 @@ class CacheLoader implements Cachable, MethodInterceptor
 	 * @param Cache $cache
 	 * @param unknown_type $lifeTime
 	 */
-	public function __construct( $cache) {
+	public function __construct(Cache $cache) {
 		$this->cache = $cache;
 	}
 

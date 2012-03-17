@@ -16,7 +16,7 @@ use Ray\Di\AbstractModule,
     Ray\Di\Config,
     Ray\Di\Forge,
     Ray\Di\Container,
-    Ray\Di\Injector,
+    Ray\Di\Injector as Di,
     Ray\Di\Definition;
 
 /**
@@ -27,6 +27,11 @@ use Ray\Di\AbstractModule,
  */
 class AppModule extends AbstractModule
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Configure dependency binding
      *
@@ -34,6 +39,7 @@ class AppModule extends AbstractModule
      */
     protected function configure()
     {
+        $this->bind()->annotatedWith('Twig')->toProvider('\BEAR\Framework\Module\Provider\TwigProvider')->in(Scope::SINGLETON);
         $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\sandbox\Module\SchemeCollectionProvider')->in(Scope::SINGLETON);
     }
 }

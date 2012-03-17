@@ -3,20 +3,25 @@ namespace sandbox\Resource\Page;
 
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page;
-use BEAR\Framework\Link\View\Dev as DevView;
+use BEAR\Framework\Link\View\Twig as View;
+
+if (class_exists('\sandbox\Resource\Page\Hello', false))
+{
+    return;
+}
 /**
  * Greeting page
  */
 class Hello extends Page
 {
-    use DevView;
+    use View;
 
     /**
      * @return ResourceObject
      */
     public function onGet()
     {
-        $this->body = 'Hello ';
+        $this['greeting'] = 'BEAR';
         return $this;
     }
 }

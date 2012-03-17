@@ -15,7 +15,6 @@ $appPath = dirname(__DIR__);
 $system = dirname(dirname($appPath));
 
 // load accerarater
-include $system . '/package/BEAR/Framework/scripts/core_loader.php';
 $loader = require  $system . '/vendor/Aura/Autoload/scripts/instance.php';
 $namespaces = require  $system . '/vendor' . DIRECTORY_SEPARATOR . '.composer/autoload_namespaces.php';
 $namespaces += [
@@ -25,6 +24,6 @@ $namespaces += [
 $loader->setPaths($namespaces);
 $loader->register();
 // silent auto loader for annotation
-AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di', $system . '/vendor/Ray.Di/src/');
-AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation', $system . '/vendor/BEAR.Resource/src/');
+AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di', $system . '/vendor/Ray/Di/src/');
+AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation', $system . '/vendor/BEAR/Resource/src/');
 AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation', $system . '/package/BEAR/Framework/src/');

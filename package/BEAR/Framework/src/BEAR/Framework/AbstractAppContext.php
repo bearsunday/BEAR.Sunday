@@ -11,7 +11,8 @@ use Ray\Di\Definition,
     Ray\Di\Forge,
     Ray\Di\Container,
     Ray\Di\Injector,
-    Ray\Di\InjectorInterface as Inject;
+    Ray\Di\InjectorInterface as Inject,
+    Ray\Di\AbstractModule;
 use BEAR\Framework\Module\StandardModule as FrameWorkModule;
 
 /**
@@ -43,11 +44,23 @@ abstract class AbstractAppContext
     public $path;
 
     /**
-     * System path
+     * Resource client
      *
-     * @var string
+     * @var Client
      */
-    public $systemPath;
+    public $resource;
+
+
+    /**
+     * Constructor
+     *
+     * @param Framework $framework
+     */
+    public function __construct(array $appModules = [], Framework $framework)
+    {
+        $this->framework = $framework;
+        $this->resource = $this->framework->getResource($appModules, $this);
+    }
 
     /**
      * Annotation Settings

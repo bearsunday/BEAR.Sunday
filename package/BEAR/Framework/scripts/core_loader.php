@@ -45,10 +45,7 @@ require $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/DocPa
 require $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/DocLexer.php';
 require $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/Annotation/Target.php';
 require $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/PhpParser.php';
-require $system . '/vendor/Ray/Di/src/Ray/Di/AbstractModule.php';
-require $system . '/vendor/Ray/Di/src/Ray/Di/EmptyModule.php';
 require $system . '/vendor/Ray/Aop/src/Ray/Aop/Bind.php';
-require $system . '/package/BEAR/Framework/src/BEAR/Framework/Module/StandardModule.php';
 require $system . '/vendor/BEAR/Resource/src/BEAR/Resource/Resource.php';
 require $system . '/vendor/BEAR/Resource/src/BEAR/Resource/Client.php';
 require $system . '/vendor/BEAR/Resource/src/BEAR/Resource/Invokable.php';

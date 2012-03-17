@@ -2,7 +2,7 @@
 /**
  * Exception handler
  */
-namespace BEAR\Framework;
+namespace BEAR\Framework\scripts\excection_handler;
 
 use BEAR\Framework\Exception\ResourceNotFound;
 use BEAR\Resource\Exception\BadRequest,
@@ -11,14 +11,14 @@ use BEAR\Resource\Exception\BadRequest,
     BEAR\Resource\Exception\InvalidScheme;
 
 use Ray\Di\Exception\InvalidBinding;
-use demoworld\Resource\Page\Code;
+use BEAR\Framework\Resource\Page\Error;
 
 use BEAR\Framework\Output\HttpFoundation as Output;
 
 set_exception_handler(function(\Exception $e) {
     $mode = isset($_ENV['BEAR_OUTPUT_MODE']) ? $_ENV['BEAR_OUTPUT_MODE'] : 'prod';
     try {
-        $response = new Code;
+        $response = new Error;
         throw $e;
     } catch (NotFound $e) {
         $response->code = 404;
@@ -57,7 +57,6 @@ set_exception_handler(function(\Exception $e) {
         $response->headers['X-EXCEPTION'] = get_class($e);
         $response->headers['X-EXCEPTION-CODE'] = $e->getCode();
         $response->headers['X-EXCEPTION-MESSAGE'] = $e->getMessage();
-        $response->body = print_r($e->getTrace()[1] , true);
         goto SERVER_ERROR;
     }
 

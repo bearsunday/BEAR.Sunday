@@ -1,10 +1,10 @@
 <?php
-namespace sandbox;
 
-use BEAR\Framework\StandardRouter;
-
-use BEAR\Framework\Dispatcher,
-    BEAR\Framework\Globals;
+use BEAR\Framework\Framework;
+use BEAR\Framework\StandardRouter as Router;
+use BEAR\Framework\Dispatcher;
+use BEAR\Framework\Globals;
+use BEAR\Framework\Output\HttpFoundation as Output;
 
 /**
  * CLI / Built-in web server dev script
@@ -37,20 +37,16 @@ if (php_sapi_name() == 'cli-server') {
     }
 }
 
-// Init
-// include dirname(__DIR__) . '/scripts/exception_handler/standard_handler.php';
-include dirname(__DIR__) . '/scripts/utility/clear_cache.php';
-
-// Load
-require dirname(__DIR__) . '/scripts/auto_loader.php';
+// Application
+$app = require dirname(__DIR__) . '/scripts/instance.php';
 
 // Route
-$route = new StandardRouter;
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
-list($method, $pagePath, $query) = $route->match($globals);
+$router = require dirname(__DIR__) . '/scripts/router/standard_router.php';
+list($method, $pagePath, $query) = $router->match($globals);
 
 // Request
-$resource = require dirname(__DIR__). '/scripts/resource.php';
-$response = $resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->linkSelf('view')->eager->request();
+$response = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->linkSelf('view')->eager->request();
+
 // Output
-include $appPath . '/scripts/output/dev.output.php';
+(new Output)->setResource($response)->debug()->prepare()->output();

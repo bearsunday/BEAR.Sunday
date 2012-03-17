@@ -6,10 +6,11 @@
 namespace BEAR\Framework\Output;
 
 use BEAR\Resource\Object as ResourceObject;
-use Exception;
+use BEAR\Framework\Exception\ResourceBodyIsNotString;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Helper\FormatterHelper as Formatter;
+use Exception;
 
 /**
  * Output with Symfony HttpFoundation
@@ -49,6 +50,9 @@ class HttpFoundation implements Outputtable
 
     public function prepare()
     {
+        if (! is_string($this->resource->body)) {
+            throw new ResourceBodyIsNotString('body is not string');
+        }
         $this->response = new Response($this->resource->body, $this->resource->code, (array) $this->resource->headers);
         // compliant with RFC 2616.
         $this->response->prepare();
@@ -60,6 +64,13 @@ class HttpFoundation implements Outputtable
         return "body";
     }
 
+    /**
+     * Output
+     *
+     * @param boolean $debug
+     *
+     * @return void
+     */
     public function output($debug = true)
     {
         if (PHP_SAPI === 'cli') {
@@ -67,23 +78,29 @@ class HttpFoundation implements Outputtable
         } else {
             $this->outputWeb();
         }
+        if ($debug === true && $this->e) {
+            $filename = get_class($this->e);
+            $filename = '.expection.' . str_replace('\\', '_', $filename) . md5(serialize((string)$this->e)) . '.log';
+            $data = print_r($this->e->getTrace() ,true);
+            file_put_contents($filename, $data);
+        }
     }
 
     public function outputWeb()
     {
-       $this->response->send();
+        $this->response->send();
     }
 
     public function outputCliDebug()
     {
         $consoleOutput = new ConsoleOutput;
         if ($this->e) {
-           $msg = $this->e->getMessage();
-           $consoleOutput->writeln([
+            $msg = $this->e->getMessage();
+            $consoleOutput->writeln([
                     '',
                     (new Formatter)->formatBlock(get_class($this->e). ': ' . $msg, 'bg=red;fg=white', true),
                     '',
-            ]);
+                    ]);
         }
         $label = "\033[1;32m";
         $label1 = "\033[1;33m";
@@ -123,5 +140,11 @@ class HttpFoundation implements Outputtable
         $log = print_r($this->e->getTrace(), true);
         file_put_contents('.trace.log', $log);
         file_put_contents('.trace.log.' . get_class($e) . md5(serialize($e->getTrace())), $log);
+    }
+
+    public function be($formart = 'json')
+    {
+        $this->resource->body = json_encode($this->resource->body);
+        return $this;
     }
 }

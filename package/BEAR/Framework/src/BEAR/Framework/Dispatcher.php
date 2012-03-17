@@ -80,7 +80,7 @@ final class Dispatcher
         if ($cached) {
             list($resource, $page) = unserialize($cached);
         } else {
-            $resource = require $this->app->path . '/scripts/resource.php';
+            $resource = $this->app->resource;
             try {
                 $page = $resource->newInstance($pageUri);
             } catch (NotReadable $e) {

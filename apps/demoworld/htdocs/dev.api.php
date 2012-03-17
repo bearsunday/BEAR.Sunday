@@ -1,9 +1,12 @@
 <?php
 namespace demoworld;
 
-use BEAR\Framework\Dispatcher,
-    BEAR\Framework\Globals;
+use BEAR\Framework\Framework;
+use BEAR\Framework\StandardRouter;
+use BEAR\Framework\Dispatcher;
+use BEAR\Framework\Globals;
 use BEAR\Framework\Output\HttpFoundation as Output;
+use BEAR\Resource\Object as ResourceObject;
 
 /**
  * CLI / Built-in web server dev script
@@ -36,21 +39,22 @@ if (php_sapi_name() == 'cli-server') {
     }
 }
 
-// Init
-include dirname(__DIR__) . '/scripts/exception_handler/standard_handler.php';
-include dirname(__DIR__) . '/scripts/utility/clear_cache.php';
+// Application
+$app = require dirname(__DIR__) . '/scripts/instance.php';
 
-// Load
-require dirname(__DIR__) . '/scripts/auto_loader.php';
-
-// Route
-$route = require dirname(__DIR__) . '/scripts/router/standard_router.php';
+// Dispatch
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
-list($method, $pagePath, $query) = $route->match($globals);
+$uri = (PHP_SAPI === 'cli') ? $argv[2] : $globals['_SERVER']['REQUEST_URI'];
+$method = (new StandardRouter)->getMethod($globals);
+list($resource, $page) = (new Dispatcher($app))->getInstance($uri);
 
 // Request
-$resource = require dirname(__DIR__). '/scripts/resource.php';
-$response = $resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->linkSelf('view')->eager->request();
+$response = $app->resource->$method->object($page)->withQuery($globals['_GET'])->eager->request();
+
+if (!($response instanceof ResourceObject)) {
+    $page->body = $response;
+    $response = $page;
+}
 
 // Output
-(new Output)->setResource($response)->debug()->prepare()->output();
+(new Output)->setResource($response)->debug()->be('JSON')->output();

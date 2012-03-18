@@ -41,7 +41,10 @@ $app = require dirname(__DIR__) . '/scripts/instance.php';
 
 // Route
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
-list($method, $pagePath, $query) = (new Router)->match($globals);
+// $router = require dirname(__DIR__) . '/scripts/router/standard_router.php';
+$router = new Router; // no router
+
+list($method, $pagePath, $query) = $router->match($globals);
 
 // Request
 $response = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->linkSelf('view')->eager->request();

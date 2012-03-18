@@ -13,7 +13,6 @@ use BEAR\Framework\StandardRouter;
 use Aura\Router\Map,
     Aura\Router\RouteFactory;
 
-
 // get a routes array from each application packages
 $attach = [
     '/helloresource'  => require __DIR__ . '/routes/helloresource.php',

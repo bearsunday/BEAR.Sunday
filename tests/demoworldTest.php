@@ -153,4 +153,9 @@ class demoworldTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame($response1->body, $response2->body);
     }
 
+    public function testWebContextInjectionAndParameterProviderView()
+    {
+        $response = $this->resource->get->uri('page://self/param/web')->withQuery([])->linkSelf('view')->eager->request();
+        $this->assertSame(200, $response->code);
+    }
 }

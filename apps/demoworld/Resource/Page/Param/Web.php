@@ -4,18 +4,19 @@ namespace demoworld\Resource\Page\Param;
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
     BEAR\Resource\Resource,
-    BEAR\Framework\Link\View\Php as PhpView;
+    BEAR\Framework\Link\View\Smarty3 as View;
 use BEAR\Resource\Annotation\Provides;
 use BEAR\Framework\Inject\WebContextInject;
 use BEAR\Resource\Annotation\Get;
 use BEAR\Resource\Annotation\Put;
+use BEAR\Framework\Args;
 
 /**
  * Parameter injection
  */
 class Web extends Page
 {
-    use PhpView;
+    use View;
     use WebContextInject;
 
     public function __construct()
@@ -25,10 +26,12 @@ class Web extends Page
     /**
      * @Get
      */
-    public function onGet($lang, $role)
+    public function onGet($lang, $role, $name, $age)
     {
         $this['lang'] = $lang;
         $this['role'] = $role;
+        $this['name'] = $name;
+        $this['age'] = $age;
         return $this;
     }
 
@@ -62,5 +65,14 @@ class Web extends Page
     {
         $role = $this->webContext->getCookie('role', 'user');
         return $role;
+    }
+
+    /**
+     * @Provides
+     */
+    public function provideRestOfParameters(Args &$args)
+    {
+        $args['name'] = 'BEAR';
+        $args['age'] =  6;
     }
 }

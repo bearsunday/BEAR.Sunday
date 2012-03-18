@@ -51,4 +51,4 @@ passthru('php apps/demoworld/htdocs/dev.web.php get /helloresource/en');
 
 echo "cache\n";
 
-passthru("php apps/demoworld/htdocs/api/dev.web.php get 'page://self/cache/page?name=koriym'");
+passthru("php apps/demoworld/htdocs/dev.api.php get 'page://self/cache/page?name=koriym'");

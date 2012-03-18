@@ -88,8 +88,8 @@
         "guzzle/guzzle": "dev-master",
 		"symfony/console": "2.0.*",
         "symfony/http-foundation": "2.0.*",
-        "ray/aop": "dev-master",
-        "ray/di": "dev-master"
+        "Ray/Aop": "dev-master",
+        "Ray/Di": "dev-master"
     },
     "authors": [
         {

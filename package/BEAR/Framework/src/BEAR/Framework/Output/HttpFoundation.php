@@ -51,7 +51,7 @@ class HttpFoundation implements Outputtable
     public function prepare()
     {
         if (! is_string($this->resource->body)) {
-            throw new ResourceBodyIsNotString('body is not string');
+            throw new ResourceBodyIsNotString(json_encode($this->resource->body));
         }
         $this->response = new Response($this->resource->body, $this->resource->code, (array) $this->resource->headers);
         // compliant with RFC 2616.

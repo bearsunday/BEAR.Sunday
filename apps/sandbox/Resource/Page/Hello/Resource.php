@@ -16,7 +16,7 @@ class Resource extends Page
     use ResourceInject;
 
     /**
-     * @return ResourceObject
+     * @return self
      */
     public function onGet()
     {

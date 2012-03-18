@@ -18,7 +18,7 @@ class Hello extends Page
     }
 
     /**
-     * @return ResourceObject
+     * @return self
      */
     public function onGet()
     {

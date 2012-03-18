@@ -35,7 +35,7 @@ use \BEAR\Resource\Object as ResourceObject;
      * Smarty 3 view link
      *
      * @param ResourceObject $page
-     * @return ResourceObject
+     * @return self
      */
     public function onLinkView(ResourceObject $page)
     {

@@ -48,7 +48,7 @@ class HelloResource extends Page
     /**
      * @param string $lang laungauage
      *
-     * @return ResourceObject
+     * @return self
      */
     public function onGet($lang)
     {

@@ -47,7 +47,7 @@ class Log extends Page
     /**
      * @param string $lang langauage
      *
-     * @return ResourceObject
+     * @return self
      */
     public function onGet($lang)
     {

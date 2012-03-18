@@ -39,7 +39,7 @@ class Pdo extends Page
      *
      * @param int $id
      *
-     * @return ResourceObject
+     * @return self
      */
     public function onGet($id = 1)
     {

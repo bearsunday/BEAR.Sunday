@@ -10,7 +10,7 @@ use BEAR\Resource\Object as ResourceObject,
 class Hello extends Page
 {
     /**
-     * @return ResourceObject
+     * @return self
      */
     public function onGet($name)
     {

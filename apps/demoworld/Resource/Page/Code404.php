@@ -19,7 +19,7 @@ class code404 extends Code
     }
 
     /**
-     * @return ResourceObject
+     * @return self
      */
     public function onGet()
     {

@@ -37,7 +37,7 @@ trait Haanga
      * Haanga view link
      *
      * @param ResourceObject $page
-     * @return ResourceObject
+     * @return self
      */
     public function onLinkView(ResourceObject $page)
     {

@@ -19,7 +19,7 @@ class Code extends Page
     }
 
     /**
-     * @return ResourceObject
+     * @return self
      */
     public function onGet()
     {

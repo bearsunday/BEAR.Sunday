@@ -17,7 +17,7 @@ class Hello extends Page
     use View;
 
     /**
-     * @return ResourceObject
+     * @return self
      */
     public function onGet()
     {

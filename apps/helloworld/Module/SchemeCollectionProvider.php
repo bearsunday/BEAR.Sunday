@@ -4,7 +4,7 @@ namespace helloworld\Module;
 use Ray\Di\InjectorInterface as Di,
     Ray\Di\ProviderInterface as Provide;
 
-use BEAR\Resource\Adapter\App,
+use BEAR\Resource\Adapter\App as AppAdapter,
     BEAR\Resource\Adapter\Page,
     BEAR\Resource\SchemeCollection,
     BEAR\Framework\AbstractAppContext as AppContext;
@@ -39,7 +39,8 @@ class SchemeCollectionProvider implements Provide
     public function get()
     {
         $schemeCollection = new SchemeCollection;
-        $schemeCollection->scheme('page')->host('self')->toAdapter(new App($this->injector, $this->namespace, 'Resource\Page'));
+        $schemeCollection->scheme('page')->host('self')->toAdapter(new AppAdapter($this->injector, $this->namespace, 'Resource\Page'));
+        $schemeCollection->scheme('app')->host('self')->toAdapter(new AppAdapter($this->injector, $this->namespace, 'Resource\App'));
         return $schemeCollection;
     }
 }

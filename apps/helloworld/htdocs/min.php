@@ -1,20 +1,18 @@
 <?php
+use BEAR\Framework\Dispatcher;
+
 /**
- * Minimum Hello World
+ * Minimum Hello World using cache script (resource.php)
  *
  * no router
- * no dispatcher
- * no model (app resource)
- * no template engine
- * no cache
+ * no view
+ * no app resource
  */
 require dirname(__DIR__) . '/scripts/auto_loader.php';
 
-// dependency injector
-$di = require dirname(__DIR__) . '/scripts/di.php';
-
-// resource request
-$response = $di->getInstance('\BEAR\Resource\Client')->get->uri('page://self/hello')->withQuery(['name' => 'Sunday'])->eager->request();
+// request
+$resource = require dirname(__DIR__). '/scripts/resource.php';
+$response = $resource->get->uri('page://self/hello')->withQuery(['name' => 'Sunday, Basic.'])->eager->request();
 
 // output
 foreach ($response->headers as $header) {

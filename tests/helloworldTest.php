@@ -11,13 +11,14 @@ class HelloworldPageTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         apc_clear_cache("user");
-        $this->di = require dirname(__DIR__) . '/apps/helloworld/scripts/di.php';
+        $app = require dirname(__DIR__) . '/apps/helloworld/scripts/instance.php';
+        $this->resource = $app->resource;
     }
 
     public function testgetDefinitionScope()
     {
         // resource request
-        $response = $this->di->getInstance('\BEAR\Resource\Client')->get->uri('page://self/hello')->withQuery(['name' => 'Sunday'])->eager->request();
+        $response = $this->resource->get->uri('page://self/hello')->withQuery(['name' => 'Sunday'])->eager->request();
         $this->assertSame(200, $response->code);
         $this->assertSame('Hello Sunday', $response->body);
     }

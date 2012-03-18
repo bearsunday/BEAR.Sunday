@@ -1,17 +1,18 @@
 <?php
 /**
- * demoworld
+ * helloworld
  *
- * @package App.demoworld
+ * @package App.helloworld
  */
 namespace helloworld;
 
 use BEAR\Framework\AbstractAppContext as AppContext;
+use BEAR\Framework\Framework;
 
 /**
  * Applicaton
  *
- * @package App.demoworld
+ * @package App.helloworld
  */
 final class App extends AppContext
 {
@@ -20,30 +21,23 @@ final class App extends AppContext
      *
      * @var string
      */
-    const VERSION = '0.0.1';
+    const VERSION = '0.1.0';
 
     /**
      * Name
      *
      * @var string
      */
-    public $name;
+    public $name = __NAMESPACE__;
 
     /**
      * Path
      *
      * @var string
      */
-    public $path;
+    public $path = __DIR__;
 
-    /**
-     * Constructor
-     *
-     * @param string $appName
-     */
-    public function __construct($appName = __NAMESPACE__)
-    {
-        $this->name = $appName;
-        $this->path = __DIR__;
-    }
+//     public function __construct()
+//     {
+//     }
 }

@@ -45,8 +45,9 @@ class AppModule extends AbstractModule
         $this->bind()->annotatedWith('GreetingMessage')->toInstance(['en' => 'Hello World', 'ja' => 'Konichiwa Sekai']);
         $this->bind()->annotatedWith('Twig')->toProvider('\demoworld\Module\Provider\TwigProvider')->in(Scope::SINGLETON);;
         $this->bind()->annotatedWith('Smarty')->toProvider('\demoworld\Module\Provider\SmartyProvider')->in(Scope::SINGLETON);;
-        $helloDi = include dirname(dirname(__DIR__)) . '/helloworld/scripts/di.php';
-        $this->bind('Ray\Di\InjectorInterface')->annotatedWith('HelloDi')->toInstance($helloDi);
+
+        $helloApp = require dirname(dirname(__DIR__)) . '/helloworld/scripts/instance.php';
+        $this->bind('Ray\Di\InjectorInterface')->annotatedWith('HelloDi')->toInstance($helloApp->di);
         $this->bind()->annotatedWith('dsn')->toInstance('/tmp/demo01.sqlite3');
         // PDO
         $this->bind('Ray\Di\ProviderInterface')->annotatedWith('pdo')->to('\demoworld\Module\Provider\PdoProvider')->in(Scope::SINGLETON);;

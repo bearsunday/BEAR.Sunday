@@ -44,9 +44,16 @@ abstract class AbstractAppContext
     public $path;
 
     /**
+     * Dependency injector
+     *
+     * @var Ray\Di\Injector
+     */
+    public $di;
+
+    /**
      * Resource client
      *
-     * @var Client
+     * @var BEAR\Resource\Client
      */
     public $resource;
 
@@ -59,7 +66,7 @@ abstract class AbstractAppContext
     public function __construct(array $appModules = [], Framework $framework)
     {
         $this->framework = $framework;
-        $this->resource = $this->framework->getResource($appModules, $this);
+        list($this->di, $this->resource) = $this->framework->getApplicationProperties($appModules, $this);
     }
 
     /**

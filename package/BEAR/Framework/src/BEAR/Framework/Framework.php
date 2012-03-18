@@ -136,32 +136,36 @@ class Framework
     }
 
     /**
-     * Return resource client;
+     * Return application properties(Dependency injector, and resource client)
      *
-     * @param unknown_type $key
-     * @return \BEAR\Resoure\Client
+     * @param Ray\Di\AbstracModule[] $appModules
+     * @param AbstractAppContext     $app
+     *
+     * @return array [\Ray\Di\Injector, \BEAR\Resoure\Client]
      */
-    public function getResource(array $appModules, AbstractAppContext $app)
+    public function getApplicationProperties(array $appModules, AbstractAppContext $app)
     {
         $key = __METHOD__;
         if ($this->cache) {
-            $client = $this->cache->fetch($key);
-            if ($client) {
-                return unserialize($client);
+            $properties = $this->cache->fetch($key);
+            if ($properties) {
+                list($di, $client) = unserialize($properties);
+                return [$di, $client];
             }
-            $client = $this->buildResourceClient($appModules);
-            $this->cache->save($key, serialize($client));
-            return $client;
+            $properties = $this->buildResourceClient($appModules);
+            $this->cache->save($key, serialize($properties));
+            list($di, $client) = $properties;
+            return [$di, $client];
         }
-        return $this->buildResourceClient($appModules, $app);
+        return $this->buildApplicationProperties($appModules, $app);
     }
 
     /**
      * Build resource client
      *
-     * @return BEAR\Resource\Clinet
+     * @return array [Ray\Di\InjectInterface, BEAR\Resource\Clinet]
      */
-    private function buildResourceClient(array $appModules, AbstractAppContext $app)
+    private function buildApplicationProperties(array $appModules, AbstractAppContext $app)
     {
         $annotations = [
             'provides' => 'BEAR\Resource\Annotation\Provides',
@@ -186,6 +190,6 @@ class Framework
             $resource->setCacheAdapter($this->cache);
         }
         $app->resource = $resource;
-        return $resource;
+        return [$di, $resource];
     }
 }

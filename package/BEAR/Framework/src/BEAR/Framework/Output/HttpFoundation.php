@@ -7,10 +7,15 @@ namespace BEAR\Framework\Output;
 
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Framework\Exception\ResourceBodyIsNotString;
+use BEAR\Framework\Exception\InvalidResourceType;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Helper\FormatterHelper as Formatter;
+use Ray\Aop\Weaver;
+
 use Exception;
+use Traversable;
 
 /**
  * Output with Symfony HttpFoundation
@@ -20,14 +25,24 @@ use Exception;
  */
 class HttpFoundation implements Outputtable
 {
+    const FORMAT_JSON = 0;
+    const FORMAT_SERIALIZE = 1;
+    const FORMAT_VAREXPORT = 2;
+    const FORMAT_VARDUMP   = 3;
+    const FORMAT_PRINTR    = 4;
+
     private $e;
     private $resource;
     private $response;
     private $headers = [];
     private $debug = true;
 
-    public function setResource(ResourceObject $resource)
+    public function setResource($resource)
     {
+        if ($resource instanceof ResourceObject === false && $resource instanceof Weaver === false) {
+            $type = (is_object($resource)) ? get_class($resource) : gettype($resource);
+            throw new InvalidResourceType($type);
+        }
         $this->resource = $resource;
         return $this;
     }
@@ -48,6 +63,12 @@ class HttpFoundation implements Outputtable
         return $this;
     }
 
+    /**
+     * Make responce object with RFC 2616 compliant HTTP header
+     *
+     * @throws ResourceBodyIsNotString
+     * @return \BEAR\Framework\Output\HttpFoundation
+     */
     public function prepare()
     {
         if (! is_string($this->resource->body)) {
@@ -57,11 +78,6 @@ class HttpFoundation implements Outputtable
         // compliant with RFC 2616.
         $this->response->prepare();
         return $this;
-    }
-
-    public function toString($body)
-    {
-        return "body";
     }
 
     /**
@@ -81,11 +97,27 @@ class HttpFoundation implements Outputtable
         if ($debug === true && $this->e) {
             $filename = get_class($this->e);
             $filename = '.expection.' . str_replace('\\', '_', $filename) . md5(serialize((string)$this->e)) . '.log';
-            $data = print_r($this->e->getTrace() ,true);
+            ob_start();
+            $ini = ini_get('xdebug.cli_color');
+            ini_set('xdebug.cli_color', 0);
+            var_dump($this->e->getTrace());
+            $data = ob_get_clean();
+            ini_set('xdebug.cli_color', $ini);
             file_put_contents($filename, $data);
+            $lasLog = '.last_expection.log';
+            if (file_exists($lasLog)) {
+                unlink($lasLog);
+            }
+            symlink($filename, $lasLog);
         }
+        return $this;
     }
 
+    /**
+     * Output web
+     *
+     * @return void
+     */
     public function outputWeb()
     {
         $this->response->send();
@@ -135,6 +167,11 @@ class HttpFoundation implements Outputtable
         echo PHP_EOL;
     }
 
+    /**
+     * Write expection as file.
+     *
+     * @return void
+     */
     private function writeException()
     {
         $log = print_r($this->e->getTrace(), true);
@@ -142,9 +179,59 @@ class HttpFoundation implements Outputtable
         file_put_contents('.trace.log.' . get_class($e) . md5(serialize($e->getTrace())), $log);
     }
 
-    public function be($formart = 'json')
+    /**
+     * Execute in-resource request
+     *
+     * @return \BEAR\Framework\Output\HttpFoundation
+     */
+    public function request()
     {
-        $this->resource->body = json_encode($this->resource->body);
+        if (is_array($this->resource->body) || $this->resource->body instanceof \Traversable) {
+            foreach ($this->resource->body as $key => &$value) {
+                if (is_callable($value) === true) {
+                    $value = $value()->body;
+                }
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Convert format
+     *
+     * @param string | Callable  $format
+     *
+     * @return \BEAR\Framework\Output\HttpFoundation
+     */
+    public function be($format)
+    {
+        if (is_callable($format)) {
+            $this->resource->body = $format($this->resource->body);
+            return $this;
+        }
+        switch ($format) {
+            case self::FORMAT_JSON:
+                $this->resource->body = json_encode($this->resource->body);
+                break;
+            case self::FORMAT_VAREXPORT:
+                $this->resource->body = var_export($this->resource->body, true);
+                break;
+            case self::FORMAT_VARDUMP:
+                ob_start();
+                var_export($this->resource->body);
+                $this->resource->body = ob_get_contents();
+                ob_end_clean();
+                break;
+            case self::FORMAT_PRINTR:
+                $this->resource->body = print_r($this->resource->body, true);
+                break;
+            case self::FORMAT_SERIALIZE:
+                $this->resource->body = serialize($this->resource->body);
+                break;
+            default:
+                throw Exception($format);
+            break;
+        }
         return $this;
     }
 }

@@ -7,7 +7,8 @@
  */
 namespace BEAR\Framework\Link\View;
 
-use \BEAR\Resource\Object as ResourceObject;
+use BEAR\Resource\Object as ResourceObject;
+use BEAR\Framework\Exception\TemplateNotFound;
 
 /**
  * Trait for smarty view link.
@@ -34,29 +35,33 @@ use \BEAR\Resource\Object as ResourceObject;
     /**
      * Smarty 3 view link
      *
-     * @param ResourceObject $page
+     * @param ResourceObject $resource
      * @return self
      */
-    public function onLinkView(ResourceObject $page)
+    public function onLinkView(ResourceObject $resource)
     {
-        foreach ($page as &$resource) {
-            if (is_callable($resource)) {
-                $resource = $resource();
+        if (is_array($resource->body) ||  $resource->body instanceof \Traversable) {
+            foreach ($resource->body as &$element) {
+                if (is_callable($element)) {
+                    $element = $element();
+                }
             }
         }
-        $paegFile = (new \ReflectionClass($page))->getFileName();
+        $paegFile = (new \ReflectionClass($resource))->getFileName();
         $dir = pathinfo($paegFile, PATHINFO_DIRNAME);
-        $this->smarty->assign($page->body);
-
+        $this->smarty->assign('resource', $resource);
+        if (is_array($resource->body) || $resource->body instanceof \Traversable) {
+            $this->smarty->assign($resource->body);
+        }
         $withoutExtention = substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
         $templateFile =  $dir . DIRECTORY_SEPARATOR . $withoutExtention . 'tpl';
             if (! file_exists($templateFile)) {
-            $templateFile =  $dir . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . $withoutExtention . 'tpl';
-            if (! file_exists($templateFile)) {
-                return $page;
+            $templateFileInViewFodler =  $dir . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . $withoutExtention . 'tpl';
+            if (! file_exists($templateFileInViewFodler)) {
+                throw new TemplateNotFound($templateFile);
             }
         }
-        $page->body = $this->smarty->fetch($templateFile);
-        return $page;
+        $resource->body = $this->smarty->fetch($templateFile);
+        return $resource;
     }
 }

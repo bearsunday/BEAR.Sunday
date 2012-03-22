@@ -38,7 +38,6 @@ class DbalProvider implements Provide
             'password' => null
         ];
         $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
-        serialize($conn);
         return $conn;
     }
 }

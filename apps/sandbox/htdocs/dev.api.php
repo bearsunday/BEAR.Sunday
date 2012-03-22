@@ -5,6 +5,8 @@ use BEAR\Framework\Globals;
 use BEAR\Framework\Output\HttpFoundation as Output;
 use BEAR\Resource\Object as ResourceObject;
 
+require dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
+
 /**
  * CLI / Built-in web server dev script
  *
@@ -54,4 +56,4 @@ if (!($response instanceof ResourceObject)) {
 }
 
 // Output
-(new Output)->setResource($response)->debug()->be('JSON')->output();
+(new Output)->debug()->setResource($response)->request()->be(OUTPUT::FORMAT_VARDUMP)->output();

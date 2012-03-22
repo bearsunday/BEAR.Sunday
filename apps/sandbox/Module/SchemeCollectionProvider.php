@@ -4,7 +4,7 @@ namespace sandbox\Module;
 use Ray\Di\InjectorInterface as Di,
     Ray\Di\ProviderInterface as Provide;
 
-use BEAR\Resource\Adapter\App as AppAdapter;
+use BEAR\Resource\Adapter\App as AppAdapter,
     BEAR\Resource\Adapter\Page,
     BEAR\Resource\SchemeCollection,
     BEAR\Framework\AbstractAppContext as AppContext;

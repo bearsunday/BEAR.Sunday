@@ -5,6 +5,8 @@ use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Output\HttpFoundation as Output;
 
+require dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
+
 /**
  * CLI / Built-in web server dev script
  *

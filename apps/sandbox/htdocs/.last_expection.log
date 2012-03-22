@@ -1,0 +1,23 @@
+array(1) {
+  [0]=>
+  array(6) {
+    ["file"]=>
+    string(64) "/Users/kooriyama/git/BEAR.Sunday/apps/sandbox/htdocs/dev.api.php"
+    ["line"]=>
+    int(43)
+    ["function"]=>
+    string(11) "__construct"
+    ["class"]=>
+    string(22) "BEAR\Framework\Globals"
+    ["type"]=>
+    string(2) "->"
+    ["args"]=>
+    array(1) {
+      [0]=>
+      array(1) {
+        [0]=>
+        string(64) "/Users/kooriyama/git/BEAR.Sunday/apps/sandbox/htdocs/dev.api.php"
+      }
+    }
+  }
+}

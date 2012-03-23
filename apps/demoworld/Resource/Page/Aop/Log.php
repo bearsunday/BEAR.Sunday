@@ -4,10 +4,9 @@ namespace demoworld\Resource\Page\Aop;
 use BEAR\Resource\Object as ResourceObject,
     BEAR\Resource\AbstractObject as Page,
     BEAR\Resource\Resource,
-    BEAR\Framework\Link\View\Php as PhpView;
-
-use BEAR\Resource\Annotation\Provides;
-
+    BEAR\Resource\Annotation\Provides;
+use BEAR\Framework\Link\View\Php as PhpView;
+use BEAR\Framework\Args;
 /**
  * Hello World using resource
  */

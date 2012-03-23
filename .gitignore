@@ -1,4 +1,7 @@
 vendor
 .trace.log*
 .expection.*
-package/BEAR/Framework/src/BEAR/Framework/tmp/twig
+*.log
+package/BEAR/Framework/src/BEAR/Framework/tmp/*
+.last_expection.log
+

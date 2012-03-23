@@ -3,9 +3,11 @@ namespace sandbox\Resource\Page;
 
 use BEAR\Resource\AbstractObject as Page;
 use BEAR\Resource\Client as Resource;
+use BEAR\Resource\Annotation\Provides;
 use BEAR\Framework\Link\View\Smarty3 as View;
 use BEAR\Framework\Annotation\Cache;
 use BEAR\Framework\Inject\WebContextInject;
+use BEAR\Framework\Args;
 
 class Posts extends Page
 {
@@ -26,8 +28,6 @@ class Posts extends Page
      * Get
      *
      * @Cache(3)
-     *
-     * @return array
      */
     public function onGet()
     {
@@ -38,14 +38,17 @@ class Posts extends Page
     /**
      * Post
      *
-     * @param string   $title
-     * @param string   $body
+     * @param string $title
+     * @param string $body
      *
-     * @return \sandbox\Resource\App\Posts
+     * @return self
      */
     public function onPost($title, $body)
     {
         $this->resource->post->uri('app://self/posts')->withQuery(['title' => $title, 'body' => $body])->eager->request();
+        $code = 301;
+        $this->headers = ['Location' => '/posts'];
+        return $this;
     }
 
     /**
@@ -53,7 +56,9 @@ class Posts extends Page
      */
     public function provideArgs(Args &$args)
     {
+        var_dump(__FILE__);exit();
         $args['title'] = $this->webContext->getPost('title', 'untitled');
         $args['body'] = $this->webContext->getPost('body');
+        $args['body'] = 'OKOK';
     }
 }

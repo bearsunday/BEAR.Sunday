@@ -33,7 +33,7 @@ require dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.
  */
 if (php_sapi_name() == 'cli-server') {
     // route static assets and return false
-    if (preg_match('/\.(?:png|jpg|jpeg|gif|js)$/', $_SERVER["REQUEST_URI"])) {
+    if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css)$/', $_SERVER["REQUEST_URI"])) {
         return false;
     }
 }
@@ -45,7 +45,6 @@ $app = require dirname(__DIR__) . '/scripts/instance.php';
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
 // $router = require dirname(__DIR__) . '/scripts/router/standard_router.php';
 $router = new Router; // no router
-
 list($method, $pagePath, $query) = $router->match($globals);
 
 // Request

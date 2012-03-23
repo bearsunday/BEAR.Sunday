@@ -66,6 +66,6 @@ SERVER_ERROR:
         $response->headers['X-EXCEPTION-CODE'] = $e->getCode();
         $response->headers['X-EXCEPTION-FILE-LINE'] = $e->getFile() . ':' . $e->getLine();
         $response->headers['X-EXCEPTION-PREVIOUS'] = $e->getPrevious();
-(new Output)->setResource($response)->setException($e)->output();
+(new Output)->setResource($response)->setException($e)->prepare()->output();
     exit(1);
 });

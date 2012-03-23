@@ -12,7 +12,6 @@ use BEAR\Framework\Args;
 class Posts extends Page
 {
     use View;
-    use WebContextInject;
 
     private $resource;
 
@@ -45,7 +44,12 @@ class Posts extends Page
      */
     public function onPost($title, $body)
     {
-        $this->resource->post->uri('app://self/posts')->withQuery(['title' => $title, 'body' => $body])->eager->request();
+        $this->resource
+        ->post
+        ->uri('app://self/posts')
+        ->withQuery(['title' => $title, 'body' => $body])
+        ->eager->request();
+
         $code = 301;
         $this->headers = ['Location' => '/posts'];
         return $this;

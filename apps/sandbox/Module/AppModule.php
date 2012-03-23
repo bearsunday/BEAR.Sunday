@@ -18,7 +18,13 @@ Ray\Di\Config,
 Ray\Di\Forge,
 Ray\Di\Container,
 Ray\Di\Injector as Di,
-Ray\Di\Definition;
+Ray\Di\Definition,
+Ray\Di\Injector;
+
+use BEAR\Framework\Interceptor\CacheLoader as CacheLoadInterceptor,
+    BEAR\Framework\Interceptor\CacheUpdater as CacheUpdateInterceptor;
+use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
+use Zend\Cache\Backend\File as CacheBackEnd;
 
 /**
  * Application module
@@ -51,6 +57,19 @@ class AppModule extends AbstractModule
                 $this->matcher->annotatedWith('BEAR\Framework\Annotation\Db'),
                 $this->matcher->any(),
                 [$dbInjector]
+        );
+
+        $cacheLoadInterceptor = new CacheLoadInterceptor(new CacheAdapter(new CacheBackEnd));
+        $this->bindInterceptor(
+                $this->matcher->any(),
+                $this->matcher->annotatedWith('BEAR\Framework\Annotation\Cache'),
+                [$cacheLoadInterceptor]
+        );
+        $cacheUpdateInterceptor = Injector::create()->getInstance('BEAR\Framework\Interceptor\CacheUpdater', ['cache' => $cacheLoadInterceptor]);
+        $this->bindInterceptor(
+                $this->matcher->any(),
+                $this->matcher->annotatedWith('BEAR\Framework\Annotation\CacheUpdate'),
+                [$cacheUpdateInterceptor]
         );
     }
 }

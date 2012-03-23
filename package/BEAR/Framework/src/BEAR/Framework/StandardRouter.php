@@ -66,11 +66,11 @@ final class StandardRouter
      */
     public function getMethod($globals)
     {
-        if ($globals['_SERVER']['REQUEST_METHOD'] === 'get' && isset($globals['_GET'][self::METHOD_OVERRIDE])) {
+        if ($globals['_SERVER']['REQUEST_METHOD'] === 'GET' && isset($globals['_GET'][self::METHOD_OVERRIDE])) {
             $method = $globals['_GET'][self::METHOD_OVERRIDE];
             goto complete;
         }
-        if ($globals['_SERVER']['REQUEST_METHOD'] === 'post' && isset($globals['_POST'][self::METHOD_OVERRIDE])) {
+        if ($globals['_SERVER']['REQUEST_METHOD'] === 'POST' && isset($globals['_POST'][self::METHOD_OVERRIDE])) {
             $method = $globals['_POST'][self::METHOD_OVERRIDE];
             goto complete;
         }

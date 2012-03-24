@@ -77,9 +77,10 @@ class HttpFoundation implements Outputtable
      *
      * @return \BEAR\Framework\Output\HttpFoundation
      */
-    public function setException(Exception $e)
+    public function setException(Exception $e, $exceptionId)
     {
         $this->e = $e;
+        $this->exceptionId = $exceptionId;
         return $this;
     }
 
@@ -115,16 +116,12 @@ class HttpFoundation implements Outputtable
             $this->outputWeb();
         }
         if ($debug === true && $this->e) {
-            $filename = get_class($this->e);
-            $filename = '.expection.' . str_replace('\\', '_', $filename) . md5(serialize((string)$this->e)) . '.log';
+            $filename = str_replace('\\', '_', get_class($this->e));
+            $filename = ".expection.{$filename}.{$this->exceptionId}.log";
             ob_start();
-            $ini = ini_get('xdebug.cli_color');
-            ini_set('xdebug.cli_color', 0);
-            var_dump($this->e->getTrace());
-            $data = ob_get_clean();
-            ini_set('xdebug.cli_color', $ini);
+            $data = print_r($this->e->getTrace(), true);
             file_put_contents($filename, $data);
-            $lasLog = '.last_expection.log';
+            $lasLog = '.expection.log';
             if (file_exists($lasLog)) {
                 unlink($lasLog);
             }

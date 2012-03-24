@@ -37,6 +37,14 @@ class HttpFoundation implements Outputtable
     private $headers = [];
     private $debug = true;
 
+    /**
+     * Set Resource
+     *
+     * @param BEAR\Rsource\Object | Ray\Aop\Weaver $resource
+     *
+     * @throws InvalidResourceType
+     * @return \BEAR\Framework\Output\HttpFoundation
+     */
     public function setResource($resource)
     {
         if ($resource instanceof ResourceObject === false && $resource instanceof Weaver === false) {
@@ -47,6 +55,11 @@ class HttpFoundation implements Outputtable
         return $this;
     }
 
+    /**
+     * Add debug information to header
+     *
+     * @return \BEAR\Framework\Output\HttpFoundation
+     */
     public function debug()
     {
         $this->debug = true;
@@ -57,6 +70,13 @@ class HttpFoundation implements Outputtable
         return $this;
     }
 
+    /**
+     * Set Excpection
+     *
+     * @param Exception $e
+     *
+     * @return \BEAR\Framework\Output\HttpFoundation
+     */
     public function setException(Exception $e)
     {
         $this->e = $e;

@@ -28,9 +28,9 @@ class Globals extends ArrayObject
     public function __construct(array $argv)
     {
         if (count($argv) !== 3) {
-            throw new BadRequest((string)count($argv));
+            throw new BadRequest('Usage: [get|post|put|delete] [uri]');
         }
-        $isMethodAllowed = in_array($argv[1], ['get', 'post', 'put', 'delete', 'head', 'options']);
+        $isMethodAllowed = in_array($argv[1], ['get', 'post', 'put', 'delete', 'options']);
         if (! $isMethodAllowed) {
             throw new MethodNotAllowed($argv[1]);
         }

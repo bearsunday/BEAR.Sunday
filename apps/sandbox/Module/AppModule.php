@@ -71,5 +71,7 @@ class AppModule extends AbstractModule
                 $this->matcher->annotatedWith('BEAR\Framework\Annotation\CacheUpdate'),
                 [$cacheUpdateInterceptor]
         );
+        // Web context
+        $this->bind('Ray\Di\ProviderInterface')->annotatedWith('webContext')->to('BEAR\Framework\Module\Provider\WebContextProvider')->in(Scope::SINGLETON);;
     }
 }

@@ -5,13 +5,16 @@ use BEAR\Resource\AbstractObject as Page;
 use BEAR\Resource\Client as Resource;
 use BEAR\Resource\Annotation\Provides;
 use BEAR\Framework\Link\View\Smarty3 as View;
-use BEAR\Framework\Annotation\Cache;
 use BEAR\Framework\Inject\WebContextInject;
 use BEAR\Framework\Args;
+
+use BEAR\Framework\Annotation\Cache;
+use BEAR\Framework\Annotation\CacheUpdate;
 
 class Posts extends Page
 {
     use View;
+    use WebContextInject;
 
     private $resource;
 
@@ -26,7 +29,7 @@ class Posts extends Page
     /**
      * Get
      *
-     * @Cache(3)
+     * @Cache
      */
     public function onGet()
     {
@@ -40,7 +43,7 @@ class Posts extends Page
      * @param string $title
      * @param string $body
      *
-     * @return self
+     * @CacheUpdate
      */
     public function onPost($title, $body)
     {

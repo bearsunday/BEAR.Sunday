@@ -4,7 +4,7 @@ namespace sandbox\Resource\Page;
 use BEAR\Resource\AbstractObject as Page;
 use BEAR\Resource\Client as Resource;
 use BEAR\Resource\Annotation\Provides;
-use BEAR\Framework\Link\View\Smarty3 as View;
+use BEAR\Framework\Link\View as View;
 use BEAR\Framework\Inject\WebContextInject;
 use BEAR\Framework\Args;
 

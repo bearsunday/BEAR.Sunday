@@ -29,5 +29,15 @@ class SmartyModule extends AbstractModule
     protected function configure()
     {
         $this->bind()->annotatedWith('Smarty')->toProvider('\BEAR\Framework\Module\Provider\SmartyProvider')->in(Scope::SINGLETON);;
+        $this
+        ->bind()
+        ->annotatedWith('link')
+        ->toProvider('\BEAR\Framework\Module\Provider\SmartyProvider')
+        ->in(Scope::SINGLETON);;
+
+        $this
+        ->bind()
+        ->annotatedWith('template_ext')
+        ->toInstance('tpl');
    }
 }

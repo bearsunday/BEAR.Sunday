@@ -5,10 +5,11 @@
  * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Framework\Link\View;
+namespace BEAR\Framework\Link;
 
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Framework\Exception\TemplateNotFound;
+use BEAR\Framework\View\Renderer;
 
 /**
  * Trait for smarty view link.
@@ -25,9 +26,9 @@ use BEAR\Framework\Exception\TemplateNotFound;
 
     /**
      * @Inject
-     * @Named("renderer")
+     * @Named("link")
      */
-    public function setRenderer(Renderer $renderer)
+    public function setRenderer($renderer)
     {
         $this->renderer = $renderer;
     }
@@ -45,9 +46,11 @@ use BEAR\Framework\Exception\TemplateNotFound;
 
     /**
      * @Link
-     * Smarty 3 view link
+     *
+     * View link
      *
      * @param ResourceObject $resource
+     *
      * @return self
      */
     public function onLinkView(ResourceObject $resource)
@@ -61,14 +64,14 @@ use BEAR\Framework\Exception\TemplateNotFound;
         }
         $paegFile = (new \ReflectionClass($resource))->getFileName();
         $dir = pathinfo($paegFile, PATHINFO_DIRNAME);
-        $this->smarty->assign('resource', $resource);
+        $this->renderer->assign('resource', $resource);
         if (is_array($resource->body) || $resource->body instanceof \Traversable) {
-            $this->smarty->assign($resource->body);
+            $this->renderer->assign($resource->body);
         }
         $withoutExtention = substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
-        $templateFile =  $dir . DIRECTORY_SEPARATOR . $withoutExtention . $this->ext;
+        $templateFile =  $dir . DIRECTORY_SEPARATOR . $withoutExtention . '.' . $this->ext;
             if (! file_exists($templateFile)) {
-            $templateFileInViewFodler =  $dir . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . $withoutExtention . $this->ext;
+            $templateFileInViewFodler =  $dir . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . $withoutExtention . '.' . $this->ext;
             if (! file_exists($templateFileInViewFodler)) {
                 throw new TemplateNotFound($templateFile);
             }

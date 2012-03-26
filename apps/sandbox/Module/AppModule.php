@@ -7,11 +7,16 @@
  */
 namespace sandbox\Module;
 
+use BEAR\Framework\Module\TemplateEngine\SmartyModule;
+
 use Ray\Di\Scope;
 
 use BEAR\Framework\Module\StandardModule,
     BEAR\Framework\Module,
-    BEAR\Framework\Interceptor\DbInjector;
+    BEAR\Framework\Module\Extention,
+    BEAR\Framework\Interceptor\DbInjector,
+    BEAR\Framework\Interceptor\ViewAdapter,
+    BEAR\Framework\Interceptor\ViewAdapter\SmartyBackend;
 use Ray\Di\AbstractModule,
     Ray\Di\InjectorInterface,
     Ray\Di\Annotation,
@@ -23,6 +28,7 @@ use Ray\Di\AbstractModule,
     Ray\Di\Injector;
 use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
 use Zend\Cache\Backend\File as CacheBackEnd;
+use Smarty;
 
 /**
  * Application module
@@ -49,5 +55,14 @@ class AppModule extends AbstractModule
         $this->install(new Module\Schema\StandardSchemaModule);
         $this->install(new Module\Cqrs\CacheModule);
         $this->install(new Module\WebContext\AuraWebModule);
+
+        $this->install(new Extension\ViewModule([new ViewAdapter(new SmartyBackEnd)]));
+
+        $dbInjector = $this->requestInjection('\BEAR\Framework\Interceptor\DbInjector');
+        $this->bindInterceptor(
+                $this->matcher->annotatedWith('BEAR\Framework\Annotation\Db'),
+                $this->matcher->any(),
+                [$dbInjector]
+        );
     }
 }

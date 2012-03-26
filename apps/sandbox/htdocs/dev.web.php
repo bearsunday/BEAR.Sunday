@@ -48,7 +48,12 @@ $router = new Router; // no router
 list($method, $pagePath, $query) = $router->match($globals);
 
 // Request
-$response = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->linkSelf('view')->eager->request();
+$response = $app
+->resource
+->$method
+->uri('page://self/' . $pagePath)
+->withQuery($query)
+->eager->request();
 
 // Output
 (new Output)->setResource($response)->debug()->prepare()->output();

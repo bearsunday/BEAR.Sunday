@@ -16,6 +16,7 @@ use Ray\Di\AbstractModule,
 /**
  * Smarty module
  *
+ *
  * @package    BEAR.Framework
  * @subpackage Module
  */
@@ -28,10 +29,13 @@ class SmartyModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind()->annotatedWith('Smarty')->toProvider('\BEAR\Framework\Module\Provider\SmartyProvider')->in(Scope::SINGLETON);;
         $this
-        ->bind()
+        ->bind('BEAR\Framework\View\Render')
         ->annotatedWith('link')
+        ->to('\BEAR\Framework\View\SmartyAdapter');
+
+        $this
+        ->bind('\Smarty')
         ->toProvider('\BEAR\Framework\Module\Provider\SmartyProvider')
         ->in(Scope::SINGLETON);;
 

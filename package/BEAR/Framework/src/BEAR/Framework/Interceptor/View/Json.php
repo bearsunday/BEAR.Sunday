@@ -1,0 +1,28 @@
+<?php
+/**
+ * BEAR.Framework;
+ *
+ * @package BEAR.Resource
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ */
+namespace BEAR\Framework\Interceptor\View;
+
+use Ray\Aop\MethodInterceptor;
+
+/**
+ * Json view interceptor
+ *
+ * @package BEAR.Framework
+ * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ */
+class Json implements MethodInterceptor
+{
+    /**
+     * (non-PHPdoc)
+     * @see Ray\Aop.MethodInterceptor::invoke()
+     */
+    public function invoke(MethodInvocation $invocation)
+    {
+        return json_encode($invocation->proceed());
+    }
+}

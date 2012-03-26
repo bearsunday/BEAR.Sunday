@@ -3,7 +3,7 @@ namespace sandbox\Resource\App;
 
 use BEAR\Framework\Annotation\Db;
 use BEAR\Framework\Interceptor\DbSetter;
-use BEAR\Framework\Link\View\Smarty3 as View;
+use BEAR\Framework\Link\View;
 use BEAR\Resource\AbstractObject as ResourceObject;
 use Doctrine\DBAL\Connection;
 use PDO;

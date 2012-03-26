@@ -8,8 +8,7 @@
 namespace BEAR\Framework\Link;
 
 use BEAR\Resource\Object as ResourceObject;
-use BEAR\Framework\Exception\TemplateNotFound;
-use BEAR\Framework\View\Renderer;
+use BEAR\Framework\View\Render;
 
 /**
  * Trait for smarty view link.
@@ -17,7 +16,7 @@ use BEAR\Framework\View\Renderer;
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
- trait View
+trait View
 {
     /**
      * @var Renderer
@@ -28,25 +27,12 @@ use BEAR\Framework\View\Renderer;
      * @Inject
      * @Named("link")
      */
-    public function setRenderer($renderer)
+    public function setRenderer(Render $renderer)
     {
         $this->renderer = $renderer;
     }
 
     /**
-     * @Inject
-     * @Named("template_ext")
-     *
-     * @param string $ext
-     */
-    public function setExt($ext)
-    {
-        $this->ext = $ext;
-    }
-
-    /**
-     * @Link
-     *
      * View link
      *
      * @param ResourceObject $resource
@@ -68,15 +54,8 @@ use BEAR\Framework\View\Renderer;
         if (is_array($resource->body) || $resource->body instanceof \Traversable) {
             $this->renderer->assign($resource->body);
         }
-        $withoutExtention = substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
-        $templateFile =  $dir . DIRECTORY_SEPARATOR . $withoutExtention . '.' . $this->ext;
-            if (! file_exists($templateFile)) {
-            $templateFileInViewFodler =  $dir . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . $withoutExtention . '.' . $this->ext;
-            if (! file_exists($templateFileInViewFodler)) {
-                throw new TemplateNotFound($templateFile);
-            }
-        }
-        $resource->body = $this->renderer->fetch($templateFile);
+        $templateFileBase = $dir . DIRECTORY_SEPARATOR . substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
+        $resource->body = $this->renderer->fetch($templateFileBase);
         return $resource;
     }
 }

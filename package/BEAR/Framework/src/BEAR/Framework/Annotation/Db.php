@@ -7,7 +7,7 @@ namespace BEAR\Framework\Annotation;
  * @Annotation
  * @Target("CLASS")
  *
- * @package    demoworld
+ * @package    BEAR.Framework
  * @subpackage Annotation
  */
 final class Db

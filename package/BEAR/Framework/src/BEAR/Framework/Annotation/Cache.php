@@ -7,7 +7,7 @@ namespace BEAR\Framework\Annotation;
  * @Annotation
  * @Target("METHOD")
  *
- * @package    demoworld
+ * @package    BEAR.Framework
  * @subpackage Annotation
  */
 final class Cache

@@ -28,8 +28,8 @@ trait Php
         $dir = pathinfo($paegFile, PATHINFO_DIRNAME);
         $templateFile = $dir . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . basename($paegFile);
         if (! file_exists($templateFile)) {
-            $withoutExtention = substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
-            $templateFile =  $dir . DIRECTORY_SEPARATOR . $withoutExtention . 'tpl.php';
+            $withoutExtension = substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
+            $templateFile =  $dir . DIRECTORY_SEPARATOR . $withoutExtension . 'tpl.php';
             if (! file_exists($templateFile)) {
                 return $page;
             }

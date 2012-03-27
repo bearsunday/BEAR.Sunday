@@ -13,7 +13,7 @@ use Ray\Di\Scope;
 
 use BEAR\Framework\Module\StandardModule,
     BEAR\Framework\Module,
-    BEAR\Framework\Module\Extention,
+    BEAR\Framework\Module\Extension,
     BEAR\Framework\Interceptor\DbInjector,
     BEAR\Framework\Interceptor\ViewAdapter,
     BEAR\Framework\Interceptor\ViewAdapter\SmartyBackend;
@@ -55,14 +55,6 @@ class AppModule extends AbstractModule
         $this->install(new Module\Schema\StandardSchemaModule);
         $this->install(new Module\Cqrs\CacheModule);
         $this->install(new Module\WebContext\AuraWebModule);
-
         $this->install(new Extension\ViewModule([new ViewAdapter(new SmartyBackEnd)]));
-
-        $dbInjector = $this->requestInjection('\BEAR\Framework\Interceptor\DbInjector');
-        $this->bindInterceptor(
-                $this->matcher->annotatedWith('BEAR\Framework\Annotation\Db'),
-                $this->matcher->any(),
-                [$dbInjector]
-        );
     }
 }

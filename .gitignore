@@ -4,4 +4,5 @@ vendor
 *.log
 package/BEAR/Framework/src/BEAR/Framework/tmp/*
 .last_expection.log
+templates_c/*
 

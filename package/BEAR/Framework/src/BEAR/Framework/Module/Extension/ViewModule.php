@@ -5,14 +5,13 @@
  * @package    BEAR.Framework
  * @subpackage Module
  */
-namespace BEAR\Framework\Module\Extention;
+namespace BEAR\Framework\Module\Extension;
 
 use Ray\Di\Scope;
 
 use Ray\Di\AbstractModule,
     Ray\Di\Injector;
 use Ray\Aop\Interceptor;
-
 
 /**
  * View module
@@ -40,10 +39,11 @@ class ViewModule extends AbstractModule
      */
     protected function configure()
     {
+        $this->bind('BEAR\Resource\Renderable')->to('BEAR\Framework\Resource\View\Renderer');
         $this->bindInterceptor(
-                $this->matcher->annotatedWith('BEAR\Framework\Annotation\Html'),
-                $this->matcher->any(),
-                $this->htmlInterceptors
+            $this->matcher->annotatedWith('BEAR\Framework\Annotation\Html'),
+            $this->matcher->any(),
+            $this->htmlInterceptors
         );
     }
 }

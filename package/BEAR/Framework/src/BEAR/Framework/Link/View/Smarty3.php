@@ -53,10 +53,10 @@ use BEAR\Framework\Exception\TemplateNotFound;
         if (is_array($resource->body) || $resource->body instanceof \Traversable) {
             $this->smarty->assign($resource->body);
         }
-        $withoutExtention = substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
-        $templateFile =  $dir . DIRECTORY_SEPARATOR . $withoutExtention . 'tpl';
+        $withoutExtension = substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
+        $templateFile =  $dir . DIRECTORY_SEPARATOR . $withoutExtension . 'tpl';
             if (! file_exists($templateFile)) {
-            $templateFileInViewFodler =  $dir . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . $withoutExtention . 'tpl';
+            $templateFileInViewFodler =  $dir . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . $withoutExtension . 'tpl';
             if (! file_exists($templateFileInViewFodler)) {
                 throw new TemplateNotFound($templateFile);
             }

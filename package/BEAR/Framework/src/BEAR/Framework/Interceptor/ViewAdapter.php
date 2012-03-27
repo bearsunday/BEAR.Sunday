@@ -34,14 +34,6 @@ class ViewAdapter implements MethodInterceptor
      */
     public function invoke(MethodInvocation $invocation) {
         $resource = $invocation->proceed();
-
-        if (is_array($resource->body) ||  $resource->body instanceof \Traversable) {
-            foreach ($resource->body as &$element) {
-                if (is_callable($element)) {
-                    $element = $element();
-                }
-            }
-        }
         $paegFile = (new \ReflectionClass($resource))->getFileName();
         $dir = pathinfo($paegFile, PATHINFO_DIRNAME);
         $this->renderer->assign('resource', $resource);

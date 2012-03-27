@@ -206,9 +206,9 @@ class HttpFoundation implements Outputtable
     {
         if (is_array($this->resource->body) || $this->resource->body instanceof \Traversable) {
             foreach ($this->resource->body as $key => &$value) {
-                if (is_callable($value) === true) {
-                    $value = $value()->body;
-                }
+//                 if (is_callable($value) === true) {
+//                     $value = $value()->body;
+//                 }
             }
         }
         return $this;

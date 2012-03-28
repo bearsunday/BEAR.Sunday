@@ -56,6 +56,6 @@ class AppModule extends AbstractModule
         $this->install(new Module\Schema\StandardSchemaModule);
         $this->install(new Module\Cqrs\CacheModule);
         $this->install(new Module\WebContext\AuraWebModule);
-        $this->install(new Extension\ViewModule([new ViewAdapter(new SmartyBackEnd(__DIR__))]));
+        $this->install(new Extension\ViewModule([new ViewAdapter(new SmartyBackEnd)]));
     }
 }

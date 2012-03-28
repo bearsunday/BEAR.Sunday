@@ -7,17 +7,11 @@
  */
 namespace helloworld\Module;
 
+use BEAR\Framework\Module;
+use BEAR\Framework\Interceptor\ViewAdapter\SmartyBackend;
+use BEAR\Framework\Interceptor\ViewAdapter;
+use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
-
-use BEAR\Framework\Module\StandardModule;
-use Ray\Di\AbstractModule,
-    Ray\Di\InjectorInterface,
-    Ray\Di\Annotation,
-    Ray\Di\Config,
-    Ray\Di\Forge,
-    Ray\Di\Container,
-    Ray\Di\Injector,
-    Ray\Di\Definition;
 
 /**
  * Application module
@@ -34,6 +28,8 @@ class AppModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\helloworld\Module\SchemeCollectionProvider')->in(Scope::SINGLETON);
+        $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\helloworld\Module\SchemeCollectionProvider');
+        $this->install(new Module\TemplateEngine\SmartyModule);
+        $this->install(new Module\Extension\ViewModule([new ViewAdapter(new SmartyBackEnd)]));
     }
 }

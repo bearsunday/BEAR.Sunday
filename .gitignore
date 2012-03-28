@@ -3,14 +3,6 @@
 *.log
 package/BEAR/Framework/src/BEAR/Framework/tmp/*
 .last_expection.log
-<<<<<<< HEAD
-<<<<<<< HEAD
 templates_c
 tmp
-=======
-templates_c/*
->>>>>>> 9a45134e9efe3ccb5367779ac1803a3f12fdf36f
-=======
-templates_c/*
->>>>>>> 9a45134e9efe3ccb5367779ac1803a3f12fdf36f
-
+vendor

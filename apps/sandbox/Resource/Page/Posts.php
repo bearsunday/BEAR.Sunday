@@ -32,11 +32,11 @@ class Posts extends Page
     /**
      * Get
      *
-     * @Cache
+     * Cache
      */
     public function onGet()
     {
-        $this['posts'] = $this->resource->get->uri('app://self/posts')->linkSelf('view')->request();
+        $this['posts'] = $this->resource->get->uri('app://self/posts')->request();
         return $this;
     }
 

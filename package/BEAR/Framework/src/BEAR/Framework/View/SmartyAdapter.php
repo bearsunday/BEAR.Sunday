@@ -15,7 +15,7 @@ use Smarty;
  * @subpackage View
  * @author     Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-class SmartyAdapter implements Render
+class SmartyAdapter implements Renderable
 {
     use fileExists;
 
@@ -31,7 +31,7 @@ class SmartyAdapter implements Render
      */
     public function __construct()
     {
-        $this->renderer = new Smarty;
+//         $this->renderer = new Smarty;
     }
 
     /**

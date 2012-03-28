@@ -8,6 +8,7 @@ namespace BEAR\Framework\Output;
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Framework\Exception\ResourceBodyIsNotString;
 use BEAR\Framework\Exception\InvalidResourceType;
+use BEAR\Resource\Request;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -120,7 +121,8 @@ class HttpFoundation implements Outputtable
             $filename = str_replace('\\', '_', get_class($this->e));
             $filename = ".expection.{$filename}.{$this->exceptionId}.log";
             ob_start();
-            $data = print_r($this->e->getTrace(), true);
+            $trace = $this->e->getTrace();
+            $data = print_r($trace[0], true) . "\n" . $this->e->getTraceAsString();
             file_put_contents($filename, $data);
             $lasLog = '.expection.log';
             if (file_exists($lasLog)) {
@@ -147,10 +149,10 @@ class HttpFoundation implements Outputtable
         if ($this->e) {
             $msg = $this->e->getMessage();
             $consoleOutput->writeln([
-                    '',
-                    (new Formatter)->formatBlock(get_class($this->e). ': ' . $msg, 'bg=red;fg=white', true),
-                    '',
-                    ]);
+                '',
+                (new Formatter)->formatBlock(get_class($this->e). ': ' . $msg, 'bg=red;fg=white', true),
+                '',
+                ]);
         }
         $label = "\033[1;32m";
         $label1 = "\033[1;33m";
@@ -206,7 +208,7 @@ class HttpFoundation implements Outputtable
     {
         if (is_array($this->resource->body) || $this->resource->body instanceof \Traversable) {
             foreach ($this->resource->body as $key => &$value) {
-                if (is_callable($value) === true) {
+                if ($value instanceof Request) {
                     $value = $value()->body;
                 }
             }
@@ -221,7 +223,7 @@ class HttpFoundation implements Outputtable
      *
      * @return \BEAR\Framework\Output\HttpFoundation
      */
-    public function be($format)
+    public function format($format)
     {
         if (is_callable($format)) {
             $this->resource->body = $format($this->resource->body);
@@ -248,8 +250,9 @@ class HttpFoundation implements Outputtable
                 break;
             default:
                 throw Exception($format);
-            break;
+                break;
         }
         return $this;
     }
+
 }

@@ -57,4 +57,4 @@ if (!($response instanceof ResourceObject)) {
 }
 
 // Output
-(new Output)->setResource($response)->debug()->be('JSON')->output();
+(new Output)->setResource($response)->debug()->format('JSON')->output();

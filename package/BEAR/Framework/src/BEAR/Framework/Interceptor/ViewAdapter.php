@@ -7,7 +7,7 @@
  */
 namespace BEAR\Framework\Interceptor;
 
-use BEAR\Framework\Interceptor\ViewAdapter\Render;
+use BEAR\Framework\Interceptor\ViewAdapter\Renderable;
 
 use Ray\Aop\MethodInterceptor,
 Ray\Aop\MethodInvocation;
@@ -23,7 +23,7 @@ class ViewAdapter implements MethodInterceptor
     /**
      * Constructor
      */
-    public function __construct(Render $renderer)
+    public function __construct(Renderable $renderer)
     {
         $this->renderer = $renderer;
     }
@@ -34,14 +34,6 @@ class ViewAdapter implements MethodInterceptor
      */
     public function invoke(MethodInvocation $invocation) {
         $resource = $invocation->proceed();
-
-        if (is_array($resource->body) ||  $resource->body instanceof \Traversable) {
-            foreach ($resource->body as &$element) {
-                if (is_callable($element)) {
-                    $element = $element();
-                }
-            }
-        }
         $paegFile = (new \ReflectionClass($resource))->getFileName();
         $dir = pathinfo($paegFile, PATHINFO_DIRNAME);
         $this->renderer->assign('resource', $resource);

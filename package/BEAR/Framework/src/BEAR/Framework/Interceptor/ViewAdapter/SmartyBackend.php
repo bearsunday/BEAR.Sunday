@@ -15,7 +15,7 @@ use Smarty;
  * @subpackage View
  * @author     Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-class SmartyBackend implements Render
+class SmartyBackend implements Renderable
 {
     use fileExists;
 
@@ -32,6 +32,9 @@ class SmartyBackend implements Render
     public function __construct()
     {
         $this->renderer = new Smarty;
+        $dir = dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))));
+        $this->renderer->setCompileDir($dir . '/tmp/smarty/template_c');
+        $this->renderer->setCacheDir($dir. '/tmp/smarty/cache');
     }
 
     /**

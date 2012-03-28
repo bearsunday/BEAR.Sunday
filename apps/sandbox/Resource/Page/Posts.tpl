@@ -11,7 +11,7 @@
     <div class="container">
 
     <h1>Posts</h1>
-    <p>{$posts->body}</p>
+    <p>{$posts}</p>
 
     <h1>Submit</h1>
     <form action="/posts">

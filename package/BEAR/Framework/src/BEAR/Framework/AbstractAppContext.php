@@ -14,6 +14,7 @@ use Ray\Di\Definition,
     Ray\Di\InjectorInterface as Inject,
     Ray\Di\AbstractModule;
 use BEAR\Framework\Module\StandardModule as FrameWorkModule;
+use BEAR\Framework\Output\Outputtable;
 
 /**
  * Application context
@@ -63,10 +64,11 @@ abstract class AbstractAppContext
      *
      * @param Framework $framework
      */
-    public function __construct(array $appModules = [], Framework $framework)
+    public function __construct(array $appModules = [], Framework $framework, Outputtable $output)
     {
         $this->framework = $framework;
         list($this->di, $this->resource) = $this->framework->getApplicationProperties($appModules, $this);
+        $this->output = $output;
     }
 
     /**

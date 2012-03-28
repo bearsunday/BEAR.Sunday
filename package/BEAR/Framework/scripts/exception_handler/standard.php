@@ -63,10 +63,10 @@ NOT_FOUND:
 BAD_REQUEST:
 METHOD_NOT_ALLOWED:
     $response->headers['X-EXCEPTION-CLASS'] = get_class($e);
-    $response->headers['X-EXCEPTION-MESSAGE'] = str_replace("\n", " ", $e->getMessage());
+    $response->headers['X-EXCEPTION-MESSAGE'] = str_replace("\n", ' ', $e->getMessage());
     $response->headers['X-EXCEPTION-CODE'] = $e->getCode();
-    $response->headers['X-EXCEPTION-FILE-LINE'] = $e->getFile() . ':' . $e->getLine();
-    $response->headers['X-EXCEPTION-PREVIOUS'] = $e->getPrevious();
+    $response->headers['X-EXCEPTION-FILE-LINE'] = $e->getFile() . '@' . $e->getLine();
+    $response->headers['X-EXCEPTION-PREVIOUS'] =  str_replace("\n", ' ', $e->getPrevious());
     $response->headers['X-EXCEPTION-ID'] = $expectionId;
     (new Output)->setResource($response)->setException($e, $expectionId)->prepare()->output();
     exit(1);

@@ -5,9 +5,9 @@
  * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Framework\View;
+namespace BEAR\Framework\Interceptor\ViewAdapter;
 
-interface Render
+interface Renderable
 {
     public function assign();
     public function fetch($template);

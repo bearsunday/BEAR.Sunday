@@ -39,7 +39,7 @@ class DbInjector implements MethodInterceptor
      * @Inject
      * @Named("masterDb=master_db,slaveDb=slave_db")
      */
-    public function setDsn(array $masterDb, array $slaveDb) {
+    public function __construct(array $masterDb, array $slaveDb) {
         $this->masterDb = $masterDb;
         $this->slaveDb = $slaveDb;
     }

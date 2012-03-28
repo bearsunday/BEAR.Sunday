@@ -30,7 +30,7 @@ class SmartyModule extends AbstractModule
     protected function configure()
     {
         $this
-        ->bind('BEAR\Framework\View\Render')
+        ->bind('BEAR\Framework\View\Renderable')
         ->annotatedWith('link')
         ->to('\BEAR\Framework\View\SmartyAdapter');
 

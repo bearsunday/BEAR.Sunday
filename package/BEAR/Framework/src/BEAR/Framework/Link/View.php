@@ -8,7 +8,7 @@
 namespace BEAR\Framework\Link;
 
 use BEAR\Resource\Object as ResourceObject;
-use BEAR\Framework\View\Render;
+use BEAR\Framework\View\Renderable;
 
 /**
  * Trait for smarty view link.
@@ -27,7 +27,7 @@ trait View
      * @Inject
      * @Named("link")
      */
-    public function setRenderer(Render $renderer)
+    public function setRenderer(Renderable $renderer)
     {
         $this->renderer = $renderer;
     }

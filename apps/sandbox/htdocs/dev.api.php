@@ -2,9 +2,8 @@
 use BEAR\Framework\StandardRouter;
 use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
-use BEAR\Framework\Output\HttpFoundation as Output;
 use BEAR\Resource\Object as ResourceObject;
-
+use BEAR\Framework\Output\HttpFoundation as Output;
 require dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
 
 /**
@@ -56,4 +55,4 @@ if (!($response instanceof ResourceObject)) {
 }
 
 // Output
-(new Output)->debug()->setResource($response)->request()->be(OUTPUT::FORMAT_VARDUMP)->output();
+$app->output->debug()->setResource($response)->request()->format(OUTPUT::FORMAT_VAREXPORT)->output();

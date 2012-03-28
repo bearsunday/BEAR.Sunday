@@ -13,11 +13,11 @@ require dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.
  * examaple:
  *
  * CLI:
- * $ php dev.php get /hello
+ * $ php dev.web.php get /hello
  *
  * Built-in web server:
  *
- * $ php -S localhost:8080 dev.php
+ * $ php -S localhost:8080 dev.web/php
  *
  * type URL:
  *   http://localhost:8080/hello
@@ -45,15 +45,12 @@ $app = require dirname(__DIR__) . '/scripts/instance.php';
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
 // $router = require dirname(__DIR__) . '/scripts/router/standard_router.php';
 $router = new Router; // no router
+
+// Dispatch
 list($method, $pagePath, $query) = $router->match($globals);
 
 // Request
-$response = $app
-->resource
-->$method
-->uri('page://self/' . $pagePath)
-->withQuery($query)
-->eager->request();
+$response = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
 
 // Output
-(new Output)->setResource($response)->debug()->prepare()->output();
+$app->output->setResource($response)->debug()->prepare()->output();

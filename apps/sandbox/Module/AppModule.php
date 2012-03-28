@@ -38,12 +38,6 @@ use Smarty;
  */
 class AppModule extends AbstractModule
 {
-    public function __construct()
-    {
-        parent::__construct();
-//         var_dump(App::PATH);
-    }
-
     /**
      * Configure dependency binding
      *
@@ -56,6 +50,5 @@ class AppModule extends AbstractModule
         $this->install(new Module\Cqrs\CacheModule);
         $this->install(new Module\WebContext\AuraWebModule);
         $this->install(new Module\TemplateEngine\SmartyModule);
-        $this->install(new Extension\ViewModule([new ViewAdapter(new SmartyBackEnd)]));
     }
 }

@@ -7,11 +7,15 @@
  */
 namespace BEAR\Framework\Module\TemplateEngine;
 
+use BEAR\Framework\Module\Extension\ViewModule;
+
 use Ray\Di\Scope;
 
-use BEAR\Framework\Module\StandardModule;
+use BEAR\Framework\Module;
+use BEAR\Framework\Interceptor\ViewAdapter;
+use BEAR\Framework\Interceptor\ViewAdapter\SmartyBackEnd;
 use Ray\Di\AbstractModule,
-    Ray\Di\Injector;
+Ray\Di\Injector;
 
 /**
  * Smarty module
@@ -22,12 +26,24 @@ use Ray\Di\AbstractModule,
  */
 class SmartyModule extends AbstractModule
 {
+
     /**
      * Configure dependency binding
      *
      * @return void
      */
     protected function configure()
+    {
+        // (string)resouce view
+        $this->installResouceViewAdapter();
+        // interceptor view
+        $this->install(new Module\Extension\ViewModule([new ViewAdapter(new SmartyBackEnd)]));
+    }
+
+    /**
+     * Install view adapter (string)resource
+     */
+    private function installResouceViewAdapter()
     {
         $this
         ->bind('BEAR\Framework\View\Renderable')
@@ -40,8 +56,7 @@ class SmartyModule extends AbstractModule
         ->in(Scope::SINGLETON);;
 
         $this
-        ->bind()
-        ->annotatedWith('template_ext')
+        ->bind()->annotatedWith('template_ext')
         ->toInstance('tpl');
-   }
+    }
 }

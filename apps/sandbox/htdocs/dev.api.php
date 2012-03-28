@@ -48,7 +48,7 @@ list($resource, $page) = (new Dispatcher($app))->getInstance($uri);
 
 // Request
 $response = $app->resource->$method->object($page)->withQuery($globals['_GET'])->eager->request();
-
+v($response->body);
 if (!($response instanceof ResourceObject)) {
     $page->body = $response;
     $response = $page;

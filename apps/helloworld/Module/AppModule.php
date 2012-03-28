@@ -8,8 +8,6 @@
 namespace helloworld\Module;
 
 use BEAR\Framework\Module;
-use BEAR\Framework\Interceptor\ViewAdapter\SmartyBackend;
-use BEAR\Framework\Interceptor\ViewAdapter;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 
@@ -30,6 +28,5 @@ class AppModule extends AbstractModule
     {
         $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\helloworld\Module\SchemeCollectionProvider');
         $this->install(new Module\TemplateEngine\SmartyModule);
-        $this->install(new Module\Extension\ViewModule([new ViewAdapter(new SmartyBackEnd)]));
     }
 }

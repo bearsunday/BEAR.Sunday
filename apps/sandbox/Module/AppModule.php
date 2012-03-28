@@ -52,10 +52,10 @@ class AppModule extends AbstractModule
     protected function configure()
     {
         $this->install(new Module\Database\DoctrineDbalModule);
-        $this->install(new Module\TemplateEngine\SmartyModule);
         $this->install(new Module\Schema\StandardSchemaModule);
         $this->install(new Module\Cqrs\CacheModule);
         $this->install(new Module\WebContext\AuraWebModule);
+        $this->install(new Module\TemplateEngine\SmartyModule);
         $this->install(new Extension\ViewModule([new ViewAdapter(new SmartyBackEnd)]));
     }
 }

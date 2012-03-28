@@ -37,7 +37,4 @@ final class App extends AppContext
      */
     public $path = __DIR__;
 
-//     public function __construct()
-//     {
-//     }
 }

@@ -66,8 +66,5 @@ class Posts extends Page
      */
     public function provideArgs(Args &$args)
     {
-        $args['title'] = $this->webContext->getPost('title', 'untitled');
-        $args['body'] = $this->webContext->getPost('body');
-        $args['body'] = 'OKOK';
     }
 }

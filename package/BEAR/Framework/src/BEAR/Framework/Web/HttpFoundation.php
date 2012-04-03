@@ -3,14 +3,14 @@
 /**
  * @package BEAR.Framework
  */
-namespace BEAR\Framework\Output;
+namespace BEAR\Framework\Web;
 
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Framework\Exception\ResourceBodyIsNotString;
 use BEAR\Framework\Exception\InvalidResourceType;
 use BEAR\Resource\Request;
 
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Helper\FormatterHelper as Formatter;
 use Ray\Aop\Weaver;
@@ -24,7 +24,7 @@ use Traversable;
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-class HttpFoundation implements Outputtable
+class HttpFoundation implements Response
 {
     const FORMAT_JSON = 0;
     const FORMAT_SERIALIZE = 1;
@@ -34,7 +34,14 @@ class HttpFoundation implements Outputtable
 
     private $e;
     private $resource;
+
+    /**
+     *
+     * @var BEAR\Resource\Object
+     */
     private $response;
+
+
     private $headers = [];
     private $debug = true;
 
@@ -44,7 +51,7 @@ class HttpFoundation implements Outputtable
      * @param BEAR\Rsource\Object | Ray\Aop\Weaver $resource
      *
      * @throws InvalidResourceType
-     * @return \BEAR\Framework\Output\HttpFoundation
+     * @return \BEAR\Framework\Web\HttpFoundation
      */
     public function setResource($resource)
     {
@@ -59,7 +66,7 @@ class HttpFoundation implements Outputtable
     /**
      * Add debug information to header
      *
-     * @return \BEAR\Framework\Output\HttpFoundation
+     * @return \BEAR\Framework\Web\HttpFoundation
      */
     public function debug()
     {
@@ -76,7 +83,7 @@ class HttpFoundation implements Outputtable
      *
      * @param Exception $e
      *
-     * @return \BEAR\Framework\Output\HttpFoundation
+     * @return \BEAR\Framework\Web\HttpFoundation
      */
     public function setException(Exception $e, $exceptionId)
     {
@@ -89,15 +96,37 @@ class HttpFoundation implements Outputtable
      * Make responce object with RFC 2616 compliant HTTP header
      *
      * @throws ResourceBodyIsNotString
-     * @return \BEAR\Framework\Output\HttpFoundation
+     * @return \BEAR\Framework\Web\HttpFoundation
+     */
+    public function slotView()
+    {
+        $body = "";
+        foreach ($this->resource->body as $slot => &$value) {
+            if (is_array($value) || is_scalar($value)) {
+                $body = "[{$slot}] (Instance) " . print_r($value, true) . PHP_EOL;
+            }
+            if ($value instanceof Request) {
+                $body = "[{$slot}] (Request) " . $value->toUri() . PHP_EOL;
+            }
+        }
+        $this->resource->body = $body;
+        return $this;
+    }
+
+    /**
+     * Make responce object with RFC 2616 compliant HTTP header
+     *
+     * @throws ResourceBodyIsNotString
+     * @return \BEAR\Framework\Web\HttpFoundation
      */
     public function prepare()
     {
+        (string)($this->resource);
         if (! is_string($this->resource->body)) {
             $type = is_object($this->resource->body) ? get_class($this->resource->body) : gettype($this->resource->body);
             throw new ResourceBodyIsNotString($type);
         }
-        $this->response = new Response($this->resource->body, $this->resource->code, (array) $this->resource->headers);
+        $this->response = new SymfonyResponse($this->resource->body, $this->resource->code, (array) $this->resource->headers);
         // compliant with RFC 2616.
         $this->response->prepare();
         return $this;
@@ -110,14 +139,14 @@ class HttpFoundation implements Outputtable
      *
      * @return void
      */
-    public function output($debug = true)
+    public function output()
     {
         if (PHP_SAPI === 'cli') {
             $this->outputCliDebug();
         } else {
             $this->outputWeb();
         }
-        if ($debug === true && $this->e) {
+        if ($this->debug === true && $this->e) {
             $filename = str_replace('\\', '_', get_class($this->e));
             $filename = ".expection.{$filename}.{$this->exceptionId}.log";
             ob_start();
@@ -158,7 +187,7 @@ class HttpFoundation implements Outputtable
         $label1 = "\033[1;33m";
         $close = "\033[0m";
         // code
-        $codeMsg = $label . $this->resource->code . ' ' . Response::$statusTexts[$this->resource->code] . $close . PHP_EOL;
+        $codeMsg = $label . $this->resource->code . ' ' . SymfonyResponse::$statusTexts[$this->resource->code] . $close . PHP_EOL;
         echo $codeMsg;
         // hedaers
         if ($this->response) {
@@ -202,17 +231,18 @@ class HttpFoundation implements Outputtable
     /**
      * Execute in-resource request
      *
-     * @return \BEAR\Framework\Output\HttpFoundation
+     * @return \BEAR\Framework\Web\HttpFoundation
      */
     public function request()
     {
-        if (is_array($this->resource->body) || $this->resource->body instanceof \Traversable) {
-            foreach ($this->resource->body as $key => &$value) {
-                if ($value instanceof Request) {
-                    $value = $value()->body;
-                }
-            }
-        }
+        (string)$this->resource;
+//         if (is_array($this->resource->body) || $this->resource->body instanceof \Traversable) {
+//             foreach ($this->resource->body as $key => &$value) {
+//                 if ($value instanceof Request) {
+//                     $value = $value()->body;
+//                 }
+//             }
+//         }
         return $this;
     }
 
@@ -221,7 +251,7 @@ class HttpFoundation implements Outputtable
      *
      * @param string | Callable  $format
      *
-     * @return \BEAR\Framework\Output\HttpFoundation
+     * @return \BEAR\Framework\Web\HttpFoundation
      */
     public function format($format)
     {

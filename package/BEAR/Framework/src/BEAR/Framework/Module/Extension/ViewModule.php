@@ -41,10 +41,10 @@ class ViewModule extends AbstractModule
     {
         $this->bind('BEAR\Resource\Renderable')->to('BEAR\Framework\Resource\View\Renderer');
         $this->bind('BEAR\Framework\Interceptor\ViewAdapter\Renderable')->to('BEAR\Framework\Interceptor\ViewAdapter\SmartyBackEnd');
-        $this->bindInterceptor(
-            $this->matcher->annotatedWith('BEAR\Framework\Annotation\Html'),
-            $this->matcher->any(),
-            $this->htmlInterceptors
-        );
+//         $this->bindInterceptor(
+//             $this->matcher->annotatedWith('BEAR\Framework\Annotation\Html'),
+//             $this->matcher->any(),
+//             $this->htmlInterceptors
+//         );
     }
 }

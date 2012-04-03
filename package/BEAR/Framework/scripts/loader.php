@@ -8,7 +8,7 @@ require $this->system . '/vendor/.composer/autoload.php';
 $loader = require  $this->system . '/vendor/Aura/Autoload/scripts/instance.php';
 $namespaces = require  $this->system . '/vendor' . DIRECTORY_SEPARATOR . '.composer/autoload_namespaces.php';
 $namespaces += [
-$this->app->name  => dirname($this->app->path),
+$this->app->name  => dirname($this->app::DIR),
 'BEAR\Framework' => $this->system . '/package/BEAR/Framework/src/'
 ];
 $loader->setPaths($namespaces);
@@ -17,4 +17,4 @@ $loader->register();
 AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di', $this->system . '/vendor/Ray/Di/src');
 AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation', $this->system . '/vendor/BEAR/Resource/src');
 AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation', $this->system . '/package/BEAR/Framework/src');
-AnnotationRegistry::registerAutoloadNamespace($this->app->name . '\Annotation', dirname($this->app->path));
+AnnotationRegistry::registerAutoloadNamespace($this->app->name . '\Annotation', dirname($this->app::DIR));

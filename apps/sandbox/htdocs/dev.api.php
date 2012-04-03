@@ -3,8 +3,7 @@ use BEAR\Framework\StandardRouter;
 use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Resource\Object as ResourceObject;
-use BEAR\Framework\Output\HttpFoundation as Output;
-require dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
+use BEAR\Framework\Web\HttpFoundation as Output;
 
 /**
  * CLI / Built-in web server dev script
@@ -45,14 +44,16 @@ $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
 $uri = (PHP_SAPI === 'cli') ? $argv[2] : $globals['_SERVER']['REQUEST_URI'];
 $method = (new StandardRouter)->getMethod($globals);
 list($resource, $page) = (new Dispatcher($app))->getInstance($uri);
-
 // Request
 $response = $app->resource->$method->object($page)->withQuery($globals['_GET'])->eager->request();
-v($response->body);
 if (!($response instanceof ResourceObject)) {
     $page->body = $response;
     $response = $page;
 }
 
 // Output
-$app->output->debug()->setResource($response)->request()->format(OUTPUT::FORMAT_VAREXPORT)->output();
+if (isset($argv[3]) && $argv[3] === '--slot') {
+    (new Output)->debug()->setResource($response)->slotView()->output();
+} else {
+    (new Output)->debug()->setResource($response)->request()->format(OUTPUT::FORMAT_PRINTR)->output();
+}

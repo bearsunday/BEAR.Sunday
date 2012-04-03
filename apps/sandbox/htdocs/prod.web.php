@@ -4,7 +4,6 @@ use BEAR\Framework\StandardRouter as Router;
 use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Web\HttpFoundation as Res;
-use BEAR\Framework\Web\HttpFoundation as Output;
 
 /**
  * CLI / Built-in web server dev script
@@ -51,4 +50,8 @@ list($method, $pagePath, $query) = $router->match($globals);
 // Request
 $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
 
-(new Output)->debug()->setResource($page)->prepare()->output();
+// Transfer
+foreach($page->headers as $header) {
+    header($header);
+}
+echo (string)$page;

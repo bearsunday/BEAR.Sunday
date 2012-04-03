@@ -15,7 +15,7 @@ class HelloworldPageTest extends \PHPUnit_Framework_TestCase
         $this->resource = $app->resource;
     }
 
-    public function testgetDefinitionScope()
+    public function testPage()
     {
         // resource request
         $response = $this->resource->get->uri('page://self/hello')->withQuery(['name' => 'Sunday'])->eager->request();

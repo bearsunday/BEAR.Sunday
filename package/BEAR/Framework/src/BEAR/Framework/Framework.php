@@ -11,19 +11,20 @@ use BEAR\Framework\AbstractAppContext;
 use BEAR\Framework\Module\StandardModule;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Ray\Di\AbstractModule,
-    Ray\Di\InjectorInterface,
-    Ray\Di\Annotation,
-    Ray\Di\Config,
-    Ray\Di\ApcConfig,
-    Ray\Di\Forge,
-    Ray\Di\Container,
-    Ray\Di\Injector,
-    Ray\Di\ApcInjector,
-    Ray\Di\Definition;
+Ray\Di\InjectorInterface,
+Ray\Di\Annotation,
+Ray\Di\Config,
+Ray\Di\ApcConfig,
+Ray\Di\Forge,
+Ray\Di\Container,
+Ray\Di\Injector,
+Ray\Di\ApcInjector,
+Ray\Di\Definition;
 use BEAR\Resource\SignalHandler\Provides;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
 use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
 use Zend\Cache\Backend\File as CacheBackEnd;
+
 /**
  * Globals
  *
@@ -111,18 +112,21 @@ class Framework
      *
      * @return void
      */
-    public function setLoader($appName, $appDir, array $namespaces = [])
+    public function setLoader($namespace, $appDir, array $namespaces = [])
     {
-        if (class_exists('\Aura\Autoload\Loader', false) === true) {
-            return $this;
+        static $loader;
+
+        if (! is_null($loader)) {
+            // unregister for another app
+            spl_autoload_unregister([$loader, 'load']);
         }
-//         include $this->system . '/package/BEAR/Framework/scripts/core_loader.php';
-        require $this->system . '/vendor/.composer/autoload.php';
-        $loader = require  $this->system . '/vendor/Aura/Autoload/scripts/instance.php';
-        $silentLoader = clone $loader;
+
+        require_once $this->system . '/vendor/Aura/Autoload/src.php';
+
+        $loader = new Loader;
         $namespacesBase = require  $this->system . '/vendor' . DIRECTORY_SEPARATOR . '.composer/autoload_namespaces.php';
         $namespacesBase += [
-            $appName  => dirname($appDir),
+            $namespace  => dirname($appDir),
             'BEAR\Framework' => $this->system . '/package/BEAR/Framework/src/'
         ];
         $namespacesBase += $namespaces;
@@ -131,7 +135,7 @@ class Framework
         AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di\\', $this->system . '/vendor/Ray/Di/src/');
         AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation\\', $this->system . '/vendor/BEAR/Resource/src/');
         AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation\\', $this->system . '/package/BEAR/Framework/src/');
-        AnnotationRegistry::registerAutoloadNamespace($appName . '\Annotation', dirname($appDir));
+        AnnotationRegistry::registerAutoloadNamespace($namespace . '\Annotation', dirname($appDir));
         return $this;
     }
 
@@ -168,13 +172,13 @@ class Framework
     private function buildApplicationProperties(array $appModules, AbstractAppContext $app)
     {
         $annotations = [
-            'provides' => 'BEAR\Resource\Annotation\Provides',
-            'signal' => 'BEAR\Resource\Annotation\Signal',
-            'argsignal' => 'BEAR\Resource\Annotation\ParamSignal',
-            'get' => 'BEAR\Resource\Annotation\Get',
-            'post' => 'BEAR\Resource\Annotation\Post',
-            'put' => 'BEAR\Resource\Annotation\Put',
-            'delete' => 'BEAR\Resource\Annotation\Delete',
+        'provides' => 'BEAR\Resource\Annotation\Provides',
+        'signal' => 'BEAR\Resource\Annotation\Signal',
+        'argsignal' => 'BEAR\Resource\Annotation\ParamSignal',
+        'get' => 'BEAR\Resource\Annotation\Get',
+        'post' => 'BEAR\Resource\Annotation\Post',
+        'put' => 'BEAR\Resource\Annotation\Put',
+        'delete' => 'BEAR\Resource\Annotation\Delete',
         ];
         $this->di = $di = Injector::create();
         $module = new StandardModule($di, $app);

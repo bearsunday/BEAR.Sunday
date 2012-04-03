@@ -45,9 +45,8 @@ final class StandardRouter
         $query = $globals['_GET'];
         $route = $this->map ? $this->map->match(parse_url($uri, PHP_URL_PATH), $globals['_SERVER']) : false;
         if ($route === false) {
-            $method = strtolower($this->getMethod($globals));
+            list($method, $query) = $this->getMethodQuery($globals);
             $pageUri = $this->getPageKey();
-            $query = $globals['_GET'];
         } else {
             $method = $route->values['action'];
             $pageUri = $route->values['page'];
@@ -56,6 +55,7 @@ final class StandardRouter
                 $query[$key] = $route->values[$key];
             }
         }
+        unset($query[self::METHOD_OVERRIDE]);
         return [$method, $pageUri, $query];
     }
 
@@ -64,20 +64,23 @@ final class StandardRouter
      *
      * @return string
      */
-    public function getMethod($globals)
+    public function getMethodQuery($globals)
     {
         if ($globals['_SERVER']['REQUEST_METHOD'] === 'GET' && isset($globals['_GET'][self::METHOD_OVERRIDE])) {
             $method = $globals['_GET'][self::METHOD_OVERRIDE];
+            $query = $globals['_GET'];
             goto complete;
         }
         if ($globals['_SERVER']['REQUEST_METHOD'] === 'POST' && isset($globals['_POST'][self::METHOD_OVERRIDE])) {
             $method = $globals['_POST'][self::METHOD_OVERRIDE];
+            $query = $globals['_POST'];
             goto complete;
         }
-        $method = $globals['_SERVER']['REQUEST_METHOD'];
-
+        $method = 'get';
+        $query = $globals['_GET'];
         complete:
-        return strtolower($method);
+        $method = strtolower($method);
+        return [$method, $query];
     }
 
     /**

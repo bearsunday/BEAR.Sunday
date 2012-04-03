@@ -28,7 +28,7 @@ class SchemeCollectionProvider implements Provide
     public function __construct(Di $injector, AppContext $app)
     {
         $this->injector = $injector;
-        $this->namespace = $app->name;
+        $this->namespace = App::NAME;
     }
 
     /**

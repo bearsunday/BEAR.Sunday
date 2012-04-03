@@ -2,7 +2,7 @@
 
 namespace BEAR\Framework\Tests;
 
-use BEAR\Framework\Output\HttpFoundation as Output;
+use BEAR\Framework\Web\HttpFoundation as Output;
 use BEAR\Framework\Resource\Page\Ok;
 /**
  * Test class for Annotation.
@@ -17,7 +17,7 @@ class HttFoundationTest extends \PHPUnit_Framework_TestCase
 
     public function testNew()
     {
-        $this->assertInstanceOf('BEAR\Framework\Output\HttpFoundation', $this->output);
+        $this->assertInstanceOf('BEAR\Framework\Web\HttpFoundation', $this->output);
     }
 
     public function test_Output()

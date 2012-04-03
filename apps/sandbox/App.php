@@ -28,9 +28,6 @@ final class App extends AppContext
      *
      * @var string
      */
-    public $name = __NAMESPACE__;
-
-    const PATH = __DIR__;
     const NAME = __NAMESPACE__;
 
     /**
@@ -38,5 +35,5 @@ final class App extends AppContext
      *
      * @var string
      */
-    public $path = __DIR__;
+    const DIR = __DIR__;
 }

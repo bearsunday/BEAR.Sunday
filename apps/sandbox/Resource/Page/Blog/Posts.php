@@ -1,5 +1,5 @@
 <?php
-namespace sandbox\Resource\Page;
+namespace sandbox\Resource\Page\Blog;
 
 use BEAR\Resource\Client as Resource;
 use BEAR\Resource\Annotation\Provides;

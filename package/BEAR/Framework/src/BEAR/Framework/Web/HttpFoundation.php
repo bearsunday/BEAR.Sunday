@@ -34,6 +34,7 @@ class HttpFoundation implements Response
 
     private $e;
     private $resource;
+    private $logDir = '.';
 
     /**
      *
@@ -60,6 +61,17 @@ class HttpFoundation implements Response
             throw new InvalidResourceType($type);
         }
         $this->resource = $resource;
+        return $this;
+    }
+
+    /**
+     * Set log dir
+     *
+     * @Inject(optional = true)
+     */
+    public function setLogDir($logDir)
+    {
+        $this->logDir = $logDir;
         return $this;
     }
 
@@ -121,7 +133,12 @@ class HttpFoundation implements Response
      */
     public function prepare()
     {
-        (string)($this->resource);
+        // be string with template
+        if (! $this->e instanceof \Exception) {
+            // be string
+            (string)($this->resource);
+        }
+        // body shoud be string
         if (! is_string($this->resource->body)) {
             $type = is_object($this->resource->body) ? get_class($this->resource->body) : gettype($this->resource->body);
             throw new ResourceBodyIsNotString($type);
@@ -152,12 +169,12 @@ class HttpFoundation implements Response
             ob_start();
             $trace = $this->e->getTrace();
             $data = print_r($trace[0], true) . "\n" . $this->e->getTraceAsString();
-            file_put_contents($filename, $data);
+            $this->log($filename, $data);
             $lasLog = '.expection.log';
             if (file_exists($lasLog)) {
                 unlink($lasLog);
             }
-            symlink($filename, $lasLog);
+            //             symlink($filename, $lasLog);
         }
         return $this;
     }
@@ -224,8 +241,8 @@ class HttpFoundation implements Response
     private function writeException()
     {
         $log = print_r($this->e->getTrace(), true);
-        file_put_contents('.trace.log', $log);
-        file_put_contents('.trace.log.' . get_class($e) . md5(serialize($e->getTrace())), $log);
+        $this->log('.trace.log', $log);
+        $this->log('.trace.log.' . get_class($e) . md5(serialize($e->getTrace())), $log);
     }
 
     /**
@@ -236,13 +253,13 @@ class HttpFoundation implements Response
     public function request()
     {
         (string)$this->resource;
-//         if (is_array($this->resource->body) || $this->resource->body instanceof \Traversable) {
-//             foreach ($this->resource->body as $key => &$value) {
-//                 if ($value instanceof Request) {
-//                     $value = $value()->body;
-//                 }
-//             }
-//         }
+        //         if (is_array($this->resource->body) || $this->resource->body instanceof \Traversable) {
+        //             foreach ($this->resource->body as $key => &$value) {
+        //                 if ($value instanceof Request) {
+        //                     $value = $value()->body;
+        //                 }
+        //             }
+        //         }
         return $this;
     }
 
@@ -285,4 +302,12 @@ class HttpFoundation implements Response
         return $this;
     }
 
+    private function log($filename, $log)
+    {
+        if (PHP_SAPI === 'cli') {
+            file_put_contents("{$this->logDir}/" . $filename, $log);
+        } else {
+            error_log("[$filename]$log");
+        }
+    }
 }

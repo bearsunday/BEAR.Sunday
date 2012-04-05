@@ -1,10 +1,18 @@
 <?php
 
+namespace sandbox;
+
 use BEAR\Framework\StandardRouter as Router;
 use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Web\HttpFoundation as Res;
 use BEAR\Framework\Web\HttpFoundation as Output;
+use BEAR\Framework\Framework;
+
+require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
+
+// require_once dirname(__DIR__) . '/App.php';
 
 /**
  * CLI / Built-in web server dev script
@@ -38,7 +46,9 @@ if (php_sapi_name() == 'cli-server') {
 }
 
 // Application
-$app = require dirname(__DIR__) . '/scripts/instance.php';
+$framework = (new Framework)->setLoader(__NAMESPACE__, dirname(__DIR__))->setExceptionHandler();
+$runMode = 0;
+$app = App::getInstance($runMode, $framework);
 
 // Route
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;

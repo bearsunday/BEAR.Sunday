@@ -46,7 +46,7 @@ class SmartyBackend implements Renderable
         $args = func_get_args();
         $count = count($args);
         if ($count === 1) {
-            $this->renderer->assign($args[0]);
+            $this->renderer->assign((array)$args[0]);
         } elseif ($count === 2) {
             $this->renderer->assign($args[0], $args[1]);
         } else {

@@ -25,6 +25,8 @@ use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
 use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
 use Zend\Cache\Backend\File as CacheBackEnd;
 
+require __DIR__ . '/AbstractAppContext.php';
+
 /**
  * Globals
  *
@@ -40,7 +42,7 @@ class Framework
      *
      * Framework version identification
      */
-    const VERSION = '0.1.0';
+    const VERSION = '0.1.0alpha';
 
     /**
      * Resource client

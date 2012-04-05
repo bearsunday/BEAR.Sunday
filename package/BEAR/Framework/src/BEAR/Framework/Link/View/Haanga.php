@@ -7,8 +7,8 @@
  */
 namespace BEAR\Framework\Link\View;
 
-use BEAR\Resource\Object as ResourceObject,
-    BEAR\Resource\Request;
+use BEAR\Resource\Object as ResourceObject;
+use BEAR\Resource\Request;
 
 require dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))))) . '/vendor/crodas/haanga/lib/Haanga.php';
 

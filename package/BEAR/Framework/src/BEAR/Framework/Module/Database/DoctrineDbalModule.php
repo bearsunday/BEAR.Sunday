@@ -8,7 +8,8 @@
 namespace BEAR\Framework\Module\Database;
 use Ray\Di\Scope;
 
-use Ray\Di\AbstractModule, Ray\Di\Injector;
+use Ray\Di\AbstractModule;
+use Ray\Di\Injector;
 
 /**
  * DBAL module

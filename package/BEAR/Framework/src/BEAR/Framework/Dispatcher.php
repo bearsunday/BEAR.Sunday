@@ -7,17 +7,17 @@
 namespace BEAR\Framework;
 
 use BEAR\Resource\Resource;
-use Ray\Di\Definition,
-    Ray\Di\Annotation,
-    Ray\Di\Config,
-    Ray\Di\Forge,
-    Ray\Di\Container,
-    Ray\Di\Injector,
-    Ray\Di\InjectorInterface as Inject;
-use BEAR\Framework\Router,
-    BEAR\Framework\DevRouter,
-    BEAR\Framework\Exception\NotFound,
-    BEAR\Framework\AbstractAppContext as AppContext;
+use Ray\Di\Definition;
+use Ray\Di\Annotation;
+use Ray\Di\Config;
+use Ray\Di\Forge;
+use Ray\Di\Container;
+use Ray\Di\Injector;
+use Ray\Di\InjectorInterface as Inject;
+use BEAR\Framework\Router;
+use BEAR\Framework\DevRouter;
+use BEAR\Framework\Exception\NotFound;
+use BEAR\Framework\AbstractAppContext as AppContext;
 use Aura\Autoload\Exception\NotReadable;
 
 use Doctrine\Common\Cache\MemcacheCache as Cache;

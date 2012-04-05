@@ -10,16 +10,16 @@ use Aura\Autoload\Loader;
 use BEAR\Framework\AbstractAppContext;
 use BEAR\Framework\Module\StandardModule;
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Ray\Di\AbstractModule,
-Ray\Di\InjectorInterface,
-Ray\Di\Annotation,
-Ray\Di\Config,
-Ray\Di\ApcConfig,
-Ray\Di\Forge,
-Ray\Di\Container,
-Ray\Di\Injector,
-Ray\Di\ApcInjector,
-Ray\Di\Definition;
+use Ray\Di\AbstractModule;
+use Ray\Di\InjectorInterface;
+use Ray\Di\Annotation;
+use Ray\Di\Config;
+use Ray\Di\ApcConfig;
+use Ray\Di\Forge;
+use Ray\Di\Container;
+use Ray\Di\Injector;
+use Ray\Di\ApcInjector;
+use Ray\Di\Definition;
 use BEAR\Resource\SignalHandler\Provides;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
 use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;

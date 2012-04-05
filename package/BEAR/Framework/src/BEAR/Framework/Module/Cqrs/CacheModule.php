@@ -10,10 +10,11 @@ namespace BEAR\Framework\Module\Cqrs;
 use Ray\Di\Scope;
 use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
 use Zend\Cache\Backend\File as CacheBackEnd;
-use BEAR\Framework\Interceptor\CacheLoader as CacheLoadInterceptor,
-    BEAR\Framework\Interceptor\CacheUpdater as CacheUpdateInterceptor;
+use BEAR\Framework\Interceptor\CacheLoader as CacheLoadInterceptor;
+use BEAR\Framework\Interceptor\CacheUpdater as CacheUpdateInterceptor;
 
-use Ray\Di\AbstractModule, Ray\Di\Injector;
+use Ray\Di\AbstractModule;
+use Ray\Di\Injector;
 
 /**
  * DBAL module

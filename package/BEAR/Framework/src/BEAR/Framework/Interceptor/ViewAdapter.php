@@ -9,8 +9,8 @@ namespace BEAR\Framework\Interceptor;
 
 use BEAR\Framework\Interceptor\ViewAdapter\Renderable;
 
-use Ray\Aop\MethodInterceptor,
-Ray\Aop\MethodInvocation;
+use Ray\Aop\MethodInterceptor;
+use Ray\Aop\MethodInvocation;
 
 /**
  * Cache interceptor

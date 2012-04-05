@@ -7,9 +7,9 @@
  */
 namespace BEAR\Framework\Module;
 
-use Ray\Di\AbstractModule,
-    Ray\Di\InjectorInterface as Di,
-    Ray\Di\Scope;
+use Ray\Di\AbstractModule;
+use Ray\Di\InjectorInterface as Di;
+use Ray\Di\Scope;
 use BEAR\Framework\AbstractAppContext as App;
 
 /**

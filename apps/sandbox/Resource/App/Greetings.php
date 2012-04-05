@@ -1,8 +1,8 @@
 <?php
 namespace sandbox\Resource\App;
 
-use BEAR\Resource\Object as ResourceObject,
-    BEAR\Resource\AbstractObject;
+use BEAR\Resource\Object as ResourceObject;
+use BEAR\Resource\AbstractObject;
 
 /**
  * Greeting resource

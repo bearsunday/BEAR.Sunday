@@ -2,8 +2,8 @@
 
 namespace BEAR\Framework\Module\Provider;
 
-use Ray\Di\InjectorInterface,
-    Ray\Di\ProviderInterface as Provide;
+use Ray\Di\InjectorInterface;
+use Ray\Di\ProviderInterface as Provide;
 use BEAR\Framework\Module\AbstractPrototypeProvider;
 
 /**

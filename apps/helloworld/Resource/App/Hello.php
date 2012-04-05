@@ -1,8 +1,8 @@
 <?php
 namespace helloworld\Resource\App;
 
-use BEAR\Resource\Object as ResourceObject,
-    BEAR\Resource\AbstractObject as Page;
+use BEAR\Resource\Object as ResourceObject;
+use BEAR\Resource\AbstractObject as Page;
 
 class Hello extends Page
 {

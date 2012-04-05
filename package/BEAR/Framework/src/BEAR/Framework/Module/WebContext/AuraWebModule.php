@@ -9,7 +9,8 @@ namespace BEAR\Framework\Module\WebContext;
 use Ray\Di\Scope;
 
 use BEAR\Framework\Module\StandardModule;
-use Ray\Di\AbstractModule, Ray\Di\Injector;
+use Ray\Di\AbstractModule;
+use Ray\Di\Injector;
 
 /**
  * Aura.Web Context module

@@ -2,8 +2,8 @@
 
 namespace BEAR\Framework\Module\Provider;
 
-use Ray\Di\InjectorInterface,
-    Ray\Di\ProviderInterface;
+use Ray\Di\InjectorInterface;
+use Ray\Di\ProviderInterface;
 
 use Smarty;
 

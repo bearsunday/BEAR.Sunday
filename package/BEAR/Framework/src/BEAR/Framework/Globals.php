@@ -7,8 +7,8 @@
 namespace BEAR\Framework;
 
 use ArrayObject;
-use BEAR\Resource\Exception\BadRequest,
-    BEAR\Resource\Exception\MethodNotAllowed;
+use BEAR\Resource\Exception\BadRequest;
+use BEAR\Resource\Exception\MethodNotAllowed;
 
 /**
  * Globals

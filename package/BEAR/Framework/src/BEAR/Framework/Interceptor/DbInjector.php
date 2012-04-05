@@ -7,8 +7,8 @@
  */
 namespace BEAR\Framework\Interceptor;
 
-use Ray\Aop\MethodInterceptor,
-Ray\Aop\MethodInvocation;
+use Ray\Aop\MethodInterceptor;
+use Ray\Aop\MethodInvocation;
 use Doctrine\DBAL\DriverManager;
 
 /**

@@ -11,21 +11,21 @@ use BEAR\Framework\Module\TemplateEngine\SmartyModule;
 
 use Ray\Di\Scope;
 
-use BEAR\Framework\Module\StandardModule,
-BEAR\Framework\Module,
-BEAR\Framework\Module\Extension,
-BEAR\Framework\Interceptor\DbInjector,
-BEAR\Framework\Interceptor\ViewAdapter,
-BEAR\Framework\Interceptor\ViewAdapter\SmartyBackend;
-use Ray\Di\AbstractModule,
-Ray\Di\InjectorInterface,
-Ray\Di\Annotation,
-Ray\Di\Config,
-Ray\Di\Forge,
-Ray\Di\Container,
-Ray\Di\Injector as Di,
-Ray\Di\Definition,
-Ray\Di\Injector;
+use BEAR\Framework\Module\StandardModule;
+use BEAR\Framework\Module;
+use BEAR\Framework\Module\Extension;
+use BEAR\Framework\Interceptor\DbInjector;
+use BEAR\Framework\Interceptor\ViewAdapter;
+use BEAR\Framework\Interceptor\ViewAdapter\SmartyBackend;
+use Ray\Di\AbstractModule;
+use Ray\Di\InjectorInterface;
+use Ray\Di\Annotation;
+use Ray\Di\Config;
+use Ray\Di\Forge;
+use Ray\Di\Container;
+use Ray\Di\Injector as Di;
+use Ray\Di\Definition;
+use Ray\Di\Injector;
 use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
 use Zend\Cache\Backend\File as CacheBackEnd;
 use Smarty;

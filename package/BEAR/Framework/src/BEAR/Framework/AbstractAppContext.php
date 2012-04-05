@@ -5,14 +5,14 @@
  */
 namespace BEAR\Framework;
 
-use Ray\Di\Definition,
-    Ray\Di\Annotation,
-    Ray\Di\Config,
-    Ray\Di\Forge,
-    Ray\Di\Container,
-    Ray\Di\Injector,
-    Ray\Di\InjectorInterface as Inject,
-    Ray\Di\AbstractModule;
+use Ray\Di\Definition;
+use Ray\Di\Annotation;
+use Ray\Di\Config;
+use Ray\Di\Forge;
+use Ray\Di\Container;
+use Ray\Di\Injector;
+use Ray\Di\InjectorInterface as Inject;
+use Ray\Di\AbstractModule;
 use BEAR\Framework\Module\StandardModule as FrameWorkModule;
 use BEAR\Framework\Web\Outputtable;
 

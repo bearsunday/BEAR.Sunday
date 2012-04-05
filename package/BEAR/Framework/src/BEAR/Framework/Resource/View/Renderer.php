@@ -8,9 +8,9 @@ namespace BEAR\Framework\Resource\View;
 
 use Ray\Aop\Weave;
 
-use BEAR\Resource\Renderable,
-    BEAR\Resource\Request,
-    BEAR\Resource\Object as ResourceObject;
+use BEAR\Resource\Renderable;
+use BEAR\Resource\Request;
+use BEAR\Resource\Object as ResourceObject;
 use BEAR\Framework\Interceptor\ViewAdapter\Renderable as ViewRenderer;
 
 /**

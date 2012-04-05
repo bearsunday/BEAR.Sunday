@@ -8,10 +8,10 @@
 namespace BEAR\Framework\Module\Provider;
 
 use Ray\Di\ProviderInterface;
-use Aura\Signal\Manager,
-    Aura\Signal\HandlerFactory,
-    Aura\Signal\ResultFactory,
-    Aura\Signal\ResultCollection;
+use Aura\Signal\Manager;
+use Aura\Signal\HandlerFactory;
+use Aura\Signal\ResultFactory;
+use Aura\Signal\ResultCollection;
 
 /**
  * Signal

@@ -7,15 +7,15 @@
  */
 namespace BEAR\Framework\Interceptor;
 use Aura\Signal\Manager as Signal;
-use Ray\Aop\MethodInterceptor,
-    Ray\Aop\MethodInvocation;
+use Ray\Aop\MethodInterceptor;
+use Ray\Aop\MethodInvocation;
 use BEAR\Framework\Interceptor\Cachable as CacheInterceptor;
 use BEAR\Resource\Invoker;
 use BEAR\Resource\Request;
 use BEAR\Resource\Linker;
-use Ray\Di\Config,
-    Ray\Di\Annotation,
-    Ray\Di\Definition;
+use Ray\Di\Config;
+use Ray\Di\Annotation;
+use Ray\Di\Definition;
 
 /**
  * Cache update interceptor

@@ -1,8 +1,8 @@
 <?php
 namespace sandbox\Interceptor;
 
-use Ray\Aop\MethodInterceptor,
-    Ray\Aop\MethodInvocation;
+use Ray\Aop\MethodInterceptor;
+use Ray\Aop\MethodInvocation;
 
 /**
  * Log Interceptor

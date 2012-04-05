@@ -1,12 +1,12 @@
 <?php
 namespace BEAR\Framework\Module\Provider;
 
-use Ray\Di\InjectorInterface as Di,
-    Ray\Di\ProviderInterface as Provide;
+use Ray\Di\InjectorInterface as Di;
+use Ray\Di\ProviderInterface as Provide;
 
-use BEAR\Resource\Adapter\App,
-    BEAR\Resource\Adapter\Http,
-    BEAR\Resource\SchemeCollection;
+use BEAR\Resource\Adapter\App;
+use BEAR\Resource\Adapter\Http;
+use BEAR\Resource\SchemeCollection;
 use BEAR\Framework\AbstractAppContext as AppContext;
 
 /**

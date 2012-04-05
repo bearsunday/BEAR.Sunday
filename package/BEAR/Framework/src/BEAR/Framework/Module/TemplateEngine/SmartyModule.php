@@ -14,8 +14,8 @@ use Ray\Di\Scope;
 use BEAR\Framework\Module;
 use BEAR\Framework\Interceptor\ViewAdapter;
 use BEAR\Framework\Interceptor\ViewAdapter\SmartyBackEnd;
-use Ray\Di\AbstractModule,
-Ray\Di\Injector;
+use Ray\Di\AbstractModule;
+use Ray\Di\Injector;
 
 /**
  * Smarty module

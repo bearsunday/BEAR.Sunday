@@ -10,5 +10,5 @@ use BEAR\Framework\Framework;
 
 require dirname(__DIR__) . '/App.php';
 
-$app = App::getInstance();
+$app = App::getInstance(__NAMESPACE__);
 return $app;

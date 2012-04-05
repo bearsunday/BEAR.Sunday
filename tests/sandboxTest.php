@@ -17,7 +17,7 @@ class SandboxTest extends \PHPUnit_Framework_TestCase
     public function test_GetPosts()
     {
         // resource request
-        $page = $this->resource->get->uri('page://self/posts')->eager->request();
+        $page = $this->resource->get->uri('page://self/blog/posts')->eager->request();
         $this->assertSame(200, $page->code);
         $this->assertArrayHasKey('posts', $page->body);
         $html = (string)$page;

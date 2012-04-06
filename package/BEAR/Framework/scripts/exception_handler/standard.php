@@ -17,7 +17,7 @@ use BEAR\Framework\Web\HttpFoundation as Output;
 
 set_exception_handler(function(\Exception $e) {
     $mode = isset($_ENV['BEAR_OUTPUT_MODE']) ? $_ENV['BEAR_OUTPUT_MODE'] : 'prod';
-    $expectionId = substr(md5((string)$e), 0, 6);
+    $expectionId = 'e' . substr(md5((string)$e), 0, 5);
     try {
         $response = new Error;
         throw $e;

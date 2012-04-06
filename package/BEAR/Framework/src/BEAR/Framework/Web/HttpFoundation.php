@@ -105,9 +105,8 @@ class HttpFoundation implements Response
     }
 
     /**
-     * Make responce object with RFC 2616 compliant HTTP header
+     * Slot view provides key => value formart.
      *
-     * @throws ResourceBodyIsNotString
      * @return \BEAR\Framework\Web\HttpFoundation
      */
     public function slotView()
@@ -115,10 +114,10 @@ class HttpFoundation implements Response
         $body = "";
         foreach ($this->resource->body as $slot => &$value) {
             if (is_array($value) || is_scalar($value)) {
-                $body = "[{$slot}] (Instance) " . print_r($value, true) . PHP_EOL;
+                $body .= "[{$slot}] " . print_r($value, true) . PHP_EOL;
             }
             if ($value instanceof Request) {
-                $body = "[{$slot}] (Request) " . $value->toUri() . PHP_EOL;
+                $body .= "[{$slot}] (Request) " . $value->toUri() . PHP_EOL;
             }
         }
         $this->resource->body = $body;

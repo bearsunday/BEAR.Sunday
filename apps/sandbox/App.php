@@ -9,7 +9,6 @@ namespace sandbox;
 use BEAR\Framework\Framework;
 use BEAR\Framework\AbstractAppContext;
 
-
 /**
  * Applicaton
  *

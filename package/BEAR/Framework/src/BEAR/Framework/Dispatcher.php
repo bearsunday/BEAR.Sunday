@@ -58,6 +58,11 @@ final class Dispatcher
         $this->systemPath = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
     }
 
+    public function setCache($cache)
+    {
+        $this->cache = $cache;
+    }
+
     /**
      * Get instance
      *
@@ -69,32 +74,33 @@ final class Dispatcher
      */
     public function getInstance($pageUri)
     {
-//         $mem = new \Memcache;
-//         $mem->addServer('localhost');
-//         $memcache = new Cache;
-//         $memcache->setMemcache($mem);
-//         $this->cache = new CacheAdapter($memcache);
-        $key = $this->app->name . md5($pageUri) . rand(1, 1000);
-        $cached = $this->cache->fetch($key);
-        if ($cached) {
+        //         $mem = new \Memcache;
+        //         $mem->addServer('localhost');
+        //         $memcache = new Cache;
+        //         $memcache->setMemcache($mem);
+        //         $this->cache = new CacheAdapter($memcache);
+        //         $key = $this->app->name . md5($pageUri) . rand(1, 1000);
+        //         $cached = $this->cache->fetch($key);
+        if ($this->cache && $this->cached) {
             list($resource, $page) = unserialize($cached);
-        } else {
-            $resource = $this->app->resource;
-            try {
-                $page = $resource->newInstance($pageUri);
-            } catch (NotReadable $e) {
-                try {
-                    $page = $resource->newInstance($pageUri . 'index');
-                } catch (NotReadable $e) {
-                    throw new Exception\ResourceNotFound($pageUri, 404, $e);
-                }
-            } catch (\Exception $e) {
-                throw $e;
-            }
-            $this->cache->save($key, serialize([$resource, $page]));
-            // serializable test
-            $page = unserialize(serialize($page));
         }
+        $resource = $this->app->resource;
+        try {
+            $page = $resource->newInstance($pageUri);
+        } catch (NotReadable $e) {
+            try {
+                $page = $resource->newInstance($pageUri . 'index');
+            } catch (NotReadable $e) {
+                throw new Exception\ResourceNotFound($pageUri, 404, $e);
+            }
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        if ($this->cache) {
+            $this->cache->save($key, serialize([$resource, $page]));
+        }
+        // serializable test
+        $page = unserialize(serialize($page));
         return [$resource, $page];
     }
 }

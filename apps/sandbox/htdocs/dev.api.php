@@ -1,9 +1,12 @@
 <?php
-use BEAR\Framework\StandardRouter;
+use BEAR\Framework\StandardRouter as Router;
 use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Framework\Web\HttpFoundation as Output;
+
+require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
 
 /**
  * CLI / Built-in web server dev script
@@ -42,7 +45,7 @@ $app = require dirname(__DIR__) . '/scripts/instance.php';
 // Dispatch
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
 $uri = (PHP_SAPI === 'cli') ? $argv[2] : $globals['_SERVER']['REQUEST_URI'];
-$method = (new StandardRouter)->getMethod($globals);
+list($method, $query) = (new Router)->getMethodQuery($globals);
 list($resource, $page) = (new Dispatcher($app))->getInstance($uri);
 // Request
 $response = $app->resource->$method->object($page)->withQuery($globals['_GET'])->eager->request();

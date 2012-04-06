@@ -19,6 +19,10 @@ class Posts extends Page
 {
     use WebContextInject;
 
+    public $body = [
+        'posts' => [] //
+    ];
+
     private $resource;
 
     /**
@@ -32,7 +36,7 @@ class Posts extends Page
     /**
      * Get
      *
-     * Cache
+     * @Cache
      */
     public function onGet()
     {
@@ -50,14 +54,16 @@ class Posts extends Page
      */
     public function onPost($title, $body)
     {
+        // create post
         $this->resource
         ->post
         ->uri('app://self/posts')
         ->withQuery(['title' => $title, 'body' => $body])
         ->eager->request();
 
-        $code = 301;
-        $this->headers = ['Location' => '/posts'];
+        // redirect
+        $this->code = 301;
+        $this->headers = ['Location' => '/blog/posts'];
         return $this;
     }
 

@@ -3,14 +3,10 @@
 namespace sandbox;
 
 use BEAR\Framework\Framework;
-
 use BEAR\Framework\StandardRouter as Router;
 use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Web\HttpFoundation as Output;
-
-$appName = __NAMESPACE__;
-$appPath = dirname(__DIR__);
 
 /**
  * Web server script (Production USE)
@@ -24,14 +20,14 @@ $appPath = dirname(__DIR__);
     }
 }
 
-// library manual loading
-require_once dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
-// framework configuration
+// load
 require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
 
-// Application
-$framework = (new Framework)->setLoader($appName, $appPath)->setExceptionHandler();
-$app = App::getInstance(0, $framework);
+// Init
+$app = App::init();
+
+// Route
 $router = new Router; // page controller only.
 // $router = dirname(__DIR__) . '/scripts/router/standard_router.php'
 
@@ -41,4 +37,5 @@ list($method, $pagePath, $query) = $router->match($GLOBALS);
 // Request
 $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
 
+// Transfer
 (new Output)->setResource($page)->prepare()->output();

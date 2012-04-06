@@ -66,8 +66,8 @@
         <div class="span4">
           <h2>Version Info</h2>
           <ul>
-            <li>BEAR.Sunday {$version.BEAR}</li>
-            <li>PHP {$version.php}</li>
+            <li>BEAR.Sunday <code>{$version.BEAR}</code></li>
+            <li>PHP <code>{$version.php}</code></li>
           </ul>
           <h2>Requrements</h2>
           <h3>mandatory</h3>

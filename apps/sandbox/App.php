@@ -16,7 +16,8 @@ use BEAR\Framework\AbstractAppContext;
  * @package sandbox
  */
 final class App extends AbstractAppContext
-{     /** Version @var string */
+{
+    /** Version @var string */
     const VERSION = '0.1.0';
 
     /** Name @var string */
@@ -30,13 +31,13 @@ final class App extends AbstractAppContext
      *
      * @param integer $mode
      */
-    public static function getInstance($namespace, $mode = 0)
+    public static function init($runMode = 0)
     {
         // configure framework
         $framework = (new Framework)->setLoader(__NAMESPACE__, __DIR__)->setExceptionHandler();
 
         // configure application
-        $app = new App([new Module\AppModule($mode)], $framework);
+        $app = new App([new Module\AppModule($runMode)], $framework);
         return $app;
     }
 }

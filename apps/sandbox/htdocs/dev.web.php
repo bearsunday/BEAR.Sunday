@@ -46,9 +46,8 @@ if (php_sapi_name() == 'cli-server') {
 }
 
 // Application
-$framework = (new Framework)->setLoader(__NAMESPACE__, dirname(__DIR__))->setExceptionHandler();
-$runMode = 0;
-$app = App::getInstance($runMode, $framework);
+$runMode = 1;
+$app = App::init($runMode);
 
 // Route
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;

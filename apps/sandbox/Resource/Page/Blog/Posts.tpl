@@ -14,7 +14,7 @@
     <p>{$posts}</p>
 
     <h1>Submit</h1>
-    <form action="/posts">
+    <form action="/blog/posts" method="get">
         <input name="X-HTTP-Method-Override" type="hidden" value="POST" />
         <p><label>タイトル</label><input type="text" name="title"></p>
         <p><label>本文</label><textarea name="body" rows="10" cols="40"></textarea></p>

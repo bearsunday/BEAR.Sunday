@@ -171,10 +171,12 @@ class HttpFoundation implements Response
             $data = print_r($trace[0], true) . "\n" . $this->e->getTraceAsString();
             $this->log($filename, $data);
             $lasLog = '.expection.log';
-            if (file_exists($lasLog)) {
-                unlink($lasLog);
+            if (is_writable($filename)) {
+                if (file_exists($lasLog)) {
+                     unlink($lasLog);
+                }
+                symlink($filename, $lasLog);
             }
-            //             symlink($filename, $lasLog);
         }
         return $this;
     }

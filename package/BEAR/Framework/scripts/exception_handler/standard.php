@@ -66,7 +66,7 @@ METHOD_NOT_ALLOWED:
     $response->headers['X-EXCEPTION-MESSAGE'] = str_replace("\n", ' ', $e->getMessage());
     $response->headers['X-EXCEPTION-CODE'] = $e->getCode();
     $response->headers['X-EXCEPTION-FILE-LINE'] = $e->getFile() . ':' . $e->getLine();
-    $response->headers['X-EXCEPTION-PREVIOUS'] =  str_replace("\n", ' ', $e->getPrevious());
+    $response->headers['X-EXCEPTION-PREVIOUS'] =  $e->getPrevious() ? (get_class($e->getPrevious()) .': ' . $e->getPrevious()->getMessage()) : 'none';
     $response->headers['X-EXCEPTION-ID'] = $expectionId;
     (new Output)->setResource($response)->setException($e, $expectionId)->prepare(false)->output();
     exit(1);

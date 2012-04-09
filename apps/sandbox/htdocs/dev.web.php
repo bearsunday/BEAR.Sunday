@@ -10,6 +10,7 @@ use BEAR\Framework\Web\HttpFoundation as Output;
 use BEAR\Framework\Framework;
 
 require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+require_once dirname(__DIR__) . '/App.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
 
 // require_once dirname(__DIR__) . '/App.php';

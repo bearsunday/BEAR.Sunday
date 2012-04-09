@@ -21,8 +21,10 @@ use BEAR\Framework\Web\HttpFoundation as Output;
 }
 
 // load
-require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+apc_clear_cache();
 require_once dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
+require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+require dirname(__DIR__) . '/App.php';
 
 // Init
 $app = App::init();

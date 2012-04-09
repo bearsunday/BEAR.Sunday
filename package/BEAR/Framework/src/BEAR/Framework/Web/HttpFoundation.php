@@ -139,6 +139,7 @@ class HttpFoundation implements Response
         }
         // body shoud be string
         if (! is_string($this->resource->body)) {
+            var_dump($this->resource->body);
             $type = is_object($this->resource->body) ? get_class($this->resource->body) : gettype($this->resource->body);
             throw new ResourceBodyIsNotString($type);
         }
@@ -168,6 +169,11 @@ class HttpFoundation implements Response
             ob_start();
             $trace = $this->e->getTrace();
             $data = print_r($trace[0], true) . "\n" . $this->e->getTraceAsString();
+            $previousE = $this->e->getPrevious();
+            if ($previousE) {
+                $data .= PHP_EOL . PHP_EOL . '-- Previous Exception --' . PHP_EOL . PHP_EOL;
+                $data .= $previousE->getTraceAsString();
+            }
             $this->log($filename, $data);
             $lasLog = '.expection.log';
             if (is_writable($filename)) {

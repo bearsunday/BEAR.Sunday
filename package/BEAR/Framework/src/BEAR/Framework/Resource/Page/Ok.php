@@ -6,15 +6,13 @@
  */
 namespace BEAR\Framework\Resource\Page;
 
-use BEAR\Resource\AbstractObject as Page;
-
 /**
  * Ok page
  *
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-class Ok extends Page
+class Ok extends AbstractPage
 {
     public $code = 200;
     public $headers = [];

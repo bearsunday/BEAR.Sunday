@@ -34,10 +34,19 @@ class SmartyModule extends AbstractModule
      */
     protected function configure()
     {
-        // (string)resouce view
-        $this->installResouceViewAdapter();
-        // interceptor view
-        $this->install(new Module\Extension\ViewModule([new ViewAdapter(new SmartyBackEnd)]));
+        $this
+        ->bind('Smarty')
+        ->toProvider('\BEAR\Framework\Module\Provider\SmartyProvider')
+        ->in(Scope::SINGLETON);
+
+        $this
+        ->bind('BEAR\Resource\Renderable')
+        ->toProvider('BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyRednererProvider');
+
+        $this
+        ->bind('BEAR\Framework\Resource\View\ViewAdapter')
+        ->to('BEAR\Framework\Interceptor\ViewAdapter\SmartyBackEnd');
+
     }
 
     /**
@@ -45,18 +54,6 @@ class SmartyModule extends AbstractModule
      */
     private function installResouceViewAdapter()
     {
-        $this
-        ->bind('BEAR\Framework\View\Renderable')
-        ->annotatedWith('link')
-        ->to('\BEAR\Framework\View\SmartyAdapter');
 
-        $this
-        ->bind('\Smarty')
-        ->toProvider('\BEAR\Framework\Module\Provider\SmartyProvider')
-        ->in(Scope::SINGLETON);;
-
-        $this
-        ->bind()->annotatedWith('template_ext')
-        ->toInstance('tpl');
     }
 }

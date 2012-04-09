@@ -7,11 +7,10 @@
 namespace BEAR\Framework\Resource\View;
 
 use Ray\Aop\Weave;
-
-use BEAR\Resource\Renderable;
-use BEAR\Resource\Request;
 use BEAR\Resource\Object as ResourceObject;
-use BEAR\Framework\Interceptor\ViewAdapter\Renderable as ViewRenderer;
+use BEAR\Resource\Renderable;
+use ReflectionClass;
+use BEAR\Framework\Resource\View\TemplateEngineAdapter;
 
 /**
  * Request render
@@ -22,18 +21,20 @@ use BEAR\Framework\Interceptor\ViewAdapter\Renderable as ViewRenderer;
 
 class Renderer implements Renderable
 {
-    private $renderer;
+    /**
+     *
+     * @var Templatable
+     */
+    private $templateEngineAdapter;
 
     /**
      * ViewRenderer Setter
      *
      * @param ViewRenderer $renderer
-     *
-     * @Inject
      */
-    public function setRenderer(ViewRenderer $renderer)
+    public function __construct(TemplateEngineAdapter $templateEngineAdapter)
     {
-        $this->renderer = $renderer;
+        $this->templateEngineAdapter = $templateEngineAdapter;
     }
 
     /**
@@ -43,14 +44,14 @@ class Renderer implements Renderable
     public function render(ResourceObject $ro)
     {
         $class =  ($ro instanceof Weave) ? get_class($ro->___getObject()) : get_class($ro);
-        $paegFile = (new \ReflectionClass($class))->getFileName();
+        $paegFile = (new ReflectionClass($class))->getFileName();
         $dir = pathinfo($paegFile, PATHINFO_DIRNAME);
-        $this->renderer->assign('resource', $ro);
+        $this->templateEngineAdapter->assign('resource', $ro);
         if (is_array($ro->body) || $ro->body instanceof \Traversable) {
-            $this->renderer->assign($ro->body);
+            $this->templateEngineAdapter->assign($ro->body);
         }
         $templateFileBase = $dir . DIRECTORY_SEPARATOR . substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
-        $ro->body = $this->renderer->fetch($templateFileBase);
+        $ro->body = $this->templateEngineAdapter->fetch($templateFileBase);
         return $ro->body;
     }
 }

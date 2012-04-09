@@ -20,8 +20,9 @@ class SmartyProvider implements ProviderInterface
     public function get()
     {
         $smarty = new Smarty;
-        $smarty->setCompileDir(dirname(dirname(__DIR__)) . '/tmp/smarty/template_c');
-        $smarty->setCacheDir(dirname(dirname(__DIR__)) . '/tmp/smarty/cache');
+        $tmpDir = dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))))) . '/tmp';
+        $smarty->setCompileDir($tmpDir . '/smarty/template_c');
+        $smarty->setCacheDir($tmpDir . '/smarty/cache');
         return $smarty;
     }
 }

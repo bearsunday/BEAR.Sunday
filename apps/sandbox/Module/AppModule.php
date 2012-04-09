@@ -26,7 +26,7 @@ use Ray\Di\Container;
 use Ray\Di\Injector as Di;
 use Ray\Di\Definition;
 use Ray\Di\Injector;
-use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
+use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;
 use Zend\Cache\Backend\File as CacheBackEnd;
 use Smarty;
 
@@ -54,8 +54,8 @@ class AppModule extends AbstractModule
     protected function configure()
     {
         switch ($this->mode) {
-            default:
             case 'dev':
+            default:
                 $this
                 ->bind()
                 ->annotatedWith('master_db')
@@ -69,6 +69,7 @@ class AppModule extends AbstractModule
                 break;
 
         }
+
         $this->installCommon();
     }
 
@@ -76,7 +77,7 @@ class AppModule extends AbstractModule
     {
         $this->install(new Module\Database\DoctrineDbalModule);
         $this->install(new Module\Schema\StandardSchemaModule);
-        $this->install(new Module\Cqrs\CacheModule);
+//         $this->install(new Module\Cqrs\CacheModule);
         $this->install(new Module\WebContext\AuraWebModule);
         $this->install(new Module\TemplateEngine\SmartyModule);
     }

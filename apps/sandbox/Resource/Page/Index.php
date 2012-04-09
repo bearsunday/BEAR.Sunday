@@ -3,6 +3,7 @@ namespace sandbox\Resource\Page;
 
 use BEAR\Resource\Client as Resource;
 use BEAR\Resource\Annotation\Provides;
+use BEAR\Resource\Renderable;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Link\View as View;
@@ -30,4 +31,17 @@ class Index extends Page
         ];
         return $this;
     }
+
+//     /**
+//      * Set renderer
+//      *
+//      * @param Stringer $stringer
+//      *
+//      * @Inject
+//      * @Named("php_template")
+//      */
+// //     public function setRederer(Renderable $renderer)
+// //     {
+// //         $this->renderer = $renderer;
+// //     }
 }

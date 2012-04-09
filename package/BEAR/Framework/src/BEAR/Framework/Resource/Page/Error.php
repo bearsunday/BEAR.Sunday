@@ -6,15 +6,13 @@
  */
 namespace BEAR\Framework\Resource\Page;
 
-use BEAR\Resource\AbstractObject as Page;
-
 /**
  * Error page
  *
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
- class Error extends Page
+ class Error extends AbstractPage
 {
     public $code = 500;
     public $headers = [];

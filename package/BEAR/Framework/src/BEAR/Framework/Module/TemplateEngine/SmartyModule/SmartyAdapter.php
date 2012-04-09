@@ -4,9 +4,11 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Framework\View;
+namespace BEAR\Framework\Module\TemplateEngine\SmartyModule;
 
 use Smarty;
+use BEAR\Framework\Resource\View\TemplateEngineAdapter;
+use BEAR\Framework\Exception\TemplateNotFound;
 
 /**
  * Smarty adapter
@@ -15,10 +17,8 @@ use Smarty;
  * @subpackage View
  * @author     Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-class SmartyAdapter implements Renderable
+class SmartyAdapter implements TemplateEngineAdapter
 {
-    use fileExists;
-
     /**
      * @var Smarty
      */
@@ -29,9 +29,9 @@ class SmartyAdapter implements Renderable
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(Smarty $smarty)
     {
-//         $this->renderer = new Smarty;
+        $this->renderer = $smarty;
     }
 
     /**
@@ -43,7 +43,7 @@ class SmartyAdapter implements Renderable
         $args = func_get_args();
         $count = count($args);
         if ($count === 1) {
-            $this->renderer->assign($args[0]);
+            $this->renderer->assign((array)$args[0]);
         } elseif ($count === 2) {
             $this->renderer->assign($args[0], $args[1]);
         } else {
@@ -60,5 +60,12 @@ class SmartyAdapter implements Renderable
         $template = $templateFileBase . self::EXT;
         $this->fileExists($template);
         return $this->renderer->fetch($template);
+    }
+
+    private function fileExists($template)
+    {
+        if (! file_exists($template)) {
+            throw new TemplateNotFound($template);
+        }
     }
 }

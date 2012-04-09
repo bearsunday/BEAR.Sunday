@@ -1,5 +1,5 @@
 <?php
-namespace sandbox\Resource\Page\Greeting;
+namespace sandbox\Resource\Page\Hello;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Annotation\Html;
@@ -9,7 +9,7 @@ use BEAR\Framework\Annotation\Html;
  *
  * @Html
  */
-class Hello extends Page
+class World extends Page
 {
     public function __construct()
     {

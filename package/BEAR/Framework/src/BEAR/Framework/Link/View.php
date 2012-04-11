@@ -41,7 +41,7 @@ trait View
      */
     public function onLinkView(ResourceObject $resource)
     {
-        if (is_array($resource->body) ||  $resource->body instanceof \Traversable) {
+        if (is_array($resource->body) || $resource->body instanceof \Traversable) {
             foreach ($resource->body as &$element) {
                 if (is_callable($element)) {
                     $element = $element();

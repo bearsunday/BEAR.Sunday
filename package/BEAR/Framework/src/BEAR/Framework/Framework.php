@@ -14,7 +14,6 @@ use Ray\Di\AbstractModule;
 use Ray\Di\InjectorInterface;
 use Ray\Di\Annotation;
 use Ray\Di\Config;
-use Ray\Di\ApcConfig;
 use Ray\Di\Forge;
 use Ray\Di\Container;
 use Ray\Di\Injector;
@@ -22,7 +21,7 @@ use Ray\Di\ApcInjector;
 use Ray\Di\Definition;
 use BEAR\Resource\SignalHandler\Provides;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
-use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
+use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;
 use Zend\Cache\Backend\File as CacheBackEnd;
 
 require __DIR__ . '/AbstractAppContext.php';
@@ -59,7 +58,6 @@ class Framework
     private $app;
 
     /**
-     *
      * System path
      *
      * @var string
@@ -67,7 +65,6 @@ class Framework
     private $system;
 
     /**
-     *
      * Cache
      *
      * @var Cache
@@ -77,7 +74,6 @@ class Framework
     /**
      * Constructor
      *
-     * @param array $argv
      */
     public function __construct()
     {
@@ -123,10 +119,10 @@ class Framework
             spl_autoload_unregister([$loader, 'load']);
         }
 
-        require_once $this->system . '/vendor/Aura/Autoload/src.php';
+        include_once $this->system . '/vendor/Aura/Autoload/src.php';
 
         $loader = new Loader;
-        $namespacesBase = require  $this->system . '/vendor' . DIRECTORY_SEPARATOR . '.composer/autoload_namespaces.php';
+        $namespacesBase = include  $this->system . '/vendor' . DIRECTORY_SEPARATOR . '.composer/autoload_namespaces.php';
         $namespacesBase += [
             $namespace  => dirname($appDir),
             'BEAR\Framework' => $this->system . '/package/BEAR/Framework/src/'
@@ -149,10 +145,10 @@ class Framework
      *
      * @return array [\Ray\Di\Injector, \BEAR\Resoure\Client]
      */
-    public function getApplicationProperties(array $appModules, AbstractAppContext $app)
+    public function getApplicationProperties(array $appModules, AbstractAppContext $app, $useCache = true)
     {
         $key = __METHOD__;
-        if ($this->cache) {
+        if ($useCache && $this->cache) {
             $properties = $this->cache->fetch($key);
             if ($properties) {
                 list($di, $client) = unserialize($properties);

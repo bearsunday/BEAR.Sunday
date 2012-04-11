@@ -29,6 +29,7 @@ use Ray\Di\Injector;
 use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;
 use Zend\Cache\Backend\File as CacheBackEnd;
 use Smarty;
+use ReflectionClass;
 
 /**
  * Application module
@@ -38,11 +39,14 @@ use Smarty;
  */
 class AppModule extends AbstractModule
 {
+    public $tmpDir;
+
     private $mode = '';
 
     public function __construct($mode = 0)
     {
         $this->mode = $mode;
+        $this->tmpDir = dirname(__DIR__) . '/tmp';
         parent::__construct();
     }
 
@@ -69,6 +73,11 @@ class AppModule extends AbstractModule
                 break;
 
         }
+        $this->bindInterceptor(
+            $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
+            $this->matcher->any(),
+            [new \sandbox\Interceptor\Checker($this->tmpDir)]
+        );
 
         $this->installCommon();
     }
@@ -77,7 +86,7 @@ class AppModule extends AbstractModule
     {
         $this->install(new Module\Database\DoctrineDbalModule);
         $this->install(new Module\Schema\StandardSchemaModule);
-//         $this->install(new Module\Cqrs\CacheModule);
+        //         $this->install(new Module\Cqrs\CacheModule);
         $this->install(new Module\WebContext\AuraWebModule);
         $this->install(new Module\TemplateEngine\SmartyModule);
     }

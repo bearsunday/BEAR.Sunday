@@ -4,15 +4,13 @@
  */
 namespace BEAR\Framework\scripts\excection_handler;
 
-use BEAR\Framework\Exception\ResourceNotFound;
-use BEAR\Resource\Exception\BadRequest,
-    BEAR\Resource\Exception\MethodNotAllowed,
-    BEAR\Resource\Exception\InvalidParameter,
-    BEAR\Resource\Exception\InvalidScheme;
-
+use BEAR\Resource\Exception\BadRequest;
+use BEAR\Resource\Exception\MethodNotAllowed;
+use BEAR\Resource\Exception\InvalidParameter;
+use BEAR\Resource\Exception\InvalidScheme;
+use BEAR\Resource\Exception\ResourceNotFound;
 use Ray\Di\Exception\InvalidBinding;
 use BEAR\Framework\Resource\Page\Error;
-
 use BEAR\Framework\Web\HttpFoundation as Output;
 
 set_exception_handler(function(\Exception $e) {
@@ -66,7 +64,8 @@ METHOD_NOT_ALLOWED:
     $response->headers['X-EXCEPTION-MESSAGE'] = str_replace("\n", ' ', $e->getMessage());
     $response->headers['X-EXCEPTION-CODE'] = $e->getCode();
     $response->headers['X-EXCEPTION-FILE-LINE'] = $e->getFile() . ':' . $e->getLine();
-    $response->headers['X-EXCEPTION-PREVIOUS'] =  $e->getPrevious() ? (get_class($e->getPrevious()) .': ' . $e->getPrevious()->getMessage()) : '-';
+    $previous =  $e->getPrevious() ? (get_class($e->getPrevious()) .': ' . str_replace("\n", ' ', $e->getPrevious()->getMessage())) : '-';
+    $response->headers['X-EXCEPTION-PREVIOUS'] =  $previous;
     $response->headers['X-EXCEPTION-ID'] = $expectionId;
     (new Output)->setResource($response)->setException($e, $expectionId)->prepare(false)->output();
     exit(1);

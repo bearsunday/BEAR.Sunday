@@ -19,6 +19,21 @@ use BEAR\Framework\Framework;
  */
 class Index extends Page
 {
+//     /**
+//      * @Inject
+//      * @Named("tmp_dir")
+//      */
+//     public function __construct($tmpdir)
+//     {
+//         $file = tempnam($tmpdir);
+//         if ($file) {
+//             unlink($file);
+//             return;
+//         }
+//         // error message
+//         include __DIR__ . '/error_message.php';
+//     }
+
     /**
      * Get
      */
@@ -29,19 +44,14 @@ class Index extends Page
             'php'  => phpversion(),
             'BEAR' => Framework::VERSION
         ];
+        $this['extentions'] = [
+            'apc'  => extension_loaded('apc') ? 'Yes' : 'No',
+            'memcache'  => extension_loaded('memcache') ? 'Yes' : 'No',
+            'curl'  => extension_loaded('curl') ? 'Yes' : 'No',
+            'mysqlnd'  => extension_loaded('mysqlnd') ? 'Yes' : 'No',
+            'Xdebug'  => extension_loaded('Xdebug') ? 'Yes' : 'No',
+            'xhprof' => extension_loaded('xhprof') ? 'Yes' : 'No'
+        ];
         return $this;
     }
-
-//     /**
-//      * Set renderer
-//      *
-//      * @param Stringer $stringer
-//      *
-//      * @Inject
-//      * @Named("php_template")
-//      */
-// //     public function setRederer(Renderable $renderer)
-// //     {
-// //         $this->renderer = $renderer;
-// //     }
 }

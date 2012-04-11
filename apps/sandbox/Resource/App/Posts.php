@@ -15,8 +15,6 @@ use PDO;
  */
 class Posts extends ResourceObject implements DbSetter
 {
-    use View;
-
     /**
      * Table
      *

@@ -1,8 +1,10 @@
 <?php
-
 /**
+ * AbstractAppContext
+ *
  * @package BEAR.Framework
  */
+
 namespace BEAR\Framework;
 
 use Ray\Di\Definition;
@@ -62,6 +64,7 @@ abstract class AbstractAppContext
     /**
      * Constructor
      *
+     * @param array     $appModules
      * @param Framework $framework
      */
     public function __construct(array $appModules = [], Framework $framework)
@@ -73,6 +76,7 @@ abstract class AbstractAppContext
     /**
      * Annotation Settings
      *
+     * @var array
      */
     protected $annotations = [
         'provides' => 'BEAR\Resource\Annotation\Provides',

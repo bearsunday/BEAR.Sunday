@@ -33,7 +33,14 @@ class HttpFoundation implements Response
     const FORMAT_PRINTR    = 4;
 
     private $e;
+
+    /**
+     * Resource object
+     *
+     * @var BEAR\Resource\Object
+     */
     private $resource;
+
     private $logDir = '.';
 
     /**
@@ -132,18 +139,25 @@ class HttpFoundation implements Response
      */
     public function prepare()
     {
-        // be string with template
+        // already has representation ?
+        if ($this->resource->representation) {
+            $body = $this->resource->representation;
+            goto complete;
+        }
+        // if not, make resource representation by rendering with template
         if (! $this->e instanceof \Exception) {
             // be string
             (string)($this->resource);
         }
-        // body shoud be string
+        // if stil not has a representation (string), throw exception.
         if (! is_string($this->resource->body)) {
-            var_dump($this->resource->body);
             $type = is_object($this->resource->body) ? get_class($this->resource->body) : gettype($this->resource->body);
             throw new ResourceBodyIsNotString($type);
         }
-        $this->response = new SymfonyResponse($this->resource->body, $this->resource->code, (array) $this->resource->headers);
+        $body = $this->resource->body;
+
+        complete:
+        $this->response = new SymfonyResponse($body, $this->resource->code, (array) $this->resource->headers);
         // compliant with RFC 2616.
         $this->response->prepare();
         return $this;
@@ -235,7 +249,8 @@ class HttpFoundation implements Response
                 echo "{$label1}{$key}{$close}:" . $body. PHP_EOL;
             }
         } else {
-            echo $this->resource->body;
+            $body = $this->resource->representation ?: $this->resource->body;
+            echo $body;
         }
         echo PHP_EOL;
     }

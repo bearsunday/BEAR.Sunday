@@ -9,6 +9,7 @@ namespace sandbox;
 use BEAR\Framework\Framework;
 use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\AbstractAppContext;
+use Ray\Di\Injector;
 
 /**
  * Applicaton
@@ -43,7 +44,7 @@ final class App extends AbstractAppContext
         $framework = (new Framework)->setLoader(__NAMESPACE__, __DIR__)->setExceptionHandler();
 
         // configure application
-        $cacheKey = __CLASS__ . $runMode . filemtime(dirname(__DIR__));
+        $cacheKey = __NAMESPACE__ . $runMode . filemtime(dirname(__DIR__));
         $useCache = (! $runMode) && extension_loaded('apc');
         if ($useCache && apc_exists($cacheKey)) {
             $app = apc_fetch($cacheKey);
@@ -60,7 +61,8 @@ final class App extends AbstractAppContext
             default:
                 $modeModule = new module\ProdModule;
         }
-        $app = new self([new FrameworkModule(__CLASS__), new $modeModule, new module\AppModule], $framework);
+        $injector = Injector::create([new FrameworkModule(__CLASS__), new $modeModule, new module\AppModule]);
+        $app = $injector->getInstance(__CLASS__);
         if ($useCache) {
             apc_store($cacheKey, $app);
         }

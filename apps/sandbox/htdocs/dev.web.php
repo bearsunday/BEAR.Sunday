@@ -60,4 +60,4 @@ list($method, $pagePath, $query) = $router->match($globals);
 // Request
 $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
 
-(new Output)->debug()->setResource($page)->prepare()->output();
+$app->response->debug()->setResource($page)->prepare()->output();

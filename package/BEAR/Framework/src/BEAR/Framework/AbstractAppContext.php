@@ -7,16 +7,13 @@
 
 namespace BEAR\Framework;
 
-use Ray\Di\Definition;
-use Ray\Di\Annotation;
-use Ray\Di\Config;
-use Ray\Di\Forge;
-use Ray\Di\Container;
 use Ray\Di\Injector;
-use Ray\Di\InjectorInterface as Inject;
+use Ray\Di\InjectorInterface as Di;
 use Ray\Di\AbstractModule;
-use BEAR\Framework\Module\StandardModule as FrameWorkModule;
-use BEAR\Framework\Web\Outputtable;
+use BEAR\Framework\Web\Response;
+use BEAR\Resource\Client;
+use BEAR\Resource\SignalHandler\Provides;
+use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
 
 /**
  * Application context
@@ -26,26 +23,6 @@ use BEAR\Framework\Web\Outputtable;
  */
 abstract class AbstractAppContext
 {
-    /**
-     * Application Version
-     *
-     * @var string
-     */
-    const VERSION = '0.0.0';
-    /**
-     * Application name
-     *
-     * @var string
-     */
-    public $name;
-
-    /**
-     * Application porject root path
-     *
-     * @var string
-     */
-    public $path;
-
     /**
      * Dependency injector
      *
@@ -60,39 +37,50 @@ abstract class AbstractAppContext
      */
     public $resource;
 
+    /**
+     * Response
+     *
+     * @var unknown_type
+     */
+    public $response;
 
     /**
-     * Constructor
+     * Cache
      *
-     * @param array     $appModules
-     * @param Framework $framework
+     * @var unknown_type
      */
-    public function __construct(array $appModules, Framework $framework)
+    private $cache;
+
+    /**
+     * Set cache adapter
+     *
+     * @param Cache $cache
+     *
+     * @Inject(optional = true)
+     * @Named("resource_cache")
+     */
+    public function setCache(Cache $cache)
     {
-        $this->framework = $framework;
-        list($this->di, $this->resource) = $this->framework->getApplicationProperties($appModules, $this);
+        $this->cache = $cache;
     }
 
     /**
-     * Annotation Settings
+     * Property setter
      *
-     * @var array
+     * @param Di     $di
+     * @param Client $resource
+     *
+     * @Inject
      */
-    protected $annotations = [
-        'provides' => 'BEAR\Resource\Annotation\Provides',
-        'signal' => 'BEAR\Resource\Annotation\Signal',
-        'argsignal' => 'BEAR\Resource\Annotation\ParamSignal',
-        'get' => 'BEAR\Resource\Annotation\Get',
-        'post' => 'BEAR\Resource\Annotation\Post',
-        'put' => 'BEAR\Resource\Annotation\Put',
-        'delete' => 'BEAR\Resource\Annotation\Delete',
-    ];
-
-    /**
-     * to string
-     */
-    public function __toString()
+    public function setApplicationProperty(Di $di, Client $resource, Response $response)
     {
-        return $this->name . self::VERSION;
+        $this->di = $di;
+        $this->resource = $resource;
+        $this->response = $response;
+        // resource client
+        $resource->attachParamProvider('Provides', new Provides);
+        if ($this->cache instanceof Cache) {
+            $resource->setCacheAdapter($this->cache);
+        }
     }
 }

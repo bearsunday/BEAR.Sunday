@@ -7,6 +7,8 @@
  */
 namespace sandbox\Module;
 
+use BEAR\Framework\Module\FrameworkModule;
+
 use helloworld\Module\AppModule;
 
 use BEAR\Framework\Module\TemplateEngine\SmartyModule;
@@ -16,7 +18,6 @@ use Ray\Di\Scope;
 use BEAR\Framework\Module\StandardModule;
 use BEAR\Framework\Module;
 use Ray\Di\AbstractModule;
-
 /**
  * Application module
  *
@@ -45,7 +46,6 @@ class DevModule extends AbstractModule
 
         $this->bind()->annotatedWith('master_db')->toInstance($masterDb);
         $this->bind()->annotatedWith('slave_db')->toInstance($slaveDb);
-        $this->bind()->annotatedWith("tmp_dir")->toInstance($tmpDir);
         // install enviroment-depend module
         $this->installWritableChecker();
     }
@@ -56,11 +56,11 @@ class DevModule extends AbstractModule
     private function installWritableChecker()
     {
         // bind tmp writable checker
-        $checker = $this->requestInjection('\sandbox\Interceptor\Checker');
-        $this->bindInterceptor(
-            $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
-            $this->matcher->any(),
-            [$checker]
-        );
+//         $checker = $this->injector->getInstance('\sandbox\Interceptor\Checker');
+//         $this->bindInterceptor(
+//             $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
+//             $this->matcher->any(),
+//             [$checker]
+//         );
     }
 }

@@ -7,31 +7,32 @@
  */
 namespace BEAR\Framework\Inject;
 
+use Ray\Di\InjectorInterface as Di;
+
 /**
- * Inject tmp_dir
+ * Inject setter trait
  *
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-trait TmpDirInject
+trait InjectorInject
 {
     /**
-     * Tmp dir
+     * Dependency injector
      *
-     * @var string
+     * @var Di
      */
-    private $tmpDir;
+    private $injector;
 
     /**
-     * Set tmp dir path
+     * Injector setter
      *
-     * @param string $tmpDir
+     * @param Di $injector
      *
      * @Inject
-     * @Named("tmp_dir")
      */
-    public function setTmpDir($tmpDir)
+    public function setInjector(Di $injector)
     {
-        $this->tmpDir = $tmpDir;
+        $this->injector = $injector;
     }
 }

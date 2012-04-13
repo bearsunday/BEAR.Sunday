@@ -25,10 +25,22 @@ class SchemeCollectionProvider implements Provide
      *
      * @Inject
      */
-    public function __construct(Di $injector, AppContext $app)
+    public function __construct(Di $injector)
     {
         $this->injector = $injector;
-        $this->namespace = App::NAME;
+    }
+
+    /**
+     * Set app name
+     *
+     * @param string $appName
+     *
+     * @Inject
+     * @Named("app_name")
+     */
+    public function setAppName($appName)
+    {
+        $this->namespace = $appName;
     }
 
     /**
@@ -54,7 +66,7 @@ class SchemeCollectionProvider implements Provide
         $schemeCollection = new SchemeCollection;
         $schemeCollection->scheme('app')->host('self')->toAdapter(new App($this->injector, $this->namespace, 'Resource\App'));
         $schemeCollection->scheme('page')->host('self')->toAdapter(new App($this->injector, $this->namespace, 'Resource\Page'));
-        $schemeCollection->scheme('page')->host('helloworld')->toAdapter(new App($this->helloInjector, 'helloworld', 'Resource\Page'));
+//         $schemeCollection->scheme('page')->host('helloworld')->toAdapter(new App($this->helloInjector, 'helloworld', 'Resource\Page'));
         $schemeCollection->scheme('http')->host('*')->toAdapter(new Http);
         return $schemeCollection;
     }

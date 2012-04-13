@@ -8,30 +8,30 @@
 namespace BEAR\Framework\Inject;
 
 /**
- * Inject tmp_dir
+ * Inject application namespace
  *
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-trait TmpDirInject
+trait AppNameInject
 {
     /**
-     * Tmp dir
+     * application namespace
      *
      * @var string
      */
-    private $tmpDir;
+    private $appName;
 
     /**
-     * Set tmp dir path
+     * App name (=namespace) setter
      *
-     * @param string $tmpDir
+     * @param string $tmp
      *
      * @Inject
-     * @Named("tmp_dir")
+     * @Named("app_name")
      */
-    public function setTmpDir($tmpDir)
+    public function setAppName($appName)
     {
-        $this->tmpDir = $tmpDir;
+        $this->appName = $appName;
     }
 }

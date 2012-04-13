@@ -25,6 +25,9 @@ use Ray\Di\Injector;
  */
 class SmartyModule extends AbstractModule
 {
+    const SMARTY   = 'BEAR\Framework\Module\Provider\SmartyProvider';
+    const RENDERER = 'BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyRednererProvider';
+
     /**
      * Configure dependency binding
      *
@@ -32,13 +35,10 @@ class SmartyModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('Smarty')
-        ->toProvider('\BEAR\Framework\Module\Provider\SmartyProvider')->in(Scope::SINGLETON);
+        $this->bind('Smarty')->toProvider(self::SMARTY)->in(Scope::SINGLETON);
+        $this->bind('BEAR\Resource\Renderable')->toProvider(self::RENDERER);
 
-        $this->bind('BEAR\Resource\Renderable')
-        ->toProvider('BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyRednererProvider');
-
-        $this->bind('BEAR\Framework\Resource\View\ViewAdapter')
-        ->to('BEAR\Framework\Interceptor\ViewAdapter\SmartyBackEnd');
+//         $this->bind('BEAR\Framework\Resource\View\ViewAdapter')
+//         ->to('BEAR\Framework\Interceptor\ViewAdapter\SmartyBackEnd');
     }
 }

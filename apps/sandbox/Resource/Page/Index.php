@@ -13,26 +13,14 @@ use BEAR\Framework\Annotation\Cache;
 use BEAR\Framework\Annotation\CacheUpdate;
 use BEAR\Framework\Annotation\Html;
 use BEAR\Framework\Framework;
+use BEAR\Framework\Inject\TmpDirInject;
 
 /**
  * @Html
  */
 class Index extends Page
 {
-//     /**
-//      * @Inject
-//      * @Named("tmp_dir")
-//      */
-//     public function __construct($tmpdir)
-//     {
-//         $file = tempnam($tmpdir);
-//         if ($file) {
-//             unlink($file);
-//             return;
-//         }
-//         // error message
-//         include __DIR__ . '/error_message.php';
-//     }
+    use TmpDirInject;
 
     /**
      * Get

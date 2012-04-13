@@ -7,8 +7,10 @@
  */
 namespace BEAR\Framework\Module;
 
+use Ray\Di\Injector;
 use Ray\Di\AbstractModule;
 use BEAR\Framework\Module\Log;
+use Ray\Di\Scope;
 
 /**
  * Application module
@@ -19,7 +21,7 @@ use BEAR\Framework\Module\Log;
 class FrameworkModule extends AbstractModule
 {
     /**
-     * App root path
+     * App class
      *
      * @var string
      */
@@ -27,11 +29,11 @@ class FrameworkModule extends AbstractModule
 
     /**
      *
-     * @param string $appDir
+     * @param string $app
      */
     public function __construct($app)
     {
-        $this->appDir = $app::DIR;
+        $this->app = $app;
         parent::__construct();
     }
 
@@ -43,12 +45,33 @@ class FrameworkModule extends AbstractModule
     protected function configure()
     {
         // bind
-        $tmpDir = $this->appDir . '/tmp';
-        $logDir = $this->appDir . '/log';
+        $app = $this->app;
+        $tmpDir = $app::DIR . '/tmp';
+        $logDir = $app::DIR . '/log';
         $this->bind()->annotatedWith("tmp_dir")->toInstance($tmpDir);
         $this->bind()->annotatedWith("log_dir")->toInstance($logDir);
 
-        // install log module
+        // install
         $this->install(new Log\MonologModule);
+        $this->installCoreModule();
+    }
+
+    /**
+     * Core Module
+     */
+    private function installCoreModule()
+    {
+        $injector = Injector::create();
+        $config = $injector->getContainer()->getForge()->getConfig();
+        $this->bind('Ray\Di\InjectorInterface')->toInstance($injector);
+        $this->bind('Aura\Di\ConfigInterface')->toInstance($config);
+        $this->bind('BEAR\Resource\Resource')->to('BEAR\Resource\Client')->in(Scope::SINGLETON);
+        $this->bind('BEAR\Resource\Invokable')->to('BEAR\Resource\Invoker')->in(Scope::SINGLETON);
+        $this->bind('BEAR\Resource\Linkable')->to('BEAR\Resource\Linker')->in(Scope::SINGLETON);
+        $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Framework\Module\Provider\CacheProvider')->in(Scope::SINGLETON);
+        $this->bind('Aura\Signal\Manager')->toProvider('BEAR\Framework\Module\Provider\SignalProvider')->in(Scope::SINGLETON);
+        $app = $this->app;
+        $this->bind()->annotatedWith('app_name')->toInstance($app::NAME);
+        $this->bind('BEAR\Framework\Web\Response')->to('BEAR\Framework\Web\HttpFoundation');
     }
 }

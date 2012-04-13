@@ -33,15 +33,12 @@ class StandardModule extends AbstractModule
      * @param Inject $injector
      * @param string $appName application name (= _NAMESPACE_)
      */
-    public function __construct(Di $injector, App $app)
+    public function __construct(Di $injector)
     {
-        $this->bindings = new \ArrayObject;
-        $this->pointcuts = new \ArrayObject;
-        $this->container = new \ArrayObject;
         $this->injector = $injector;
         $this->config = $injector->getContainer()->getForge()->getConfig();
-        $this->app = $app;
-        $this->configure();
+//         $this->app = $app;
+        parent::__constrrcut();
     }
 
     /**
@@ -58,7 +55,7 @@ class StandardModule extends AbstractModule
         $this->bind('BEAR\Resource\Linkable')->to('BEAR\Resource\Linker')->in(Scope::SINGLETON);
         $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Framework\Module\Provider\CacheProvider')->in(Scope::SINGLETON);
         $this->bind('Aura\Signal\Manager')->toProvider('BEAR\Framework\Module\Provider\SignalProvider')->in(Scope::SINGLETON);
-        $this->bind('BEAR\Framework\AbstractAppContext')->toInstance($this->app);
-//         $this->bind('BEAR\Resource\Client')->toProvider('BEAR\Framework\Module\Provier\ResourceClientProvider');
+        $this->bind('BEAR\Resource\Client')->toProvider('BEAR\Framework\Module\Provier\ResourceClientProvider');
+//         $this->bind('BEAR\Framework\AbstractAppContext')->toInstance($this->app);
     }
 }

@@ -5,6 +5,7 @@
  */
 namespace BEAR\Framework\Web;
 
+
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Framework\Exception\ResourceBodyIsNotString;
 use BEAR\Framework\Exception\InvalidResourceType;
@@ -17,6 +18,8 @@ use Ray\Aop\Weaver;
 
 use Exception;
 use Traversable;
+use BEAR\Framework\Inject\LogInject;
+use BEAR\Framework\Inject\TmpDirInject;
 
 /**
  * Output with Symfony HttpFoundation
@@ -26,6 +29,9 @@ use Traversable;
  */
 class HttpFoundation implements Response
 {
+    use LogInject;
+    use TmpDirInject;
+
     const FORMAT_JSON = 0;
     const FORMAT_SERIALIZE = 1;
     const FORMAT_VAREXPORT = 2;
@@ -139,6 +145,7 @@ class HttpFoundation implements Response
      */
     public function prepare()
     {
+        v($this->tmpDir);
         // already has representation ?
         if ($this->resource->representation) {
             $body = $this->resource->representation;
@@ -152,6 +159,7 @@ class HttpFoundation implements Response
         // if stil not has a representation (string), throw exception.
         if (! is_string($this->resource->body)) {
             $type = is_object($this->resource->body) ? get_class($this->resource->body) : gettype($this->resource->body);
+            $this->log("ResourceBodyIsNotString[{$this->resource->body}]");
             throw new ResourceBodyIsNotString($type);
         }
         $body = $this->resource->body;
@@ -192,7 +200,7 @@ class HttpFoundation implements Response
             $lasLog = '.expection.log';
             if (is_writable($filename)) {
                 if (file_exists($lasLog)) {
-                     unlink($lasLog);
+                    unlink($lasLog);
                 }
                 symlink($filename, $lasLog);
             }
@@ -326,10 +334,7 @@ class HttpFoundation implements Response
 
     private function log($filename, $log)
     {
-        if (PHP_SAPI === 'cli') {
-            file_put_contents("{$this->logDir}/" . $filename, $log);
-        } else {
-            error_log("[$filename]$log");
-        }
+        file_put_contents("{$this->logDir}/" . $filename, $log);
+        error_log("[$filename]$log");
     }
 }

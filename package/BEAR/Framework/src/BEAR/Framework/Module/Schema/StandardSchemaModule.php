@@ -20,12 +20,30 @@ use Ray\Di\Injector;
 class StandardSchemaModule extends AbstractModule
 {
     /**
-     * Configure dependency binding
+     * Application module namespace
+     *
+     * @var string
+     */
+    private $appModuleNamespace;
+
+    /**
+     *
+     * @param string $appModuleNamespace
+     */
+    public function __construct($appModuleNamespace)
+    {
+        $this->appModuleNamespace = $appModuleNamespace;
+        parent::__construct();
+    }
+
+    /**
+     * Configure SchemeCollectionProvider
      *
      * @return void
      */
     protected function configure()
     {
-        $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\sandbox\Module\SchemeCollectionProvider');
+        $provider = $this->appModuleNamespace . '\SchemeCollectionProvider';
+        $this->bind('BEAR\Resource\SchemeCollection')->toProvider($provider);
     }
 }

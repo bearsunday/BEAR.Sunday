@@ -67,7 +67,7 @@ abstract class AbstractAppContext
      * @param array     $appModules
      * @param Framework $framework
      */
-    public function __construct(array $appModules = [], Framework $framework)
+    public function __construct(array $appModules, Framework $framework)
     {
         $this->framework = $framework;
         list($this->di, $this->resource) = $this->framework->getApplicationProperties($appModules, $this);

@@ -30,9 +30,9 @@ class DoctrineDbalModule extends AbstractModule
         $this->bind()->annotatedWith('slave_db')->toInstance(['driver' => 'pdo_mysql', 'host' => 'localhost', 'dbname' => 'blogbear', 'user' => 'root', 'password' => null, 'charset' => 'UTF8']);
         $dbInjector = $this->requestInjection('\BEAR\Framework\Interceptor\DbInjector');
         $this->bindInterceptor(
-                $this->matcher->annotatedWith('BEAR\Framework\Annotation\Db'),
-                $this->matcher->any(),
-                [$dbInjector]
+            $this->matcher->annotatedWith('BEAR\Framework\Annotation\Db'),
+            $this->matcher->any(),
+            [$dbInjector]
         );
     }
 }

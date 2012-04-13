@@ -28,6 +28,7 @@ class SmartyAdapter implements TemplateEngineAdapter
 
     /**
      * Constructor
+     * @Inject
      */
     public function __construct(Smarty $smarty)
     {

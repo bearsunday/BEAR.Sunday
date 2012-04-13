@@ -14,22 +14,20 @@ use Smarty;
 class SmartyRednererProvider implements ProviderInterface
 {
     /**
-     * @param Smarty $smarty
-     *
+     * @param SmartyAdapter $adapter
      * @Inject
      */
-    public function __construct(Smarty $smarty)
+    public function setAdapter(SmartyAdapter $adapter)
     {
-        $this->smarty = $smarty;
+        $this->adapter = $adapter;
     }
-
     /**
      *
      * @return \BEAR\Framework\Resource\View\Renderer
      */
     public function get()
     {
-        $instance = new Renderer(new SmartyAdapter($this->smarty));
+        $instance = new Renderer($this->adapter);
         return $instance;
     }
 }

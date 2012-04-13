@@ -3,7 +3,9 @@
 namespace BEAR\Framework\Module\Provider;
 
 use Ray\Di\InjectorInterface;
-use Ray\Di\ProviderInterface;
+use Ray\Di\ProviderInterface as Provide;
+use BEAR\Framework\Inject\LogInject;
+use BEAR\Framework\Inject\TmpDirInject;
 
 use Smarty;
 
@@ -12,17 +14,20 @@ use Smarty;
  *
  * @see http://www.smarty.net/docs/ja/
  */
-class SmartyProvider implements ProviderInterface
+class SmartyProvider implements Provide
 {
+    use LogInject;
+    use TmpDirInject;
+
     /**
-     * @return array
+     * @return Smarty
      */
     public function get()
     {
         $smarty = new Smarty;
-        $tmpDir = dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))))) . '/tmp';
-        $smarty->setCompileDir($tmpDir . '/smarty/template_c');
-        $smarty->setCacheDir($tmpDir . '/smarty/cache');
+        $smarty->setCompileDir($this->tmpDir . '/smarty/template_c');
+        $smarty->setCacheDir($this->tmpDir . '/smarty/cache');
+        $this->log->log("Smarty installed.tmp=[{$this->tmpDir}]");
         return $smarty;
     }
 }

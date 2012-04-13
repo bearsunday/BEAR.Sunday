@@ -10,7 +10,6 @@ use BEAR\Framework\Module\AbstractPrototypeProvider;
  * PDO provider
  */
 class DbalProvider implements Provide
-// class DbalProvider extends AbstractPrototypeProvider
 {
     /**
      * @Inject
@@ -26,11 +25,9 @@ class DbalProvider implements Provide
      *
      * @return Doctrine\DBAL\Connection
      */
-//     public function newInstance()
     public function get()
     {
         $config = new \Doctrine\DBAL\Configuration();
-        //..
         $connectionParams = [
             'driver' => 'pdo_sqlite',
             'path' => $this->dsn,

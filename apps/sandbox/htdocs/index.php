@@ -13,7 +13,7 @@ use BEAR\Framework\Web\HttpFoundation as Output;
  *
  * @package BEAR.Framework
  */
- if (php_sapi_name() == 'cli-server') {
+if (php_sapi_name() == 'cli-server') {
     // route static assets and return false
     if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css)$/', $_SERVER["REQUEST_URI"])) {
         return false;
@@ -26,8 +26,8 @@ require_once dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Sm
 require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
 require dirname(__DIR__) . '/App.php';
 
-// Init
-$app = App::init();
+// App instance (init)
+$app = App::factory(App::RUN_MODE_PROD);
 
 // Route
 $router = new Router; // page controller only.

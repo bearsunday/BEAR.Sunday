@@ -47,8 +47,7 @@ if (php_sapi_name() == 'cli-server') {
 }
 
 // Application
-$runMode = 1;
-$app = App::init($runMode);
+$app = App::factory(App::RUN_MODE_DEV);
 
 // Route
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;

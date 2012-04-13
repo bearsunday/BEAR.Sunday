@@ -9,6 +9,6 @@ namespace BEAR\Framework\Interceptor\ViewAdapter;
 
 interface Renderable
 {
-    public function assign();
+    public function assign(array $value);
     public function fetch($template);
 }

@@ -28,10 +28,22 @@ class SmartyBackend implements Renderable
 
     /**
      * Constructor
+     * @Inject
+     * @Named("tmp_dir")
      */
-    public function __construct()
+    public function __construct($tmpDir)
     {
-        $this->renderer = new Smarty;
+        $this->tmpDir = $tmpDir;
+    }
+
+    /**
+     * setRenderer
+     *
+     * @Inject
+     */
+    public function setRenderer(Smarty $smarty)
+    {
+        $this->renderer = $smarty;
         $dir = dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))));
         $this->renderer->setCompileDir($dir . '/tmp/smarty/template_c');
         $this->renderer->setCacheDir($dir. '/tmp/smarty/cache');
@@ -41,17 +53,9 @@ class SmartyBackend implements Renderable
      * (non-PHPdoc)
      * @see BEAR\Framework\View.Render::assign()
      */
-    public function assign()
+    public function assign(array $values)
     {
-        $args = func_get_args();
-        $count = count($args);
-        if ($count === 1) {
-            $this->renderer->assign((array)$args[0]);
-        } elseif ($count === 2) {
-            $this->renderer->assign($args[0], $args[1]);
-        } else {
-            throw \InvalidArgumentException;
-        }
+        $this->renderer->assign((array) $values);
     }
 
     /**

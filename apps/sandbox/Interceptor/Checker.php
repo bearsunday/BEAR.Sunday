@@ -12,6 +12,13 @@ class Checker implements MethodInterceptor
 {
     private $tmpDir;
 
+    /**
+     * Constructor
+     *
+     * @param string $tmpDir
+     * @Inject
+     * @Named("tmp_dir")
+     */
     public function __construct($tmpDir)
     {
         $this->tmpDir = $tmpDir;

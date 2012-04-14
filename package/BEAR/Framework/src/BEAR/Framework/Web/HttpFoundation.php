@@ -176,7 +176,7 @@ class HttpFoundation implements Response
             $filename = ".expection.{$filename}.{$this->exceptionId}.log";
             ob_start();
             $trace = $this->e->getTrace();
-            $data = print_r($trace[0], true) . "\n" . $this->e->getTraceAsString();
+            $data = print_r($trace[0], true) . "\n";// . $this->e->getTraceAsString();
             $previousE = $this->e->getPrevious();
             if ($previousE) {
                 $data .= PHP_EOL . PHP_EOL . '-- Previous Exception --' . PHP_EOL . PHP_EOL;

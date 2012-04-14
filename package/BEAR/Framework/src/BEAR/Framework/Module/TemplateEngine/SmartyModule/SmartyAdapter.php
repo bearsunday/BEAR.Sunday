@@ -9,6 +9,8 @@ namespace BEAR\Framework\Module\TemplateEngine\SmartyModule;
 use Smarty;
 use BEAR\Framework\Resource\View\TemplateEngineAdapter;
 use BEAR\Framework\Exception\TemplateNotFound;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Smarty adapter

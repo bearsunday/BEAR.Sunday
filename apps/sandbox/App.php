@@ -30,7 +30,7 @@ final class App extends AbstractAppContext
     const DIR = __DIR__;
 
     /** Run mode Production */
-    const RUN_MODE_PROD = 1;
+    const RUN_MODE_PROD = 0;
 
     /** Run mode Develop */
     const RUN_MODE_DEV = 1;
@@ -44,7 +44,7 @@ final class App extends AbstractAppContext
     {
         // configure framework
         $framework = (new Framework)->setLoader(__NAMESPACE__, __DIR__)->setExceptionHandler();
-
+        
         // configure application
         $cacheKey = __NAMESPACE__ . $runMode . filemtime(dirname(__DIR__));
         $useCache = (! $runMode) && extension_loaded('apc');

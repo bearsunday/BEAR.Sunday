@@ -9,6 +9,8 @@ namespace BEAR\Framework\Module\TemplateEngine\SmartyModule;
 
 use BEAR\Framework\Resource\View\Renderer;
 use Ray\Di\ProviderInterface;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 use Smarty;
 
 class SmartyRednererProvider implements ProviderInterface

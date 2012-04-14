@@ -6,6 +6,8 @@ use Ray\Di\InjectorInterface;
 use Ray\Di\ProviderInterface as Provide;
 use BEAR\Framework\Inject\LogInject;
 use BEAR\Framework\Inject\TmpDirInject;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 use Smarty;
 

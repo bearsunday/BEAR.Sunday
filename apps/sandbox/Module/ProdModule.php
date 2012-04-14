@@ -41,6 +41,8 @@ use ReflectionClass;
  */
 class ProdModule extends AbstractModule
 {
+    const RESOURCE_CACHE_INTERFACE = 'Guzzle\Common\Cache\CacheAdapterInterface';
+    const RESOURCE_CACHE_PROVIDER  = 'BEAR\Framework\Module\Provider\CacheProvider';
     /**
      * Configure dependency binding
      *
@@ -58,12 +60,13 @@ class ProdModule extends AbstractModule
             'charset' => 'UTF8'
         ];
         $tmpDir = dirname(__DIR__) . '/tmp';
-
         $this->bind()->annotatedWith('master_db')->toInstance($masterDb);
         $this->bind()->annotatedWith('slave_db')->toInstance($slaveDb);
         $this->bind()->annotatedWith("tmp_dir")->toInstance($tmpDir);
+        $this->bind(self::RESOURCE_CACHE_INTERFACE)->annotatedWith("resource_cache")->toProvider(self::RESOURCE_CACHE_PROVIDER);
         // install enviroment-depend module
         $this->installWritableChecker();
+        // resource cache
     }
 
     /**

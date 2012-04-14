@@ -72,7 +72,7 @@
           <h2>Extension</h2>
           <h3>mandatory</h3>
           <ul>
-            <li>apc <code>{$extentions.apc}</code></li>
+            <li><a href="/_bear/apc.php">apc</a> <code>{$extentions.apc}</code></li>
           </ul>
           <h3>optional</h3>
           <ul>

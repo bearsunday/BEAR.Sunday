@@ -11,7 +11,6 @@ use BEAR\Framework\Framework;
 
 require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
 require_once dirname(__DIR__) . '/App.php';
-require_once dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
 
 // require_once dirname(__DIR__) . '/App.php';
 
@@ -60,4 +59,4 @@ list($method, $pagePath, $query) = $router->match($globals);
 // Request
 $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
 
-$app->response->debug()->setResource($page)->prepare()->output();
+$app->response->debug()->setResource($page)->prepare()->send();

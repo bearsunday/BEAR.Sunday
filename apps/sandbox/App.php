@@ -11,6 +11,8 @@ use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\AbstractAppContext;
 use Ray\Di\Injector;
 
+require_once dirname(dirname(__DIR__)) . '/vendor/smarty/smarty/libs/Smarty.class.php';
+
 /**
  * Applicaton
  *
@@ -38,7 +40,7 @@ final class App extends AbstractAppContext
      *
      * @param integer $runMode
      */
-    public static function factory($runMode)
+    public static function factory($runMode = self::RUN_MODE_PROD)
     {
         // configure framework
         $framework = (new Framework)->setLoader(__NAMESPACE__, __DIR__)->setExceptionHandler();

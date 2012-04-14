@@ -1,25 +1,24 @@
 <?php
-
 /**
+ * Response
+ *
  * @package BEAR.Framework
  */
 namespace BEAR\Framework\Web;
-
 
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Framework\Exception\ResourceBodyIsNotString;
 use BEAR\Framework\Exception\InvalidResourceType;
 use BEAR\Resource\Request;
-
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Helper\FormatterHelper as Formatter;
 use Ray\Aop\Weaver;
-
 use Exception;
 use Traversable;
 use BEAR\Framework\Inject\LogInject;
 use BEAR\Framework\Inject\TmpDirInject;
+use BEAR\Framework\Inject\LogDirInject;
 
 /**
  * Output with Symfony HttpFoundation
@@ -31,13 +30,24 @@ class HttpFoundation implements Response
 {
     use LogInject;
     use TmpDirInject;
+    use LogDirInject;
 
-    const FORMAT_JSON = 0;
-    const FORMAT_SERIALIZE = 1;
-    const FORMAT_VAREXPORT = 2;
-    const FORMAT_VARDUMP   = 3;
-    const FORMAT_PRINTR    = 4;
+    const FORMAT_JSON      = 'json';
+    const FORMAT_SERIALIZE = 'serialize';
+    const FORMAT_VAREXPORT = 'varexport';
+    const FORMAT_VARDUMP   = 'vardump';
+    const FORMAT_PRINTR    = 'printr';
+    const FORMAT_REP       = 'rep';
 
+    const MODE_REQUEST = 'requrest';
+    const MODE_REP     = 'rep';
+    const MODE_VALUE   = 'value';
+
+    /**
+     * Exception
+     *
+     * @var Exception
+     */
     private $e;
 
     /**
@@ -47,9 +57,8 @@ class HttpFoundation implements Response
      */
     private $resource;
 
-    private $logDir = '.';
-
     /**
+     * Response resource object
      *
      * @var BEAR\Resource\Object
      */
@@ -118,26 +127,6 @@ class HttpFoundation implements Response
     }
 
     /**
-     * Slot view provides key => value formart.
-     *
-     * @return \BEAR\Framework\Web\HttpFoundation
-     */
-    public function slotView()
-    {
-        $body = "";
-        foreach ($this->resource->body as $slot => &$value) {
-            if (is_array($value) || is_scalar($value)) {
-                $body .= "[{$slot}] " . print_r($value, true) . PHP_EOL;
-            }
-            if ($value instanceof Request) {
-                $body .= "[{$slot}] (Request) " . $value->toUri() . PHP_EOL;
-            }
-        }
-        $this->resource->body = $body;
-        return $this;
-    }
-
-    /**
      * Make responce object with RFC 2616 compliant HTTP header
      *
      * @throws ResourceBodyIsNotString
@@ -145,7 +134,6 @@ class HttpFoundation implements Response
      */
     public function prepare()
     {
-        v($this->tmpDir);
         // already has representation ?
         if ($this->resource->representation) {
             $body = $this->resource->representation;
@@ -172,16 +160,14 @@ class HttpFoundation implements Response
     }
 
     /**
-     * Output
+     * Send
      *
-     * @param boolean $debug
-     *
-     * @return void
+     * @return \BEAR\Framework\Web\HttpFoundation
      */
-    public function output()
+    public function send($mode = self::MODE_REP)
     {
         if (PHP_SAPI === 'cli') {
-            $this->outputCliDebug();
+            $this->outputCliDebug($mode);
         } else {
             $this->outputWeb();
         }
@@ -218,10 +204,10 @@ class HttpFoundation implements Response
         $this->response->send();
     }
 
-    public function outputCliDebug()
+    public function outputCliDebug($mode)
     {
-        $consoleOutput = new ConsoleOutput;
         if ($this->e) {
+            $consoleOutput = new ConsoleOutput;
             $msg = $this->e->getMessage();
             $consoleOutput->writeln([
                 '',
@@ -231,6 +217,8 @@ class HttpFoundation implements Response
         }
         $label = "\033[1;32m";
         $label1 = "\033[1;33m";
+        $label2 = "\e[4;30m";
+        $label3 = "\e[0;36m";
         $close = "\033[0m";
         // code
         $codeMsg = $label . $this->resource->code . ' ' . SymfonyResponse::$statusTexts[$this->resource->code] . $close . PHP_EOL;
@@ -249,11 +237,28 @@ class HttpFoundation implements Response
                 echo "{$label1}{$name}: {$close}{$value}" . PHP_EOL;
             }
         }
-        // body
+        // body label
         echo "{$label}[BODY]{$close}" . PHP_EOL;
-        if (is_array($this->resource->body) || $this->resource->body instanceof \Traversal) {
+        $isTraversable = is_array($this->resource->body) || $this->resource->body instanceof \Traversable;
+        if ($isTraversable) {
             foreach ($this->resource->body as $key => $body) {
-                $body = is_array($body) ? json_encode($body) : $body;
+                if ($body instanceof \BEAR\Resource\Request) {
+                    switch ($mode) {
+                        case self::MODE_REQUEST:
+                            $body = "{$label2}(Request)" . $body->toUri() .$close;
+                            break;
+                        case self::MODE_VALUE:
+                            $resource = $body();
+                            $body = var_export($resource->body, true) . "{$label2}by " . $body->toUri() . $close;
+                            break;
+                        case self::MODE_REP:
+                        default:
+                            $body = (string)$body . "{$label2}by " . $body->toUri() . $close;
+                            break;
+
+                    }
+                }
+                $body = is_array($body) ? var_export($body, true) : $body;
                 echo "{$label1}{$key}{$close}:" . $body. PHP_EOL;
             }
         } else {
@@ -282,21 +287,14 @@ class HttpFoundation implements Response
      */
     public function request()
     {
-        (string)$this->resource;
-        //         if (is_array($this->resource->body) || $this->resource->body instanceof \Traversable) {
-        //             foreach ($this->resource->body as $key => &$value) {
-        //                 if ($value instanceof Request) {
-        //                     $value = $value()->body;
-        //                 }
-        //             }
-        //         }
+        //         (string)$this->resource;
         return $this;
     }
 
     /**
      * Convert format
      *
-     * @param string | Callable  $format
+     * @param mixed $format
      *
      * @return \BEAR\Framework\Web\HttpFoundation
      */
@@ -308,22 +306,22 @@ class HttpFoundation implements Response
         }
         switch ($format) {
             case self::FORMAT_JSON:
-                $this->resource->body = json_encode($this->resource->body);
+                $this->resource->representation = json_encode($this->resource->body);
                 break;
             case self::FORMAT_VAREXPORT:
-                $this->resource->body = var_export($this->resource->body, true);
+                $this->resource->representation = var_export($this->resource->body, true);
                 break;
             case self::FORMAT_VARDUMP:
                 ob_start();
                 var_export($this->resource->body);
-                $this->resource->body = ob_get_contents();
+                $this->resource->representation = ob_get_contents();
                 ob_end_clean();
                 break;
             case self::FORMAT_PRINTR:
-                $this->resource->body = print_r($this->resource->body, true);
+                $this->resource->representation = print_r($this->resource->body, true);
                 break;
             case self::FORMAT_SERIALIZE:
-                $this->resource->body = serialize($this->resource->body);
+                $this->resource->representation = serialize($this->resource->body);
                 break;
             default:
                 throw Exception($format);
@@ -334,7 +332,10 @@ class HttpFoundation implements Response
 
     private function log($filename, $log)
     {
-        file_put_contents("{$this->logDir}/" . $filename, $log);
+        $file = "{$this->logDir}/" . $filename;
+        if (is_writable($file)) {
+            file_put_contents($file, $log);
+        }
         error_log("[$filename]$log");
     }
 }

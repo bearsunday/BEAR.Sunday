@@ -1,12 +1,15 @@
 <?php
+
+namespace sandbox;
+
 use BEAR\Framework\StandardRouter as Router;
 use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Resource\Object as ResourceObject;
-use BEAR\Framework\Web\HttpFoundation as Output;
+use BEAR\Framework\Web\HttpFoundation as Response;
 
 require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
-require_once dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
+require_once dirname(__DIR__) . '/App.php';
 
 /**
  * CLI / Built-in web server dev script
@@ -40,7 +43,7 @@ if (php_sapi_name() == 'cli-server') {
 }
 
 // Application
-$app = require dirname(__DIR__) . '/scripts/instance.php';
+$app = App::factory(App::RUN_MODE_DEV);
 
 // Dispatch
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
@@ -55,8 +58,12 @@ if (!($response instanceof ResourceObject)) {
 }
 
 // Output
-if (isset($argv[3]) && $argv[3] === '--slot') {
-    (new Output)->debug()->setResource($response)->slotView()->output();
+if (isset($argv[3])) {
+    $mode = $argv[3];
+    if (! in_array($mode, [Response::MODE_REP, Response::MODE_REQUEST, Response::MODE_VALUE])) {
+        throw new \InvalidArgumentException($mode);
+    }
 } else {
-    (new Output)->debug()->setResource($response)->request()->format(OUTPUT::FORMAT_PRINTR)->output();
+    $mode = Response::MODE_REQUEST;
 }
+$app->response->debug()->setResource($response)->request()->send($mode);

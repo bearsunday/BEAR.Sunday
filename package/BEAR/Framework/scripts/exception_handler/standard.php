@@ -67,6 +67,6 @@ METHOD_NOT_ALLOWED:
     $previous =  $e->getPrevious() ? (get_class($e->getPrevious()) .': ' . str_replace("\n", ' ', $e->getPrevious()->getMessage())) : '-';
     $response->headers['X-EXCEPTION-PREVIOUS'] =  $previous;
     $response->headers['X-EXCEPTION-ID'] = $expectionId;
-    (new Output)->setResource($response)->setException($e, $expectionId)->prepare(false)->output();
+    (new Output)->setResource($response)->setException($e, $expectionId)->prepare(false)->send();
     exit(1);
 });

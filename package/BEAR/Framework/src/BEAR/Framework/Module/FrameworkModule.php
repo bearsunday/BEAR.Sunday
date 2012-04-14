@@ -63,8 +63,8 @@ class FrameworkModule extends AbstractModule
     {
         $injector = Injector::create();
         $config = $injector->getContainer()->getForge()->getConfig();
-        $this->bind('Ray\Di\InjectorInterface')->toInstance($injector);
         $this->bind('Aura\Di\ConfigInterface')->toInstance($config);
+        $this->bind('Ray\Di\InjectorInterface')->toInstance($injector);
         $this->bind('BEAR\Resource\Resource')->to('BEAR\Resource\Client')->in(Scope::SINGLETON);
         $this->bind('BEAR\Resource\Invokable')->to('BEAR\Resource\Invoker')->in(Scope::SINGLETON);
         $this->bind('BEAR\Resource\Linkable')->to('BEAR\Resource\Linker')->in(Scope::SINGLETON);

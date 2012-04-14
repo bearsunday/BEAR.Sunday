@@ -39,7 +39,7 @@ use ReflectionClass;
  * @package    sandbox
  * @subpackage Module
  */
-class DevModule extends AbstractModule
+class ProdModule extends AbstractModule
 {
     /**
      * Configure dependency binding

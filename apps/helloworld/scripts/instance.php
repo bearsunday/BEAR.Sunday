@@ -6,14 +6,7 @@
  */
 namespace helloworld;
 
-use BEAR\Framework\Framework;
+require dirname(__DIR__) . '/App.php';
 
-require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
-require_once dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
-
-// framework configuration
-$framework = (new Framework)->setLoader(__NAMESPACE__, dirname(__DIR__));
-
-// application instance
-$app = new App([new Module\AppModule], $framework);
+$app = App::factory(0);
 return $app;

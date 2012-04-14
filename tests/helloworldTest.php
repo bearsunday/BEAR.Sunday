@@ -5,7 +5,7 @@ namespace BEAR\Framework;
 /**
  * Test class for Annotation.
  */
-class HelloworldPageTest extends \PHPUnit_Framework_TestCase
+class HelloworldTest extends \PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {

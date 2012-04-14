@@ -25,7 +25,7 @@ class HttFoundationTest extends \PHPUnit_Framework_TestCase
         $response = new Ok;
         $response->body = '';
         ob_start();
-        $this->output->setResource($response)->output();
+        $this->output->setResource($response)->send();
         $ob = ob_get_clean();
         $this->assertTrue(is_string($ob));
     }
@@ -35,7 +35,7 @@ class HttFoundationTest extends \PHPUnit_Framework_TestCase
         $response = new Ok;
         $response->body = '';
         ob_start();
-        $this->output->setResource($response)->prepare()->output();
+        $this->output->setResource($response)->prepare()->send();
         $ob = ob_get_clean();
         $this->assertTrue(is_string($ob));
     }

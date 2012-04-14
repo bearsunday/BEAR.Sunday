@@ -46,8 +46,9 @@ class DevModule extends AbstractModule
 
         $this->bind()->annotatedWith('master_db')->toInstance($masterDb);
         $this->bind()->annotatedWith('slave_db')->toInstance($slaveDb);
+
         // install enviroment-depend module
-        $this->installWritableChecker();
+//         $this->installWritableChecker();
     }
 
     /**
@@ -56,11 +57,11 @@ class DevModule extends AbstractModule
     private function installWritableChecker()
     {
         // bind tmp writable checker
-//         $checker = $this->injector->getInstance('\sandbox\Interceptor\Checker');
-//         $this->bindInterceptor(
-//             $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
-//             $this->matcher->any(),
-//             [$checker]
-//         );
+        $checker = $this->requestInjection('\sandbox\Interceptor\Checker');
+        $this->bindInterceptor(
+            $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
+            $this->matcher->any(),
+            [$checker]
+        );
     }
 }

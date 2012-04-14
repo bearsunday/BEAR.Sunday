@@ -21,8 +21,7 @@ if (php_sapi_name() == 'cli-server') {
 }
 
 // load
-apc_clear_cache();
-require_once dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
+require dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
 require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
 require dirname(__DIR__) . '/App.php';
 
@@ -40,4 +39,4 @@ list($method, $pagePath, $query) = $router->match($GLOBALS);
 $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
 
 // Transfer
-(new Output)->setResource($page)->prepare()->output();
+$app->response->setResource($page)->prepare()->send();

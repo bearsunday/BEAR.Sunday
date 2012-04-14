@@ -1,35 +1,23 @@
 <?php
 namespace helloworld\Module;
 
-use Ray\Di\InjectorInterface as Di;
 use Ray\Di\ProviderInterface as Provide;
-
 use BEAR\Resource\Adapter\App as AppAdapter;
 use BEAR\Resource\Adapter\Page;
 use BEAR\Resource\SchemeCollection;
-use BEAR\Framework\AbstractAppContext as AppContext;
+use BEAR\Framework\Inject\AppNameInject;
+use BEAR\Framework\Inject\InjectorInject;
 
 /**
  * Application resource module
  *
- * @package    helloworld
+ * @package    sandbox
  * @subpackage Module
  */
 class SchemeCollectionProvider implements Provide
 {
-    /**
-     * Constructor
-     *
-     * @param Inject     $injector
-     * @param AppContext $app
-     *
-     * @Inject
-     */
-    public function __construct(Di $injector, AppContext $app)
-    {
-        $this->injector = $injector;
-        $this->namespace = $app::NAME;
-    }
+    use AppNameInject;
+    use InjectorInject;
 
     /**
      * Return resource adapter set.
@@ -39,8 +27,10 @@ class SchemeCollectionProvider implements Provide
     public function get()
     {
         $schemeCollection = new SchemeCollection;
-        $schemeCollection->scheme('page')->host('self')->toAdapter(new AppAdapter($this->injector, $this->namespace, 'Resource\Page'));
-        $schemeCollection->scheme('app')->host('self')->toAdapter(new AppAdapter($this->injector, $this->namespace, 'Resource\App'));
+        $pageAdapter = new AppAdapter($this->injector, $this->appName, 'Resource\Page');
+        $appAdapter = new AppAdapter($this->injector, $this->appName, 'Resource\App');
+        $schemeCollection->scheme('page')->host('self')->toAdapter($pageAdapter);
+        $schemeCollection->scheme('app')->host('self')->toAdapter($appAdapter);
         return $schemeCollection;
     }
 }

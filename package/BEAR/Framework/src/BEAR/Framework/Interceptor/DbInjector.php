@@ -11,6 +11,9 @@ use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 use Doctrine\DBAL\DriverManager;
 
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
+
 /**
  * Cache interceptor
  *

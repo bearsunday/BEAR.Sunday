@@ -9,6 +9,9 @@ namespace BEAR\Framework\Inject;
 
 use Ray\Di\InjectorInterface as Di;
 
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
+
 /**
  * Inject setter trait
  *

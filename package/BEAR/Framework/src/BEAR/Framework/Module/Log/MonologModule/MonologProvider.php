@@ -13,6 +13,9 @@ use Monolog\Logger;
 use Monolog\Handler\TestHandler;
 use Monolog\Handler\StreamHandler;
 
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
+
 /**
  * Cache
  *

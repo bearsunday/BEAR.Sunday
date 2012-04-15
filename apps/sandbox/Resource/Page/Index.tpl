@@ -107,7 +107,7 @@
       <hr>
 
       <footer>
-        <p>&copy; 2012 <a href="https://twitter.com/#!/bearsunday">@BEARSunday</a></p>
+        <p>&copy; 2012 <a href="https://twitter.com/#!/bearsunday">@BEARSunday</a> ({$performance} page / sec)</p>
       </footer>
 
     </div> <!-- /container -->

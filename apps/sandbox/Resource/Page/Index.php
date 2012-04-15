@@ -14,18 +14,16 @@ use BEAR\Framework\Annotation\CacheUpdate;
 use BEAR\Framework\Annotation\Html;
 use BEAR\Framework\Framework;
 use BEAR\Framework\Inject\TmpDirInject;
+use BEAR\Framework\Inject\ResourceInject;
 
 /**
  * @Html
  */
 class Index extends Page
 {
-    use TmpDirInject;
-
-    /**
-     * Get
-     */
-    public function onGet()
+    use ResourceInject;
+    
+    public function __construct()
     {
         $this['greeting'] ='Hello, BEAR.Sunday.';
         $this['version'] = [
@@ -40,6 +38,15 @@ class Index extends Page
             'Xdebug'  => extension_loaded('Xdebug') ? 'Yes' : 'No',
             'xhprof' => extension_loaded('xhprof') ? 'Yes' : 'No'
         ];
+    }
+
+    /**
+     * Get
+     */
+    public function onGet()
+    {
+        // page / sec
+        $this['performance'] = $this->resource->get->uri('app://self/performance')->request();
         return $this;
     }
 }

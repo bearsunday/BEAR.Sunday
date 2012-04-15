@@ -6,6 +6,9 @@
  */
 namespace BEAR\Framework\Interceptor\ViewAdapter;
 
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
+
 use Smarty;
 
 /**

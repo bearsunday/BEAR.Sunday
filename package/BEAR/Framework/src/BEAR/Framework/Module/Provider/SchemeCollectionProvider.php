@@ -9,6 +9,9 @@ use BEAR\Resource\Adapter\Http;
 use BEAR\Resource\SchemeCollection;
 use BEAR\Framework\AbstractAppContext as AppContext;
 
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
+
 /**
  * Application resource module
  *

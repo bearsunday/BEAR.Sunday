@@ -9,6 +9,9 @@ namespace BEAR\Framework\Inject;
 
 use BEAR\Resource\Client as Resource;
 
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
+
 /**
  * Inject resource client
  *

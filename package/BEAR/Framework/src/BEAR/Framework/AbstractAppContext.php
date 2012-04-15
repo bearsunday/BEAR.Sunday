@@ -14,6 +14,8 @@ use BEAR\Framework\Web\Response;
 use BEAR\Resource\Client;
 use BEAR\Resource\SignalHandler\Provides;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Application context

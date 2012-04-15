@@ -12,6 +12,9 @@ use BEAR\Framework\Annotation\Cache;
 use BEAR\Framework\Annotation\CacheUpdate;
 use BEAR\Framework\Annotation\Html;
 
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
+
 /**
  * @Html
  */

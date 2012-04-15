@@ -1,5 +1,5 @@
 # benchmark
-#php_value auto_prepend_file "/usr/local/phpmark/xhprof.php"
+php_value auto_prepend_file "/Users/akihito/git/xhprof/auto_prepend_file/xhgui.php"
 <IfModule mod_rewrite.c>
     # turn on rewriting
     RewriteEngine On

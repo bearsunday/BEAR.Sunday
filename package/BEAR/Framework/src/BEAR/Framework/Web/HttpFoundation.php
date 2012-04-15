@@ -19,6 +19,8 @@ use Traversable;
 use BEAR\Framework\Inject\LogInject;
 use BEAR\Framework\Inject\TmpDirInject;
 use BEAR\Framework\Inject\LogDirInject;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Output with Symfony HttpFoundation

@@ -17,6 +17,7 @@ class SmartyRednererProvider implements ProviderInterface
 {
     /**
      * @param SmartyAdapter $adapter
+     * 
      * @Inject
      */
     public function setAdapter(SmartyAdapter $adapter)

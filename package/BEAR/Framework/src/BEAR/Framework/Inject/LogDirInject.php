@@ -7,6 +7,9 @@
  */
 namespace BEAR\Framework\Inject;
 
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
+
 /**
  * Inject tmp_dir
  *

@@ -59,7 +59,8 @@
       <div class="hero-unit">
         <h1>{$greeting}</h1>
         <p>PHP 5.4+ Resource Oriented Framework</p>
-        <p><a class="btn btn-primary btn-large" href="https://github.com/koriym/BEAR.Sunday">View project on GitHub &raquo;</a></p>
+        <p><a class="btn btn-primary btn-large" href="https://github.com/koriym/BEAR.Sunday">View project on GitHub &raquo;</a> 
+        <a rel="tooltip" title ="{$apc.size} of {$apc.total} APC entries will be cleard." class="btn btn-primary btn-large btn btn-warning" href="/_bear/refresh.php"><span class="icon-refresh"></span> Refresh</a></p> 
       </div>
       <!-- Example row of columns -->
       <div class="row">
@@ -72,15 +73,18 @@
           <h2>Extension</h2>
           <h3>mandatory</h3>
           <ul>
-            <li><a href="/_bear/apc.php">apc</a> <code>{$extentions.apc}</code></li>
+            <li><a href="http://www.php.net/apc">apc</a> <code>{$extentions.apc}</code></li>
+            <a class="btn" href="_bear/apc.php" id="apc" rel="tooltip" title="Open APC admin cotroll panel">APC Admin  &raquo;</a>
           </ul>
           <h3>optional</h3>
           <ul>
             <li>curl <code>{$extentions.curl}</code></li>
             <li>memcache <code>{$extentions.memcache}</code></li>
+            <p><a class="btn" href="_bear/memcache.php/" id="memchace" rel="tooltip" title="Open memcache admin cotroll panel">Memcache Admin &raquo;</a></p>
             <li>mysqlnd <code>{$extentions.mysqlnd}</code></li>
             <li>Xdebug <code>{$extentions.Xdebug}</code></li>
             <li>xhprof <code>{$extentions.xhprof}</code></li>
+            <p><a class="btn" href="/xhprof_html/" rel="tooltip" title="Open profiler">Profile &raquo;</a></p>
           </ul>
         </div>
         <div class="span4">
@@ -128,6 +132,15 @@
     <script src="../assets/js/bootstrap-collapse.js"></script>
     <script src="../assets/js/bootstrap-carousel.js"></script>
     <script src="../assets/js/bootstrap-typeahead.js"></script>
+
+    <script>
+    
+    {literal}
+    $('#apc').tooltip();
+    $('[rel=tooltip]').tooltip();
+    {/literal}
+
+    </script>
 
   </body>
 </html>

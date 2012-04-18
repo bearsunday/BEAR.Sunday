@@ -78,6 +78,7 @@
     "require": {
         "php": ">=5.4.0",
         "ext-apc": "*",
+        "ext-curl": "*",
         "Aura/Autoload": "dev-master",
         "Aura/Di": "dev-master",
         "Aura/Router": "dev-master",
@@ -86,7 +87,6 @@
         "BEAR/Resource": "dev-master",
         "doctrine/common": "2.2.*",
         "doctrine/dbal": "dev-master",
-        "guzzle/guzzle": "dev-master",
         "symfony/console": "2.0.*",
         "symfony/http-foundation": "2.0.*",
         "Ray/Aop": "dev-master",

@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * BEAR.Framework
+ *
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ */
 namespace BEAR\Framework\Module\Provider;
 
 use BEAR\Framework\Inject\LogInject;
@@ -8,7 +12,6 @@ use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 use Ray\Di\InjectorInterface;
 use Ray\Di\ProviderInterface as Provide;
-
 use Smarty;
 
 /**
@@ -22,6 +25,8 @@ class SmartyProvider implements Provide
     use TmpDirInject;
 
     /**
+     * Return instance
+     * 
      * @return Smarty
      */
     public function get()

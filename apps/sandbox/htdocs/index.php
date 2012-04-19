@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Web server script (Production USE)
+ *
+ * @package BEAR.Framework
+ */
 namespace sandbox;
 
 use BEAR\Framework\Framework;
@@ -8,11 +12,6 @@ use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Web\HttpFoundation as Output;
 
-/**
- * Web server script (Production USE)
- *
- * @package BEAR.Framework
- */
 if (php_sapi_name() == 'cli-server') {
     // route static assets and return false
     if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css)$/', $_SERVER["REQUEST_URI"])) {

@@ -1,6 +1,6 @@
 <?php
 /**
- *  BEAR.Framework
+ * BEAR.Framework
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
@@ -11,9 +11,9 @@ use ArrayIterator;
 
 /**
  * HTTP Header
- *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * 
+ * @package    BEAR.Framework
+ * @subpackage Page
  */
 class Header extends ArrayObject
 {

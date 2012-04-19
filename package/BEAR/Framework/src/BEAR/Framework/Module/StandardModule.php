@@ -2,7 +2,6 @@
 /**
  * BEAR.Framework
  *
- * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Module;
@@ -15,8 +14,8 @@ use BEAR\Framework\AbstractAppContext as App;
 /**
  * Framework default module
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Module
  */
 class StandardModule extends AbstractModule
 {

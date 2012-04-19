@@ -2,7 +2,6 @@
 /**
  * BEAR.Framework
  *
- * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Module;
@@ -15,7 +14,7 @@ use Ray\Di\Scope;
 /**
  * Application module
  *
- * @package    sandbox
+ * @package    BEAR.Framework
  * @subpackage Module
  */
 class FrameworkModule extends AbstractModule

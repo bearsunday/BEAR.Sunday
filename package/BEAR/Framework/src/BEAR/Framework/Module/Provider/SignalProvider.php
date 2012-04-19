@@ -1,13 +1,12 @@
 <?php
 /**
- * BEAR.Framework;
+ * BEAR.Framework
  *
- * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Module\Provider;
 
-use Ray\Di\ProviderInterface;
+use Ray\Di\ProviderInterface as Provide;
 use Aura\Signal\Manager;
 use Aura\Signal\HandlerFactory;
 use Aura\Signal\ResultFactory;
@@ -16,20 +15,22 @@ use Aura\Signal\ResultCollection;
 /**
  * Signal
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Module
  */
-class SignalProvider implements ProviderInterface
+class SignalProvider implements Provide
 {
     /**
+     * Return instance
+     * 
      * @return Manager
      */
     public function get()
     {
         return new Manager(
-                new HandlerFactory,
-                new ResultFactory,
-                new ResultCollection
+            new HandlerFactory,
+            new ResultFactory,
+            new ResultCollection
         );
     }
 }

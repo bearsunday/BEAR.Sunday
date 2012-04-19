@@ -6,12 +6,14 @@
  */
 namespace BEAR\Framework\Exception;
 
+use BEAR\Resource\Exception;
+
 /**
  * Invalid Resource Type
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package   BEAR.Framework
+ * @subpackge Exception
  */
-class InvalidResourceType extends \BEAR\Resource\Exception
+class InvalidResourceType extends Exception
 {
 }

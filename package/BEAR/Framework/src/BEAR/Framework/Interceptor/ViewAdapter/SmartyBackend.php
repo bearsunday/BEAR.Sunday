@@ -8,15 +8,13 @@ namespace BEAR\Framework\Interceptor\ViewAdapter;
 
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
-
 use Smarty;
 
 /**
  * Smarty adapter
  *
  * @package    BEAR.Framework
- * @subpackage View
- * @author     Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @subpackage Intercetor
  */
 class SmartyBackend implements Renderable
 {

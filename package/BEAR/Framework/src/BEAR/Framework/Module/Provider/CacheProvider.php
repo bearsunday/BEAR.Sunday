@@ -1,28 +1,29 @@
 <?php
 /**
- * BEAR.Framework;
+ * BEAR.Framework
  *
- * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Module\Provider;
 
-use Ray\Di\ProviderInterface as Provide;
+use BEAR\Framework\Inject\LogInject;
 use Doctrine\Common\Cache\ApcCache as Cache;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
-use BEAR\Framework\Inject\LogInject;;
+use Ray\Di\ProviderInterface as Provide;
 
 /**
  * Cache
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Module
  */
 class CacheProvider implements Provide
 {
     use LogInject;
 
     /**
+     * Return instance
+     * 
      * @return CacheAdapter
      */
     public function get()

@@ -1,15 +1,12 @@
 <?php
 /**
- * Module
+ * BEAR.Framework
  *
- * @package    BEAR.Framework
- * @subpackage Module
+ * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Module\Schema;
-use Ray\Di\Scope;
 
 use Ray\Di\AbstractModule;
-use Ray\Di\Injector;
 
 /**
  * Schema module

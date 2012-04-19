@@ -1,24 +1,22 @@
 <?php
 /**
- * BEAR.Framework;
+ * BEAR.Framework
  *
- * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Interceptor;
 
+use Doctrine\DBAL\DriverManager;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
-use Doctrine\DBAL\DriverManager;
-
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
 /**
  * Cache interceptor
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Intercetor
  */
 class DbInjector implements MethodInterceptor
 {
@@ -27,14 +25,14 @@ class DbInjector implements MethodInterceptor
      *
      * @var array
      */
-    private $masterDsn;
+    private $masterDb;
 
     /**
      * DSN for slave
      *
      * @var array
      */
-    private $slaveDsn;
+    private $slaveDb;
 
     /**
      * Constructor

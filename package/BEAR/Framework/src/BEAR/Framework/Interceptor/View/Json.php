@@ -1,6 +1,6 @@
 <?php
 /**
- * BEAR.Framework;
+ * BEAR.Framework
  *
  * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
@@ -12,8 +12,8 @@ use Ray\Aop\MethodInterceptor;
 /**
  * Json view interceptor
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Interceptor
  */
 class Json implements MethodInterceptor
 {

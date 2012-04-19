@@ -1,8 +1,7 @@
 <?php
 /**
- * BEAR.Framework;
+ * BEAR.Framework
  *
- * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Module;
@@ -27,7 +26,7 @@ abstract class AbstractPrototypeProvider implements Provide
     private $instance;
 
     /**
-     * New instance
+     * Create new instance
      *
      * @return object
      */

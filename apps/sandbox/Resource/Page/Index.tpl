@@ -44,7 +44,6 @@
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
               <li><a href="https://github.com/koriym/BEAR.Sunday">GitHub</a></li>
-              <li><a href="http://travis-ci.org/#!/koriym/BEAR.Sunday">Travis</a></li>
               <li><a href="http://code.google.com/p/bearsunday/">Google Code</a></li>
               <li><a href="mailto:koriyama@bear-project.net">Contact</a></li>
             </ul>
@@ -134,12 +133,7 @@
     <script src="../assets/js/bootstrap-typeahead.js"></script>
 
     <script>
-    
-    {literal}
-    $('#apc').tooltip();
-    $('[rel=tooltip]').tooltip();
-    {/literal}
-
+    {literal}$('[rel=tooltip]').tooltip();{/literal}
     </script>
 
   </body>

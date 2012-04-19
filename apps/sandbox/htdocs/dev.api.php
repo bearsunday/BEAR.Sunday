@@ -1,20 +1,8 @@
 <?php
-
-namespace sandbox;
-
-use BEAR\Framework\StandardRouter as Router;
-use BEAR\Framework\Dispatcher;
-use BEAR\Framework\Globals;
-use BEAR\Resource\Object as ResourceObject;
-use BEAR\Framework\Web\HttpFoundation as Response;
-
-require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
-require_once dirname(__DIR__) . '/App.php';
-
 /**
- * CLI / Built-in web server dev script
+ * CLI  Built-in web server dev script
  *
- * examaple:
+ * Examaple:
  *
  * CLI:
  * $ php dev.php get /hello
@@ -35,6 +23,17 @@ require_once dirname(__DIR__) . '/App.php';
  * @global BEAR\Resource\Object $page     Resource object (target)
  * @global BEAR\Resource\Object $response Resource object (response)
  */
+namespace sandbox;
+
+use BEAR\Framework\StandardRouter as Router;
+use BEAR\Framework\Dispatcher;
+use BEAR\Framework\Globals;
+use BEAR\Resource\Object as ResourceObject;
+use BEAR\Framework\Web\HttpFoundation as Response;
+
+require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+require_once dirname(__DIR__) . '/App.php';
+
 if (php_sapi_name() == 'cli-server') {
     // route static assets and return false
     if (preg_match('/\.(?:png|jpg|jpeg|gif|js)$/', $_SERVER["REQUEST_URI"])) {

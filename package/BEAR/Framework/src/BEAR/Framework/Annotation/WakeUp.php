@@ -14,7 +14,6 @@ namespace BEAR\Framework\Annotation;
  *
  * @package    BEAR.Framework
  * @subpackage Annotation
- * @author     Akihito Koriyama <akihito.koriyama@gmail.com>
  */
 final class WakeUp
 {

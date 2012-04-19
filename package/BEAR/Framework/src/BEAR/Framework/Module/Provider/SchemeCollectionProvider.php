@@ -1,21 +1,19 @@
 <?php
 namespace BEAR\Framework\Module\Provider;
 
-use Ray\Di\InjectorInterface as Di;
-use Ray\Di\ProviderInterface as Provide;
-
 use BEAR\Resource\Adapter\App;
 use BEAR\Resource\Adapter\Http;
 use BEAR\Resource\SchemeCollection;
 use BEAR\Framework\AbstractAppContext as AppContext;
-
+use Ray\Di\InjectorInterface as Di;
+use Ray\Di\ProviderInterface as Provide;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
 /**
  * Application resource module
  *
- * @package    helloworld
+ * @package    BEAR.Framework
  * @subpackage Module
  */
 class SchemeCollectionProvider implements Provide

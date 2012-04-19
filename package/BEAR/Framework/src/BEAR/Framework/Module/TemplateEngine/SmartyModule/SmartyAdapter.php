@@ -16,8 +16,7 @@ use Ray\Di\Di\Named;
  * Smarty adapter
  *
  * @package    BEAR.Framework
- * @subpackage View
- * @author     Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @subpackage Module
  */
 class SmartyAdapter implements TemplateEngineAdapter
 {

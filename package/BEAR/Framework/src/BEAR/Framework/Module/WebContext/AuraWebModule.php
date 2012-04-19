@@ -1,16 +1,14 @@
 <?php
 /**
- * Module
+ * BEAR.Framework
  *
- * @package    BEAR.Framework
- * @subpackage Module
+ * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Module\WebContext;
-use Ray\Di\Scope;
 
 use BEAR\Framework\Module\StandardModule;
 use Ray\Di\AbstractModule;
-use Ray\Di\Injector;
+use Ray\Di\Scope;
 
 /**
  * Aura.Web Context module
@@ -30,6 +28,7 @@ class AuraWebModule extends AbstractModule
         $this
         ->bind('Ray\Di\ProviderInterface')
         ->annotatedWith('webContext')
-        ->to('BEAR\Framework\Module\Provider\WebContextProvider')->in(Scope::SINGLETON);
+        ->to('BEAR\Framework\Module\Provider\WebContextProvider')
+        ->in(Scope::SINGLETON);
     }
 }

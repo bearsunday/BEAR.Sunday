@@ -1,20 +1,18 @@
 <?php
 /**
- * Module
+ * BEAR.Framework
  *
- * @package    BEAR.Framework
- * @subpackage Module
+ * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Module\Cqrs;
 
-use Ray\Di\Scope;
-use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
-use Zend\Cache\Backend\File as CacheBackEnd;
 use BEAR\Framework\Interceptor\CacheLoader as CacheLoadInterceptor;
 use BEAR\Framework\Interceptor\CacheUpdater as CacheUpdateInterceptor;
-
+use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
+use Zend\Cache\Backend\File as CacheBackEnd;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
+use Ray\Di\Scope;
 
 /**
  * DBAL module
@@ -33,15 +31,15 @@ class CacheModule extends AbstractModule
     {
         $cacheLoadInterceptor = new CacheLoadInterceptor(new CacheAdapter(new CacheBackEnd));
         $this->bindInterceptor(
-                $this->matcher->any(),
-                $this->matcher->annotatedWith('BEAR\Framework\Annotation\Cache'),
-                [$cacheLoadInterceptor]
+            $this->matcher->any(),
+            $this->matcher->annotatedWith('BEAR\Framework\Annotation\Cache'),
+            [$cacheLoadInterceptor]
         );
         $cacheUpdateInterceptor = Injector::create()->getInstance('BEAR\Framework\Interceptor\CacheUpdater', ['cache' => $cacheLoadInterceptor]);
         $this->bindInterceptor(
-                $this->matcher->any(),
-                $this->matcher->annotatedWith('BEAR\Framework\Annotation\CacheUpdate'),
-                [$cacheUpdateInterceptor]
+            $this->matcher->any(),
+            $this->matcher->annotatedWith('BEAR\Framework\Annotation\CacheUpdate'),
+            [$cacheUpdateInterceptor]
         );
     }
 }

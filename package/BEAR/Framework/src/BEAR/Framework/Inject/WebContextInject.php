@@ -1,24 +1,22 @@
 <?php
 /**
- * BEAR.Resource;
+ * BEAR.Framework
  *
- * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Inject;
 
+use Aura\Di\ConfigInterface;
 use Ray\Di\Definition;
 use Ray\Di\ProviderInterface as Provider;
-use Aura\Di\ConfigInterface;
-
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
 /**
  * Inject web context
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Inject
  */
 trait WebContextInject
 {

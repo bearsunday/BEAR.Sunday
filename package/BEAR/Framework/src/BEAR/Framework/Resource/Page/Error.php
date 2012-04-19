@@ -1,6 +1,6 @@
 <?php
 /**
- *  BEAR.Framework
+ * BEAR.Framework
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
@@ -8,9 +8,9 @@ namespace BEAR\Framework\Resource\Page;
 
 /**
  * Error page
- *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * 
+ * @package    BEAR.Framework
+ * @subpackage Page
  */
  class Error extends AbstractPage
 {
@@ -18,6 +18,9 @@ namespace BEAR\Framework\Resource\Page;
     public $headers = [];
     public $body = '';
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
     }

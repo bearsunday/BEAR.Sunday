@@ -7,28 +7,34 @@
  */
 namespace BEAR\Framework\Module\Log\MonologModule;
 
-use Ray\Di\ProviderInterface as Provide;
 use Guzzle\Common\Log\MonologLogAdapter;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use Monolog\Handler\StreamHandler;
-
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
+use Ray\Di\ProviderInterface as Provide;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
 /**
  * Cache
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Module
  */
 class MonologProvider implements Provide
 {
+    /**
+     * Log directory path
+     * 
+     * @var string
+     */
     private $logDir;
 
     /**
+     * Constructor
      *
      * @param string $logDir
+     * 
      * @Inject
      * @Named("log_dir")
      */
@@ -38,15 +44,15 @@ class MonologProvider implements Provide
     }
 
     /**
+     * Provide instance
+     * 
      * @return CacheAdapter
      */
     public function get()
     {
         $log = new Logger('app');
-        $handler = new TestHandler();
-//         $log->pushHandler($handler);
         $logFile = $this->logDir . '/app.log';
-        $log->pushHandler(new StreamHandler($this->logDir . '/app.log'));
+        $log->pushHandler(new StreamHandler($logFile));
         $adapter = new MonologLogAdapter($log);
         return $adapter;
     }

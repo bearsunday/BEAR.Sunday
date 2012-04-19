@@ -6,9 +6,8 @@
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Interceptor;
+
 use Aura\Signal\Manager as Signal;
-use Ray\Aop\MethodInterceptor;
-use Ray\Aop\MethodInvocation;
 use BEAR\Framework\Interceptor\Cachable as CacheInterceptor;
 use BEAR\Resource\Invoker;
 use BEAR\Resource\Request;
@@ -16,12 +15,14 @@ use BEAR\Resource\Linker;
 use Ray\Di\Config;
 use Ray\Di\Annotation;
 use Ray\Di\Definition;
+use Ray\Aop\MethodInterceptor;
+use Ray\Aop\MethodInvocation;
 
 /**
  * Cache update interceptor
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Intercetor
  */
 class CacheUpdater implements MethodInterceptor
 {

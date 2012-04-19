@@ -6,12 +6,14 @@
  */
 namespace BEAR\Framework\Exception;
 
+use BEAR\Resource\Exception;
+
 /**
  * Not found
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package   BEAR.Framework
+ * @subpackge Exception
  */
-class ResourceNotFound extends \BEAR\Resource\Exception
+class ResourceNotFound extends Exception
 {
 }

@@ -1,19 +1,17 @@
 <?php
 /**
- * Module
+ * BEAR.Framework
  *
- * @package    BEAR.Framework
- * @subpackage Module
+ * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Module\Log;
 
-use Ray\Di\Scope;
-
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
+use Ray\Di\Scope;
 
 /**
- * DBAL module
+ * Monolog module
  *
  * @package    BEAR.Framework
  * @subpackage Module
@@ -27,6 +25,8 @@ class MonologModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('Guzzle\Common\Log\LogAdapterInterface')->toProvider('BEAR\Framework\Module\Log\MonologModule\MonologProvider');
+        $this
+        ->bind('Guzzle\Common\Log\LogAdapterInterface')
+        ->toProvider('BEAR\Framework\Module\Log\MonologModule\MonologProvider');
     }
 }

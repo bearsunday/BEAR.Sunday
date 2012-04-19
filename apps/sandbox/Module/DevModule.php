@@ -7,17 +7,16 @@
  */
 namespace sandbox\Module;
 
-use BEAR\Framework\Module\FrameworkModule;
-
-use helloworld\Module\AppModule;
-
-use BEAR\Framework\Module\TemplateEngine\SmartyModule;
-
-use Ray\Di\Scope;
-
-use BEAR\Framework\Module\StandardModule;
 use BEAR\Framework\Module;
+use BEAR\Framework\Module\FrameworkModule;
+use BEAR\Framework\Module\StandardModule;
+use BEAR\Framework\Module\TemplateEngine\SmartyModule;
+use BEAR\Framework\Module\Database;
+use helloworld\Module\AppModule;
+use Ray\Di\Scope;
 use Ray\Di\AbstractModule;
+
+
 /**
  * Application module
  *
@@ -33,6 +32,7 @@ class DevModule extends AbstractModule
      */
     protected function configure()
     {
+        v('DoctrineDbalModule');
         // application config
         $masterDb = $slaveDb = [
             'driver' => 'pdo_mysql',
@@ -43,9 +43,7 @@ class DevModule extends AbstractModule
             'charset' => 'UTF8'
         ];
         $tmpDir = dirname(__DIR__) . '/tmp';
-
-        $this->bind()->annotatedWith('master_db')->toInstance($masterDb);
-        $this->bind()->annotatedWith('slave_db')->toInstance($slaveDb);
+        $this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
 
         // install enviroment-depend module
 //         $this->installWritableChecker();

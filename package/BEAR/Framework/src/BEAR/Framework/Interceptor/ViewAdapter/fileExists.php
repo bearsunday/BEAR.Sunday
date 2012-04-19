@@ -1,6 +1,6 @@
 <?php
 /**
- *  BEAR.Framework
+ * BEAR.Framework
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
@@ -9,10 +9,10 @@ namespace BEAR\Framework\Interceptor\ViewAdapter;
 use BEAR\Framework\Exception\TemplateNotFound;
 
 /**
- * TraitName
+ * File exists ?
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Interceptor
  */
 trait fileExists
 {

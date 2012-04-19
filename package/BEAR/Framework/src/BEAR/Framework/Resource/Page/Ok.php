@@ -8,9 +8,9 @@ namespace BEAR\Framework\Resource\Page;
 
 /**
  * Ok page
- *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * 
+ * @package    BEAR.Framework
+ * @subpackage Page
  */
 class Ok extends AbstractPage
 {

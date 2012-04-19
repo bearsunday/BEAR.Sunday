@@ -73,7 +73,6 @@ class Framework
 
     /**
      * Constructor
-     *
      */
     public function __construct()
     {

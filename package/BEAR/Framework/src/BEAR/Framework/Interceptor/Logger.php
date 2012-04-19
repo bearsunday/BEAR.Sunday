@@ -1,6 +1,6 @@
 <?php
 /**
- * Logger
+ * BEAR.Framework
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
@@ -30,7 +30,7 @@ class Log implements MethodInterceptor
         $class = get_class($invocation->getThis());
         $input = $invocation->getArguments();
         $input = json_encode($input);
-        $result .= PHP_EOL .  "[Log] target = $class, input = $input, result = $result" . PHP_EOL;
+        $this->log->log("target = [{$class}], input = [{$input}], result = [{$result}]");
         return $result;
     }
 }

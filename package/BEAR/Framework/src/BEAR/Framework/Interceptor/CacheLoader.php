@@ -1,8 +1,7 @@
 <?php
 /**
- * BEAR.Framework;
+ * BEAR.Framework
  *
- * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Interceptor;
@@ -15,8 +14,8 @@ use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
 /**
  * Cache interceptor
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Intercetor
  */
 class CacheLoader implements Cachable, MethodInterceptor
 {

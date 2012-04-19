@@ -7,15 +7,10 @@
  */
 namespace BEAR\Framework\Module\TemplateEngine;
 
-use BEAR\Framework\Module\Extension\ViewModule;
-
-use Ray\Di\Scope;
-
-use BEAR\Framework\Module;
 use BEAR\Framework\Interceptor\ViewAdapter;
 use BEAR\Framework\Interceptor\ViewAdapter\SmartyBackEnd;
 use Ray\Di\AbstractModule;
-use Ray\Di\Injector;
+use Ray\Di\Scope;
 
 /**
  * Smarty module
@@ -37,8 +32,5 @@ class SmartyModule extends AbstractModule
     {
         $this->bind('Smarty')->toProvider(self::SMARTY)->in(Scope::SINGLETON);
         $this->bind('BEAR\Resource\Renderable')->toProvider(self::RENDERER);
-
-//         $this->bind('BEAR\Framework\Resource\View\ViewAdapter')
-//         ->to('BEAR\Framework\Interceptor\ViewAdapter\SmartyBackEnd');
     }
 }

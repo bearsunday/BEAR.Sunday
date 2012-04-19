@@ -1,32 +1,32 @@
 <?php
 /**
- * Response
+ * BEAR.Framework
  *
- * @package BEAR.Framework
+ * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Web;
 
-use BEAR\Resource\Object as ResourceObject;
 use BEAR\Framework\Exception\ResourceBodyIsNotString;
 use BEAR\Framework\Exception\InvalidResourceType;
+use BEAR\Framework\Inject\LogInject;
+use BEAR\Framework\Inject\TmpDirInject;
+use BEAR\Framework\Inject\LogDirInject;
 use BEAR\Resource\Request;
+use BEAR\Resource\Object as ResourceObject;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Helper\FormatterHelper as Formatter;
 use Ray\Aop\Weaver;
-use Exception;
-use Traversable;
-use BEAR\Framework\Inject\LogInject;
-use BEAR\Framework\Inject\TmpDirInject;
-use BEAR\Framework\Inject\LogDirInject;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
+use Exception;
+use Traversable;
 
 /**
- * Output with Symfony HttpFoundation
+ * Output with using symfony HttpFoundation
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Web
  */
 class HttpFoundation implements Response
 {

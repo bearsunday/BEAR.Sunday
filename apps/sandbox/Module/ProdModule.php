@@ -32,6 +32,7 @@ use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;
 use Zend\Cache\Backend\File as CacheBackEnd;
 use Smarty;
 use ReflectionClass;
+use BEAR\Framework\Module\Database;
 
 /**
  * Application module
@@ -59,14 +60,15 @@ class ProdModule extends AbstractModule
             'password' => null,
             'charset' => 'UTF8'
         ];
+        $this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
         $tmpDir = dirname(__DIR__) . '/tmp';
-        $this->bind()->annotatedWith('master_db')->toInstance($masterDb);
-        $this->bind()->annotatedWith('slave_db')->toInstance($slaveDb);
         $this->bind()->annotatedWith("tmp_dir")->toInstance($tmpDir);
-        $this->bind(self::RESOURCE_CACHE_INTERFACE)->annotatedWith("resource_cache")->toProvider(self::RESOURCE_CACHE_PROVIDER);
-        // install enviroment-depend module
+        
+        $this->bind(self::RESOURCE_CACHE_INTERFACE)
+        ->annotatedWith("resource_cache")
+        ->toProvider(self::RESOURCE_CACHE_PROVIDER);
+        
         $this->installWritableChecker();
-        // resource cache
     }
 
     /**

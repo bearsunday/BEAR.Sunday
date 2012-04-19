@@ -6,3 +6,4 @@ package/BEAR/Framework/src/BEAR/Framework/tmp/*
 templates_c
 tmp
 vendor
+xhprof_html

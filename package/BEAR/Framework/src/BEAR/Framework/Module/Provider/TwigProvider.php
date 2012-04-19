@@ -1,17 +1,24 @@
 <?php
-
-namespace BEAR\Framework\Module\Provider;
+/**
+ * BEAR.Framework
+ *
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ */
+namespace BEAR\Framework\Module\Provider as Provide;
 
 use Ray\Di\InjectorInterface;
 use Ray\Di\ProviderInterface;
+use BEAR\Framework\Inject\TmpDirInject;
 
 /**
  * Twig
  *
  * @see http://twig.sensiolabs.org/
  */
-class TwigProvider implements ProviderInterface
+class TwigProvider implements Provide
 {
+    use TmpDirInject;
+    
     /**
      * @return array
      */
@@ -20,7 +27,7 @@ class TwigProvider implements ProviderInterface
         $twig = new \Twig_Environment(
             new \Twig_Loader_Filesystem('/'),
             [
-                'cache' => dirname(dirname(__DIR__)) . '/tmp/twig',
+                'cache' => $this->tmpDir . '/tmp/twig',
                 'auto_reload' => true
             ]
         );

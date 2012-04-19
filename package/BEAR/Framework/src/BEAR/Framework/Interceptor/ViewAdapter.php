@@ -1,22 +1,20 @@
 <?php
 /**
- * BEAR.Framework;
+ * BEAR.Framework
  *
- * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Interceptor;
 
 use BEAR\Framework\Interceptor\ViewAdapter\Renderable;
-
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 
 /**
- * Cache interceptor
+ * ViewAdapter
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Interceptor
  */
 class ViewAdapter implements MethodInterceptor
 {

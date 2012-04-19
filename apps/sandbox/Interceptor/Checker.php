@@ -1,10 +1,14 @@
 <?php
+/**
+ * Env setting checker
+ *
+ * @package BEAR.Framework
+ */
 namespace sandbox\Interceptor;
 
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 use Ray\Di\AbstractModule;
-
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
@@ -13,12 +17,18 @@ use Ray\Di\Di\Named;
  */
 class Checker implements MethodInterceptor
 {
+    /**
+     * Tmpd dir path
+     *
+     * @var string
+     */
     private $tmpDir;
 
     /**
      * Constructor
      *
      * @param string $tmpDir
+     *
      * @Inject
      * @Named("tmp_dir")
      */
@@ -38,7 +48,7 @@ class Checker implements MethodInterceptor
         }
         $pageObject = $invocation->getThis();
         $tmpDir = $this->tmpDir;
-        $pageObject->representation  =  include __DIR__ . '/Checker/error.php';
+        $pageObject->representation = include __DIR__ . '/Checker/error.php';
         return $pageObject;
     }
 }

@@ -4,9 +4,10 @@
  *
  * @package BEAR.Framework
  */
-
 namespace BEAR\Framework;
 
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 use Ray\Di\Injector;
 use Ray\Di\InjectorInterface as Di;
 use Ray\Di\AbstractModule;
@@ -14,14 +15,12 @@ use BEAR\Framework\Web\Response;
 use BEAR\Resource\Client;
 use BEAR\Resource\SignalHandler\Provides;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 
 /**
  * Application context
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Web
  */
 abstract class AbstractAppContext
 {

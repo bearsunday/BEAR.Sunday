@@ -1,19 +1,24 @@
 <?php
 /**
- * Module
+ * BEAR.Framework
  *
- * @package    BEAR.Framework
- * @subpackage Module
+ * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Module\TemplateEngine\SmartyModule;
 
 use BEAR\Framework\Resource\View\Renderer;
-use Ray\Di\ProviderInterface;
+use Ray\Di\ProviderInterface as Provide;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 use Smarty;
 
-class SmartyRednererProvider implements ProviderInterface
+/**
+ * Smarty renderer adapter
+ *
+ * @package    BEAR.Framework
+ * @subpackage Module
+ */
+class SmartyRednererProvider implements Provide
 {
     /**
      * @param SmartyAdapter $adapter
@@ -24,9 +29,11 @@ class SmartyRednererProvider implements ProviderInterface
     {
         $this->adapter = $adapter;
     }
+    
     /**
+     * Return instance
      *
-     * @return \BEAR\Framework\Resource\View\Renderer
+     * @return Renderer
      */
     public function get()
     {

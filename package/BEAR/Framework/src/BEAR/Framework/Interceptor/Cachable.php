@@ -1,8 +1,7 @@
 <?php
 /**
- * BEAR.Framework;
+ * BEAR.Framework
  *
- * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Interceptor;
@@ -10,8 +9,8 @@ namespace BEAR\Framework\Interceptor;
 /**
  * Cache intercepor interface
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Interceptor
  */
 interface Cachable
 {
@@ -20,6 +19,8 @@ interface Cachable
      *
      * @param string $class
      * @param array  $args
+     * 
+     * @return void
      */
     public function delete($class, array $args);
 }

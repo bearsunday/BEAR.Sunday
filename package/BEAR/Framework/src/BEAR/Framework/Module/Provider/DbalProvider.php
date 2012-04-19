@@ -24,7 +24,7 @@ class DbalProvider implements Provide
     }
 
     /**
-     * New instance
+     * Return instance
      *
      * @return Doctrine\DBAL\Connection
      */

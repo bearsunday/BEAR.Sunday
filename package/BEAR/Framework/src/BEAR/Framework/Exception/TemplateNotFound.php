@@ -7,13 +7,14 @@
 namespace BEAR\Framework\Exception;
 
 use BEAR\Framework\Exception;
+use RuntimeException;
 
 /**
  * Template Not found
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package   BEAR.Framework
+ * @subpackge Exception
  */
-class TemplateNotFound extends \RuntimeException implements Exception
+class TemplateNotFound extends RuntimeException implements Exception
 {
 }

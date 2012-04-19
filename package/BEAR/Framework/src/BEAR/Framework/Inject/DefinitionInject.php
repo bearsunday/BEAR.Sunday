@@ -1,22 +1,20 @@
 <?php
 /**
- * BEAR.Framework;
+ * BEAR.Framework
  *
- * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Inject;
 
 use Aura\Di\ConfigInterface as Config;
-
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
 /**
  * Inject class definition
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Inject
  */
 trait DefinitionInject
 {

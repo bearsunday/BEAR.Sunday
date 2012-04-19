@@ -15,7 +15,6 @@ use BEAR\Framework\Module\Cqrs;
 use BEAR\Framework\Module\WebContext;
 use BEAR\Framework\Module\TemplateEngine;
 
-
 use Ray\Di\AbstractModule;
 
 /**
@@ -34,7 +33,7 @@ class AppModule extends AbstractModule
     protected function configure()
     {
         $this->install(new Schema\StandardSchemaModule(__NAMESPACE__));
-        $this->install(new Database\DoctrineDbalModule);
+//         $this->install(new Database\DoctrineDbalModule);
         $this->install(new Cqrs\CacheModule);
         $this->install(new WebContext\AuraWebModule);
         $this->install(new TemplateEngine\SmartyModule);

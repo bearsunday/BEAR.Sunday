@@ -2,7 +2,6 @@
 /**
  * BEAR.Framework
  *
- * @package BEAR.Framework
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Inject;
@@ -13,8 +12,8 @@ use Ray\Di\Di\Named;
 /**
  * Inject application namespace
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Inject
  */
 trait AppNameInject
 {
@@ -28,7 +27,7 @@ trait AppNameInject
     /**
      * App name (=namespace) setter
      *
-     * @param string $tmp
+     * @param string $appName
      *
      * @Inject
      * @Named("app_name")

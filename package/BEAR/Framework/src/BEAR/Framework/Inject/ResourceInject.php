@@ -1,22 +1,20 @@
 <?php
 /**
- * BEAR.Resource;
+ * BEAR.Framework
  *
- * @package BEAR.Resource
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Inject;
 
 use BEAR\Resource\Client as Resource;
-
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
 /**
  * Inject resource client
  *
- * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Inject
  */
 trait ResourceInject
 {

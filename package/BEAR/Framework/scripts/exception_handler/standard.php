@@ -14,8 +14,10 @@ use BEAR\Framework\Resource\Page\Error;
 use BEAR\Framework\Web\HttpFoundation as Output;
 
 set_exception_handler(function(\Exception $e) {
+	global $_xhprof;
+	
     $mode = isset($_ENV['BEAR_OUTPUT_MODE']) ? $_ENV['BEAR_OUTPUT_MODE'] : 'prod';
-    $expectionId = 'e' . substr(md5((string)$e), 0, 5);
+    $exceptionId = 'e' . substr(md5((string)$e), 0, 5);
     try {
         $response = new Error;
         throw $e;
@@ -56,7 +58,31 @@ OK:
 INVALID_BINDING:
 SERVER_ERROR:
     $response->code = 500;
-    $response->body = "Internal error occured ({$expectionId})";
+	if (PHP_SAPI === 'cli') {
+    	$response->body = "Internal error occured ({$exceptionId})";
+	} else {
+	    $sec = number_format((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 2);
+	    $memory = number_format(memory_get_peak_usage(true));
+	    $f = function (\Exception $e){
+	    	return [
+	    		'message' => $e->getMessage(),
+	    		'traceString' => $e->getTraceAsString(),
+	    		'traceRaw' => print_r($e->getTrace(), true),
+	    		'file' => $e->getFile(),
+	    		'line' => $e->getLine(),
+	    		'fileContents' => htmlspecialchars(trim(file_get_contents($e->getFile()))),
+	    		'class' => get_class($e),
+	    		'trace' => $e->getTrace()
+	    	];
+	    };
+	    $exception = $f($e);
+	    $previousE = $e->getPrevious();
+	    if ($previousE) {
+	    	$previousE = $f($e->getPrevious());
+	    }
+	    $systemRoot = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
+	    $response->body = include __DIR__ . "/exception.tpl.php";
+	}
 NOT_FOUND:
 BAD_REQUEST:
 METHOD_NOT_ALLOWED:
@@ -66,7 +92,7 @@ METHOD_NOT_ALLOWED:
     $response->headers['X-EXCEPTION-FILE-LINE'] = $e->getFile() . ':' . $e->getLine();
     $previous =  $e->getPrevious() ? (get_class($e->getPrevious()) .': ' . str_replace("\n", ' ', $e->getPrevious()->getMessage())) : '-';
     $response->headers['X-EXCEPTION-PREVIOUS'] =  $previous;
-    $response->headers['X-EXCEPTION-ID'] = $expectionId;
-    (new Output)->setResource($response)->setException($e, $expectionId)->prepare(false)->send();
+    $response->headers['X-EXCEPTION-ID'] = $exceptionId;
+    (new Output)->setResource($response)->setException($e, $exceptionId)->prepare(false)->send();
     exit(1);
 });

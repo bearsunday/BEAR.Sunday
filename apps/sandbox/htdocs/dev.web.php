@@ -38,12 +38,19 @@ require_once dirname(__DIR__) . '/App.php';
  * @global BEAR\Resource\Object $page     Resource object (target)
  * @global BEAR\Resource\Object $response Resource object (response)
  */
+$requrestUri = $_SERVER["REQUEST_URI"];
 if (php_sapi_name() == 'cli-server') {
     // route static assets and return false
-    if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css)$/', $_SERVER["REQUEST_URI"])) {
+    if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css)$/', $requrestUri)) {
         return false;
     }
 }
+if (file_exists($_SERVER['SCRIPT_FILENAME'])) {
+	include$_SERVER['SCRIPT_FILENAME'];
+	exit();
+// 	return false;
+}
+var_dump($_SERVER["REQUEST_URI"]);
 
 // Application
 $app = App::factory(App::RUN_MODE_DEV);

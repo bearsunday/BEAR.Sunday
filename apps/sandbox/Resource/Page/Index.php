@@ -1,25 +1,14 @@
 <?php
 namespace sandbox\Resource\Page;
 
-use BEAR\Resource\Client as Resource;
-use BEAR\Resource\Annotation\Provides;
-use BEAR\Resource\Renderable;
 use BEAR\Framework\Resource\AbstractPage as Page;
-use BEAR\Framework\Link\View as View;
-use BEAR\Framework\Inject\WebContextInject;
-use BEAR\Framework\Args;
-use BEAR\Framework\Annotation\Cache;
-use BEAR\Framework\Annotation\CacheUpdate;
-use BEAR\Framework\Annotation\Html;
-use BEAR\Framework\Framework;
-use BEAR\Framework\Inject\TmpDirInject;
 use BEAR\Framework\Inject\ResourceInject;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
+use BEAR\Framework\Framework;
 use APCIterator;
+use Ray\Di\Di\Inject;
 
 /**
- * @Html
+ * Index page
  */
 class Index extends Page
 {
@@ -31,11 +20,6 @@ class Index extends Page
         $this['version'] = [
             'php'  => phpversion(),
             'BEAR' => Framework::VERSION
-        ];
-        $apc = new APCIterator('user');
-        $this['apc'] = [
-           'total' => $apc->getTotalCount(),
-           'size' => $apc->getTotalSize()
         ];
         $this['extentions'] = [
             'apc'  => extension_loaded('apc') ? 'Yes' : 'No',
@@ -52,7 +36,12 @@ class Index extends Page
      */
     public function onGet()
     {
-        // page / sec
+        $apc = new APCIterator('user');
+        $this['apc'] = [
+           'total' => $apc->getTotalCount(),
+           'size' => number_format($apc->getTotalSize())
+        ];
+    	// page / sec
         $this['performance'] = $this->resource->get->uri('app://self/performance')->request();
         return $this;
     }

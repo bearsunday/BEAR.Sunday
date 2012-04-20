@@ -73,6 +73,23 @@
                     "reference": "master"
                 }
             }
+        },
+        {
+            "type":"package",
+            "package": {
+                "name": "xhprof/xhprof",
+                "version": "1.0.0",
+                "target-dir": "xhprof",
+                "dist": {
+                    "url": "https://github.com/koriym/xhprof/zipball/master",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/koriym/xhprof.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
         }
     ],
     "require": {

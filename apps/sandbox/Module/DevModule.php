@@ -32,7 +32,6 @@ class DevModule extends AbstractModule
      */
     protected function configure()
     {
-        v('DoctrineDbalModule');
         // application config
         $masterDb = $slaveDb = [
             'driver' => 'pdo_mysql',

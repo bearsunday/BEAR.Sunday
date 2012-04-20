@@ -1,5 +1,4 @@
 # benchmark
-php_value auto_prepend_file "/usr/local/xhprof/external/header.php"
 <IfModule mod_rewrite.c>
     # turn on rewriting
     RewriteEngine On

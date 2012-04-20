@@ -41,12 +41,29 @@
           </a>
           <a class="brand" href="#">BEAR.Sunday</a>
           <div class="nav-collapse">
-            <ul class="nav">
+    <ul class="nav nav-pills">
               <li class="active"><a href="#">Home</a></li>
               <li><a href="https://github.com/koriym/BEAR.Sunday">GitHub</a></li>
-              <li><a href="http://code.google.com/p/bearsunday/">Google Code</a></li>
+              <li><a href="http://code.google.com/p/bearsunday/wiki/manual?tm=6">Docs</a></li>
+              <li><a href="http://code.google.com/p/rayphp/wiki/Motivation?tm=6">Ray</a></li>
+              <li><a href="https://github.com/koriym/BEAR.Sunday/issues">Issues</a></li>
+    <li class="dropdown" id="menu1">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+    API
+    <b class="caret"></b>
+    </a>
+    
+    <ul class="dropdown-menu">
+    <li><a href="http://vps.kumasystem.com:8080/job/Ray.Di/API_Documentation/">Ray.Di</a></li>
+    <li><a href="http://vps.kumasystem.com:8080/job/Ray.Aop/API_Documentation/">Ray.Aop</a></li>
+    <li class="divider"></li>
+    <li><a href="http://vps.kumasystem.com:8080/job/BEAR.Resource/API_Documentation/">BEAR.Resource</a></li>
+    <li><a href="http://vps.kumasystem.com:8080/job/BEAR.Sunday/API_Documentation/">BEAR.Sunday</a></li>
+    </ul>
+    </li>
               <li><a href="mailto:koriyama@bear-project.net">Contact</a></li>
-            </ul>
+    </ul>
+    
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -59,7 +76,7 @@
         <h1>{$greeting}</h1>
         <p>PHP 5.4+ Resource Oriented Framework</p>
         <p><a class="btn btn-primary btn-large" href="https://github.com/koriym/BEAR.Sunday">View project on GitHub &raquo;</a> 
-        <a rel="tooltip" title ="{$apc.size} of {$apc.total} APC entries will be cleard." class="btn btn-primary btn-large btn btn-warning" href="/_bear/refresh.php"><span class="icon-refresh"></span> Refresh</a></p> 
+        <a rel="tooltip" title ="{$apc.size} bytes of {$apc.total} user APC entries will be cleard." class="btn btn-primary btn-large btn btn-warning" href="/_bear/refresh.php"><span class="icon-refresh"></span> Refresh</a></p> 
       </div>
       <!-- Example row of columns -->
       <div class="row">
@@ -83,7 +100,6 @@
             <li>mysqlnd <code>{$extentions.mysqlnd}</code></li>
             <li>Xdebug <code>{$extentions.Xdebug}</code></li>
             <li>xhprof <code>{$extentions.xhprof}</code></li>
-            <p><a class="btn" href="/xhprof_html/" rel="tooltip" title="Open profiler">Profile &raquo;</a></p>
           </ul>
         </div>
         <div class="span4">
@@ -93,9 +109,9 @@
             <li>Aspect Orietned Design</li>
             <li>Representational State Transfer</li>
           </ul>
-           <p> Ray.Di - Guice style annotation-driven dependency injection framework,</p>
-           <p> Ray.Aop package provides method interception. This feature enables you to write code that is executed each time a matching method is invoked. </p>
-           <p> BEAR.Resource - RESTful service layer framework.</p>
+           <p> <code>Ray.Di</code> - Guice style annotation-driven dependency injection framework <img src="https://secure.travis-ci.org/koriym/Ray.Di.png"> </p>
+           <p> <code>Ray.Aop</code> package provides method interception. This feature enables you to write code that is executed each time a matching method is invoked. <img src="https://secure.travis-ci.org/koriym/Ray.Aop.png"> </p>
+           <p> <code>BEAR.Resource</code> - RESTful service layer framework. <img src="https://secure.travis-ci.org/koriym/BEAR.Resource.png"> </p>
        </div>
         <div class="span4">
           <h2>Sample apps</h2>
@@ -114,7 +130,6 @@
       </footer>
 
     </div> <!-- /container -->
-
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

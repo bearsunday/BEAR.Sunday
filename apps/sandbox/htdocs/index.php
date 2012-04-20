@@ -12,15 +12,11 @@ use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Web\HttpFoundation as Output;
 
-if (php_sapi_name() == 'cli-server') {
-    // route static assets and return false
-    if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css)$/', $_SERVER["REQUEST_URI"])) {
-        return false;
-    }
-}
+// profiler
+require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/scripts/profile.php';
+require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/scripts/core_loader.php';
 
 // load
-require dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/smarty/libs/Smarty.class.php';
 require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
 require dirname(__DIR__) . '/App.php';
 

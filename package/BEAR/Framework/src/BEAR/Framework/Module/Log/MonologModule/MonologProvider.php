@@ -14,6 +14,7 @@ use Monolog\Logger;
 use Ray\Di\ProviderInterface as Provide;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
+use RuntimeException;
 
 /**
  * Cache
@@ -52,7 +53,12 @@ class MonologProvider implements Provide
     {
         $log = new Logger('app');
         $logFile = $this->logDir . '/app.log';
-        $log->pushHandler(new StreamHandler($logFile));
+        touch($logFile);
+        if (is_writable($logFile)) {
+        	$log->pushHandler(new StreamHandler($logFile));
+        } else {
+        	$log->pushHandler(new TestHandler);
+        }
         $adapter = new MonologLogAdapter($log);
         return $adapter;
     }

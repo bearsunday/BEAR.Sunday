@@ -14,7 +14,7 @@ register_shutdown_function(function () {
     $require = '';
     foreach ($includeFiles as $file) {
         if (strpos($file, '/tmp/') === false) {
-            $require .= "require '$file';\n";
+            $require .= "require '$file';<br>";
         }
     }
    echo $require;

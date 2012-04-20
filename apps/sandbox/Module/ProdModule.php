@@ -28,12 +28,13 @@ use Ray\Di\Container;
 use Ray\Di\Injector as Di;
 use Ray\Di\Definition;
 use Ray\Di\Injector;
-use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;
-use Zend\Cache\Backend\File as CacheBackEnd;
+// use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;
+// use Zend\Cache\Backend\File as CacheBackEnd;
 use Smarty;
 use ReflectionClass;
 use BEAR\Framework\Module\Database;
-
+use Doctrine\Common\Cache\ApcCache as Cache;
+use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 /**
  * Application module
  *
@@ -66,7 +67,7 @@ class ProdModule extends AbstractModule
         
         $this->bind(self::RESOURCE_CACHE_INTERFACE)
         ->annotatedWith("resource_cache")
-        ->toProvider(self::RESOURCE_CACHE_PROVIDER);
+        ->toInstance(new CacheAdapter(new Cache));
         
         $this->installWritableChecker();
     }

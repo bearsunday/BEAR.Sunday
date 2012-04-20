@@ -53,7 +53,7 @@ final class App extends AbstractAppContext
             return $app;
         }
         // run mode
-        $injector = Injector::create([new FrameworkModule(__CLASS__), new module\AppModule]);
+        $injector = Injector::create([new FrameworkModule(__CLASS__), new Module\AppModule]);
         $app = $injector->getInstance(__CLASS__);
         if ($useCache) {
             apc_store($cacheKey, $app);

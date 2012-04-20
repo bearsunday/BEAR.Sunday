@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>jquery.keybind</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+    <script type="text/javascript" src="jquery.keybind.js"></script>
+    <script type="text/javascript">
+      (function($) {
+        $(function() {
+          var add = function(key) {
+            $('#list').append($('<li />').append(key));
+            $(window).bind('keydown', key, function() {
+              $('#placeholder').append($('<p />').append(key));
+              return false;
+            });
+          };
+
+          add('a b c');
+          add('3 9');
+          add('g g');
+          add('j');
+          add('k');
+          add('C-x C-c');
+          add('F5');
+
+        });
+      })(jQuery);
+    </script>
+    <style type="text/css">
+      #placeholder > p { display: inline; margin: 0 2px; }
+    </style>
+  </head>
+  <body>
+    <h1>jquery.keybind</h1>
+    <ul id="list"></ul>
+    <div id="placeholder"></div>
+  </body>
+</html>

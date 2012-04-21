@@ -52,7 +52,7 @@ class MonologProvider implements Provide
     public function get()
     {
         $log = new Logger('app');
-        $logFile = $this->logDir . '/app.log';
+        $logFile = $this->logDir . '/'. PHP_SAPI . '.app.log';
         touch($logFile);
         if (is_writable($logFile)) {
         	$log->pushHandler(new StreamHandler($logFile));

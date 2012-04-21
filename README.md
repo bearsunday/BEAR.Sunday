@@ -124,7 +124,7 @@ Rahter than reinvent the wheel and develop our library, BEAR.Sunday use (or will
 Testing BEAR.Sunday
 ------- 
 
-Here's how to install Ray.Aop from source to run the unit tests:
+Here's how to install BEAR.Sunday from source to run the unit tests:
 
     $ git clone git://github.com/koriym/BEAR.Sunday.git
     $ cd BEAR.Sunday

@@ -1,4 +1,27 @@
 <?php
+$sec = number_format((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 2);
+$memory = number_format(memory_get_peak_usage(true));
+
+$systemRoot = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
+$exceptionInfo = function (\Exception $e) use ($systemRoot) {
+	return [
+	'message' => $e->getMessage(),
+	'traceString' => $e->getTraceAsString(),
+	'traceRaw' => print_r($e->getTrace(), true),
+	'file' => $e->getFile(),
+	'href' => '/_bear/edit/?file=' . str_replace($systemRoot, '', $e->getFile()) . '&line=' . $e->getLine(),
+	'title' => $e->getFile() . ':' . $e->getLine(),
+	'line' => $e->getLine(),
+	'fileContents' => htmlspecialchars(trim(file_get_contents($e->getFile()))),
+	'class' => get_class($e),
+	'trace' => $e->getTrace()
+	];
+};
+$exception = $exceptionInfo($e);
+$previousE = $e->getPrevious();
+if ($previousE) {
+	$previousE = $exceptionInfo($e->getPrevious());
+}
 $html = <<<EOT
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +72,7 @@ $html = <<<EOT
         <h1 class="alert-heading">{$exception['class']}</h1>
         <h2>{$exception['message']}</h2>
         <p></p>
-        <a class="btn disabled" href="#">Edit</a>
+        <a  class="btn" target="code_edit" title="{$exception['title']}" href="{$exception['href']}">Edit</a>
         <a class="btn disabled" href="#">Download</a>
       </div>
 EOT;
@@ -60,7 +83,9 @@ if ($previousE) {
         <a class="close" data-dismiss="alert" href="#">&times;</a>
         <h1 class="alert-heading">{$previousE['class']}</h1>
         <h2>{$previousE['message']}</h2>
-      </div>
+        <p></p>
+        <a  class="btn" target="code_edit" title="{$previousE['title']}" href="{$previousE['href']}">Edit</a>
+        </div>
 EOT;
 }
 $html .= <<<EOT
@@ -74,10 +99,10 @@ $html .= <<<EOT
     </ul>
     <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade in active" id="summary">
-      <p><span class="icon-fire"></span> {$exception['file']} : {$exception['line']}</P>
+      <p><span class="icon-fire"></span><a target="code_edit" href="{$exception['href']}">{$exception['file']} : {$exception['line']}</a></P>
       <p><pre>{$exception['traceString']}</pre></p>
     </div>
-    
+
     <p><span class="icon-file"></span>Files</P>
 EOT;
 foreach ($exception['trace'] as $trace) {
@@ -88,17 +113,17 @@ foreach ($exception['trace'] as $trace) {
 	}
 }
 $html .= <<<EOT
-    
+
     <div class="tab-pane" id="file">
       <pre class="prettyprint linenums">
         {$exception['fileContents']}
 	  </pre>
     </div>
-    
+
     <div class="tab-pane" id="raw">
       <p><pre>{$exception['traceRaw']}</pre></p>
     </div>
-    
+
 
     <p></p>
      <a class="btn disabled" href="#">Edit</a>

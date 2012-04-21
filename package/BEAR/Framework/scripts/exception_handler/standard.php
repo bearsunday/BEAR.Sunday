@@ -61,26 +61,7 @@ SERVER_ERROR:
 	if (PHP_SAPI === 'cli') {
     	$response->body = "Internal error occured ({$exceptionId})";
 	} else {
-	    $sec = number_format((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 2);
-	    $memory = number_format(memory_get_peak_usage(true));
-	    $f = function (\Exception $e){
-	    	return [
-	    		'message' => $e->getMessage(),
-	    		'traceString' => $e->getTraceAsString(),
-	    		'traceRaw' => print_r($e->getTrace(), true),
-	    		'file' => $e->getFile(),
-	    		'line' => $e->getLine(),
-	    		'fileContents' => htmlspecialchars(trim(file_get_contents($e->getFile()))),
-	    		'class' => get_class($e),
-	    		'trace' => $e->getTrace()
-	    	];
-	    };
-	    $exception = $f($e);
-	    $previousE = $e->getPrevious();
-	    if ($previousE) {
-	    	$previousE = $f($e->getPrevious());
-	    }
-	    $systemRoot = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
+		// exception screen in develop
 	    $response->body = include __DIR__ . "/exception.tpl.php";
 	}
 NOT_FOUND:

@@ -2,11 +2,12 @@ BEAR, a resource oriented framework.
 =============================
 
  * preview release 2nd 
+[![Build Status](https://secure.travis-ci.org/koriym/BEAR.Sunday.png?branch=master)](http://travis-ci.org/koriym/BEAR.Sunday)
 
 ## Requirement
 
  * php 5.4+
- * (APC, Memcache , cURL)
+ * APC
  
 One minute example
 ==================
@@ -113,6 +114,7 @@ Rahter than reinvent the wheel and develop our library, BEAR.Sunday use (or will
  * [Doctrine/DBAL](http://www.doctrine-project.org/projects/dbal "Doctrine.DBAL")
  * [Guzzle/Guzzle](http://guzzlephp.org/ "Guzzle")
  * [Haanga](http://haanga.org/ "Haanga")
+ * [Monolog](https://github.com/Seldaek/monolog.git "Monolog")
  * [Smarty3](http://www.smarty.net/ "Smarty3")
  * [Symfony/Validator](https://github.com/symfony/Validator "Symfony.Validator")
  * [Twig/Twig](http://twig.sensiolabs.org/ "Twig")
@@ -122,29 +124,25 @@ Rahter than reinvent the wheel and develop our library, BEAR.Sunday use (or will
 Testing BEAR.Sunday
 ------- 
 
-Here's how to install Ray.Aop from source to run the unit tests and sample:
+Here's how to install Ray.Aop from source to run the unit tests:
 
     $ git clone git://github.com/koriym/BEAR.Sunday.git
     $ cd BEAR.Sunday
-    $ (wget http://getcomposer.org/composer.phar)
-    $ composer.phar install --install-suggests
+    $ curl -s http://getcomposer.org/installer | php
+    $ php composer.phar install
+    $ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
     $ phpunit
-    $ php tests/runall.php
 
 ### buil-in web server
 
-    $ php -S localhost:8080 apps/demoworld/htdocs/dev.php
-    
-    http://localhost:8080/hello
-    http://localhost:8080/template/haanga
-    http://localhost:8080/template/twig
-    http://localhost:8080/template/smarty3
+    $ cd apps/sandbox/htdocs
+    $ php -S localhost:8080 dev.web.php
+    $ curl http://localhost:8080/
 
-### CLI for HTML
+### CLI
 
-    $ php apps/demoworld/htdocs/dev.php get /hello
-
-### CLI for API
-
-    $ php apps/demoworld/htdocs/api/dev.php get page://self/hello
-    $ php apps/demoworld/htdocs/api/dev.php get app://self/greeting?lang=ja
+    $ php dev.web.php get /index
+    $ php dev.api.php get app://self/greetings?lang=ja
+    $ php dev.api.php get app://self/greetings?lang=en
+    $ php dev.api.php get page://self/index
+    $ php dev.api.php get page://self/index rep

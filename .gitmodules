@@ -1,9 +1,0 @@
-[submodule "vendor/BEAR/Resource"]
-	path = vendor/BEAR/Resource
-	url = https://github.com/koriym/BEAR.Resource
-[submodule "vendor/Ray/Di"]
-	path = vendor/Ray/Di
-	url = git@github.com:koriym/Ray.Di.git
-[submodule "vendor/Ray/Aop"]
-	path = vendor/Ray/Aop
-	url = git@github.com:koriym/Ray.Aop.git

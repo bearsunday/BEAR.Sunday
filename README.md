@@ -1,7 +1,7 @@
 BEAR, a resource oriented framework.
 =============================
 
- * preview release 2nd 
+ * 0.1.0alpha
 [![Build Status](https://secure.travis-ci.org/koriym/BEAR.Sunday.png?branch=master)](http://travis-ci.org/koriym/BEAR.Sunday)
 
 ## Requirement

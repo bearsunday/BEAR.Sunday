@@ -1,6 +1,6 @@
 <?php
 /**
- * Web server script (Production USE)
+ * Web server script (Production)
  *
  * @package BEAR.Framework
  */
@@ -8,9 +8,6 @@ namespace sandbox;
 
 use BEAR\Framework\Framework;
 use BEAR\Framework\StandardRouter as Router;
-use BEAR\Framework\Dispatcher;
-use BEAR\Framework\Globals;
-use BEAR\Framework\Web\HttpFoundation as Output;
 
 // profiler
 require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/scripts/profile.php';

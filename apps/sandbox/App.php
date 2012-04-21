@@ -34,6 +34,9 @@ final class App extends AbstractAppContext
 
     /** Run mode Develop */
     const RUN_MODE_DEV = 1;
+    
+    /** Run mode Develop */
+    const RUN_MODE_DEV_CACHE = 2;
 
     /**
      * Return application instance
@@ -47,8 +50,8 @@ final class App extends AbstractAppContext
         
         // configure application
         $cacheKey = __NAMESPACE__ . $runMode . filemtime(dirname(__DIR__));
-        $useCache = (! $runMode) && extension_loaded('apc');
-        if ($useCache && apc_exists($cacheKey)) {
+        $useCache = (! $runMode);
+        if ((! $runMode) && apc_exists($cacheKey)) {
             $app = apc_fetch($cacheKey);
             return $app;
         }
@@ -58,13 +61,14 @@ final class App extends AbstractAppContext
             case self::RUN_MODE_DEV:
                 apc_clear_cache();
                 apc_clear_cache('user');
-                $modeModule = new module\DevModule;
+            case self::RUN_MODE_DEV_CACHE:
+                $modeModule = new Module\DevModule;
                 break;
             case self::RUN_MODE_PROD:
             default:
-                $modeModule = new module\ProdModule;
+                $modeModule = new Module\ProdModule;
         }
-        $injector = Injector::create([new FrameworkModule(__CLASS__), new $modeModule, new module\AppModule], true);
+        $injector = Injector::create([new FrameworkModule(__CLASS__), new $modeModule, new Module\AppModule], true);
         $app = $injector->getInstance(__CLASS__);
         if ($useCache) {
             apc_store($cacheKey, $app);

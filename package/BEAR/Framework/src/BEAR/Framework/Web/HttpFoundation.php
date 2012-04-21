@@ -41,7 +41,7 @@ class HttpFoundation implements Response
     const FORMAT_PRINTR    = 'printr';
     const FORMAT_REP       = 'rep';
 
-    const MODE_REQUEST = 'requrest';
+    const MODE_REQUEST = 'request';
     const MODE_REP     = 'rep';
     const MODE_VALUE   = 'value';
 
@@ -177,7 +177,7 @@ class HttpFoundation implements Response
             $filename = ".expection.{$filename}.{$this->exceptionId}.log";
             ob_start();
             $trace = $this->e->getTrace();
-            $data = print_r($trace[0], true) . "\n";// . $this->e->getTraceAsString();
+            $data = (isset($trace[0])) ? print_r($trace[0], true) . "\n" : '';// . $this->e->getTraceAsString();
             $previousE = $this->e->getPrevious();
             if ($previousE) {
                 $data .= PHP_EOL . PHP_EOL . '-- Previous Exception --' . PHP_EOL . PHP_EOL;
@@ -246,15 +246,15 @@ class HttpFoundation implements Response
                 if ($body instanceof \BEAR\Resource\Request) {
                     switch ($mode) {
                         case self::MODE_REQUEST:
-                            $body = "{$label2}(Request)" . $body->toUri() .$close;
+                            $body = "{$label2}" . $body->toUri() .$close;
                             break;
                         case self::MODE_VALUE:
-                            $resource = $body();
-                            $body = var_export($resource->body, true) . "{$label2}by " . $body->toUri() . $close;
+                            $value = $body();
+                            $body = var_export($value, true) . " {$label2}" . $body->toUri() . $close;
                             break;
                         case self::MODE_REP:
                         default:
-                            $body = (string)$body . "{$label2}by " . $body->toUri() . $close;
+                            $body = (string)$body . " {$label2}" . $body->toUri() . $close;
                             break;
 
                     }

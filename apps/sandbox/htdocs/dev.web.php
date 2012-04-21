@@ -5,8 +5,6 @@ namespace sandbox;
 use BEAR\Framework\StandardRouter as Router;
 use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
-use BEAR\Framework\Web\HttpFoundation as Res;
-use BEAR\Framework\Web\HttpFoundation as Output;
 use BEAR\Framework\Framework;
 
 require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
@@ -38,22 +36,26 @@ require_once dirname(__DIR__) . '/App.php';
  * @global BEAR\Resource\Object $page     Resource object (target)
  * @global BEAR\Resource\Object $response Resource object (response)
  */
-$requrestUri = $_SERVER["REQUEST_URI"];
-if (php_sapi_name() == 'cli-server') {
-    // route static assets and return false
-    if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css)$/', $requrestUri)) {
-        return false;
+
+// route static assets
+if (PHP_SAPI == 'cli-server') {
+    if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css)$/', $_SERVER["REQUEST_URI"])) {
+        return false; 
     }
 }
-if (file_exists($_SERVER['SCRIPT_FILENAME'])) {
-	include$_SERVER['SCRIPT_FILENAME'];
-	exit();
-// 	return false;
+// reoute another PHP file 
+$doIncludePHPfile = (
+    PHP_SAPI !== 'cli' &&
+    file_exists($_SERVER['SCRIPT_FILENAME']) &&
+	($_SERVER['SCRIPT_FILENAME'] !== __DIR__  . '/index.php')
+);
+if ($doIncludePHPfile) {
+	include $_SERVER['SCRIPT_FILENAME'];
+	exit(0);
 }
-var_dump($_SERVER["REQUEST_URI"]);
 
 // Application
-$app = App::factory(App::RUN_MODE_DEV);
+$app = App::factory(App::RUN_MODE_DEV_CACHE);
 
 // Route
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
@@ -66,4 +68,5 @@ list($method, $pagePath, $query) = $router->match($globals);
 // Request
 $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
 
+// Transfer
 $app->response->debug()->setResource($page)->prepare()->send();

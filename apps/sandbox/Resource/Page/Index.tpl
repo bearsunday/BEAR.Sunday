@@ -94,9 +94,9 @@
           </ul>
           <h3>optional</h3>
           <ul>
-            <li>curl <code>{$extentions.curl}</code></li>
             <li>memcache <code>{$extentions.memcache}</code></li>
             <p><a class="btn" href="_bear/memcache.php/" id="memchace" rel="tooltip" title="Open memcache admin cotroll panel">Memcache Admin &raquo;</a></p>
+            <li>pdo_sqlite <code>{$extentions.pdo_sqlite}</code></li>
             <li>mysqlnd <code>{$extentions.mysqlnd}</code></li>
             <li>Xdebug <code>{$extentions.Xdebug}</code></li>
             <li>xhprof <code>{$extentions.xhprof}</code></li>
@@ -109,9 +109,9 @@
             <li>Aspect Orietned Design</li>
             <li>Representational State Transfer</li>
           </ul>
-           <p> <code>Ray.Di</code> - Guice style annotation-driven dependency injection framework <img src="https://secure.travis-ci.org/koriym/Ray.Di.png"> </p>
-           <p> <code>Ray.Aop</code> package provides method interception. This feature enables you to write code that is executed each time a matching method is invoked. <img src="https://secure.travis-ci.org/koriym/Ray.Aop.png"> </p>
-           <p> <code>BEAR.Resource</code> - RESTful service layer framework. <img src="https://secure.travis-ci.org/koriym/BEAR.Resource.png"> </p>
+           <p> <code>Ray.Di</code> - Guice style annotation-driven dependency injection framework <a href="http://travis-ci.org/koriym/Ray.Di"><img src="https://secure.travis-ci.org/koriym/Ray.Di.png"></a> </p>
+           <p> <code>Ray.Aop</code> package provides method interception. This feature enables you to write code that is executed each time a matching method is invoked. <a href="http://travis-ci.org/koriym/Ray.Aop"><img src="https://secure.travis-ci.org/koriym/Ray.Aop.png"></a> </p>
+           <p> <code>BEAR.Resource</code> - RESTful service layer framework. <a href="http://travis-ci.org/koriym/BEAR.Resource"><img src="https://secure.travis-ci.org/koriym/BEAR.Resource.png"></a> </p>
        </div>
         <div class="span4">
           <h2>Sample apps</h2>

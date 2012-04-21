@@ -22,12 +22,12 @@ class Index extends Page
             'BEAR' => Framework::VERSION
         ];
         $this['extentions'] = [
-            'apc'  => extension_loaded('apc') ? 'Yes' : 'No',
-            'memcache'  => extension_loaded('memcache') ? 'Yes' : 'No',
-            'curl'  => extension_loaded('curl') ? 'Yes' : 'No',
-            'mysqlnd'  => extension_loaded('mysqlnd') ? 'Yes' : 'No',
-            'Xdebug'  => extension_loaded('Xdebug') ? 'Yes' : 'No',
-            'xhprof' => extension_loaded('xhprof') ? 'Yes' : 'No'
+            'apc'  => extension_loaded('apc') ? phpversion('apc') : 'n/a',
+            'memcache'  => extension_loaded('memcache') ? phpversion('memcache') : 'n/a',
+            'mysqlnd'  => extension_loaded('mysqlnd') ? phpversion('mysqlnd') : 'n/a',
+            'pdo_sqlite'  => extension_loaded('pdo_sqlite') ? phpversion('pdo_sqlite') : 'n/a',
+            'Xdebug'  => extension_loaded('Xdebug') ? phpversion('Xdebug') : 'n/a',
+            'xhprof' => extension_loaded('xhprof') ? phpversion('xhprof') : 'n/a'
         ];
     }
 
@@ -36,10 +36,10 @@ class Index extends Page
      */
     public function onGet()
     {
-        $apc = new APCIterator('user');
+        $cache = apc_cache_info('user');
         $this['apc'] = [
-           'total' => $apc->getTotalCount(),
-           'size' => number_format($apc->getTotalSize())
+           'total' => $cache['num_entries'],
+           'size' => $cache['mem_size']
         ];
     	// page / sec
         $this['performance'] = $this->resource->get->uri('app://self/performance')->request();

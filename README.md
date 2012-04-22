@@ -1,14 +1,9 @@
-BEAR, a resource oriented framework.
+BEAR, a resource oriented framework for PHP5.4
 =============================
 
  * 0.1.0alpha
 [![Build Status](https://secure.travis-ci.org/koriym/BEAR.Sunday.png?branch=master)](http://travis-ci.org/koriym/BEAR.Sunday)
 
-## Requirement
-
- * php 5.4+
- * APC
- 
 One minute example
 ==================
 
@@ -120,6 +115,18 @@ Rahter than reinvent the wheel and develop our library, BEAR.Sunday use (or will
  * [Twig/Twig](http://twig.sensiolabs.org/ "Twig")
  * [Zend/Cache](https://github.com/zendframework/zf2)
  * [Zend/Log](https://github.com/zendframework/zf2)
+
+## Requirement
+
+ * php 5.4
+ * [APC](http://jp.php.net/manual/en/book.apc.php)
+
+### optional
+ * [xhprof](http://jp.php.net/manual/en/book.xhprof.php)
+ 
+### php.ini
+    apc.enable_cli = 1
+    xhprof.output_dir = /tmp
 
 Testing BEAR.Sunday
 ------- 

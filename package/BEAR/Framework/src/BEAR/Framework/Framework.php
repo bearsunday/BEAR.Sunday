@@ -9,7 +9,7 @@ namespace BEAR\Framework;
 use Aura\Autoload\Loader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
-require __DIR__ . '/AbstractAppContext.php';
+require_once __DIR__ . '/AbstractAppContext.php';
 
 /**
  * Framework

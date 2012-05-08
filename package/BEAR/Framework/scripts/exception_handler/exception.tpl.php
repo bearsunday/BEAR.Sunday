@@ -109,7 +109,7 @@ foreach ($exception['trace'] as $trace) {
 	if (isset($trace['file'])) {
 		$file =  $trace['file'];
 		$editFile = str_replace($systemRoot, '', $file);
-		$html .= "<a target=\"code_edit\" href=\"/_bear/edit/?file={$editFile}\">{$file} <span class=\"icon-share-alt\"></span></a><br>";
+		$html .= "<a target=\"code_edit\" href=\"/_bear/edit/?file={$editFile}\">{$file}  : {$trace['line']} <span class=\"icon-share-alt\"></span></a><br>";
 	}
 }
 $html .= <<<EOT

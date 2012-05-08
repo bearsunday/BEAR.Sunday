@@ -7,6 +7,8 @@ use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Framework;
 
+set_include_path('.');
+
 require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
 require_once dirname(__DIR__) . '/App.php';
 
@@ -39,11 +41,11 @@ require_once dirname(__DIR__) . '/App.php';
 
 // route static assets
 if (PHP_SAPI == 'cli-server') {
-    if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css)$/', $_SERVER["REQUEST_URI"])) {
-        return false; 
+    if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|ico)$/', $_SERVER["REQUEST_URI"])) {
+        return false;
     }
 }
-// reoute another PHP file 
+// reoute another PHP file
 $doIncludePHPfile = (
     PHP_SAPI !== 'cli' &&
     file_exists($_SERVER['SCRIPT_FILENAME']) &&
@@ -55,7 +57,7 @@ if ($doIncludePHPfile) {
 }
 
 // Application
-$app = App::factory(App::RUN_MODE_DEV_CACHE);
+$app = App::factory(App::RUN_MODE_STAB);
 
 // Route
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;

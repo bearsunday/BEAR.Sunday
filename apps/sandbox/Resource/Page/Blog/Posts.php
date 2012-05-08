@@ -65,7 +65,7 @@ class Posts extends Page
         ->eager->request();
 
         // redirect
-        $this->code = 301;
+        $this->code = 303;
         $this->headers = ['Location' => '/blog/posts'];
         return $this;
     }

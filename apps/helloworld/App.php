@@ -30,34 +30,39 @@ final class App extends AbstractAppContext
     const DIR = __DIR__;
 
     /** Run mode Production */
-    const RUN_MODE_PROD = 1;
+    const RUN_MODE_PROD = 0;
 
     /** Run mode Develop */
     const RUN_MODE_DEV = 1;
+
+    /** Run mode Stab */
+    const RUN_MODE_STAB = 10;
 
     /**
      * Return application instance
      *
      * @param integer $runMode
      */
-    public static function factory($runMode)
+    public static function factory($runMode = self::RUN_MODE_PROD, $useCache = false)
     {
         // configure framework
-        $framework = (new Framework)->setLoader(__NAMESPACE__, __DIR__)->setExceptionHandler();
+        (new Framework)->setLoader(__NAMESPACE__, __DIR__)->setExceptionHandler();
 
         // configure application
-        $cacheKey = __NAMESPACE__ . $runMode . filemtime(dirname(__DIR__));
-        $useCache = (! $runMode) && extension_loaded('apc');
+        $cacheKey = 'app' . __NAMESPACE__ . PHP_SAPI . $runMode;
         if ($useCache && apc_exists($cacheKey)) {
             $app = apc_fetch($cacheKey);
             return $app;
         }
         // run mode
-        $injector = Injector::create([new FrameworkModule(__CLASS__), new Module\AppModule]);
-        $app = $injector->getInstance(__CLASS__);
-        if ($useCache) {
-            apc_store($cacheKey, $app);
+        switch ($runMode) {
+            case self::RUN_MODE_PROD:
+            default:
+                $modules = [new FrameworkModule(__NAMESPACE__, __DIR__ . '/tmp', __DIR__ . '/log'), new Module\AppModule];
         }
+        $injector = Injector::create($modules, $useCache);
+        $app = $injector->getInstance(__CLASS__);
+        $useCache ? apc_store($cacheKey, $app) : apc_clear_cache('user');
         return $app;
     }
 }

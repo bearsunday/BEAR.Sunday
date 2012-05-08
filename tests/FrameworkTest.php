@@ -32,11 +32,4 @@ class FrameworkTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('BEAR\Framework\Framework', $this->framework);
     }
-
-    public function test_setCache()
-    {
-        $this->framework->setCache(new CacheAdapter(new CacheBackEnd));
-        $this->assertInstanceOf('BEAR\Framework\Framework', $this->framework);
-    }
-
 }

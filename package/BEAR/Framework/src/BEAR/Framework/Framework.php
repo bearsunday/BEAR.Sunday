@@ -101,6 +101,8 @@ class Framework
     public function setExceptionHandler()
     {
         require dirname(dirname(dirname(__DIR__))) . '/scripts/exception_handler/standard.php';
+//         $exceptionHandler = new ExceptionHandler;
+//         set_exception_handler([$exceptionHandler, 'handle']);
         return $this;
     }
 

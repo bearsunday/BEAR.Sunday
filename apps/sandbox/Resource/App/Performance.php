@@ -13,7 +13,7 @@ class Performance extends AbstractObject
      * Get
      *
      * @param string $lang
-     * 
+     *
      * @return float
      */
     public function onGet()

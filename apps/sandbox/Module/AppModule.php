@@ -33,9 +33,23 @@ class AppModule extends AbstractModule
     protected function configure()
     {
         $this->install(new Schema\StandardSchemaModule(__NAMESPACE__));
-//         $this->install(new Database\DoctrineDbalModule);
         $this->install(new Cqrs\CacheModule);
         $this->install(new WebContext\AuraWebModule);
         $this->install(new TemplateEngine\SmartyModule);
+        $this->installWritableChecker();
+    }
+
+    /**
+     * installWritableChecker
+     */
+    private function installWritableChecker()
+    {
+        // bind tmp writable checker
+        $checker = $this->requestInjection('\sandbox\Interceptor\Checker');
+        $this->bindInterceptor(
+            $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
+            $this->matcher->any(),
+            [$checker]
+        );
     }
 }

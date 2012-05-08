@@ -20,58 +20,55 @@ require_once dirname(dirname(__DIR__)) . '/vendor/smarty/smarty/libs/Smarty.clas
  */
 final class App extends AbstractAppContext
 {
-	/** Version @var string */
-	const VERSION = '0.1.0';
+    /** Version @var string */
+    const VERSION = '0.1.0';
 
-	/** Name @var string */
-	const NAME = __NAMESPACE__;
+    /** Name @var string */
+    const NAME = __NAMESPACE__;
 
-	/** Path @var string */
-	const DIR = __DIR__;
+    /** Path @var string */
+    const DIR = __DIR__;
 
-	/** Run mode Production */
-	const RUN_MODE_PROD = 0;
+    /** Run mode Production */
+    const RUN_MODE_PROD = 0;
 
-	/** Run mode Develop */
-	const RUN_MODE_DEV = 1;
+    /** Run mode Develop */
+    const RUN_MODE_DEV = 1;
 
-	/** Run mode Develop */
-	const RUN_MODE_DEV_CACHE = 2;
+    /** Run mode Stab */
+    const RUN_MODE_STAB = 10;
 
-	/**
-	 * Return application instance
-	 *
-	 * @param integer $runMode
-	 */
-	public static function factory($runMode = self::RUN_MODE_PROD)
-	{
-		// configure framework
-		$framework = (new Framework)->setLoader(__NAMESPACE__, __DIR__)->setExceptionHandler();
+    /**
+     * Return application instance
+     *
+     * @param integer $runMode
+     */
+    public static function factory($runMode = self::RUN_MODE_PROD, $useCache = false)
+    {
+        // configure framework
+        (new Framework)->setLoader(__NAMESPACE__, __DIR__)->setExceptionHandler();
 
-		// configure application
-		$cacheKey = 'app' . __NAMESPACE__ . PHP_SAPI . $runMode;
-		if (apc_exists($cacheKey)) {
-			$app = apc_fetch($cacheKey);
-			return $app;
-		}
-		// run mode
-		$useApcConfig = true;
-		switch ($runMode) {
-			case self::RUN_MODE_DEV:
-				apc_clear_cache();
-				apc_clear_cache('user');
-				$cacheKey = 'void';
-				$useApcConfig = false;
-			case self::RUN_MODE_DEV_CACHE:
-				$modeModule = new Module\DevModule;
-				break;
-			case self::RUN_MODE_PROD:
-			default:
-				$modeModule = new Module\ProdModule;
-		}
-		$injector = Injector::create([new FrameworkModule(__CLASS__), new $modeModule, new Module\AppModule], $useApcConfig);
-		$app = $injector->getInstance(__CLASS__);
-		apc_store($cacheKey, $app);
-		return $app;
-	}
+        // configure application
+        $cacheKey = 'app' . __NAMESPACE__ . PHP_SAPI . $runMode;
+        if ($useCache && apc_exists($cacheKey)) {
+            $app = apc_fetch($cacheKey);
+            return $app;
+        }
+        // run mode
+        switch ($runMode) {
+            case self::RUN_MODE_STAB:
+                $modules = [new Module\StabModule(__NAMESPACE__)];
+                break;
+            case self::RUN_MODE_DEV:
+                $modules = [new Module\DevModule(__NAMESPACE__)];
+                break;
+            case self::RUN_MODE_PROD:
+            default:
+                $modules = [new Module\ProdModule(__NAMESPACE__)];
+        }
+        $injector = Injector::create($modules, $useCache);
+        $app = $injector->getInstance(__CLASS__);
+        $useCache ? apc_store($cacheKey, $app) : apc_clear_cache('user');
+        return $app;
+    }
 }

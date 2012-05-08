@@ -20,19 +20,38 @@ use Ray\Di\Scope;
 class FrameworkModule extends AbstractModule
 {
     /**
-     * App class
+     * App name
      *
      * @var string
      */
-    private $appDir;
+    private $app;
 
     /**
+     * Tmp direcotry
      *
-     * @param string $app
+     * @var string
      */
-    public function __construct($app)
+    private $tmpDir;
+
+    /**
+     * Log directory
+     *
+     * @var string
+     */
+    private $logDir;
+
+    /**
+     * Constructor
+     *
+     * @param string $app App name (=namespace name)
+     * @param string $tmpDir
+     * @param string $logDir
+     */
+    public function __construct($app, $tmpDir, $logDir)
     {
         $this->app = $app;
+        $this->tmpDir = $tmpDir;
+        $this->logDir = $logDir;
         parent::__construct();
     }
 
@@ -43,12 +62,9 @@ class FrameworkModule extends AbstractModule
      */
     protected function configure()
     {
-        // bind
-        $app = $this->app;
-        $tmpDir = $app::DIR . '/tmp';
-        $logDir = $app::DIR . '/log';
-        $this->bind()->annotatedWith("tmp_dir")->toInstance($tmpDir);
-        $this->bind()->annotatedWith("log_dir")->toInstance($logDir);
+        // bind dir
+        $this->bind()->annotatedWith("tmp_dir")->toInstance($this->tmpDir);
+        $this->bind()->annotatedWith("log_dir")->toInstance($this->logDir);
 
         // install
         $this->install(new Log\MonologModule);
@@ -69,8 +85,7 @@ class FrameworkModule extends AbstractModule
         $this->bind('BEAR\Resource\Linkable')->to('BEAR\Resource\Linker')->in(Scope::SINGLETON);
         $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Framework\Module\Provider\CacheProvider')->in(Scope::SINGLETON);
         $this->bind('Aura\Signal\Manager')->toProvider('BEAR\Framework\Module\Provider\SignalProvider')->in(Scope::SINGLETON);
-        $app = $this->app;
-        $this->bind()->annotatedWith('app_name')->toInstance($app::NAME);
+        $this->bind()->annotatedWith('app_name')->toInstance($this->app);
         $this->bind('BEAR\Framework\Web\Response')->to('BEAR\Framework\Web\HttpFoundation');
     }
 }

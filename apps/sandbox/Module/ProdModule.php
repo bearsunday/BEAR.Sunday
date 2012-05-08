@@ -7,34 +7,19 @@
  */
 namespace sandbox\Module;
 
-use helloworld\Module\AppModule;
-
-use BEAR\Framework\Module\TemplateEngine\SmartyModule;
-
-use Ray\Di\Scope;
-
-use BEAR\Framework\Module\StandardModule;
 use BEAR\Framework\Module;
-use BEAR\Framework\Module\Extension;
-use BEAR\Framework\Interceptor\DbInjector;
-use BEAR\Framework\Interceptor\ViewAdapter;
-use BEAR\Framework\Interceptor\ViewAdapter\SmartyBackend;
-use Ray\Di\AbstractModule;
-use Ray\Di\InjectorInterface;
-use Ray\Di\Annotation;
-use Ray\Di\Config;
-use Ray\Di\Forge;
-use Ray\Di\Container;
-use Ray\Di\Injector as Di;
-use Ray\Di\Definition;
-use Ray\Di\Injector;
-// use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;
-// use Zend\Cache\Backend\File as CacheBackEnd;
-use Smarty;
-use ReflectionClass;
+use BEAR\Framework\Module\FrameworkModule;
+use BEAR\Framework\Module\StandardModule;
+use BEAR\Framework\Module\TemplateEngine\SmartyModule;
 use BEAR\Framework\Module\Database;
-use Doctrine\Common\Cache\ApcCache as Cache;
+use BEAR\Framework\Module\Provider\CacheProvider;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
+use Doctrine\Common\Cache\ApcCache as Cache;
+
+use helloworld\Module\AppModule as HelloWorldModule;
+use Ray\Di\Scope;
+use Ray\Di\AbstractModule;
+
 /**
  * Application module
  *
@@ -45,6 +30,25 @@ class ProdModule extends AbstractModule
 {
     const RESOURCE_CACHE_INTERFACE = 'Guzzle\Common\Cache\CacheAdapterInterface';
     const RESOURCE_CACHE_PROVIDER  = 'BEAR\Framework\Module\Provider\CacheProvider';
+
+    /**
+     * App name
+     *
+     * @var string
+     */
+    private $app;
+
+    /**
+     * Constructor
+     *
+     * @param string $app
+     */
+    public function __construct($app)
+    {
+        $this->app = $app;
+        parent::__construct();
+    }
+
     /**
      * Configure dependency binding
      *
@@ -52,7 +56,12 @@ class ProdModule extends AbstractModule
      */
     protected function configure()
     {
-        // application config
+        // install framework module
+        $tmpDir = dirname(__DIR__) . '/tmp';
+        $logDir = dirname(__DIR__) . '/log';
+        $this->install(new FrameworkModule($this->app, $tmpDir, $logDir));
+
+        // mode specific install
         $masterDb = $slaveDb = [
             'driver' => 'pdo_mysql',
             'host' => 'localhost',
@@ -62,27 +71,13 @@ class ProdModule extends AbstractModule
             'charset' => 'UTF8'
         ];
         $this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
-        $tmpDir = dirname(__DIR__) . '/tmp';
-        $this->bind()->annotatedWith("tmp_dir")->toInstance($tmpDir);
-        
-        $this->bind(self::RESOURCE_CACHE_INTERFACE)
-        ->annotatedWith("resource_cache")
-        ->toInstance(new CacheAdapter(new Cache));
-        
-        $this->installWritableChecker();
-    }
 
-    /**
-     * installWritableChecker
-     */
-    private function installWritableChecker()
-    {
-        // bind tmp writable checker
-        $checker = $this->requestInjection('\sandbox\Interceptor\Checker');
-        $this->bindInterceptor(
-            $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
-            $this->matcher->any(),
-            [$checker]
-        );
+        $this->bind(self::RESOURCE_CACHE_INTERFACE)
+        ->annotatedWith('resource_cache')
+        ->toInstance(new CacheAdapter(new Cache));
+
+
+        // install common app module
+        $this->install(new AppModule($this));
     }
 }

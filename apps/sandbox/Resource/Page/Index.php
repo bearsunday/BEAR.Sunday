@@ -36,12 +36,14 @@ class Index extends Page
      */
     public function onGet()
     {
-        $cache = apc_cache_info('user');
-        $this['apc'] = [
-           'total' => $cache['num_entries'],
-           'size' => $cache['mem_size']
-        ];
-    	// page / sec
+        if (PHP_SAPI !== 'cli') {
+            $cache = apc_cache_info('user');
+            $this['apc'] = [
+               'total' => $cache['num_entries'],
+               'size' => $cache['mem_size']
+            ];
+        }
+    	// page speed.
         $this['performance'] = $this->resource->get->uri('app://self/performance')->request();
         return $this;
     }

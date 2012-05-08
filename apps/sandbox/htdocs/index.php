@@ -18,7 +18,7 @@ require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/F
 require dirname(__DIR__) . '/App.php';
 
 // App instance (init)
-$app = App::factory(App::RUN_MODE_PROD);
+$app = App::factory(App::RUN_MODE_PROD, true);
 
 // Route
 $router = new Router; // page controller only.

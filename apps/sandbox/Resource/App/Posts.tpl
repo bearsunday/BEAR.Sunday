@@ -5,7 +5,6 @@
         <th>Body</th>
         <th>CreatedAt</th>
     </tr>
-    <!-- ここから、posts配列をループして、投稿記事の情報を表示 -->
     {foreach from=$resource->body item=post}
     <tr>
         <td>{$post.id}</td>

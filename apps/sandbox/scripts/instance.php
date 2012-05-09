@@ -6,8 +6,6 @@
  */
 namespace sandbox;
 
-use BEAR\Framework\Framework;
-
 require dirname(__DIR__) . '/App.php';
 
 $app = App::factory();

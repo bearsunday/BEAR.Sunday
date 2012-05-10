@@ -11,12 +11,12 @@ require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/B
 require_once dirname(__DIR__) . '/App.php';
 
 /**
- * CLI / Built-in web server dev script
+ * CLI / Built-in web server script for development
  *
  * examaple:
  *
  * CLI:
- * $ php dev.web.php get /hello
+ * $ php web.php get /hello
  *
  * Built-in web server:
  *
@@ -52,7 +52,7 @@ if ($doIncludePHPfile) {
 // run mode
 $runMode = App::RUN_MODE_STAB;
 $useCache = false; 
-error_log("run: " . __NAMESPACE__ . "mode={$runMode} cahce=" . ($useCache ? 'enable' : 'disable'));
+error_log('run:' . __NAMESPACE__ . " mode={$runMode} cahce=" . ($useCache ? 'enable' : 'disable'));
 
 // Application
 $app = App::factory($runMode, $useCache);

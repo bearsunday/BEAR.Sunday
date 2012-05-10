@@ -8,8 +8,7 @@ namespace BEAR\Framework\Module\Cqrs;
 
 use BEAR\Framework\Interceptor\CacheLoader as CacheLoadInterceptor;
 use BEAR\Framework\Interceptor\CacheUpdater as CacheUpdateInterceptor;
-use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
-use Zend\Cache\Backend\File as CacheBackEnd;
+use Guzzle\Common\Cache\CacheAdapterInterface;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 use Ray\Di\Scope;
@@ -22,6 +21,23 @@ use Ray\Di\Scope;
  */
 class CacheModule extends AbstractModule
 {
+	/**
+	 * Cache adapter
+	 * 
+	 * @var Guzzle\Common\Cache\CacheAdapterInterface
+	 */
+	private $cacheAdapter;
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param AbstractCacheAdapter $cacheAdapter
+	 */
+	public function __construct(CacheAdapterInterface $cacheAdapter)
+	{
+		$this->cacheAdapter = $cacheAdapter;
+	}
+	
     /**
      * Configure dependency binding
      *
@@ -29,7 +45,9 @@ class CacheModule extends AbstractModule
      */
     protected function configure()
     {
-        $cacheLoadInterceptor = new CacheLoadInterceptor(new CacheAdapter(new CacheBackEnd));
+        $cacheLoadInterceptor = new CacheLoadInterceptor($this->cacheAdapter);
+        
+        // bind @Cache annotatated method in any class
         $this->bindInterceptor(
             $this->matcher->any(),
             $this->matcher->annotatedWith('BEAR\Framework\Annotation\Cache'),

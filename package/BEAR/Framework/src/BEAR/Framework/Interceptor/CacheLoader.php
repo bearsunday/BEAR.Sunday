@@ -37,7 +37,6 @@ class CacheLoader implements Cachable, MethodInterceptor
 	 * Constructor
 	 *
 	 * @param Cache $cache
-	 * @param unknown_type $lifeTime
 	 */
 	public function __construct(Cache $cache) {
 		$this->cache = $cache;

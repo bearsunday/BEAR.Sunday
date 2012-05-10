@@ -14,8 +14,11 @@ use BEAR\Framework\Module\Database;
 use BEAR\Framework\Module\Cqrs;
 use BEAR\Framework\Module\WebContext;
 use BEAR\Framework\Module\TemplateEngine;
-
 use Ray\Di\AbstractModule;
+
+// cache adapter
+use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
+use Zend\Cache\Backend\Apc as CacheBackEnd;
 
 /**
  * Application module
@@ -33,7 +36,7 @@ class AppModule extends AbstractModule
     protected function configure()
     {
         $this->install(new Schema\StandardSchemaModule(__NAMESPACE__));
-        $this->install(new Cqrs\CacheModule);
+        $this->install(new Cqrs\CacheModule(new CacheAdapter(new CacheBackEnd)));
         $this->install(new WebContext\AuraWebModule);
         $this->install(new TemplateEngine\SmartyModule);
         $this->installWritableChecker();

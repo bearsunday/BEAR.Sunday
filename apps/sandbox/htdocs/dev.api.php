@@ -17,11 +17,6 @@
  *
  * @package BEAR.Framework
  *
- * @global string               $method   Resource method
- * @global BEAR\Resource\Client $resource Resource client
- * @global array                $query    Resource request query
- * @global BEAR\Resource\Object $page     Resource object (target)
- * @global BEAR\Resource\Object $response Resource object (response)
  */
 namespace sandbox;
 

@@ -36,7 +36,7 @@ final class App extends AbstractAppContext
     const RUN_MODE_DEV = 1;
 
     /** Run mode Stab */
-    const RUN_MODE_STAB = 10;
+    const RUN_MODE_STAB = 2;
 
     /**
      * Return application instance

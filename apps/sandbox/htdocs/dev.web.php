@@ -7,12 +7,8 @@ use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Framework;
 
-set_include_path('.');
-
 require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
 require_once dirname(__DIR__) . '/App.php';
-
-// require_once dirname(__DIR__) . '/App.php';
 
 /**
  * CLI / Built-in web server dev script
@@ -29,14 +25,11 @@ require_once dirname(__DIR__) . '/App.php';
  * type URL:
  *   http://localhost:8080/hello
  *   http://localhost:8080/helloresource
+ *   
+ * @global $runMode  run mode
+ * @global $useCache 
  *
  * @package BEAR.Framework
- *
- * @global string               $method   Resource method
- * @global BEAR\Resource\Client $resource Resource client
- * @global array                $query    Resource request query
- * @global BEAR\Resource\Object $page     Resource object (target)
- * @global BEAR\Resource\Object $response Resource object (response)
  */
 
 // route static assets
@@ -56,8 +49,13 @@ if ($doIncludePHPfile) {
 	exit(0);
 }
 
+// run mode
+$runMode = App::RUN_MODE_STAB;
+$useCache = false; 
+error_log("run: " . __NAMESPACE__ . "mode={$runMode} cahce=" . ($useCache ? 'enable' : 'disable'));
+
 // Application
-$app = App::factory(App::RUN_MODE_STAB);
+$app = App::factory($runMode, $useCache);
 
 // Route
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;

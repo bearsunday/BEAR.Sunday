@@ -1,7 +1,7 @@
 <?php
 namespace sandbox;
 
-class AppPerformanceTest extends \PHPUnit_Framework_TestCase
+class AppPostTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * Resource client

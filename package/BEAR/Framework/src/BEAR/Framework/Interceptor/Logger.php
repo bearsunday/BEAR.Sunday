@@ -4,11 +4,11 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace sandbox\Interceptor;
+namespace BEAR\Framework\Interceptor;
 
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
-use BEAR\Framework\Log\LogInject;
+use BEAR\Framework\Inject\LogInject;
 
 /**
  * Log Interceptor
@@ -16,7 +16,7 @@ use BEAR\Framework\Log\LogInject;
  * @package    BEAR.Framework
  * @subpackage Interceptor
  */
-class Log implements MethodInterceptor
+class Logger implements MethodInterceptor
 {
     use LogInject;
 
@@ -29,8 +29,10 @@ class Log implements MethodInterceptor
         $result = $invocation->proceed();
         $class = get_class($invocation->getThis());
         $input = $invocation->getArguments();
-        $input = json_encode($input);
-        $this->log->log("target = [{$class}], input = [{$input}], result = [{$result}]");
+        $input = substr(json_encode($input), 0 ,80);
+        $output = substr(json_encode($result), 0 ,80);
+        $log = "target = [{$class}], input = [{$input}], result = [{$output}]";
+        $this->log->log($log);
         return $result;
     }
 }

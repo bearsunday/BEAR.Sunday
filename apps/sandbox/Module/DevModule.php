@@ -55,8 +55,11 @@ class DevModule extends AbstractModule
         $tmpDir = dirname(__DIR__) . '/tmp';
         $logDir = dirname(__DIR__) . '/log';
         $this->install(new FrameworkModule($this->app, $tmpDir, $logDir));
+        
+        // install application module
+        $this->install(new AppModule($this));
 
-        // mode specific install
+        // indtall runmode module
         $masterDb = $slaveDb = [
             'driver' => 'pdo_mysql',
             'host' => 'localhost',
@@ -66,8 +69,13 @@ class DevModule extends AbstractModule
             'charset' => 'UTF8'
         ];
         $this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
-
-        // install common app module
-        $this->install(new AppModule($this));
+        
+        // log all resource access
+        $logger = $this->requestInjection('BEAR\Framework\Interceptor\Logger');
+        $this->bindInterceptor(
+            $this->matcher->subclassesOf('BEAR\Resource\Object'),
+            $this->matcher->any(),
+            [$logger]
+        );
     }
 }

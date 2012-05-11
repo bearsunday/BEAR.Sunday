@@ -76,7 +76,10 @@ class FrameworkModule extends AbstractModule
      */
     private function installCoreModule()
     {
-        $injector = Injector::create();
+        $injector = Injector::create([$this]);
+        $monologLogger = $injector->getInstance('BEAR\Framework\Module\Log\MonologModule\MonologProvider')->get();
+        $logger = $this->requestInjection('BEAR\Framework\Inject\Logger\Adapter');
+        $injector->setLogger($logger);
         $config = $injector->getContainer()->getForge()->getConfig();
         $this->bind('Aura\Di\ConfigInterface')->toInstance($config);
         $this->bind('Ray\Di\InjectorInterface')->toInstance($injector);

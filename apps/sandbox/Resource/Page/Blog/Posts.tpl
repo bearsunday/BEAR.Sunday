@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <title>BEAR.Sunday blog</title>
-    <link href="/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="/assets/css/bootstrap-responsive.css" rel="stylesheet">
-  </head>
+<head>
+<meta charset="utf-8">
+<title>BEAR.Sunday Blog</title>
+<link href="/assets/css/bootstrap.css" rel="stylesheet">
+<link href="/assets/css/bootstrap-responsive.css" rel="stylesheet">
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/bootstrap-modal.js"></script>
+<script src="/app/js/modal.js"></script>
+</script>
+</head>
+<body>
+	<div class="container">
+		<ul class="breadcrumb">
+			<li><a href="/">Home</a> <span class="divider">/</span></li>
+			<li class="active">Blog</li>
+		</ul>
 
-  <body>
-    <div class="container">
+		<h1>Posts</h1>
+		<p>{$posts}</p>
 
-    <h1>Posts</h1>
-    <p>{$posts}</p>
-
-    <h1>Submit</h1>
-    <form action="/blog/posts" method="get">
-        <input name="X-HTTP-Method-Override" type="hidden" value="POST" />
-        <p><label>タイトル</label><input type="text" name="title"></p>
-        <p><label>本文</label><textarea name="body" rows="10" cols="40"></textarea></p>
-        <input type="submit" value="送信">
-    </form>
-    </div>
-  </body>
+		<a href="posts/newpost" class="btn btn-primary btn-large">New Post</a>
+	</div>
+</body>
 </html>

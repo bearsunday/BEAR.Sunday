@@ -1,5 +1,5 @@
 <?php
-namespace sandbox\Resource\Page\Blog;
+namespace sandbox\Resource\Page\Blog\Posts;
 
 use BEAR\Resource\Client as Resource;
 use BEAR\Resource\Annotation\Provides;
@@ -16,15 +16,15 @@ use BEAR\Framework\Annotation\Html;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 use sandbox\Annotation\Form;
+
 /**
  * @Html
  */
-class Posts extends Page
+class Newpost extends Page
 {
 	use ResourceInject;
 	
     public $body = [
-        'posts' => '',
         'errors' => ['title' => '', 'body' => ''],
         'submit' => ['title' => '', 'body' => '']
     ];
@@ -32,11 +32,9 @@ class Posts extends Page
     /**
      * Get
      *
-     * @Cache
      */
     public function onGet()
     {
-        $this['posts'] = $this->resource->get->uri('app://self/posts')->request();
         return $this;
     }
 
@@ -47,7 +45,6 @@ class Posts extends Page
      * @param string $body
      *
      * @Form
-     * @CacheUpdate
      */
     public function onPost($title, $body)
     {
@@ -57,36 +54,10 @@ class Posts extends Page
         ->uri('app://self/posts')
         ->withQuery(['title' => $title, 'body' => $body])
         ->eager->request();
-
+        
         // redirect
         $this->code = 303;
         $this->headers = ['Location' => '/blog/posts'];
         return $this;
-    }
-    
-    /**
-     * Delte
-     * 
-     * @param int $id
-     */
-    public function onDelete($id)
-    {
-        // delete
-        $this->resource
-        ->delete
-        ->uri('app://self/posts')
-        ->withQuery(['id' => $id])
-        ->eager->request();
-        
-        // message
-        $this['message'] = 'Entry deleted.';
-        return $this->onGet();
-    }
-
-    /**
-     * @Provides
-     */
-    public function provideArgs(Args &$args)
-    {
     }
 }

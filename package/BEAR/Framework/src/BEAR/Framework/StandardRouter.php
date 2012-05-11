@@ -32,6 +32,7 @@ final class StandardRouter
     private $map;
 
     const METHOD_OVERRIDE = 'X-HTTP-Method-Override';
+    const METHOD_OVERRIDE_GET = '_method';
 
     public function __construct(Map $map = null)
     {
@@ -66,8 +67,8 @@ final class StandardRouter
      */
     public function getMethodQuery($globals)
     {
-        if ($globals['_SERVER']['REQUEST_METHOD'] === 'GET' && isset($globals['_GET'][self::METHOD_OVERRIDE])) {
-            $method = $globals['_GET'][self::METHOD_OVERRIDE];
+        if ($globals['_SERVER']['REQUEST_METHOD'] === 'GET' && isset($globals['_GET'][self::METHOD_OVERRIDE_GET])) {
+            $method = $globals['_GET'][self::METHOD_OVERRIDE_GET];
             $query = $globals['_GET'];
             goto complete;
         }

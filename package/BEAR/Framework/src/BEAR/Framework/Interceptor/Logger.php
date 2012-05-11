@@ -28,8 +28,8 @@ class Logger implements MethodInterceptor
     {
         $result = $invocation->proceed();
         $class = get_class($invocation->getThis());
-        $input = $invocation->getArguments();
-        $input = substr(json_encode($input), 0 ,80);
+        $args = $invocation->getArguments();
+        $input = substr(json_encode($args), 0 ,80);
         $output = substr(json_encode($result), 0 ,80);
         $log = "target = [{$class}], input = [{$input}], result = [{$output}]";
         $this->log->log($log);

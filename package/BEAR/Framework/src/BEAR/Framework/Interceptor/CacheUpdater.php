@@ -73,7 +73,6 @@ class CacheUpdater implements MethodInterceptor
         $data = $request($args);
         $class = get_class($invocation->getThis());
         // save cahce
-//         $this->cache->save($class, $args, $data);
         $this->cache->delete($class, $args);
         // call original @CacheUpdate annotated method
         return $invocation->proceed();

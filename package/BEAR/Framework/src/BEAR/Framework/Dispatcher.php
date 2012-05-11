@@ -74,13 +74,6 @@ final class Dispatcher
      */
     public function getInstance($pageUri)
     {
-        //         $mem = new \Memcache;
-        //         $mem->addServer('localhost');
-        //         $memcache = new Cache;
-        //         $memcache->setMemcache($mem);
-        //         $this->cache = new CacheAdapter($memcache);
-        //         $key = $this->app->name . md5($pageUri) . rand(1, 1000);
-        //         $cached = $this->cache->fetch($key);
         if ($this->cache && $this->cached) {
             list($resource, $page) = unserialize($cached);
         }

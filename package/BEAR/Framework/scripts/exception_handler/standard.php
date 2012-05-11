@@ -58,15 +58,15 @@ OK:
 INVALID_BINDING:
 SERVER_ERROR:
     $response->code = 500;
+NOT_FOUND:
+BAD_REQUEST:
+METHOD_NOT_ALLOWED:
 	if (PHP_SAPI === 'cli') {
     	$response->body = "Internal error occured ({$exceptionId})";
 	} else {
 		// exception screen in develop
 	    $response->body = include __DIR__ . "/exception.tpl.php";
 	}
-NOT_FOUND:
-BAD_REQUEST:
-METHOD_NOT_ALLOWED:
     $response->headers['X-EXCEPTION-CLASS'] = get_class($e);
     $response->headers['X-EXCEPTION-MESSAGE'] = str_replace("\n", ' ', $e->getMessage());
     $response->headers['X-EXCEPTION-CODE'] = $e->getCode();

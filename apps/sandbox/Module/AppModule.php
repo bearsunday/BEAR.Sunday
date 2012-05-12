@@ -60,6 +60,9 @@ class AppModule extends AbstractModule
         );
     }
     
+    /**
+     * @Form - bind form validater
+     */
     private function installFormValidater()
     {
         $this->bindInterceptor(
@@ -69,6 +72,9 @@ class AppModule extends AbstractModule
         );
     }
     
+    /**
+     * @Time - put time to 'time' property 
+     */
     private function installTimeStamper()
     {
         $this->bindInterceptor(

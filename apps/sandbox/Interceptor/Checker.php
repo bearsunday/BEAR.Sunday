@@ -48,7 +48,7 @@ class Checker implements MethodInterceptor
         }
         $pageObject = $invocation->getThis();
         $tmpDir = $this->tmpDir;
-        $pageObject->representation = include __DIR__ . '/Checker/error.php';
+        $pageObject->view = include __DIR__ . '/Checker/error.php';
         return $pageObject;
     }
 }

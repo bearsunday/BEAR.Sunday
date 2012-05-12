@@ -37,7 +37,7 @@ if (php_sapi_name() == 'cli-server') {
 }
 
 // Application
-$app = App::factory(App::RUN_MODE_DEV);
+$app = App::factory(App::RUN_MODE_STAB, false);
 
 // Dispatch
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;

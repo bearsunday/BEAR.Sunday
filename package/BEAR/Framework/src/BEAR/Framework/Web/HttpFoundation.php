@@ -136,17 +136,17 @@ class HttpFoundation implements Response
      */
     public function prepare()
     {
-        // already has representation ?
-        if ($this->resource->representation) {
-            $body = $this->resource->representation;
+        // already has view ?
+        if ($this->resource->view) {
+            $body = $this->resource->view;
             goto complete;
         }
-        // if not, make resource representation by rendering with template
+        // if not, make resource view by rendering with template
         if (! $this->e instanceof \Exception) {
             // be string
             (string)($this->resource);
         }
-        // if stil not has a representation (string), throw exception.
+        // if stil not has a view (string), throw exception.
         if (! is_string($this->resource->body)) {
             $type = is_object($this->resource->body) ? get_class($this->resource->body) : gettype($this->resource->body);
             throw new ResourceBodyIsNotString($type, 0 , new UnexpectedValueException(serialize($this->resource->body)));
@@ -263,7 +263,7 @@ class HttpFoundation implements Response
                 echo "{$label1}{$key}{$close}:" . $body. PHP_EOL;
             }
         } else {
-            $body = $this->resource->representation ?: $this->resource->body;
+            $body = $this->resource->view ?: $this->resource->body;
             echo $body;
         }
         echo PHP_EOL;
@@ -307,22 +307,22 @@ class HttpFoundation implements Response
         }
         switch ($format) { 
             case self::FORMAT_JSON:
-                $this->resource->representation = json_encode($this->resource->body);
+                $this->resource->view = json_encode($this->resource->body);
                 break;
             case self::FORMAT_VAREXPORT:
-                $this->resource->representation = var_export($this->resource->body, true);
+                $this->resource->view = var_export($this->resource->body, true);
                 break;
             case self::FORMAT_VARDUMP:
                 ob_start();
                 var_export($this->resource->body);
-                $this->resource->representation = ob_get_contents();
+                $this->resource->view = ob_get_contents();
                 ob_end_clean();
                 break;
             case self::FORMAT_PRINTR:
-                $this->resource->representation = print_r($this->resource->body, true);
+                $this->resource->view = print_r($this->resource->body, true);
                 break;
             case self::FORMAT_SERIALIZE:
-                $this->resource->representation = serialize($this->resource->body);
+                $this->resource->view = serialize($this->resource->body);
                 break;
             default:
                 throw Exception($format);

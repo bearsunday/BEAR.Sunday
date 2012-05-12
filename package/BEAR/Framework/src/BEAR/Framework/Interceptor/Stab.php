@@ -45,7 +45,11 @@ class Stab implements MethodInterceptor
     public function invoke(MethodInvocation $invocation)
     {
         $object = $invocation->getThis();
-        $object->body = $this->stab;
+        if (is_array($object->body)) {
+            $object->body = array_merge($object->body, $this->stab);
+        } else {
+            $object->body = $this->stab;
+        }
 //         $msg = "stab: " . get_class($invocation->getThis());
 // //         $this->log->log($msg);
 //         return $this->stab;

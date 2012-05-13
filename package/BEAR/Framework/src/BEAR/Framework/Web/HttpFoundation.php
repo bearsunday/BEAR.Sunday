@@ -39,10 +39,10 @@ class HttpFoundation implements Response
     const FORMAT_VAREXPORT = 'varexport';
     const FORMAT_VARDUMP   = 'vardump';
     const FORMAT_PRINTR    = 'printr';
-    const FORMAT_REP       = 'rep';
+    const FORMAT_VIEW       = 'view';
 
     const MODE_REQUEST = 'request';
-    const MODE_REP     = 'rep';
+    const MODE_VIEW     = 'view';
     const MODE_VALUE   = 'value';
 
     /**
@@ -165,7 +165,7 @@ class HttpFoundation implements Response
      *
      * @return \BEAR\Framework\Web\HttpFoundation
      */
-    public function send($mode = self::MODE_REP)
+    public function send($mode = self::MODE_VIEW)
     {
         if (PHP_SAPI === 'cli') {
             $this->outputCliDebug($mode);
@@ -252,7 +252,7 @@ class HttpFoundation implements Response
                             $value = $body();
                             $body = var_export($value, true) . " {$label2}" . $body->toUri() . $close;
                             break;
-                        case self::MODE_REP:
+                        case self::MODE_VIEW:
                         default:
                             $body = (string)$body . " {$label2}" . $body->toUri() . $close;
                             break;

@@ -30,7 +30,7 @@ trait LogDirInject
      * @param string $logDir
      *
      * @Inject
-     * @Named("tmp_dir")
+     * @Named("log_dir")
      */
     public function setlogDir($logDir)
     {

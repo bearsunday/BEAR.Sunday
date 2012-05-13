@@ -27,7 +27,7 @@ class Adapter implements LoggerInterface
         . ' params=' . $this->getString((array)$params)
         . ' setter=' . $this->getString((array)$setter)
         . ' bind=' . $this->getString((array)$bind, true);// $this->getString((array)$bind);
-        $this->log->log($log);
+        @$this->log->log($log);
     }
     
     private function getString(array $params, $isBind = false)

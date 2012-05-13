@@ -3,7 +3,6 @@ namespace sandbox\Resource\App;
 
 use BEAR\Framework\Annotation\Db;
 use BEAR\Framework\Interceptor\DbSetter;
-use BEAR\Framework\Link\View;
 use BEAR\Framework\Annotation\Time;
 use BEAR\Resource\AbstractObject as ResourceObject;
 use Doctrine\DBAL\Connection;

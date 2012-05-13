@@ -37,7 +37,9 @@ if (php_sapi_name() == 'cli-server') {
 }
 
 // Application
-$app = App::factory(App::RUN_MODE_STAB, false);
+$runMode = App::RUN_MODE_STAB;
+$useCache = false;
+$app = App::factory($runMode, $useCache);
 
 // Dispatch
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
@@ -54,7 +56,7 @@ if (!($response instanceof ResourceObject)) {
 // Output
 if (isset($argv[3])) {
     $mode = $argv[3];
-    if (! in_array($mode, [Response::MODE_REP, Response::MODE_REQUEST, Response::MODE_VALUE])) {
+    if (! in_array($mode, [Response::MODE_VIEW, Response::MODE_REQUEST, Response::MODE_VALUE])) {
         throw new \InvalidArgumentException($mode);
     }
 } else {

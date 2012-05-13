@@ -51,7 +51,7 @@ if ($doIncludePHPfile) {
 
 // run mode
 $runMode = App::RUN_MODE_STAB;
-$useCache = false; 
+$useCache = true; 
 error_log('run:' . __NAMESPACE__ . " mode={$runMode} cahce=" . ($useCache ? 'enable' : 'disable'));
 
 // Application

@@ -35,7 +35,7 @@ class Edit extends Page
      */
     public function onGet($id)
     {
-        $this['submit'] = $this->resource->get->uri('app://self/posts')->withQuery(['id' => $id])->request()->body;
+        $this['submit'] = $this->resource->get->uri('app://self/posts')->withQuery(['id' => $id])->eager->request()->body;
         $this['id'] = $id;
         return $this;
     }

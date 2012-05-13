@@ -21,7 +21,7 @@ require_once dirname(dirname(__DIR__)) . '/vendor/smarty/smarty/libs/Smarty.clas
 final class App extends AbstractAppContext
 {
     /** Version @var string */
-    const VERSION = '0.1.0';
+    const VERSION = '0.1.1';
 
     /** Name @var string */
     const NAME = __NAMESPACE__;

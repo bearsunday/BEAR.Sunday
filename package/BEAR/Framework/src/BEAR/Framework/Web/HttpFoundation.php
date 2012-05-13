@@ -91,7 +91,8 @@ class HttpFoundation implements Response
     /**
      * Set log dir
      *
-     * @Inject(optional = true)
+     * @Inject
+     * @Named("log_dir")
      */
     public function setLogDir($logDir)
     {
@@ -172,26 +173,6 @@ class HttpFoundation implements Response
         } else {
             $this->outputWeb();
         }
-        if ($this->debug === true && $this->e) {
-            $filename = str_replace('\\', '_', get_class($this->e));
-            $filename = ".expection.{$filename}.{$this->exceptionId}.log";
-            ob_start();
-            $trace = $this->e->getTrace();
-            $data = (isset($trace[0])) ? print_r($trace[0], true) . "\n" : '';// . $this->e->getTraceAsString();
-            $previousE = $this->e->getPrevious();
-            if ($previousE) {
-                $data .= PHP_EOL . PHP_EOL . '-- Previous Exception --' . PHP_EOL . PHP_EOL;
-                $data .= $previousE->getTraceAsString();
-            }
-            $this->log($filename, $data);
-            $lasLog = '.expection.log';
-            if (is_writable($filename)) {
-                if (file_exists($lasLog)) {
-                    unlink($lasLog);
-                }
-                symlink($filename, $lasLog);
-            }
-        }
         return $this;
     }
 
@@ -270,25 +251,13 @@ class HttpFoundation implements Response
     }
 
     /**
-     * Write expection as file.
-     *
-     * @return void
-     */
-    private function writeException()
-    {
-        $log = print_r($this->e->getTrace(), true);
-        $this->log('.trace.log', $log);
-        $this->log('.trace.log.' . get_class($e) . md5(serialize($e->getTrace())), $log);
-    }
-
-    /**
      * Execute in-resource request
      *
      * @return \BEAR\Framework\Web\HttpFoundation
      */
     public function request()
     {
-        //         (string)$this->resource;
+        //(string)$this->resource;
         return $this;
     }
 
@@ -329,14 +298,5 @@ class HttpFoundation implements Response
                 break;
         }
         return $this;
-    }
-
-    private function log($filename, $log)
-    {
-        $file = "{$this->logDir}/" . $filename;
-        if (is_writable($file)) {
-            file_put_contents($file, $log);
-        }
-        error_log("[$filename]$log");
     }
 }

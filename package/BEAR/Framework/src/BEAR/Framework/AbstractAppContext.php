@@ -15,6 +15,7 @@ use BEAR\Framework\Web\Response;
 use BEAR\Resource\Client;
 use BEAR\Resource\SignalHandler\Provides;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
+use BEAR\Framework\Exception\ExceptionHandle;
 
 /**
  * Application context
@@ -53,6 +54,12 @@ abstract class AbstractAppContext
     private $cache;
 
     /**
+     * 
+     * @var EexceptionHandle
+     */
+    public $exceptionHandler;
+    
+    /**
      * Set cache adapter
      *
      * @param Cache $cache
@@ -83,5 +90,17 @@ abstract class AbstractAppContext
         if ($this->cache instanceof Cache) {
             $resource->setCacheAdapter($this->cache);
         }
+    }
+    
+    /**
+     * Set exception handler
+     * 
+     * @param EexceptionHandle $exceptionHandle
+     * 
+     * @Inject
+     */
+    public function setExceptionHandler(ExceptionHandle $exceptionHandler)
+    {
+        $this->exceptionHandler = $exceptionHandler;
     }
 }

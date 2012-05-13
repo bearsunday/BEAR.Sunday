@@ -50,7 +50,7 @@ if ($doIncludePHPfile) {
 }
 
 // run mode
-$runMode = App::RUN_MODE_STAB;
+$runMode = App::RUN_MODE_DEV;
 $useCache = true; 
 error_log('run:' . __NAMESPACE__ . " mode={$runMode} cahce=" . ($useCache ? 'enable' : 'disable'));
 
@@ -66,7 +66,11 @@ $router = new Router; // no router
 list($method, $pagePath, $query) = $router->match($globals);
 
 // Request
-$page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
+try {
+    $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
+} catch (Exception $e) {
+    $page = $app->exceptionHandler->handle($e);
+}
 
 // Transfer
 $app->response->debug()->setResource($page)->prepare()->send();

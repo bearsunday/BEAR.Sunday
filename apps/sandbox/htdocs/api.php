@@ -25,6 +25,7 @@ use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Framework\Web\HttpFoundation as Response;
+use Exception;
 
 require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
 require_once dirname(__DIR__) . '/App.php';
@@ -37,7 +38,7 @@ if (php_sapi_name() == 'cli-server') {
 }
 
 // Application
-$runMode = App::RUN_MODE_STAB;
+$runMode = App::RUN_MODE_DEV;
 $useCache = false;
 $app = App::factory($runMode, $useCache);
 
@@ -46,8 +47,13 @@ $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
 $uri = (PHP_SAPI === 'cli') ? $argv[2] : $globals['_SERVER']['REQUEST_URI'];
 list($method, $query) = (new Router)->getMethodQuery($globals);
 list($resource, $page) = (new Dispatcher($app))->getInstance($uri);
-// Request
-$response = $app->resource->$method->object($page)->withQuery($globals['_GET'])->eager->request();
+
+try {
+    // Request
+    $response = $app->resource->$method->object($page)->withQuery($globals['_GET'])->eager->request();
+} catch (Exception $e) {
+    $response = $app->exceptionHandler->handle($e);
+}
 if (!($response instanceof ResourceObject)) {
     $page->body = $response;
     $response = $page;

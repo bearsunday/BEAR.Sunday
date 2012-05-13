@@ -14,7 +14,7 @@ use Ray\Di\Injector;
 use Ray\Di\Scope;
 
 /**
- * DBAL module
+ * Cache module
  *
  * @package    BEAR.Framework
  * @subpackage Module
@@ -36,6 +36,7 @@ class CacheModule extends AbstractModule
 	public function __construct(CacheAdapterInterface $cacheAdapter)
 	{
 		$this->cacheAdapter = $cacheAdapter;
+		parent::__construct();
 	}
 	
     /**

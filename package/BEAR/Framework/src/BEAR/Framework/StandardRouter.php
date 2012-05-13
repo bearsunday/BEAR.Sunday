@@ -77,7 +77,7 @@ final class StandardRouter
             $query = $globals['_POST'];
             goto complete;
         }
-        $method = 'get';
+        $method = $globals['_SERVER']['REQUEST_METHOD'] ;
         $query = $globals['_GET'];
         complete:
         $method = strtolower($method);

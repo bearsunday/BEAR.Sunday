@@ -12,6 +12,7 @@ use Ray\Di\Injector;
 use Ray\Di\InjectorInterface as Di;
 use Ray\Di\AbstractModule;
 use BEAR\Framework\Web\Response;
+use BEAR\Framework\Inject\ResourceInject;
 use BEAR\Resource\Client;
 use BEAR\Resource\SignalHandler\Provides;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
@@ -73,23 +74,15 @@ abstract class AbstractAppContext
     }
 
     /**
-     * Property setter
-     *
-     * @param Di     $di
-     * @param Client $resource
-     *
+     * Set dependency injector
+     * 
+     * @params Di $di
+     * 
      * @Inject
      */
-    public function setApplicationProperty(Di $di, Client $resource, Response $response)
+    public function setDi(Di $d)
     {
         $this->di = $di;
-        $this->resource = $resource;
-        $this->response = $response;
-        // resource client
-        $resource->attachParamProvider('Provides', new Provides);
-        if ($this->cache instanceof Cache) {
-            $resource->setCacheAdapter($this->cache);
-        }
     }
     
     /**
@@ -102,5 +95,32 @@ abstract class AbstractAppContext
     public function setExceptionHandler(ExceptionHandle $exceptionHandler)
     {
         $this->exceptionHandler = $exceptionHandler;
+    }
+    
+    /**
+     * Set response
+     * 
+     * @Inject
+     */
+    public function setResponse(Response $response)
+    {
+        $this->response = $response;
+    }
+    
+    /**
+     * Set resource
+     *
+     * @param Client $resource
+     *
+     * @Inject
+     */
+    public function setResource(Client $resource)
+    {
+        $this->resource = $resource;
+        // resource client
+        $resource->attachParamProvider('Provides', new Provides);
+        if ($this->cache instanceof Cache) {
+            $resource->setCacheAdapter($this->cache);
+        }
     }
 }

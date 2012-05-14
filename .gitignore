@@ -2,8 +2,7 @@
 .expection.*
 *.log
 package/BEAR/Framework/src/BEAR/Framework/tmp/*
-.last_expection.log
 templates_c
-tmp
 vendor
-apps/sandbox/build/
+tmp
+apps/sandbox/build

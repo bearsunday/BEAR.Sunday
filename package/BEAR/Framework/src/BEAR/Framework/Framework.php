@@ -33,7 +33,7 @@ class Framework
      */
     public function setExceptionHandler()
     {
-        include dirname(dirname(dirname(__DIR__))) . '/scripts/exception_handler/standard.php';
+//         include dirname(dirname(dirname(__DIR__))) . '/scripts/exception_handler/standard.php';
         return $this;
     }
 
@@ -54,7 +54,7 @@ class Framework
         $system = dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))));
         include_once $system . '/vendor/Aura/Autoload/src.php';
         $loader = new Loader;
-        $namespacesBase = include  $system . '/vendor' . DIRECTORY_SEPARATOR . '.composer/autoload_namespaces.php';
+        $namespacesBase = include  $system . '/vendor/composer/autoload_namespaces.php';
         $namespacesBase += [
             $namespace  => dirname($appDir),
             'BEAR\Framework' => $system . '/package/BEAR/Framework/src/'

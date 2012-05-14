@@ -51,7 +51,7 @@ include $system . '/vendor/Ray/Aop/src/Ray/Aop/Advice.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Interceptor.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/MethodInterceptor.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Interceptor/CacheLoader.php';
-include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Cache/ZendCacheAdapter.php';
+include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Cache/Zf2CacheAdapter.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Interceptor/CacheUpdater.php';
 include $system . '/vendor/BEAR/Resource/src/BEAR/Resource/Request.php';
 include $system . '/vendor/BEAR/Resource/src/BEAR/Resource/Invokable.php';

@@ -5,7 +5,7 @@ namespace BEAR\Framework\Tests;
 use BEAR\Framework\Framework;
 use mockapp\App;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
-use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;
+use Guzzle\Common\Cache\Zf2CacheAdapter as CacheAdapter;
 use Zend\Cache\Backend\File as CacheBackEnd;
 
 
@@ -39,13 +39,13 @@ class CliTest extends \PHPUnit_Framework_TestCase
 
     public function test_devApiPhpRep()
     {
-    	$cli = 'php ' . $this->systemRoot . '/apps/sandbox/htdocs/api.php get page://self/index rep';
+    	$cli = 'php ' . $this->systemRoot . '/apps/sandbox/htdocs/api.php get page://self/index view';
     	exec($cli, $return);
     	$html = implode('', $return);
     	$pos = strpos($html, 'Hello, BEAR.Sunday');
     	$this->assertTrue(is_int($pos));
     }
-    
+
     public function test_devApiPhpValue()
     {
     	$cli = 'php ' . $this->systemRoot . '/apps/sandbox/htdocs/api.php get page://self/index value';
@@ -62,5 +62,5 @@ class CliTest extends \PHPUnit_Framework_TestCase
     	$html = implode('', $return);
     	$pos = strpos($html, 'Hello, BEAR.Sunday');
     	$this->assertTrue(is_int($pos));
-    }    
+    }
 }

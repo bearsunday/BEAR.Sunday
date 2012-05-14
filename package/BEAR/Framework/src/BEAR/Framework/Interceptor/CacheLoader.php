@@ -8,7 +8,7 @@ namespace BEAR\Framework\Interceptor;
 
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
-use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;
+use Guzzle\Common\Cache\Zf2CacheAdapter as CacheAdapter;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
 
 /**

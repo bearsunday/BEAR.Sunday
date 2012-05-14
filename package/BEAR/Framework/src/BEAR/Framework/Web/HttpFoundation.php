@@ -1,23 +1,21 @@
 <?php
 /**
  * BEAR.Framework
- * 
- * @license http://opensource.org/licenses/bsd-license.php BSD 
+ *
+ * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Web;
 
 use BEAR\Framework\Exception\ResourceBodyIsNotString;
 use BEAR\Framework\Exception\InvalidResourceType;
 use BEAR\Framework\Inject\LogInject;
-use BEAR\Framework\Inject\TmpDirInject; 
-use BEAR\Framework\Inject\LogDirInject;
 use BEAR\Resource\Request;
 use BEAR\Resource\Object as ResourceObject;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Helper\FormatterHelper as Formatter;
 use Ray\Aop\Weaver;
-use Ray\Di\Di\Inject; 
+use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 use Exception;
 use Traversable;
@@ -31,8 +29,6 @@ use UnexpectedValueException;
 class HttpFoundation implements Response
 {
     use LogInject;
-    use TmpDirInject;
-    use LogDirInject;
 
     const FORMAT_JSON      = 'json';
     const FORMAT_SERIALIZE = 'serialize';
@@ -85,18 +81,6 @@ class HttpFoundation implements Response
             throw new InvalidResourceType($type);
         }
         $this->resource = $resource;
-        return $this;
-    }
-
-    /**
-     * Set log dir
-     *
-     * @Inject
-     * @Named("log_dir")
-     */
-    public function setLogDir($logDir)
-    {
-        $this->logDir = $logDir;
         return $this;
     }
 
@@ -274,7 +258,7 @@ class HttpFoundation implements Response
             $this->resource->body = $format($this->resource->body);
             return $this;
         }
-        switch ($format) { 
+        switch ($format) {
             case self::FORMAT_JSON:
                 $this->resource->view = json_encode($this->resource->body);
                 break;

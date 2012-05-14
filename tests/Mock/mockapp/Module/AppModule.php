@@ -21,7 +21,7 @@ use \demoworld\Interceptor\Log;
 // use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 // use Doctrine\Common\Cache\ApcCache as CacheBackEnd;
 
-use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
+use Guzzle\Common\Cache\Zf2CacheAdapter as CacheAdapter;;
 use Zend\Cache\Backend\File as CacheBackEnd;
 
 /**

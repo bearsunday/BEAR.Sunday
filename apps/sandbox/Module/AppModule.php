@@ -19,8 +19,8 @@ use BEAR\Framework\Interceptor\TimeStamper;
 use Ray\Di\AbstractModule;
 
 // cache adapter
-use Guzzle\Common\Cache\ZendCacheAdapter as CacheAdapter;;
-use Zend\Cache\Backend\Apc as CacheBackEnd;
+use Guzzle\Common\Cache\Zf2CacheAdapter as CacheAdapter;;
+use Zend\Cache\Storage\Adapter\Apc as CacheBackEnd;
 
 /**
  * Application module
@@ -59,7 +59,7 @@ class AppModule extends AbstractModule
             [$checker]
         );
     }
-    
+
     /**
      * @Form - bind form validater
      */
@@ -71,9 +71,9 @@ class AppModule extends AbstractModule
             [new FormValidater]
         );
     }
-    
+
     /**
-     * @Time - put time to 'time' property 
+     * @Time - put time to 'time' property
      */
     private function installTimeStamper()
     {

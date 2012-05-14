@@ -55,11 +55,11 @@ abstract class AbstractAppContext
     private $cache;
 
     /**
-     * 
+     *
      * @var EexceptionHandle
      */
     public $exceptionHandler;
-    
+
     /**
      * Set cache adapter
      *
@@ -75,38 +75,38 @@ abstract class AbstractAppContext
 
     /**
      * Set dependency injector
-     * 
-     * @params Di $di
-     * 
+     *
+     * @param Di $di
+     *
      * @Inject
      */
-    public function setDi(Di $d)
+    public function setDi(Di $di)
     {
         $this->di = $di;
     }
-    
+
     /**
      * Set exception handler
-     * 
+     *
      * @param EexceptionHandle $exceptionHandle
-     * 
+     *
      * @Inject
      */
     public function setExceptionHandler(ExceptionHandle $exceptionHandler)
     {
         $this->exceptionHandler = $exceptionHandler;
     }
-    
+
     /**
      * Set response
-     * 
+     *
      * @Inject
      */
     public function setResponse(Response $response)
     {
         $this->response = $response;
     }
-    
+
     /**
      * Set resource
      *

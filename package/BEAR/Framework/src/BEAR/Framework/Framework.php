@@ -24,7 +24,7 @@ class Framework
      *
      * Framework version identification
      */
-    const VERSION = '0.1.1alpha';
+    const VERSION = '0.2.0alpha';
 
     /**
      * Set standard expection handler

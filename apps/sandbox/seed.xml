@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="blogbeartest">
+	<table_data name="posts">
+	<row>
+		<field name="id">1</field>
+		<field name="title">タイトル</field>
+		<field name="body">これは、記事の本文です。</field>
+		<field name="created">2012-05-15 07:33:53</field>
+		<field name="modified" xsi:nil="true" />
+	</row>
+	<row>
+		<field name="id">2</field>
+		<field name="title">またタイトル</field>
+		<field name="body">そこに本文が続きます。</field>
+		<field name="created">2012-05-15 07:33:53</field>
+		<field name="modified" xsi:nil="true" />
+	</row>
+	<row>
+		<field name="id">3</field>
+		<field name="title">タイトルの逆襲</field>
+		<field name="body">こりゃ本当に面白そう！うそ。</field>
+		<field name="created">2012-05-15 07:33:54</field>
+		<field name="modified" xsi:nil="true" />
+	</row>
+	</table_data>
+</database>
+</mysqldump>

@@ -1,9 +1,26 @@
 <?php
 namespace sandbox;
 
-class PageBlogPostsTest extends \PHPUnit_Framework_TestCase
+class PageBlogPostsTest extends \PHPUnit_Extensions_Database_TestCase
 {
-	/**
+    /**
+     * @return PHPUnit_Extensions_Database_DB_IDatabaseConnection
+     */
+    public function getConnection()
+    {
+        $pdo = new \PDO("mysql:host=localhost; dbname=blogbeartest", "root", "");
+        return $this->createDefaultDBConnection($pdo, 'mysql');
+    }
+
+    /**
+     * @return PHPUnit_Extensions_Database_DataSet_IDataSet
+     */
+    public function getDataSet()
+    {
+        return $this->createMySQLXMLDataSet(__DIR__.'/seed.xml');
+    }
+
+    /**
 	 * Resource client
 	 *
 	 * @var BEAR\Resource\Resourcce
@@ -12,11 +29,13 @@ class PageBlogPostsTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		static $app;
+        static $app;
 
-		parent::setUp();
-		$app = App::factory(App::RUN_MODE_STAB, false);
-		$this->resource = $app->resource;
+        parent::setUp();
+        if (is_null($app)) {
+            $app = App::factory(App::RUN_MODE_TEST, false);
+        }
+        $this->resource = $app->resource;
 	}
 
 	/**
@@ -64,7 +83,7 @@ class PageBlogPostsTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Rendable ?
+	 * Renderable ?
 	 *
 	 * @depends resource
 	 */
@@ -84,4 +103,5 @@ class PageBlogPostsTest extends \PHPUnit_Framework_TestCase
 		$html = (string)$page->body;
 		$this->assertContains('</html>', $html);
 	}
+
 }

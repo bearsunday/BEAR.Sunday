@@ -33,10 +33,13 @@ final class App extends AbstractAppContext
     const RUN_MODE_PROD = 0;
 
     /** Run mode Develop */
-    const RUN_MODE_DEV = 1;
+    const RUN_MODE_DEV = 'dev';
 
     /** Run mode Stab */
-    const RUN_MODE_STAB = 2;
+    const RUN_MODE_STAB = 'stab';
+    
+    /** Run mode unit test */
+    const RUN_MODE_TEST = 'test';
 
     /**
      * Return application instance
@@ -61,6 +64,9 @@ final class App extends AbstractAppContext
                 break;
             case self::RUN_MODE_DEV:
                 $modules = [new Module\DevModule(__NAMESPACE__)];
+                break;
+            case self::RUN_MODE_TEST:
+                $modules = [new Module\TestModule(__NAMESPACE__)];
                 break;
             case self::RUN_MODE_PROD:
             default:

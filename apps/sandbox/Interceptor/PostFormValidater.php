@@ -16,7 +16,7 @@ use BEAR\Framework\Inject\LogInject;
 /**
  * Log Interceptor
  */
-class FormValidater implements MethodInterceptor
+class PostFormValidater implements MethodInterceptor
 {
 	const TITLE = 0;
 	const BODY = 1;

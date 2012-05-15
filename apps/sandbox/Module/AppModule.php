@@ -7,7 +7,7 @@
  */
 namespace sandbox\Module;
 
-use sandbox\Interceptor\FormValidater;
+use sandbox\Interceptor\PostFormValidater;
 
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\Schema;
@@ -68,7 +68,7 @@ class AppModule extends AbstractModule
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\Page\Blog\Posts\Newpost'),
        	    $this->matcher->annotatedWith('sandbox\Annotation\Form'),
-            [new FormValidater]
+            [new PostFormValidater]
         );
     }
 

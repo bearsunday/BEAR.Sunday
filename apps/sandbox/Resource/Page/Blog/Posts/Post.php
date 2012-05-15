@@ -10,17 +10,31 @@ use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
 /**
+ * BLog post page
+ * 
+ * @package    sandbox
+ * @subpackage page
  */
 class Post extends Page
 {
 	use ResourceInject;
 	
+	/**
+	 * Contents
+	 * 
+	 * @var array
+	 */
     public $body = [
-        'post' => ['title' => 'aaa', 'body' => 'bbb'],
+        'post' => [
+            'title' => '',
+            'body' => ''
+        ],
     ];
 
     /**
      * Get
+     * 
+     * @param int $id
      */
     public function onGet($id)
     {

@@ -18,12 +18,20 @@ use Ray\Di\Di\Named;
 use sandbox\Annotation\Form;
 
 /**
- * @Html
+ * Edit post page
+ * 
+ * @package    sandbox
+ * @subpackage page
  */
 class Edit extends Page
 {
     use ResourceInject;
 
+    /**
+     * Contents
+     * 
+     * @var array
+     */
     public $body = [
         'errors' => ['title' => '', 'body' => ''],
         'submit' => ['title' => '', 'body' => '']
@@ -31,7 +39,8 @@ class Edit extends Page
 
     /**
      * Get
-     *
+     * 
+     * @param int $id
      */
     public function onGet($id)
     {

@@ -8,10 +8,21 @@ use BEAR\Framework\Annotation\Cache;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
+/**
+ * Blog index page
+ * 
+ * @package    sandbox
+ * @subpackage page
+ */
 class Posts extends Page
 {
 	use ResourceInject;
 	
+	/**
+	 * Contents
+	 * 
+	 * @var array
+	 */
     public $body = [
         'posts' => ''
     ];
@@ -39,7 +50,8 @@ class Posts extends Page
         ->delete
         ->uri('app://self/posts')
         ->withQuery(['id' => $id])
-        ->eager->request();
+        ->eager
+        ->request();
         
         // message
         $this['message'] = 'Entry deleted.';

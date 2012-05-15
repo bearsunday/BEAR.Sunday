@@ -65,7 +65,7 @@ class PageIndexTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Rendable ?
+     * Renderable ?
      * 
      * @depends resource
      */

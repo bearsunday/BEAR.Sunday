@@ -40,7 +40,7 @@ class AppPerformanceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Rendable ?
+     * Renderable ?
      * 
      * @depends resource
      * @test
@@ -51,7 +51,7 @@ class AppPerformanceTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Rendable ?
+     * Renderable ?
      * 
      * @depends resource
      */

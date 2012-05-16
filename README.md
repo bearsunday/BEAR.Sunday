@@ -1,7 +1,7 @@
 BEAR, a resource oriented framework for PHP5.4
 =============================
 
- * 0.1.1alpha
+ * 0.2.0alpha
 [![Build Status](https://secure.travis-ci.org/koriym/BEAR.Sunday.png?branch=master)](http://travis-ci.org/koriym/BEAR.Sunday)
 
 One minute example
@@ -131,25 +131,23 @@ Rahter than reinvent the wheel and develop our library, BEAR.Sunday use (or will
 Testing BEAR.Sunday
 ------- 
 
-Here's how to install BEAR.Sunday from source to run the unit tests:
+Here's how to install BEAR.Sunday:
 
     $ git clone git://github.com/koriym/BEAR.Sunday.git
     $ cd BEAR.Sunday
-    $ curl -s http://getcomposer.org/installer | php
-    $ php composer.phar install
+    $ php ./composer.phar install
     $ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
-    $ phpunit
 
 ### buil-in web server
 
     $ cd apps/sandbox/htdocs
-    $ php -S localhost:8080 web.pgp
-    $ curl http://localhost:8080/
+    $ php -S localhost:8088 web.php
+    $ curl http://localhost:8088/
 
 ### CLI
 
-    $ php web.pgp get /index
-    $ php api.pgp get app://self/greetings?lang=ja
-    $ php api.pgp get app://self/greetings?lang=en
-    $ php api.pgp get page://self/index
-    $ php api.pgp get page://self/index rep
+    $ php web.php get /index
+    $ php api.php get app://self/greetings?lang=ja
+    $ php api.php get app://self/greetings?lang=en
+    $ php api.php get page://self/index
+    $ php api.php get page://self/index view

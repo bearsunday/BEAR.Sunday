@@ -21,7 +21,7 @@
 		<h2>{$post.title}</h2>
 		<span class="label label-info">{$post.created}</span>
 		<div style="padding:10px"></div>
-		<p>{$post.body}</p>
+		<p>{$post.body|nl2br}</p>
 	</div>
 </body>
 </html>

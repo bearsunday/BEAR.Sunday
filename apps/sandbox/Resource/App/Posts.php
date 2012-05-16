@@ -4,6 +4,7 @@ namespace sandbox\Resource\App;
 use BEAR\Framework\Annotation\Db;
 use BEAR\Framework\Interceptor\DbSetter;
 use BEAR\Framework\Annotation\Time;
+use BEAR\Framework\Annotation\Transactional;
 use BEAR\Resource\AbstractObject as ResourceObject;
 use Doctrine\DBAL\Connection;
 use PDO;
@@ -78,13 +79,14 @@ class Posts extends ResourceObject implements DbSetter
      * @return \sandbox\Resource\App\Posts
      *
      * @Time
+     * @Transactional
      */
     public function onPost($title, $body)
     {
         $values = [
-        'title' => $title,
-        'body' => $body,
-        'created' => $this->time
+            'title' => $title,
+            'body' => $body,
+            'created' => $this->time
         ];
         $this->db->insert($this->table, $values);
         $this->code = 204;
@@ -94,10 +96,9 @@ class Posts extends ResourceObject implements DbSetter
     /**
      * Put
      *
-     * @param string   $title
-     * @param string   $body
-     *
-     * @return \sandbox\Resource\App\Posts
+     * @param int $id
+     * @param string $title
+     * @param string $body
      *
      * @Time
      */
@@ -113,6 +114,11 @@ class Posts extends ResourceObject implements DbSetter
         return $this;
     }
 
+    /**
+     * Delete
+     *
+     * @param int $id
+     */
     public function onDelete($id)
     {
         $this->db->delete($this->table, array('id' => $id));

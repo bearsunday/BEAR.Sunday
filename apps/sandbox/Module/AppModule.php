@@ -16,6 +16,8 @@ use BEAR\Framework\Module\Cqrs;
 use BEAR\Framework\Module\WebContext;
 use BEAR\Framework\Module\TemplateEngine;
 use BEAR\Framework\Interceptor\TimeStamper;
+use BEAR\Framework\Interceptor\Transactional;
+
 use Ray\Di\AbstractModule;
 
 // cache adapter
@@ -44,6 +46,7 @@ class AppModule extends AbstractModule
         $this->installWritableChecker();
         $this->installFormValidater();
         $this->installTimeStamper();
+        $this->installTransaction();
     }
 
     /**
@@ -81,6 +84,18 @@ class AppModule extends AbstractModule
             $this->matcher->any(),
        	    $this->matcher->annotatedWith('BEAR\Framework\Annotation\Time'),
             [new TimeStamper]
+        );
+    }
+
+    /**
+     * @Transactional - db transaction
+     */
+    private function installTransaction()
+    {
+        $this->bindInterceptor(
+            $this->matcher->any(),
+       	    $this->matcher->annotatedWith('BEAR\Framework\Annotation\Transactional'),
+            [new Transactional]
         );
     }
 }

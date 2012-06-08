@@ -141,7 +141,8 @@
         "zend/zend-cache": "2.0.0beta3",
         "zend/zend-stdlib": "2.0.0beta3",
         "zend/zend-eventmanager": "2.0.0beta3",
-        "zend/zend-log": "2.0.0beta3"
+        "zend/zend-log": "2.0.0beta3",
+        "pagerfanta/pagerfanta": "dev-master"
     },
     "authors": [
         {

@@ -12,6 +12,7 @@ use BEAR\Framework\AbstractAppContext;
 use Ray\Di\Injector;
 
 require_once dirname(dirname(__DIR__)) . '/vendor/smarty/smarty/libs/Smarty.class.php';
+require_once dirname(dirname(__DIR__)) . '/vendor/vdump/vdump/vdump/src.php';
 
 /**
  * Applicaton
@@ -21,7 +22,7 @@ require_once dirname(dirname(__DIR__)) . '/vendor/smarty/smarty/libs/Smarty.clas
 final class App extends AbstractAppContext
 {
     /** Version @var string */
-    const VERSION = '0.1.1';
+    const VERSION = '0.2.0';
 
     /** Name @var string */
     const NAME = __NAMESPACE__;
@@ -30,14 +31,14 @@ final class App extends AbstractAppContext
     const DIR = __DIR__;
 
     /** Run mode Production */
-    const RUN_MODE_PROD = 0;
+    const RUN_MODE_PROD = 'prod';
 
     /** Run mode Develop */
     const RUN_MODE_DEV = 'dev';
 
     /** Run mode Stab */
     const RUN_MODE_STAB = 'stab';
-    
+
     /** Run mode unit test */
     const RUN_MODE_TEST = 'test';
 

@@ -31,6 +31,8 @@ class Posts extends Page
      * Get
      *
      * @Cache
+     *
+     * @internal Cache "request", not the result of request. never changed.
      */
     public function onGet()
     {

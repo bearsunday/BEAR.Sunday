@@ -49,11 +49,20 @@ class CacheLoader implements Cachable, MethodInterceptor
 	public function invoke(MethodInvocation $invocation) {
 	    $class = get_class($invocation->getThis());
 	    $args = $invocation->getArguments();
+	    $method = $invocation->getMethod();
 		$id = $this->getId($class, $args);
+	    $pager = (isset($_GET['_start'])) ? $_GET['_start'] : '';
 		$saved = $this->cache->fetch($id);
-		if ($saved) {
+		$pager = (! $pager && isset($saved['pager']) ) ? 1 : $pager;
+		if ($pager) {
+		    $pagered = (isset($saved['pager'][$pager])) ? $saved['pager'][$pager] : false;
+		} else {
+		    $pagered = $saved;
+		}
+		if ($pagered) {
     		$resource = $invocation->getThis();
-    		list($resource->code,  $resource->headers, $resource->body) = $saved;
+    		list($resource->code,  $resource->headers, $resource->body) = $pagered;
+    		echo '<span class="label">[R] ' . get_class($resource) . '</span>';
 			return $resource;
 		}
 		$result = $invocation->proceed();
@@ -62,7 +71,12 @@ class CacheLoader implements Cachable, MethodInterceptor
         $data = [$resource->code, $resource->headers, $resource->body];
 		$annotation = $invocation->getAnnotation();
 		$time = $annotation->time;
+		if ($pager) {
+		    $saved['pager'][$pager] = $data;
+		    $data = $saved;
+		}
 		$this->cache->save($id, $data, $time);
+    	echo '<span class="label label-important">[W] ' . get_class($resource) . '</span>';
 		return $result;
 	}
 

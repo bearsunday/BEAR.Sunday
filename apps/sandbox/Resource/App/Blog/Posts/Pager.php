@@ -20,8 +20,8 @@ class Pager extends Posts implements DbSetter
     /**
      * Get
      *
+     * @Cache
      * @DbPager(2)
-     * Cache
      *
      * @return array
      */

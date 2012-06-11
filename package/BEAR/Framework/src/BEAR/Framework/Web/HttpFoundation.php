@@ -134,7 +134,7 @@ class HttpFoundation implements Response
         // if stil not has a view (string), throw exception.
         if (! is_string($this->resource->body)) {
             $type = is_object($this->resource->body) ? get_class($this->resource->body) : gettype($this->resource->body);
-            throw new ResourceBodyIsNotString($type, 0 , new UnexpectedValueException(serialize($this->resource->body)));
+            throw new ResourceBodyIsNotString($type, 0 , new UnexpectedValueException);
         }
         $body = $this->resource->body;
 

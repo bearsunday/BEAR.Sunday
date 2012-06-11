@@ -117,6 +117,23 @@
                     "reference": "master"
                 }
             }
+        },
+        {
+            "type":"package",
+            "package": {
+                "name": "vdump/vdump",
+                "version": "0.1.0",
+                "target-dir": "vdump",
+                "dist": {
+                    "url": "https://github.com/koriym/vdump/zipball/master",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/koriym/vdump.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
         }
     ],
     "require": {
@@ -130,7 +147,7 @@
         "Aura/Web": "dev-master",
         "BEAR/Resource": "dev-master",
         "doctrine/common": "2.2.*",
-        "doctrine/dbal": "dev-master",
+        "doctrine/dbal": "2.2.*",
         "symfony/console": "2.0.*",
         "symfony/http-foundation": "2.0.*",
         "Ray/Aop": "dev-master",
@@ -142,7 +159,8 @@
         "zend/zend-stdlib": "2.0.0beta3",
         "zend/zend-eventmanager": "2.0.0beta3",
         "zend/zend-log": "2.0.0beta3",
-        "pagerfanta/pagerfanta": "dev-master"
+        "pagerfanta/pagerfanta": "dev-master",
+        "vdump/vdump": "0.1.*"
     },
     "authors": [
         {

@@ -10,17 +10,17 @@ use Ray\Di\Di\Named;
 
 /**
  * Blog index page
- * 
+ *
  * @package    sandbox
  * @subpackage page
  */
 class Posts extends Page
 {
 	use ResourceInject;
-	
+
 	/**
 	 * Contents
-	 * 
+	 *
 	 * @var array
 	 */
     public $body = [
@@ -34,13 +34,13 @@ class Posts extends Page
      */
     public function onGet()
     {
-        $this['posts'] = $this->resource->get->uri('app://self/posts')->request();
+        $this['posts'] = $this->resource->get->uri('app://self/blog/posts')->request();
         return $this;
     }
 
     /**
      * Delte
-     * 
+     *
      * @param int $id
      */
     public function onDelete($id)
@@ -48,11 +48,11 @@ class Posts extends Page
         // delete
         $this->resource
         ->delete
-        ->uri('app://self/posts')
+        ->uri('app://self/blog/posts')
         ->withQuery(['id' => $id])
         ->eager
         ->request();
-        
+
         // message
         $this['message'] = 'Entry deleted.';
         return $this->onGet();

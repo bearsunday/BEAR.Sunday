@@ -60,7 +60,7 @@ class Newpost extends Page
         // create post
         $this->resource
         ->post
-        ->uri('app://self/posts')
+        ->uri('app://self/blog/posts')
         ->withQuery(['title' => $title, 'body' => $body])
         ->eager->request();
         

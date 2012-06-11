@@ -38,7 +38,7 @@ class Post extends Page
      */
     public function onGet($id)
     {
-        $this['post'] = $this->resource->get->uri('app://self/posts')->withQuery(['id' => $id])->eager->request()->body;
+        $this['post'] = $this->resource->get->uri('app://self/blog/posts')->withQuery(['id' => $id])->eager->request()->body;
         return $this;
     }
 }

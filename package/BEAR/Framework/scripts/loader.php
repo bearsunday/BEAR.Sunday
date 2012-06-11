@@ -11,7 +11,6 @@ $namespaces += [
 $this->app->name  => dirname($this->app::DIR),
 'BEAR\Framework' => $this->system . '/package/BEAR/Framework/src/'
 ];
-var_dump($namespaces);
 $loader->setPaths($namespaces);
 $loader->register();
 // silent auto loader for annotation

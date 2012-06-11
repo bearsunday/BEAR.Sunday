@@ -48,7 +48,7 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
     public function resource()
     {
         // resource request
-        $resource = $this->resource->get->uri('app://self/posts')->eager->request();
+        $resource = $this->resource->get->uri('app://self/blog/posts')->eager->request();
         $this->assertSame(200, $resource->code);
         return $resource;
     }
@@ -94,7 +94,7 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
         $before = $this->getConnection()->getRowCount('posts');
         $response = $this->resource
         ->post
-        ->uri('app://self/posts')
+        ->uri('app://self/blog/posts')
         ->withQuery(['title' => 'test_title', 'body' => 'test_body'])
         ->eager
         ->request();
@@ -103,7 +103,7 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
         // new post
         $body = $this->resource
         ->get
-        ->uri('app://self/posts')
+        ->uri('app://self/blog/posts')
         ->withQuery(['id' => 4])
         ->eager
         ->request()->body;
@@ -118,5 +118,21 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
     {
         $this->assertEquals('test_title', $body['title']);
         $this->assertEquals('test_body', $body['body']);
+    }
+
+    /**
+     * @test
+     */
+    public function delete()
+    {
+        // dec 1
+        $before = $this->getConnection()->getRowCount('posts');
+        $response = $this->resource
+        ->delete
+        ->uri('app://self/blog/posts')
+        ->withQuery(['id' => 1])
+        ->eager
+        ->request();
+        $this->assertEquals($before - 1, $this->getConnection()->getRowCount('posts'), "faild to delete post");
     }
 }

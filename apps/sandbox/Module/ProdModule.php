@@ -75,8 +75,6 @@ class ProdModule extends AbstractModule
         $this->bind(self::RESOURCE_CACHE_INTERFACE)
         ->annotatedWith('resource_cache')
         ->toInstance(new CacheAdapter(new Cache));
-
-
         // install common app module
         $this->install(new AppModule($this));
     }

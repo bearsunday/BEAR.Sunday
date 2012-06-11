@@ -52,13 +52,18 @@ class CacheLoader implements Cachable, MethodInterceptor
 		$id = $this->getId($class, $args);
 		$saved = $this->cache->fetch($id);
 		if ($saved) {
-			return unserialize($saved);
+    		$resource = $invocation->getThis();
+    		list($resource->code,  $resource->headers, $resource->body) = $saved;
+			return $resource;
 		}
-		$data = $invocation->proceed();
+		$result = $invocation->proceed();
+		$resource = $invocation->getThis();
+		$resource->headers['x-cached-since'] = date('r');
+        $data = [$resource->code, $resource->headers, $resource->body];
 		$annotation = $invocation->getAnnotation();
 		$time = $annotation->time;
-		$this->cache->save($id, serialize($data), $time);
-		return $data;
+		$this->cache->save($id, $data, $time);
+		return $result;
 	}
 
 	/**

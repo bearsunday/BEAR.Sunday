@@ -7,7 +7,7 @@
  */
 namespace BEAR\Framework\Interceptor;
 
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Connection as DriverConnection;
 
 /**
  * Db setter interface
@@ -19,10 +19,10 @@ interface DbSetter
 {
     /**
      * Set db connection
-     * 
+     *
      * @param Connection $db
-     * 
+     *
      * @return void
      */
-    public function setDb(Connection $db = null);
+    public function setDb(DriverConnection $db = null);
 }

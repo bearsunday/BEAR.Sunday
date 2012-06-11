@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="blogbeartest">
+	<table_data name="posts">
+	<row>
+		<field name="id">1</field>
+		<field name="title">title1</field>
+		<field name="body">body1</field>
+		<field name="created">2012-05-15 07:33:51</field>
+		<field name="modified" xsi:nil="true" />
+	</row>
+	<row>
+		<field name="id">2</field>
+		<field name="title">title2</field>
+		<field name="body">body2</field>
+		<field name="created">2012-05-15 07:33:52</field>
+		<field name="modified" xsi:nil="true" />
+	</row>
+	<row>
+		<field name="id">3</field>
+		<field name="title">title3</field>
+		<field name="body">body3</field>
+		<field name="created">2012-05-15 07:33:53</field>
+		<field name="modified" xsi:nil="true" />
+	</row>
+	<row>
+		<field name="id">4</field>
+		<field name="title">title4</field>
+		<field name="body">body4</field>
+		<field name="created">2012-05-15 07:33:54</field>
+		<field name="modified" xsi:nil="true" />
+	</row>
+	<row>
+		<field name="id">5</field>
+		<field name="title">title5</field>
+		<field name="body">body5</field>
+		<field name="created">2012-05-15 07:33:55</field>
+		<field name="modified" xsi:nil="true" />
+	</row>
+	</table_data>
+</database>
+</mysqldump>

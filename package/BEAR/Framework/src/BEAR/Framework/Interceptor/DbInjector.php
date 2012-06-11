@@ -11,6 +11,7 @@ use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
+use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
 /**
  * Cache interceptor
@@ -46,6 +47,14 @@ class DbInjector implements MethodInterceptor
     }
 
     /**
+     * @Inject
+     */
+    public function setReader(Reader $reader)
+    {
+        $this->reader = $reader;
+    }
+
+    /**
      * (non-PHPdoc)
      * @see Ray\Aop.MethodInterceptor::invoke()
      */
@@ -53,8 +62,23 @@ class DbInjector implements MethodInterceptor
         $object = $invocation->getThis();
         $method = $invocation->getMethod();
         $connectionParams = ($method->name !== 'onGet') ? $this->slaveDb : $this->masterDb;
-        $db = DriverManager::getConnection($connectionParams);
+        $pagerAnnotation = $this->reader->getMethodAnnotation($method, 'BEAR\Framework\Annotation\DbPager');
+        if ($pagerAnnotation) {
+            $connectionParams['wrapperClass'] = 'BEAR\Framework\Module\Database\DoctrineDbalModule\Connection';
+            $db = DriverManager::getConnection($connectionParams);
+            $db->setMaxPerPage($pagerAnnotation->limit);
+        } else {
+            $db = DriverManager::getConnection($connectionParams);
+        }
+        /* @var $db \BEAR\Framework\Module\Database\DoctrineDbalModule\Connection */
         $object->setDb($db);
-        return $invocation->proceed();
+        $result = $invocation->proceed();
+        if ($pagerAnnotation) {
+            $pagerData = $db->getPager();
+            if ($pagerData) {
+                $object->headers['pager'] = $pagerData;
+            }
+        }
+        return $result;
     }
 }

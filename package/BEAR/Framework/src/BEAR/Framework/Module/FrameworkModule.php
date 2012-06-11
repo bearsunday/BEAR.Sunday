@@ -91,5 +91,6 @@ class FrameworkModule extends AbstractModule
         $this->bind()->annotatedWith('app_name')->toInstance($this->app);
         $this->bind('BEAR\Framework\Web\Response')->to('BEAR\Framework\Web\HttpFoundation');
         $this->bind('BEAR\Framework\Exception\ExceptionHandle')->to('BEAR\Framework\Exception\ExceptionHandler');
+        $this->bind('Doctrine\Common\Annotations\Reader')->to('Doctrine\Common\Annotations\AnnotationReader');
     }
 }

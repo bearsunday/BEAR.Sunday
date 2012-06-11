@@ -13,14 +13,14 @@
 <body>
 	<div class="container">
 		<ul class="breadcrumb">
-			<li><a href="/">Home</a> <span class="divider">/</span></li>
-			<li class="active">Blog</li>
+			<li><a href="/">Home</a> <span class="divider">/</span> <a href="/blog/posts">Blog</a> <span class="divider">/</span></li>
+			<li class="active">Pager</li>
 		</ul>
-		<div align="right"><a href="posts/pager" class="btn btn-success btn-mini">Pagination</a></div>
 
 		<h1>Posts</h1>
 		<p>{$posts}</p>
-		<a href="posts/newpost" class="btn btn-primary btn-large">New Post</a>
+		<div align="center">{$posts->headers.pager.html}</div>
+		<a href="/blog/posts/newpost" class="btn btn-primary btn-large">New Post</a>
 	</div>
 </body>
 </html>

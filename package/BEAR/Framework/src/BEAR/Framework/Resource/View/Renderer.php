@@ -14,7 +14,7 @@ use BEAR\Framework\Resource\View\TemplateEngineAdapter;
 
 /**
  * Request renderer
- * 
+ *
  * @package    BEAR.Framework
  * @subpackage View
  */
@@ -30,7 +30,7 @@ class Renderer implements Renderable
     /**
      * ViewRenderer Setter
      *
-     * @param ViewRenderer $renderer
+     * @param TemplateEngineAdapter $templateEngineAdapter
      */
     public function __construct(TemplateEngineAdapter $templateEngineAdapter)
     {
@@ -43,14 +43,14 @@ class Renderer implements Renderable
      */
     public function render(ResourceObject $ro)
     {
-        $class =  ($ro instanceof Weave) ? get_class($ro->___getObject()) : get_class($ro);
+        $class = ($ro instanceof Weave) ? get_class($ro->___getObject()) : get_class($ro);
         $paegFile = (new ReflectionClass($class))->getFileName();
         $dir = pathinfo($paegFile, PATHINFO_DIRNAME);
         $this->templateEngineAdapter->assign('resource', $ro);
         if (is_array($ro->body) || $ro->body instanceof \Traversable) {
             $this->templateEngineAdapter->assign($ro->body);
         }
-        $templateFileBase = $dir . DIRECTORY_SEPARATOR . substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
+        $templateFileBase = $dir . DIRECTORY_SEPARATOR . substr(basename($paegFile), 0, strlen(basename($paegFile)) - 3);
         $ro->body = $this->templateEngineAdapter->fetch($templateFileBase);
         return $ro->body;
     }

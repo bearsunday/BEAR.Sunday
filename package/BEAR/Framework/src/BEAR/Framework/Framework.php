@@ -20,6 +20,13 @@ require_once __DIR__ . '/AbstractAppContext.php';
 class Framework
 {
     /**
+     * BEAR.Sunday root path
+     * 
+     * @var system
+     */
+    public static $systemRoot;
+    
+    /**
      * BEAR.Sunday
      *
      * Framework version identification
@@ -27,13 +34,23 @@ class Framework
     const VERSION = '0.2.0alpha';
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        // global setting
+        self::$systemRoot = dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))));
+        umask(0);
+    }
+    
+    /**
      * Set standard expection handler
      *
      * @return void
      */
     public function setExceptionHandler()
     {
-//         include dirname(dirname(dirname(__DIR__))) . '/scripts/exception_handler/standard.php';
+        include dirname(dirname(dirname(__DIR__))) . '/scripts/exception_handler/standard.php';
         return $this;
     }
 
@@ -46,12 +63,14 @@ class Framework
     {
         static $loader;
 
+        
         if (! is_null($loader)) {
             // unregister for another app
             spl_autoload_unregister([$loader, 'load']);
         }
 
         $system = dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))));
+        include_once $system . '/package/BEAR/Framework/scripts/core_loader.php';
         include_once $system . '/vendor/Aura/Autoload/src.php';
         $loader = new Loader;
         $namespacesBase = include  $system . '/vendor/composer/autoload_namespaces.php';

@@ -11,7 +11,6 @@ use BEAR\Framework\StandardRouter as Router;
 
 // profiler
 require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/scripts/profile.php';
-require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/scripts/core_loader.php';
 
 // load
 require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';

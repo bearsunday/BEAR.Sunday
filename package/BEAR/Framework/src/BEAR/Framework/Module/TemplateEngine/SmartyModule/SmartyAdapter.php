@@ -21,14 +21,29 @@ use Ray\Di\Di\Named;
 class SmartyAdapter implements TemplateEngineAdapter
 {
     /**
+     * Renderer
+     *
      * @var Smarty
      */
     private $renderer;
 
+    /**
+     * Template file
+     *
+     * @var string
+     */
+    private $template;
+
+    /**
+     * File extention
+     *
+     * @var string
+     */
     const EXT = 'tpl';
 
     /**
      * Constructor
+     * 
      * @Inject
      */
     public function __construct(Smarty $smarty)
@@ -61,13 +76,31 @@ class SmartyAdapter implements TemplateEngineAdapter
     {
         $template = $templateFileBase . self::EXT;
         $this->fileExists($template);
+        $this->template = $template;
         return $this->renderer->fetch($template);
     }
 
+    /**
+     * Return file exists
+     * 
+     * @param string $template
+     * 
+     * @throws TemplateNotFound
+     */
     private function fileExists($template)
     {
         if (! file_exists($template)) {
             throw new TemplateNotFound($template);
         }
+    }
+
+    /**
+     * Return template full path.
+     * 
+     * @return string
+     */
+    public function getTemplateFile()
+    {
+        return $this->template;
     }
 }

@@ -10,7 +10,7 @@ namespace sandbox\Module;
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Module\StandardModule;
-use BEAR\Framework\Module\TemplateEngine\SmartyModule;
+use BEAR\Framework\Module\TemplateEngine;
 use BEAR\Framework\Module\Database;
 use BEAR\Framework\Module\Provider\CacheProvider;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
@@ -61,6 +61,9 @@ class ProdModule extends AbstractModule
         $logDir = dirname(__DIR__) . '/log';
         $this->install(new FrameworkModule($this->app, $tmpDir, $logDir));
 
+        // install prod module
+        $this->install(new TemplateEngine\ProdRendererModule);
+        
         // mode specific install
         $masterDb = $slaveDb = [
             'driver' => 'pdo_mysql',

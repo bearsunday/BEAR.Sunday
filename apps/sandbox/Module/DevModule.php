@@ -10,7 +10,7 @@ namespace sandbox\Module;
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Module\StandardModule;
-use BEAR\Framework\Module\TemplateEngine\SmartyModule;
+use BEAR\Framework\Module\TemplateEngine;
 use BEAR\Framework\Module\Database;
 use helloworld\Module\AppModule as HelloWorldModule;
 use Ray\Di\Scope;
@@ -55,6 +55,9 @@ class DevModule extends AbstractModule
         $tmpDir = dirname(__DIR__) . '/tmp';
         $logDir = dirname(__DIR__) . '/log';
         $this->install(new FrameworkModule($this->app, $tmpDir, $logDir));
+
+        // install dev module
+        $this->install(new TemplateEngine\DevRendererModule);
         
         // install application module
         $this->install(new AppModule($this));
@@ -69,13 +72,13 @@ class DevModule extends AbstractModule
             'charset' => 'UTF8'
         ];
         $this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
-        
+
         // log all resource access
         $logger = $this->requestInjection('BEAR\Framework\Interceptor\Logger');
-//         $this->bindInterceptor(
-//             $this->matcher->subclassesOf('BEAR\Resource\Object'),
-//             $this->matcher->any(),
-//             [$logger]
-//         );
+        $this->bindInterceptor(
+            $this->matcher->subclassesOf('BEAR\Resource\Object'),
+            $this->matcher->any(),
+            [$logger]
+        );
     }
 }

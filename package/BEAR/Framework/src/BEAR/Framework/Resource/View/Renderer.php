@@ -11,6 +11,7 @@ use BEAR\Resource\Object as ResourceObject;
 use BEAR\Resource\Renderable;
 use ReflectionClass;
 use BEAR\Framework\Resource\View\TemplateEngineAdapter;
+use Ray\Di\Di\Inject;
 
 /**
  * Request renderer
@@ -31,6 +32,8 @@ class Renderer implements Renderable
      * ViewRenderer Setter
      *
      * @param TemplateEngineAdapter $templateEngineAdapter
+     * 
+     * @Inject
      */
     public function __construct(TemplateEngineAdapter $templateEngineAdapter)
     {

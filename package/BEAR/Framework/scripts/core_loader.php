@@ -9,7 +9,9 @@
  */
 namespace BEAR\Framework\Scripts;
 
-$system = dirname(dirname(dirname(dirname(__DIR__))));
+use BEAR\Framework\Framework;
+
+$system = Framework::$systemRoot;
 
 include $system . '/vendor/Aura/Autoload/src/Aura/Autoload/Loader.php';
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/AnnotationRegistry.php';

@@ -7,6 +7,8 @@
  */
 namespace BEAR\Framework\Interceptor;
 
+use BEAR\Framework\Framework;
+
 use Aura\Signal\Manager as Signal;
 use BEAR\Framework\Interceptor\Cachable as CacheInterceptor;
 use BEAR\Resource\Invoker;
@@ -34,7 +36,7 @@ class CacheUpdater implements MethodInterceptor
     public function __construct(CacheInterceptor $cache, Request $request = null)
     {
         $this->cache = $cache;
-        $signal = require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/vendor/Aura/Signal/scripts/instance.php';
+        $signal = require Framework::$systemRoot . '/vendor/Aura/Signal/scripts/instance.php';
         $this->request = $request ?: new Request(new Invoker(new Config(new Annotation(new Definition)), new Linker, $signal));
     }
 

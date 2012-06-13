@@ -1,8 +1,11 @@
 <?php
+use BEAR\Framework\Framework;
+
 $sec = number_format((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 2);
 $memory = number_format(memory_get_peak_usage(true));
 
-$systemRoot = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
+$systemRoot = Framework::$systemRoot;
+
 $exceptionInfo = function (\Exception $e) use ($systemRoot) {
 	return [
 	'message' => $e->getMessage(),

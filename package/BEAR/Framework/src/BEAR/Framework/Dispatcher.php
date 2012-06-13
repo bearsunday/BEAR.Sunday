@@ -38,12 +38,6 @@ final class Dispatcher
      */
     private $app;
 
-    /**
-     * System path
-     *
-     * @var string
-     */
-    private $systemPath;
 
     /**
      * Constructor
@@ -55,7 +49,6 @@ final class Dispatcher
     {
         $this->app = $app;
         $this->cache = $cache;
-        $this->systemPath = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
     }
 
     public function setCache($cache)

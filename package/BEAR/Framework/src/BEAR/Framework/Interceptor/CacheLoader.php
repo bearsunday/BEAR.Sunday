@@ -61,13 +61,13 @@ class CacheLoader implements Cachable, MethodInterceptor
 		}
 		if ($pagered) {
     		$resource = $invocation->getThis();
-    		list($resource->code,  $resource->headers, $resource->body) = $pagered;
-    		echo '<span class="label">[R] ' . get_class($resource) . '</span>';
+    		list($resource->code, $resource->headers, $resource->body) = $pagered;
+    		$resource->headers['x-cache-info'] = ['mode' => 'R', 'date' => $resource->headers['x-cache-info']['date']];
 			return $resource;
 		}
 		$result = $invocation->proceed();
 		$resource = $invocation->getThis();
-		$resource->headers['x-cached-since'] = date('r');
+		$resource->headers['x-cache-info'] = ['mode' => 'W', 'date' => date('r')];
         $data = [$resource->code, $resource->headers, $resource->body];
 		$annotation = $invocation->getAnnotation();
 		$time = $annotation->time;
@@ -76,8 +76,8 @@ class CacheLoader implements Cachable, MethodInterceptor
 		    $data = $saved;
 		}
 		$this->cache->save($id, $data, $time);
-    	echo '<span class="label label-important">[W] ' . get_class($resource) . '</span>';
-		return $result;
+    	$resource->headers['x-debug-info'] = '[W] ' . get_class($resource);
+    	return $resource;
 	}
 
 	/**

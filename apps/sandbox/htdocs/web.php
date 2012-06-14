@@ -73,4 +73,4 @@ try {
 }
 
 // Transfer
-$app->response->debug()->setResource($page)->prepare()->send();
+$app->response->setResource($page)->debug()->prepare()->send();

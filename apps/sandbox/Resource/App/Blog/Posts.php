@@ -54,7 +54,7 @@ class Posts extends ResourceObject implements DbSetter
     /**
      * Get
      *
-     * @Cache
+     * @Cache(100)
      *
      * @return array
      */

@@ -62,15 +62,18 @@ class CacheLoader implements Cachable, MethodInterceptor
 		if ($pagered) {
     		$resource = $invocation->getThis();
     		list($resource->code, $resource->headers, $resource->body) = $pagered;
-    		$resource->headers['x-cache-info'] = ['mode' => 'R', 'date' => $resource->headers['x-cache-info']['date']];
+    		$resource->headers['x-cache'] = [
+    		    'mode' => 'R',
+    		    'date' => $resource->headers['x-cache']['date'],
+    		    'life' => $resource->headers['x-cache']['life']
+    		];
 			return $resource;
 		}
 		$result = $invocation->proceed();
 		$resource = $invocation->getThis();
-		$resource->headers['x-cache-info'] = ['mode' => 'W', 'date' => date('r')];
+		$time = $invocation->getAnnotation()->time;
+		$resource->headers['x-cache'] = ['mode' => 'W', 'date' => date('r'), 'life' => $time];
         $data = [$resource->code, $resource->headers, $resource->body];
-		$annotation = $invocation->getAnnotation();
-		$time = $annotation->time;
 		if ($pager) {
 		    $saved['pager'][$pager] = $data;
 		    $data = $saved;

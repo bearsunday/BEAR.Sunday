@@ -148,9 +148,7 @@
     <script src="../assets/js/bootstrap-carousel.js"></script>
     <script src="../assets/js/bootstrap-typeahead.js"></script>
 *}
-    <script>
-    {literal}$('[rel=tooltip]').tooltip();{/literal}
-    </script>
+
 
   </body>
 </html>

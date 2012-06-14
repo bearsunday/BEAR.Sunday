@@ -91,11 +91,28 @@ class HttpFoundation implements Response
      */
     public function debug()
     {
+        // add performance info
         $this->debug = true;
         if (isset($_SERVER['REQUEST_TIME_FLOAT'])) {
             $this->headers['X-Request-Per-Second'] = number_format((1 / (microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'])), 2);
             $this->headers['X-Memory-Peak-Usage'] = number_format(memory_get_peak_usage(true));
         }
+        
+        // add interceptor info
+        $resource = $this->resource;
+        array_walk_recursive($this->resource->body, function ($element) {
+            if ($element instanceof Request && ($element->ro instanceof Weaver)) {
+                $object = $element->ro->___getObject();
+                $bind = (array)$element->ro->___getBind();
+                if (isset($bind['onGet'])) {
+                    $interceptors = array_values($bind['onGet']);
+                    foreach ($interceptors as &$interceptor) {
+                        $interceptor = get_class($interceptor);
+                    }
+                }
+                $object->headers['x-bind'] = $interceptors;
+            }
+        });
         return $this;
     }
 

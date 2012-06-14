@@ -100,6 +100,9 @@ class HttpFoundation implements Response
         
         // add interceptor info
         $resource = $this->resource;
+        if ((! isset($this->resource)) ||(! is_array($this->resource->body))) {
+            return $this;
+        }
         array_walk_recursive($this->resource->body, function ($element) {
             if ($element instanceof Request && ($element->ro instanceof Weaver)) {
                 $object = $element->ro->___getObject();
@@ -217,6 +220,7 @@ class HttpFoundation implements Response
         } else {
             // resource headers
             foreach ($this->resource->headers as $name => $value) {
+                $value = (is_array($value)) ? print_r($value, true) : $value;
                 echo "{$label1}{$name}: {$close}{$value}" . PHP_EOL;
             }
         }

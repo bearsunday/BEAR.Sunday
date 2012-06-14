@@ -70,7 +70,6 @@ class Framework
         }
 
         $system = dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))));
-        include_once $system . '/package/BEAR/Framework/scripts/core_loader.php';
         include_once $system . '/vendor/Aura/Autoload/src.php';
         $loader = new Loader;
         $namespacesBase = include  $system . '/vendor/composer/autoload_namespaces.php';
@@ -81,6 +80,7 @@ class Framework
         $namespacesBase += $namespaces;
         $loader->setPaths($namespacesBase);
         $loader->register();
+//         include_once $system . '/package/BEAR/Framework/scripts/core_loader.php';
         AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di\\', $system . '/vendor/Ray/Di/src/');
         AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation\\', $system . '/vendor/BEAR/Resource/src/');
         AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation\\', $system . '/package/BEAR/Framework/src/');

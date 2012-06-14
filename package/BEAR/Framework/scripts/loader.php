@@ -2,8 +2,7 @@
 if (class_exists('\Aura\Autoload\Loader', false) === true) {
     return;
 }
-$system =
-include __DIR__ . '/core_loader.php';
+include_once __DIR__ . '/core_loader.php';
 // require $this->system . '/vendor/autoload.php';
 $loader = require  $this->system . '/vendor/Aura/Autoload/scripts/instance.php';
 $namespaces = require  $this->system . '/vendor/composer/autoload_namespaces.php';

@@ -79,7 +79,7 @@ class PageBlogPostsTest extends \PHPUnit_Extensions_Database_TestCase
 	public function test_AppResourceUri($page)
 	{
 		$posts = $page->body['posts'];
-		$this->assertSame('get app://self/blog/posts', $posts->toUri());
+		$this->assertSame('app://self/blog/posts', $posts->toUri());
 	}
 
 	/**

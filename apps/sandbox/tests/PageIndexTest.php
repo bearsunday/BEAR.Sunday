@@ -61,7 +61,7 @@ class PageIndexTest extends \PHPUnit_Framework_TestCase
      */
     public function test_AppResourceUri($page)
     {
-    	$this->assertSame('get app://self/performance', $page->body['performance']->toUri());
+    	$this->assertSame('app://self/performance', $page->body['performance']->toUri());
     }
     
     /**

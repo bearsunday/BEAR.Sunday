@@ -63,7 +63,6 @@ class Framework
     {
         static $loader;
 
-        
         if (! is_null($loader)) {
             // unregister for another app
             spl_autoload_unregister([$loader, 'load']);

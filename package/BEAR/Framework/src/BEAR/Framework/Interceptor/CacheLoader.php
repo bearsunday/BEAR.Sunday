@@ -79,7 +79,6 @@ class CacheLoader implements Cachable, MethodInterceptor
 		    $data = $saved;
 		}
 		$this->cache->save($id, $data, $time);
-    	$resource->headers['x-debug-info'] = '[W] ' . get_class($resource);
     	return $resource;
 	}
 

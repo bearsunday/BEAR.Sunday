@@ -6,6 +6,8 @@
          strict="true"
          colors="true"
          timeoutForSmallTests="10"
+		 stopOnError="true"
+		 stopOnFailure="true"
          verbose="true">
   <testsuites>
     <testsuite name="BEAR.Sunday">

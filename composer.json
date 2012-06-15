@@ -105,16 +105,11 @@
             "type":"package",
             "package": {
                 "name": "xhprof/xhprof",
-                "version": "1.0.0",
+                "version": "0.9.2",
                 "target-dir": "xhprof",
                 "dist": {
-                    "url": "https://github.com/koriym/xhprof/zipball/master",
-                    "type": "zip"
-                },
-                "source": {
-                    "url": "https://github.com/koriym/xhprof.git",
-                    "type": "git",
-                    "reference": "master"
+                    "url": "http://pecl.php.net/get/xhprof-0.9.2.tgz",
+                    "type": "pecl"
                 }
             }
         },

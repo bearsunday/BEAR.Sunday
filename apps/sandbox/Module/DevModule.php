@@ -78,7 +78,7 @@ class DevModule extends AbstractModule
         $logger = $this->requestInjection('BEAR\Framework\Interceptor\Logger');
         $this->bindInterceptor(
             $this->matcher->subclassesOf('BEAR\Resource\Object'),
-            $this->matcher->any(),
+            $this->matcher->startWith('on'),
             [$logger]
         );
 

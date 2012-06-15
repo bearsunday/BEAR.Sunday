@@ -40,7 +40,7 @@ class DoctrineDbalModule extends AbstractModule
         $dbInjector = $this->requestInjection('\BEAR\Framework\Interceptor\DbInjector');
         $this->bindInterceptor(
             $this->matcher->annotatedWith('BEAR\Framework\Annotation\Db'),
-            $this->matcher->any(),
+            $this->matcher->startWith('on'),
             [$dbInjector]
         );
     }

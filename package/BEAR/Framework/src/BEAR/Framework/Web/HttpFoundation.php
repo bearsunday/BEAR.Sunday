@@ -159,6 +159,11 @@ class HttpFoundation implements Response
         $body = $this->resource->body;
 
         complete:
+        foreach ($this->resource->headers as $key => &$header) {
+            if (! (is_string($header))) {
+                unset($this->resource->headers[$key]);
+            }    
+        }
         $this->response = new SymfonyResponse($body, $this->resource->code, (array) $this->resource->headers);
         // compliant with RFC 2616.
         $this->response->prepare();
@@ -213,7 +218,10 @@ class HttpFoundation implements Response
         if ($this->response) {
             // prepared HTTP headers
             foreach ($this->response->headers->all() as $name => $values) {
-                foreach ($values as $value) {
+                foreach ($values as &$value) {
+                    if (is_array($value)) {
+                        $value = json_encode($value);
+                    }
                     echo "{$label1}{$name}: {$close}{$value}" . PHP_EOL;
                 }
             }

@@ -97,7 +97,7 @@ class ExceptionHandler implements ExceptionHandle
      * @param Exception $e
      * @param string    $exceptionId
      */
-    public function writeExceptionLog($e, $exceptionId)
+    public function writeExceptionLog(Exception $e, $exceptionId)
     {
         $filename = "e.{$exceptionId}.log";
         $trace = $e->getTrace();
@@ -107,7 +107,7 @@ class ExceptionHandler implements ExceptionHandle
             $data .= PHP_EOL . PHP_EOL . '-- Previous Exception --' . PHP_EOL . PHP_EOL;
             $data .= $previousE->getTraceAsString();
         }
-        $data .= print_r($e->getTrace(), true);
+        $data .= (string)$e;
         $file = "{$this->logDir}/" . $filename;
         file_put_contents($file, $data);
     }

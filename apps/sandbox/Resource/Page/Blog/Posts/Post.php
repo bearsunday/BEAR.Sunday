@@ -35,6 +35,8 @@ class Post extends Page
      * Get
      * 
      * @param int $id
+     * 
+     * @Cache(5)
      */
     public function onGet($id)
     {

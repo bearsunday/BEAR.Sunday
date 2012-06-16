@@ -6,16 +6,19 @@
  */
 namespace BEAR\Framework\Resource\View;
 
+
 use Ray\Aop\Weave;
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Resource\Renderable;
 use BEAR\Resource\Request;
-use ReflectionClass;
 use BEAR\Framework\Resource\View\TemplateEngineAdapter;
+use BEAR\Framework\Interceptor\CacheLoader;
+use ReflectionClass;
 use ReflectionObject;
 use Ray\Di\Di\Inject;
 use DateTime;
 use DateInterval;
+use BEAR\Resource\DevInvoker;
 
 /**
  * Request renderer
@@ -25,7 +28,6 @@ use DateInterval;
  */
 class DevRenderer implements Renderable
 {
-
     const NO_CACHE = '';
     const WRITE_CACHE = 'label-important';
     const READ_CACHE = 'label-success';
@@ -33,11 +35,14 @@ class DevRenderer implements Renderable
     const BADGE_ARGS = '<span class="badge badge-info">Arguments</span>';
     const BADGE_CACHE = '<span class="badge badge-info">Cache</span>';
     const BADGE_INTERCEPTORS = '<span class="badge badge-info">Interceptors</span>';
+    const BADGE_PROFILE = '<span class="badge badge-info">Profile</span>';
     
     const ICON_LIFE = '<span class="icon-refresh"></span>';
     const ICON_TIME = '<span class="icon-time"></span>';
     const ICON_NA = '<span class="icon-ban-circle"></span>';
 
+    const DIV_WELL = '<div style="padding:10px;">';
+    
     /**
      * Template engine adapter
      *
@@ -110,9 +115,9 @@ EOT;
 
     private function getLabel($body, ResourceObject $ro, $templateFile)
     {
-        if (! isset($ro->headers['x-cache-info'])) {
+        if (! isset($ro->headers[CacheLoader::HEADER_CACHE])) {
             $labelColor = self::NO_CACHE;
-        } elseif ($ro->headers['x-cache-info']['mode'] === 'W') {
+        } elseif ($ro->headers[CacheLoader::HEADER_CACHE]['mode'] === 'W') {
             $labelColor = self::WRITE_CACHE;
         } else {
             $labelColor = self::READ_CACHE;
@@ -127,7 +132,7 @@ EOT;
         $resourceKey = spl_object_hash($ro);
         $html = highlight_string($body, true);
 
-        $info = $this->getResourceMetaInfo($ro);
+        $info = $this->getResourceInfo($ro);
 
         $label = <<<EOT
 <span class="label {$labelColor}">{$resourceName}</span>
@@ -179,11 +184,12 @@ EOT;
      *
      * @return string
      */
-    private function getResourceMetaInfo(ResourceObject $ro)
+    private function getResourceInfo(ResourceObject $ro)
     {
         $info = $this->getArgsInfo($ro);
         $info .= $this->getInterceptorInfo($ro);
         $info .= $this->getCacheInfo($ro);
+        $info .= $this->getProfileInfo($ro);
         return $info;
     }
 
@@ -194,10 +200,10 @@ EOT;
      */
     private function getArgsInfo(ResourceObject $ro)
     {
+        $result = self::BADGE_ARGS . self::DIV_WELL;
         if (! isset($ro->headers['x-args'])) {
-            return self::BADGE_ARGS . '<li> n/a (no logger is binded.)</li>';
+            return $result . 'n/a (no logger is binded.)</div>';
         }
-        $result = self::BADGE_ARGS;
         $args = $ro->headers['x-args'];
         foreach ($args as $arg) {
             if (is_scalar($arg)) {
@@ -213,10 +219,10 @@ EOT;
             $argInfo = "<li>($type) {$arg}</li>";
         }
         if ($args === []) {
-            $argInfo = '<li>void</li>';
+            $argInfo = 'void';
         }
         $result .= "<ul>{$argInfo}</ul>";
-        return $result;
+        return $result . '</div>';
     }
     /**
      * Return cache info
@@ -225,15 +231,15 @@ EOT;
      */
     private function getCacheInfo(ResourceObject $ro)
     {
-        if (! isset($ro->headers['x-cache'])) {
-            return self::BADGE_CACHE . '<ul><li> n/a</li></ul>';
+        $result = self::BADGE_CACHE . self::DIV_WELL;
+        if (! isset($ro->headers[CacheLoader::HEADER_CACHE])) {
+            return $result . 'n/a' . '</div>';
         }
         $iconLife = self::ICON_LIFE;
         $iconTime = self::ICON_TIME;
         
-        $cache = $ro->headers['x-cache'];
+        $cache = $ro->headers[CacheLoader::HEADER_CACHE];
         $life = $cache['life'] ? "{$cache['life']} sec" : 'Unlmited';
-        $result = self::BADGE_CACHE . '<ul>';
         if ($cache['mode'] === 'W') {
             $result .=  "Write {$iconLife} {$life}";
         } else {
@@ -247,7 +253,7 @@ EOT;
             }
             $result .= "Read {$iconLife} {$life} {$iconTime} {$time}";
         }
-        return $result;
+        return $result . '</div>';
     }
 
     /**
@@ -259,18 +265,45 @@ EOT;
      */
     private function getInterceptorInfo(ResourceObject $ro)
     {
-        $result = self::BADGE_INTERCEPTORS;
-        if (! isset($ro->headers['x-bind'])) {
-            return $result . '<ul><li> n/a</li></ul>';
+        $result = self::BADGE_INTERCEPTORS . self::DIV_WELL;
+        if (! isset($ro->headers[DevInvoker::HEADER_INTERCEPTORS])) {
+            return $result . 'n/a';
         }
-        $result .= '<ul>';
-        foreach ($ro->headers['x-bind'] as $interceptor) {
+        $result .= '<ul class="unstyled">';
+        foreach ($ro->headers[DevInvoker::HEADER_INTERCEPTORS]['onGet'] as $interceptor) {
             $interceptorfile = (new ReflectionClass($interceptor))->getFileName();
             $result .= <<<EOT
 <li><a target="_blank" href="/_bear/edit/?file={$interceptorfile}"><span class="icon-arrow-right"></span>{$interceptor}</a></li>
 EOT;
         }
-        $result .= '</ul>';
+        $result .= '</ul></div>';
+        return $result;
+    }
+
+    /**
+     * Return resource meta info
+     *
+     * @param ResourceObject $ro
+     *
+     * @return string
+     */
+    private function getProfileInfo(ResourceObject $ro)
+    {
+        // memory, time
+        $result = self::BADGE_PROFILE  . self::DIV_WELL;
+        $time = number_format($ro->headers[DevInvoker::HEADER_EXECUTION_TIME] , 3);;
+        $memory = number_format($ro->headers[DevInvoker::HEADER_MEMORY_USAGE]);
+        $result .= <<<EOT
+<span class="icon-time"></span> {$time} sec <span class="icon-signal"></span> {$memory} bytes
+EOT;
+        // profile id
+        if (isset($ro->headers[DevInvoker::HEADER_PROFILE_ID])) {
+            $profileId = $ro->headers[DevInvoker::HEADER_PROFILE_ID];
+            $result .= <<<EOT
+ <span class="icon-random"></span><a href="/_bear/profile/xhprof_html/index.php?run={$profileId}&source=resource"> {$profileId}</a>
+EOT;
+        }
+        $result .= '</div>';
         return $result;
     }
 }

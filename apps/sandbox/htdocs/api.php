@@ -27,7 +27,8 @@ use BEAR\Resource\Object as ResourceObject;
 use BEAR\Framework\Web\HttpFoundation as Response;
 use Exception;
 
-require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+$system = dirname(dirname(dirname(__DIR__)));
+require_once $system . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
 require_once dirname(__DIR__) . '/App.php';
 
 if (php_sapi_name() == 'cli-server') {

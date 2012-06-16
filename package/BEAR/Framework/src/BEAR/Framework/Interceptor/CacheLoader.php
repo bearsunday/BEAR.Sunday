@@ -19,6 +19,13 @@ use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
  */
 class CacheLoader implements Cachable, MethodInterceptor
 {
+    /**
+     * Cache header key
+     * 
+     * @var string
+     */
+    const HEADER_CACHE = 'x-cache';
+    
 	/**
 	 * Host
 	 *
@@ -62,17 +69,17 @@ class CacheLoader implements Cachable, MethodInterceptor
 		if ($pagered) {
     		$resource = $invocation->getThis();
     		list($resource->code, $resource->headers, $resource->body) = $pagered;
-    		$resource->headers['x-cache'] = [
+    		$resource->headers['self::HEADER_CACHE'] = [
     		    'mode' => 'R',
-    		    'date' => $resource->headers['x-cache']['date'],
-    		    'life' => $resource->headers['x-cache']['life']
+    		    'date' => $resource->headers['self::HEADER_CACHE']['date'],
+    		    'life' => $resource->headers['self::HEADER_CACHE']['life']
     		];
 			return $resource;
 		}
 		$result = $invocation->proceed();
 		$resource = $invocation->getThis();
 		$time = $invocation->getAnnotation()->time;
-		$resource->headers['x-cache'] = ['mode' => 'W', 'date' => date('r'), 'life' => $time];
+		$resource->headers['self::HEADER_CACHE'] = ['mode' => 'W', 'date' => date('r'), 'life' => $time];
         $data = [$resource->code, $resource->headers, $resource->body];
 		if ($pager) {
 		    $saved['pager'][$pager] = $data;

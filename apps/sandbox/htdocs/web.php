@@ -7,7 +7,11 @@ use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Framework;
 
-require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+$system = dirname(dirname(dirname(__DIR__)));
+require_once $system . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+// profiler
+require_once $system . '/vendor/xhprof/xhprof/xhprof/xhprof_lib/utils/xhprof_lib.php';
+require_once $system . '/vendor/xhprof/xhprof/xhprof/xhprof_lib/utils/xhprof_runs.php';
 require_once dirname(__DIR__) . '/App.php';
 
 /**
@@ -38,7 +42,7 @@ if (PHP_SAPI == 'cli-server') {
         return false;
     }
 }
-// reoute another PHP file
+// reroute another PHP file
 $doIncludePHPfile = (
     PHP_SAPI !== 'cli' &&
     file_exists($_SERVER['SCRIPT_FILENAME']) &&
@@ -48,6 +52,7 @@ if ($doIncludePHPfile) {
 	include $_SERVER['SCRIPT_FILENAME'];
 	exit(0);
 }
+
 
 // run mode
 $runMode = App::RUN_MODE_DEV;

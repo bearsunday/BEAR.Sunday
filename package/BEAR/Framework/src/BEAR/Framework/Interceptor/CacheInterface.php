@@ -12,7 +12,7 @@ namespace BEAR\Framework\Interceptor;
  * @package    BEAR.Framework
  * @subpackage Interceptor
  */
-interface Cachable
+interface CacheInterface
 {
     /**
      * Delete cache data

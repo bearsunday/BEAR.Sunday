@@ -153,7 +153,7 @@
         "Aura/Signal": "dev-master",
         "Aura/Web": "dev-master",
         "BEAR/Resource": "dev-master",
-        "doctrine/common": "2.2.*",
+        "doctrine/common": "2.3.*",
         "doctrine/dbal": "2.2.*",
         "symfony/console": "2.0.*",
         "symfony/http-foundation": "2.0.*",

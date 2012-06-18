@@ -6,9 +6,8 @@
  */
 namespace BEAR\Framework\Inject;
 
-use BEAR\Resource\Client as Resource;
+use BEAR\Resource\ResourceInterface;
 use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 
 /**
  * Inject resource client
@@ -22,7 +21,7 @@ trait ResourceInject
     /**
      * @Inject
      */
-    public function setResource(Resource $resource)
+    public function setResource(ResourceInterface $resource)
     {
         $this->resource = $resource;
     }

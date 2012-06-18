@@ -15,7 +15,7 @@ use Doctrine\DBAL\Driver\Connection as DriverConnection;
  * @package    BEAR.Framework
  * @subpackage Intercetor
  */
-interface DbSetter
+interface DbSetterInterface
 {
     /**
      * Set db connection

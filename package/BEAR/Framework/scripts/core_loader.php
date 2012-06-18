@@ -48,7 +48,7 @@ include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Cache/DoctrineCacheAd
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Pointcut.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Matchable.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Matcher.php';
-include $system . '/package/BEAR/Framework/src/BEAR/Framework/Interceptor/Cachable.php';
+include $system . '/package/BEAR/Framework/src/BEAR/Framework/Interceptor/CacheInterface.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Advice.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Interceptor.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/MethodInterceptor.php';
@@ -56,9 +56,9 @@ include $system . '/package/BEAR/Framework/src/BEAR/Framework/Interceptor/CacheL
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Cache/Zf2CacheAdapter.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Interceptor/CacheUpdater.php';
 include $system . '/vendor/BEAR/Resource/src/BEAR/Resource/Request.php';
-include $system . '/vendor/BEAR/Resource/src/BEAR/Resource/Invokable.php';
+include $system . '/vendor/BEAR/Resource/src/BEAR/Resource/InvokerInterface.php';
 include $system . '/vendor/BEAR/Resource/src/BEAR/Resource/Invoker.php';
-include $system . '/vendor/BEAR/Resource/src/BEAR/Resource/Linkable.php';
+include $system . '/vendor/BEAR/Resource/src/BEAR/Resource/LinkerInterface.php';
 include $system . '/vendor/BEAR/Resource/src/BEAR/Resource/Linker.php';
 include $system . '/vendor/Aura/Signal/src/Aura/Signal/Manager.php';
 include $system . '/vendor/Aura/Signal/src/Aura/Signal/HandlerFactory.php';

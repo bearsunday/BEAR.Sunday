@@ -25,7 +25,7 @@ class CliTest extends \PHPUnit_Framework_TestCase
     	$cli = 'php ' . $this->systemRoot . '/apps/sandbox/htdocs/web.php get /index';
     	exec($cli, $return);
     	$pos = array_search('<html lang="en">', $return);
-    	$this->assertTrue(is_int($pos));
+    	$this->assertTrue(is_int($pos), json_encode($return));
     }
 
     public function test_devApiPhp()

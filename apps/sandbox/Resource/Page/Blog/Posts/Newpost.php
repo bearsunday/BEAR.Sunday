@@ -1,7 +1,7 @@
 <?php
 namespace sandbox\Resource\Page\Blog\Posts;
 
-use BEAR\Resource\Client as Resource;
+use BEAR\Resource\Resource;
 use BEAR\Resource\Annotation\Provides;
 
 use BEAR\Framework\Resource\AbstractPage as Page;

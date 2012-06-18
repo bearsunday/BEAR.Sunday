@@ -10,7 +10,7 @@ namespace BEAR\Framework\Interceptor;
 use BEAR\Framework\Framework;
 
 use Aura\Signal\Manager as Signal;
-use BEAR\Framework\Interceptor\Cachable as CacheInterceptor;
+use BEAR\Framework\Interceptor\CacheInterface as CacheInterceptor;
 use BEAR\Resource\Invoker;
 use BEAR\Resource\Request;
 use BEAR\Resource\Linker;

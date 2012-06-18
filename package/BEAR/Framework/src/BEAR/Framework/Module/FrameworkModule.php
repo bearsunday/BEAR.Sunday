@@ -83,14 +83,14 @@ class FrameworkModule extends AbstractModule
         $config = $injector->getContainer()->getForge()->getConfig();
         $this->bind('Aura\Di\ConfigInterface')->toInstance($config);
         $this->bind('Ray\Di\InjectorInterface')->toInstance($injector);
-        $this->bind('BEAR\Resource\Resource')->to('BEAR\Resource\Client')->in(Scope::SINGLETON);
-        $this->bind('BEAR\Resource\Invokable')->to('BEAR\Resource\Invoker')->in(Scope::SINGLETON);
-        $this->bind('BEAR\Resource\Linkable')->to('BEAR\Resource\Linker')->in(Scope::SINGLETON);
+        $this->bind('BEAR\Resource\ResourceInterface')->to('BEAR\Resource\Resource')->in(Scope::SINGLETON);
+        $this->bind('BEAR\Resource\InvokerInterface')->to('BEAR\Resource\Invoker')->in(Scope::SINGLETON);
+        $this->bind('BEAR\Resource\LinkerInterface')->to('BEAR\Resource\Linker')->in(Scope::SINGLETON);
         $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Framework\Module\Provider\CacheProvider')->in(Scope::SINGLETON);
         $this->bind('Aura\Signal\Manager')->toProvider('BEAR\Framework\Module\Provider\SignalProvider')->in(Scope::SINGLETON);
         $this->bind()->annotatedWith('app_name')->toInstance($this->app);
-        $this->bind('BEAR\Framework\Web\Response')->to('BEAR\Framework\Web\HttpFoundation');
-        $this->bind('BEAR\Framework\Exception\ExceptionHandle')->to('BEAR\Framework\Exception\ExceptionHandler');
+        $this->bind('BEAR\Framework\Web\ResponseInterface')->to('BEAR\Framework\Web\HttpFoundation');
+        $this->bind('BEAR\Framework\Exception\ExceptionHandlerInterface')->to('BEAR\Framework\Exception\ExceptionHandler');
         $this->bind('Doctrine\Common\Annotations\Reader')->to('Doctrine\Common\Annotations\AnnotationReader');
     }
 }

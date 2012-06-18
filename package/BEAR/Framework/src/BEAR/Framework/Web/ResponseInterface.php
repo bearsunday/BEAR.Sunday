@@ -12,6 +12,6 @@ namespace BEAR\Framework\Web;
  * @package    BEAR.Framework
  * @subpackage Web
  */
-interface Response
+interface ResponseInterface
 {
 }

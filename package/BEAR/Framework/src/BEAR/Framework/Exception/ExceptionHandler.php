@@ -8,28 +8,28 @@ use BEAR\Resource\Exception\InvalidScheme;
 use BEAR\Resource\Exception\ResourceNotFound;
 use Ray\Di\Exception\InvalidBinding;
 use BEAR\Framework\Resource\Page\Error;
-use BEAR\Framework\Web\Response;
+use BEAR\Framework\Web\ResponseInterface;
 use BEAR\Framework\Web\HttpFoundation as Output;
 use BEAR\Framework\Inject\LogDirInject;
 use Exception;
 
-class ExceptionHandler implements ExceptionHandle
+class ExceptionHandler implements ExceptionHandlerInterface
 {
     use LogDirInject;
 
     /**
      * Set response
      *
-     * @param Response $response
+     * @param ResponseInterface $response
      */
-    public function setResponse(Response $response)
+    public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
     }
 
     /**
      * (non-PHPdoc)
-     * @see BEAR\Framework\Exception.ExceptionHandle::handle()
+     * @see BEAR\Framework\Exception.ExceptionHandlerInterface::handle()
      */
     public function handle(Exception $e)
     {

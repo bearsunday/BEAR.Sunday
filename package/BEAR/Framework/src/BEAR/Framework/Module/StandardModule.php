@@ -49,12 +49,16 @@ class StandardModule extends AbstractModule
     {
         $this->bind('Ray\Di\InjectorInterface')->toInstance($this->injector);
         $this->bind('Aura\Di\ConfigInterface')->toInstance($this->config);
+<<<<<<< Updated upstream
         $this->bind('BEAR\Resource\Resource')->to('BEAR\Resource\Client')->in(Scope::SINGLETON);
-        $this->bind('BEAR\Resource\Invokable')->to('BEAR\Resource\Invoker')->in(Scope::SINGLETON);
-        $this->bind('BEAR\Resource\Linkable')->to('BEAR\Resource\Linker')->in(Scope::SINGLETON);
+=======
+        $this->bind('BEAR\Resource\ResourceInterface')->to('BEAR\Resource\Resource')->in(Scope::SINGLETON);
+>>>>>>> Stashed changes
+        $this->bind('BEAR\Resource\InvokerInterface')->to('BEAR\Resource\Invoker')->in(Scope::SINGLETON);
+        $this->bind('BEAR\Resource\LinkerInterface')->to('BEAR\Resource\Linker')->in(Scope::SINGLETON);
         $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Framework\Module\Provider\CacheProvider')->in(Scope::SINGLETON);
         $this->bind('Aura\Signal\Manager')->toProvider('BEAR\Framework\Module\Provider\SignalProvider')->in(Scope::SINGLETON);
-        $this->bind('BEAR\Resource\Client')->toProvider('BEAR\Framework\Module\Provier\ResourceClientProvider');
+        $this->bind('BEAR\Resource\ResourceInterface')->toProvider('BEAR\Framework\Module\Provier\ResourceClientProvider');
 //         $this->bind('BEAR\Framework\AbstractAppContext')->toInstance($this->app);
     }
 }

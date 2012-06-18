@@ -61,7 +61,7 @@ final class Dispatcher
      *
      * @param string $pageUri Page resource path ("/hello/world")
      *
-     * @return array [BEAR\Resource\Resource $resource, BEAR\Resource\Object $page]
+     * @return array [BEAR\Resource\ResourceInterface $resource, BEAR\Resource\Object $page]
      *
      * @throws Exception
      */

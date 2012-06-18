@@ -11,12 +11,12 @@ use Ray\Di\Di\Named;
 use Ray\Di\Injector;
 use Ray\Di\InjectorInterface as Di;
 use Ray\Di\AbstractModule;
-use BEAR\Framework\Web\Response;
+use BEAR\Framework\Web\ResponseInterface;
 use BEAR\Framework\Inject\ResourceInject;
-use BEAR\Resource\Client;
+use BEAR\Resource\ResourceInterface;
 use BEAR\Resource\SignalHandler\Provides;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
-use BEAR\Framework\Exception\ExceptionHandle;
+use BEAR\Framework\Exception\ExceptionHandlerInterface;
 
 /**
  * Application context
@@ -36,14 +36,14 @@ abstract class AbstractAppContext
     /**
      * Resource client
      *
-     * @var BEAR\Resource\Client
+     * @var BEAR\Resource\Resource
      */
     public $resource;
 
     /**
      * Response
      *
-     * @var unknown_type
+     * @var ResponseInterface
      */
     public $response;
 
@@ -92,17 +92,19 @@ abstract class AbstractAppContext
      *
      * @Inject
      */
-    public function setExceptionHandler(ExceptionHandle $exceptionHandler)
+    public function setExceptionHandler(ExceptionHandlerInterface $exceptionHandler)
     {
         $this->exceptionHandler = $exceptionHandler;
     }
 
     /**
      * Set response
-     *
+     * 
+     * @param ResponseInterface $response
+     * 
      * @Inject
      */
-    public function setResponse(Response $response)
+    public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
     }
@@ -114,7 +116,7 @@ abstract class AbstractAppContext
      *
      * @Inject
      */
-    public function setResource(Client $resource)
+    public function setResource(ResourceInterface $resource)
     {
         $this->resource = $resource;
         // resource client

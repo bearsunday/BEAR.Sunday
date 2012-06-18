@@ -3,7 +3,7 @@ namespace sandbox\Resource\App\Blog\Posts;
 
 use BEAR\Framework\Annotation\Db;
 use BEAR\Framework\Annotation\Cache;
-use BEAR\Framework\Interceptor\DbSetter;
+use BEAR\Framework\Interceptor\DbSetterInterface;
 use BEAR\Framework\Annotation\DbPager;
 use PDO;
 
@@ -14,7 +14,7 @@ use sandbox\Resource\App\Blog\Posts;
  *
  * @Db
  */
-class Pager extends Posts implements DbSetter
+class Pager extends Posts implements DbSetterInterface
 {
 
     /**

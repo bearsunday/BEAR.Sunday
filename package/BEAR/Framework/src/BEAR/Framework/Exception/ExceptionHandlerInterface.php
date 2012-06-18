@@ -4,7 +4,7 @@ namespace BEAR\Framework\Exception;
 use Ray\Di\Di\ImplementedBy;
 use Exception;
 
-interface ExceptionHandle
+interface ExceptionHandlerInterface
 {
     /**
      * Handle exception

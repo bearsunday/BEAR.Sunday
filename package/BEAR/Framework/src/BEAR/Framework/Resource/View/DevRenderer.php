@@ -19,6 +19,7 @@ use Ray\Di\Di\Inject;
 use DateTime;
 use DateInterval;
 use BEAR\Resource\DevInvoker;
+use Traversable;
 
 /**
  * Request renderer
@@ -53,7 +54,7 @@ class DevRenderer implements Renderable
     /**
      * ViewRenderer Setter
      *
-     * @param ViewRenderer $renderer
+     * @param TemplateEngineAdapter $templateEngineAdapter
      *
      * @Inject
      */
@@ -61,13 +62,17 @@ class DevRenderer implements Renderable
     {
         $this->templateEngineAdapter = $templateEngineAdapter;
     }
-
+    
     /**
      * (non-PHPdoc)
      * @see BEAR\Resource.Renderable::render()
      */
     public function render(ResourceObject $ro)
     {
+        if (PHP_SAPI === 'cli') {
+            // delegate original method to avoid render dev html.
+            return (new Renderer($this->templateEngineAdapter))->render($ro);
+        }
         // resource code editor
         $class =  get_class($ro);
         $paegFile = (new ReflectionClass($class))->getFileName();
@@ -75,7 +80,7 @@ class DevRenderer implements Renderable
         // resource template editor
         $dir = pathinfo($paegFile, PATHINFO_DIRNAME);
         $this->templateEngineAdapter->assign('resource', $ro);
-        if (is_array($ro->body) || $ro->body instanceof \Traversable) {
+        if (is_array($ro->body) || $ro->body instanceof Traversable) {
             $this->templateEngineAdapter->assign($ro->body);
         }
         $templateFileBase = $dir . DIRECTORY_SEPARATOR . substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
@@ -115,9 +120,10 @@ EOT;
 
     private function getLabel($body, ResourceObject $ro, $templateFile)
     {
-        if (! isset($ro->headers[CacheLoader::HEADER_CACHE])) {
+        $cache = isset($ro->headers[CacheLoader::HEADER_CACHE]) ? json_decode($ro->headers[CacheLoader::HEADER_CACHE], true) : false;
+        if ($cache === false) {
             $labelColor = self::NO_CACHE;
-        } elseif ($ro->headers[CacheLoader::HEADER_CACHE]['mode'] === 'W') {
+        } elseif ($cache['mode'] === 'W') {
             $labelColor = self::WRITE_CACHE;
         } else {
             $labelColor = self::READ_CACHE;
@@ -159,7 +165,7 @@ EOT;
         if (is_scalar($body)) {
             return $body;
         }
-        $isTraversable = (is_array($body) || $body instanceof \Traversable);
+        $isTraversable = (is_array($body) || $body instanceof Traversable);
         if (! $isTraversable) {
             return '-';
         }
@@ -186,7 +192,7 @@ EOT;
      */
     private function getResourceInfo(ResourceObject $ro)
     {
-        $info = $this->getArgsInfo($ro);
+        $info = $this->getParamsInfo($ro);
         $info .= $this->getInterceptorInfo($ro);
         $info .= $this->getCacheInfo($ro);
         $info .= $this->getProfileInfo($ro);
@@ -198,30 +204,27 @@ EOT;
      *
      * @param ResourceObject $ro
      */
-    private function getArgsInfo(ResourceObject $ro)
+    private function getParamsInfo(ResourceObject $ro)
     {
         $result = self::BADGE_ARGS . self::DIV_WELL;
-        if (! isset($ro->headers['x-args'])) {
-            return $result . 'n/a (no logger is binded.)</div>';
-        }
-        $args = $ro->headers['x-args'];
-        foreach ($args as $arg) {
-            if (is_scalar($arg)) {
-                $type = gettype($arg);
-            } elseif (is_object($arg)) {
-                $type = get_class($arg);
-            } elseif (is_array($arg)) {
+        $params = json_decode($ro->headers[DevInvoker::HEADER_PARAMS], true);
+        foreach ($params as $param) {
+            if (is_scalar($param)) {
+                $type = gettype($param);
+            } elseif (is_object($param)) {
+                $type = get_class($param);
+            } elseif (is_array($param)) {
                 $type = 'array';
-                $arg = print_r($arg, true);
+                $param = print_r($param, true);
             } else {
                 $type = 'unkonwn';
             }
-            $argInfo = "<li>($type) {$arg}</li>";
+            $paramInfo = "<li>($type) {$param}</li>";
         }
-        if ($args === []) {
-            $argInfo = 'void';
+        if ($params === []) {
+            $paramInfo = 'void';
         }
-        $result .= "<ul>{$argInfo}</ul>";
+        $result .= "<ul>{$paramInfo}</ul>";
         return $result . '</div>';
     }
     /**
@@ -231,14 +234,14 @@ EOT;
      */
     private function getCacheInfo(ResourceObject $ro)
     {
+        $cache = isset($ro->headers[CacheLoader::HEADER_CACHE]) ? json_decode($ro->headers[CacheLoader::HEADER_CACHE], true) : false;
         $result = self::BADGE_CACHE . self::DIV_WELL;
-        if (! isset($ro->headers[CacheLoader::HEADER_CACHE])) {
+        if ($cache === false) {
             return $result . 'n/a' . '</div>';
         }
         $iconLife = self::ICON_LIFE;
         $iconTime = self::ICON_TIME;
         
-        $cache = $ro->headers[CacheLoader::HEADER_CACHE];
         $life = $cache['life'] ? "{$cache['life']} sec" : 'Unlmited';
         if ($cache['mode'] === 'W') {
             $result .=  "Write {$iconLife} {$life}";
@@ -270,7 +273,9 @@ EOT;
             return $result . 'n/a';
         }
         $result .= '<ul class="unstyled">';
-        foreach ($ro->headers[DevInvoker::HEADER_INTERCEPTORS]['onGet'] as $interceptor) {
+        $interceptors = json_decode($ro->headers[DevInvoker::HEADER_INTERCEPTORS], true);
+        $onGetInterceptors = $interceptors['onGet'];
+        foreach ($onGetInterceptors as $interceptor) {
             $interceptorfile = (new ReflectionClass($interceptor))->getFileName();
             $result .= <<<EOT
 <li><a target="_blank" href="/_bear/edit/?file={$interceptorfile}"><span class="icon-arrow-right"></span>{$interceptor}</a></li>
@@ -300,7 +305,7 @@ EOT;
         if (isset($ro->headers[DevInvoker::HEADER_PROFILE_ID])) {
             $profileId = $ro->headers[DevInvoker::HEADER_PROFILE_ID];
             $result .= <<<EOT
- <span class="icon-random"></span><a href="/_bear/profile/xhprof_html/index.php?run={$profileId}&source=resource"> {$profileId}</a>
+<span class="icon-random"></span><a href="/_bear/profile/xhprof_html/index.php?run={$profileId}&source=resource"> {$profileId}</a>
 EOT;
         }
         $result .= '</div>';

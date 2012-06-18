@@ -17,7 +17,7 @@ use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
  * @package    BEAR.Framework
  * @subpackage Intercetor
  */
-class CacheLoader implements Cachable, MethodInterceptor
+class CacheLoader implements CacheInterface, MethodInterceptor
 {
     /**
      * Cache header key
@@ -69,17 +69,22 @@ class CacheLoader implements Cachable, MethodInterceptor
 		if ($pagered) {
     		$resource = $invocation->getThis();
     		list($resource->code, $resource->headers, $resource->body) = $pagered;
-    		$resource->headers['self::HEADER_CACHE'] = [
+    		$cache = json_decode($resource->headers[self::HEADER_CACHE], true);
+    		$resource->headers[self::HEADER_CACHE] = json_encode([
     		    'mode' => 'R',
-    		    'date' => $resource->headers['self::HEADER_CACHE']['date'],
-    		    'life' => $resource->headers['self::HEADER_CACHE']['life']
-    		];
+    		    'date' => $cache['date'],
+    		    'life' => $cache['life']
+    		]);
 			return $resource;
 		}
 		$result = $invocation->proceed();
 		$resource = $invocation->getThis();
 		$time = $invocation->getAnnotation()->time;
-		$resource->headers['self::HEADER_CACHE'] = ['mode' => 'W', 'date' => date('r'), 'life' => $time];
+		$resource->headers[self::HEADER_CACHE] = json_encode([
+		    'mode' => 'W',
+		    'date' => date('r'),
+		    'life' => $time
+		]);
         $data = [$resource->code, $resource->headers, $resource->body];
 		if ($pager) {
 		    $saved['pager'][$pager] = $data;
@@ -103,7 +108,7 @@ class CacheLoader implements Cachable, MethodInterceptor
 
 	/**
 	 * (non-PHPdoc)
-	 * @see BEAR\Framework\Interceptor\Cachable::delete()
+	 * @see BEAR\Framework\Interceptor\CacheInterface::delete()
 	 */
 	public function delete($class, array $args)
 	{
@@ -113,7 +118,7 @@ class CacheLoader implements Cachable, MethodInterceptor
 
 	/**
 	 * (non-PHPdoc)
-	 * @see BEAR\Framework\Interceptor\Cachable::save()
+	 * @see BEAR\Framework\Interceptor\CacheInterface::save()
 	 */
 	public function save($class, $args, $data)
 	{

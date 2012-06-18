@@ -26,7 +26,7 @@ use UnexpectedValueException;
  * @package    BEAR.Framework
  * @subpackage Web
  */
-class HttpFoundation implements Response
+class HttpFoundation implements ResponseInterface
 {
     use LogInject;
 

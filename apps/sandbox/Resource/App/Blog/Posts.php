@@ -2,7 +2,7 @@
 namespace sandbox\Resource\App\Blog;
 
 use BEAR\Framework\Annotation\Db;
-use BEAR\Framework\Interceptor\DbSetter;
+use BEAR\Framework\Interceptor\DbSetterInterface;
 use BEAR\Framework\Annotation\Time;
 use BEAR\Framework\Annotation\Transactional;
 use BEAR\Framework\Annotation\Cache;
@@ -16,7 +16,7 @@ use Doctrine\DBAL\Driver\Connection as DriverConnection;
  *
  * @Db
  */
-class Posts extends ResourceObject implements DbSetter
+class Posts extends ResourceObject implements DbSetterInterface
 {
     /**
      * Time

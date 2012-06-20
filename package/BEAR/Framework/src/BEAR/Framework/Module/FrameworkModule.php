@@ -89,7 +89,7 @@ class FrameworkModule extends AbstractModule
         $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Framework\Module\Provider\CacheProvider')->in(Scope::SINGLETON);
         $this->bind('Aura\Signal\Manager')->toProvider('BEAR\Framework\Module\Provider\SignalProvider')->in(Scope::SINGLETON);
         $this->bind()->annotatedWith('app_name')->toInstance($this->app);
-        $this->bind('BEAR\Framework\Web\ResponseInterface')->to('BEAR\Framework\Web\HttpFoundation');
+        $this->bind('BEAR\Framework\Web\ResponseInterface')->to('BEAR\Framework\Web\SymfonyResponse');
         $this->bind('BEAR\Framework\Exception\ExceptionHandlerInterface')->to('BEAR\Framework\Exception\ExceptionHandler');
         $this->bind('Doctrine\Common\Annotations\Reader')->to('Doctrine\Common\Annotations\AnnotationReader');
     }

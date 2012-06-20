@@ -9,7 +9,7 @@ use BEAR\Resource\Exception\ResourceNotFound;
 use Ray\Di\Exception\InvalidBinding;
 use BEAR\Framework\Resource\Page\Error;
 use BEAR\Framework\Web\ResponseInterface;
-use BEAR\Framework\Web\HttpFoundation as Output;
+use BEAR\Framework\Web\SymfonyResponse as Output;
 use BEAR\Framework\Inject\LogDirInject;
 use Exception;
 
@@ -40,27 +40,27 @@ class ExceptionHandler implements ExceptionHandlerInterface
             throw $e;
         } catch (NotFound $e) {
             $response->code = 404;
-            $response->body = 'The requested URI was not found on this service.';
+            $response->view = 'The requested URI was not found on this service.';
             goto NOT_FOUND;
         } catch (BadRequest $e) {
             $response->code = 400;
-            $response->body = 'You sent a request that this service cound not understand.';
+            $response->view = 'You sent a request that this service cound not understand.';
             goto METHOD_NOT_ALLOWED;
         } catch (InvalidParameter $e) {
             $response->code = 400;
-            $response->body = 'You sent a request that query is not valid.';
+            $response->view = 'You sent a request that query is not valid.';
             goto BAD_REQUEST;
         } catch (InvalidScheme $e) {
             $response->code = 400;
-            $response->body = 'You sent a request that scheme is not valid.';
+            $response->view = 'You sent a request that scheme is not valid.';
             goto BAD_REQUEST;
         } catch (MethodNotAllowed $e) {
             $response->code = 405;
-            $response->body = 'The requested method is not allowed for this URI.';
+            $response->view = 'The requested method is not allowed for this URI.';
             goto METHOD_NOT_ALLOWED;
         } catch (ResourceNotFound $e) {
             $response->code = 404;
-            $response->body = 'The requested URI was not found on this service.';
+            $response->view = 'The requested URI was not found on this service.';
             goto NOT_FOUND;
         } catch (InvalidBinding $e) {
             goto INVALID_BINDING;
@@ -75,16 +75,16 @@ class ExceptionHandler implements ExceptionHandlerInterface
         BAD_REQUEST:
         METHOD_NOT_ALLOWED:
         if (PHP_SAPI === 'cli') {
-            $response->body = "Internal error occured ({$exceptionId})";
+            $response->view = "Internal error occured ({$exceptionId})";
         } else {
             // exception screen in develop
-            $response->body = include __DIR__ . "/exception.tpl.php";
+            $response->view = include __DIR__ . "/exception.tpl.php";
         }
         $response->headers['X-EXCEPTION-CLASS'] = get_class($e);
         $response->headers['X-EXCEPTION-MESSAGE'] = str_replace("\n", ' ', $e->getMessage());
         $response->headers['X-EXCEPTION-CODE'] = $e->getCode();
         $response->headers['X-EXCEPTION-FILE-LINE'] = $e->getFile() . ':' . $e->getLine();
-        $previous =  $e->getPrevious() ? (get_class($e->getPrevious()) .': ' . str_replace("\n", ' ', $e->getPrevious()->getMessage())) : '-';
+        $previous = $e->getPrevious() ? (get_class($e->getPrevious()) .': ' . str_replace("\n", ' ', $e->getPrevious()->getMessage())) : '-';
         $response->headers['X-EXCEPTION-PREVIOUS'] =  $previous;
         $response->headers['X-EXCEPTION-ID'] = $exceptionId;
         $this->writeExceptionLog($e, $exceptionId);
@@ -93,7 +93,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
 
     /**
      * Write exception log
-     * 
+     *
      * @param Exception $e
      * @param string    $exceptionId
      */

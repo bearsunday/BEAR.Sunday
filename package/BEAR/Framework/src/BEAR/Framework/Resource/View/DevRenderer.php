@@ -6,19 +6,18 @@
  */
 namespace BEAR\Framework\Resource\View;
 
-
-use Ray\Aop\Weave;
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Resource\Renderable;
 use BEAR\Resource\Request;
+use BEAR\Resource\DevInvoker;
 use BEAR\Framework\Resource\View\TemplateEngineAdapter;
 use BEAR\Framework\Interceptor\CacheLoader;
+use Ray\Aop\Weave;
 use ReflectionClass;
 use ReflectionObject;
 use Ray\Di\Di\Inject;
 use DateTime;
 use DateInterval;
-use BEAR\Resource\DevInvoker;
 use Traversable;
 
 /**
@@ -32,18 +31,18 @@ class DevRenderer implements Renderable
     const NO_CACHE = '';
     const WRITE_CACHE = 'label-important';
     const READ_CACHE = 'label-success';
-    
+
     const BADGE_ARGS = '<span class="badge badge-info">Arguments</span>';
     const BADGE_CACHE = '<span class="badge badge-info">Cache</span>';
     const BADGE_INTERCEPTORS = '<span class="badge badge-info">Interceptors</span>';
     const BADGE_PROFILE = '<span class="badge badge-info">Profile</span>';
-    
+
     const ICON_LIFE = '<span class="icon-refresh"></span>';
     const ICON_TIME = '<span class="icon-time"></span>';
     const ICON_NA = '<span class="icon-ban-circle"></span>';
 
     const DIV_WELL = '<div style="padding:10px;">';
-    
+
     /**
      * Template engine adapter
      *
@@ -62,7 +61,7 @@ class DevRenderer implements Renderable
     {
         $this->templateEngineAdapter = $templateEngineAdapter;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see BEAR\Resource.Renderable::render()
@@ -74,7 +73,7 @@ class DevRenderer implements Renderable
             return (new Renderer($this->templateEngineAdapter))->render($ro);
         }
         // resource code editor
-        $class =  get_class($ro);
+        $class = get_class($ro);
         $paegFile = (new ReflectionClass($class))->getFileName();
 
         // resource template editor
@@ -83,22 +82,34 @@ class DevRenderer implements Renderable
         if (is_array($ro->body) || $ro->body instanceof Traversable) {
             $this->templateEngineAdapter->assign($ro->body);
         }
-        $templateFileBase = $dir . DIRECTORY_SEPARATOR . substr(basename($paegFile), 0 ,strlen(basename($paegFile)) - 3);
+        $templateFileBase = $dir . DIRECTORY_SEPARATOR . substr(basename($paegFile), 0, strlen(basename($paegFile)) - 3);
 
-        // add tools
+        // add tool bar
         $body = $this->templateEngineAdapter->fetch($templateFileBase);
         $body = $this->addJsDevToolLadingHtml($body);
         $templateFile = $this->templateEngineAdapter->getTemplateFile();
-        $ro->body = $this->getLabel($body, $ro, $templateFile);
+        $label = $this->getLabel($body, $ro, $templateFile);
+        $ro->body = $labels;
         return $ro->body;
     }
 
+    /**
+     * Return JS install html for dev tool
+     *
+     * @param string $body
+     *
+     * @return string
+     */
     private function addJsDevToolLadingHtml($body)
     {
         $replace = <<<EOT
 <!-- BEAR.Sunday dev renderer -->
-<script src="/_bear/css/bear.css"></script>
-<script src="/assets/js/jquery.js"></script>
+<script src="http://www.google.com/jsapi"></script>
+<script>
+if (typeof jQuery != "undefined") {
+    google.load("jquery", "1.7.1");
+}
+</script>
 <script src="/assets/js/bootstrap-tooltip.js"></script>
 <script src="/assets/js/bootstrap-popover.js"></script>
 <script src="/assets/js/bootstrap-collapse.js"></script>
@@ -108,7 +119,7 @@ $(function(){
     jQuery.noConflict();
     jQuery('[rel=tooltip]').tooltip();
     jQuery('[rel=popover]').popover();
-    jQuery('#toolTab a:first').tab('show')
+    jQuery('.home').click();
 });
 </script>
 <!-- /BEAR.Sunday dev renderer -->
@@ -118,6 +129,15 @@ EOT;
         return $body;
     }
 
+    /**
+     * Return label
+     *
+     * @param string         $body
+     * @param ResourceObject $ro
+     * @param string         $templateFile
+     *
+     * @return string
+     */
     private function getLabel($body, ResourceObject $ro, $templateFile)
     {
         $cache = isset($ro->headers[CacheLoader::HEADER_CACHE]) ? json_decode($ro->headers[CacheLoader::HEADER_CACHE], true) : false;
@@ -142,19 +162,19 @@ EOT;
 
         $label = <<<EOT
 <span class="label {$labelColor}">{$resourceName}</span>
-    <a data-toggle="tab" href="#{$resourceKey}_body"><span class="icon-home" rel="tooltip" title="Home"></span></a>
-    <a data-toggle="tab" href="#{$resourceKey}_var"><span class="icon-zoom-in" rel="tooltip" title="Status"></span></a>
-    <a data-toggle="tab" href="#{$resourceKey}_html"><span class="icon-font" rel="tooltip" title="View"></span></a>
-    <a data-toggle="tab" href="#{$resourceKey}_info"><span class="icon-info-sign" rel="tooltip" title="Info"></span></a>
-    <span style="padding:4px;"></span>
-    <a target="_blank" href="/_bear/edit/?file={$codeFile}"><span class="icon-edit" rel="tooltip" title="Code ({$codeFile})"></span></a>
-    <a target="_blank" href="/_bear/edit/?file={$templateFile}"><span class="icon-file" rel="tooltip" title="Template ({$templateFile})"></span></a>
-    </span>
-<div id="myTabContent" class="tab-content">
-<div id="{$resourceKey}_body" class="tab-pane fade active in"><div style="border: 1px dashed gray">{$body}</div></div>
-<div id="{$resourceKey}_var" class="tab-pane fade active"><div class="well"><div class="badge badge-info">Resource state</div>{$var}</div></div>
-<div id="{$resourceKey}_html" class="tab-pane fade"><div class="well"><div class="badge badge-info">Resource representation</div>{$html}</div></div>
-<div id="{$resourceKey}_info" class="tab-pane fade"><div class="well">{$info}</div></div>
+  <a data-toggle="tab" href="#{$resourceKey}_body" class="home"><span class="icon-home" rel="tooltip" title="Home"></span></a>
+  <a data-toggle="tab" href="#{$resourceKey}_var"><span class="icon-zoom-in" rel="tooltip" title="Status"></span></a>
+  <a data-toggle="tab" href="#{$resourceKey}_html"><span class="icon-font" rel="tooltip" title="View"></span></a>
+  <a data-toggle="tab" href="#{$resourceKey}_info"><span class="icon-info-sign" rel="tooltip" title="Info"></span></a>
+<span style="padding:4px;"></span>
+  <a target="_blank" href="/_bear/edit/?file={$codeFile}"><span class="icon-edit" rel="tooltip" title="Code ({$codeFile})"></span></a>
+  <a target="_blank" href="/_bear/edit/?file={$templateFile}"><span class="icon-file" rel="tooltip" title="Template ({$templateFile})"></span></a>
+</span>
+<div class="tab-content">
+  <div id="{$resourceKey}_body" class="tab-pane fade active in"><div style="border: 1px dashed gray">{$body}</div></div>
+  <div id="{$resourceKey}_var" class="tab-pane fade active"><div class="well"><div class="badge badge-info">Resource state</div>{$var}</div></div>
+  <div id="{$resourceKey}_html" class="tab-pane fade"><div class="well"><div class="badge badge-info">Resource representation</div>{$html}</div></div>
+  <div id="{$resourceKey}_info" class="tab-pane fade"><div class="well">{$info}</div></div>
 </div>
 EOT;
         return $label;
@@ -241,7 +261,7 @@ EOT;
         }
         $iconLife = self::ICON_LIFE;
         $iconTime = self::ICON_TIME;
-        
+
         $life = $cache['life'] ? "{$cache['life']} sec" : 'Unlmited';
         if ($cache['mode'] === 'W') {
             $result .=  "Write {$iconLife} {$life}";
@@ -296,7 +316,7 @@ EOT;
     {
         // memory, time
         $result = self::BADGE_PROFILE  . self::DIV_WELL;
-        $time = number_format($ro->headers[DevInvoker::HEADER_EXECUTION_TIME] , 3);;
+        $time = number_format($ro->headers[DevInvoker::HEADER_EXECUTION_TIME], 3);
         $memory = number_format($ro->headers[DevInvoker::HEADER_MEMORY_USAGE]);
         $result .= <<<EOT
 <span class="icon-time"></span> {$time} sec <span class="icon-signal"></span> {$memory} bytes

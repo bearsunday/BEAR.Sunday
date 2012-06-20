@@ -33,6 +33,9 @@ final class App extends AbstractAppContext
     /** Run mode Production */
     const RUN_MODE_PROD = 'prod';
 
+    /** Run mode Production */
+    const RUN_MODE_API = 'api';
+
     /** Run mode Develop */
     const RUN_MODE_DEV = 'dev';
 
@@ -50,7 +53,7 @@ final class App extends AbstractAppContext
     public static function factory($runMode = self::RUN_MODE_PROD, $useCache = false)
     {
         // configure framework
-        (new Framework)->setLoader(__NAMESPACE__, __DIR__)->setExceptionHandler();
+        (new Framework)->setLoader(__NAMESPACE__, __DIR__);
 
         // configure application
         $cacheKey = 'app' . __NAMESPACE__ . PHP_SAPI . $runMode;
@@ -60,11 +63,14 @@ final class App extends AbstractAppContext
         }
         // run mode
         switch ($runMode) {
-            case self::RUN_MODE_STAB:
-                $modules = [new Module\StabModule(__NAMESPACE__)];
-                break;
             case self::RUN_MODE_DEV:
                 $modules = [new Module\DevModule(__NAMESPACE__)];
+                break;
+            case self::RUN_MODE_API:
+                $modules = [new Module\ApiModule(__NAMESPACE__)];
+                break;
+            case self::RUN_MODE_STAB:
+                $modules = [new Module\StabModule(__NAMESPACE__)];
                 break;
             case self::RUN_MODE_TEST:
                 $modules = [new Module\TestModule(__NAMESPACE__)];

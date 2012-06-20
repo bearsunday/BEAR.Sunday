@@ -2,7 +2,6 @@ var MyDialogs = {
 	loadConfirmationModal : function(modalId, confirmURL, caption, body) {
 		var $modal = jQuery('#' + modalId);
 		if ($modal.size() === 0) {
-
 			var modalString = '<div id="'
 					+ modalId
 					+ '" class="modal hide fade">'

@@ -3,7 +3,7 @@
 namespace BEAR\Framework\Tests;
 
 use BEAR\Framework\Exception\ExceptionHandler;
-use BEAR\Framework\Web\HttpFoundation as Output;
+use BEAR\Framework\Web\SymfonyResponse as Response;
 
 class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
         $this->exceptionHandler = new ExceptionHandler;
         $this->exceptionHandler->setLogDir(__DIR__ . '/tmp');
-        $output = new Output;
+        $output = new Response;
         $this->exceptionHandler->setResponse($output);
     }
 

@@ -1,3 +1,4 @@
+<script src="/app/js/modal.js"></script>
 <table class="table table-bordered table-striped">
     <tr>
         <th class="span1">Id</th>

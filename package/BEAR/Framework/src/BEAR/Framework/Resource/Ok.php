@@ -24,4 +24,9 @@ class Ok extends AbstractObject implements ResourceObject
     public function __construct()
     {
     }
+
+    public function onGet()
+    {
+        return $this;
+    }
 }

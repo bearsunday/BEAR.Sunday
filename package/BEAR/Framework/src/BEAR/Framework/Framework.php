@@ -21,11 +21,11 @@ class Framework
 {
     /**
      * BEAR.Sunday root path
-     * 
+     *
      * @var system
      */
     public static $systemRoot;
-    
+
     /**
      * BEAR.Sunday
      *
@@ -41,17 +41,6 @@ class Framework
         // global setting
         self::$systemRoot = dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))));
         umask(0);
-    }
-    
-    /**
-     * Set standard expection handler
-     *
-     * @return void
-     */
-    public function setExceptionHandler()
-    {
-        include dirname(dirname(dirname(__DIR__))) . '/scripts/exception_handler/standard.php';
-        return $this;
     }
 
     /**
@@ -71,6 +60,7 @@ class Framework
         $system = dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))));
         include_once $system . '/vendor/Aura/Autoload/src.php';
         $loader = new Loader;
+        //$loader->setMode(Loader::MODE_DEBUG);
         $namespacesBase = include  $system . '/vendor/composer/autoload_namespaces.php';
         $namespacesBase += [
             $namespace  => dirname($appDir),

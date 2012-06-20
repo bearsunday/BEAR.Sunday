@@ -63,7 +63,7 @@ final class Dispatcher
      *
      * @return array [BEAR\Resource\ResourceInterface $resource, BEAR\Resource\Object $page]
      *
-     * @throws Exception
+     * @throws ResourceNotFound
      */
     public function getInstance($pageUri)
     {

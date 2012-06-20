@@ -83,7 +83,7 @@ include $system . '/package/BEAR/Framework/src/BEAR/Framework/Web/Response.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Inject/LogInject.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Inject/TmpDirInject.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Inject/LogDirInject.php';
-include $system . '/package/BEAR/Framework/src/BEAR/Framework/Web/HttpFoundation.php';
+include $system . '/package/BEAR/Framework/src/BEAR/Framework/Web/SymfonyResponse.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Log/LogAdapterInterface.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Log/AbstractLogAdapter.php';
 include $system . '/vendor/monolog/monolog/src/Monolog/Logger.php';

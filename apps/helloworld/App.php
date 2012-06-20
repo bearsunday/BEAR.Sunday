@@ -46,7 +46,7 @@ final class App extends AbstractAppContext
     public static function factory($runMode = self::RUN_MODE_PROD, $useCache = false)
     {
         // configure framework
-        (new Framework)->setLoader(__NAMESPACE__, __DIR__)->setExceptionHandler();
+        (new Framework)->setLoader(__NAMESPACE__, __DIR__);
 
         // configure application
         $cacheKey = 'app' . __NAMESPACE__ . PHP_SAPI . $runMode;

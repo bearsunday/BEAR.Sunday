@@ -29,9 +29,9 @@ require_once dirname(__DIR__) . '/App.php';
  * type URL:
  *   http://localhost:8080/hello
  *   http://localhost:8080/helloresource
- *   
+ *
  * @global $runMode  run mode
- * @global $useCache 
+ * @global $useCache
  *
  * @package BEAR.Framework
  */
@@ -53,10 +53,9 @@ if ($doIncludePHPfile) {
 	exit(0);
 }
 
-
 // run mode
 $runMode = App::RUN_MODE_DEV;
-$useCache = false; 
+$useCache = false;
 error_log('run:' . __NAMESPACE__ . " mode={$runMode} cahce=" . ($useCache ? 'enable' : 'disable'));
 
 // Application
@@ -65,7 +64,7 @@ $app = App::factory($runMode, $useCache);
 // Route
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
 // $router = require dirname(__DIR__) . '/scripts/router/standard_router.php';
-$router = new Router; // no router
+$router = new Router;
 
 // Dispatch
 list($method, $pagePath, $query) = $router->match($globals);
@@ -78,4 +77,4 @@ try {
 }
 
 // Transfer
-$app->response->setResource($page)->debug()->prepare()->send();
+$app->response->setResource($page)->render()->prepare()->send();

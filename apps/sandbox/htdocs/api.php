@@ -23,50 +23,43 @@ namespace sandbox;
 use BEAR\Framework\StandardRouter as Router;
 use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
+use BEAR\Framework\Web;
 use BEAR\Resource\Object as ResourceObject;
-use BEAR\Framework\Web\HttpFoundation as Response;
 use Exception;
+
 
 $system = dirname(dirname(dirname(__DIR__)));
 require_once $system . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
 require_once dirname(__DIR__) . '/App.php';
 
-if (php_sapi_name() == 'cli-server') {
-    // route static assets and return false
-    if (preg_match('/\.(?:png|jpg|jpeg|gif|js)$/', $_SERVER["REQUEST_URI"])) {
+if (PHP_SAPI == 'cli-server') {
+    if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|ico)$/', $_SERVER["REQUEST_URI"])) {
         return false;
     }
 }
 
 // Application
-$runMode = App::RUN_MODE_DEV;
+$runMode = App::RUN_MODE_API;
 $useCache = false;
 $app = App::factory($runMode, $useCache);
 
 // Dispatch
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
-$uri = (PHP_SAPI === 'cli') ? $argv[2] : $globals['_SERVER']['REQUEST_URI'];
-list($method, $query) = (new Router)->getMethodQuery($globals);
-list($resource, $page) = (new Dispatcher($app))->getInstance($uri);
+$pathInfo = isset($globals['_SERVER']['PATH_INFO']) ? $globals['_SERVER']['PATH_INFO'] : '/index';
+$uri = (PHP_SAPI === 'cli') ? $argv[2] : 'app://self' . $pathInfo;
 
 try {
+    list($method, $query) = (new Router)->getMethodQuery($globals);
+    list($resource, $page) = (new Dispatcher($app))->getInstance($uri);
+
     // Request
-    $response = $app->resource->$method->object($page)->withQuery($globals['_GET'])->eager->request();
+    $page = $app->resource->$method->object($page)->withQuery($globals['_GET'])->eager->request();
+    if (!($page instanceof ResourceObject)) {
+        $page->body = $response;
+    }
 } catch (Exception $e) {
-    $response = $app->exceptionHandler->handle($e);
-}
-if (!($response instanceof ResourceObject)) {
-    $page->body = $response;
-    $response = $page;
+    $page = $app->exceptionHandler->handle($e);
 }
 
-// Output
-if (isset($argv[3])) {
-    $mode = $argv[3];
-    if (! in_array($mode, [Response::MODE_VIEW, Response::MODE_REQUEST, Response::MODE_VALUE])) {
-        throw new \InvalidArgumentException($mode);
-    }
-} else {
-    $mode = Response::MODE_REQUEST;
-}
-$app->response->debug()->setResource($response)->request()->send($mode);
+$send = (PHP_SAPI === 'cli') ? 'sendCli' : 'send';
+$app->response->setResource($page)->render()->prepare()->$send();

@@ -50,7 +50,7 @@ class ProdModule extends AbstractModule
     }
 
     /**
-     * Configure dependency binding
+     * Configure
      *
      * @return void
      */
@@ -63,7 +63,7 @@ class ProdModule extends AbstractModule
 
         // install prod module
         $this->install(new TemplateEngine\ProdRendererModule);
-        
+
         // mode specific install
         $masterDb = $slaveDb = [
             'driver' => 'pdo_mysql',

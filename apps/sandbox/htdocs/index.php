@@ -30,4 +30,4 @@ list($method, $pagePath, $query) = $router->match($GLOBALS);
 $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
 
 // Transfer
-$app->response->setResource($page)->prepare()->send();
+$app->response->setResource($page)->render()->prepare()->send();

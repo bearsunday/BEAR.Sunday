@@ -7,7 +7,6 @@
 <link href="/assets/css/bootstrap-responsive.css" rel="stylesheet">
 <script src="/assets/js/jquery.js"></script>
 <script src="/assets/js/bootstrap-modal.js"></script>
-<script src="/app/js/modal.js"></script>
 </script>
 </head>
 <body>

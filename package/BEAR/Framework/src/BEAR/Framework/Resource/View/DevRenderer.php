@@ -106,7 +106,7 @@ class DevRenderer implements Renderable
 <!-- BEAR.Sunday dev renderer -->
 <script src="http://www.google.com/jsapi"></script>
 <script>
-if (typeof jQuery != "undefined") {
+if (typeof jQuery == "undefined") {
     google.load("jquery", "1.7.1");
 }
 </script>

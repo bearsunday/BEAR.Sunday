@@ -89,7 +89,7 @@ class DevRenderer implements Renderable
         $body = $this->addJsDevToolLadingHtml($body);
         $templateFile = $this->templateEngineAdapter->getTemplateFile();
         $label = $this->getLabel($body, $ro, $templateFile);
-        $ro->body = $labels;
+        $ro->body = $label;
         return $ro->body;
     }
 

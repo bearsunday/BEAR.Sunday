@@ -4,7 +4,7 @@
  *
  * @package BEAR.Framework
  */
-namespace BEAR\Framework;
+namespace BEAR\Framework\Inject;
 
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
@@ -19,12 +19,12 @@ use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
 use BEAR\Framework\Exception\ExceptionHandlerInterface;
 
 /**
- * Application context
+ * Application dependency inject
  *
  * @package    BEAR.Framework
- * @subpackage Web
+ * @subpackage Inject
  */
-abstract class AbstractAppContext
+trait AppDependencyInject
 {
     /**
      * Dependency injector

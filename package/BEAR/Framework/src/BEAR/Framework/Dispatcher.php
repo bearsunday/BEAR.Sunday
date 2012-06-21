@@ -17,8 +17,8 @@ use Ray\Di\InjectorInterface as Inject;
 use BEAR\Framework\Router;
 use BEAR\Framework\DevRouter;
 use BEAR\Framework\Exception\NotFound;
-use BEAR\Framework\AbstractAppContext as AppContext;
 use Aura\Autoload\Exception\NotReadable;
+use BEAR\Framework\AppContext;
 
 use Doctrine\Common\Cache\MemcacheCache as Cache;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;

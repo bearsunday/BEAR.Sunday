@@ -7,8 +7,8 @@
 namespace sandbox;
 
 use BEAR\Framework\Framework;
-use BEAR\Framework\Module\FrameworkModule;
-use BEAR\Framework\AbstractAppContext;
+use BEAR\Framework\AppContext;
+use BEAR\Framework\Inject\AppDependencyInject;
 use Ray\Di\Injector;
 use LogicException;
 
@@ -20,8 +20,10 @@ require_once dirname(dirname(__DIR__)) . '/vendor/vdump/vdump/vdump/src.php';
  *
  * @package sandbox
  */
-final class App extends AbstractAppContext
+final class App implements AppContext
 {
+    use AppDependencyInject;
+    
     /** Version @var string */
     const VERSION = '0.2.0';
 
@@ -51,7 +53,7 @@ final class App extends AbstractAppContext
      *
      * @param integer $runMode
      */
-    public static function factory($runMode = self::RUN_MODE_PROD, $useCache = false)
+    public static function factory($runMode, $useCache = false)
     {
         // configure framework
         (new Framework)->setLoader(__NAMESPACE__, __DIR__);
@@ -70,9 +72,9 @@ final class App extends AbstractAppContext
         } catch (Exception $e) {
             throw new \LogicException('Run mode module not loaded', $runMode);
         }
-        $injector = Injector::create($modules, $useCache);
         
         // return application object
+        $injector = Injector::create($modules, $useCache);
         $app = $injector->getInstance(__CLASS__);
         $useCache ? apc_store($cacheKey, $app) : apc_clear_cache('user');
         return $app;

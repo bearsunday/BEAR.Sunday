@@ -8,5 +8,5 @@ namespace sandbox;
 
 require dirname(__DIR__) . '/App.php';
 
-$app = App::factory();
+$app = App::factory(App::RUN_MODE_PROD, true);
 return $app;

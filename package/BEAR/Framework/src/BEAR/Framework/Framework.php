@@ -57,10 +57,10 @@ class Framework
             spl_autoload_unregister([$loader, 'load']);
         }
 
-        $system = dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))));
+        $system = self::$systemRoot;
         include_once $system . '/vendor/Aura/Autoload/src.php';
         $loader = new Loader;
-        //$loader->setMode(Loader::MODE_DEBUG);
+//      $loader->setMode(Loader::MODE_DEBUG);
         $namespacesBase = include  $system . '/vendor/composer/autoload_namespaces.php';
         $namespacesBase += [
             $namespace  => dirname($appDir),
@@ -69,7 +69,6 @@ class Framework
         $namespacesBase += $namespaces;
         $loader->setPaths($namespacesBase);
         $loader->register();
-//         include_once $system . '/package/BEAR/Framework/scripts/core_loader.php';
         AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di\\', $system . '/vendor/Ray/Di/src/');
         AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation\\', $system . '/vendor/BEAR/Resource/src/');
         AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation\\', $system . '/package/BEAR/Framework/src/');

@@ -19,7 +19,10 @@ use Ray\Di\Annotation;
 use Ray\Di\Definition;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
-
+use Aura\Signal\Manager;
+use Aura\Signal\HandlerFactory;
+use Aura\Signal\ResultFactory;
+use Aura\Signal\ResultCollection;
 /**
  * Cache update interceptor
  *
@@ -36,8 +39,7 @@ class CacheUpdater implements MethodInterceptor
     public function __construct(CacheInterceptor $cache, Request $request = null)
     {
         $this->cache = $cache;
-        $signal = require Framework::$systemRoot . '/vendor/Aura/Signal/scripts/instance.php';
-        $this->request = $request ?: new Request(new Invoker(new Config(new Annotation(new Definition)), new Linker, $signal));
+        $this->request = $request ?: new Request(new Invoker(new Config(new Annotation(new Definition)), new Linker, new Manager(new HandlerFactory, new ResultFactory, new ResultCollection)));
     }
 
     /**

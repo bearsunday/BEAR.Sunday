@@ -102,31 +102,38 @@ class DevRenderer implements Renderable
      */
     private function addJsDevToolLadingHtml($body)
     {
-        $replace = <<<EOT
-<!-- BEAR.Sunday dev renderer -->
+        if (strpos($body, '</body>') === false) {
+            return $body;
+        }
+        $bootstrapCss = strpos($body, '/assets/css/bootstrap.css') ? '' : '<link href="/assets/css/bootstrap.css" rel="stylesheet">';
+        $tooltipJs = strpos($body, '/assets/js/bootstrap-tooltip.js') ? '' : '<script src="/assets/js/bootstrap-tooltip.js"></script>';
+        $popoverJs = strpos($body, '/assets/js/bootstrap-popover.js') ? '' : '<script src="/assets/js/bootstrap-popover.js"></script>';
+        $collapseJs = strpos($body, '/assets/js/bootstrap-collapse.js') ? '' : '<script src="/assets/js/bootstrap-collapse.js"></script>';
+        $tabJs = strpos($body, '/assets/js/bootstrap-tab.js') ? '' : '<script src="/assets/js/bootstrap-tab.js"></script>';
+        $toolLoad = <<<EOT
+<!-- BEAR.Sunday dev tool load -->
 <script src="http://www.google.com/jsapi"></script>
 <script>
 if (typeof jQuery == "undefined") {
     google.load("jquery", "1.7.1");
 }
 </script>
-<script src="/assets/js/bootstrap-tooltip.js"></script>
-<script src="/assets/js/bootstrap-popover.js"></script>
-<script src="/assets/js/bootstrap-collapse.js"></script>
-<script src="/assets/js/bootstrap-tab.js"></script>
+{$bootstrapCss}{$tooltipJs}{$popoverJs}{$collapseJs}{$tabJs}
 <script>
 $(function(){
-    jQuery.noConflict();
-    jQuery('[rel=tooltip]').tooltip();
-    jQuery('[rel=popover]').popover();
-    jQuery('.home').click();
+  jQuery.noConflict();
+  jQuery('[rel=tooltip]').tooltip();
+  jQuery('[rel=popover]').popover();
+  jQuery('.home').click();
 });
 </script>
-<!-- /BEAR.Sunday dev renderer -->
+<!-- /BEAR.Sunday dev tool load -->
 </body>
 EOT;
-        $body = str_replace('</body>', $replace, $body);
-        return $body;
+$toolLoad = str_replace(["\n", "  "],  '', $toolLoad);
+$body = str_replace('</html>', "{$toolLoad}\n</html>", $body);
+// $body = $body .  $toolLoad;
+return $body;
     }
 
     /**
@@ -159,8 +166,11 @@ EOT;
         $html = highlight_string($body, true);
 
         $info = $this->getResourceInfo($ro);
-
-        $label = <<<EOT
+        $rmReturn = function($str) {
+            return str_replace("\n", '', $str);
+        };
+        $result = <<<EOT
+<!-- {$resourceName} -->
 <span class="label {$labelColor}">{$resourceName}</span>
   <a data-toggle="tab" href="#{$resourceKey}_body" class="home"><span class="icon-home" rel="tooltip" title="Home"></span></a>
   <a data-toggle="tab" href="#{$resourceKey}_var"><span class="icon-zoom-in" rel="tooltip" title="Status"></span></a>
@@ -171,13 +181,19 @@ EOT;
   <a target="_blank" href="/_bear/edit/?file={$templateFile}"><span class="icon-file" rel="tooltip" title="Template ({$templateFile})"></span></a>
 </span>
 <div class="tab-content">
-  <div id="{$resourceKey}_body" class="tab-pane fade active in"><div style="border: 1px dashed gray">{$body}</div></div>
+  <div id="{$resourceKey}_body" class="tab-pane fade active in"><div style="border: 1px dashed gray">
+EOT;
+        $result = $rmReturn($result);
+        $result .= $body;
+        $label = <<<EOT
+<!-- /{$resourceName} --></div></div>
   <div id="{$resourceKey}_var" class="tab-pane fade active"><div class="well"><div class="badge badge-info">Resource state</div>{$var}</div></div>
   <div id="{$resourceKey}_html" class="tab-pane fade"><div class="well"><div class="badge badge-info">Resource representation</div>{$html}</div></div>
   <div id="{$resourceKey}_info" class="tab-pane fade"><div class="well">{$info}</div></div>
 </div>
 EOT;
-        return $label;
+        $result .= $rmReturn($label);
+        return $result;
     }
 
     private function getVar($body)

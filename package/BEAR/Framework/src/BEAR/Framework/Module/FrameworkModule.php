@@ -10,6 +10,7 @@ use Ray\Di\Injector;
 use Ray\Di\AbstractModule;
 use BEAR\Framework\Module\Log;
 use Ray\Di\Scope;
+use ReflectionClass;
 
 /**
  * Application module
@@ -63,8 +64,14 @@ class FrameworkModule extends AbstractModule
     protected function configure()
     {
         // bind dir
+        $this->bind()->annotatedWith("app")->toInstance($this->app);
+        // tmp dir
         $this->bind()->annotatedWith("tmp_dir")->toInstance($this->tmpDir);
+        // log dir
         $this->bind()->annotatedWith("log_dir")->toInstance($this->logDir);
+        // view template dir
+        $appDir = dirname((new ReflectionClass("{$this->app}\App"))->getFileName());
+        $this->bind()->annotatedWith("app_dir")->toInstance($appDir);
 
         // install
         $this->install(new Log\MonologModule);

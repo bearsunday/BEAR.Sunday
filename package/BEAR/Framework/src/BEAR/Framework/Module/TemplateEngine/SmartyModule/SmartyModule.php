@@ -5,12 +5,13 @@
  * @package    BEAR.Framework
  * @subpackage Module
  */
-namespace BEAR\Framework\Module\TemplateEngine;
+namespace BEAR\Framework\Module\TemplateEngine\SmartyModule;
 
 use BEAR\Framework\Interceptor\ViewAdapter;
+use BEAR\Framework\AppDieInject;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
-
+use ReflectionClass;
 /**
  * Smarty module
  *
@@ -26,7 +27,7 @@ class SmartyModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('Smarty')->toProvider('BEAR\Framework\Module\Provider\SmartyProvider')->in(Scope::SINGLETON);
+        $this->bind('Smarty')->toProvider('BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyProvider')->in(Scope::SINGLETON);
         $this->bind('BEAR\Framework\Resource\View\TemplateEngineAdapter')->to('BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyAdapter')->in(Scope::SINGLETON);
     }
 }

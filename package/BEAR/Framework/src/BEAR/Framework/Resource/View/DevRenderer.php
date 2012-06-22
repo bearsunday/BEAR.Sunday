@@ -80,7 +80,7 @@ class DevRenderer implements Renderable
         $dir = pathinfo($paegFile, PATHINFO_DIRNAME);
         $this->templateEngineAdapter->assign('resource', $ro);
         if (is_array($ro->body) || $ro->body instanceof Traversable) {
-            $this->templateEngineAdapter->assign($ro->body);
+            $this->templateEngineAdapter->assignAll($ro->body);
         }
         $templateFileBase = $dir . DIRECTORY_SEPARATOR . substr(basename($paegFile), 0, strlen(basename($paegFile)) - 3);
 

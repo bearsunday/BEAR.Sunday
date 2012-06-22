@@ -4,10 +4,13 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Framework\Module\Provider;
+namespace BEAR\Framework\Module\TemplateEngine\SmartyModule;
+
+use BEAR\Framework\Inject\InjectorInject;
 
 use BEAR\Framework\Inject\LogInject;
 use BEAR\Framework\Inject\TmpDirInject;
+use BEAR\Framework\Inject\AppDirInject;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 use Ray\Di\InjectorInterface;
@@ -23,18 +26,20 @@ class SmartyProvider implements Provide
 {
     use LogInject;
     use TmpDirInject;
-
+    use AppDirInject;
+        
     /**
      * Return instance
-     * 
+     *
      * @return Smarty
      */
     public function get()
     {
         $smarty = new Smarty;
-        $smarty->setCompileDir($this->tmpDir . '/smarty/template_c');
-        $smarty->setCacheDir($this->tmpDir . '/smarty/cache');
-        $this->log->log("Smarty installed.tmp=[{$this->tmpDir}]");
+        $smarty->compile_dir  =  $this->tmpDir . '/smarty/template_c';
+        $smarty->cache_dir    = $this->tmpDir . '/smarty/cache';
+        $smarty->template_dir = $this->appDir . '/Resource/View';
+        $this->log->log("Smarty installed.tmp={$this->tmpDir}");
         return $smarty;
     }
 }

@@ -17,12 +17,21 @@ interface TemplateEngineAdapter
     /**
      * Assigns a variable
      *
-     * @param array|string $tpl_var the template variable name(s)
-     * @param mixed        $value   the value to assign
+     * @param string $tplVar the template variable name(s)
+     * @param mixed  $value  the value to assign
      *
      * @return self
      */
-    public function assign();
+    public function assign($tplVar, $value);
+    
+    /**
+     * Assigns all variables
+     *
+     * @param array $values
+     *
+     * @return self
+     */
+    public function assignAll(array $values);
 
     /**
      * Fetches a rendered template

@@ -42,7 +42,7 @@ class AppModule extends AbstractModule
         $this->install(new Schema\StandardSchemaModule(__NAMESPACE__));
         $this->install(new Cqrs\CacheModule(new CacheAdapter(new CacheBackEnd)));
         $this->install(new WebContext\AuraWebModule);
-        $this->install(new TemplateEngine\SmartyModule);
+        $this->install(new TemplateEngine\SmartyModule\SmartyModule);
         $this->installWritableChecker();
         $this->installFormValidater();
         $this->installTimeStamper();

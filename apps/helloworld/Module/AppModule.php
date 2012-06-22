@@ -27,6 +27,6 @@ class AppModule extends AbstractModule
     protected function configure()
     {
         $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\helloworld\Module\SchemeCollectionProvider');
-        $this->install(new Module\TemplateEngine\SmartyModule);
+        $this->install(new Module\TemplateEngine\SmartyModule\SmartyModule);
     }
 }

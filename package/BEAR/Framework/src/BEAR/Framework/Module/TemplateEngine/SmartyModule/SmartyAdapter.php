@@ -21,11 +21,11 @@ use Ray\Di\Di\Named;
 class SmartyAdapter implements TemplateEngineAdapter
 {
     /**
-     * Renderer
+     * smarty
      *
      * @var Smarty
      */
-    private $renderer;
+    private $smarty;
 
     /**
      * Template file
@@ -43,48 +43,48 @@ class SmartyAdapter implements TemplateEngineAdapter
 
     /**
      * Constructor
-     * 
+     *
      * @Inject
      */
     public function __construct(Smarty $smarty)
     {
-        $this->renderer = $smarty;
+        $this->smarty = $smarty;
     }
 
     /**
      * (non-PHPdoc)
-     * @see BEAR\Framework\View.Render::assign()
+     * @see BEAR\Framework\Resource\View.TemplateEngineAdapter::assign()
      */
-    public function assign()
+    public function assign($tplVar, $value)
     {
-        $args = func_get_args();
-        $count = count($args);
-        if ($count === 1) {
-            $this->renderer->assign((array)$args[0]);
-        } elseif ($count === 2) {
-            $this->renderer->assign($args[0], $args[1]);
-        } else {
-            throw \InvalidArgumentException;
-        }
+        $this->smarty->assign($tplVar, $value);
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see BEAR\Framework\Resource\View.TemplateEngineAdapter::assignAll()
+     */
+    public function assignAll(array $values)
+    {
+        $this->smarty->assign($values);
     }
 
     /**
      * (non-PHPdoc)
      * @see BEAR\Framework\View.Render::fetch()
      */
-    public function fetch($templateFileBase)
+    public function fetch($templatefileWithoutExtention)
     {
-        $template = $templateFileBase . self::EXT;
+        $template = $templatefileWithoutExtention . self::EXT;
         $this->fileExists($template);
-        $this->template = $template;
-        return $this->renderer->fetch($template);
+        return $this->smarty->fetch($template);
     }
 
     /**
      * Return file exists
-     * 
+     *
      * @param string $template
-     * 
+     *
      * @throws TemplateNotFound
      */
     private function fileExists($template)
@@ -96,7 +96,7 @@ class SmartyAdapter implements TemplateEngineAdapter
 
     /**
      * Return template full path.
-     * 
+     *
      * @return string
      */
     public function getTemplateFile()

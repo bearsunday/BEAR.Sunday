@@ -47,14 +47,17 @@ class Renderer implements Renderable
     public function render(ResourceObject $ro)
     {
         $class = ($ro instanceof Weave) ? get_class($ro->___getObject()) : get_class($ro);
-        $paegFile = (new ReflectionClass($class))->getFileName();
-        $dir = pathinfo($paegFile, PATHINFO_DIRNAME);
+        $file = (new ReflectionClass($class))->getFileName();
+        
+        // assign 'resource'
         $this->templateEngineAdapter->assign('resource', $ro);
+
+        // assign all
         if (is_array($ro->body) || $ro->body instanceof \Traversable) {
-            $this->templateEngineAdapter->assign($ro->body);
+            $this->templateEngineAdapter->assignAll((array)$ro->body);
         }
-        $templateFileBase = $dir . DIRECTORY_SEPARATOR . substr(basename($paegFile), 0, strlen(basename($paegFile)) - 3);
-        $ro->body = $this->templateEngineAdapter->fetch($templateFileBase);
+        $templatefileWithoutExtention = substr($file, 0, -3);
+        $ro->body = $this->templateEngineAdapter->fetch($templatefileWithoutExtention);
         return $ro->body;
     }
 }

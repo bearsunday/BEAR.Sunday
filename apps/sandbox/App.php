@@ -26,13 +26,7 @@ final class App implements AppContext
     
     /** Version @var string */
     const VERSION = '0.2.0';
-
-    /** Name @var string */
-    const NAME = __NAMESPACE__;
-
-    /** Path @var string */
-    const DIR = __DIR__;
-
+    
     /** Run mode Production */
     const RUN_MODE_PROD = 'prod';
 
@@ -70,7 +64,7 @@ final class App implements AppContext
         try {
             $modules = [new $modeModule(__NAMESPACE__)];
         } catch (Exception $e) {
-            throw new \LogicException('Run mode module not loaded', $runMode);
+            throw new LogicException('Run mode module not loaded', $runMode);
         }
         
         // return application object

@@ -3,7 +3,7 @@
     "description": "BEAR.Sunday, a resource oriented framework",
     "keywords": ["rest", "framework", "api"],
     "homepage": "https://github.com/koriym/BEAR.Sunday",
-    "version": "0.2.0",
+    "version": "0.3.0rc1",
     "license": "BSD-3-Clause",
     "repositories": [
         {
@@ -167,8 +167,8 @@
         "zend/zend-eventmanager": "2.0.0beta3",
         "zend/zend-log": "2.0.0beta3",
         "pagerfanta/pagerfanta": "dev-master",
-        "vdump/vdump": "0.1.*",
-        "xhprof/xhprof": "0.9.2"
+        "xhprof/xhprof": "0.9.2",
+        "vdump/vdump": "0.1.*"
     },
     "authors": [
         {

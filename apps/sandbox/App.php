@@ -28,19 +28,19 @@ final class App implements AppContext
     const VERSION = '0.2.0';
 
     /** Run mode Production */
-    const RUN_MODE_PROD = 'prod';
+    const RUN_MODE_PROD = 'Prod';
 
     /** Run mode Production */
-    const RUN_MODE_API = 'api';
+    const RUN_MODE_API = 'Api';
 
     /** Run mode Develop */
-    const RUN_MODE_DEV = 'dev';
+    const RUN_MODE_DEV = 'Dev';
 
     /** Run mode Stab */
-    const RUN_MODE_STAB = 'stab';
+    const RUN_MODE_STAB = 'Stab';
 
     /** Run mode unit test */
-    const RUN_MODE_TEST = 'test';
+    const RUN_MODE_TEST = 'Test';
 
     /**
      * Return application instance

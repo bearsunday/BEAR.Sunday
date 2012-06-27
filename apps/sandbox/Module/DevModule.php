@@ -54,12 +54,13 @@ class DevModule extends AbstractModule
         // install framework module
         $tmpDir = dirname(__DIR__) . '/tmp';
         $logDir = dirname(__DIR__) . '/log';
+
         $this->bind('BEAR\Resource\InvokerInterface')->to('BEAR\Resource\DevInvoker')->in(Scope::SINGLETON);
         $this->install(new FrameworkModule($this->app, $tmpDir, $logDir));
 
         // install dev module
         $this->install(new TemplateEngine\DevRendererModule);
-        
+
         // install application module
         $this->install(new AppModule($this));
 

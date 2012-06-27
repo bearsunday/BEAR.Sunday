@@ -116,8 +116,8 @@
         <div class="span4">
           <h2>Sample apps</h2>
           <ul>
-            <li><a href="/hello/world">Hello World</a></li>
-            <li><a href="/blog/posts">Blog tutorial</a></li>
+            <li><a href="{href rel="helloworld"}">Hello World</a></li>
+            <li><a href="{href rel="blog"}">Blog tutorial</a></li>
           </ul>
           <p><a class="btn" href="http://code.google.com/p/bearsunday/wiki/blog">Try tutorial &raquo;</a></p>
         </div>

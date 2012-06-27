@@ -13,6 +13,16 @@ use Ray\Di\Di\Inject;
 class Index extends Page
 {
     use ResourceInject;
+    
+    /**
+     * Links
+     * 
+     * @var array
+     */
+    public $links = [
+        'helloworld' => 'page://self/hello/world',
+        'blog' => 'page://self/blog/posts'
+    ];
 
     public function __construct()
     {

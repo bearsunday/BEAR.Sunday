@@ -38,6 +38,17 @@ class Posts extends ResourceObject implements DbSetterInterface
      * @var Doctrine\DBAL\Connection
      */
     protected $db;
+    
+    /**
+     * Resource links
+     * 
+     * @var array
+     */
+    public $links = [
+        'page_post' => 'page://self/blog/posts/post{?id}',
+        'page_edit' => 'page://self/blog/posts/edit{?id}',
+        'page_delete' => 'page://self/blog/posts?_method=delete{&id}',
+    ];
 
     /**
      * Set DB
@@ -55,7 +66,7 @@ class Posts extends ResourceObject implements DbSetterInterface
      * Get
      *
      * @Cache(100)
-     *
+     * 
      * @return array
      */
     public function onGet($id = null)

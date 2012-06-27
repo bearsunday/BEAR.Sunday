@@ -7,21 +7,8 @@
 namespace BEAR\Framework;
 
 use BEAR\Resource\Resource;
-use Ray\Di\Definition;
-use Ray\Di\Annotation;
-use Ray\Di\Config;
-use Ray\Di\Forge;
-use Ray\Di\Container;
-use Ray\Di\Injector;
-use Ray\Di\InjectorInterface as Inject;
-use BEAR\Framework\Router;
-use BEAR\Framework\DevRouter;
 use BEAR\Framework\Exception\NotFound;
 use Aura\Autoload\Exception\NotReadable;
-use BEAR\Framework\AppContext;
-
-use Doctrine\Common\Cache\MemcacheCache as Cache;
-use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 
 /**
  * Dispatcher
@@ -42,51 +29,42 @@ final class Dispatcher
     /**
      * Constructor
      *
-     * @param string $appName
-     * @param string $appPath
+     * @param AppContext $app
      */
-    public function __construct(AppContext $app, Cache $cache = null)
+    public function __construct(AppContext $app)
     {
         $this->app = $app;
-        $this->cache = $cache;
-    }
-
-    public function setCache($cache)
-    {
-        $this->cache = $cache;
     }
 
     /**
-     * Get instance
+     * Return resource client and resource object
      *
-     * @param string $pageUri Page resource path ("/hello/world")
+     * @param string $uri Page resource path ("/hello/world")
      *
      * @return array [BEAR\Resource\ResourceInterface $resource, BEAR\Resource\Object $page]
      *
      * @throws ResourceNotFound
      */
-    public function getInstance($pageUri)
+    public function getInstance($uri)
     {
-        if ($this->cache && $this->cached) {
-            list($resource, $page) = unserialize($cached);
+        $key = 'BEAR_DISPATCH_' . $uri;
+        if (apc_exists($key)) {
+            list($resource, $page) = apc_fetch($key);
+            return [$resource, $page];
         }
         $resource = $this->app->resource;
         try {
-            $page = $resource->newInstance($pageUri);
+            $page = $resource->newInstance($uri);
         } catch (NotReadable $e) {
             try {
-                $page = $resource->newInstance($pageUri . 'index');
+                $page = $resource->newInstance($uri . 'index');
             } catch (NotReadable $e) {
-                throw new Exception\ResourceNotFound($pageUri, 404, $e);
+                throw new Exception\ResourceNotFound($uri, 404, $e);
             }
         } catch (\Exception $e) {
             throw $e;
         }
-        if ($this->cache) {
-            $this->cache->save($key, serialize([$resource, $page]));
-        }
-        // serializable test
-        $page = unserialize(serialize($page));
+        apc_store($key, [$resource, $page]);
         return [$resource, $page];
     }
 }

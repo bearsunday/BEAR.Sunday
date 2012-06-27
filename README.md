@@ -1,28 +1,19 @@
 BEAR, a resource oriented framework for PHP5.4
 =============================
 
- * 0.2.0alpha
+ * 0.3.0
 [![Build Status](https://secure.travis-ci.org/koriym/BEAR.Sunday.png?branch=master)](http://travis-ci.org/koriym/BEAR.Sunday)
 
 One minute example
 ==================
 
-Service
+RESTful Service
 -----------
 
-### Client side
-
+### Resource object
 ```php
 <?php
-    use ResourceInject;
-    
-    $this->resource->get->uri('app://self/greetings')->withQuery(['lang' => 'ja'])->eager->request();
-```
-
-### Service side
-```php
-<?php
-    class Greetings extends ResourceObject
+    class Greetings extends AbstractObject
     {
         public function onGet($lang = 'en')
         {
@@ -30,6 +21,15 @@ Service
             return $this;
         }
     }
+```
+
+### Resource client
+
+```php
+<?php
+    use ResourceInject;
+    
+    $this->resource->get->uri('app://self/greetings')->withQuery(['lang' => 'ja'])->eager->request();
 ```
 Dependency injection
 --------------------
@@ -101,20 +101,23 @@ Dependencies
 ------------
 Rahter than reinvent the wheel and develop our library, BEAR.Sunday use (or will use) these great libraries.
 
- * [Aura/Autoload](https://github.com/auraphp/Aura.Autoload "Aura.Autoload")
- * [Aura/Router](https://github.com/auraphp/Aura.Router "Aura.Router")
- * [Aura/Signal](https://github.com/auraphp/Aura.Signal "Aura.Signal")
- * [Aura/Web](https://github.com/auraphp/Aura.Web "Aura.Web")
- * [Doctrine/Common](http://www.doctrine-project.org/projects/common "Doctrine.Common")
- * [Doctrine/DBAL](http://www.doctrine-project.org/projects/dbal "Doctrine.DBAL")
- * [Guzzle/Guzzle](http://guzzlephp.org/ "Guzzle")
- * [Haanga](http://haanga.org/ "Haanga")
- * [Monolog](https://github.com/Seldaek/monolog.git "Monolog")
- * [Smarty3](http://www.smarty.net/ "Smarty3")
- * [Symfony/Validator](https://github.com/symfony/Validator "Symfony.Validator")
- * [Twig/Twig](http://twig.sensiolabs.org/ "Twig")
+ * [Aura/Autoload](https://github.com/auraphp/Aura.Autoload)
+ * [Aura/Router](https://github.com/auraphp/Aura.Router)
+ * [Aura/Signal](https://github.com/auraphp/Aura.Signal)
+ * [Aura/Web](https://github.com/auraphp/Aura.Web)
+ * [Doctrine/Common](http://www.doctrine-project.org/projects/common)
+ * [Doctrine/DBAL](http://www.doctrine-project.org/projects/dbal)
+ * [Monolog](https://github.com/Seldaek/monolog.git)
+ * [Pagerfanta](git://github.com/whiteoctober/Pagerfanta.git)
+ * [Smarty3](http://www.smarty.net/)
+ * [Symfony/HttpFoundation](https://github.com/symfony/HttpFoundation)
  * [Zend/Cache](https://github.com/zendframework/zf2)
  * [Zend/Log](https://github.com/zendframework/zf2)
+
+ * [Haanga](http://haanga.org/ "Haanga")
+ * [Twig/Twig](http://twig.sensiolabs.org/ "Twig")
+ * [Symfony/Validator](https://github.com/symfony/Validator "Symfony.Validator")
+ * [Guzzle/Guzzle](http://guzzlephp.org/ "Guzzle")
 
 ## Requirement
 
@@ -135,14 +138,18 @@ Here's how to install BEAR.Sunday:
 
     $ git clone git://github.com/koriym/BEAR.Sunday.git
     $ cd BEAR.Sunday
+    $ wget http://getcomposer.org/composer.phar
     $ php ./composer.phar install
     $ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
 
 ### buil-in web server
-
+    
     $ cd apps/sandbox/htdocs
     $ php -S localhost:8088 web.php
     $ curl http://localhost:8088/
+
+    $ php -S localhost:8089 api.php
+    $ curl http://localhost:8089/blog/posts
 
 ### CLI
 
@@ -150,4 +157,3 @@ Here's how to install BEAR.Sunday:
     $ php api.php get app://self/greetings?lang=ja
     $ php api.php get app://self/greetings?lang=en
     $ php api.php get page://self/index
-    $ php api.php get page://self/index view

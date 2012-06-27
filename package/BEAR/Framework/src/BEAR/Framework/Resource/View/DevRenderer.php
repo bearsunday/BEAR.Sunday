@@ -12,7 +12,6 @@ use BEAR\Resource\Request;
 use BEAR\Resource\DevInvoker;
 use BEAR\Framework\Resource\View\TemplateEngineAdapter;
 use BEAR\Framework\Interceptor\CacheLoader;
-use Ray\Aop\Weave;
 use ReflectionClass;
 use ReflectionObject;
 use Ray\Di\Di\Inject;
@@ -90,6 +89,7 @@ class DevRenderer implements Renderable
         $templateFile = $this->templateEngineAdapter->getTemplateFile();
         $label = $this->getLabel($body, $ro, $templateFile);
         $ro->body = $label;
+
         return $ro->body;
     }
 
@@ -193,6 +193,7 @@ EOT;
 </div>
 EOT;
         $result .= $rmReturn($label);
+
         return $result;
     }
 
@@ -213,9 +214,10 @@ EOT;
                 $value = $value->body;
             }
             if (is_object($value)) {
-                $value = '(object)' . get_class($value);
+                $value = '(object) ' . get_class($value);
             }
         });
+
         return highlight_string(var_export($body, true), true);
     }
 
@@ -232,6 +234,7 @@ EOT;
         $info .= $this->getInterceptorInfo($ro);
         $info .= $this->getCacheInfo($ro);
         $info .= $this->getProfileInfo($ro);
+
         return $info;
     }
 
@@ -261,6 +264,7 @@ EOT;
             $paramInfo = 'void';
         }
         $result .= "<ul>{$paramInfo}</ul>";
+
         return $result . '</div>';
     }
     /**
@@ -292,6 +296,7 @@ EOT;
             }
             $result .= "Read {$iconLife} {$life} {$iconTime} {$time}";
         }
+
         return $result . '</div>';
     }
 
@@ -318,6 +323,7 @@ EOT;
 EOT;
         }
         $result .= '</ul></div>';
+
         return $result;
     }
 
@@ -345,6 +351,7 @@ EOT;
 EOT;
         }
         $result .= '</div>';
+
         return $result;
     }
 }

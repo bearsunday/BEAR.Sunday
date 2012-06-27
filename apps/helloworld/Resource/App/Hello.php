@@ -1,7 +1,6 @@
 <?php
 namespace helloworld\Resource\App;
 
-use BEAR\Resource\Object as ResourceObject;
 use BEAR\Resource\AbstractObject as Page;
 
 class Hello extends Page
@@ -15,6 +14,7 @@ class Hello extends Page
     {
         $this['greeting'] = 'Hello ' . $name;
         $this['time'] = date('r');
+
         return $this;
     }
 }

@@ -7,11 +7,8 @@
  */
 namespace BEAR\Framework\Module\TemplateEngine\SmartyModule;
 
-use BEAR\Framework\Interceptor\ViewAdapter;
-use BEAR\Framework\AppDieInject;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
-use ReflectionClass;
 /**
  * Smarty module
  *

@@ -4,7 +4,6 @@ namespace sandbox\Resource\Page;
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;
 use BEAR\Framework\Framework;
-use APCIterator;
 use Ray\Di\Di\Inject;
 
 /**
@@ -13,10 +12,10 @@ use Ray\Di\Di\Inject;
 class Index extends Page
 {
     use ResourceInject;
-    
+
     /**
      * Links
-     * 
+     *
      * @var array
      */
     public $links = [
@@ -51,8 +50,9 @@ class Index extends Page
            'total' => $cache['num_entries'],
            'size' => $cache['mem_size']
         ];
-    	// page speed.
+        // page speed.
         $this['performance'] = $this->resource->get->uri('app://self/performance')->request();
+
         return $this;
     }
 }

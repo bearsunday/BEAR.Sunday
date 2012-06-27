@@ -11,7 +11,6 @@ use BEAR\Framework\Module;
 use Ray\Di\AbstractModule;
 use BEAR\Framework\Module\Database;
 
-
 /**
  * Application module
  *

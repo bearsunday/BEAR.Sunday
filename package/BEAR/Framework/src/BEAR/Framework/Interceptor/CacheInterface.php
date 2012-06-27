@@ -19,7 +19,7 @@ interface CacheInterface
      *
      * @param string $class
      * @param array  $args
-     * 
+     *
      * @return void
      */
     public function delete($class, array $args);

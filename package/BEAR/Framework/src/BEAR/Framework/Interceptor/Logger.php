@@ -35,6 +35,7 @@ class Logger implements MethodInterceptor
         $output = substr(json_encode($result), 0 ,80);
         $log = "target = [{$class}], input = [{$input}], result = [{$output}]";
         $this->log->log($log);
+
         return $result;
     }
 }

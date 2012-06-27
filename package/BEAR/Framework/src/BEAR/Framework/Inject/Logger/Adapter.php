@@ -8,7 +8,6 @@ namespace BEAR\Framework\Inject\Logger;
 
 use Ray\Di\LoggerInterface;
 use Ray\Aop\Bind;
-use Ray\Aop\Weaver;
 use BEAR\Framework\Inject\LogInject;
 
 /**
@@ -20,16 +19,16 @@ use BEAR\Framework\Inject\LogInject;
 class Adapter implements LoggerInterface
 {
     use LogInject;
-    
+
     public function log($class, array $params, array $setter, $object, Bind $bind)
     {
         $log = "DI class={$class}"
-        . ' params=' . $this->getString((array)$params)
-        . ' setter=' . $this->getString((array)$setter)
-        . ' bind=' . $this->getString((array)$bind, true);// $this->getString((array)$bind);
+        . ' params=' . $this->getString((array) $params)
+        . ' setter=' . $this->getString((array) $setter)
+        . ' bind=' . $this->getString((array) $bind, true);// $this->getString((array) $bind);
         @$this->log->log($log);
     }
-    
+
     private function getString(array $params, $isBind = false)
     {
         $paramInfo = [];
@@ -50,6 +49,7 @@ class Adapter implements LoggerInterface
             $paramInfo[] = $str;
         }
         $paramStr = implode(',', $paramInfo);
+
         return $paramStr;
     }
 }

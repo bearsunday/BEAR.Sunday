@@ -11,7 +11,7 @@ use ArrayIterator;
 
 /**
  * HTTP Header
- * 
+ *
  * @package    BEAR.Framework
  * @subpackage Page
  */
@@ -19,7 +19,7 @@ class Header extends ArrayObject
 {
     public function getIterator()
     {
-        return new ArrayIterator((array)$this);
+        return new ArrayIterator((array) $this);
     }
 
     public function outout()

@@ -9,7 +9,6 @@ namespace helloworld;
 use BEAR\Framework\Framework;
 use BEAR\Framework\AppContext;
 use BEAR\Framework\Module\FrameworkModule;
-use BEAR\Framework\AbstractAppContext;
 use BEAR\Framework\Inject\AppDependencyInject;
 use Ray\Di\Injector;
 
@@ -50,6 +49,7 @@ final class App implements AppContext
         $cacheKey = 'app' . __NAMESPACE__ . PHP_SAPI . $runMode;
         if ($useCache && apc_exists($cacheKey)) {
             $app = apc_fetch($cacheKey);
+
             return $app;
         }
         // run mode
@@ -61,6 +61,7 @@ final class App implements AppContext
         $injector = Injector::create($modules, $useCache);
         $app = $injector->getInstance(__CLASS__);
         $useCache ? apc_store($cacheKey, $app) : apc_clear_cache('user');
+
         return $app;
     }
 }

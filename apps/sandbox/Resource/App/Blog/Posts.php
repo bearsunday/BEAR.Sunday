@@ -38,10 +38,10 @@ class Posts extends ResourceObject implements DbSetterInterface
      * @var Doctrine\DBAL\Connection
      */
     protected $db;
-    
+
     /**
      * Resource links
-     * 
+     *
      * @var array
      */
     public $links = [
@@ -66,7 +66,7 @@ class Posts extends ResourceObject implements DbSetterInterface
      * Get
      *
      * @Cache(100)
-     * 
+     *
      * @return array
      */
     public function onGet($id = null)
@@ -82,14 +82,15 @@ class Posts extends ResourceObject implements DbSetterInterface
             $stmt->execute();
             $this->body = $stmt->fetch(PDO::FETCH_ASSOC);
         }
+
         return $this;
     }
 
     /**
      * Post
      *
-     * @param string   $title
-     * @param string   $body
+     * @param string $title
+     * @param string $body
      *
      * @return \sandbox\Resource\App\Posts
      *
@@ -105,13 +106,14 @@ class Posts extends ResourceObject implements DbSetterInterface
         ];
         $this->db->insert($this->table, $values);
         $this->code = 204;
+
         return $this;
     }
 
     /**
      * Put
      *
-     * @param int $id
+     * @param int    $id
      * @param string $title
      * @param string $body
      *
@@ -126,6 +128,7 @@ class Posts extends ResourceObject implements DbSetterInterface
         ];
         $this->db->update($this->table, $values, array('id' => $id));
         $this->code = 204;
+
         return $this;
     }
 
@@ -138,6 +141,7 @@ class Posts extends ResourceObject implements DbSetterInterface
     {
         $this->db->delete($this->table, array('id' => $id));
         $this->code = 204;
+
         return $this;
     }
 }

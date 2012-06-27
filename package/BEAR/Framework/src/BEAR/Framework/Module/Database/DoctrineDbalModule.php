@@ -7,8 +7,6 @@
 namespace BEAR\Framework\Module\Database;
 
 use Ray\Di\AbstractModule;
-use Ray\Di\Injector;
-use Ray\Di\Scope;
 
 /**
  * DBAL module
@@ -20,14 +18,14 @@ class DoctrineDbalModule extends AbstractModule
 {
     private $masterDb;
     private $slaveDb;
-    
+
     public function __construct(array $masterDb, array $slaveDb)
     {
         $this->masterDb = $masterDb;
         $this->slaveDb = $slaveDb;
         parent::__construct();
     }
-    
+
     /**
      * Configure dependency binding
      *

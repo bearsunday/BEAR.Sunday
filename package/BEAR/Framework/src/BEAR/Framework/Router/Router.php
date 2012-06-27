@@ -6,7 +6,6 @@
  */
 namespace BEAR\Framework\Router;
 
-use BEAR\Resource\Resource;
 use Aura\Router\Map;
 
 /**
@@ -62,6 +61,7 @@ final class Router
             }
         }
         unset($query[self::METHOD_OVERRIDE]);
+
         return [$method, $pageUri, $query];
     }
 
@@ -86,13 +86,14 @@ final class Router
         $query = $globals['_GET'];
         complete:
         $method = strtolower($method);
+
         return [$method, $query];
     }
 
     /**
      * Return page key
      *
-     * @return array [$method, $pagekey]
+     * @return array                     [$method, $pagekey]
      * @throws \InvalidArgumentException
      */
     private function getPageKey()
@@ -101,6 +102,7 @@ final class Router
             return '404';
         }
         $pageKey = substr($this->globals['_SERVER']['REQUEST_URI'], 1);
+
         return $pageKey;
     }
 }

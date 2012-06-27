@@ -11,17 +11,15 @@ use sandbox\Interceptor\PostFormValidater;
 
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\Schema;
-use BEAR\Framework\Module\Database;
 use BEAR\Framework\Module\Cqrs;
 use BEAR\Framework\Module\WebContext;
 use BEAR\Framework\Module\TemplateEngine;
 use BEAR\Framework\Interceptor\TimeStamper;
 use BEAR\Framework\Interceptor\Transactional;
 use Ray\Di\AbstractModule;
-use Ray\Di\Di\Scope;
 // cache adapter
-use Guzzle\Common\Cache\Zf2CacheAdapter as CacheAdapter;;
 use Zend\Cache\Storage\Adapter\Apc as CacheBackEnd;
+use Guzzle\Common\Cache\Zf2CacheAdapter as CacheAdapter;;
 
 /**
  * Application module
@@ -70,7 +68,7 @@ class AppModule extends AbstractModule
     {
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\Page\Blog\Posts\Newpost'),
-       	    $this->matcher->annotatedWith('sandbox\Annotation\Form'),
+               $this->matcher->annotatedWith('sandbox\Annotation\Form'),
             [new PostFormValidater]
         );
     }
@@ -82,7 +80,7 @@ class AppModule extends AbstractModule
     {
         $this->bindInterceptor(
             $this->matcher->any(),
-       	    $this->matcher->annotatedWith('BEAR\Framework\Annotation\Time'),
+               $this->matcher->annotatedWith('BEAR\Framework\Annotation\Time'),
             [new TimeStamper]
         );
     }
@@ -94,7 +92,7 @@ class AppModule extends AbstractModule
     {
         $this->bindInterceptor(
             $this->matcher->any(),
-       	    $this->matcher->annotatedWith('BEAR\Framework\Annotation\Transactional'),
+               $this->matcher->annotatedWith('BEAR\Framework\Annotation\Transactional'),
             [new Transactional]
         );
     }

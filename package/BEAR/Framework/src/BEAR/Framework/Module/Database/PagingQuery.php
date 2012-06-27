@@ -22,14 +22,14 @@ class PagingQuery implements Countable, IteratorAggregate
 {
     /**
      * Total number
-     * 
+     *
      * @var int
      */
     private $count;
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param DriverConnection $db
      * @param string           $query
      * @param array            $params
@@ -41,7 +41,7 @@ class PagingQuery implements Countable, IteratorAggregate
         $this->query = $query;
         $this->params = $params;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -51,10 +51,10 @@ class PagingQuery implements Countable, IteratorAggregate
             return $this->count;
         }
         $this->count = $this->getCountNum($this->query, $this->params);
+
         return $this->count;
     }
-    
-    
+
     /**
      * {@inheritdoc}
      */
@@ -67,20 +67,22 @@ class PagingQuery implements Countable, IteratorAggregate
         } else {
             $result = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
         }
+
         return new ArrayIterator($result);
     }
-    
+
     /**
      * Return pager sql
-     * 
+     *
      * @param int $offset
      * @param int $length
-     * 
+     *
      * @return string
      */
     public function getPagerSql($offset, $length)
     {
         $query = $this->db->getDatabasePlatform()->modifyLimitQuery($this->query, $length, $offset);
+
         return $query;
     }
 
@@ -107,7 +109,8 @@ class PagingQuery implements Countable, IteratorAggregate
             $result = $db->fetchAll($query);
             $count = count($result);
         }
-        return (integer)$count;
+
+        return (integer) $count;
     }
 
     /**
@@ -137,6 +140,7 @@ class PagingQuery implements Countable, IteratorAggregate
         $queryCount = preg_replace('/(?:.*)\bFROM\b\s+/Uims', 'SELECT COUNT(*) FROM ', $query, 1);
         list($queryCount, ) = preg_split('/\s+ORDER\s+BY\s+/is', $queryCount);
         list($queryCount, ) = preg_split('/\bLIMIT\b/is', $queryCount);
+
         return trim($queryCount);
     }
 }

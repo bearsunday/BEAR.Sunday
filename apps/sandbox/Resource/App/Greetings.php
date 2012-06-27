@@ -1,7 +1,6 @@
 <?php
 namespace sandbox\Resource\App;
 
-use BEAR\Resource\Object as ResourceObject;
 use BEAR\Resource\AbstractObject;
 
 /**
@@ -30,13 +29,14 @@ class Greetings extends AbstractObject
     /**
      * Get
      *
-     * @param string $lang
+     * @param  string $lang
      * @return string
      *
      */
     public function onGet($lang = 'en')
     {
         $greeting = $this->message[$lang];
+
         return $greeting;
     }
 }

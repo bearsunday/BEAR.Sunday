@@ -44,7 +44,7 @@ class FrameworkModule extends AbstractModule
     /**
      * Constructor
      *
-     * @param string $app App name (=namespace name)
+     * @param string $app    App name (=namespace name)
      * @param string $tmpDir
      * @param string $logDir
      */

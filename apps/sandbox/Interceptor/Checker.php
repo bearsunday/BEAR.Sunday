@@ -8,7 +8,6 @@ namespace sandbox\Interceptor;
 
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
-use Ray\Di\AbstractModule;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
@@ -49,6 +48,7 @@ class Checker implements MethodInterceptor
         $pageObject = $invocation->getThis();
         $tmpDir = $this->tmpDir;
         $pageObject->view = include __DIR__ . '/Checker/error.php';
+
         return $pageObject;
     }
 }

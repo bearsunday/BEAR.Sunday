@@ -41,7 +41,8 @@ class DbInjector implements MethodInterceptor
      * @Inject
      * @Named("masterDb=master_db,slaveDb=slave_db")
      */
-    public function __construct(array $masterDb, array $slaveDb) {
+    public function __construct(array $masterDb, array $slaveDb)
+    {
         $this->masterDb = $masterDb;
         $this->slaveDb = $slaveDb;
     }
@@ -58,7 +59,8 @@ class DbInjector implements MethodInterceptor
      * (non-PHPdoc)
      * @see Ray\Aop.MethodInterceptor::invoke()
      */
-    public function invoke(MethodInvocation $invocation) {
+    public function invoke(MethodInvocation $invocation)
+    {
         $object = $invocation->getThis();
         $method = $invocation->getMethod();
         $connectionParams = ($method->name !== 'onGet') ? $this->slaveDb : $this->masterDb;
@@ -79,6 +81,7 @@ class DbInjector implements MethodInterceptor
                 $object->headers['pager'] = $pagerData;
             }
         }
+
         return $result;
     }
 }

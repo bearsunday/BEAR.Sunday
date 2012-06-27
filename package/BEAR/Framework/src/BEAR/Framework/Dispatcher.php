@@ -7,7 +7,6 @@
 namespace BEAR\Framework;
 
 use BEAR\Resource\Resource;
-use BEAR\Framework\Exception\NotFound;
 use Aura\Autoload\Exception\NotReadable;
 
 /**
@@ -24,7 +23,6 @@ final class Dispatcher
      * @var AppContext
      */
     private $app;
-
 
     /**
      * Constructor
@@ -50,6 +48,7 @@ final class Dispatcher
         $key = 'BEAR_DISPATCH_' . $uri;
         if (apc_exists($key)) {
             list($resource, $page) = apc_fetch($key);
+
             return [$resource, $page];
         }
         $resource = $this->app->resource;
@@ -65,6 +64,7 @@ final class Dispatcher
             throw $e;
         }
         apc_store($key, [$resource, $page]);
+
         return [$resource, $page];
     }
 }

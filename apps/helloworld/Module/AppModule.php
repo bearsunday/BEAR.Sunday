@@ -9,7 +9,6 @@ namespace helloworld\Module;
 
 use BEAR\Framework\Module;
 use Ray\Di\AbstractModule;
-use Ray\Di\Scope;
 
 /**
  * Application module

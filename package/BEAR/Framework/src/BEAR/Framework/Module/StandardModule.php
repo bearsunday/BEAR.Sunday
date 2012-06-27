@@ -30,7 +30,7 @@ class StandardModule extends AbstractModule
      * Constructor
      *
      * @param Inject $injector
-     * @param string $appName application name (= _NAMESPACE_)
+     * @param string $appName  application name (= _NAMESPACE_)
      */
     public function __construct(Di $injector)
     {

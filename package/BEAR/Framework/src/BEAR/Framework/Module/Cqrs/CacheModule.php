@@ -6,12 +6,7 @@
  */
 namespace BEAR\Framework\Module\Cqrs;
 
-use BEAR\Framework\Interceptor\CacheLoader as CacheLoadInterceptor;
-use BEAR\Framework\Interceptor\CacheUpdater as CacheUpdateInterceptor;
-use Guzzle\Common\Cache\CacheAdapterInterface;
 use Ray\Di\AbstractModule;
-use Ray\Di\Injector;
-use Ray\Di\Scope;
 
 /**
  * Cache module

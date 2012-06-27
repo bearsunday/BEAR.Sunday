@@ -8,7 +8,7 @@ namespace BEAR\Framework\Resource\Page;
 
 /**
  * Error page
- * 
+ *
  * @package    BEAR.Framework
  * @subpackage Page
  */

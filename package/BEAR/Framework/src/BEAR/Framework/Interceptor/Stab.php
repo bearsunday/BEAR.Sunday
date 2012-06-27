@@ -7,7 +7,6 @@
 namespace BEAR\Framework\Interceptor;
 
 use BEAR\Framework\Inject\LogInject;
-use BEAR\Framework\Resource\Ok;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 
@@ -54,7 +53,6 @@ class Stab implements MethodInterceptor
 // //         $this->log->log($msg);
 //         return $this->stab;
 //         $result = $invocation->proceed();
-
 
 //         $result->body = $this->stab;
         return $object;

@@ -31,6 +31,7 @@ class JsonRenderer implements Renderable
             }
         });
         $ro->view = @json_encode($ro->body, JSON_PRETTY_PRINT);
+
         return $ro->view;
     }
 }

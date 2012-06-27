@@ -52,7 +52,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="container">
         <div class="alert alert-block alert-error fade in">
             <a class="close" data-dismiss="alert" href="#">&times;</a>
@@ -66,7 +66,6 @@
               <a class="btn btn-danger" href="/index">Retry</a> <a class="btn" href="#">Read Manual</a>
             </p>
           </div>
-
 
       <footer>
         <p>&copy; 2012 <a href="https://twitter.com/#!/bearsunday">@BEARSunday</a></p>

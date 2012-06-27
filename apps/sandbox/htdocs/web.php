@@ -3,7 +3,6 @@
 namespace sandbox;
 
 use BEAR\Framework\Router\Router;
-use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Framework;
 
@@ -46,12 +45,12 @@ if (PHP_SAPI == 'cli-server') {
 $doIncludePHPfile = (
     PHP_SAPI !== 'cli' &&
     file_exists($_SERVER['SCRIPT_FILENAME']) &&
-	($_SERVER['SCRIPT_FILENAME'] !== __DIR__ . '/index.php') &&
-	($_SERVER['SCRIPT_FILENAME'] !== __FILE__)
+    ($_SERVER['SCRIPT_FILENAME'] !== __DIR__ . '/index.php') &&
+    ($_SERVER['SCRIPT_FILENAME'] !== __FILE__)
 );
 if ($doIncludePHPfile) {
-	include $_SERVER['SCRIPT_FILENAME'];
-	exit(0);
+    include $_SERVER['SCRIPT_FILENAME'];
+    exit(0);
 }
 
 // run mode

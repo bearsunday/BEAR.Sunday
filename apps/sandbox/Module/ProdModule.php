@@ -9,15 +9,12 @@ namespace sandbox\Module;
 
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\FrameworkModule;
-use BEAR\Framework\Module\StandardModule;
 use BEAR\Framework\Module\TemplateEngine;
 use BEAR\Framework\Module\Database;
 use BEAR\Framework\Module\Provider\CacheProvider;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Doctrine\Common\Cache\ApcCache as Cache;
 
-use helloworld\Module\AppModule as HelloWorldModule;
-use Ray\Di\Scope;
 use Ray\Di\AbstractModule;
 
 /**

@@ -3,10 +3,8 @@ namespace sandbox\Resource\Page\Blog\Posts;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;
-use BEAR\Framework\Annotation\Cache;
 
 use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 
 /**
  * Blog entry pager page
@@ -16,13 +14,13 @@ use Ray\Di\Di\Named;
  */
 class Pager extends Page
 {
-	use ResourceInject;
+    use ResourceInject;
 
-	/**
-	 * Contents
-	 *
-	 * @var array
-	 */
+    /**
+     * Contents
+     *
+     * @var array
+     */
     public $body = [
         'posts' => ''
     ];
@@ -34,6 +32,7 @@ class Pager extends Page
     public function onGet()
     {
         $this['posts'] = $this->resource->get->uri('app://self/blog/posts/pager')->eager->request();
+
         return $this;
     }
 }

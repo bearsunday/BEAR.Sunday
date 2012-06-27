@@ -22,7 +22,7 @@ class SignalProvider implements Provide
 {
     /**
      * Return instance
-     * 
+     *
      * @return Manager
      */
     public function get()

@@ -8,7 +8,7 @@ namespace BEAR\Framework\Resource\View;
 
 /**
  * Template engine adapter
- * 
+ *
  * @package    BEAR.Framework
  * @subpackage Resource
  */
@@ -23,7 +23,7 @@ interface TemplateEngineAdapter
      * @return self
      */
     public function assign($tplVar, $value);
-    
+
     /**
      * Assigns all variables
      *
@@ -36,7 +36,7 @@ interface TemplateEngineAdapter
     /**
      * Fetches a rendered template
      *
-     * @param string $template          the resource handle of the template file or template object
+     * @param string $template the resource handle of the template file or template object
      *
      * @return string rendered template output
      */

@@ -14,7 +14,6 @@ use Monolog\Logger;
 use Ray\Di\ProviderInterface as Provide;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
-use RuntimeException;
 
 /**
  * Cache
@@ -26,7 +25,7 @@ class MonologProvider implements Provide
 {
     /**
      * Log directory path
-     * 
+     *
      * @var string
      */
     private $logDir;
@@ -35,7 +34,7 @@ class MonologProvider implements Provide
      * Constructor
      *
      * @param string $logDir
-     * 
+     *
      * @Inject
      * @Named("log_dir")
      */
@@ -46,7 +45,7 @@ class MonologProvider implements Provide
 
     /**
      * Provide instance
-     * 
+     *
      * @return CacheAdapter
      */
     public function get()
@@ -55,11 +54,12 @@ class MonologProvider implements Provide
         $logFile = $this->logDir . '/'. PHP_SAPI . '.app.log';
         touch($logFile);
         if (is_writable($logFile)) {
-        	$log->pushHandler(new StreamHandler($logFile));
+            $log->pushHandler(new StreamHandler($logFile));
         } else {
-        	$log->pushHandler(new TestHandler);
+            $log->pushHandler(new TestHandler);
         }
         $adapter = new MonologLogAdapter($log);
+
         return $adapter;
     }
 }

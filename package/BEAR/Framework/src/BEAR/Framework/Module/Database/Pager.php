@@ -9,12 +9,8 @@ namespace BEAR\Framework\Module\Database;
 use Pagerfanta\Pagerfanta;
 
 use Doctrine\DBAL\Driver\Connection as DriverConnection;
-use Countable;
-use PDO;
-use ArrayIterator;
-use IteratorAggregate;
 use Pagerfanta\View\ViewInterface;
-use Pagerfanta\View\TwitterBootstrapView;    
+use Pagerfanta\View\TwitterBootstrapView;
 /**
  * Paging Query
  *
@@ -44,36 +40,42 @@ class Pager
     public function setMaxPerPage($maxPerPage)
     {
         $this->maxPerPage = $maxPerPage;
+
         return $this;
     }
 
     public function setPageKey($pageKey)
     {
         $this->pageKey = $pageKey;
+
         return $this;
     }
 
     public function setCurrentPage($currentPage)
     {
         $this->currentPage = $currentPage;
+
         return $this;
     }
 
     public function setView(ViewInterface $view)
     {
         $this->view = $view;
+
         return $this;
     }
 
     public function setRouteGenerator(Callable $routeGenerator)
     {
         $this->routeGenerator = $routeGenerator;
+
         return $this;
     }
 
     public function setViewOption($key, $value)
     {
         $this->viewOptions[$key] = $value;
+
         return $this;
     }
 
@@ -104,6 +106,7 @@ class Pager
     public function getPagerQuery($query)
     {
         $pagerQuery = $this->db->getDatabasePlatform()->modifyLimitQuery($query, $this->maxPerPage, $this->firstResult);
+
         return $pagerQuery;
     }
 
@@ -118,6 +121,7 @@ class Pager
             $routeGenerator,
             $this->viewOptions
         );
+
         return $html;
     }
 }

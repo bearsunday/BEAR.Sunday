@@ -42,6 +42,7 @@ class DoctrineDbalAdapter implements AdapterInterface
     public function getSlice($offset, $length)
     {
         $iterator = $this->query->getIterator($offset, $length);
+
         return $iterator;
     }
 }

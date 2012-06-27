@@ -62,7 +62,7 @@ class Framework
         include_once $system . '/vendor/Aura/Autoload/src.php';
         $loader = new Loader;
 //      $loader->setMode(Loader::MODE_DEBUG);
-        $namespacesBase = include  $system . '/vendor/composer/autoload_namespaces.php';
+        $namespacesBase = include $system . '/vendor/composer/autoload_namespaces.php';
         $namespacesBase += [
             $namespace  => dirname($appDir),
             'BEAR\Framework' => $system . '/package/BEAR/Framework/src/'
@@ -74,6 +74,7 @@ class Framework
         AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation\\', $system . '/vendor/BEAR/Resource/src/');
         AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation\\', $system . '/package/BEAR/Framework/src/');
         AnnotationRegistry::registerAutoloadNamespace($namespace . '\Annotation', dirname($appDir));
+
         return $this;
     }
 }

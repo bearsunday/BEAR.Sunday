@@ -8,8 +8,6 @@ namespace BEAR\Framework\Module\Database\DoctrineDbalModule;
 
 use BEAR\Framework\Module\Database\DoctrineDbalModule\Pagerfanta\DoctrineDbalAdapter;
 
-use PDO;
-use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Connection as DbalConnection;
 use Doctrine\DBAL\Driver\Connection as DriverConnection;
 use BEAR\Framework\Module\Database\Pager;
@@ -39,30 +37,35 @@ class Connection extends DbalConnection implements DriverConnection
     public function setMaxPerPage($maxPerPage)
     {
         $this->maxPerPage = $maxPerPage;
+
         return $this;
     }
 
     public function setPageKey($pageKey)
     {
         $this->pageKey = $pageKey;
+
         return $this;
     }
 
     public function setCurrentPage($currentPage)
     {
         $this->currentPage = $currentPage;
+
         return $this;
     }
 
     public function setView(ViewInterface $view)
     {
         $this->view = $view;
+
         return $this;
     }
 
     public function setRouteGenerator(Callable $routeGenerator)
     {
         $this->routeGenerator = $routeGenerator;
+
         return $this;
     }
 
@@ -86,6 +89,7 @@ class Connection extends DbalConnection implements DriverConnection
         $pagerQuery = $this->getDatabasePlatform()->modifyLimitQuery($query, $this->maxPerPage, $firstResult);
         $args[0] = $pagerQuery;
         $result = call_user_func_array(array('Doctrine\DBAL\Connection', 'query'), $args);
+
         return $result;
     }
 
@@ -103,6 +107,7 @@ class Connection extends DbalConnection implements DriverConnection
             'hasPrevious' => $this->pagerfanta->hasPreviousPage(),
             'html' => $this->getHtml($this->pagerfanta)
         ];
+
         return $pager;
     }
 
@@ -117,6 +122,7 @@ class Connection extends DbalConnection implements DriverConnection
             $routeGenerator,
             $this->viewOptions
         );
+
         return $html;
     }
 }

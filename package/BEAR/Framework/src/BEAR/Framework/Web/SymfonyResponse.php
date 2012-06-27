@@ -6,7 +6,6 @@
  */
 namespace BEAR\Framework\Web;
 
-use BEAR\Framework\Exception\ResourceBodyIsNotString;
 use BEAR\Framework\Exception\InvalidResourceType;
 use BEAR\Framework\Inject\LogInject;
 use BEAR\Resource\Request;
@@ -16,10 +15,8 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Helper\FormatterHelper as Formatter;
 use Ray\Aop\Weaver;
 use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 use Exception;
 use Traversable;
-use UnexpectedValueException;
 /**
  * Output with using symfony HttpFoundation
  *
@@ -77,6 +74,7 @@ class SymfonyResponse implements ResponseInterface
             throw new InvalidResourceType($type);
         }
         $this->resource = $resource;
+
         return $this;
     }
 
@@ -109,6 +107,7 @@ class SymfonyResponse implements ResponseInterface
         $this->code = $e->getCode();
         $this->headers = [];
         $this->body = $exceptionId;
+
         return $this;
     }
 
@@ -125,8 +124,9 @@ class SymfonyResponse implements ResponseInterface
             $this->view = $renderer($this->body);
         } else {
             // __toString() method suppoesed to creat own view.
-            (string)$this->resource;
+            (string) $this->resource;
         }
+
         return $this;
     }
 
@@ -140,6 +140,7 @@ class SymfonyResponse implements ResponseInterface
         $this->response = new Response($this->resource->view, $this->resource->code, (array) $this->resource->headers);
         // compliant with RFC 2616.
         $this->response->prepare();
+
         return $this;
     }
 
@@ -155,9 +156,9 @@ class SymfonyResponse implements ResponseInterface
         } else {
             $this->response->send();
         }
+
         return $this;
     }
-
 
     public function sendCli($mode = self::MODE_VIEW)
     {
@@ -212,7 +213,7 @@ class SymfonyResponse implements ResponseInterface
                             break;
                         case self::MODE_VIEW:
                         default:
-                            $body = (string)$body . " {$label2}" . $body->toUri() . $close;
+                            $body = (string) $body . " {$label2}" . $body->toUri() . $close;
                             break;
 
                     }

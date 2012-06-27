@@ -9,14 +9,10 @@ namespace sandbox\Module;
 
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\FrameworkModule;
-use BEAR\Framework\Module\StandardModule;
 use BEAR\Framework\Module\TemplateEngine;
 use BEAR\Framework\Module\Database;
-use helloworld\Module\AppModule as HelloWorldModule;
 use Ray\Di\Scope;
 use Ray\Di\AbstractModule;
-
-use BEAR\Framework\Interceptor\Stab;
 
 /**
  * Application module

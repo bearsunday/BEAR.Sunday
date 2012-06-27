@@ -7,7 +7,6 @@
 namespace BEAR\Framework\Inject;
 
 use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 use Guzzle\Common\Log\LogAdapterInterface as Log;
 
 /**

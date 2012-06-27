@@ -10,7 +10,7 @@ use BEAR\Resource\AbstractObject;
 
 /**
  * Abstract page
- * 
+ *
  * @package    BEAR.Framework
  * @subpackage Resource
  */

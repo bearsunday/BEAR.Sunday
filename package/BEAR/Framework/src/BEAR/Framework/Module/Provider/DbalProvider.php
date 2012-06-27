@@ -2,9 +2,7 @@
 
 namespace BEAR\Framework\Module\Provider;
 
-use Ray\Di\InjectorInterface;
 use Ray\Di\ProviderInterface as Provide;
-use BEAR\Framework\Module\AbstractPrototypeProvider;
 
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
@@ -34,10 +32,11 @@ class DbalProvider implements Provide
         $connectionParams = [
             'driver' => 'pdo_sqlite',
             'path' => $this->dsn,
-        	'user' => null,
+            'user' => null,
             'password' => null
         ];
         $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+
         return $conn;
     }
 }

@@ -1,7 +1,6 @@
 <?php
 namespace sandbox\Resource\App;
 
-use BEAR\Resource\Object as ResourceObject;
 use BEAR\Resource\AbstractObject;
 
 /**
@@ -19,6 +18,7 @@ class Performance extends AbstractObject
     public function onGet()
     {
         $performance = number_format((1 / (microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'])), 2);
+
         return $performance;
     }
 }

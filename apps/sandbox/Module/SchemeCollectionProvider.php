@@ -31,6 +31,7 @@ class SchemeCollectionProvider implements Provide
         $appAdapter = new AppAdapter($this->injector, $this->appName, 'Resource\App');
         $schemeCollection->scheme('page')->host('self')->toAdapter($pageAdapter);
         $schemeCollection->scheme('app')->host('self')->toAdapter($appAdapter);
+
         return $schemeCollection;
     }
 }

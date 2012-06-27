@@ -10,9 +10,7 @@ use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 use Ray\Di\Injector;
 use Ray\Di\InjectorInterface as Di;
-use Ray\Di\AbstractModule;
 use BEAR\Framework\Web\ResponseInterface;
-use BEAR\Framework\Inject\ResourceInject;
 use BEAR\Resource\ResourceInterface;
 use BEAR\Resource\SignalHandler\Provides;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
@@ -99,9 +97,9 @@ trait AppDependencyInject
 
     /**
      * Set response
-     * 
+     *
      * @param ResponseInterface $response
-     * 
+     *
      * @Inject
      */
     public function setResponse(ResponseInterface $response)

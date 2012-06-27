@@ -30,7 +30,7 @@ abstract class AbstractSingletonProvider implements Provide
      *
      * @return object
      */
-    abstract function newInstance();
+    abstract public function newInstance();
 
     /**
      * @return object
@@ -40,6 +40,7 @@ abstract class AbstractSingletonProvider implements Provide
         if ($this->instance === null) {
             $this->instance = $this->newInstance();
         }
+
         return $this->instance;
     }
 }

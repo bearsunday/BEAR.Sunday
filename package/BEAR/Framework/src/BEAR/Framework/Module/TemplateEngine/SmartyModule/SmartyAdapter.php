@@ -10,7 +10,6 @@ use Smarty;
 use BEAR\Framework\Resource\View\TemplateEngineAdapter;
 use BEAR\Framework\Exception\TemplateNotFound;
 use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 
 /**
  * Smarty adapter
@@ -77,6 +76,7 @@ class SmartyAdapter implements TemplateEngineAdapter
     {
         $template = $templatefileWithoutExtention . self::EXT;
         $this->fileExists($template);
+
         return $this->smarty->fetch($template);
     }
 

@@ -69,6 +69,7 @@ class SchemeCollectionProvider implements Provide
         $schemeCollection->scheme('page')->host('self')->toAdapter(new App($this->injector, $this->namespace, 'Resource\Page'));
 //         $schemeCollection->scheme('page')->host('helloworld')->toAdapter(new App($this->helloInjector, 'helloworld', 'Resource\Page'));
         $schemeCollection->scheme('http')->host('*')->toAdapter(new Http);
+
         return $schemeCollection;
     }
 }

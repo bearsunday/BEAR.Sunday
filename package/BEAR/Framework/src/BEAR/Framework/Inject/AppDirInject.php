@@ -30,7 +30,7 @@ trait AppDirInject
      * @param string $viewPath
      *
      * @return void
-     * 
+     *
      * @Inject
      * @Named("app_dir")
      */

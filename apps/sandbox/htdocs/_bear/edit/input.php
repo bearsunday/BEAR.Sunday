@@ -18,9 +18,9 @@ if (file_exists($path)) {
 }
 // validate
 if (!is_readable($fullPath)) {
-	throw new \InvalidArgumentException("Not found. {$fullPath} is not readable.");
+    throw new \InvalidArgumentException("Not found. {$fullPath} is not readable.");
 }
 if (strpos($fullPath, $rootDir) === false) {
-	throw new \OutOfRangeException($fullPath);
+    throw new \OutOfRangeException($fullPath);
 }
 return array($fullPath, $line, $relativePath);

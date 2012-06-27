@@ -6,7 +6,6 @@ use BEAR\Framework\Inject\ResourceInject;
 use BEAR\Framework\Annotation\Cache;
 use BEAR\Framework\Annotation;
 use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 
 /**
  * Blog index page
@@ -16,13 +15,13 @@ use Ray\Di\Di\Named;
  */
 class Posts extends Page
 {
-	use ResourceInject;
+    use ResourceInject;
 
-	/**
-	 * Contents
-	 *
-	 * @var array
-	 */
+    /**
+     * Contents
+     *
+     * @var array
+     */
     public $body = [
         'posts' => ''
     ];
@@ -37,6 +36,7 @@ class Posts extends Page
     public function onGet()
     {
         $this['posts'] = $this->resource->get->uri('app://self/blog/posts')->request();
+
         return $this;
     }
 
@@ -57,6 +57,7 @@ class Posts extends Page
 
         // message
         $this['message'] = 'Entry deleted.';
+
         return $this->onGet();
     }
 }

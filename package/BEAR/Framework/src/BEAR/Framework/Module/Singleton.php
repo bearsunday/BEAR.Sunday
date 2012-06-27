@@ -24,6 +24,7 @@ trait Singleton
         if ($instance === null) {
             $instance = $this->newInstance();
         }
+
         return $instance;
     }
 }

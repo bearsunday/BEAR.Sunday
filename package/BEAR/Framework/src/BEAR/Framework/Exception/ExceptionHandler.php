@@ -9,7 +9,6 @@ use BEAR\Resource\Exception\ResourceNotFound;
 use Ray\Di\Exception\InvalidBinding;
 use BEAR\Framework\Resource\Page\Error;
 use BEAR\Framework\Web\ResponseInterface;
-use BEAR\Framework\Web\SymfonyResponse as Output;
 use BEAR\Framework\Inject\LogDirInject;
 use Exception;
 
@@ -34,7 +33,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
     public function handle(Exception $e)
     {
         $mode = isset($_ENV['BEAR_OUTPUT_MODE']) ? $_ENV['BEAR_OUTPUT_MODE'] : 'prod';
-        $exceptionId = 'e' . substr(md5((string)$e), 0, 5);
+        $exceptionId = 'e' . substr(md5((string) $e), 0, 5);
         try {
             $response = new Error;
             throw $e;
@@ -88,6 +87,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
         $response->headers['X-EXCEPTION-PREVIOUS'] =  $previous;
         $response->headers['X-EXCEPTION-ID'] = $exceptionId;
         $this->writeExceptionLog($e, $exceptionId);
+
         return $response;
     }
 
@@ -107,7 +107,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
             $data .= PHP_EOL . PHP_EOL . '-- Previous Exception --' . PHP_EOL . PHP_EOL;
             $data .= $previousE->getTraceAsString();
         }
-        $data .= (string)$e;
+        $data .= (string) $e;
         $file = "{$this->logDir}/" . $filename;
         file_put_contents($file, $data);
     }

@@ -7,8 +7,6 @@
  */
 namespace BEAR\Framework\Interceptor;
 
-use BEAR\Framework\Module\Database\DoctrineDbalModule\Pagerfanta\DoctrineDbalAdapter;
-
 use BEAR\Framework\Framework;
 
 use Aura\Signal\Manager as Signal;

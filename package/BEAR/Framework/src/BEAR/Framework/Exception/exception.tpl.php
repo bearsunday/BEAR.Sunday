@@ -7,23 +7,23 @@ $memory = number_format(memory_get_peak_usage(true));
 $systemRoot = Framework::$systemRoot;
 
 $exceptionInfo = function (\Exception $e) use ($systemRoot) {
-	return [
-	'message' => $e->getMessage(),
-	'traceString' => $e->getTraceAsString(),
-	'traceRaw' => print_r($e->getTrace(), true),
-	'file' => $e->getFile(),
-	'href' => '/_bear/edit/?file=' . str_replace($systemRoot, '', $e->getFile()) . '&line=' . $e->getLine(),
-	'title' => $e->getFile() . ':' . $e->getLine(),
-	'line' => $e->getLine(),
-	'fileContents' => htmlspecialchars(trim(file_get_contents($e->getFile()))),
-	'class' => get_class($e),
-	'trace' => $e->getTrace()
-	];
+    return [
+    'message' => $e->getMessage(),
+    'traceString' => $e->getTraceAsString(),
+    'traceRaw' => print_r($e->getTrace(), true),
+    'file' => $e->getFile(),
+    'href' => '/_bear/edit/?file=' . str_replace($systemRoot, '', $e->getFile()) . '&line=' . $e->getLine(),
+    'title' => $e->getFile() . ':' . $e->getLine(),
+    'line' => $e->getLine(),
+    'fileContents' => htmlspecialchars(trim(file_get_contents($e->getFile()))),
+    'class' => get_class($e),
+    'trace' => $e->getTrace()
+    ];
 };
 $exception = $exceptionInfo($e);
 $previousE = $e->getPrevious();
 if ($previousE) {
-	$previousE = $exceptionInfo($e->getPrevious());
+    $previousE = $exceptionInfo($e->getPrevious());
 }
 $html = <<<EOT
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ $html = <<<EOT
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57-precomposed.png">
-	<link href="/assets/js/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link href="/assets/js/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
   </head>
 
   <body>
@@ -80,9 +80,9 @@ $html = <<<EOT
       </div>
 EOT;
 if ($previousE) {
-	$html .= <<<EOT
+    $html .= <<<EOT
       <div class="alert alert-block alert-warning fade in">
-      	<span class="badge badge-warning">Privious Exception</span>
+          <span class="badge badge-warning">Privious Exception</span>
         <a class="close" data-dismiss="alert" href="#">&times;</a>
         <h1 class="alert-heading">{$previousE['class']}</h1>
         <h2>{$previousE['message']}</h2>
@@ -109,18 +109,18 @@ $html .= <<<EOT
     <p><span class="icon-file"></span>Files</P>
 EOT;
 foreach ($exception['trace'] as $trace) {
-	if (isset($trace['file'])) {
-		$file =  $trace['file'];
-		$editFile = str_replace($systemRoot, '', $file);
-		$html .= "<a target=\"code_edit\" href=\"/_bear/edit/?file={$editFile}\">{$file}  : {$trace['line']} <span class=\"icon-share-alt\"></span></a><br>";
-	}
+    if (isset($trace['file'])) {
+        $file =  $trace['file'];
+        $editFile = str_replace($systemRoot, '', $file);
+        $html .= "<a target=\"code_edit\" href=\"/_bear/edit/?file={$editFile}\">{$file}  : {$trace['line']} <span class=\"icon-share-alt\"></span></a><br>";
+    }
 }
 $html .= <<<EOT
 
     <div class="tab-pane" id="file">
       <pre class="prettyprint linenums">
         {$exception['fileContents']}
-	  </pre>
+      </pre>
     </div>
 
     <div class="tab-pane" id="raw">
@@ -156,10 +156,9 @@ $html .= <<<EOT
     <script src="/assets/js/bootstrap-carousel.js"></script>
     <script src="/assets/js/bootstrap-typeahead.js"></script>
     <script src="/assets/js/google-code-prettify/prettify.js"></script>
-	<script>$(function () { prettyPrint() })</script>
+    <script>$(function () { prettyPrint() })</script>
 </script>
   </body>
 </html>
 EOT;
 return $html;
-?>

@@ -11,6 +11,7 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
     public function getConnection()
     {
         $pdo = new \PDO("mysql:host=localhost; dbname=blogbeartest", "root", "");
+
         return $this->createDefaultDBConnection($pdo, 'mysql');
     }
 
@@ -50,6 +51,7 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
         // resource request
         $resource = $this->resource->get->uri('app://self/blog/posts')->eager->request();
         $this->assertSame(200, $resource->code);
+
         return $resource;
     }
 
@@ -81,7 +83,7 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
      */
     public function render($resource)
     {
-        $html = (string)$resource;
+        $html = (string) $resource;
         $this->assertInternalType('string', $html);
     }
 
@@ -107,6 +109,7 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
         ->withQuery(['id' => 4])
         ->eager
         ->request()->body;
+
         return $body;
     }
 

@@ -1,7 +1,6 @@
 <?php
 namespace helloworld\Resource\Page;
 
-use BEAR\Resource\Object as ResourceObject;
 use BEAR\Resource\AbstractObject as Page;
 
 /**
@@ -15,6 +14,7 @@ class Hello extends Page
     public function onGet($name)
     {
         $this->body = 'Hello ' . $name;
+
         return $this;
     }
 }

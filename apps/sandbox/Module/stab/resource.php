@@ -32,7 +32,7 @@ return [
                     'created' => '2011-05-11 08:08:01'
                  ]
             ],
-            
+
     'sandbox\Resource\Page\Blog\Posts\Edit' =>
             [
                 'id' => '1',

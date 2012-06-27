@@ -1,7 +1,7 @@
 <?php
 /**
  * Display editor
- * 
+ *
  * @package BEAR.CodeEdit
  */
 list($fullPath, $line, $relativePath) = require __DIR__ . '/input.php';
@@ -21,4 +21,3 @@ $view['auth']  = md5(session_id() . $id);
 
 // render
 include 'view.php';
-?>

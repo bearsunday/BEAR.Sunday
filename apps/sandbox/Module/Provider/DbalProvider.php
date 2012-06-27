@@ -7,18 +7,19 @@ use Doctrine\DBAL\DriverManager;
 
 class DbalProvider implements Provide
 {
-	public function get()
-	{
-		$config = new Configuration;
-		//..
-		$connectionParams = [
-		'driver' => 'pdo_mysql',
-		'user' => 'root',
-		'password' => '',
-		'dbname' => 'blogbear'
-		
-		];
-		$conn = DriverManager::getConnection($connectionParams, $config);
-		return $conn;
-	}
+    public function get()
+    {
+        $config = new Configuration;
+        //..
+        $connectionParams = [
+        'driver' => 'pdo_mysql',
+        'user' => 'root',
+        'password' => '',
+        'dbname' => 'blogbear'
+
+        ];
+        $conn = DriverManager::getConnection($connectionParams, $config);
+
+        return $conn;
+    }
 }

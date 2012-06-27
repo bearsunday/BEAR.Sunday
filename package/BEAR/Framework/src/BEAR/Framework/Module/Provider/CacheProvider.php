@@ -23,14 +23,15 @@ class CacheProvider implements Provide
 
     /**
      * Return instance
-     * 
+     *
      * @return CacheAdapter
      */
     public function get()
     {
-    	$cache = new Cache;
-    	$log = 'Cache installed. adapter=[' . get_class($cache) . ']';
-    	$this->log->log($log);
+        $cache = new Cache;
+        $log = 'Cache installed. adapter=[' . get_class($cache) . ']';
+        $this->log->log($log);
+
         return new CacheAdapter($cache);
     }
 }

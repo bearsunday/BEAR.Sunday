@@ -6,7 +6,6 @@
  */
 namespace BEAR\Framework\Module\WebContext;
 
-use BEAR\Framework\Module\StandardModule;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 

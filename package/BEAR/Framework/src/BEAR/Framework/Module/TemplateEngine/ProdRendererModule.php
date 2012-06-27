@@ -8,7 +8,6 @@
 namespace BEAR\Framework\Module\TemplateEngine;
 
 use Ray\Di\AbstractModule;
-use Ray\Di\Scope;
 
 /**
  * Resource renderer module - PROD

@@ -32,7 +32,7 @@ class Renderer implements Renderable
      * ViewRenderer Setter
      *
      * @param TemplateEngineAdapter $templateEngineAdapter
-     * 
+     *
      * @Inject
      */
     public function __construct(TemplateEngineAdapter $templateEngineAdapter)
@@ -48,16 +48,17 @@ class Renderer implements Renderable
     {
         $class = ($ro instanceof Weave) ? get_class($ro->___getObject()) : get_class($ro);
         $file = (new ReflectionClass($class))->getFileName();
-        
+
         // assign 'resource'
         $this->templateEngineAdapter->assign('resource', $ro);
 
         // assign all
         if (is_array($ro->body) || $ro->body instanceof \Traversable) {
-            $this->templateEngineAdapter->assignAll((array)$ro->body);
+            $this->templateEngineAdapter->assignAll((array) $ro->body);
         }
         $templatefileWithoutExtention = substr($file, 0, -3);
         $ro->body = $this->templateEngineAdapter->fetch($templatefileWithoutExtention);
+
         return $ro->body;
     }
 }

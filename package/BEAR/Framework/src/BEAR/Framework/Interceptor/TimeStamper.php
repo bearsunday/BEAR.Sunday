@@ -8,7 +8,6 @@ namespace BEAR\Framework\Interceptor;
 
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
-use BEAR\Framework\Inject\LogInject;
 
 /**
  * Log Interceptor
@@ -27,6 +26,7 @@ class TimeStamper implements MethodInterceptor
         $object = $invocation->getThis();
         $object->time = date("Y-m-d H:i:s", time());
         $result = $invocation->proceed();
+
         return $result;
     }
 }

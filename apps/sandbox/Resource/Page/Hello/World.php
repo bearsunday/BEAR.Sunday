@@ -21,6 +21,7 @@ class World extends Page
     public function onGet()
     {
         $this['greeting'] ='Hello, World !';
+
         return $this;
     }
 }

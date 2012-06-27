@@ -18,7 +18,7 @@ class WebContextProvider implements ProviderInterface
 {
     /**
      * Return instance
-     * 
+     *
      * @return Context
      */
     public function get()

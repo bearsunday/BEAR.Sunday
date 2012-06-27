@@ -7,8 +7,6 @@
 namespace BEAR\Framework\Module\Log;
 
 use Ray\Di\AbstractModule;
-use Ray\Di\Injector;
-use Ray\Di\Scope;
 
 /**
  * Monolog module

@@ -6,8 +6,6 @@
  */
 namespace BEAR\Framework\Module\Provider as Provide;
 
-use Ray\Di\InjectorInterface;
-use Ray\Di\ProviderInterface;
 use BEAR\Framework\Inject\TmpDirInject;
 
 /**
@@ -18,7 +16,7 @@ use BEAR\Framework\Inject\TmpDirInject;
 class TwigProvider implements Provide
 {
     use TmpDirInject;
-    
+
     /**
      * @return array
      */
@@ -31,6 +29,7 @@ class TwigProvider implements Provide
                 'auto_reload' => true
             ]
         );
+
         return $twig;
     }
 }

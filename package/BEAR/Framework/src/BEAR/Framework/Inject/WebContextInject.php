@@ -6,7 +6,6 @@
  */
 namespace BEAR\Framework\Inject;
 
-use Aura\Di\ConfigInterface;
 use Ray\Di\Definition;
 use Ray\Di\ProviderInterface as Provider;
 use Ray\Di\Di\Inject;

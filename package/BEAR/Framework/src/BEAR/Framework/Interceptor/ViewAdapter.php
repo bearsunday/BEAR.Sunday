@@ -30,7 +30,8 @@ class ViewAdapter implements MethodInterceptor
      * (non-PHPdoc)
      * @see Ray\Aop.MethodInterceptor::invoke()
      */
-    public function invoke(MethodInvocation $invocation) {
+    public function invoke(MethodInvocation $invocation)
+    {
         $resource = $invocation->proceed();
         $paegFile = (new \ReflectionClass($resource))->getFileName();
         $dir = pathinfo($paegFile, PATHINFO_DIRNAME);

@@ -38,6 +38,7 @@ class Pager extends Posts implements DbSetterInterface
             $stmt->execute();
             $this->body = $stmt->fetch(PDO::FETCH_ASSOC);
         }
+
         return $this;
     }
 }

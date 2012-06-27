@@ -7,13 +7,10 @@
 namespace BEAR\Framework\Module\TemplateEngine\SmartyModule;
 
 use BEAR\Framework\Framework;
-use BEAR\Framework\Inject\InjectorInject;
 use BEAR\Framework\Inject\LogInject;
 use BEAR\Framework\Inject\TmpDirInject;
 use BEAR\Framework\Inject\AppDirInject;
 use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
-use Ray\Di\InjectorInterface;
 use Ray\Di\ProviderInterface as Provide;
 use Smarty;
 
@@ -27,7 +24,7 @@ class SmartyProvider implements Provide
     use LogInject;
     use TmpDirInject;
     use AppDirInject;
-        
+
     /**
      * Return instance
      *
@@ -43,6 +40,7 @@ class SmartyProvider implements Provide
         $frameworkPlugin = Framework::$systemRoot . '/package/BEAR/Framework/vendor/smarty/plugin';
         $smarty->plugins_dir = [$smarty->plugins_dir[0], $appPlugin, $frameworkPlugin];
         $this->log->log("Smarty installed.tmp={$this->tmpDir}");
+
         return $smarty;
     }
 }

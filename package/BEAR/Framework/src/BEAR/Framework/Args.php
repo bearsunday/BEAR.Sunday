@@ -10,7 +10,7 @@ use ArrayObject;
 
 /**
  * Arguments
- * 
+ *
  * @package    BEAR.Framework
  */
 class Args extends ArrayObject

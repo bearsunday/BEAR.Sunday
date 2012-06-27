@@ -9,6 +9,7 @@ class PageBlogPostsTest extends \PHPUnit_Extensions_Database_TestCase
     public function getConnection()
     {
         $pdo = new \PDO("mysql:host=localhost; dbname=blogbeartest", "root", "");
+
         return $this->createDefaultDBConnection($pdo, 'mysql');
     }
 
@@ -21,14 +22,14 @@ class PageBlogPostsTest extends \PHPUnit_Extensions_Database_TestCase
     }
 
     /**
-	 * Resource client
-	 *
-	 * @var BEAR\Resource\Resourcce
-	 */
-	private $resource;
+     * Resource client
+     *
+     * @var BEAR\Resource\Resourcce
+     */
+    private $resource;
 
-	protected function setUp()
-	{
+    protected function setUp()
+    {
         static $app;
 
         parent::setUp();
@@ -36,72 +37,73 @@ class PageBlogPostsTest extends \PHPUnit_Extensions_Database_TestCase
             $app = App::factory(App::RUN_MODE_TEST, false);
         }
         $this->resource = $app->resource;
-	}
+    }
 
-	/**
-	 * page://self/blog/posts
-	 *
-	 * @test
-	 */
-	public function resource()
-	{
-		// resource request
-		$page = $this->resource->get->uri('page://self/blog/posts')->eager->request();
-		$this->assertSame(200, $page->code);
-		return $page;
-	}
+    /**
+     * page://self/blog/posts
+     *
+     * @test
+     */
+    public function resource()
+    {
+        // resource request
+        $page = $this->resource->get->uri('page://self/blog/posts')->eager->request();
+        $this->assertSame(200, $page->code);
 
-	/**
-	 * Has page app resource ?
-	 *
-	 * @depends resource
-	 */
-	public function test_Graph($page)
-	{
-		$this->assertArrayHasKey('posts', $page->body);
-	}
+        return $page;
+    }
 
-	/**
-	 * Is app resource request?
-	 *
-	 * @depends resource
-	 */
-	public function test_AppResourceType($page)
-	{
-		$this->assertInstanceOf('BEAR\Resource\Request', $page->body['posts']);
-	}
+    /**
+     * Has page app resource ?
+     *
+     * @depends resource
+     */
+    public function test_Graph($page)
+    {
+        $this->assertArrayHasKey('posts', $page->body);
+    }
 
-	/**
-	 * Is valid app resource uri ?
-	 *
-	 * @depends resource
-	 */
-	public function test_AppResourceUri($page)
-	{
-		$posts = $page->body['posts'];
-		$this->assertSame('app://self/blog/posts', $posts->toUri());
-	}
+    /**
+     * Is app resource request?
+     *
+     * @depends resource
+     */
+    public function test_AppResourceType($page)
+    {
+        $this->assertInstanceOf('BEAR\Resource\Request', $page->body['posts']);
+    }
 
-	/**
-	 * Renderable ?
-	 *
-	 * @depends resource
-	 */
-	public function test_Render($page)
-	{
-		$html = (string)$page;
-		$this->assertInternalType('string', $html);
-	}
+    /**
+     * Is valid app resource uri ?
+     *
+     * @depends resource
+     */
+    public function test_AppResourceUri($page)
+    {
+        $posts = $page->body['posts'];
+        $this->assertSame('app://self/blog/posts', $posts->toUri());
+    }
 
-	/**
-	 * Html Rendered ?
-	 *
-	 * @depends resource
-	 */
-	public function test_RenderHtml($page)
-	{
-		$html = (string)$page->body;
-		$this->assertContains('</html>', $html);
-	}
+    /**
+     * Renderable ?
+     *
+     * @depends resource
+     */
+    public function test_Render($page)
+    {
+        $html = (string) $page;
+        $this->assertInternalType('string', $html);
+    }
+
+    /**
+     * Html Rendered ?
+     *
+     * @depends resource
+     */
+    public function test_RenderHtml($page)
+    {
+        $html = (string) $page->body;
+        $this->assertContains('</html>', $html);
+    }
 
 }

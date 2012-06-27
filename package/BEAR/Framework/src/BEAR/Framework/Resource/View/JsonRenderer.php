@@ -25,11 +25,13 @@ class JsonRenderer implements Renderable
     public function render(ResourceObject $ro)
     {
         // evaluate all request in body.
-        array_walk_recursive($ro->body, function(&$element) {
-            if ($element instanceof Requestable) {
-                $element = $element();
-            }
-        });
+        if (is_array($ro->body) || $ro->body instanceof \Traversable) {
+            array_walk_recursive($ro->body, function(&$element) {
+                if ($element instanceof Requestable) {
+                    $element = $element();
+                }
+            });
+        }
         $ro->view = @json_encode($ro->body, JSON_PRETTY_PRINT);
 
         return $ro->view;

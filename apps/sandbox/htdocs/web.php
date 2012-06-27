@@ -2,7 +2,7 @@
 
 namespace sandbox;
 
-use BEAR\Framework\StandardRouter as Router;
+use BEAR\Framework\Router\Router;
 use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Framework;
@@ -46,7 +46,8 @@ if (PHP_SAPI == 'cli-server') {
 $doIncludePHPfile = (
     PHP_SAPI !== 'cli' &&
     file_exists($_SERVER['SCRIPT_FILENAME']) &&
-	($_SERVER['SCRIPT_FILENAME'] !== __DIR__  . '/index.php')
+	($_SERVER['SCRIPT_FILENAME'] !== __DIR__ . '/index.php') &&
+	($_SERVER['SCRIPT_FILENAME'] !== __FILE__)
 );
 if ($doIncludePHPfile) {
 	include $_SERVER['SCRIPT_FILENAME'];
@@ -60,7 +61,6 @@ error_log('run:' . __NAMESPACE__ . " mode={$runMode} cahce=" . ($useCache ? 'ena
 
 // Application
 $app = App::factory($runMode, $useCache);
-
 // Route
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
 // $router = require dirname(__DIR__) . '/scripts/router/standard_router.php';
@@ -68,7 +68,6 @@ $router = new Router;
 
 // Dispatch
 list($method, $pagePath, $query) = $router->match($globals);
-
 // Request
 try {
     $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();

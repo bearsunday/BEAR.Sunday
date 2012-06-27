@@ -4,7 +4,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Framework;
+namespace BEAR\Framework\Router;
 
 use BEAR\Resource\Resource;
 use Aura\Router\Map;
@@ -15,7 +15,7 @@ use Aura\Router\Map;
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-final class StandardRouter
+final class Router
 {
     /**
      * $GLOBALS
@@ -34,6 +34,11 @@ final class StandardRouter
     const METHOD_OVERRIDE = 'X-HTTP-Method-Override';
     const METHOD_OVERRIDE_GET = '_method';
 
+    /**
+     * Constructor
+     *
+     * @param Map $map
+     */
     public function __construct(Map $map = null)
     {
         $this->map = $map;

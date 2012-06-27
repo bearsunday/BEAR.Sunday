@@ -3,8 +3,6 @@ namespace sandbox\Resource\Page\Blog;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;
-use BEAR\Framework\Annotation\Cache;
-
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
@@ -29,8 +27,6 @@ class Posts extends Page
 
     /**
      * Get
-     *
-     * @Cache
      *
      * @internal Cache "request", not the result of request. never changed.
      */

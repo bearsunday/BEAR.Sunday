@@ -25,7 +25,7 @@ class CliTest extends \PHPUnit_Framework_TestCase
     	$cli = 'php ' . $this->systemRoot . '/apps/sandbox/htdocs/web.php get /index';
     	exec($cli, $return);
     	$pos = array_search('<html lang="en">', $return);
-    	$this->assertTrue(is_int($pos), json_encode($return));
+    	$this->assertTrue(is_int($pos), implode($return, "\n"));
     }
 
     public function test_devApiPhp()
@@ -34,7 +34,7 @@ class CliTest extends \PHPUnit_Framework_TestCase
     	exec($cli, $return);
     	$html = implode('', $return);
     	$pos = strpos($html, 'Hello, BEAR.Sunday');
-    	$this->assertTrue(is_int($pos));
+    	$this->assertTrue(is_int($pos), implode($return, "\n"));
     }
 
     public function test_devApiPhpRep()

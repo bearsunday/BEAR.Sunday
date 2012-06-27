@@ -20,7 +20,7 @@
  */
 namespace sandbox;
 
-use BEAR\Framework\StandardRouter as Router;
+use BEAR\Framework\Router\Router;
 use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Web;

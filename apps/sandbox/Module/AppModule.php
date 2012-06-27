@@ -17,9 +17,8 @@ use BEAR\Framework\Module\WebContext;
 use BEAR\Framework\Module\TemplateEngine;
 use BEAR\Framework\Interceptor\TimeStamper;
 use BEAR\Framework\Interceptor\Transactional;
-
 use Ray\Di\AbstractModule;
-
+use Ray\Di\Di\Scope;
 // cache adapter
 use Guzzle\Common\Cache\Zf2CacheAdapter as CacheAdapter;;
 use Zend\Cache\Storage\Adapter\Apc as CacheBackEnd;
@@ -39,8 +38,9 @@ class AppModule extends AbstractModule
      */
     protected function configure()
     {
+        $this->bind('Guzzle\Common\Cache\CacheAdapterInterface')->toInstance(new CacheAdapter(new CacheBackEnd));
         $this->install(new Schema\StandardSchemaModule(__NAMESPACE__));
-        $this->install(new Cqrs\CacheModule(new CacheAdapter(new CacheBackEnd)));
+        $this->install(new Cqrs\CacheModule($this));
         $this->install(new WebContext\AuraWebModule);
         $this->install(new TemplateEngine\SmartyModule\SmartyModule);
         $this->installWritableChecker();
@@ -58,7 +58,7 @@ class AppModule extends AbstractModule
         $checker = $this->requestInjection('\sandbox\Interceptor\Checker');
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
-            $this->matcher->startWith('onGet'),
+            $this->matcher->startWith('__construct'),
             [$checker]
         );
     }

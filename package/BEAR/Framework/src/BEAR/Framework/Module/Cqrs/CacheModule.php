@@ -21,24 +21,6 @@ use Ray\Di\Scope;
  */
 class CacheModule extends AbstractModule
 {
-	/**
-	 * Cache adapter
-	 * 
-	 * @var Guzzle\Common\Cache\CacheAdapterInterface
-	 */
-	private $cacheAdapter;
-	
-	/**
-	 * Constructor
-	 * 
-	 * @param AbstractCacheAdapter $cacheAdapter
-	 */
-	public function __construct(CacheAdapterInterface $cacheAdapter)
-	{
-		$this->cacheAdapter = $cacheAdapter;
-		parent::__construct();
-	}
-	
     /**
      * Configure dependency binding
      *
@@ -46,19 +28,12 @@ class CacheModule extends AbstractModule
      */
     protected function configure()
     {
-        $cacheLoadInterceptor = new CacheLoadInterceptor($this->cacheAdapter);
-        
+        $cacheLoader = $this->requestInjection('BEAR\Framework\Interceptor\CacheLoader');
         // bind @Cache annotatated method in any class
         $this->bindInterceptor(
             $this->matcher->any(),
             $this->matcher->annotatedWith('BEAR\Framework\Annotation\Cache'),
-            [$cacheLoadInterceptor]
-        );
-        $cacheUpdateInterceptor = Injector::create()->getInstance('BEAR\Framework\Interceptor\CacheUpdater', ['cache' => $cacheLoadInterceptor]);
-        $this->bindInterceptor(
-            $this->matcher->any(),
-            $this->matcher->annotatedWith('BEAR\Framework\Annotation\CacheUpdate'),
-            [$cacheUpdateInterceptor]
+            [$cacheLoader]
         );
     }
 }

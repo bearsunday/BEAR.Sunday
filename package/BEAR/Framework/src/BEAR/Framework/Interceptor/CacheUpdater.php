@@ -7,6 +7,8 @@
  */
 namespace BEAR\Framework\Interceptor;
 
+use BEAR\Framework\Module\Database\DoctrineDbalModule\Pagerfanta\DoctrineDbalAdapter;
+
 use BEAR\Framework\Framework;
 
 use Aura\Signal\Manager as Signal;
@@ -23,6 +25,7 @@ use Aura\Signal\Manager;
 use Aura\Signal\HandlerFactory;
 use Aura\Signal\ResultFactory;
 use Aura\Signal\ResultCollection;
+use Doctrine\Common\Annotations\AnnotationReader as Reader;
 /**
  * Cache update interceptor
  *
@@ -39,7 +42,7 @@ class CacheUpdater implements MethodInterceptor
     public function __construct(CacheInterceptor $cache, Request $request = null)
     {
         $this->cache = $cache;
-        $this->request = $request ?: new Request(new Invoker(new Config(new Annotation(new Definition)), new Linker, new Manager(new HandlerFactory, new ResultFactory, new ResultCollection)));
+        $this->request = $request ?: new Request(new Invoker(new Config(new Annotation(new Definition)), new Linker(new Reader), new Manager(new HandlerFactory, new ResultFactory, new ResultCollection)));
     }
 
     /**

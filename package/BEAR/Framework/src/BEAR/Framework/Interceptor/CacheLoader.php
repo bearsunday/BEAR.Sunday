@@ -9,8 +9,9 @@ namespace BEAR\Framework\Interceptor;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 use Guzzle\Common\Cache\Zf2CacheAdapter as CacheAdapter;
-use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
-
+use Guzzle\Common\Cache\CacheAdapterInterface;
+use Ray\Di\Di\Inject;
+use BEAR\Resource\ResourceInterface;
 /**
  * Cache interceptor
  *
@@ -21,11 +22,11 @@ class CacheLoader implements CacheInterface, MethodInterceptor
 {
     /**
      * Cache header key
-     * 
+     *
      * @var string
      */
     const HEADER_CACHE = 'x-cache';
-    
+
 	/**
 	 * Host
 	 *
@@ -44,8 +45,10 @@ class CacheLoader implements CacheInterface, MethodInterceptor
 	 * Constructor
 	 *
 	 * @param Cache $cache
+	 *
+	 * @Inject
 	 */
-	public function __construct(Cache $cache) {
+	public function __construct(CacheAdapterInterface $cache) {
 		$this->cache = $cache;
 	}
 

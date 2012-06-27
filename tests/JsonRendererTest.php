@@ -10,6 +10,7 @@ use BEAR\Resource\Linker;
 use BEAR\Resource\Invoker;
 use BEAR\Framework\Resource\Ok;
 use BEAR\Framework\Resource\View\JsonRenderer;
+use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
 class RequestSample
 {
@@ -28,7 +29,7 @@ class JsonRendererTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $signal = require dirname(__DIR__) . '/vendor/Aura/Signal/scripts/instance.php';
-        $request = new Request(new Invoker(new Config(new Annotation(new Definition)), new Linker, $signal));
+        $request = new Request(new Invoker(new Config(new Annotation(new Definition)), new Linker(new Reader), $signal));
         $request->method = 'get';
         $this->testResource = new Ok;
         $request->ro = $this->testResource;

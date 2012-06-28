@@ -13,5 +13,4 @@
 <h1>Posts</h1>
 <p>{$posts}</p>
 <a href="posts/newpost" class="btn btn-primary btn-large">New Post</a>
-</div>
 {/block}

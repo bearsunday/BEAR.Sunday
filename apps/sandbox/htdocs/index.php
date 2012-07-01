@@ -7,7 +7,7 @@
 namespace sandbox;
 
 use BEAR\Framework\Framework;
-use BEAR\Framework\Router as Router;
+use BEAR\Framework\Router\Router;
 
 // profiler
 require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/scripts/profile.php';
@@ -17,7 +17,7 @@ require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/F
 require dirname(__DIR__) . '/App.php';
 
 // App instance (init)
-$app = App::factory(App::RUN_MODE_PROD, false);
+$app = App::factory(App::RUN_MODE_PROD, true);
 
 // Route
 $router = new Router; // page controller only.

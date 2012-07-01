@@ -4,6 +4,7 @@ namespace sandbox\Resource\Page\Blog;
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;
 use BEAR\Framework\Annotation\Cache;
+use BEAR\Framework\Annotation\CacheUpdate;
 use BEAR\Framework\Annotation;
 use Ray\Di\Di\Inject;
 
@@ -29,7 +30,7 @@ class Posts extends Page
     /**
      * Get
      *
-     * @\BEAR\Framework\Annotation\Cache
+     * @Cache
      *
      * @internal Cache "request", not the result of request. never changed.
      */
@@ -42,8 +43,12 @@ class Posts extends Page
 
     /**
      * Delte
-     *
+     * 
      * @param int $id
+     * 
+     * @return self
+     * @CacheUpdate
+     * 
      */
     public function onDelete($id)
     {

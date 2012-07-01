@@ -22,6 +22,6 @@
 		<textarea name="body" rows="10" cols="40">{$submit.body}</textarea>
 		<p class="help-inline">{$errors.body}</p>
 	</div>
-	<input type="submit" value="‘—M">
+	<input type="submit" value="Submit">
 </form>
 {/block}

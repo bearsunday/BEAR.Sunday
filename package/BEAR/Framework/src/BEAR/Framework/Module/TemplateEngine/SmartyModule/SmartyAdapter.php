@@ -74,10 +74,10 @@ class SmartyAdapter implements TemplateEngineAdapter
      */
     public function fetch($templatefileWithoutExtention)
     {
-        $template = $templatefileWithoutExtention . self::EXT;
-        $this->fileExists($template);
+        $this->template = $templatefileWithoutExtention . self::EXT;
+        $this->fileExists($this->template);
 
-        return $this->smarty->fetch($template);
+        return $this->smarty->fetch($this->template);
     }
 
     /**

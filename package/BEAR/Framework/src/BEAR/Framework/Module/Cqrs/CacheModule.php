@@ -7,6 +7,8 @@
 namespace BEAR\Framework\Module\Cqrs;
 
 use Ray\Di\AbstractModule;
+use Ray\Di\Injector;
+use Guzzle\Common\Cache\CacheAdapterInterface;
 
 /**
  * Cache module
@@ -17,13 +19,24 @@ use Ray\Di\AbstractModule;
 class CacheModule extends AbstractModule
 {
     /**
+     * @var CacheAdapterInterface
+     */
+    private $cache;
+    
+    public function __construct(CacheAdapterInterface $cache)
+    {
+        $this->cache = $cache;
+        parent::__construct();
+    }
+    
+    /**
      * Configure dependency binding
      *
      * @return void
      */
     protected function configure()
     {
-        $cacheLoader = $this->requestInjection('BEAR\Framework\Interceptor\CacheLoader');
+        $cacheLoader = Injector::create()->getInstance('BEAR\Framework\Interceptor\CacheLoader', ['cache' => $this->cache]);
         // bind @Cache annotatated method in any class
         $this->bindInterceptor(
             $this->matcher->any(),

@@ -44,9 +44,8 @@ class AppModule extends AbstractModule
         $cache = new CacheAdapter(new CacheStorage);
 //         $cacheStorage = StorageFactory::factory(['adapter' => 'apc']);
 //         $cache = new Zf2CacheAdapter($cacheStorage);
-        $this->bind('Guzzle\Common\Cache\CacheAdapterInterface')->toInstance($cache);
         $this->install(new Schema\StandardSchemaModule(__NAMESPACE__));
-        $this->install(new Cqrs\CacheModule($this));
+        $this->install(new Cqrs\CacheModule($cache));
         $this->install(new WebContext\AuraWebModule);
         $this->install(new TemplateEngine\SmartyModule\SmartyModule);
         $this->installWritableChecker();

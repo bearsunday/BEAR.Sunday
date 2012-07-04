@@ -16,36 +16,36 @@
         "php": ">=5.4.0",
         "ext-apc": "*",
         "ext-curl": "*",
-        "Aura/Autoload": "*",
-        "Aura/Di": "*",
-        "Aura/Router": "*",
-        "Aura/Signal": "*",
-        "Aura/Web": "*",
+        "Aura/Autoload": "dev-master",
+        "Aura/Di": "dev-master",
+        "Aura/Router": "dev-master",
+        "Aura/Signal": "dev-master",
+        "Aura/Web": "dev-master",
         "BEAR/Resource": "dev-master",
-        "doctrine/common": "2.3.*",
-        "doctrine/dbal": "2.2.*",
+        "doctrine/common": "2.3.*-dev",
+        "doctrine/dbal": "2.3.*-dev",
         "facebook/xhprof": "0.9.2",
         "guzzle/guzzle": "2.7.*",
         "monolog/monolog": "1.*",
-        "pagerfanta/pagerfanta": "*",
+        "pagerfanta/pagerfanta": "dev-master",
         "smarty/smarty": "3.1.*",
         "symfony/console": "2.0.*",
         "symfony/http-foundation": "2.0.*",
-        "Ray/Aop": "*",
-        "Ray/Di": "*",
-        "vdump/vdump": "*",
-        "zendframework/zend-cache": "2.0.*",
-        "zendframework/zend-log": "2.0.*",
-        "zendframework/zend-stdlib": "2.0.*"
+        "Ray/Aop": "dev-master",
+        "Ray/Di": "dev-master",
+        "vdump/vdump": "*"
     },
     "require-dev": {
-        "crodas/haanga": "*",
-        "twig/twig": "*",
+        "crodas/haanga": "dev-master",
+        "twig/twig": "dev-master",
         "zend/zend-log1": "1.11",
         "zend/zend-cache1": "1.11",
-        "zendframework/zend-loader": "2.0.*",
-        "zendframework/zend-eventmanager": "2.0.*",
-        "zendframework/zend-servicemanager": "2.0.*"
+        "zendframework/zend-loader": "2.0.*-dev",
+        "zendframework/zend-eventmanager": "2.0.*-dev",
+        "zendframework/zend-servicemanager": "2.0.*-dev",
+        "zendframework/zend-cache": "2.0.*-dev",
+        "zendframework/zend-log": "2.0.*-dev",
+        "zendframework/zend-stdlib": "2.0.*-dev"
     },
     "autoload": {
         "psr-0": {
@@ -57,8 +57,8 @@
         }
     },
     "require-dev": {
-        "crodas/haanga": "*",
-        "twig/twig": "*"
+        "crodas/haanga": "dev-master",
+        "twig/twig": "dev-master"
     },
     "repositories": [
         {

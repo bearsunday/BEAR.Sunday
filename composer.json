@@ -1,10 +1,65 @@
 {
     "name": "BEAR.Sunday",
+    "type": "library",
     "description": "BEAR.Sunday, a resource oriented framework",
     "keywords": ["rest", "framework", "api"],
     "homepage": "https://github.com/koriym/BEAR.Sunday",
-    "version": "0.3.0rc1",
     "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Akihito Koriyama",
+            "email": "akihito.koriyama@gmail.com",
+            "homepage": "https://github.com/koriym"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "ext-apc": "*",
+        "ext-curl": "*",
+        "Aura/Autoload": "*",
+        "Aura/Di": "*",
+        "Aura/Router": "*",
+        "Aura/Signal": "*",
+        "Aura/Web": "*",
+        "BEAR/Resource": "dev-master",
+        "doctrine/common": "2.3.*",
+        "doctrine/dbal": "2.2.*",
+        "facebook/xhprof": "0.9.2",
+        "guzzle/guzzle": "2.7.*",
+        "monolog/monolog": "1.*",
+        "pagerfanta/pagerfanta": "*",
+        "smarty/smarty": "3.1.*",
+        "symfony/console": "2.0.*",
+        "symfony/http-foundation": "2.0.*",
+        "Ray/Aop": "*",
+        "Ray/Di": "*",
+        "vdump/vdump": "*",
+        "zendframework/zend-cache": "2.0.*",
+        "zendframework/zend-log": "2.0.*",
+        "zendframework/zend-stdlib": "2.0.*"
+    },
+    "require-dev": {
+        "crodas/haanga": "*",
+        "twig/twig": "*",
+        "zend/zend-log1": "1.11",
+        "zend/zend-cache1": "1.11",
+        "zendframework/zend-loader": "2.0.*",
+        "zendframework/zend-eventmanager": "2.0.*",
+        "zendframework/zend-servicemanager": "2.0.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "BEAR\\Sunday": "src/",
+            "Aura\\Di": "vendor/Aura/Di/src/",
+            "Aura\\Router": "vendor/Aura/Router/src/",
+            "Aura\\Signal": "vendor/Aura/Signal/src/",
+            "Aura\\Web": "vendor/Aura/Web/src/"
+        }
+    },
+    "require-dev": {
+        "crodas/haanga": "*",
+        "twig/twig": "*"
+    },
     "repositories": [
         {
             "type": "package",
@@ -39,81 +94,6 @@
             }
         },
         {
-            "type": "package",
-            "package": {
-                "name": "zend/zend-log",
-                "version": "2.0.0beta3",
-                "dist": {
-                    "url": "http://packages.zendframework.com/get/Zend_Log-2.0.0beta3.tgz",
-                    "type": "pear"
-                },
-                "autoload": {
-                    "psr-0": {
-                        "Zend\\Log": "php/"
-                    }
-                }
-            }
-        },        {
-            "type":"package",
-            "package": {
-                "name": "zend/zend-cache",
-                "version": "2.0.0beta3",
-                "dist": {
-                    "url": "http://packages.zendframework.com/get/Zend_Cache-2.0.0beta3.tgz",
-                    "type": "pear"
-                },
-                "autoload": {
-                    "psr-0": {
-                        "Zend\\Cache": "php/"
-                    }
-                }
-            }
-        },
-        {
-            "type":"package",
-            "package": {
-                "name": "zend/zend-stdlib",
-                "version": "2.0.0beta3",
-                "dist": {
-                    "url": "http://packages.zendframework.com/get/Zend_Stdlib-2.0.0beta3.tgz",
-                    "type": "pear"
-                },
-                "autoload": {
-                    "psr-0": {
-                        "Zend\\Stdlib": "php/"
-                    }
-                }
-            }
-        },
-        {
-            "type":"package",
-            "package": {
-                "name": "zend/zend-eventmanager",
-                "version": "2.0.0beta3",
-                "dist": {
-                    "url": "http://packages.zendframework.com/get/Zend_EventManager-2.0.0beta3.tgz",
-                    "type": "pear"
-                },
-                "autoload": {
-                    "psr-0": {
-                        "Zend\\EventManager": "php/"
-                    }
-                }
-            }
-        },
-        {
-            "type":"package",
-            "package": {
-                "name": "xhprof/xhprof",
-                "version": "0.9.2",
-                "target-dir": "xhprof",
-                "dist": {
-                    "url": "http://pecl.php.net/get/xhprof-0.9.2.tgz",
-                    "type": "pear"
-                }
-            }
-        },
-        {
             "type":"package",
             "package": {
                 "name": "vdump/vdump",
@@ -131,62 +111,68 @@
             }
         },
         {
-            "type":"package",
+            "type": "package",
+            "package": {
+                "name": "facebook/xhprof",
+                "version": "0.9.2",
+                "dist": {
+                    "url": "https://github.com/facebook/xhprof/zipball/master",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/facebook/xhprof.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
             "package": {
                 "name": "xhprof/xhprof",
                 "version": "0.9.2",
-                "target-dir": "xhprof",
                 "dist": {
-                    "url": "http://pecl.php.net/get/xhprof-0.9.2.tgz",
-                    "type": "pear"
+                    "url": "https://github.com/facebook/xhprof/zipball/master",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/facebook/xhprof.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type":"package",
+            "package": {
+                "name": "zend/zend-log1",
+                "version": "1.11",
+                "source": {
+                    "url": "http://framework.zend.com/svn",
+                    "type": "svn",
+                    "reference": "framework/standard/trunk/library/Zend/Log/"
+                },
+                "target-dir": "Zend/Log",
+                "autoload": {
+                    "psr-0": { "Zend_Log": "/" }
+                }
+            }
+        },
+        {
+            "type":"package",
+            "package": {
+                "name": "zend/zend-cache1",
+                "version": "1.11",
+                "source": {
+                    "url": "http://framework.zend.com/svn",
+                    "type": "svn",
+                    "reference": "framework/standard/trunk/library/Zend/Cache/"
+                },
+                "target-dir": "Zend/Cache",
+                "autoload": {
+                    "psr-0": { "Zend_Cache": "/" }
                 }
             }
         }
-    ],
-    "require": {
-        "php": ">=5.4.0",
-        "ext-apc": "*",
-        "ext-curl": "*",
-        "Aura/Autoload": "dev-master",
-        "Aura/Di": "dev-master",
-        "Aura/Router": "dev-master",
-        "Aura/Signal": "dev-master",
-        "Aura/Web": "dev-master",
-        "BEAR/Resource": "dev-master",
-        "doctrine/common": "2.3.*",
-        "doctrine/dbal": "2.2.*",
-        "symfony/console": "2.0.*",
-        "symfony/http-foundation": "2.0.*",
-        "Ray/Aop": "dev-master",
-        "Ray/Di": "dev-master",
-        "smarty/smarty": "3.1.*",
-        "guzzle/guzzle": "2.5.*",
-        "monolog/monolog": ">=1.0.0",
-        "zend/zend-cache": "2.0.0beta3",
-        "zend/zend-stdlib": "2.0.0beta3",
-        "zend/zend-eventmanager": "2.0.0beta3",
-        "zend/zend-log": "2.0.0beta3",
-        "pagerfanta/pagerfanta": "dev-master",
-        "xhprof/xhprof": "0.9.2",
-        "vdump/vdump": "0.1.*"
-    },
-    "authors": [
-        {
-            "name": "Akihito Koriyama",
-            "email": "akihito.koriyama@gmail.com"
-        }
-    ],
-    "require-dev": {
-        "crodas/haanga": "dev-master",
-        "twig/twig": "dev-master"
-    },
-    "autoload": {
-        "psr-0": {
-            "BEAR\\Sunday": "src/",
-            "Aura\\Di": "vendor/Aura/Di/src/",
-            "Aura\\Router": "vendor/Aura/Router/src/",
-            "Aura\\Signal": "vendor/Aura/Signal/src/",
-            "Aura\\Web": "vendor/Aura/Web/src/"
-        }
-    }
+    ]
 }

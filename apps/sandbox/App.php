@@ -12,7 +12,7 @@ use BEAR\Framework\Inject\AppDependencyInject;
 use Ray\Di\Injector;
 use LogicException;
 
-require_once dirname(dirname(__DIR__)) . '/vendor/smarty/smarty/libs/Smarty.class.php';
+require_once dirname(dirname(__DIR__)) . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php';
 require_once dirname(dirname(__DIR__)) . '/vendor/vdump/vdump/vdump/src.php';
 
 /**

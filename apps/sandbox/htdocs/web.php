@@ -9,8 +9,6 @@ use BEAR\Framework\Framework;
 $system = dirname(dirname(dirname(__DIR__)));
 require_once $system . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
 // profiler
-require_once $system . '/vendor/xhprof/xhprof/xhprof/xhprof_lib/utils/xhprof_lib.php';
-require_once $system . '/vendor/xhprof/xhprof/xhprof/xhprof_lib/utils/xhprof_runs.php';
 require_once dirname(__DIR__) . '/App.php';
 
 /**
@@ -52,6 +50,9 @@ if ($doIncludePHPfile) {
     include $_SERVER['SCRIPT_FILENAME'];
     exit(0);
 }
+require_once $system . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_lib.php';
+require_once $system . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_runs.php';
+
 
 // run mode
 $runMode = App::RUN_MODE_DEV;

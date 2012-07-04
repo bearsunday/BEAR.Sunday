@@ -1,7 +1,7 @@
 <?php
 
-use Guzzle\Http\UriTemplate;
-
+// use Guzzle\Http\UriTemplate;
+use Guzzle\Parser\UriTemplate\UriTemplate;
 /**
  * Smarty plugin
  *
@@ -47,7 +47,7 @@ function smarty_function_href($params, $template)
     $template = $resource->links[$rel];
 
     // get expanded url
-    $uri = (new UriTemplate($template))->expand($data);
+    $uri = (new UriTemplate)->expand($template, (array) $data);
     
     // remove "page://self/"
     $uri = str_replace('page://self/', '/', $uri);

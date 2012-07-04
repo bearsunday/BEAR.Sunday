@@ -17,9 +17,14 @@ use BEAR\Framework\Module\TemplateEngine;
 use BEAR\Framework\Interceptor\TimeStamper;
 use BEAR\Framework\Interceptor\Transactional;
 use Ray\Di\AbstractModule;
+
 // cache adapter
-use Zend\Cache\Storage\Adapter\Apc as CacheBackEnd;
-use Guzzle\Common\Cache\Zf2CacheAdapter as CacheAdapter;;
+// use Guzzle\Common\Cache\Zf2CacheAdapter;
+// use Zend\Cache\StorageFactory;
+use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
+use Doctrine\Common\Cache\ApcCache as CacheStorage;
+
+
 
 /**
  * Application module
@@ -36,7 +41,10 @@ class AppModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('Guzzle\Common\Cache\CacheAdapterInterface')->toInstance(new CacheAdapter(new CacheBackEnd));
+        $cache = new CacheAdapter(new CacheStorage);
+//         $cacheStorage = StorageFactory::factory(['adapter' => 'apc']);
+//         $cache = new Zf2CacheAdapter($cacheStorage);
+        $this->bind('Guzzle\Common\Cache\CacheAdapterInterface')->toInstance($cache);
         $this->install(new Schema\StandardSchemaModule(__NAMESPACE__));
         $this->install(new Cqrs\CacheModule($this));
         $this->install(new WebContext\AuraWebModule);

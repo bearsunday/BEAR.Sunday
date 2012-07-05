@@ -16,16 +16,6 @@ use Ray\Di\AbstractModule;
  */
 class DoctrineDbalModule extends AbstractModule
 {
-    private $masterDb;
-    private $slaveDb;
-
-    public function __construct(array $masterDb, array $slaveDb)
-    {
-        $this->masterDb = $masterDb;
-        $this->slaveDb = $slaveDb;
-        parent::__construct();
-    }
-
     /**
      * Configure dependency binding
      *
@@ -33,8 +23,6 @@ class DoctrineDbalModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind()->annotatedWith('master_db')->toInstance($this->masterDb);
-        $this->bind()->annotatedWith('slave_db')->toInstance($this->slaveDb);
         $dbInjector = $this->requestInjection('\BEAR\Framework\Interceptor\DbInjector');
         $this->bindInterceptor(
             $this->matcher->annotatedWith('BEAR\Framework\Annotation\Db'),

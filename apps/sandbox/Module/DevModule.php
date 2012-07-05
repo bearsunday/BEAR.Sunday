@@ -10,7 +10,6 @@ namespace sandbox\Module;
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Module\TemplateEngine;
-use BEAR\Framework\Module\Database;
 use Ray\Di\Scope;
 use Ray\Di\AbstractModule;
 
@@ -30,13 +29,22 @@ class DevModule extends AbstractModule
     private $app;
 
     /**
+     * Config
+     * 
+     * <$named => $instance>
+     * @var array
+     */
+    private $properties;
+    
+    /**
      * Constructor
      *
      * @param string $app
      */
-    public function __construct($app)
+    public function __construct($app, $configFile = 'config.php')
     {
         $this->app = $app;
+        $this->properties = require dirname(__DIR__) . "/scripts/{$configFile}";
         parent::__construct();
     }
 
@@ -47,30 +55,19 @@ class DevModule extends AbstractModule
      */
     protected function configure()
     {
+        foreach ($this->properties as $named => $instance) {
+            $this->bind('')->annotatedWith($named)->toInstance($instance);
+        }
         // install framework module
         $tmpDir = dirname(__DIR__) . '/tmp';
         $logDir = dirname(__DIR__) . '/log';
 
-        $this->bind('BEAR\Resource\InvokerInterface')->to('BEAR\Resource\DevInvoker')->in(Scope::SINGLETON);
         $this->install(new FrameworkModule($this->app, $tmpDir, $logDir));
 
-        // install dev module
+        // install dev invoker (attach extra dev info to resource) 
+        $this->bind('BEAR\Resource\InvokerInterface')->to('BEAR\Resource\DevInvoker')->in(Scope::SINGLETON);
+        // install dev render (display extra dev info)
         $this->install(new TemplateEngine\DevRendererModule);
-
-        // install application module
-        $this->install(new AppModule($this));
-
-        // indtall runmode module
-        $masterDb = $slaveDb = [
-            'driver' => 'pdo_mysql',
-            'host' => 'localhost',
-            'dbname' => 'blogbear',
-            'user' => 'root',
-            'password' => null,
-            'charset' => 'UTF8'
-        ];
-        $this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
-
         // log all resource access
         $logger = $this->requestInjection('BEAR\Framework\Interceptor\Logger');
         $this->bindInterceptor(
@@ -78,7 +75,7 @@ class DevModule extends AbstractModule
             $this->matcher->startWith('on'),
             [$logger]
         );
-
-        // dev invoker
+        // install application module
+        $this->install(new AppModule($this));
     }
 }

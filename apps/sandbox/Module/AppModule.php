@@ -16,6 +16,8 @@ use BEAR\Framework\Module\WebContext;
 use BEAR\Framework\Module\TemplateEngine;
 use BEAR\Framework\Interceptor\TimeStamper;
 use BEAR\Framework\Interceptor\Transactional;
+use BEAR\Framework\Module\Database;
+
 use Ray\Di\AbstractModule;
 
 // cache adapter
@@ -48,6 +50,7 @@ class AppModule extends AbstractModule
         $this->install(new Cqrs\CacheModule($cache));
         $this->install(new WebContext\AuraWebModule);
         $this->install(new TemplateEngine\SmartyModule\SmartyModule);
+        $this->install(new Database\DoctrineDbalModule($this));
         $this->installWritableChecker();
         $this->installFormValidater();
         $this->installTimeStamper();

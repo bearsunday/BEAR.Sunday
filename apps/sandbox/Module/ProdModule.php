@@ -40,12 +40,13 @@ class ProdModule extends AbstractModule
      *
      * @param string $app
      */
-    public function __construct($app)
+    public function __construct($app, $configFile = 'config.php')
     {
         $this->app = $app;
+        $this->properties = require dirname(__DIR__) . "/scripts/{$configFile}";
         parent::__construct();
     }
-
+    
     /**
      * Configure
      *
@@ -53,6 +54,9 @@ class ProdModule extends AbstractModule
      */
     protected function configure()
     {
+        foreach ($this->properties as $named => $instance) {
+            $this->bind('')->annotatedWith($named)->toInstance($instance);
+        }
         // install framework module
         $tmpDir = dirname(__DIR__) . '/tmp';
         $logDir = dirname(__DIR__) . '/log';
@@ -61,16 +65,7 @@ class ProdModule extends AbstractModule
         // install prod module
         $this->install(new TemplateEngine\ProdRendererModule);
 
-        // mode specific install
-        $masterDb = $slaveDb = [
-            'driver' => 'pdo_mysql',
-            'host' => 'localhost',
-            'dbname' => 'blogbear',
-            'user' => 'root',
-            'password' => null,
-            'charset' => 'UTF8'
-        ];
-        $this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
+        $this->install(new Database\DoctrineDbalModule($this));
 
         $this->bind(self::RESOURCE_CACHE_INTERFACE)
         ->annotatedWith('resource_cache')

@@ -37,15 +37,6 @@ class TestModule extends AbstractModule
      */
     protected function configure()
     {
-        $masterDb = $slaveDb = [
-            'driver' => 'pdo_mysql',
-            'host' => 'localhost',
-            'dbname' => 'blogbeartest',
-            'user' => 'root',
-            'password' => null,
-            'charset' => 'UTF8'
-        ];
-        $this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
-        $this->install(new DevModule($this->app));
+        $this->install(new DevModule($this->app, 'test.config.php'));
     }
 }

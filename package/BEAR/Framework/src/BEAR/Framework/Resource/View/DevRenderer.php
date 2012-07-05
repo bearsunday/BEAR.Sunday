@@ -217,7 +217,6 @@ EOT;
                 $value = '(object) ' . get_class($value);
             }
         });
-
         return highlight_string(var_export($body, true), true);
     }
 
@@ -246,7 +245,11 @@ EOT;
     private function getParamsInfo(ResourceObject $ro)
     {
         $result = self::BADGE_ARGS . self::DIV_WELL;
-        $params = json_decode($ro->headers[DevInvoker::HEADER_PARAMS], true);
+        if (isset($ro->headers[DevInvoker::HEADER_PARAMS])) {
+            $params = json_decode($ro->headers[DevInvoker::HEADER_PARAMS], true);
+        } else {
+            $params = [];
+        }
         foreach ($params as $param) {
             if (is_scalar($param)) {
                 $type = gettype($param);

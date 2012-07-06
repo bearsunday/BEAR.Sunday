@@ -79,22 +79,6 @@ class SymfonyResponse implements ResponseInterface
     }
 
     /**
-     * Add debug information to header
-     *
-     * @return \BEAR\Framework\Web\SymfonyResponse
-     */
-    //     public function debug()
-    //     {
-    //         // add performance info
-    //         $this->debug = true;
-    //         if (isset($_SERVER['REQUEST_TIME_FLOAT'])) {
-    //             $this->headers['X-Request-Per-Second'] = number_format((1 / (microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'])), 2);
-    //             $this->headers['X-Memory-Peak-Usage'] = number_format(memory_get_peak_usage(true));
-    //         }
-    //         return $this;
-    //     }
-
-    /**
      * Set Excpection
      *
      * @param Exception $e

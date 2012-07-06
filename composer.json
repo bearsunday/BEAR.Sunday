@@ -24,7 +24,7 @@
         "BEAR/Resource": "dev-master",
         "doctrine/common": "2.3.*-dev",
         "doctrine/dbal": "2.3.*-dev",
-        "facebook/xhprof": "0.9.2",
+        "facebook/xhprof": "0.9.*",
         "guzzle/guzzle": "2.7.*",
         "monolog/monolog": "1.*",
         "pagerfanta/pagerfanta": "dev-master",

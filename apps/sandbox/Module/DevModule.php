@@ -12,6 +12,7 @@ use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Module\TemplateEngine;
 use Ray\Di\Scope;
 use Ray\Di\AbstractModule;
+use Ray\Di\Injector;
 
 /**
  * Application module
@@ -61,9 +62,7 @@ class DevModule extends AbstractModule
         // install framework module
         $tmpDir = dirname(__DIR__) . '/tmp';
         $logDir = dirname(__DIR__) . '/log';
-
         $this->install(new FrameworkModule($this->app, $tmpDir, $logDir));
-
         // install dev invoker (attach extra dev info to resource) 
         $this->bind('BEAR\Resource\InvokerInterface')->to('BEAR\Resource\DevInvoker')->in(Scope::SINGLETON);
         // install dev render (display extra dev info)
@@ -76,6 +75,7 @@ class DevModule extends AbstractModule
             [$logger]
         );
         // install application module
-        $this->install(new AppModule($this));
+        $injector = Injector::create([$this]);
+        $this->install(new AppModule($injector));
     }
 }

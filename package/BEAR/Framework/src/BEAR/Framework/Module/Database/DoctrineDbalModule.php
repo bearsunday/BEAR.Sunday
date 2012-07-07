@@ -6,6 +6,8 @@
  */
 namespace BEAR\Framework\Module\Database;
 
+use Ray\Di\InjectorInterface;
+
 use Ray\Di\AbstractModule;
 
 /**
@@ -16,6 +18,12 @@ use Ray\Di\AbstractModule;
  */
 class DoctrineDbalModule extends AbstractModule
 {
+    public function __construct(InjectorInterface $injector)
+    {
+        $this->injector = $injector;
+        parent::__construct();
+    }
+    
     /**
      * Configure dependency binding
      *
@@ -23,7 +31,7 @@ class DoctrineDbalModule extends AbstractModule
      */
     protected function configure()
     {
-        $dbInjector = $this->requestInjection('\BEAR\Framework\Interceptor\DbInjector');
+        $dbInjector = $this->injector->getInstance('\BEAR\Framework\Interceptor\DbInjector');
         $this->bindInterceptor(
             $this->matcher->annotatedWith('BEAR\Framework\Annotation\Db'),
             $this->matcher->startWith('on'),

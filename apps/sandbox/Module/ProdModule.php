@@ -12,6 +12,7 @@ use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Module\TemplateEngine;
 use BEAR\Framework\Module\Database;
 use BEAR\Framework\Module\Provider\CacheProvider;
+use Ray\Di\Injector;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Doctrine\Common\Cache\ApcCache as Cache;
 
@@ -64,13 +65,11 @@ class ProdModule extends AbstractModule
 
         // install prod module
         $this->install(new TemplateEngine\ProdRendererModule);
-
-        $this->install(new Database\DoctrineDbalModule($this));
-
         $this->bind(self::RESOURCE_CACHE_INTERFACE)
         ->annotatedWith('resource_cache')
         ->toInstance(new CacheAdapter(new Cache));
-        // install common app module
-        $this->install(new AppModule($this));
+        // install application module
+        $injector = Injector::create([$this]);
+        $this->install(new AppModule($injector));
     }
 }

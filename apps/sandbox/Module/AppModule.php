@@ -19,7 +19,7 @@ use BEAR\Framework\Interceptor\Transactional;
 use BEAR\Framework\Module\Database;
 
 use Ray\Di\AbstractModule;
-
+use Ray\Di\InjectorInterface;
 // cache adapter
 // use Guzzle\Common\Cache\Zf2CacheAdapter;
 // use Zend\Cache\StorageFactory;
@@ -37,6 +37,16 @@ use Doctrine\Common\Cache\ApcCache as CacheStorage;
 class AppModule extends AbstractModule
 {
     /**
+     * Constructor
+     * 
+     * @param InjectorInterface $injector
+     */
+    public function __construct(InjectorInterface $injector)
+    {
+        $this->injector = $injector;
+        parent::__construct();
+    }
+    /**
      * Configure dependency binding
      *
      * @return void
@@ -44,13 +54,13 @@ class AppModule extends AbstractModule
     protected function configure()
     {
         $cache = new CacheAdapter(new CacheStorage);
-//         $cacheStorage = StorageFactory::factory(['adapter' => 'apc']);
-//         $cache = new Zf2CacheAdapter($cacheStorage);
+        //         $cacheStorage = StorageFactory::factory(['adapter' => 'apc']);
+        //         $cache = new Zf2CacheAdapter($cacheStorage);
         $this->install(new Schema\StandardSchemaModule(__NAMESPACE__));
         $this->install(new Cqrs\CacheModule($cache));
         $this->install(new WebContext\AuraWebModule);
         $this->install(new TemplateEngine\SmartyModule\SmartyModule);
-        $this->install(new Database\DoctrineDbalModule($this));
+        $this->install(new Module\Database\DoctrineDbalModule($this->injector));
         $this->installWritableChecker();
         $this->installFormValidater();
         $this->installTimeStamper();
@@ -63,7 +73,7 @@ class AppModule extends AbstractModule
     private function installWritableChecker()
     {
         // bind tmp writable checker
-        $checker = $this->requestInjection('\sandbox\Interceptor\Checker');
+        $checker = $this->injector->getInstance('\sandbox\Interceptor\Checker');
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
             $this->matcher->startWith('__construct'),
@@ -78,7 +88,7 @@ class AppModule extends AbstractModule
     {
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\Page\Blog\Posts\Newpost'),
-               $this->matcher->annotatedWith('sandbox\Annotation\Form'),
+            $this->matcher->annotatedWith('sandbox\Annotation\Form'),
             [new PostFormValidater]
         );
     }
@@ -90,7 +100,7 @@ class AppModule extends AbstractModule
     {
         $this->bindInterceptor(
             $this->matcher->any(),
-               $this->matcher->annotatedWith('BEAR\Framework\Annotation\Time'),
+            $this->matcher->annotatedWith('BEAR\Framework\Annotation\Time'),
             [new TimeStamper]
         );
     }
@@ -102,7 +112,7 @@ class AppModule extends AbstractModule
     {
         $this->bindInterceptor(
             $this->matcher->any(),
-               $this->matcher->annotatedWith('BEAR\Framework\Annotation\Transactional'),
+            $this->matcher->annotatedWith('BEAR\Framework\Annotation\Transactional'),
             [new Transactional]
         );
     }

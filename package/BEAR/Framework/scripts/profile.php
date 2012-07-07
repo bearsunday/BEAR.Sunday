@@ -14,11 +14,12 @@ if ($enable){
 	// stop
 	register_shutdown_function(function () {
 		$xhprof = xhprof_disable();
-		require_once __DIR__ . '/profile/xhprof_lib/utils/xhprof_lib.php';
-		require_once __DIR__ . '/profile/xhprof_lib/utils/xhprof_runs.php';
+		$dir = dirname(dirname(dirname(dirname(__DIR__))));
+		require_once $dir . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_lib.php';
+		require_once $dir . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_runs.php';
 		$id = (new XHProfRuns_Default)->save_run($xhprof, 'sunday');
 		if ($id) {
-			echo "<a style=\"position:absolute;right:20px; bottom:10px;\" class=\"btn btn btn-mini\" href=\"/_bear/profile/xhprof_html/index.php?run={$id}&source=sunday\" target=\"_blank\">PROFILE</a>\n";
+			echo "<a style=\"position:absolute;right:20px; bottom:10px;\" class=\"btn btn btn-mini\" href=\"/_bear/xhprof_html/index.php?run={$id}&source=sunday\" target=\"_blank\">PROFILE</a>\n";
 		}
 	});
 }

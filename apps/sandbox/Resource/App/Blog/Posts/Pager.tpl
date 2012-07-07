@@ -9,7 +9,7 @@
     {foreach from=$resource->body item=post}
     <tr>
         <td>{$post.id}</td>
-        <td><a href="posts/post?id={$post.id}">{$post.title}</a></td>
+        <td><a href="post?id={$post.id}">{$post.title}</a></td>
         <td>{$post.body|truncate:60}</td>
         <td>{$post.created}</td>
         <td>

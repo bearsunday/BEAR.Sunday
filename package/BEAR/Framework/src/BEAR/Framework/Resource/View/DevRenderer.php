@@ -350,7 +350,7 @@ EOT;
         if (isset($ro->headers[DevInvoker::HEADER_PROFILE_ID])) {
             $profileId = $ro->headers[DevInvoker::HEADER_PROFILE_ID];
             $result .= <<<EOT
-<span class="icon-random"></span><a href="/_bear/profile/xhprof_html/index.php?run={$profileId}&source=resource"> {$profileId}</a>
+<span class="icon-random"></span><a href="/_bear/xhprof_html/index.php?run={$profileId}&source=resource"> {$profileId}</a>
 EOT;
         }
         $result .= '</div>';

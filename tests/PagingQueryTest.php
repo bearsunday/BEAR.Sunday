@@ -18,7 +18,7 @@ class PagingQueryTest extends \PHPUnit_Extensions_Database_TestCase
      */
     public function getConnection()
     {
-        $this->pdo = new \PDO("mysql:host=localhost; dbname=blogbeartest", "root", "");
+        $this->pdo = require __DIR__ . '/scripts/db.php';;
         return $this->createDefaultDBConnection($this->pdo, 'mysql');
     }
 

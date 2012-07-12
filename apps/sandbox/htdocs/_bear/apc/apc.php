@@ -997,6 +997,17 @@ EOB;
 				}
 				if($fieldkey=='info') {
 					echo "<tr class=tr-$m><td class=td-0>Stored Value</td><td class=td-last><pre>";
+					$output = apc_fetch($entry[$fieldkey]);
+					//echo htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
+					if (isset($_GET['printa'])) {
+					    print_a($output, $fieldkey);
+					} else {
+    					if (extension_loaded('xdebug')) {
+    					    $level = isset($_GET['level']) ? $_GET['level'] : 3;
+    					    ini_set('xdebug.var_display_max_depth', $level);
+    					}
+    					var_dump($output);
+					}
 					$output = var_export(apc_fetch($entry[$fieldkey]),true);
 					echo htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
 					echo "</pre></td></tr>\n";

@@ -43,7 +43,7 @@ class JsonRendererTest extends \PHPUnit_Framework_TestCase
     public function test_render()
     {
         // json render
-        $result = (string)$this->testResource;
+        $result = (string) $this->testResource;
         $data = json_decode($result, true);
         $expected = array (
   'one' => 1,

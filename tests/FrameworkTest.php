@@ -3,11 +3,7 @@
 namespace BEAR\Framework\Tests;
 
 use BEAR\Framework\Framework;
-use mockapp\App;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
-use Guzzle\Common\Cache\Zf2CacheAdapter as CacheAdapter;
-use Zend\Cache\Backend\File as CacheBackEnd;
-
 
 /**
  * Test class for Annotation.

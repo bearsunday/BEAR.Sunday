@@ -16,12 +16,9 @@ BEAR\Framework\Interceptor\Transactional,
 BEAR\Framework\Interceptor\CacheLoader as CacheLoadInterceptor,
 BEAR\Framework\Interceptor\CacheUpdater as CacheUpdateInterceptor;
 
-use \demoworld\Interceptor\Log;
-
 // use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 // use Doctrine\Common\Cache\ApcCache as CacheBackEnd;
 
-use Guzzle\Common\Cache\Zf2CacheAdapter as CacheAdapter;;
 use Zend\Cache\Backend\File as CacheBackEnd;
 
 /**

@@ -20,7 +20,7 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
      */
     public function getDataSet()
     {
-        return $this->createMySQLXMLDataSet(App::DIR .'/seed.xml');
+        return $this->createMySQLXMLDataSet(App::DIR .'/tests/seed.xml');
     }
 
     /**

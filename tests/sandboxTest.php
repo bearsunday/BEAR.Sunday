@@ -16,13 +16,14 @@ class SandboxTest extends \PHPUnit_Framework_TestCase
 
     public function test_GetPosts()
     {
-		$this->assertTrue(true);
-		return; // @todo remove thsis;
+        $this->assertTrue(true);
+
+        return; // @todo remove thsis;
         // resource request
         $page = $this->resource->get->uri('page://self/blog/posts')->eager->request();
         $this->assertSame(200, $page->code);
         $this->assertArrayHasKey('posts', $page->body);
-        $html = (string)$page;
+        $html = (string) $page;
         $this->assertTrue(is_string($html));
         $this->assertContains('Posts', $html);
     }

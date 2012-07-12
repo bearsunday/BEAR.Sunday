@@ -43,6 +43,13 @@ final class App implements AppContext
     const RUN_MODE_TEST = 'Test';
 
     /**
+     * Dir
+     * 
+     * @var string
+     */
+    const DIR = __DIR__;
+    
+    /**
      * Return application instance
      *
      * @param integer $runMode

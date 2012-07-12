@@ -1,6 +1,7 @@
 <?php
-namespace sandbox;
+namespace sandbox\tests\Resource\App\Blog;
 
+use sandbox\App;
 use BEAR\Resource\Annotation\Post;
 
 class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
@@ -10,8 +11,7 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
      */
     public function getConnection()
     {
-        $pdo = new \PDO("mysql:host=localhost; dbname=blogbeartest", "root", "");
-
+        $pdo = require App::DIR . '/tests/scripts/db.php';
         return $this->createDefaultDBConnection($pdo, 'mysql');
     }
 
@@ -20,7 +20,7 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
      */
     public function getDataSet()
     {
-        return $this->createMySQLXMLDataSet(__DIR__.'/seed.xml');
+        return $this->createMySQLXMLDataSet(App::DIR .'/seed.xml');
     }
 
     /**
@@ -35,9 +35,7 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
         static $app;
 
         parent::setUp();
-        if (is_null($app)) {
-            $app = App::factory(App::RUN_MODE_TEST, false);
-        }
+        $app = App::factory(App::RUN_MODE_TEST, true);
         $this->resource = $app->resource;
     }
 

@@ -13,7 +13,7 @@ class PageIndexTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $app = App::factory(App::RUN_MODE_PROD, false);
+        $app = App::factory(App::RUN_MODE_PROD, true);
         $this->resource = $app->resource;
     }
 

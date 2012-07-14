@@ -74,7 +74,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
         BAD_REQUEST:
         METHOD_NOT_ALLOWED:
         if (PHP_SAPI === 'cli') {
-            $response->view = "Internal error occured ({$exceptionId})";
+            $response->view = "Internal error occurred ({$exceptionId})";
         } else {
             // exception screen in develop
             $response->view = include __DIR__ . "/exception.tpl.php";

@@ -13,7 +13,7 @@ use BEAR\Resource\Object as ResourceObject;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Helper\FormatterHelper as Formatter;
-use Ray\Aop\Weaver;
+use Ray\Aop\Weave;
 use Ray\Di\Di\Inject;
 use Exception;
 use Traversable;
@@ -69,7 +69,10 @@ class SymfonyResponse implements ResponseInterface
      */
     public function setResource($resource)
     {
-        if ($resource instanceof ResourceObject === false && $resource instanceof Weaver === false) {
+        if ($resource instanceof Weave) {
+            $resource = $resource->___getObject();
+        }
+        if ($resource instanceof ResourceObject === false && $resource instanceof Weave === false) {
             $type = (is_object($resource)) ? get_class($resource) : gettype($resource);
             throw new InvalidResourceType($type);
         }

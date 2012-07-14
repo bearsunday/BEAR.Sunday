@@ -53,12 +53,8 @@ try {
 
     // Request
     $page = $app->resource->$method->object($page)->withQuery($globals['_GET'])->eager->request();
-    if (!($page instanceof ResourceObject)) {
-        $page->body = $response;
-    }
 } catch (Exception $e) {
     $page = $app->exceptionHandler->handle($e);
 }
-
 $send = (PHP_SAPI === 'cli') ? 'sendCli' : 'send';
 $app->response->setResource($page)->render()->prepare()->$send();

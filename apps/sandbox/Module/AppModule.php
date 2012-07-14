@@ -65,6 +65,9 @@ class AppModule extends AbstractModule
         $this->installFormValidater();
         $this->installTimeStamper();
         $this->installTransaction();
+        
+        // greeting 
+        //$this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');
     }
 
     /**

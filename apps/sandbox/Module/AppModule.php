@@ -8,6 +8,7 @@
 namespace sandbox\Module;
 
 use sandbox\Interceptor\PostFormValidater;
+use sandbox\Interceptor\TimeMessage;
 
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\Schema;
@@ -67,7 +68,13 @@ class AppModule extends AbstractModule
         $this->installTransaction();
         
         // greeting 
-        //$this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');
+        $this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');
+        // time message binding
+        $this->bindInterceptor(
+            $this->matcher->subclassesOf('sandbox\Resource\App\First\Greeting\Aop'),
+            $this->matcher->any(),
+            [new TimeMessage]
+        );
     }
 
     /**

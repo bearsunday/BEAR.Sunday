@@ -3,7 +3,7 @@
  * Config for unit test
  */
 $id = isset($_ENV['BEAR_DB_ID']) ? $_ENV['BEAR_DB_ID'] : 'root';
-$password = isset($_ENV['BEAR_DB_PASSOWRD']) ? $_ENV['BEAR_DB_PASSOWRD'] : '';
+$password = isset($_ENV['BEAR_DB_PASSWORD']) ? $_ENV['BEAR_DB_PASSWORD'] : '';
 return [
     'master_db' => [
         'driver' => 'pdo_mysql',

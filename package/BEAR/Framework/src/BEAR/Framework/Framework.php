@@ -57,8 +57,8 @@ class Framework
             // unregister for another app
             spl_autoload_unregister([$loader, 'load']);
         }
-
         $system = self::$systemRoot;
+        include_once $system . '/package/BEAR/Framework/scripts/core_loader.php';
         include_once $system . '/vendor/Aura/Autoload/src.php';
         $loader = new Loader;
 //      $loader->setMode(Loader::MODE_DEBUG);

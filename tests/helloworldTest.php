@@ -10,7 +10,6 @@ class HelloworldTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        apc_clear_cache("user");
         $app = require dirname(__DIR__) . '/apps/helloworld/scripts/instance.php';
         $this->resource = $app->resource;
     }

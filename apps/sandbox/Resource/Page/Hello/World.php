@@ -2,12 +2,10 @@
 namespace sandbox\Resource\Page\Hello;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
-use BEAR\Framework\Annotation\Html;
 
 /**
- * Greeting
+ * Hello World
  *
- * @Html
  */
 class World extends Page
 {

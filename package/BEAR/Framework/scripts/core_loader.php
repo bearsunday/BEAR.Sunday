@@ -11,10 +11,11 @@ namespace BEAR\Framework\Scripts;
 
 use BEAR\Framework\Framework;
 
+if (isset($system)) {
+    return;
+}
 $system = Framework::$systemRoot;
 
-$er = error_reporting();
-error_reporting(0);
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/AnnotationRegistry.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/InjectorInterface.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/Injector.php';
@@ -57,11 +58,8 @@ include $system . '/vendor/Ray/Aop/src/Ray/Aop/MethodInterceptor.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Interceptor/DbInjector.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Interceptor/CacheInterface.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Interceptor/CacheLoader.php';
-include $system . '/apps/sandbox/Interceptor/Checker.php';
-include $system . '/apps/sandbox/Interceptor/PostFormValidater.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Interceptor/TimeStamper.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Interceptor/Transactional.php';
-include $system . '/apps/sandbox/Interceptor/TimeMessage.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/LoggerInterface.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Inject/LogInject.php';
 include $system . '/package/BEAR/Framework/src/BEAR/Framework/Inject/Logger/Adapter.php';
@@ -112,5 +110,3 @@ include $system . '/package/BEAR/Framework/src/BEAR/Framework/Module/TemplateEng
 include $system . '/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php';
 include $system . '/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/HeaderBag.php';
 include $system . '/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/ResponseHeaderBag.php';
-
-error_reporting($er);

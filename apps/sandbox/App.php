@@ -60,7 +60,7 @@ final class App implements AppContext
         (new Framework)->setLoader(__NAMESPACE__, __DIR__);
 
         // cached application ?
-        $cacheKey = 'app' . __NAMESPACE__ . PHP_SAPI . $runMode;
+        $cacheKey = '[App] ' . __NAMESPACE__ . '-' . PHP_SAPI . '-' . $runMode;
         if ($useCache && apc_exists($cacheKey)) {
             $app = apc_fetch($cacheKey);
 

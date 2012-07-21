@@ -21,7 +21,6 @@
    All other licensing and usage conditions are those of the PHP Group.
 
  */
-
 $VERSION='$Id: apc.php 307048 2011-01-03 23:53:17Z kalle $';
 
 ////////// READ OPTIONAL CONFIGURATION FILE ////////////
@@ -509,15 +508,18 @@ function block_sort($array1, $array2)
 		return -1;
 	}
 }
+//DbugL::html_prefix();
 
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head><title>APC INFO <?php echo $host ?></title>
+<?php echo DbugL::html_prefix();?>
+
 <style><!--
 body { background:white; font-size:100.01%; margin:0; padding:0; }
-body,p,td,th,input,submit { font-size:0.8em;font-family:arial,helvetica,sans-serif; }
+body,p,td,th,input,submit { font-size:1.0em;font-family:arial,helvetica,sans-serif; }
 * html body   {font-size:0.8em}
 * html p      {font-size:0.8em}
 * html td     {font-size:0.8em}
@@ -996,20 +998,36 @@ EOB;
 					$m=1-$m;
 				}
 				if($fieldkey=='info') {
+				    if (extension_loaded('xdebug')) {
+				        $level = isset($_GET['lv']) ? $_GET['lv'] : 2;
+				        ini_set('xdebug.var_display_max_depth', $level);
+				    }
 					echo "<tr class=tr-$m><td class=td-0>Stored Value</td><td class=td-last><pre>";
 					$output = apc_fetch($entry[$fieldkey]);
-					//echo htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
-					if (isset($_GET['printa'])) {
-					    print_a($output, $fieldkey);
-					} else {
-    					if (extension_loaded('xdebug')) {
-    					    $level = isset($_GET['level']) ? $_GET['level'] : 3;
-    					    ini_set('xdebug.var_display_max_depth', $level);
-    					}
-    					var_dump($output);
+					if (! isset($_GET['vardump'])) {
+					    $isSortOfArray = ($output instanceof \ArrayObject) || ($output instanceof ArrayAccess);
+					    $isWeave = ($output instanceof \Ray\Aop\Weave);
+					    if ($isWeave) {
+					        $bind = $output->___getBind();
+					        $object = $output->___getObject();
+					        array_walk_recursive($bind, function(&$item) {
+					            $item = '{' . get_class($item) . '}';
+					        });
+					        $var = print_a($bind, 'label:Weave; return:1;');
+					        $class = get_class($object);
+					        $obj = print_a($object, "label:{$class}; return:1;");
+					        echo $var . $obj;
+					        goto vardump;
+					    } elseif ($isSortOfArray) {
+					        $output = (array)$output;
+					    }
+					    $type = gettype($output);
+					    $type = ($type === 'object') ? get_class($output) : $type;
+					    print_a($output, "label:{$type};");
 					}
-					$output = var_export(apc_fetch($entry[$fieldkey]),true);
-					echo htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
+					vardump:
+					echo '<hr style="height: 20px; background-color: #ddd; border: 1px solid; color: #ffdfe2;">';
+					@var_dump($output);
 					echo "</pre></td></tr>\n";
 				}
 				break;

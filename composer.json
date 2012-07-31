@@ -2,6 +2,7 @@
     "name": "BEAR.Sunday",
     "type": "library",
     "description": "BEAR.Sunday, a resource oriented framework",
+    "version": "0.3.2",
     "keywords": ["rest", "framework", "api"],
     "homepage": "https://github.com/koriym/BEAR.Sunday",
     "license": "BSD-3-Clause",

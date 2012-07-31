@@ -32,7 +32,7 @@ class Framework
      *
      * Framework version identification
      */
-    const VERSION = '0.3.1b';
+    const VERSION = '0.3.2';
 
     /**
      * Constructor

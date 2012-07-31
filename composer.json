@@ -33,7 +33,8 @@
         "symfony/http-foundation": "2.0.*",
         "Ray/Aop": "dev-master",
         "Ray/Di": "dev-master",
-        "vdump/vdump": "*"
+        "vdump/vdump": "*",
+        "print_o/print_o": "*"
     },
     "require-dev": {
         "crodas/haanga": "dev-master",
@@ -105,6 +106,23 @@
                 },
                 "source": {
                     "url": "https://github.com/koriym/vdump.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type":"package",
+            "package": {
+                "name": "print_o/print_o",
+                "version": "0.1.0",
+                "target-dir": "print_o",
+                "dist": {
+                    "url": "https://github.com/koriym/print_o/zipball/master",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/koriym/print_o.git",
                     "type": "git",
                     "reference": "master"
                 }

@@ -5,6 +5,7 @@ namespace sandbox;
 use BEAR\Framework\Router\Router;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Framework;
+use Exception;
 
 $system = dirname(dirname(dirname(__DIR__)));
 require_once $system . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
@@ -74,6 +75,5 @@ try {
 } catch (Exception $e) {
     $page = $app->exceptionHandler->handle($e);
 }
-
 // Transfer
 $app->response->setResource($page)->render()->prepare()->send();

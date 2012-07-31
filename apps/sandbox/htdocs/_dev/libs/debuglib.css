@@ -1,0 +1,280 @@
+*.DbugL {
+	font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular,
+		sans-serif;
+}
+
+pre.DbugL {
+	display: inline;
+	background: #F1F1F1;
+	font-size: 8pt;
+}
+
+div.DbugL {
+	margin-bottom: 5px;
+}
+
+a.DbugL_window_link {
+	font-size: xx-small;
+	color: black;
+	border: 1px solid darkorange;
+	padding: 3px;
+	background: #F1F1F1;
+	margin: 2px;
+}
+
+div.DbugL_pre {
+	font-size: 8pt;
+	font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular,
+		sans-serif;
+	margin-bottom: 10px;
+}
+
+/* Profont is a monospace bitmap font which absolutely rocks! see: http://www.tobias-jung.de/seekingprofont/  */
+span.DbugL_multi {
+	font-size: 9pt;
+	font-family: ProFontWindows, ProFont, Lucida Console, monospace,
+		Courier New;
+	background: #F0F0F9;
+	line-height: 100%;
+}
+
+span.DbugL_outer_space {
+	background: gold;
+}
+
+span.DbugL_tabs {
+	border-right: 1px solid #DDD;
+}
+
+/* arrgh.. if someone has a fix for the wrong widths of the fieldsets in IE7 please let me know :| */
+fieldset.DbugL_normal {
+	display: table-cell;
+	border: 1px solid black;
+	padding: 2px;
+}
+
+fieldset.DbugL_pickled {
+	width: 90%;
+	border: 1px solid black;
+	padding: 2px;
+}
+
+legend.DbugL {
+	font-size: 9pt;
+	font-weight: bold;
+	color: black;
+}
+
+div.DbugL_runtime {
+	font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular,
+		sans-serif;
+	font-size: 9pt;
+	font-weight: normal;
+	color: black;
+	background: yellow;
+	padding: 2px;
+}
+
+span.DbugL_runtime_label {
+	font-weight: bold;
+}
+
+span.DbugL_type_other {
+	font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular,
+		sans-serif;
+	font-size: 8pt;
+	background: #ECEDFE;
+	color: red;
+}
+
+span.DbugL_value_other {
+	font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular,
+		sans-serif;
+	font-size: 8pt;
+	white-space: nowrap;
+	color: black;
+}
+
+table.DbugL {
+	background: #D5D5EA;
+	font-size: 8pt;
+	border-collapse: separate;
+}
+
+table.DbugL th {
+	background: #1E32C8;
+	color: white;
+	text-align: left;
+	padding-left: 2px;
+	padding-right: 2px;
+	font-weight: normal;
+}
+
+table.DbugL td {
+	background: #DEDEEF;
+	font-weight: normal;
+}
+
+table.DbugL th.key_single_value {
+	background: #FFFF00 !important;
+	color: black !important;
+	font-weight: normal !important;
+	padding: 3px;
+}
+
+table.DbugL th.key_string {
+	color: white;
+}
+
+table.DbugL th.key_number {
+	color: green;
+}
+
+table.DbugL th.key_array {
+	color: white;
+	font-weight: bold;
+}
+
+table.DbugL th.key_object {
+	color: white;
+	font-weight: bold;
+}
+
+table.DbugL td.value {
+	padding: 0px;
+}
+
+table.DbugL td.value_bool_true {
+	color: #5BA800;
+	padding: 1px;
+}
+
+table.DbugL td.value_bool_false {
+	color: #D90062;
+	padding: 1px;
+}
+
+table.DbugL td.value_string {
+	color: black;
+	padding: 1px;
+}
+
+table.DbugL td.value_integer {
+	color: green;
+	padding: 1px;
+}
+
+table.DbugL td.value_double {
+	color: blue;
+	padding: 1px;
+}
+
+table.DbugL td.value_null {
+	color: darkorange;
+	padding: 1px;
+}
+
+table.DbugL td.value_empty_array {
+	color: darkorange;
+	padding: 1px;
+}
+
+table.DbugL td.value_empty_string {
+	color: darkorange;
+	padding: 1px;
+}
+
+table.DbugL td.value_skipped {
+	color: #666666;
+	padding: 1px;
+}
+
+div.DbugL_SG {
+	color: black;
+	font-weight: bold;
+	font-size: 9pt;
+}
+
+table.DbugL_SG {
+	width: 100%;
+	font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular,
+		sans-serif;
+	font-size: 8pt;
+}
+
+table.DbugL_SG td {
+	
+}
+
+table.DbugL_SG td.globals {
+	background: #7ACCC8;
+	padding: 2px;
+}
+
+table.DbugL_SG td.get {
+	background: #7DA7D9;
+	padding: 2px;
+}
+
+table.DbugL_SG td.post {
+	background: #F49AC1;
+	padding: 2px;
+}
+
+table.DbugL_SG td.files {
+	background: #82CA9C;
+	padding: 2px;
+}
+
+table.DbugL_SG td.session {
+	background: #FCDB26;
+	padding: 2px;
+}
+
+table.DbugL_SG td.cookie {
+	background: #A67C52;
+	padding: 2px;
+}
+
+table.DbugL_SG td.server {
+	background: #A186BE;
+	padding: 2px;
+}
+
+table.DbugL_SG td.env {
+	background: #7ACCC8;
+	padding: 2px;
+}
+
+div.DbugL_js_hr_first {
+	width: 100%;
+	border-bottom: 1px dashed black;
+	margin: 10px 0px 10px 0px;
+	font-size: xx-small;
+	text-align: right;
+	background: gold;
+}
+
+div.DbugL_js_hr {
+	width: 100%;
+	border-bottom: 1px dashed black;
+	margin: 10px 0px 10px 0px;
+	font-size: xx-small;
+	text-align: right;
+	background: #EFEFEF
+}
+
+div.DbugL_window_content {
+	padding-top: 20px;
+}
+
+div.DbugL_window_clear_button {
+	text-align: center;
+	font-size: x-small;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background: orange;
+	width: 100%;
+	border-bottom: 1px solid black;
+}

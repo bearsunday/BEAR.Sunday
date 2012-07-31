@@ -47,7 +47,7 @@ else:
 
 	class DbugL {
 
-		public static $first_call = TRUE;
+		public static $first_call = FALSE;
 
 		// shortcuts for the pros
 		public static $alt_parameter_names = array(

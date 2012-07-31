@@ -10,9 +10,9 @@ $exceptionInfo = function (\Exception $e) use ($systemRoot) {
     return [
     'message' => $e->getMessage(),
     'traceString' => $e->getTraceAsString(),
-    'traceRaw' => print_r($e->getTrace(), true),
+    'traceRaw' => 'n/a', //print_r($e->getTrace(), true),
     'file' => $e->getFile(),
-    'href' => '/_bear/edit/?file=' . str_replace($systemRoot, '', $e->getFile()) . '&line=' . $e->getLine(),
+    'href' => '/_dev/edit/?file=' . str_replace($systemRoot, '', $e->getFile()) . '&line=' . $e->getLine(),
     'title' => $e->getFile() . ':' . $e->getLine(),
     'line' => $e->getLine(),
     'fileContents' => htmlspecialchars(trim(file_get_contents($e->getFile()))),
@@ -112,7 +112,7 @@ foreach ($exception['trace'] as $trace) {
     if (isset($trace['file'])) {
         $file =  $trace['file'];
         $editFile = str_replace($systemRoot, '', $file);
-        $html .= "<a target=\"code_edit\" href=\"/_bear/edit/?file={$editFile}\">{$file}  : {$trace['line']} <span class=\"icon-share-alt\"></span></a><br>";
+        $html .= "<a target=\"code_edit\" href=\"/_dev/edit/?file={$editFile}\">{$file}  : {$trace['line']} <span class=\"icon-share-alt\"></span></a><br>";
     }
 }
 $html .= <<<EOT

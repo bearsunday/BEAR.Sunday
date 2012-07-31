@@ -86,7 +86,7 @@ class AppModule extends AbstractModule
         $checker = $this->injector->getInstance('\sandbox\Interceptor\Checker');
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
-            $this->matcher->startWith('__construct'),
+            $this->matcher->startWith('onInit'),
             [$checker]
         );
     }

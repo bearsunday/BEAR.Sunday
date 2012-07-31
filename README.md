@@ -1,7 +1,6 @@
 BEAR, a resource oriented framework for PHP5.4
 =============================
 
- * 0.3.0
 [![Build Status](https://secure.travis-ci.org/koriym/BEAR.Sunday.png?branch=master)](http://travis-ci.org/koriym/BEAR.Sunday)
 
 One minute example

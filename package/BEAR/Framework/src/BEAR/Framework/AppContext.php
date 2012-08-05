@@ -14,5 +14,4 @@ namespace BEAR\Framework;
  */
 interface AppContext
 {
-    public static function factory($runMode, $useCache = false);
 }

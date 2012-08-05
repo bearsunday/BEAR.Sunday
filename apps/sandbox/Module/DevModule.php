@@ -7,6 +7,8 @@
  */
 namespace sandbox\Module;
 
+require_once dirname(dirname(dirname(__DIR__))) . '/vendor/print_o/print_o/print_o/src.php';
+
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Module\TemplateEngine;

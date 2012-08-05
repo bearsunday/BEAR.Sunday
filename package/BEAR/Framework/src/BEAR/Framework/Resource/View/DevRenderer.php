@@ -84,13 +84,11 @@ class DevRenderer implements Renderable
         $templateFileBase = $dir . DIRECTORY_SEPARATOR . substr(basename($paegFile), 0, strlen(basename($paegFile)) - 3);
 
         // add tool bar
-        $body = $this->templateEngineAdapter->fetch($templateFileBase);
+        $ro->view  = $body = $this->templateEngineAdapter->fetch($templateFileBase);
         $body = $this->addJsDevToolLadingHtml($body);
         $templateFile = $this->templateEngineAdapter->getTemplateFile();
         $label = $this->getLabel($body, $ro, $templateFile);
-        $ro->body = $label;
-
-        return $ro->body;
+        return $label;
     }
 
     /**

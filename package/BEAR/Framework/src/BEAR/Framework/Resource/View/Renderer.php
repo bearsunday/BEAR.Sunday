@@ -57,8 +57,8 @@ class Renderer implements Renderable
             $this->templateEngineAdapter->assignAll((array) $ro->body);
         }
         $templatefileWithoutExtention = substr($file, 0, -3);
-        $ro->body = $this->templateEngineAdapter->fetch($templatefileWithoutExtention);
+        $ro->view = $this->templateEngineAdapter->fetch($templatefileWithoutExtention);
 
-        return $ro->body;
+        return $ro->view;
     }
 }

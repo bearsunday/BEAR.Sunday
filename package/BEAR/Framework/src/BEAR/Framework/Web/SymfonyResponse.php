@@ -110,8 +110,8 @@ class SymfonyResponse implements ResponseInterface
         if (is_callable($renderer)) {
             $this->view = $renderer($this->body);
         } else {
-            // __toString() method suppoesed to creat own view.
-            (string) $this->resource;
+            // __toString() method suppoesed to create own view.
+            $this->view = (string) $this->resource;
         }
 
         return $this;
@@ -124,7 +124,7 @@ class SymfonyResponse implements ResponseInterface
      */
     public function prepare()
     {
-        $this->response = new Response($this->resource->view, $this->resource->code, (array) $this->resource->headers);
+        $this->response = new Response($this->view, $this->resource->code, (array) $this->resource->headers);
         // compliant with RFC 2616.
         $this->response->prepare();
 

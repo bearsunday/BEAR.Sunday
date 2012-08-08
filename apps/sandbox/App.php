@@ -12,9 +12,6 @@ use BEAR\Framework\Inject\AppDependencyInject;
 use Ray\Di\Injector;
 use LogicException;
 
-require_once dirname(dirname(__DIR__)) . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php';
-require_once dirname(dirname(__DIR__)) . '/vendor/vdump/vdump/vdump/src.php';
-
 /**
  * Applicaton
  *
@@ -44,11 +41,11 @@ final class App implements AppContext
 
     /**
      * Dir
-     * 
+     *
      * @var string
      */
     const DIR = __DIR__;
-    
+
     /**
      * Return application instance
      *
@@ -56,30 +53,30 @@ final class App implements AppContext
      */
     public static function factory($runMode, $useCache = false)
     {
-        // configure framework
+        // class loader
         (new Framework)->setLoader(__NAMESPACE__, __DIR__);
 
         // cached application ?
         $cacheKey = '[App] ' . __NAMESPACE__ . '-' . PHP_SAPI . '-' . $runMode;
         if ($useCache && apc_exists($cacheKey)) {
             $app = apc_fetch($cacheKey);
+        } else {
+            // run mode module
+            $modeModule = __NAMESPACE__ . '\Module\\' . $runMode . 'Module';
+            try {
+                $modules = [new $modeModule(__NAMESPACE__)];
+            } catch (Exception $e) {
+                throw new LogicException('Run mode module not loaded', $runMode);
+            }
 
-            return $app;
+            // return application object
+            $injector = Injector::create($modules, $useCache);
+            $app = $injector->getInstance(__CLASS__);
+            $useCache ? apc_store($cacheKey, $app) : apc_clear_cache('user');
         }
 
-        // run mode module
-        $modeModule = __NAMESPACE__ . '\Module\\' . $runMode . 'Module';
-        try {
-            $modules = [new $modeModule(__NAMESPACE__)];
-        } catch (Exception $e) {
-            throw new LogicException('Run mode module not loaded', $runMode);
-        }
-
-        // return application object
-        $injector = Injector::create($modules, $useCache);
-        $app = $injector->getInstance(__CLASS__);
-        $useCache ? apc_store($cacheKey, $app) : apc_clear_cache('user');
-
+        // register logging
+        $app->logger->register($app);
         return $app;
     }
 }

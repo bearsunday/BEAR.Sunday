@@ -35,7 +35,8 @@
         "Ray/Aop": "dev-master",
         "Ray/Di": "dev-master",
         "vdump/vdump": "*",
-        "print_o/print_o": "*"
+        "print_o/print_o": "*",
+        "firephp/firephp-core": "dev-master"
     },
     "require-dev": {
         "crodas/haanga": "dev-master",

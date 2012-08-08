@@ -39,7 +39,7 @@ class AppModule extends AbstractModule
 {
     /**
      * Constructor
-     * 
+     *
      * @param InjectorInterface $injector
      */
     public function __construct(InjectorInterface $injector)
@@ -54,20 +54,20 @@ class AppModule extends AbstractModule
      */
     protected function configure()
     {
+        $this->install(new Schema\StandardSchemaModule(__NAMESPACE__));
         $cache = new CacheAdapter(new CacheStorage);
         //         $cacheStorage = StorageFactory::factory(['adapter' => 'apc']);
         //         $cache = new Zf2CacheAdapter($cacheStorage);
-        $this->install(new Schema\StandardSchemaModule(__NAMESPACE__));
-        $this->install(new Cqrs\CacheModule($cache));
         $this->install(new WebContext\AuraWebModule);
         $this->install(new TemplateEngine\SmartyModule\SmartyModule);
         $this->install(new Module\Database\DoctrineDbalModule($this->injector));
+        $this->install(new Cqrs\CacheModule($cache));
         $this->installWritableChecker();
         $this->installFormValidater();
         $this->installTimeStamper();
         $this->installTransaction();
-        
-        // greeting 
+
+        // greeting
         $this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');
         // time message binding
         $this->bindInterceptor(

@@ -33,12 +33,12 @@ class DevModule extends AbstractModule
 
     /**
      * Config
-     * 
+     *
      * <$named => $instance>
      * @var array
      */
     private $properties;
-    
+
     /**
      * Constructor
      *
@@ -65,15 +65,15 @@ class DevModule extends AbstractModule
         $tmpDir = dirname(__DIR__) . '/tmp';
         $logDir = dirname(__DIR__) . '/log';
         $this->install(new FrameworkModule($this->app, $tmpDir, $logDir));
-        // install dev invoker (attach extra dev info to resource) 
+        // install dev invoker (attach extra dev info to resource)
         $this->bind('BEAR\Resource\InvokerInterface')->to('BEAR\Resource\DevInvoker')->in(Scope::SINGLETON);
         // install dev render (display extra dev info)
         $this->install(new TemplateEngine\DevRendererModule);
-        // log all resource access
+        // log resource access with @Log
         $logger = $this->requestInjection('BEAR\Framework\Interceptor\Logger');
         $this->bindInterceptor(
             $this->matcher->subclassesOf('BEAR\Resource\Object'),
-            $this->matcher->startWith('on'),
+            $this->matcher->annotatedWith('BEAR\Framework\Annotation\Log'),
             [$logger]
         );
         // install application module

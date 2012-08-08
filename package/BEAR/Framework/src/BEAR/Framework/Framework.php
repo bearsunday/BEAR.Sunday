@@ -69,6 +69,8 @@ class Framework
         ];
         $namespacesBase += $namespaces;
         $loader->setPaths($namespacesBase);
+        $classes = include $system . '/vendor/composer/autoload_classmap.php';
+        $loader->setClasses($classes);
         $loader->register();
         AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di\\', $system . '/vendor/Ray/Di/src/');
         AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation\\', $system . '/vendor/BEAR/Resource/src/');

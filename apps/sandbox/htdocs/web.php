@@ -57,23 +57,32 @@ require_once $system . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_runs.php
 
 // run mode
 $runMode = App::RUN_MODE_DEV;
-$useCache = false;
+$useCache = true;
 error_log('run:' . __NAMESPACE__ . " mode={$runMode} cahce=" . ($useCache ? 'enable' : 'disable'));
 
 // Application
 $app = App::factory($runMode, $useCache);
+
+// Log
+$app->logger->register($app);
+
 // Route
 $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
+// or use router
 // $router = require dirname(__DIR__) . '/scripts/router/standard_router.php';
 $router = new Router;
 
 // Dispatch
 list($method, $pagePath, $query) = $router->match($globals);
+
 // Request
 try {
     $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
 } catch (Exception $e) {
     $page = $app->exceptionHandler->handle($e);
+    //$page = $app->exceptionHandler->handle($e)->bePage();
 }
+
 // Transfer
-$app->response->setResource($page)->render()->prepare()->send();
+$app->response->setResource($page)->render()->prepare()->outputWebConsoleLog()->send();
+exit(0);

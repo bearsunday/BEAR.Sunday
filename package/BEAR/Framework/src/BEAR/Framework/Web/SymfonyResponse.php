@@ -8,7 +8,10 @@ namespace BEAR\Framework\Web;
 
 use BEAR\Framework\Exception\InvalidResourceType;
 use BEAR\Framework\Inject\LogInject;
+use BEAR\Framework\Application\LoggerInterface as AppLogger;
 use BEAR\Resource\Request;
+use BEAR\Resource\LoggerInterface;
+use BEAR\Resource\Logger;
 use BEAR\Resource\Object as ResourceObject;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -17,6 +20,7 @@ use Ray\Aop\Weave;
 use Ray\Di\Di\Inject;
 use Exception;
 use Traversable;
+
 /**
  * Output with using symfony HttpFoundation
  *
@@ -58,6 +62,22 @@ class SymfonyResponse implements ResponseInterface
      * @param string $mode
      */
     private $mode;
+
+    private $code;
+    private $headers;
+    private $view;
+
+    /**
+     * Set application logger
+     *
+     * @param Logger $logger
+     *
+     * @Inject
+     */
+    public function setAppLogger(AppLogger $appLogger)
+    {
+        $this->appLogger = $appLogger;
+    }
 
     /**
      * Set Resource
@@ -110,7 +130,6 @@ class SymfonyResponse implements ResponseInterface
         if (is_callable($renderer)) {
             $this->view = $renderer($this->body);
         } else {
-            // __toString() method suppoesed to create own view.
             $this->view = (string) $this->resource;
         }
 
@@ -131,6 +150,12 @@ class SymfonyResponse implements ResponseInterface
         return $this;
     }
 
+    public function outputWebConsoleLog()
+    {
+        $this->appLogger->outputWebConsoleLog();
+        return $this;
+    }
+
     /**
      * Send
      *
@@ -147,6 +172,11 @@ class SymfonyResponse implements ResponseInterface
         return $this;
     }
 
+    /**
+     * Sennd CLI output
+     *
+     * @param bool $mode
+     */
     public function sendCli($mode = self::MODE_VIEW)
     {
         if ($this->e) {
@@ -184,34 +214,39 @@ class SymfonyResponse implements ResponseInterface
                 echo "{$label1}{$name}: {$close}{$value}" . PHP_EOL;
             }
         }
-        // body label
+        // body
         echo "{$label}[BODY]{$close}" . PHP_EOL;
-        $isTraversable = is_array($this->resource->body) || $this->resource->body instanceof \Traversable;
-        if ($isTraversable) {
-            foreach ($this->resource->body as $key => $body) {
-                if ($body instanceof \BEAR\Resource\Request) {
-                    switch ($mode) {
-                        case self::MODE_REQUEST:
-                            $body = "{$label2}" . $body->toUri() .$close;
-                            break;
-                        case self::MODE_VALUE:
-                            $value = $body();
-                            $body = var_export($value, true) . " {$label2}" . $body->toUri() . $close;
-                            break;
-                        case self::MODE_VIEW:
-                        default:
-                            $body = (string) $body . " {$label2}" . $body->toUri() . $close;
-                            break;
-
-                    }
-                }
-                $body = is_array($body) ? var_export($body, true) : $body;
-                echo "{$label1}{$key}{$close}:" . $body. PHP_EOL;
-            }
-        } else {
-            $body = $this->resource->view ?: $this->resource->body;
-            echo $body;
+        if ($this->resource->view) {
+            echo $this->view;
+            goto complete;
         }
+        $isTraversable = is_array($this->resource->body) || $this->resource->body instanceof \Traversable;
+        if (! $isTraversable) {
+            $this->resource->body;
+            goto complete;
+        }
+        foreach ($this->resource->body as $key => $body) {
+            if ($body instanceof \BEAR\Resource\Request) {
+                switch ($mode) {
+                    case self::MODE_REQUEST:
+                        $body = "{$label2}" . $body->toUri() .$close;
+                        break;
+                    case self::MODE_VALUE:
+                        $value = $body();
+                        $body = var_export($value, true) . " {$label2}" . $body->toUri() . $close;
+                        break;
+                    case self::MODE_VIEW:
+                    default:
+                        $body = (string) $body . " {$label2}" . $body->toUri() . $close;
+                        break;
+
+                }
+            }
+            $body = is_array($body) ? var_export($body, true) : $body;
+            echo "{$label1}{$key}{$close}:" . $body. PHP_EOL;
+        }
+
+        complete:
         echo PHP_EOL;
     }
 }

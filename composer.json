@@ -67,22 +67,6 @@
         {
             "type": "package",
             "package": {
-                "name": "smarty/smarty",
-                "version": "3.1.8",
-                "dist": {
-                    "url": "http://www.smarty.net/files/Smarty-3.1.8.zip",
-                    "type": "zip"
-                },
-                "source": {
-                    "url": "http://smarty-php.googlecode.com/svn/",
-                    "type": "svn",
-                    "reference": "tags/Smarty_3_1_8/distribution/"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "crodas/haanga",
                 "version": "1.0.4",
                 "dist": {

@@ -51,6 +51,7 @@ if ($doIncludePHPfile) {
     include $_SERVER['SCRIPT_FILENAME'];
     exit(0);
 }
+require_once $system . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php';
 require_once $system . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_lib.php';
 require_once $system . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_runs.php';
 

@@ -39,13 +39,6 @@ class Index extends Page
             'xhprof' => extension_loaded('xhprof') ? phpversion('xhprof') : 'n/a'
         ];
     }
-    
-    /**
-     * @PostConstruct
-     */
-    public function onInit()
-    {
-    }
 
     /**
      * Get

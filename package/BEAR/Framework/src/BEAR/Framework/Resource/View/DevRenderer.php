@@ -316,7 +316,7 @@ EOT;
         }
         $result .= '<ul class="unstyled">';
         $interceptors = json_decode($ro->headers[DevInvoker::HEADER_INTERCEPTORS], true);
-        $onGetInterceptors = $interceptors['onGet'];
+        $onGetInterceptors = isset($interceptors['onGet']) ? $interceptors['onGet'] : [];
         foreach ($onGetInterceptors as $interceptor) {
             $interceptorfile = (new ReflectionClass($interceptor))->getFileName();
             $result .= <<<EOT

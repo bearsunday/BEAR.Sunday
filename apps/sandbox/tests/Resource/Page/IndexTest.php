@@ -83,7 +83,7 @@ class PageIndexTest extends \PHPUnit_Framework_TestCase
      */
     public function test_RenderHtml($page)
     {
-        $html = (string) $page->body;
+        $html = (string) $page;
         $this->assertContains('</html>', $html);
     }
 }

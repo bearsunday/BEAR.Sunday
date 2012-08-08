@@ -60,6 +60,7 @@ class JsonRendererTest extends \PHPUnit_Framework_TestCase
     ),
     'uri' => 'test://self/path/to/resource',
     'view' => NULL,
+    'links' => []
   ),
 );
         $this->assertSame($expected, $data);

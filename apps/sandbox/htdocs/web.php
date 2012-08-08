@@ -57,7 +57,7 @@ require_once $system . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_runs.php
 
 // run mode
 $runMode = App::RUN_MODE_DEV;
-$useCache = true;
+$useCache = false;
 error_log('run:' . __NAMESPACE__ . " mode={$runMode} cahce=" . ($useCache ? 'enable' : 'disable'));
 
 // Application

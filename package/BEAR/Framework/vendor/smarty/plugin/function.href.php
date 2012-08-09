@@ -36,11 +36,15 @@ use Guzzle\Parser\UriTemplate\UriTemplate;
  */
 function smarty_function_href($params, $template)
 {
-    if (empty($params['rel']) || empty($template->smarty->tpl_vars['resource']->value->links[$params['rel']])) {
-        trigger_error("href: missing 'rel' parameter nor no value",E_USER_WARNING);
+    if (empty($params['rel'])) {
+        trigger_error("href: missing 'rel' parameter", E_USER_WARNING);
         return;
     }
-    
+    if (empty($template->smarty->tpl_vars['resource']->value->links[$params['rel']])) {
+        trigger_error("href: links needs {$params['rel']} parameter", E_USER_WARNING);
+        return;
+    }
+
     $rel = $params['rel'];
     $data = (isset($params['data'])) ? $params['data'] : $template->smarty->tpl_vars['resource']->value->body;
     $resource = $template->smarty->tpl_vars['resource']->value;
@@ -48,8 +52,8 @@ function smarty_function_href($params, $template)
 
     // get expanded url
     $uri = (new UriTemplate)->expand($template, (array) $data);
-    
+
     // remove "page://self/"
     $uri = str_replace('page://self/', '/', $uri);
-    return $uri;    
+    return $uri;
 }

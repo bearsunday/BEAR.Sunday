@@ -2,6 +2,8 @@
 
 namespace BEAR\Framework\Tests;
 
+use BEAR\Framework\Output\Console;
+
 use BEAR\Framework\Web\SymfonyResponse as Output;
 use BEAR\Framework\Resource\Page\Ok;
 /**
@@ -12,7 +14,7 @@ class HttFoundationTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->output = new Output;
+        $this->output = new Output(new Console);
     }
 
     public function testNew()

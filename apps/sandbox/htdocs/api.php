@@ -56,5 +56,5 @@ try {
 } catch (Exception $e) {
     $page = $app->exceptionHandler->handle($e);
 }
-$send = (PHP_SAPI === 'cli') ? 'sendCli' : 'send';
-$app->response->setResource($page)->render()->prepare()->$send();
+$app->response->setResource($page)->render()->prepare()->send();
+exit(0);

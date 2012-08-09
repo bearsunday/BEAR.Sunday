@@ -2,6 +2,8 @@
 
 namespace BEAR\Framework\Tests;
 
+use BEAR\Framework\Output\Console;
+
 use BEAR\Framework\Exception\ExceptionHandler;
 use BEAR\Framework\Web\SymfonyResponse as Response;
 
@@ -12,7 +14,7 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
         $this->exceptionHandler = new ExceptionHandler;
         $this->exceptionHandler->setLogDir(__DIR__ . '/tmp');
-        $output = new Response;
+        $output = new Response(new Console);
         $this->exceptionHandler->setResponse($output);
     }
 

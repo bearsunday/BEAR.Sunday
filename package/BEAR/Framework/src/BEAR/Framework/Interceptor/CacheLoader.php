@@ -10,6 +10,8 @@ use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 use Guzzle\Common\Cache\CacheAdapterInterface;
 use Ray\Di\Di\Inject;
+use Exception;
+
 /**
  * Cache interceptor
  *
@@ -92,7 +94,11 @@ class CacheLoader implements CacheInterface, MethodInterceptor
             $saved['pager'][$pager] = $data;
             $data = $saved;
         }
-        $this->cache->save($id, $data, $time);
+        try {
+            $this->cache->save($id, $data, $time);
+        } catch (Exception $e) {
+            error_log(get_class($e) . ':' . $e->getMessage());
+        }
 
         return $resource;
     }

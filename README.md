@@ -112,7 +112,6 @@ Rahter than reinvent the wheel and develop our library, BEAR.Sunday use (or will
  * [Symfony/HttpFoundation](https://github.com/symfony/HttpFoundation)
  * [Zend/Cache](https://github.com/zendframework/zf2)
  * [Zend/Log](https://github.com/zendframework/zf2)
-
  * [Haanga](http://haanga.org/ "Haanga")
  * [Twig/Twig](http://twig.sensiolabs.org/ "Twig")
  * [Symfony/Validator](https://github.com/symfony/Validator "Symfony.Validator")
@@ -138,7 +137,7 @@ Here's how to install BEAR.Sunday:
     $ git clone git://github.com/koriym/BEAR.Sunday.git
     $ cd BEAR.Sunday
     $ wget http://getcomposer.org/composer.phar
-    $ php ./composer.phar install
+    $ php ./composer.phar update
     $ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
 
 ### buil-in web server

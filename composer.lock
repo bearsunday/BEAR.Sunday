@@ -1,5 +1,5 @@
 {
-    "hash": "35e57d073a2aeef7aec3976861ebea27",
+    "hash": "0eaa73771a402d435877446ca7a72aa2",
     "packages": [
         {
             "package": "Aura/Autoload",
@@ -141,7 +141,6 @@
         "pagerfanta/pagerfanta": 20,
         "ray/aop": 20,
         "ray/di": 20,
-        "printo/printo": 20,
         "firephp/firephp-core": 20,
         "crodas/haanga": 20,
         "twig/twig": 20,

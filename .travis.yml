@@ -11,5 +11,5 @@ before_script:
  - pyrus install pear.phpunit.de/PHP_Invoker
  - pyrus install pear.phpunit.de/DbUnit
  - wget http://getcomposer.org/composer.phar
- - php composer.phar install
+ - php composer.phar update
 script: phpunit --coverage-text

@@ -28,7 +28,7 @@ use BEAR\Resource\Object as ResourceObject;
 use Exception;
 
 $system = dirname(dirname(dirname(__DIR__)));
-require_once $system . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+require_once $system . '/src/BEAR/Framework/Framework.php';
 require_once dirname(__DIR__) . '/App.php';
 
 if (PHP_SAPI == 'cli-server') {

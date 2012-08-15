@@ -8,7 +8,7 @@ use BEAR\Framework\Framework;
 use Exception;
 
 $system = dirname(dirname(dirname(__DIR__)));
-require_once $system . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+require_once $system . '/src/BEAR/Framework/Framework.php';
 // profiler
 require_once dirname(__DIR__) . '/App.php';
 

@@ -10,10 +10,10 @@ use BEAR\Framework\Framework;
 use BEAR\Framework\Router\Router;
 
 // profiler
-require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/scripts/profile.php';
+require dirname(dirname(dirname(__DIR__))) . '/scripts/profile.php';
 
 // load
-require dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+require dirname(dirname(dirname(__DIR__))) . '/src/BEAR/Framework/Framework.php';
 require dirname(__DIR__) . '/App.php';
 
 // App instance (init)

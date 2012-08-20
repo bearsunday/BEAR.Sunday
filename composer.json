@@ -1,5 +1,5 @@
 {
-    "name": "bearsunday/bearsunday",
+    "name": "bear/sunday",
     "type": "library",
     "description": "BEAR.Sunday, a resource oriented framework",
     "version": "0.3.3-dev",
@@ -13,6 +13,7 @@
             "homepage": "https://github.com/koriym"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
         "ext-apc": "*",

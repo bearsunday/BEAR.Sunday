@@ -16,20 +16,20 @@
         {
             "package": "BEAR/Resource",
             "version": "dev-master",
-            "source-reference": "1c690fea929dede543a4817372e5dbd6b824cdc9",
-            "commit-date": "1345010782"
+            "source-reference": "37dceeb14d0680b0516aafc5f8738e46fc94d46a",
+            "commit-date": "1345443365"
         },
         {
             "package": "Ray/Aop",
             "version": "dev-master",
-            "source-reference": "71843ff9fba774e1c0266f777b6a07c9ba953ecc",
-            "commit-date": "1344486379"
+            "source-reference": "2d118d33454a2c2006b83a2d62ae9270eea33413",
+            "commit-date": "1345435456"
         },
         {
             "package": "Ray/Di",
             "version": "dev-master",
-            "source-reference": "93f5b6e4d103701bf771a76bd1fe879023e5eff1",
-            "commit-date": "1345009803"
+            "source-reference": "1.0.0-beta1",
+            "commit-date": "1345435997"
         },
         {
             "package": "aura/di",
@@ -77,7 +77,7 @@
         },
         {
             "package": "monolog/monolog",
-            "version": "1.1.0"
+            "version": "1.2.0"
         },
         {
             "package": "pagerfanta/pagerfanta",
@@ -110,8 +110,8 @@
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "v2.1.0-BETA4",
-            "commit-date": "1342739894"
+            "source-reference": "76c76f62702b09e0f182ae618be0f1d79e2a711f",
+            "commit-date": "1345066712"
         },
         {
             "package": "symfony/http-foundation",

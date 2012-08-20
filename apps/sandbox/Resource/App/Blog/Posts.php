@@ -45,7 +45,7 @@ class Posts extends ResourceObject implements DbSetterInterface
      * @var array
      */
     public $links = [
-        'page_post' => 'page://self/blog/posts/post',
+        'page_post' => 'page://self/blog/posts/post{?id}',
         'page_edit' => 'page://self/blog/posts/edit{?id}',
         'page_delete' => 'page://self/blog/posts?_method=delete{&id}',
     ];

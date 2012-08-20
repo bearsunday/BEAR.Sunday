@@ -76,7 +76,7 @@
         <h1>{$greeting}</h1>
         <p>PHP 5.4+ Resource Oriented Framework</p>
         <p><a class="btn btn-primary btn-large" href="https://github.com/koriym/BEAR.Sunday">View project on GitHub &raquo;</a> 
-        <a rel="tooltip" title ="{$apc.size} bytes of {$apc.total} user APC entries will be cleard." class="btn btn-primary btn-large btn btn-warning" href="/_bear/refresh.php"><span class="icon-refresh"></span> Refresh</a></p> 
+        <a rel="tooltip" title ="{$apc.size} bytes of {$apc.total} user APC entries will be cleard." class="btn btn-primary btn-large btn btn-warning" href="/_dev/refresh.php"><span class="icon-refresh"></span> Refresh</a></p> 
       </div>
       <!-- Example row of columns -->
       <div class="row">
@@ -96,7 +96,7 @@
           <h3>optional</h3>
           <ul>
             <li>memcache <code>{$extentions.memcache}</code></li>
-            <p><a class="btn" href="_bear/memcache.php/" id="memchace" rel="tooltip" title="Open memcache admin cotroll panel">Memcache Admin &raquo;</a></p>
+            <p><a class="btn" href="_dev/memcache.php/" id="memchace" rel="tooltip" title="Open memcache admin cotroll panel">Memcache Admin &raquo;</a></p>
             <li>pdo_sqlite <code>{$extentions.pdo_sqlite}</code></li>
             <li>mysqlnd <code>{$extentions.mysqlnd}</code></li>
             <li>Xdebug <code>{$extentions.Xdebug}</code></li>

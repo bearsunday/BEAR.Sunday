@@ -1,5 +1,5 @@
 {
-    "hash": "0eaa73771a402d435877446ca7a72aa2",
+    "hash": "adfb35015b72b93e3d1941751a57ef0e",
     "packages": [
         {
             "package": "Aura/Autoload",
@@ -16,8 +16,8 @@
         {
             "package": "BEAR/Resource",
             "version": "dev-master",
-            "source-reference": "37dceeb14d0680b0516aafc5f8738e46fc94d46a",
-            "commit-date": "1345443365"
+            "source-reference": "47a93a4b86dbb3b0eb6c7eb9b2e27b7944de3122",
+            "commit-date": "1345450433"
         },
         {
             "package": "Ray/Aop",
@@ -88,8 +88,8 @@
         {
             "package": "printo/printo",
             "version": "dev-master",
-            "source-reference": "ffc4a91c1196d1db6d6afb2f221d33c38ba19568",
-            "commit-date": "1344996316"
+            "source-reference": "0cd9c846a68655122bfcef7d79e2e893329eaecf",
+            "commit-date": "1345448885"
         },
         {
             "package": "smarty/smarty",

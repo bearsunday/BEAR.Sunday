@@ -7,6 +7,7 @@
 namespace BEAR\Framework\Module\TemplateEngine\SmartyModule;
 
 use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 use BEAR\Framework\Framework;
 use BEAR\Framework\Inject\LogInject;
 use BEAR\Framework\Inject\TmpDirInject;

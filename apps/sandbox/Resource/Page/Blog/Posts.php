@@ -24,7 +24,6 @@ class Posts extends Page
      * @var array
      */
     public $body = [
-        'posts' => ''
     ];
 
     /**
@@ -43,12 +42,12 @@ class Posts extends Page
 
     /**
      * Delte
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return self
      * @CacheUpdate
-     * 
+     *
      */
     public function onDelete($id)
     {
@@ -61,8 +60,7 @@ class Posts extends Page
         ->request();
 
         // message
-        $this['message'] = 'Entry deleted.';
-
-        return $this->onGet();
+        $this->headers['location'] = '/blog/posts';
+        return $this;
     }
 }

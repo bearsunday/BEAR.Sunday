@@ -111,8 +111,9 @@ EOT;
 foreach ($exception['trace'] as $trace) {
     if (isset($trace['file'])) {
         $file =  $trace['file'];
+        $line =  $trace['line'];
         $editFile = str_replace($systemRoot, '', $file);
-        $html .= "<a target=\"code_edit\" href=\"/_dev/edit/?file={$editFile}\">{$file}  : {$trace['line']} <span class=\"icon-share-alt\"></span></a><br>";
+        $html .= "<a target=\"code_edit\" href=\"/_dev/edit/?file={$editFile}&line={$line}\">{$file}  : {$trace['line']} <span class=\"icon-share-alt\"></span></a><br>";
     }
 }
 $html .= <<<EOT

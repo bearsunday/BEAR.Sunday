@@ -16,8 +16,8 @@
         {
             "package": "BEAR/Resource",
             "version": "dev-master",
-            "source-reference": "47a93a4b86dbb3b0eb6c7eb9b2e27b7944de3122",
-            "commit-date": "1345450433"
+            "source-reference": "f6f6350665d67970629863027f492e5abbe0f7f2",
+            "commit-date": "1345616864"
         },
         {
             "package": "Ray/Aop",

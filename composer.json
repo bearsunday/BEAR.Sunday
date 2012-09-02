@@ -37,7 +37,8 @@
         "ray/di": "dev-master",
         "vdump/vdump": "*",
         "printo/printo": "*",
-        "firephp/firephp-core": "dev-master"
+        "firephp/firephp-core": "dev-master",
+        "twitter/bootstrap": "dev-master"
     },
     "autoload": {
         "psr-0": {
@@ -140,6 +141,22 @@
                     "psr-0": { "Zend_Cache": "/" }
                 }
             }
-        }
+        },
+        {
+           "type": "package",
+           "package": {
+               "version": "master",
+               "name": "twitter/bootstrap",
+               "source": {
+                   "url": "https://github.com/twitter/bootstrap.git",
+                   "type": "git",
+                   "reference": "master"
+               },
+               "dist": {
+                   "url": "https://github.com/twitter/bootstrap/zipball/master",
+                   "type": "zip"
+               }
+           }
+       }
     ]
 }

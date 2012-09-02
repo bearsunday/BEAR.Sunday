@@ -1,5 +1,5 @@
 {
-    "hash": "adfb35015b72b93e3d1941751a57ef0e",
+    "hash": "71c4d0c4333b71689d32f79bdabb6b0b",
     "packages": [
         {
             "package": "Aura/Autoload",
@@ -128,6 +128,12 @@
             "commit-date": "1343367114"
         },
         {
+            "package": "twitter/bootstrap",
+            "version": "master",
+            "source-reference": "master",
+            "commit-date": "1345529623"
+        },
+        {
             "package": "vdump/vdump",
             "version": "0.1.0"
         }
@@ -150,6 +156,7 @@
         "ray/aop": 20,
         "ray/di": 20,
         "firephp/firephp-core": 20,
+        "twitter/bootstrap": 20,
         "crodas/haanga": 20,
         "twig/twig": 20,
         "zendframework/zend-loader": 20,

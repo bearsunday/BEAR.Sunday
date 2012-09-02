@@ -34,8 +34,8 @@
         {
             "package": "aura/di",
             "version": "dev-master",
-            "source-reference": "1.0.0-beta3",
-            "commit-date": "1343709915"
+            "source-reference": "8730acf19625fb74fca9f5ec8a0f80012c754442",
+            "commit-date": "1346013492"
         },
         {
             "package": "aura/router",
@@ -52,14 +52,14 @@
         {
             "package": "doctrine/common",
             "version": "2.3.x-dev",
-            "source-reference": "2ec4bc6db13db6a0976a16b71058083c55cbcdbd",
-            "commit-date": "1343847076"
+            "source-reference": "605b1b8b5a7bc8daf9111fb35483e5708e30de35",
+            "commit-date": "1346249247"
         },
         {
             "package": "doctrine/dbal",
             "version": "2.3.x-dev",
-            "source-reference": "6470e2089e9ab4a2d24e6927ebe073b7935d7ed5",
-            "commit-date": "1344980709"
+            "source-reference": "adb28e4e1f959d515971b8e8b7f05a01913a7b91",
+            "commit-date": "1346249329"
         },
         {
             "package": "facebook/xhprof",
@@ -77,13 +77,21 @@
         },
         {
             "package": "monolog/monolog",
-            "version": "1.2.0"
+            "version": "dev-master",
+            "alias-pretty-version": "1.3.x-dev",
+            "alias-version": "1.3.9999999.9999999-dev"
+        },
+        {
+            "package": "monolog/monolog",
+            "version": "dev-master",
+            "source-reference": "1.2.1",
+            "commit-date": "1346241200"
         },
         {
             "package": "pagerfanta/pagerfanta",
             "version": "dev-master",
-            "source-reference": "486a9b809fa7660787fb3b97dffcc26d30de6356",
-            "commit-date": "1343021263"
+            "source-reference": "12f71d99457b018fb80746f84514dd5b495c5789",
+            "commit-date": "1345672591"
         },
         {
             "package": "printo/printo",
@@ -98,7 +106,7 @@
         {
             "package": "symfony/console",
             "version": "2.0.x-dev",
-            "source-reference": "3d0d961fa4e721ca282f2aba05f6eb2b9d20ad14",
+            "source-reference": "v2.0.17",
             "commit-date": "1342761932"
         },
         {
@@ -110,13 +118,13 @@
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "76c76f62702b09e0f182ae618be0f1d79e2a711f",
-            "commit-date": "1345066712"
+            "source-reference": "v2.1.0-RC2",
+            "commit-date": "1345643321"
         },
         {
             "package": "symfony/http-foundation",
             "version": "2.0.x-dev",
-            "source-reference": "ebece78daf32ab04bcf10f78723d06589e192586",
+            "source-reference": "v2.0.17",
             "commit-date": "1343367114"
         },
         {

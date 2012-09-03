@@ -19,24 +19,6 @@ use Nocarrier\Hal;
  */
 class HalRenderer implements Renderable
 {
-//     /**
-//      * Hal
-//      *
-//      * @see https://github.com/blongden/hal
-//      *
-//      * @var Hal
-//      */
-//     private $hal;
-
-//     /**
-//      *
-//      * @param Hal $hal
-//      */
-//     public function __construct(Nocarrier\Hal $hal)
-//     {
-//         $this->hal = $hal;
-//     }
-
     /**
      * (non-PHPdoc)
      * @see BEAR\Resource.Renderable::render()

@@ -31,52 +31,38 @@
 
   <body>
 
-    <div class="navbar navbar-fixed-top">
+
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <i class="icon-bar"></i>
+            <i class="icon-bar"></i>
+            <i class="icon-bar"></i>
           </a>
           <a class="brand" href="#">BEAR.Sunday</a>
-          <div class="nav-collapse">
-    <ul class="nav nav-pills">
+          <div class="nav-collapse collapse">
+            <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="https://github.com/koriym/BEAR.Sunday">GitHub</a></li>
-              <li><a href="http://code.google.com/p/bearsunday/wiki/manual?tm=6">Docs</a></li>
-              <li><a href="http://code.google.com/p/rayphp/wiki/Motivation?tm=6">Ray</a></li>
-              <li><a href="https://github.com/koriym/BEAR.Sunday/issues">Issues</a></li>
-    <li class="dropdown" id="menu1">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
-    API
-    <b class="caret"></b>
-    </a>
-    
-    <ul class="dropdown-menu">
-    <li><a href="http://vps.kumasystem.com:8080/job/Ray.Di/API_Documentation/">Ray.Di</a></li>
-    <li><a href="http://vps.kumasystem.com:8080/job/Ray.Aop/API_Documentation/">Ray.Aop</a></li>
-    <li class="divider"></li>
-    <li><a href="http://vps.kumasystem.com:8080/job/BEAR.Resource/API_Documentation/">BEAR.Resource</a></li>
-    <li><a href="http://vps.kumasystem.com:8080/job/BEAR.Sunday/API_Documentation/">BEAR.Sunday</a></li>
-    </ul>
-    </li>
               <li><a href="mailto:koriyama@bear-project.net">Contact</a></li>
-    </ul>
-    
+            </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
-    
+
+<!-- Subhead
+================================================== -->    
     <div class="container">
         
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
         <h1>{$greeting}</h1>
-        <p>PHP 5.4+ Resource Oriented Framework</p>
+        <p>A Resource Oriented Framework for PHP5.4</p>
         <p><a class="btn btn-primary btn-large" href="https://github.com/koriym/BEAR.Sunday">View project on GitHub &raquo;</a> 
-        <a rel="tooltip" title ="{$apc.size} bytes of {$apc.total} user APC entries will be cleard." class="btn btn-primary btn-large btn btn-warning" href="/_dev/refresh.php"><span class="icon-refresh"></span> Refresh</a></p> 
+        <a rel="tooltip" title ="{$apc.size} bytes of {$apc.total} user APC entries will be cleard." class="btn btn-primary btn-large btn btn-warning" href="/_dev/refresh.php"><i class="icon-refresh"></i> Refresh</a></p> 
       </div>
       <!-- Example row of columns -->
       <div class="row">
@@ -121,6 +107,11 @@
             <li><a href="{href rel="blog"}">Blog tutorial</a></li>
           </ul>
           <p><a class="btn" href="http://code.google.com/p/bearsunday/wiki/blog">Try tutorial &raquo;</a></p>
+          <h2>Links</h2>
+              <ul>
+              <li><i class="icon-book"></i><a href="http://code.google.com/p/bearsunday/wiki/manual?tm=6">BEAR.Sunday Manual</a></li>
+              <li><i class="icon-book"></i><a href="http://code.google.com/p/rayphp/wiki/Motivation?tm=6">Ray.Di / Ray.AOP Manual</a></li>
+              <li><i class="icon-fire"></i><a href="https://github.com/koriym/BEAR.Sunday/issues">Issues</a></li>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 {
-    "hash": "71c4d0c4333b71689d32f79bdabb6b0b",
+    "hash": "6b68ed436fbd92a0c96a3446691014bd",
     "packages": [
         {
             "package": "Aura/Autoload",
@@ -86,6 +86,12 @@
             "version": "dev-master",
             "source-reference": "1.2.1",
             "commit-date": "1346241200"
+        },
+        {
+            "package": "nocarrier/hal",
+            "version": "dev-master",
+            "source-reference": "8df21bd985b0995a8316ef18448cdf28d50dbc90",
+            "commit-date": "1340720820"
         },
         {
             "package": "pagerfanta/pagerfanta",

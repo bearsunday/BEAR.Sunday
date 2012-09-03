@@ -38,7 +38,8 @@
         "vdump/vdump": "*",
         "printo/printo": "*",
         "firephp/firephp-core": "dev-master",
-        "twitter/bootstrap": "dev-master"
+        "twitter/bootstrap": "dev-master",
+        "nocarrier/hal": "*"
     },
     "autoload": {
         "psr-0": {

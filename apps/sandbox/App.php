@@ -27,8 +27,9 @@ final class App implements AppContext
     /** Run mode Production */
     const RUN_MODE_PROD = 'Prod';
 
-    /** Run mode Production */
+    /** Run mode API */
     const RUN_MODE_API = 'Api';
+    const RUN_MODE_HAL = 'Hal';
 
     /** Run mode Develop */
     const RUN_MODE_DEV = 'Dev';

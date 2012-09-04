@@ -2,6 +2,7 @@
 namespace sandbox\Resource\Page;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
+use BEAR\Framework\Resource\Link;
 use BEAR\Framework\Inject\ResourceInject;
 use BEAR\Framework\Framework;
 use Ray\Di\Di\Inject;
@@ -19,8 +20,8 @@ class Index extends Page
      * @var array
      */
     public $links = [
-        'helloworld' => 'page://self/hello/world',
-        'blog' => 'page://self/blog/posts'
+        'helloworld' => [Link::HREF => 'page://self/hello/world'],
+        'blog' => [Link::HREF => 'page://self/blog/posts']
     ];
 
     public function __construct()

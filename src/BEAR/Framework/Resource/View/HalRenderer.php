@@ -6,6 +6,7 @@
  */
 namespace BEAR\Framework\Resource\View;
 
+use BEAR\Framework\Resource\Link;
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Resource\Requestable;
 use BEAR\Resource\Renderable;
@@ -35,9 +36,12 @@ class HalRenderer implements Renderable
         }
 
         // HAL
-        $hal = new Hal($ro->uri, $ro->body);
-        foreach ($ro->links as $rel => $uri) {
-            $hal->addLink($rel, $uri);
+        $data = $ro->body ?: [];
+        $hal = new Hal($ro->uri, $data);
+        foreach ($ro->links as $rel => $link) {
+            $title = (isset($link[Link::TITLE])) ? $link[Link::TITLE] : null;
+            $attr = (isset($link[Link::TEMPLATED]) && $link[Link::TEMPLATED] === true) ? [Link::TEMPLATED => true] : [];
+            $hal->addLink($rel, $link[Link::HREF], $title, $attr);
         }
         $ro->view = $hal->asJson(true);
         return $ro->view;

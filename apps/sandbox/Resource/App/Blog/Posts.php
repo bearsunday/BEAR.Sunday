@@ -10,6 +10,7 @@ use BEAR\Resource\AbstractObject as ResourceObject;
 use Doctrine\DBAL\Connection;
 use PDO;
 use Doctrine\DBAL\Driver\Connection as DriverConnection;
+use BEAR\Framework\Resource\Link;
 
 /**
  * Posts
@@ -45,9 +46,9 @@ class Posts extends ResourceObject implements DbSetterInterface
      * @var array
      */
     public $links = [
-        'page_post' => 'page://self/blog/posts/post{?id}',
-        'page_edit' => 'page://self/blog/posts/edit{?id}',
-        'page_delete' => 'page://self/blog/posts?_method=delete{&id}',
+        'page_post' => [Link::HREF => 'page://self/blog/posts/post'],
+        'page_edit' => [Link::HREF => 'page://self/blog/posts/edit{?id}', Link::TEMPLATED => true],
+        'page_delete' => [Link::HREF => 'page://self/blog/posts?_method=delete{&id}', Link::TEMPLATED => true]
     ];
 
     /**

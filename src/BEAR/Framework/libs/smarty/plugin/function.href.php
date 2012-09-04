@@ -2,6 +2,8 @@
 
 // use Guzzle\Http\UriTemplate;
 use Guzzle\Parser\UriTemplate\UriTemplate;
+use BEAR\Framework\Resource\Link;
+
 /**
  * Smarty plugin
  *
@@ -48,10 +50,13 @@ function smarty_function_href($params, $template)
     $rel = $params['rel'];
     $data = (isset($params['data'])) ? $params['data'] : $template->smarty->tpl_vars['resource']->value->body;
     $resource = $template->smarty->tpl_vars['resource']->value;
-    $template = $resource->links[$rel];
-
-    // get expanded url
-    $uri = (new UriTemplate)->expand($template, (array) $data);
+    $link = $resource->links[$rel];
+    if (isset($link[Link::TEMPLATED]) &&  $link[Link::TEMPLATED] === true) {
+        // get expanded url
+        $uri = (new UriTemplate)->expand($link[Link::HREF], (array) $data);
+    } else {
+        $uri = $link[Link::HREF];
+    }
 
     // remove "page://self/"
     $uri = str_replace('page://self/', '/', $uri);

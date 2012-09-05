@@ -26,9 +26,9 @@ use BEAR\Framework\Globals;
 use BEAR\Framework\Web;
 use Exception;
 
-$system = dirname(dirname(dirname(__DIR__)));
-require_once $system . '/src/BEAR/Framework/Framework.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/src/BEAR/Framework/Framework.php';
 require_once dirname(__DIR__) . '/App.php';
+
 
 if (PHP_SAPI == 'cli-server') {
     if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|ico)$/', $_SERVER["REQUEST_URI"])) {
@@ -41,15 +41,14 @@ $runMode = App::RUN_MODE_HAL;
 $useCache = false;
 $app = App::factory($runMode, $useCache);
 
-// Dispatch
-$globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
-$pathInfo = isset($globals['_SERVER']['PATH_INFO']) ? $globals['_SERVER']['PATH_INFO'] : '/index';
-$uri = (PHP_SAPI === 'cli') ? $argv[2] : 'app://self' . $pathInfo;
-
 try {
+    // Dispatch
+    $globals = (PHP_SAPI === 'cli') ? new Globals($argv) : $GLOBALS;
+    $pathInfo = isset($globals['_SERVER']['PATH_INFO']) ? $globals['_SERVER']['PATH_INFO'] : '/index';
+    $uri = (PHP_SAPI === 'cli') ? $argv[2] : 'app://self' . $pathInfo;
+    // Router
     list($method, $query) = (new Router)->getMethodQuery($globals);
     list($resource, $page) = (new Dispatcher($app))->getInstance($uri);
-
     // Request
     $page = $app->resource->$method->object($page)->withQuery($globals['_GET'])->eager->request();
 } catch (Exception $e) {

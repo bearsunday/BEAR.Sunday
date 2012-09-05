@@ -19,6 +19,7 @@ class Redirect extends Page
     {
         $this->code = 302;
         $this->headers = ['Location' => '/'];
+
         return $this;
     }
 }

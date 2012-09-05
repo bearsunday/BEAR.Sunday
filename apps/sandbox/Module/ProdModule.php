@@ -10,7 +10,6 @@ namespace sandbox\Module;
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Module\TemplateEngine;
-use BEAR\Framework\Module\Database;
 use BEAR\Framework\Module\Provider\CacheProvider;
 use Ray\Di\Injector;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
@@ -47,7 +46,7 @@ class ProdModule extends AbstractModule
         $this->properties = require dirname(__DIR__) . "/scripts/{$configFile}";
         parent::__construct();
     }
-    
+
     /**
      * Configure
      *

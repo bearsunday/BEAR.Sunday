@@ -78,6 +78,7 @@ final class App implements AppContext
 
         // register logging
         $app->logger->register($app);
+
         return $app;
     }
 }

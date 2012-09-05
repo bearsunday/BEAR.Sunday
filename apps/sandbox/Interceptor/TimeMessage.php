@@ -22,6 +22,7 @@ class TimeMessage implements MethodInterceptor
     {
         $time = date('g:i');
         $result = $invocation->proceed() . ". It is {$time} now !";
+
         return $result;
     }
 }

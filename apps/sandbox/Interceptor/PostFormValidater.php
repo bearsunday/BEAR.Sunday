@@ -8,7 +8,6 @@ namespace sandbox\Interceptor;
 
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
-use Ray\Di\Di\Inject;
 
 /**
  * Log Interceptor

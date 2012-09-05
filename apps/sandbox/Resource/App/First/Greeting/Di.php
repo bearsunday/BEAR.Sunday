@@ -12,9 +12,9 @@ use Ray\Di\Di\Named;
 class Di extends AbstractObject
 {
     /**
-     * 
+     *
      * @param string $message
-     * 
+     *
      * @Inject
      * @Named("greeting_msg")
      */
@@ -22,12 +22,12 @@ class Di extends AbstractObject
     {
         $this->message = $message;
     }
-    
+
     /**
      * Get
      *
-     * @param  string $name
-     * 
+     * @param string $name
+     *
      * @return string
      *
      */

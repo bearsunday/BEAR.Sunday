@@ -12,6 +12,7 @@ class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
     public function getConnection()
     {
         $pdo = require App::DIR . '/tests/scripts/db.php';
+
         return $this->createDefaultDBConnection($pdo, 'mysql');
     }
 

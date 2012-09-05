@@ -11,8 +11,8 @@ class Greeting extends AbstractObject
     /**
      * Get
      *
-     * @param  string $name
-     * 
+     * @param string $name
+     *
      * @return string
      *
      */

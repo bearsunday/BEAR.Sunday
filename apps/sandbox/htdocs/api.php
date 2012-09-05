@@ -24,7 +24,6 @@ use BEAR\Framework\Router\Router;
 use BEAR\Framework\Dispatcher;
 use BEAR\Framework\Globals;
 use BEAR\Framework\Web;
-use BEAR\Resource\Object as ResourceObject;
 use Exception;
 
 $system = dirname(dirname(dirname(__DIR__)));

@@ -61,6 +61,7 @@ class Posts extends Page
 
         // message
         $this->headers['location'] = '/blog/posts';
+
         return $this;
     }
 }

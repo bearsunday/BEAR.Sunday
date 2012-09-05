@@ -2,7 +2,6 @@
 namespace sandbox\tests\Resource\App\Blog;
 
 use sandbox\App;
-use BEAR\Resource\Annotation\Post;
 
 class GreetingTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,9 +29,10 @@ class GreetingTest extends \PHPUnit_Framework_TestCase
         // resource request
         $resource = $this->resource->get->uri('app://self/first/greeting')->withQuery(['name' => 'BEAR'])->eager->request();
         $this->assertSame(200, $resource->code);
+
         return $resource;
     }
-    
+
     /**
      * Type ?
      *

@@ -55,7 +55,6 @@ require_once $system . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php
 require_once $system . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_lib.php';
 require_once $system . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_runs.php';
 
-
 // run mode
 $runMode = App::RUN_MODE_DEV;
 $useCache = false;

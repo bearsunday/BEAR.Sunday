@@ -2,7 +2,6 @@
 namespace sandbox\tests\Resource\Page\Blog;
 
 use sandbox\App;
-use sandbox\tests\Config;
 
 class PostsTest extends \PHPUnit_Extensions_Database_TestCase
 {
@@ -12,6 +11,7 @@ class PostsTest extends \PHPUnit_Extensions_Database_TestCase
     public function getConnection()
     {
         $pdo = require App::DIR . '/tests/scripts/db.php';
+
         return $this->createDefaultDBConnection($pdo, 'mysql');
     }
 

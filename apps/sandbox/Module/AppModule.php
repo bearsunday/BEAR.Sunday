@@ -27,8 +27,6 @@ use Ray\Di\InjectorInterface;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Doctrine\Common\Cache\ApcCache as CacheStorage;
 
-
-
 /**
  * Application module
  *

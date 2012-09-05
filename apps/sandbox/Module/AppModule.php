@@ -69,6 +69,7 @@ class AppModule extends AbstractModule
 
         // greeting
         $this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');
+        $this->bind('BEAR\Resource\Renderable')->annotatedWith('hal')->to('BEAR\Framework\Resource\View\HalRenderer');
         // time message binding
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\App\First\Greeting\Aop'),

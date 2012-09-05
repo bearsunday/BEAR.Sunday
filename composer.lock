@@ -14,12 +14,6 @@
             "commit-date": "1343710300"
         },
         {
-            "package": "BEAR/Resource",
-            "version": "dev-master",
-            "source-reference": "f6f6350665d67970629863027f492e5abbe0f7f2",
-            "commit-date": "1345616864"
-        },
-        {
             "package": "Ray/Aop",
             "version": "dev-master",
             "source-reference": "2d118d33454a2c2006b83a2d62ae9270eea33413",
@@ -48,6 +42,12 @@
             "version": "dev-master",
             "source-reference": "1.0.0-beta3",
             "commit-date": "1343710041"
+        },
+        {
+            "package": "bear/resource",
+            "version": "dev-master",
+            "source-reference": "fa2b0337a062440bbd1b8c3f132dd0eef49c2441",
+            "commit-date": "1346839528"
         },
         {
             "package": "doctrine/common",

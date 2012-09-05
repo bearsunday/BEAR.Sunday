@@ -21,7 +21,8 @@ class Index extends Page
      */
     public $links = [
         'helloworld' => [Link::HREF => 'page://self/hello/world'],
-        'blog' => [Link::HREF => 'page://self/blog/posts']
+        'blog' => [Link::HREF => 'page://self/blog/posts'],
+        'restbucks' => [Link::HREF => 'page://self/restbucks/index']
     ];
 
     public function __construct()

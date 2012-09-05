@@ -5,9 +5,9 @@ use BEAR\Resource\Exception\BadRequest;
 use BEAR\Resource\Exception\MethodNotAllowed;
 use BEAR\Resource\Exception\InvalidParameter;
 use BEAR\Resource\Exception\InvalidScheme;
-use BEAR\Resource\Exception\ResourceNotFound;
 use Ray\Di\Exception\InvalidBinding;
 use BEAR\Framework\Resource\Page\Error;
+use BEAR\Framework\Exception\ResourceNotFound;
 use BEAR\Framework\Web\ResponseInterface;
 use BEAR\Framework\Inject\LogDirInject;
 use Exception;
@@ -37,7 +37,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
         try {
             $response = new Error;
             throw $e;
-        } catch (NotFound $e) {
+        } catch (ResourceNotFound $e) {
             $response->code = 404;
             $response->view = 'The requested URI was not found on this service.';
             goto NOT_FOUND;
@@ -57,12 +57,11 @@ class ExceptionHandler implements ExceptionHandlerInterface
             $response->code = 405;
             $response->view = 'The requested method is not allowed for this URI.';
             goto METHOD_NOT_ALLOWED;
-        } catch (ResourceNotFound $e) {
-            $response->code = 404;
-            $response->view = 'The requested URI was not found on this service.';
-            goto NOT_FOUND;
         } catch (InvalidBinding $e) {
             goto INVALID_BINDING;
+        } catch (InvalidUri $e) {
+            $response->code = 400;
+            goto INVALID_URI;
         } catch (\Exception $e) {
             goto SERVER_ERROR;
         }
@@ -70,9 +69,12 @@ class ExceptionHandler implements ExceptionHandlerInterface
         INVALID_BINDING:
         SERVER_ERROR:
         $response->code = 500;
+
         NOT_FOUND:
         BAD_REQUEST:
         METHOD_NOT_ALLOWED:
+        INVALID_URI:
+
         if (PHP_SAPI === 'cli') {
             $response->view = "Internal error occurred ({$exceptionId})";
         } else {

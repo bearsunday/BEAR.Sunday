@@ -44,6 +44,7 @@ class HalRenderer implements Renderable
             $hal->addLink($rel, $link[Link::HREF], $title, $attr);
         }
         $ro->view = $hal->asJson(true);
+
         return $ro->view;
     }
 }

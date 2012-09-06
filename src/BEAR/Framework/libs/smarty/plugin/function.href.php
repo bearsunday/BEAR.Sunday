@@ -1,6 +1,5 @@
 <?php
 
-// use Guzzle\Http\UriTemplate;
 use Guzzle\Parser\UriTemplate\UriTemplate;
 use BEAR\Framework\Resource\Link;
 
@@ -15,20 +14,19 @@ use BEAR\Framework\Resource\Link;
  * Smarty {href} function plugin
  *
  * Type:     function<br>
- * Name:     mailto<br>
- * Date:     May 21, 2002
- * Purpose:  automate mailto address link creation, and optionally encode them.<br>
+ * Name:     href<br>
+ * Purpose:  make uri link<br>
  * Params:
+ *
  * <pre>
- * - address    - (required) - e-mail address
- * - text       - (optional) - text to display, default is address
- * - encode     - (optional) - can be one of:
- * - extra      - (optional) - extra tags for the href link
+ * - rel        - (required) - relation
+ * - data       - (required) - data for template
  * </pre>
+ *
  * Examples:
  * <pre>
- * {mailto address="me@domain.com"}
- * {mailto address="me@domain.com" extra='class="mailto"'}
+ * {href rel="blog}
+ * {href rel="entry" data=$resoirce->body}
  * </pre>
  *
  * @param array                    $params   parameters

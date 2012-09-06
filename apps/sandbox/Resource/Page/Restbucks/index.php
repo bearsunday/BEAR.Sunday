@@ -3,6 +3,8 @@ namespace sandbox\Resource\Page\Restbucks;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;
+use BEAR\Resource\LoggerInterface;
+use BEAR\Resource\Code;
 
 /**
  * Restbucks order
@@ -15,6 +17,16 @@ class index extends Page
     public $body = [
         'ordered' => false
     ];
+
+    /**
+     * @Inject
+     *
+     * @param LoggerInterface $logger
+     */
+    public function setResourceLogger(LoggerInterface $logger)
+    {
+        $this->resourceLogger = $logger;
+    }
 
     /**
      * Get
@@ -71,10 +83,10 @@ class index extends Page
         ->uri($paymentUri)
         ->addQuery([
             'id' => $orderId,
-            'card_no' => '00001234',
-            'expires' => '010820',
-            'name' => 'sunday',
-            'amount' =>4
+            'card_no' => '0000123408010908',
+            'expires' => '021014',
+            'name' => 'BEAR SUNDAY',
+            'amount' => 1
         ])
         ->eager
         ->request();
@@ -83,14 +95,13 @@ class index extends Page
         // （店）お客さんに提供するために注文をみて、注文を"準備中"に変更する
 
         // get one order
-        $statusResponse = $this
+        $ordersResponse = $this
         ->resource
         ->get
         ->uri('app://self/restbucks/orders')
         ->eager
         ->request();
-        $order = $statusResponse->body['order'][0];
-
+        $order = $ordersResponse->body['order'][0];
         // change status
         $editUri = $order['_links']['edit']['href'];
         $response = $this
@@ -126,6 +137,23 @@ class index extends Page
 
         $this['ordered'] = true;
 
+        // log
+        $this['logs'] = $this->getLogs();
         return $this;
+    }
+
+    private function getLogs()
+    {
+        $logs = [];
+        $statusText = (new Code)->statusText;
+        foreach ($this->resourceLogger as $resourceLog) {
+            list($request, $response) = $resourceLog;
+            $logs[] = [
+            'request' => $request->toUriWithMethod(),
+            'code' => "{$response->code} {$statusText[$response->code]}",
+            'body' => (string) $response
+            ];
+        }
+        return $logs;
     }
 }

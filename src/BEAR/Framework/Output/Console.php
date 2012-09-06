@@ -10,7 +10,6 @@ use BEAR\Resource\Object as ResourceObject;
 use Ray\Di\Di\Inject;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Guzzle\Parser\UriTemplate\UriTemplate;
-use BEAR\Framework\Resource\Link as ResourceLink;
 
 /**
  * Cli Output
@@ -120,16 +119,6 @@ class Console implements ConsoleInterface
 
         complete:
         // links
-        echo PHP_EOL;
-        echo "{$label}External links{$close}:" . count($resource->links) . PHP_EOL;
-        foreach ($resource->links as $rel => $link) {
-            if (isset($link[ResourceLink::TEMPLATED]) && ($link[ResourceLink::TEMPLATED] === true)) {
-                $href = $this->uriTemplate->expand($link[ResourceLink::HREF], (array) $resource->body);
-            } else {
-                $href = $link[ResourceLink::HREF];
-            }
-            echo "{$label1}" . $rel . ':' . $close . ' ' . $href . PHP_EOL;
-        }
         echo PHP_EOL;
     }
 }

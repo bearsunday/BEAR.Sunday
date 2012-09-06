@@ -82,10 +82,10 @@ class ExceptionHandler implements ExceptionHandlerInterface
             $response->view = include __DIR__ . "/exception.tpl.php";
         }
         $response->headers['X-EXCEPTION-CLASS'] = get_class($e);
-        $response->headers['X-EXCEPTION-MESSAGE'] = str_replace("\n", ' ', $e->getMessage());
+        $response->headers['X-EXCEPTION-MESSAGE'] = str_replace(PHP_EOL, ' ', $e->getMessage());
         $response->headers['X-EXCEPTION-CODE'] = $e->getCode();
         $response->headers['X-EXCEPTION-FILE-LINE'] = $e->getFile() . ':' . $e->getLine();
-        $previous = $e->getPrevious() ? (get_class($e->getPrevious()) .': ' . str_replace("\n", ' ', $e->getPrevious()->getMessage())) : '-';
+        $previous = $e->getPrevious() ? (get_class($e->getPrevious()) .': ' . str_replace(PHP_EOL, ' ', $e->getPrevious()->getMessage())) : '-';
         $response->headers['X-EXCEPTION-PREVIOUS'] =  $previous;
         $response->headers['X-EXCEPTION-ID'] = $exceptionId;
         $this->writeExceptionLog($e, $exceptionId);
@@ -103,7 +103,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
     {
         $filename = "e.{$exceptionId}.log";
         $trace = $e->getTrace();
-        $data = "\n" . $e->getTraceAsString();
+        $data = PHP_EOL . $e->getTraceAsString();
         $previousE = $e->getPrevious();
         if ($previousE) {
             $data .= PHP_EOL . PHP_EOL . '-- Previous Exception --' . PHP_EOL . PHP_EOL;

@@ -46,8 +46,8 @@
         {
             "package": "bear/resource",
             "version": "dev-master",
-            "source-reference": "0bc03b471754de6594969558d2116314fe554a90",
-            "commit-date": "1346845587"
+            "source-reference": "3ddcec26fff10de135cd40cb29368dac9a8a620d",
+            "commit-date": "1346954882"
         },
         {
             "package": "doctrine/common",
@@ -124,7 +124,7 @@
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "v2.1.0-RC2",
+            "source-reference": "v2.1.0",
             "commit-date": "1345643321"
         },
         {

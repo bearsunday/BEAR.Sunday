@@ -2,18 +2,6 @@
     "hash": "6b68ed436fbd92a0c96a3446691014bd",
     "packages": [
         {
-            "package": "Aura/Autoload",
-            "version": "dev-master",
-            "source-reference": "1.0.0-beta3",
-            "commit-date": "1343709875"
-        },
-        {
-            "package": "Aura/Web",
-            "version": "dev-master",
-            "source-reference": "1.0.0-beta3",
-            "commit-date": "1343710300"
-        },
-        {
             "package": "Ray/Aop",
             "version": "dev-master",
             "source-reference": "2d118d33454a2c2006b83a2d62ae9270eea33413",
@@ -24,6 +12,12 @@
             "version": "dev-master",
             "source-reference": "1.0.0-beta1",
             "commit-date": "1345435997"
+        },
+        {
+            "package": "aura/autoload",
+            "version": "dev-master",
+            "source-reference": "1.0.0-beta3",
+            "commit-date": "1343709875"
         },
         {
             "package": "aura/di",
@@ -42,6 +36,12 @@
             "version": "dev-master",
             "source-reference": "1.0.0-beta3",
             "commit-date": "1343710041"
+        },
+        {
+            "package": "aura/web",
+            "version": "dev-master",
+            "source-reference": "1.0.0-beta3",
+            "commit-date": "1343710300"
         },
         {
             "package": "bear/resource",
@@ -118,14 +118,14 @@
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
+            "alias-pretty-version": "2.2.x-dev",
+            "alias-version": "2.2.9999999.9999999-dev"
         },
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "v2.1.0",
-            "commit-date": "1345643321"
+            "source-reference": "f18fecbb49d418570f1fba6a8e73fc0a285c3f61",
+            "commit-date": "1346957130"
         },
         {
             "package": "symfony/http-foundation",
@@ -137,7 +137,7 @@
             "package": "twitter/bootstrap",
             "version": "master",
             "source-reference": "master",
-            "commit-date": "1345529623"
+            "commit-date": "1346816651"
         },
         {
             "package": "vdump/vdump",

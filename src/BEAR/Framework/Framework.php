@@ -59,7 +59,7 @@ class Framework
         }
         $system = self::$systemRoot;
         include_once $system . '/scripts/core_loader.php';
-        include_once $system . '/vendor/Aura/Autoload/src.php';
+        include_once $system . '/vendor/aura/autoload/src.php';
         $loader = new Loader;
         $loader->setMode(Loader::MODE_DEBUG);
         $autloadNamespaces = require $system . '/vendor/composer/autoload_namespaces.php';

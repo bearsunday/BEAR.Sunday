@@ -3,6 +3,8 @@ namespace sandbox\Resource\App\Restbucks;
 
 use BEAR\Resource\AbstractObject;
 use BEAR\Resource\Renderable;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Order

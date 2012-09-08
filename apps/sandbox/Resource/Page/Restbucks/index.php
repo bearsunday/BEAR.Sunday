@@ -5,6 +5,7 @@ use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;
 use BEAR\Resource\LoggerInterface;
 use BEAR\Resource\Code;
+use Ray\Di\Di\Inject;
 
 /**
  * Restbucks order

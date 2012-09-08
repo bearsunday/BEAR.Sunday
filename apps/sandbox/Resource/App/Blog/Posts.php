@@ -6,6 +6,7 @@ use BEAR\Framework\Interceptor\DbSetterInterface;
 use BEAR\Framework\Annotation\Time;
 use BEAR\Framework\Annotation\Transactional;
 use BEAR\Framework\Annotation\Cache;
+use BEAR\Framework\Annotation\CacheUpdate;
 use BEAR\Resource\AbstractObject as ResourceObject;
 use Doctrine\DBAL\Connection;
 use PDO;
@@ -47,6 +48,7 @@ class Posts extends ResourceObject implements DbSetterInterface
      */
     public $links = [
         'page_post' => [Link::HREF => 'page://self/blog/posts/post'],
+        'page_item' => [Link::HREF => 'page://self/blog/posts/post{?id}', Link::TEMPLATED => true],
         'page_edit' => [Link::HREF => 'page://self/blog/posts/edit{?id}', Link::TEMPLATED => true],
         'page_delete' => [Link::HREF => 'page://self/blog/posts?_method=delete{&id}', Link::TEMPLATED => true]
     ];
@@ -97,6 +99,7 @@ class Posts extends ResourceObject implements DbSetterInterface
      *
      * @Time
      * @Transactional
+     * @CacheUpdate
      */
     public function onPost($title, $body)
     {
@@ -121,6 +124,7 @@ class Posts extends ResourceObject implements DbSetterInterface
      * @param string $body
      *
      * @Time
+     * @CacheUpdate
      */
     public function onPut($id, $title, $body)
     {
@@ -129,7 +133,7 @@ class Posts extends ResourceObject implements DbSetterInterface
             'body' => $body,
             'created' => $this->time
         ];
-        $this->db->update($this->table, $values, array('id' => $id));
+        $this->db->update($this->table, $values, ['id' => $id]);
         $this->code = 204;
 
         return $this;
@@ -138,11 +142,13 @@ class Posts extends ResourceObject implements DbSetterInterface
     /**
      * Delete
      *
+     * @CacheUpdate
+     *
      * @param int $id
      */
     public function onDelete($id)
     {
-        $this->db->delete($this->table, array('id' => $id));
+        $this->db->delete($this->table, ['id' => $id]);
         $this->code = 204;
 
         return $this;

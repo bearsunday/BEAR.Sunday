@@ -5,6 +5,8 @@ use BEAR\Framework\Inject\TmpDirInject;
 use BEAR\Resource\AbstractObject;
 use BEAR\Framework\Resource\Link;
 use DirectoryIterator;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Orders

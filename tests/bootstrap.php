@@ -1,4 +1,7 @@
 <?php
+
+use Doctrine\Common\Annotations\AnnotationRegistry;
+
 error_reporting(E_ALL);
 
 ob_start(); // to hide chekcer message
@@ -13,3 +16,7 @@ ob_end_clean();
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 require 'PHPUnit/Extensions/Database/TestCase.php';
+$system = dirname(__DIR__);
+AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di\\', $system . '/vendor/Ray/Di/src/');
+AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation\\', $system . '/vendor/BEAR/Resource/src/');
+AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation\\', $system . '/src/');

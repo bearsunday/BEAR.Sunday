@@ -10,7 +10,7 @@
 	{foreach from=$resource->body item=post}
 	<tr>
 		<td>{$post.id}</td>
-		<td><a href="{href rel="page_post" data=$post}">{$post.title}</a></td>
+		<td><a href="{href rel="page_item" data=$post}">{$post.title}</a></td>
 		<td>{$post.body|truncate:60}</td>
 		<td>{$post.created}</td>
 		<td><a title="Edit post" class="btn"

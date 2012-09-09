@@ -10,7 +10,6 @@ namespace sandbox\Module;
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Module\TemplateEngine;
-use BEAR\Framework\Module\Provider\CacheProvider;
 use Ray\Di\Injector;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Doctrine\Common\Cache\ApcCache as Cache;
@@ -25,9 +24,6 @@ use Ray\Di\AbstractModule;
  */
 class ProdModule extends AbstractModule
 {
-    const RESOURCE_CACHE_INTERFACE = 'Guzzle\Common\Cache\CacheAdapterInterface';
-    const RESOURCE_CACHE_PROVIDER  = 'BEAR\Framework\Module\Provider\CacheProvider';
-
     /**
      * App name
      *
@@ -64,9 +60,7 @@ class ProdModule extends AbstractModule
 
         // install prod module
         $this->install(new TemplateEngine\ProdRendererModule);
-        $this->bind(self::RESOURCE_CACHE_INTERFACE)
-        ->annotatedWith('resource_cache')
-        ->toInstance(new CacheAdapter(new Cache));
+        $this->bind('Guzzle\Common\Cache\CacheAdapterInterface')->annotatedWith('resource_cache')->toProvider('BEAR\Framework\Module\Provider\ApcCacheProvider');
         // install application module
         $injector = Injector::create([$this]);
         $this->install(new AppModule($injector));

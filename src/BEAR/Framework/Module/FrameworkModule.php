@@ -95,12 +95,13 @@ class FrameworkModule extends AbstractModule
         $this->bind('BEAR\Resource\LinkerInterface')->to('BEAR\Resource\Linker')->in(Scope::SINGLETON);
         $this->bind('BEAR\Resource\LoggerInterface')->annotatedWith("resource_logger")->to('BEAR\Resource\Logger');
         $this->bind('BEAR\Resource\LoggerInterface')->toProvider('BEAR\Framework\Module\Provider\ResourceLoggerProvider');
-        $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Framework\Module\Provider\CacheProvider')->in(Scope::SINGLETON);
+        $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Framework\Module\Provider\ApcCacheProvider')->in(Scope::SINGLETON);
         $this->bind('Aura\Signal\Manager')->toProvider('BEAR\Framework\Module\Provider\SignalProvider')->in(Scope::SINGLETON);
         $this->bind()->annotatedWith('app_name')->toInstance($this->app);
         $this->bind('BEAR\Framework\Web\ResponseInterface')->to('BEAR\Framework\Web\SymfonyResponse');
         $this->bind('BEAR\Framework\Exception\ExceptionHandlerInterface')->to('BEAR\Framework\Exception\ExceptionHandler');
         $this->bind('BEAR\Framework\Output\ConsoleInterface')->to('BEAR\Framework\Output\Console');
         $this->bind('Doctrine\Common\Annotations\Reader')->to('Doctrine\Common\Annotations\AnnotationReader');
+        $this->bind('BEAR\Framework\Resource\CacheControl\Taggable')->to('BEAR\Framework\Resource\CacheControl\Etag');
     }
 }

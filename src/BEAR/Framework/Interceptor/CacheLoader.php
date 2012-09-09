@@ -9,16 +9,19 @@ namespace BEAR\Framework\Interceptor;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 use Guzzle\Common\Cache\CacheAdapterInterface;
+use BEAR\Framework\Inject\EtagInject;
 use Exception;
 
 /**
- * Cache interceptor
+ * Cache load interceptor
  *
  * @package    BEAR.Framework
  * @subpackage Intercetor
  */
-class CacheLoader implements CacheInterface, MethodInterceptor
+class CacheLoader implements MethodInterceptor
 {
+    use EtagInject;
+
     /**
      * Cache header key
      *
@@ -43,6 +46,9 @@ class CacheLoader implements CacheInterface, MethodInterceptor
     /**
      * Constructor
      *
+     * @Inject
+     * @Named("resource_cache")
+     *
      * @param Cache $cache
      */
     public function __construct(CacheAdapterInterface $cache)
@@ -56,10 +62,11 @@ class CacheLoader implements CacheInterface, MethodInterceptor
      */
     public function invoke(MethodInvocation $invocation)
     {
-        $class = get_class($invocation->getThis());
+        $ro = $invocation->getThis();
         $args = $invocation->getArguments();
         $method = $invocation->getMethod();
-        $id = $this->getId($class, $args);
+        $id = $this->etag->getEtag($ro, $args);
+
         $pager = (isset($_GET['_start'])) ? $_GET['_start'] : '';
         $saved = $this->cache->fetch($id);
         $pager = (! $pager && isset($saved['pager']) ) ? 1 : $pager;
@@ -100,38 +107,5 @@ class CacheLoader implements CacheInterface, MethodInterceptor
         }
 
         return $resource;
-    }
-
-    /**
-     * Return cache id
-     *
-     * @param string $class
-     * @param array  $args
-     *
-     * @return string
-     */
-    protected function getId($class, array $args)
-    {
-        return $class . crc32(serialize($args));
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see BEAR\Framework\Interceptor\CacheInterface::delete()
-     */
-    public function delete($class, array $args)
-    {
-        $id = $this->getId($class, $args);
-        $this->cache->delete($id);
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see BEAR\Framework\Interceptor\CacheInterface::save()
-     */
-    public function save($class, $args, $data)
-    {
-        $id = $this->getId($class, $args);
-        $this->cache->save($id, serialize($data), 1);
     }
 }

@@ -7,23 +7,12 @@
  */
 namespace BEAR\Framework\Interceptor;
 
-use BEAR\Framework\Framework;
-
-use Aura\Signal\Manager as Signal;
-use BEAR\Framework\Interceptor\CacheInterface as CacheInterceptor;
-use BEAR\Resource\Invoker;
-use BEAR\Resource\Request;
-use BEAR\Resource\Linker;
-use Ray\Di\Config;
-use Ray\Di\Annotation;
-use Ray\Di\Definition;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
-use Aura\Signal\Manager;
-use Aura\Signal\HandlerFactory;
-use Aura\Signal\ResultFactory;
-use Aura\Signal\ResultCollection;
-use Doctrine\Common\Annotations\AnnotationReader as Reader;
+use Guzzle\Common\Cache\CacheAdapterInterface;
+use ReflectionMethod;
+use BEAR\Framework\Inject\EtagInject;
+
 /**
  * Cache update interceptor
  *
@@ -32,26 +21,19 @@ use Doctrine\Common\Annotations\AnnotationReader as Reader;
  */
 class CacheUpdater implements MethodInterceptor
 {
+    use EtagInject;
+
     /**
      * Constructor
      *
-     * @param CacheInterceptor $cache
+     * @Inject
+     * @Named("resource_cache")
+     *
+     * @param Cache $cache
      */
-    public function __construct(CacheInterceptor $cache, Request $request = null)
+    public function __construct(CacheAdapterInterface $cache)
     {
         $this->cache = $cache;
-        $this->request = $request ?: new Request(new Invoker(new Config(new Annotation(new Definition)), new Linker(new Reader), new Manager(new HandlerFactory, new ResultFactory, new ResultCollection)));
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return void
-     * Inject
-     */
-    public function setRequest(Request $request)
-    {
-        $this->request = $request;
     }
 
     /**
@@ -60,26 +42,20 @@ class CacheUpdater implements MethodInterceptor
      */
     public function invoke(MethodInvocation $invocation)
     {
-        $invocationArgs = $invocation->getArguments();
-        $annotation = $invocation->getAnnotation();
-        $args = [];
-        $method = $invocation->getMethod();
-        $parameters = $method->getParameters();
-        foreach ($parameters as $parameter) {
-            if (in_array($parameter->name, $annotation->args)) {
-                $args[$parameter->name] = $invocationArgs[$parameter->getPosition()];
-            }
-        }
-        $object = $invocation->getThis();
-        // call @Get
-        $request = $this->request;
-        $request->ro = $object;
-        $request->method  = 'get';
-        $data = $request($args);
-        $class = get_class($invocation->getThis());
-        // save cahce
-        $this->cache->delete($class, $args);
-        // call original @CacheUpdate annotated method
+        $ro = $invocation->getThis();
+
+        // onGet(void) clear cache
+        $id = $this->etag->getEtag($ro, [0 => null]);
+        $this->cache->delete($id);
+
+        // onGet($id, $x, $y...) clear cache
+        $getMethod = new ReflectionMethod($ro, 'onGet');
+        $parameterNum = count($getMethod->getParameters());
+        // cut as same size and order as onGet
+        $slicedInvocationArgs = array_slice($invocation->getArguments(), 0 , $parameterNum);
+        $id = $this->etag->getEtag($ro, $slicedInvocationArgs);
+        $this->cache->delete($id);
+
         return $invocation->proceed();
     }
 }

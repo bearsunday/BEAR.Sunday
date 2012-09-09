@@ -1,20 +1,9 @@
 <?php
 namespace mockapp\Module;
 
-use Ray\Di\AbstractModule,
-    Ray\Di\InjectorInterface as Di,
-    Ray\Di\Annotation,
-    Ray\Di\Config,
-    Ray\Di\Forge,
-    Ray\Di\Container,
-    Ray\Di\Injector,
-    Ray\Di\Definition,
-    Ray\Di\Scope;
-
-use BEAR\Framework\Module\StandardModule,
-BEAR\Framework\Interceptor\Transactional,
-BEAR\Framework\Interceptor\CacheLoader as CacheLoadInterceptor,
-BEAR\Framework\Interceptor\CacheUpdater as CacheUpdateInterceptor;
+use Ray\Di\AbstractModule;
+use Ray\Di\InjectorInterface as Di;
+use Ray\Di\Injector;
 
 // use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 // use Doctrine\Common\Cache\ApcCache as CacheBackEnd;

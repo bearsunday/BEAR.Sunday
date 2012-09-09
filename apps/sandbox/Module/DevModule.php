@@ -74,6 +74,7 @@ class DevModule extends AbstractModule
             $this->matcher->annotatedWith('BEAR\Framework\Annotation\Log'),
             [$logger]
         );
+        $this->bind('Guzzle\Common\Cache\CacheAdapterInterface')->annotatedWith('resource_cache')->toProvider('BEAR\Framework\Module\Provider\ApcCacheProvider');
         // install application module
         $injector = Injector::create([$this]);
         $this->install(new AppModule($injector));

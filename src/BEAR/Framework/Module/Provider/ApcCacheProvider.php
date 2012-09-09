@@ -17,7 +17,7 @@ use Ray\Di\ProviderInterface as Provide;
  * @package    BEAR.Framework
  * @subpackage Module
  */
-class CacheProvider implements Provide
+class ApcCacheProvider implements Provide
 {
     use LogInject;
 

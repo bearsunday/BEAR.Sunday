@@ -21,11 +21,7 @@ use BEAR\Framework\Module\Database;
 
 use Ray\Di\AbstractModule;
 use Ray\Di\InjectorInterface;
-// cache adapter
-// use Guzzle\Common\Cache\Zf2CacheAdapter;
-// use Zend\Cache\StorageFactory;
-use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
-use Doctrine\Common\Cache\ApcCache as CacheStorage;
+
 
 /**
  * Application module
@@ -52,22 +48,17 @@ class AppModule extends AbstractModule
      */
     protected function configure()
     {
+        $this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');
+        $this->bind('BEAR\Resource\Renderable')->annotatedWith('hal')->to('BEAR\Framework\Resource\View\HalRenderer');
         $this->install(new Schema\StandardSchemaModule(__NAMESPACE__));
-        $cache = new CacheAdapter(new CacheStorage);
-        //         $cacheStorage = StorageFactory::factory(['adapter' => 'apc']);
-        //         $cache = new Zf2CacheAdapter($cacheStorage);
         $this->install(new WebContext\AuraWebModule);
         $this->install(new TemplateEngine\SmartyModule\SmartyModule);
         $this->install(new Module\Database\DoctrineDbalModule($this->injector));
-        $this->install(new Cqrs\CacheModule($cache));
+        $this->install(new Cqrs\CacheModule($this->injector));
         $this->installWritableChecker();
         $this->installFormValidater();
         $this->installTimeStamper();
         $this->installTransaction();
-
-        // greeting
-        $this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');
-        $this->bind('BEAR\Resource\Renderable')->annotatedWith('hal')->to('BEAR\Framework\Resource\View\HalRenderer');
         // time message binding
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\App\First\Greeting\Aop'),
@@ -85,7 +76,7 @@ class AppModule extends AbstractModule
         $checker = $this->injector->getInstance('\sandbox\Interceptor\Checker');
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
-            $this->matcher->startWith('onInit'),
+            $this->matcher->startWith('onGet'),
             [$checker]
         );
     }

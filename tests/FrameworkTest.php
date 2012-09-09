@@ -3,7 +3,6 @@
 namespace BEAR\Framework\Tests;
 
 use BEAR\Framework\Framework;
-use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
 
 /**
  * Test class for Annotation.

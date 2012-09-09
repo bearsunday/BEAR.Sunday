@@ -17,10 +17,4 @@ namespace BEAR\Framework\Annotation;
  */
 final class CacheUpdate
 {
-    /**
-     * Arguments
-     *
-     * @var array
-     */
-    public $args = [];
 }

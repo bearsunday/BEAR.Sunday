@@ -24,6 +24,7 @@ class Posts extends Page
      * @var array
      */
     public $body = [
+        'post' => ''
     ];
 
     /**
@@ -57,7 +58,7 @@ class Posts extends Page
         ->request();
 
         // redirect
-        $this->headers['location'] = '/blog/posts';
+        //$this->headers['location'] = '/blog/posts';
 
         return $this;
     }

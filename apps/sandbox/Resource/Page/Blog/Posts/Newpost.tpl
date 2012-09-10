@@ -7,21 +7,15 @@
 	<li class="active">New Post</li>
 </ul>
 
-<h1>New Post</h1>
-<form action="/blog/posts/newpost" method="POST">
-	<input name="X-HTTP-Method-Override" type="hidden" value="POST" />
-	<div class="control-group {if $errors.title}error{/if}">
-		<label class="control-label" for="title">Title</label>
-		<div class="controls">
-			<input type="text" id="title" name="title" value="{$submit.title}">
-			<p class="help-inline">{$errors.title}</p>
-		</div>
-	</div>
-	<div class="control-group {if $errors.body}error{/if}">
-		<label>Body</label>
-		<textarea name="body" rows="10" cols="40">{$submit.body}</textarea>
-		<p class="help-inline">{$errors.body}</p>
-	</div>
-	<input type="submit" value="Submit">
-</form>
+{if $code == 200}
+    {include file="Form/Post.tpl"}
+{elseif $code == 201}
+	<div class="alert alert-success">Successfully posted.</div>
+	<ul>
+	<li><a href="{href rel="page_new_post"}">See new post</a></li>
+	<li><a href="{href rel="back"}">Back to list</a></li>
+	</ul>
+{else}
+    <div class="alert alert-error">Something wrong.</div>
+{/if}
 {/block}

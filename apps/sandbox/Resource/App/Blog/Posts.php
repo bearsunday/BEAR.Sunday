@@ -110,10 +110,9 @@ class Posts extends ResourceObject implements DbSetterInterface
             'created' => $this->time
         ];
         $this->db->insert($this->table, $values);
+        //
         $lastId = $this->db->lastInsertId('id');
-        // 201
         $this->code = Code::CREATED;
-        // links
         $this->links['new_post'] = [Link::HREF => "app://self/posts/post?id={$lastId}"];
         $this->links['page_new_post'] = [Link::HREF => "page://self/posts/post?id={$lastId}"];
 

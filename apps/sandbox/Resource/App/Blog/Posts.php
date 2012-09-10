@@ -12,6 +12,7 @@ use Doctrine\DBAL\Connection;
 use PDO;
 use Doctrine\DBAL\Driver\Connection as DriverConnection;
 use BEAR\Framework\Resource\Link;
+use BEAR\Resource\Code;
 
 /**
  * Posts
@@ -109,9 +110,12 @@ class Posts extends ResourceObject implements DbSetterInterface
             'created' => $this->time
         ];
         $this->db->insert($this->table, $values);
-        $this->code = 204;
-        $this->links['new_post'] = 'app://self/posts/post?id=300';
-        $this->links['page_new_post'] = 'page://self/posts/post?id=300';
+        $lastId = $this->db->lastInsertId('id');
+        // 201
+        $this->code = Code::CREATED;
+        // links
+        $this->links['new_post'] = [Link::HREF => "app://self/posts/post?id={$lastId}"];
+        $this->links['page_new_post'] = [Link::HREF => "page://self/posts/post?id={$lastId}"];
 
         return $this;
     }
@@ -134,7 +138,7 @@ class Posts extends ResourceObject implements DbSetterInterface
             'created' => $this->time
         ];
         $this->db->update($this->table, $values, ['id' => $id]);
-        $this->code = 204;
+        $this->code = Code::NO_CONTENT;
 
         return $this;
     }
@@ -149,7 +153,7 @@ class Posts extends ResourceObject implements DbSetterInterface
     public function onDelete($id)
     {
         $this->db->delete($this->table, ['id' => $id]);
-        $this->code = 204;
+        $this->code = Code::NO_CONTENT;
 
         return $this;
     }

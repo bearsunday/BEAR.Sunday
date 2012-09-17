@@ -6,7 +6,10 @@
  * no view
  * no app resource
  */
-// Application
+
+// profiler
+//require dirname(dirname(dirname(__DIR__))) . '/scripts/profile.php';
+
 $app = require dirname(__DIR__) . '/scripts/instance.php';
 $response = $app->resource->get->uri('page://self/hello')->withQuery(['name' => 'World !'])->eager->request();
 

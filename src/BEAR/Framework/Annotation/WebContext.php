@@ -7,14 +7,14 @@
 namespace BEAR\Framework\Annotation;
 
 /**
- * WakeUp
+ * WebContext
  *
  * @Annotation
- * @Target("METHOD")
+ * @Target({"METHOD","CLASS"})
  *
  * @package    BEAR.Framework
  * @subpackage Annotation
  */
-final class WakeUp
+final class WebContext
 {
 }

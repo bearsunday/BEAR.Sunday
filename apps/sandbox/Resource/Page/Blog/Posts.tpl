@@ -14,3 +14,6 @@
 <p>{$posts}</p>
 <a href="posts/newpost" class="btn btn-primary btn-large">New Post</a>
 {/block}
+{else}
+submit
+{/if}

@@ -31,3 +31,4 @@ $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($que
 
 // Transfer
 $app->response->setResource($page)->render()->prepare()->send();
+exit(0);

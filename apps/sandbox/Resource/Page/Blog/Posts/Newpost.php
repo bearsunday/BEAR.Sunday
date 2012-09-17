@@ -8,6 +8,7 @@ use BEAR\Framework\Inject\ResourceInject;
 
 use Ray\Di\Di\Inject;
 use sandbox\Annotation\Form;
+use BEAR\Framework\Resource\Link;
 
 /**
  * New post page
@@ -26,7 +27,12 @@ class Newpost extends Page
      */
     public $body = [
         'errors' => ['title' => '', 'body' => ''],
-        'submit' => ['title' => '', 'body' => '']
+        'submit' => ['title' => '', 'body' => ''],
+        'code' => 200
+    ];
+
+    public $links = [
+        'back' => [Link::HREF => 'page://self/blog/posts']
     ];
 
     /**
@@ -50,15 +56,18 @@ class Newpost extends Page
     public function onPost($title, $body)
     {
         // create post
-        $this->resource
+        $response = $this->resource
         ->post
         ->uri('app://self/blog/posts')
         ->withQuery(['title' => $title, 'body' => $body])
         ->eager->request();
 
+        $this['code'] = $response->code;
+        $this->links += $response->links;
+
         // redirect
-        $this->code = 303;
-        $this->headers = ['Location' => '/blog/posts'];
+//      $this->code = 303;
+//      $this->headers = ['Location' => '/blog/posts'];
 
         return $this;
     }

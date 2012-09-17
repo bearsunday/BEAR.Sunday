@@ -1,6 +1,18 @@
 {
-    "hash": "6b68ed436fbd92a0c96a3446691014bd",
+    "hash": "387e3782374abf9dc5501984f7d87f9a",
     "packages": [
+        {
+            "package": "Aura/Autoload",
+            "version": "dev-master",
+            "source-reference": "1.0.0-beta3",
+            "commit-date": "1343709875"
+        },
+        {
+            "package": "Aura/Web",
+            "version": "dev-master",
+            "source-reference": "1.0.0-beta3",
+            "commit-date": "1343710300"
+        },
         {
             "package": "Ray/Aop",
             "version": "dev-master",
@@ -12,12 +24,6 @@
             "version": "dev-master",
             "source-reference": "1.0.0-beta1",
             "commit-date": "1345435997"
-        },
-        {
-            "package": "aura/autoload",
-            "version": "dev-master",
-            "source-reference": "1.0.0-beta3",
-            "commit-date": "1343709875"
         },
         {
             "package": "aura/di",
@@ -36,12 +42,6 @@
             "version": "dev-master",
             "source-reference": "1.0.0-beta3",
             "commit-date": "1343710041"
-        },
-        {
-            "package": "aura/web",
-            "version": "dev-master",
-            "source-reference": "1.0.0-beta3",
-            "commit-date": "1343710300"
         },
         {
             "package": "bear/resource",
@@ -84,8 +84,8 @@
         {
             "package": "monolog/monolog",
             "version": "dev-master",
-            "source-reference": "a929570bb7688b39fefe4106f0ecf0ac35f37647",
-            "commit-date": "1346873566"
+            "source-reference": "e5bf7ba5d1df622b68d004b3c0277bc94286e1b7",
+            "commit-date": "1347105894"
         },
         {
             "package": "nocarrier/hal",
@@ -137,7 +137,7 @@
             "package": "twitter/bootstrap",
             "version": "master",
             "source-reference": "master",
-            "commit-date": "1346816651"
+            "commit-date": "1345529623"
         },
         {
             "package": "vdump/vdump",

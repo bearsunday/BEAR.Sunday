@@ -12,8 +12,6 @@ use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Inject\AppDependencyInject;
 use Ray\Di\Injector;
 
-require_once dirname(dirname(__DIR__)) . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php';
-
 /**
  * Applicaton
  *

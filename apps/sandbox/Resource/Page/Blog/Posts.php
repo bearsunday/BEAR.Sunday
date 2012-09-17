@@ -24,6 +24,7 @@ class Posts extends Page
      * @var array
      */
     public $body = [
+        'post' => ''
     ];
 
     /**
@@ -56,8 +57,8 @@ class Posts extends Page
         ->eager
         ->request();
 
-        // message
-        $this->headers['location'] = '/blog/posts';
+        // redirect
+        //$this->headers['location'] = '/blog/posts';
 
         return $this;
     }

@@ -41,7 +41,11 @@ class HalRenderer implements Renderable
         foreach ($ro->links as $rel => $link) {
             $title = (isset($link[Link::TITLE])) ? $link[Link::TITLE] : null;
             $attr = (isset($link[Link::TEMPLATED]) && $link[Link::TEMPLATED] === true) ? [Link::TEMPLATED => true] : [];
-            $hal->addLink($rel, $link[Link::HREF], $title, $attr);
+            if (isset($link[Link::HREF])) {
+                $hal->addLink($rel, $link[Link::HREF], $title, $attr);
+            } else {
+                trigger_error('"href" is required in link', E_USER_WARNING);
+            }
         }
         $ro->view = $hal->asJson(true);
         $ro->headers['content-type'] = 'application/hal+json; charset=UTF-8';

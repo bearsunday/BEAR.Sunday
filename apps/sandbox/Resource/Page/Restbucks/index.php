@@ -143,6 +143,7 @@ class index extends Page
 
         // log
         $this['logs'] = $this->getLogs();
+
         return $this;
     }
 

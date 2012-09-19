@@ -11,7 +11,6 @@ use BEAR\Framework\Module;
 use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Module\TemplateEngine;
 use Ray\Di\Injector;
-use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Doctrine\Common\Cache\ApcCache as Cache;
 
 use Ray\Di\AbstractModule;

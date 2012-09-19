@@ -29,7 +29,6 @@ use Exception;
 require_once dirname(dirname(dirname(__DIR__))) . '/src/BEAR/Framework/Framework.php';
 require_once dirname(__DIR__) . '/App.php';
 
-
 if (PHP_SAPI == 'cli-server') {
     if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|ico)$/', $_SERVER["REQUEST_URI"])) {
         return false;

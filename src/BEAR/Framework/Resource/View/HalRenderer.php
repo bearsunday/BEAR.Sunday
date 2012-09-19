@@ -6,7 +6,7 @@
  */
 namespace BEAR\Framework\Resource\View;
 
-use BEAR\Framework\Resource\Link;
+use BEAR\Resource\Link;
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Resource\Requestable;
 use BEAR\Resource\Renderable;

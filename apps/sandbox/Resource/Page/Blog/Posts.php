@@ -4,7 +4,6 @@ namespace sandbox\Resource\Page\Blog;
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;
 use BEAR\Framework\Annotation\Cache;
-use BEAR\Framework\Annotation\CacheUpdate;
 use BEAR\Framework\Annotation;
 use Ray\Di\Di\Inject;
 
@@ -58,8 +57,7 @@ class Posts extends Page
         ->request();
 
         // redirect
-        //$this->headers['location'] = '/blog/posts';
-
+        $this->headers['location'] = '/blog/posts';
         return $this;
     }
 }

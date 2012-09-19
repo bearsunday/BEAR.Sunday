@@ -11,7 +11,7 @@ use BEAR\Resource\AbstractObject as ResourceObject;
 use Doctrine\DBAL\Connection;
 use PDO;
 use Doctrine\DBAL\Driver\Connection as DriverConnection;
-use BEAR\Framework\Resource\Link;
+use BEAR\Resource\Link;
 use BEAR\Resource\Code;
 
 /**

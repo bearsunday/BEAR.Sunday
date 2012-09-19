@@ -8,7 +8,7 @@ use BEAR\Framework\Inject\ResourceInject;
 
 use Ray\Di\Di\Inject;
 use sandbox\Annotation\Form;
-use BEAR\Framework\Resource\Link;
+use BEAR\Resource\Link;
 
 /**
  * New post page
@@ -68,7 +68,6 @@ class Newpost extends Page
         // redirect
 //      $this->code = 303;
 //      $this->headers = ['Location' => '/blog/posts'];
-
         return $this;
     }
 }

@@ -21,8 +21,8 @@
 
   <!-- Kick everything off -->
   <script src="script.js" type="text/javascript"></script>
-	<script type="text/javascript"> 
-	$(document).ready(function() {
+    <script type="text/javascript">
+    $(document).ready(function() {
         $("#js-mindmap").mindmap({
             showSublines: true,
             canvasError: "alert",
@@ -36,17 +36,17 @@
         });
  */
     });
-	</script> 
-	<style> 
-	#js-mindmap2 {
-	   display:none;
-	    position:relative;
+    </script>
+    <style>
+    #js-mindmap2 {
+       display:none;
+        position:relative;
         margin-left:10px;
     }
-	</style> 
+    </style>
 </head>
 <body>
-<h1>Object graph view</h1> 
+<h1>Object graph view</h1>
 <p class="credit">Object Graph</p>
 <?php echo $graph ?>
 </body>

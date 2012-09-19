@@ -3,7 +3,7 @@ namespace sandbox\Resource\App\Restbucks;
 
 use BEAR\Framework\Inject\TmpDirInject;
 use BEAR\Resource\AbstractObject;
-use BEAR\Framework\Resource\Link;
+use BEAR\Resource\Link;
 use DirectoryIterator;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;

@@ -46,10 +46,10 @@
               <li><a href="https://github.com/koriym/BEAR.Sunday">Object Graph</a></li>
               <li><a href="mailto:koriyama@bear-project.net">Dependency</a></li>
     </ul>
-    
+
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
-    
+
     <div class="container">

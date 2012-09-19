@@ -22,7 +22,6 @@ use BEAR\Framework\Module\Database;
 use Ray\Di\AbstractModule;
 use Ray\Di\InjectorInterface;
 
-
 /**
  * Application module
  *

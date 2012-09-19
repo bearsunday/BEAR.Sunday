@@ -1,7 +1,7 @@
 <?php
 
 use Guzzle\Parser\UriTemplate\UriTemplate;
-use BEAR\Framework\Resource\Link;
+use BEAR\Resource\Link;
 
 /**
  * Smarty plugin

@@ -2,7 +2,7 @@
 namespace sandbox\Resource\App\Restbucks;
 
 use BEAR\Framework\Inject\TmpDirInject;
-use BEAR\Framework\Resource\Link;
+use BEAR\Resource\Link;
 use BEAR\Resource\Code;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;

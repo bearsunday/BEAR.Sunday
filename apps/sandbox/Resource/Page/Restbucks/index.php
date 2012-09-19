@@ -3,6 +3,7 @@ namespace sandbox\Resource\Page\Restbucks;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;
+use BEAR\Framework\Inject\AInject;
 use BEAR\Resource\LoggerInterface;
 use BEAR\Resource\Code;
 use Ray\Di\Di\Inject;
@@ -14,6 +15,7 @@ use Ray\Di\Di\Inject;
 class index extends Page
 {
     use ResourceInject;
+    use AInject;
 
     public $body = [
         'ordered' => false
@@ -77,7 +79,7 @@ class index extends Page
 
         // Story 3: As a customer. I want to be able to pay my bill to recieve my drink
         // （お客）支払いをする
-        $paymentUri = $updateResponse->links['payment']['href'];
+        $paymentUri = $this->a->href('payment', $updateResponse);
         $paymentResponse = $this
         ->resource
         ->put
@@ -116,6 +118,7 @@ class index extends Page
         // Story 5: As a barista, I want to check that a customer has paid for their drink so that I can serve it
         // (店) ドリンクを渡すために支払いを確認
         $paymentUri = $order['_links']['payment']['href'];
+
         $paymentResponse = $this
         ->resource
         ->get
@@ -143,6 +146,11 @@ class index extends Page
         return $this;
     }
 
+    /**
+     * Get logs
+     *
+     * @return array
+     */
     private function getLogs()
     {
         $logs = [];
@@ -155,6 +163,7 @@ class index extends Page
             'body' => (string) $response
             ];
         }
+
         return $logs;
     }
 }

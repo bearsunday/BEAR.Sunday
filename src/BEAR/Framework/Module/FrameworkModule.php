@@ -103,5 +103,7 @@ class FrameworkModule extends AbstractModule
         $this->bind('BEAR\Framework\Output\ConsoleInterface')->to('BEAR\Framework\Output\Console');
         $this->bind('Doctrine\Common\Annotations\Reader')->to('Doctrine\Common\Annotations\AnnotationReader');
         $this->bind('BEAR\Framework\Resource\CacheControl\Taggable')->to('BEAR\Framework\Resource\CacheControl\Etag');
+        $this->bind('BEAR\Resource\Referable')->to('BEAR\Resource\A');
+        $this->bind('Guzzle\Parser\UriTemplate\UriTemplateInterface')->to('Guzzle\Parser\UriTemplate\UriTemplate');
     }
 }

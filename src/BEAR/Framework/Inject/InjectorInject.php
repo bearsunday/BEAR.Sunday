@@ -10,7 +10,7 @@ use Ray\Di\InjectorInterface as Di;
 use Ray\Di\Di\Inject;
 
 /**
- * Inject setter trait
+ * Inject injector
  *
  * @package    BEAR.Framework
  * @subpackage Inject

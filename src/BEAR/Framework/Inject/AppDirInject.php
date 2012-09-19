@@ -10,7 +10,7 @@ use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
 /**
- * Inject logger
+ * Inject app dir
  *
  * @package    BEAR.Framework
  * @subpackage Inject

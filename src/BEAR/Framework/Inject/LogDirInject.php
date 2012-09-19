@@ -10,7 +10,7 @@ use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
 /**
- * Inject tmp_dir
+ * Inject log dir
  *
  * @package    BEAR.Framework
  * @subpackage Inject

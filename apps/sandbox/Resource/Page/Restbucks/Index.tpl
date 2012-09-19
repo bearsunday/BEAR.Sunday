@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <link href="/assets/css/bootstrap.css" rel="stylesheet">
-</style><title>Restbucks</title>
+</style><title>RESTbucks</title>
 </head>
 
 <body>
 <div class="container">
     {if ! $ordered}
-	<h1>Welcome to Restbucks</h1>
+	<h1>Welcome to RESTbucks</h1>
 
 	<form action="/restbucks/index" method="POST">
 	    <legend>Order here</legend>

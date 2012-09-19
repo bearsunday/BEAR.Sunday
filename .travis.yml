@@ -8,8 +8,9 @@ before_script:
  - if [[ "$DB" == "mysql" ]]; then mysql -e "CREATE DATABASE IF NOT EXISTS blogbear;USE blogbeartest;CREATE TABLE IF NOT EXISTS posts (id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,title VARCHAR(50),body TEXT,created DATETIME DEFAULT NULL,modified DATETIME DEFAULT NULL);" -u root; fi
  - 'wget http://pecl.php.net/get/memcache-2.2.6.tgz ; tar -xzf memcache-2.2.6.tgz; sh -c "cd memcache-2.2.6 && phpize && ./configure --enable-memcache && make && sudo make install" ; echo "extension=memcache.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`'
  - 'wget http://pecl.php.net/get/APC-3.1.10.tgz ; tar -xzf APC-3.1.10.tgz ; sh -c "cd APC-3.1.10 && phpize && ./configure  && make && sudo make install" ; echo -e "extension=apc.so\napc.enable_cli=on" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`'
- - pyrus install pear.phpunit.de/PHP_Invoker
- - pyrus install pear.phpunit.de/DbUnit
+ - pear config-set auto_discover 1
+ - pear install pear.phpunit.de/PHP_Invoker
+ - pear install pear.phpunit.de/DbUnit
  - wget http://getcomposer.org/composer.phar
  - php composer.phar update
 script: phpunit --coverage-text

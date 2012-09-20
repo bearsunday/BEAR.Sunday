@@ -51,7 +51,7 @@ class PagerTest extends \PHPUnit_Extensions_Database_TestCase
     public function test_getPagerQuery()
     {
         $query = $this->pager->getPagerQuery($this->query);
-        $expected = 'SELECT * FROM posts LIMIT 2 OFFSET 0';
+        $expected = 'SELECT * FROM posts LIMIT 10 OFFSET 0';
         $this->assertSame($expected, $query);
     }
 }

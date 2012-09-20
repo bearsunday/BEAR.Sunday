@@ -2,33 +2,6 @@
     "hash": "387e3782374abf9dc5501984f7d87f9a",
     "packages": [
         {
-            "name": "Ray/Aop",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/koriym/Ray.Aop.git",
-                "reference": "2d118d33454a2c2006b83a2d62ae9270eea33413"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/koriym/Ray.Aop/zipball/2d118d33454a2c2006b83a2d62ae9270eea33413",
-                "reference": "2d118d33454a2c2006b83a2d62ae9270eea33413",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "doctrine/common": "2.3.*-dev"
-            },
-            "time": "1345435456",
-            "type": "library",
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Ray\\Aop": "src/"
-                }
-            }
-        },
-        {
             "name": "Ray/Di",
             "version": "dev-master",
             "source": {
@@ -56,7 +29,30 @@
                     "Ray\\Di": "src/",
                     "Aura\\Di": "vendor/Aura/Di/src/"
                 }
-            }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Akihito Koriyama",
+                    "email": "akihito.koriyama@gmail.com",
+                    "homepage": "https://github.com/koriym"
+                }
+            ],
+            "description": "Guice style annotation-driven dependency injection framework",
+            "homepage": "https://github.com/koriym/Ray.Di",
+            "keywords": [
+                "dependency injection",
+                "container",
+                "aop",
+                "di",
+                "jsr",
+                "annotation",
+                "method interception",
+                "guice",
+                "ioc"
+            ]
         },
         {
             "name": "aura/autoload",
@@ -82,7 +78,41 @@
                 "psr-0": {
                     "Aura\\Autoload": "src/"
                 }
-            }
+            },
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Paul M. Jones",
+                    "email": "pmjones88@gmail.com",
+                    "homepage": "http://paul-m-jones.com"
+                },
+                {
+                    "name": "Hari KT",
+                    "email": "kthari85@gmail.com",
+                    "homepage": "http://harikt.com"
+                },
+                {
+                    "name": "Aura.Autoload Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Autoload/contributors"
+                },
+                {
+                    "name": "Akihito Koriyama",
+                    "email": "akihito.koriyama@gmail.com",
+                    "homepage": "https://github.com/koriym"
+                }
+            ],
+            "description": "The Aura Autoload package provides a PSR-0 compliant SPL autoloader\nimplementation for PHP. It also matches the proposed SplClassLoader interface.\n\n[PSR-0]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md\n[SplClassLoader]: https://wiki.php.net/rfc/splclassloader",
+            "homepage": "http://auraphp.github.com/Aura.Autoload",
+            "keywords": [
+                "autoloader",
+                "psr-0",
+                "autoload",
+                "SPL autoloader",
+                "SplClassLoader",
+                "class loader"
+            ]
         },
         {
             "name": "aura/di",
@@ -108,7 +138,39 @@
                 "psr-0": {
                     "Aura\\Di": "src/"
                 }
-            }
+            },
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Paul M. Jones",
+                    "email": "pmjones88@gmail.com",
+                    "homepage": "http://paul-m-jones.com"
+                },
+                {
+                    "name": "Hari KT",
+                    "email": "kthari85@gmail.com",
+                    "homepage": "http://harikt.com"
+                },
+                {
+                    "name": "Aura.Di Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Di/contributors"
+                },
+                {
+                    "name": "Kenaniah Cerny",
+                    "email": "kenaniah@gmail.com"
+                }
+            ],
+            "description": "The Aura DI package provides a dependency injection container system with native support for constructor- and setter-based injection, lazy-loading of services, and inheritable configuration of setters and constructor params.",
+            "homepage": "http://auraphp.github.com/Aura.Di",
+            "keywords": [
+                "dependency injection",
+                "container",
+                "di",
+                "di container",
+                "dependency injection container"
+            ]
         },
         {
             "name": "aura/router",
@@ -134,7 +196,33 @@
                 "psr-0": {
                     "Aura\\Router": "src/"
                 }
-            }
+            },
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Paul M. Jones",
+                    "email": "pmjones88@gmail.com",
+                    "homepage": "http://paul-m-jones.com"
+                },
+                {
+                    "name": "Hari KT",
+                    "email": "kthari85@gmail.com",
+                    "homepage": "http://harikt.com"
+                },
+                {
+                    "name": "Aura.Router Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Router/contributors"
+                }
+            ],
+            "description": "The Aura Router package implements web routing; given a URI path and a copy of $_SERVER, it will extract controller, action, and parameter values for a specific route.",
+            "homepage": "http://auraphp.github.com/Aura.Router",
+            "keywords": [
+                "route",
+                "routing",
+                "router"
+            ]
         },
         {
             "name": "aura/signal",
@@ -160,7 +248,35 @@
                 "psr-0": {
                     "Aura\\Signal": "src/"
                 }
-            }
+            },
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Paul M. Jones",
+                    "email": "pmjones88@gmail.com",
+                    "homepage": "http://paul-m-jones.com"
+                },
+                {
+                    "name": "Hari KT",
+                    "email": "kthari85@gmail.com",
+                    "homepage": "http://harikt.com"
+                },
+                {
+                    "name": "Aura.Signal Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Signal/contributors"
+                }
+            ],
+            "description": "A SignalSlots/EventHandler implementation for PHP; with it, we can invoke handlers (\"slots\" or \"hooks\") whenever an object sends a signal (\"notification\" or \"event\") to the signal manager.",
+            "homepage": "http://auraphp.github.com/Aura.Signal",
+            "keywords": [
+                "event",
+                "event handler",
+                "event handling",
+                "signal",
+                "signal slots"
+            ]
         },
         {
             "name": "aura/web",
@@ -186,7 +302,33 @@
                 "psr-0": {
                     "Aura\\Web": "src/"
                 }
-            }
+            },
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Paul M. Jones",
+                    "email": "pmjones88@gmail.com",
+                    "homepage": "http://paul-m-jones.com"
+                },
+                {
+                    "name": "Hari KT",
+                    "email": "kthari85@gmail.com",
+                    "homepage": "http://harikt.com"
+                },
+                {
+                    "name": "Aura.Web Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Web/contributors"
+                }
+            ],
+            "description": "The Aura Web package provides tools to build web page controllers, including an AbstractPage for action methods, a Context class for disovering the request environment, and a Response transfer object that describes the eventual HTTP response.",
+            "homepage": "http://auraphp.github.com/Aura.Web",
+            "keywords": [
+                "controller",
+                "page controller",
+                "web controller"
+            ]
         },
         {
             "name": "bear/resource",
@@ -243,18 +385,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common",
-                "reference": "24c761bf0f8337064b961a8fad85631a561d26c7"
+                "reference": "bb0aebbf234db52df476a2b473d434745b34221c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/common/zipball/24c761bf0f8337064b961a8fad85631a561d26c7",
-                "reference": "24c761bf0f8337064b961a8fad85631a561d26c7",
+                "url": "https://github.com/doctrine/common/zipball/bb0aebbf234db52df476a2b473d434745b34221c",
+                "reference": "bb0aebbf234db52df476a2b473d434745b34221c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "1347882477",
+            "time": "1348120518",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -311,19 +453,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal",
-                "reference": "c4fe3499781944f7f2b056fd164cfedc67cc0130"
+                "reference": "fdc866a37959e43620e4f7ec519dc7dd8e30fc5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/dbal/zipball/c4fe3499781944f7f2b056fd164cfedc67cc0130",
-                "reference": "c4fe3499781944f7f2b056fd164cfedc67cc0130",
+                "url": "https://github.com/doctrine/dbal/zipball/fdc866a37959e43620e4f7ec519dc7dd8e30fc5b",
+                "reference": "fdc866a37959e43620e4f7ec519dc7dd8e30fc5b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
                 "doctrine/common": "2.3.*"
             },
-            "time": "1347882607",
+            "time": "1348120597",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -406,7 +548,19 @@
                     "lib/FirePHPCore/FirePHP.class.php",
                     "lib/FirePHPCore/fb.php"
                 ]
-            }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Dorn",
+                    "email": "christoph@christophdorn.com",
+                    "homepage": "christophdorn.com"
+                }
+            ],
+            "description": "Traditional FirePHPCore library for sending PHP variables to the browser.",
+            "homepage": "https://github.com/firephp/firephp-core"
         },
         {
             "name": "guzzle/guzzle",
@@ -445,7 +599,7 @@
                 "zend/zend-log1": "1.11",
                 "zend/zend-cache1": "1.11"
             },
-            "time": "2012-07-02 11:04:37",
+            "time": "2012-07-02 15:04:37",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -453,7 +607,32 @@
                     "Guzzle\\Tests": "tests/",
                     "Guzzle": "src/"
                 }
-            }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Guzzle Community",
+                    "homepage": "https://github.com/guzzle/guzzle/contributors"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "framework",
+                "curl",
+                "http",
+                "rest",
+                "http client",
+                "client",
+                "web service"
+            ]
         },
         {
             "name": "monolog/monolog",
@@ -585,7 +764,22 @@
                 "psr-0": {
                     "Pagerfanta\\": "src/"
                 }
-            }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pablo Díez",
+                    "email": "pablodip@gmail.com",
+                    "homepage": "http://github.com/pablodip"
+                }
+            ],
+            "description": "Pagination for PHP 5.3",
+            "keywords": [
+                "page",
+                "paging"
+            ]
         },
         {
             "name": "printo/printo",
@@ -612,7 +806,68 @@
                     "src/Printo/Printo.php",
                     "src/Printo/print_o.php"
                 ]
-            }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Akihito Koriyama",
+                    "email": "akihito.koriyama@gmail.com",
+                    "homepage": "https://github.com/koriym"
+                }
+            ],
+            "description": "An object graph visualizer.",
+            "homepage": "https://github.com/koriym/print_o",
+            "keywords": [
+                "debug",
+                "object"
+            ]
+        },
+        {
+            "name": "ray/aop",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/koriym/Ray.Aop.git",
+                "reference": "2d118d33454a2c2006b83a2d62ae9270eea33413"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/koriym/Ray.Aop/zipball/2d118d33454a2c2006b83a2d62ae9270eea33413",
+                "reference": "2d118d33454a2c2006b83a2d62ae9270eea33413",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "doctrine/common": "2.3.*-dev"
+            },
+            "time": "1345435456",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Ray\\Aop": "src/"
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Akihito Koriyama",
+                    "email": "akihito.koriyama@gmail.com",
+                    "homepage": "https://github.com/koriym"
+                }
+            ],
+            "description": "Aspect oriented programing framework",
+            "homepage": "https://github.com/koriym/Ray.Aop",
+            "keywords": [
+                "aop",
+                "aspect",
+                "annotation",
+                "method interception"
+            ]
         },
         {
             "name": "smarty/smarty",
@@ -625,14 +880,36 @@
             "require": {
                 "php": ">=5.2"
             },
-            "time": "2012-07-02 07:17:26",
+            "time": "2012-07-02 11:17:26",
             "type": "library",
             "installation-source": "source",
             "autoload": {
                 "classmap": [
                     "distribution/libs/Smarty.class.php"
                 ]
-            }
+            },
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Monte Ohrt",
+                    "email": "monte@ohrt.com"
+                },
+                {
+                    "name": "Uwe Tews",
+                    "email": "uwe.tews@googlemail.com"
+                },
+                {
+                    "name": "Rodney Rehm",
+                    "email": "rodney.rehm@medialize.de"
+                }
+            ],
+            "description": "Smarty - the compiling PHP template engine",
+            "homepage": "http://www.smarty.net",
+            "keywords": [
+                "templating"
+            ]
         },
         {
             "name": "symfony/console",
@@ -659,7 +936,22 @@
                 "psr-0": {
                     "Symfony\\Component\\Console": ""
                 }
-            }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "http://symfony.com"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -740,7 +1032,22 @@
                 "psr-0": {
                     "Symfony\\Component\\HttpFoundation": ""
                 }
-            }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony HttpFoundation Component",
+            "homepage": "http://symfony.com"
         },
         {
             "name": "twitter/bootstrap",

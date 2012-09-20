@@ -5,4 +5,5 @@ package/BEAR/Framework/src/BEAR/Framework/tmp/*
 templates_c
 vendor
 tmp
+log
 apps/sandbox/build

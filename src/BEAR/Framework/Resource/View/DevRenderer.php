@@ -258,6 +258,8 @@ EOT;
             } elseif (is_array($param)) {
                 $type = 'array';
                 $param = print_r($param, true);
+            } elseif (is_null($param)) {
+                $type = 'null';
             } else {
                 $type = 'unkonwn';
             }
@@ -314,7 +316,7 @@ EOT;
     {
         $result = self::BADGE_INTERCEPTORS . self::DIV_WELL;
         if (! isset($ro->headers[DevInvoker::HEADER_INTERCEPTORS])) {
-            return $result . 'n/a';
+            return $result . 'n/a</div>';
         }
         $result .= '<ul class="unstyled">';
         $interceptors = json_decode($ro->headers[DevInvoker::HEADER_INTERCEPTORS], true);

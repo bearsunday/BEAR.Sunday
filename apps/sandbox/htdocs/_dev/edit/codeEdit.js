@@ -2,15 +2,15 @@ $.codeEdit = {
 	changed : false,
 	factory : function() {
 		var editor = ace.edit("editor");
-		window.aceEditor = editor;
 		editor.setTheme("ace/theme/eclipse");
-		var PhpMode = require("ace/mode/php").Mode;
-		editor.getSession().setMode(new PhpMode());
+		editor.getSession().setMode("ace/mode/php");
+		window.aceEditor = editor;
 		editor.getSession().setTabSize(4);
 		editor.getSession().setUseSoftTabs(true);
-		editor.setHighlightActiveLine(true);
+		editor.getSession().setUseWrapMode(true);
+        editor.renderer.setHScrollBarAlwaysVisible(false);
 		editor.getSession().on('change', $.codeEdit.change);
-		
+		editor.setHighlightActiveLine(true);
 		return editor;
 	},
 	save : function(file_path, data) {

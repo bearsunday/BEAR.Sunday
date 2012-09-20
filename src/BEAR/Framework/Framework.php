@@ -32,7 +32,7 @@ final class Framework
      *
      * Framework version identification
      */
-    const VERSION = '0.4.0';
+    const VERSION = '0.4.1';
 
     /**
      * Constructor

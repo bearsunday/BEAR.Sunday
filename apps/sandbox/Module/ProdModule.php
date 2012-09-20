@@ -55,6 +55,7 @@ class ProdModule extends AbstractModule
         // install framework module
         $tmpDir = dirname(__DIR__) . '/tmp';
         $logDir = dirname(__DIR__) . '/log';
+        $this->bind('Doctrine\Common\Annotations\Reader')->toProvider('BEAR\Framework\Module\Provider\CachedReaderProvider');
         $this->install(new FrameworkModule($this->app, $tmpDir, $logDir));
 
         // install prod module

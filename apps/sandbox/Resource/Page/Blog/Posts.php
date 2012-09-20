@@ -23,7 +23,7 @@ class Posts extends Page
      * @var array
      */
     public $body = [
-        'post' => ''
+        'posts' => ''
     ];
 
     /**

@@ -9,10 +9,6 @@ use BEAR\Framework\Resource\AbstractPage as Page;
  */
 class World extends Page
 {
-    public function __construct()
-    {
-    }
-
     /**
      * Get
      */

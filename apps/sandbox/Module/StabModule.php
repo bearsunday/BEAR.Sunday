@@ -11,7 +11,7 @@ use Ray\Di\AbstractModule;
 use BEAR\Framework\Interceptor\Stab;
 
 /**
- * Application module
+ * Stab module
  *
  * @package    sandbox
  * @subpackage Module

@@ -1,4 +1,10 @@
 <?php
+/**
+ * App resource
+ *
+ * @package    sandbox
+ * @subpackage resource
+ */
 namespace sandbox\Resource\App\First;
 
 use BEAR\Resource\AbstractObject;
@@ -14,7 +20,6 @@ class Greeting extends AbstractObject
      * @param string $name
      *
      * @return string
-     *
      */
     public function onGet($name)
     {

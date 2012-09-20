@@ -1,6 +1,6 @@
 <?php
 /**
- * Env setting checker
+ * Checke env interceptor
  *
  * @package BEAR.Framework
  */
@@ -12,7 +12,7 @@ use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
 /**
- * Log Interceptor
+ * Checke env interceptor
  */
 class Checker implements MethodInterceptor
 {

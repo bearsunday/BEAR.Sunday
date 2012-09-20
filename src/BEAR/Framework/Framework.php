@@ -18,7 +18,7 @@ require_once __DIR__ . '/Inject/AppDependencyInject.php';
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-class Framework
+final class Framework
 {
     /**
      * BEAR.Sunday root path

@@ -12,11 +12,10 @@ use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Module\TemplateEngine;
 use Ray\Di\Injector;
 use Doctrine\Common\Cache\ApcCache as Cache;
-
 use Ray\Di\AbstractModule;
 
 /**
- * Application module
+ * Production module
  *
  * @package    sandbox
  * @subpackage Module
@@ -34,6 +33,7 @@ class ProdModule extends AbstractModule
      * Constructor
      *
      * @param string $app
+     * @param string $configFile
      */
     public function __construct($app, $configFile = 'config.php')
     {

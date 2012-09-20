@@ -8,10 +8,12 @@
 namespace sandbox\Module;
 
 /**
- * Application module for API
+ * Application module for API (JSON + HAL)
  *
  * @package    sandbox
  * @subpackage Module
+ *
+ * @see http://stateless.co/hal_specification.html
  */
 class HalModule extends ProdModule
 {

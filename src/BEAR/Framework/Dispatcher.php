@@ -15,7 +15,7 @@ use Aura\Autoload\Exception\NotReadable;
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-final class Dispatcher
+class Dispatcher
 {
     /**
      * Application context

@@ -7,7 +7,6 @@
 namespace BEAR\Framework\Module\Database;
 
 use Ray\Di\InjectorInterface;
-
 use Ray\Di\AbstractModule;
 
 /**

@@ -7,10 +7,10 @@
 namespace BEAR\Framework\Module\Database;
 
 use Pagerfanta\Pagerfanta;
-
 use Doctrine\DBAL\Driver\Connection as DriverConnection;
 use Pagerfanta\View\ViewInterface;
 use Pagerfanta\View\TwitterBootstrapView;
+
 /**
  * Paging Query
  *
@@ -19,15 +19,33 @@ use Pagerfanta\View\TwitterBootstrapView;
  */
 class Pager
 {
-    private $maxPerPage = 2;
-    private $pageKey = '_start';
+    /**
+     * Max per page
+     *
+     * @var int
+     */
+    protected $maxPerPage = 10;
+
+    /**
+     * Page key
+     *
+     * @var string
+     */
+    protected $pageKey = '_start';
+
+    /**
+     * View options
+     *
+     * @var array
+     */
+    protected $viewOptions = [
+        'prev_message' => '&laquo;',
+        'next_message' => '&raquo;'
+    ];
+
+    private $view;
     private $pager = [];
     private $currentPage;
-    private $viewOptions = [
-    'prev_message' => '&laquo;',
-    'next_message' => '&raquo;'
-    ];
-    private $view;
     private $routeGenerator;
 
     /**

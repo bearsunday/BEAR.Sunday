@@ -1,8 +1,13 @@
 <?php
+/**
+ * App resource
+ *
+ * @package    sandbox
+ * @subpackage resource
+ */
 namespace sandbox\Resource\Page\Blog\Posts;
 
 use BEAR\Resource\Resource;
-
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;
 use BEAR\Framework\Annotation\Cache;

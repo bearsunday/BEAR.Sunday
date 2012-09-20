@@ -1,4 +1,10 @@
 <?php
+/**
+ * App resource
+ *
+ * @package    sandbox
+ * @subpackage resource
+ */
 namespace sandbox\Resource\App\Blog;
 
 use BEAR\Framework\Annotation\Db;
@@ -69,9 +75,9 @@ class Posts extends ResourceObject implements DbSetterInterface
     /**
      * Get
      *
-     * @Cache(100)
-     *
      * @return array
+     *
+     * @Cache(100)
      */
     public function onGet($id = null)
     {
@@ -95,8 +101,6 @@ class Posts extends ResourceObject implements DbSetterInterface
      *
      * @param string $title
      * @param string $body
-     *
-     * @return \sandbox\Resource\App\Posts
      *
      * @Time
      * @Transactional
@@ -145,9 +149,9 @@ class Posts extends ResourceObject implements DbSetterInterface
     /**
      * Delete
      *
-     * @CacheUpdate
-     *
      * @param int $id
+     *
+     * @CacheUpdate
      */
     public function onDelete($id)
     {

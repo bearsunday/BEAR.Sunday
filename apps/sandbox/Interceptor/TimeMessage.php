@@ -1,6 +1,6 @@
 <?php
 /**
- * Env setting checker
+ * Time message
  *
  * @package BEAR.Framework
  */
@@ -10,7 +10,7 @@ use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 
 /**
- * Interceptor
+ * +Time  message add interceptor
  */
 class TimeMessage implements MethodInterceptor
 {

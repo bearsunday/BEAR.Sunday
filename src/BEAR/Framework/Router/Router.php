@@ -14,7 +14,7 @@ use Aura\Router\Map;
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-final class Router
+class Router
 {
     /**
      * $GLOBALS

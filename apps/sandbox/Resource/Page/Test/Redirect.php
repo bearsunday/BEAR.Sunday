@@ -1,4 +1,10 @@
 <?php
+/**
+ * App resource
+ *
+ * @package    sandbox
+ * @subpackage resource
+ */
 namespace sandbox\Resource\Page\Test;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
@@ -8,10 +14,6 @@ use BEAR\Framework\Resource\AbstractPage as Page;
  */
 class Redirect extends Page
 {
-    public function __construct()
-    {
-    }
-
     /**
      * Get
      */

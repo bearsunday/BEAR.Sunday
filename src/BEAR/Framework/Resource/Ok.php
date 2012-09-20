@@ -15,7 +15,7 @@ use BEAR\Resource\AbstractObject;
  * @package    BEAR.Framework
  * @subpackage Page
  */
-class Ok extends AbstractObject implements ResourceObject
+final class Ok extends AbstractObject implements ResourceObject
 {
     public $code = 200;
     public $headers = [];

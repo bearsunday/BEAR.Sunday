@@ -8,6 +8,8 @@ namespace BEAR\Framework\Interceptor;
 
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
+use ReflectionProperty;
+use Exception;
 
 /**
  * Transaction interceptor
@@ -24,14 +26,14 @@ class Transactional implements MethodInterceptor
     public function invoke(MethodInvocation $invocation)
     {
         $object = $invocation->getThis();
-        $ref = new \ReflectionProperty($object, 'db');
+        $ref = new ReflectionProperty($object, 'db');
         $ref->setAccessible(true);
         $db = $ref->getValue($object);
         $db->beginTransaction();
         try {
             $invocation->proceed();
             $db->commit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $db->roleback();
         }
     }

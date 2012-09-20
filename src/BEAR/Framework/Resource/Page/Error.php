@@ -12,7 +12,7 @@ namespace BEAR\Framework\Resource\Page;
  * @package    BEAR.Framework
  * @subpackage Page
  */
- class Error extends AbstractPage
+final class Error extends AbstractPage
 {
     public $code = 500;
     public $headers = [];

@@ -1,8 +1,6 @@
 <?php
 /**
- * sandbox
- *
- * @package App.sandbox
+ * App instance
  */
 namespace sandbox;
 

@@ -9,7 +9,9 @@ use BEAR\Resource\AbstractObject as Page;
 class Hello extends Page
 {
     /**
-     * @return self
+     * Get
+     *
+     * @param string $nam
      */
     public function onGet($name)
     {

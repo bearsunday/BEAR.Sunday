@@ -11,7 +11,7 @@ use BEAR\Framework\Module;
 use Ray\Di\AbstractModule;
 
 /**
- * Application module
+ * Test module
  *
  * @package    sandbox
  * @subpackage Module

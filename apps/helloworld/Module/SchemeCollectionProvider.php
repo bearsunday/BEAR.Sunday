@@ -1,4 +1,10 @@
 <?php
+/**
+ * Module
+ *
+ * @package    helloworld
+ * @subpackage Module
+ */
 namespace helloworld\Module;
 
 use Ray\Di\ProviderInterface as Provide;
@@ -9,9 +15,9 @@ use BEAR\Framework\Inject\AppNameInject;
 use BEAR\Framework\Inject\InjectorInject;
 
 /**
- * Application resource module
+ * Scheme collection provider
  *
- * @package    sandbox
+ * @package    helloworld
  * @subpackage Module
  */
 class SchemeCollectionProvider implements Provide

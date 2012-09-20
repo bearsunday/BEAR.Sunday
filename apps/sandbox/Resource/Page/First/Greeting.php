@@ -1,4 +1,10 @@
 <?php
+/**
+ * App resource
+ *
+ * @package    sandbox
+ * @subpackage resource
+ */
 namespace sandbox\Resource\Page\First;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
@@ -19,7 +25,6 @@ class Greeting extends Page
      * Get
      *
      * @param string $name
-     *
      */
     public function onGet($name = 'anonymous')
     {

@@ -18,7 +18,7 @@ use BEAR\Resource\Exception\MethodNotAllowed;
  * @package BEAR.Framework
  * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
-class Globals extends ArrayObject
+final class Globals extends ArrayObject
 {
     /**
      * Constructor

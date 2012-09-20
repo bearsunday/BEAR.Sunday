@@ -17,7 +17,7 @@ use Guzzle\Parser\UriTemplate\UriTemplate;
  * @package    BEAR.Framework
  * @subpackage Web
  */
-class Console implements ConsoleInterface
+final class Console implements ConsoleInterface
 {
     const MODE_REQUEST = 'request';
     const MODE_VIEW    = 'view';

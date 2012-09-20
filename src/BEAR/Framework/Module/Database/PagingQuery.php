@@ -34,7 +34,7 @@ class PagingQuery implements Countable, IteratorAggregate
      * @param string           $query
      * @param array            $params
      */
-    public function __construct(DriverConnection $db, $query, array $params = array())
+    public function __construct(DriverConnection $db, $query, array $params = [])
     {
         $this->db = $db;
         $this->pdo = $this->db->getWrappedConnection();

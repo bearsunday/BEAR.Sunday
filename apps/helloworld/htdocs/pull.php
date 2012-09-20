@@ -1,6 +1,6 @@
 <?php
 /**
- * Hello World (Pull)
+ * Hello World - Pull
  */
 $app = require dirname(__DIR__) . '/scripts/instance.php';
 $hello = $app->resource->get->uri('app://self/hello')->withQuery(['name' => 'Pull world !'])->eager->request();

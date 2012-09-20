@@ -1,8 +1,8 @@
 <?php
 /**
- * sandbox
+ * helloworld
  *
- * @package App.sandbox
+ * @package App.helloworld
  */
 namespace helloworld;
 
@@ -15,7 +15,7 @@ use Ray\Di\Injector;
 /**
  * Applicaton
  *
- * @package sandbox
+ * @package helloworld
  */
 final class App implements AppContext
 {

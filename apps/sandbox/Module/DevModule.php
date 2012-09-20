@@ -15,7 +15,7 @@ use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 
 /**
- * Application module
+ * Dev module
  *
  * @package    sandbox
  * @subpackage Module
@@ -41,6 +41,7 @@ class DevModule extends AbstractModule
      * Constructor
      *
      * @param string $app
+     * @param string $configFile
      */
     public function __construct($app, $configFile = 'config.php')
     {

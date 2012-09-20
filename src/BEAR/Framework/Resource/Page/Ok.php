@@ -12,7 +12,7 @@ namespace BEAR\Framework\Resource\Page;
  * @package    BEAR.Framework
  * @subpackage Page
  */
-class Ok extends AbstractPage
+final class Ok extends AbstractPage
 {
     public $code = 200;
     public $headers = [];

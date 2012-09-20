@@ -1,4 +1,10 @@
 <?php
+/**
+ * App resource
+ *
+ * @package    sandbox
+ * @subpackage resource
+ */
 namespace sandbox\Resource\Page\Blog;
 
 use BEAR\Framework\Resource\AbstractPage as Page;

@@ -9,7 +9,6 @@ namespace sandbox\Module;
 
 use sandbox\Interceptor\PostFormValidater;
 use sandbox\Interceptor\TimeMessage;
-
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\Schema;
 use BEAR\Framework\Module\Cqrs;
@@ -18,7 +17,6 @@ use BEAR\Framework\Module\TemplateEngine;
 use BEAR\Framework\Interceptor\TimeStamper;
 use BEAR\Framework\Interceptor\Transactional;
 use BEAR\Framework\Module\Database;
-
 use Ray\Di\AbstractModule;
 use Ray\Di\InjectorInterface;
 

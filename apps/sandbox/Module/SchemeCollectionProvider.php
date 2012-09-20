@@ -1,4 +1,10 @@
 <?php
+/**
+ * Scheme collection
+ *
+ * @package    sandbox
+ * @subpackage Module
+ */
 namespace sandbox\Module;
 
 use Ray\Di\ProviderInterface as Provide;
@@ -9,7 +15,7 @@ use BEAR\Framework\Inject\AppNameInject;
 use BEAR\Framework\Inject\InjectorInject;
 
 /**
- * Application resource module
+ * Scheme collection
  *
  * @package    sandbox
  * @subpackage Module

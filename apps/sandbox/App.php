@@ -2,7 +2,7 @@
 /**
  * sandbox
  *
- * @package App.sandbox
+ * @package sandbox
  */
 namespace sandbox;
 

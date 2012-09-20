@@ -17,8 +17,8 @@ interface Taggable
     /**
      * Get etag
      *
-     * @param unknown_type $object
-     * @param unknown_type $args
+     * @param object $object
+     * @param array  $args
      */
     public function getEtag($object, $args);
 }

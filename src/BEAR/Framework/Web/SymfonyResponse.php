@@ -25,7 +25,7 @@ use Exception;
  * @package    BEAR.Framework
  * @subpackage Web
  */
-class SymfonyResponse implements ResponseInterface
+final class SymfonyResponse implements ResponseInterface
 {
     use LogInject;
 

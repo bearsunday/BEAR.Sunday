@@ -1,9 +1,14 @@
 <?php
+/**
+ * App resource
+ *
+ * @package    sandbox
+ * @subpackage resource
+ */
 namespace sandbox\Resource\Page\Blog\Posts;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;
-
 use Ray\Di\Di\Inject;
 
 /**
@@ -27,7 +32,6 @@ class Pager extends Page
 
     /**
      * Get
-     *
      */
     public function onGet()
     {

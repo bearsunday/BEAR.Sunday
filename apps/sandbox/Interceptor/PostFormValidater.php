@@ -10,7 +10,7 @@ use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 
 /**
- * Log Interceptor
+ * Form validator
  */
 class PostFormValidater implements MethodInterceptor
 {

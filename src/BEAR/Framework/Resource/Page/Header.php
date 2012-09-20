@@ -15,7 +15,7 @@ use ArrayIterator;
  * @package    BEAR.Framework
  * @subpackage Page
  */
-class Header extends ArrayObject
+final class Header extends ArrayObject
 {
     public function getIterator()
     {

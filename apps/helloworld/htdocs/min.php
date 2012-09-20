@@ -1,6 +1,6 @@
 <?php
 /**
- * Minimum Hello World
+ * Hello World - Min
  *
  * no router
  * no view

@@ -10,11 +10,13 @@ use BEAR\Framework\Framework;
 use BEAR\Framework\Router\Router;
 
 // profiler
-require dirname(dirname(dirname(__DIR__))) . '/scripts/profile.php';
+$system = dirname(dirname(dirname(__DIR__)));
+require $system . '/scripts/profile.php';
 
 // load
-require dirname(dirname(dirname(__DIR__))) . '/src/BEAR/Framework/Framework.php';
+require $system . '/src/BEAR/Framework/Framework.php';
 require dirname(__DIR__) . '/App.php';
+require_once $system . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php';
 
 // App instance (init)
 $app = App::factory(App::RUN_MODE_PROD, true);

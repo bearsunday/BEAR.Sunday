@@ -43,9 +43,8 @@ if (PHP_SAPI == 'cli-server') {
 // reroute another PHP file
 $doIncludePHPfile = (
     PHP_SAPI !== 'cli' &&
-    file_exists($_SERVER['SCRIPT_FILENAME']) &&
-    ($_SERVER['SCRIPT_FILENAME'] !== __DIR__ . '/index.php') &&
-    ($_SERVER['SCRIPT_FILENAME'] !== __FILE__)
+    (substr($_SERVER['REQUEST_URI'], 0, 5) === '/_dev/') &&
+    file_exists($_SERVER['SCRIPT_FILENAME'])
 );
 if ($doIncludePHPfile) {
     include $_SERVER['SCRIPT_FILENAME'];

@@ -2,7 +2,7 @@
 /**
  * BEAR.Sunday install checker
  *
- * usage
+ * usage:
  *
  * $ php path/to/check.php;
  *

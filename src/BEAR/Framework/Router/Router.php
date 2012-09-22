@@ -1,7 +1,8 @@
 <?php
 /**
- *  BEAR.Framework
+ * This file is part of the BEAR.Framework package
  *
+ * @package BEAR.Framework
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Router;
@@ -12,7 +13,6 @@ use Aura\Router\Map;
  * Standard Router
  *
  * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
 class Router
 {

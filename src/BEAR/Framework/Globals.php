@@ -1,7 +1,8 @@
 <?php
 /**
- *  BEAR.Framework
+ * This file is part of the BEAR.Framework package
  *
+ * @package BEAR.Framework
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework;
@@ -16,7 +17,6 @@ use BEAR\Resource\Exception\MethodNotAllowed;
  * Emulates web $GLOBALS in CLI
  *
  * @package BEAR.Framework
- * @author  Akihito Koriyama <akihito.koriyama@gmail.com>
  */
 final class Globals extends ArrayObject
 {

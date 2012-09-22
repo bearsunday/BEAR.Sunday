@@ -1,7 +1,8 @@
 <?php
 /**
- *  BEAR.Framework
+ * This file is part of the BEAR.Framework package
  *
+ * @package BEAR.Framework
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Application;
@@ -15,9 +16,7 @@ use FirePHP;
 /**
  * Resource log iterator
  *
- * @package    BEAR.Framework
- * @subpackage Log
- * @author     Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package BEAR.Framework
  */
 final class ResourceLogIterator extends IteratorIterator implements Fireable
 {

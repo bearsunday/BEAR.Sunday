@@ -1,13 +1,14 @@
 <?php
 /**
- * BEAR.Framework
+ * This file is part of the BEAR.Framework package
  *
+ * @package BEAR.Framework
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Resource\View;
 
 /**
- * Template engine adapter
+ * Intarface for template engine adapter
  *
  * @package    BEAR.Framework
  * @subpackage Resource

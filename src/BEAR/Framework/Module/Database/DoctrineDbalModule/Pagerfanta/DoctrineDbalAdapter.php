@@ -1,7 +1,8 @@
 <?php
 /**
- * BEAR.Framework
+ * This file is part of the BEAR.Framework package
  *
+ * @package BEAR.Framework
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Framework\Module\Database\DoctrineDbalModule\Pagerfanta;
@@ -11,9 +12,10 @@ use Pagerfanta\Adapter\AdapterInterface;
 use BEAR\Framework\Module\Database\PagingQuery;
 
 /**
- * DoctrineDbalAdapter.
+ * DoctrineDbal adapter.
  *
- * @author Akihito Koriyama <akihito.koriyama@gmail.com>
+ * @package    BEAR.Framework
+ * @subpackage Module
  */
 class DoctrineDbalAdapter implements AdapterInterface
 {

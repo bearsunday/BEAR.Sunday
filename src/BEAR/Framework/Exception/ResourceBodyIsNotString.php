@@ -15,6 +15,6 @@ use BEAR\Resource\Exception;
  * @package   BEAR.Framework
  * @subpackge Exception
  */
-class ResourceBodyIsNotString extends Exception
+class ResourceBodyIsNotString extends \RuntimeException implements Exception
 {
 }

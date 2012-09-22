@@ -15,6 +15,6 @@ use BEAR\Resource\Exception;
  * @package   BEAR.Framework
  * @subpackge Exception
  */
-class ResourceNotFound extends Exception
+class ResourceNotFound extends \BadMethodCallException implements Exception
 {
 }

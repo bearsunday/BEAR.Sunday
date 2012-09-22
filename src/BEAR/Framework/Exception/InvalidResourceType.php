@@ -7,14 +7,12 @@
  */
 namespace BEAR\Framework\Exception;
 
-use BEAR\Resource\Exception;
-
 /**
  * Invalid Resource Type
  *
  * @package   BEAR.Framework
  * @subpackge Exception
  */
-class InvalidResourceType extends Exception
+class InvalidResourceType extends \LogicException implements Exception
 {
 }

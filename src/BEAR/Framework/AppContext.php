@@ -8,7 +8,7 @@
 namespace BEAR\Framework;
 
 /**
- * Application context
+ * Interface for application context
  *
  * @package    BEAR.Framework
  * @subpackage App

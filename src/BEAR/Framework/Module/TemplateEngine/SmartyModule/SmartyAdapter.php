@@ -11,6 +11,8 @@ use Smarty;
 use BEAR\Framework\Resource\View\TemplateEngineAdapter;
 use BEAR\Framework\Exception\TemplateNotFound;
 use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
+use Ray\Di\Di\PostConstruct;
 
 /**
  * Smarty adapter
@@ -42,6 +44,19 @@ class SmartyAdapter implements TemplateEngineAdapter
     const EXT = 'tpl';
 
     /**
+     * Is production ?
+     *
+     * @param bool $isProd
+     *
+     * @Inject
+     * @Named("is_prod")
+     */
+    public function setIsProd($isProd)
+    {
+        $this->isProd = $isProd;
+    }
+
+    /**
      * Constructor
      *
      * @Inject
@@ -49,6 +64,18 @@ class SmartyAdapter implements TemplateEngineAdapter
     public function __construct(Smarty $smarty)
     {
         $this->smarty = $smarty;
+    }
+
+    /**
+     * @PostConstruct
+     */
+    public function init()
+    {
+        if ($this->isProd) {
+            $this->smarty->caching = 1;
+            $this->smarty->force_compile = false;
+            $this->smarty->compile_check = false;
+        }
     }
 
     /**

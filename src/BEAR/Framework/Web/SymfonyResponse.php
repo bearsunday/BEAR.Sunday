@@ -180,7 +180,6 @@ final class SymfonyResponse implements ResponseInterface
     public function send()
     {
         if (PHP_SAPI === 'cli') {
-            //$this->sendCli();
             if ($this->resource instanceof Page) {
                 $this->resource->headers = $this->response->headers->all();
             }

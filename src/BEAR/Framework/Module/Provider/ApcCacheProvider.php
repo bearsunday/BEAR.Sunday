@@ -7,7 +7,6 @@
  */
 namespace BEAR\Framework\Module\Provider;
 
-use BEAR\Framework\Inject\LogInject;
 use Doctrine\Common\Cache\ApcCache as Cache;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Ray\Di\ProviderInterface as Provide;
@@ -20,7 +19,6 @@ use Ray\Di\ProviderInterface as Provide;
  */
 class ApcCacheProvider implements Provide
 {
-    use LogInject;
 
     /**
      * Return instance
@@ -29,10 +27,8 @@ class ApcCacheProvider implements Provide
      */
     public function get()
     {
-        $cache = new Cache;
-        $log = 'Cache installed. adapter=[' . get_class($cache) . ']';
-        $this->log->log($log);
+        $cache = new CacheAdapter(new Cache);
 
-        return new CacheAdapter($cache);
+        return $cache;
     }
 }

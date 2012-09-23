@@ -11,6 +11,8 @@ use BEAR\Framework\AppContext;
 use BEAR\Framework\Inject\AppDependencyInject;
 use Ray\Di\Injector;
 use LogicException;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Applicaton
@@ -79,9 +81,6 @@ final class App implements AppContext
             // log binding
             file_put_contents(__DIR__ . '/log/di-log-'. $cacheKey . 'log', (string) $injector);
         }
-
-        // register logging
-        $app->logger->register($app);
 
         return $app;
     }

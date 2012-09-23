@@ -33,8 +33,7 @@ class DevModule extends AbstractModule
         $this->install(new FrameworkModule($this));
         $this->installDevLogger();
         $this->installResourceCache();
-        $injector = Injector::create([$this]);
-        $this->install(new Common\AppModule($injector));
+        $this->install(new Common\AppModule($this));
     }
 
     /**

@@ -11,6 +11,7 @@ use BEAR\Framework\AppContext;
 use BEAR\Framework\Application\ResourceLogIterator;
 use BEAR\Resource\LoggerInterface as ResourceLoggerInterface;
 use BEAR\Resource\Logger as ResourceLogger;
+use Ray\Di\Di\Inject;
 
 /**
  * Logger

@@ -38,8 +38,7 @@ class ProdModule extends AbstractModule
         $this->installResourceCache();
 
         // install application module
-        $injector = Injector::create([$this]);
-        $this->install(new Common\AppModule($injector));
+        $this->install(new Common\AppModule($this));
     }
 
     /**

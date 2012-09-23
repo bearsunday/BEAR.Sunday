@@ -12,6 +12,8 @@ use Ray\Aop\MethodInvocation;
 use Guzzle\Common\Cache\CacheAdapterInterface;
 use ReflectionMethod;
 use BEAR\Framework\Inject\EtagInject;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Cache update interceptor
@@ -29,7 +31,7 @@ class CacheUpdater implements MethodInterceptor
      * @Inject
      * @Named("resource_cache")
      *
-     * @param Cache $cache
+     * @param CacheAdapterInterface $cache
      */
     public function __construct(CacheAdapterInterface $cache)
     {

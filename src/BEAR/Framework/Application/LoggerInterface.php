@@ -8,6 +8,7 @@
 namespace BEAR\Framework\Application;
 
 use BEAR\Framework\AppContext;
+use Ray\Di\Di\ImplementedBy;
 
 /**
  * Interface for application logger

@@ -9,6 +9,8 @@ namespace BEAR\Framework\Module\Provider;
 
 use Ray\Di\ProviderInterface;
 use BEAR\Resource\LoggerInterface;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Resource logger

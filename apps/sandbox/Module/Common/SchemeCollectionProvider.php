@@ -13,6 +13,8 @@ use BEAR\Resource\Adapter\Page;
 use BEAR\Resource\SchemeCollection;
 use BEAR\Framework\Inject\AppNameInject;
 use BEAR\Framework\Inject\InjectorInject;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Scheme collection

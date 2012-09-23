@@ -7,12 +7,12 @@
  */
 namespace BEAR\Framework\Resource\View;
 
-use Ray\Aop\Weave;
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Resource\Renderable;
-use ReflectionClass;
 use BEAR\Framework\Resource\View\TemplateEngineAdapter;
+use Ray\Aop\Weave;
 use Ray\Di\Di\Inject;
+use ReflectionClass;
 
 /**
  * Request renderer

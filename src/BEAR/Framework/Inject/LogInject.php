@@ -8,7 +8,7 @@
 namespace BEAR\Framework\Inject;
 
 use Ray\Di\Di\Inject;
-use Guzzle\Common\Log\LogAdapterInterface as Log;
+use Guzzle\Common\Log\LogAdapterInterface;
 
 /**
  * Inject logger
@@ -33,7 +33,7 @@ trait LogInject
      * @return void
      * @Inject
      */
-    public function setLog(Log $log)
+    public function setLog(LogAdapterInterface $log)
     {
         $this->log = $log;
     }

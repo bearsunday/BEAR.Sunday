@@ -17,6 +17,8 @@ use BEAR\Framework\Exception\ResourceNotFound;
 use BEAR\Framework\Web\ResponseInterface;
 use BEAR\Framework\Inject\LogDirInject;
 use Exception;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Exception handler

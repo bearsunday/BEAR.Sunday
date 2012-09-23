@@ -1,5 +1,5 @@
 {
-    "hash": "387e3782374abf9dc5501984f7d87f9a",
+    "hash": "8e8e8b2a99f2c0a62f7ef0ac656407ec",
     "packages": [
         {
             "name": "Ray/Di",
@@ -336,12 +336,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "2588a50882bef1379c2716653be263ff4a022ec3"
+                "reference": "41b8a8ac9614a2e9fe86b90eecff648514dd804b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/koriym/BEAR.Resource/zipball/2588a50882bef1379c2716653be263ff4a022ec3",
-                "reference": "2588a50882bef1379c2716653be263ff4a022ec3",
+                "url": "https://github.com/koriym/BEAR.Resource/zipball/41b8a8ac9614a2e9fe86b90eecff648514dd804b",
+                "reference": "41b8a8ac9614a2e9fe86b90eecff648514dd804b",
                 "shasum": ""
             },
             "require": {
@@ -354,7 +354,7 @@
                 "ray/aop": "dev-master",
                 "ray/di": "dev-master"
             },
-            "time": "1348071387",
+            "time": "2012-09-21 11:21:38",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -599,7 +599,7 @@
                 "zend/zend-log1": "1.11",
                 "zend/zend-cache1": "1.11"
             },
-            "time": "2012-07-02 15:04:37",
+            "time": "2012-07-02 17:04:37",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -880,7 +880,7 @@
             "require": {
                 "php": ">=5.2"
             },
-            "time": "2012-07-02 11:17:26",
+            "time": "2012-07-02 13:17:26",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -1084,6 +1084,78 @@
             },
             "type": "library",
             "installation-source": "dist"
+        },
+        {
+            "name": "zendframework/zend-log",
+            "version": "2.0.2",
+            "target-dir": "Zend/Log",
+            "dist": {
+                "type": "zip",
+                "url": "http://packages.zendframework.com/composer/Zend_Log-2.0.2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-stdlib": "self.version"
+            },
+            "suggest": {
+                "ext-mongo": "*",
+                "zendframework/zend-db": "Zend\\Db component",
+                "zendframework/zend-escaper": "Zend\\Escaper component, for use in the XML formatter",
+                "zendframework/zend-mail": "Zend\\Mail component",
+                "zendframework/zend-validator": "Zend\\Validator component"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Log": ""
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "component for general purpose logging",
+            "homepage": "http://packages.zendframework.com/",
+            "keywords": [
+                "zf2",
+                "log",
+                "logging"
+            ]
+        },
+        {
+            "name": "zendframework/zend-stdlib",
+            "version": "2.0.2",
+            "target-dir": "Zend/Stdlib",
+            "dist": {
+                "type": "zip",
+                "url": "http://packages.zendframework.com/composer/Zend_Stdlib-2.0.2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "pecl-weakref": "Implementation of weak references for Stdlib\\CallbackHandler"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Stdlib": ""
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": " ",
+            "homepage": "http://packages.zendframework.com/",
+            "keywords": [
+                "zf2",
+                "stdlib"
+            ]
         }
     ],
     "packages-dev": null,

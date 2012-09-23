@@ -39,7 +39,8 @@
         "printo/printo": "*",
         "firephp/firephp-core": "dev-master",
         "twitter/bootstrap": "dev-master",
-        "nocarrier/hal": "*"
+        "nocarrier/hal": "*",
+        "zendframework/zend-log": "2.0.*"
     },
     "autoload": {
         "psr-0": {
@@ -158,6 +159,10 @@
                    "type": "zip"
                }
            }
-       }
+       },
+       {
+            "type": "composer",
+            "url": "http://packages.zendframework.com/"
+        }
     ]
 }

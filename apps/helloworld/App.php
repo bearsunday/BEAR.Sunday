@@ -11,6 +11,7 @@ use BEAR\Framework\AppContext;
 use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Inject\AppDependencyInject;
 use Ray\Di\Injector;
+use Ray\Di\Di\Inject;
 
 /**
  * Applicaton

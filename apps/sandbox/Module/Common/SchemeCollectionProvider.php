@@ -5,7 +5,7 @@
  * @package    sandbox
  * @subpackage Module
  */
-namespace sandbox\Module;
+namespace sandbox\Module\Common;
 
 use Ray\Di\ProviderInterface as Provide;
 use BEAR\Resource\Adapter\App as AppAdapter;

@@ -19,32 +19,14 @@ use BEAR\Framework\Interceptor\Stab;
 class StabModule extends AbstractModule
 {
     /**
-     * App class
-     *
-     * @var string
-     */
-    private $app;
-
-    /**
-     * Constructor
-     *
-     * @param string $app
-     */
-    public function __construct($app)
-    {
-        $this->app = $app;
-        parent::__construct();
-    }
-
-    /**
      * Configure application
      *
      * @return void
      */
     protected function configure()
     {
-        $this->install(new DevModule($this->app));
-        $stab = include __DIR__ . '/stab/resource.php';
+        $this->install(new DevModule);
+        $stab = include __DIR__ . '/common/stab/resource.php';
         $this->installResourceStab($stab);
     }
 

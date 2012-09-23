@@ -47,15 +47,10 @@ final class App implements AppContext
         $cacheKey = 'app' . __NAMESPACE__ . PHP_SAPI . $runMode;
         if ($useCache && apc_exists($cacheKey)) {
             $app = apc_fetch($cacheKey);
-
             return $app;
         }
         // run mode
-        switch ($runMode) {
-            case self::RUN_MODE_PROD:
-            default:
-                $modules = [new FrameworkModule(__NAMESPACE__, __DIR__ . '/tmp', __DIR__ . '/log'), new Module\AppModule];
-        }
+        $modules = [new Module\AppModule];
         $injector = Injector::create($modules, $useCache);
         $app = $injector->getInstance(__CLASS__);
         $useCache ? apc_store($cacheKey, $app) : apc_clear_cache('user');

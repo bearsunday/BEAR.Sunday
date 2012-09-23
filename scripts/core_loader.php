@@ -14,6 +14,7 @@ use BEAR\Framework\Framework;
 if (isset($system)) {
     return;
 }
+
 $system = Framework::$systemRoot;
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/AnnotationRegistry.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/AbstractModule.php';
@@ -91,7 +92,7 @@ include $system . '/src/BEAR/Framework/Interceptor/Logger.php';
 include $system . '/src/BEAR/Framework/Annotation/Log.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Pointcut.php';
 include $system . '/src/BEAR/Framework/Resource/View/HalRenderer.php';
-include $system . '/src/BEAR/Framework/Module/Schema/StandardSchemaModule.php';
+include $system . '/src/BEAR/Framework/Module/SchemeModule.php';
 include $system . '/src/BEAR/Framework/Inject/AppNameInject.php';
 include $system . '/src/BEAR/Framework/Inject/InjectorInject.php';
 include $system . '/src/BEAR/Framework/Module/WebContext/AuraWebModule.php';

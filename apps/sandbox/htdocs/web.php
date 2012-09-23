@@ -43,7 +43,7 @@ if (PHP_SAPI == 'cli-server') {
 // reroute another PHP file
 $doIncludePHPfile = (
     PHP_SAPI !== 'cli' &&
-    (substr($_SERVER['REQUEST_URI'], 0, 5) === '/_dev/') &&
+    (substr($_SERVER['REQUEST_URI'], 0, 5) === '/_dev') &&
     file_exists($_SERVER['SCRIPT_FILENAME'])
 );
 if ($doIncludePHPfile) {
@@ -56,7 +56,7 @@ require_once $system . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_runs.php
 
 // run mode
 $runMode = App::RUN_MODE_DEV;
-$useCache = false;
+$useCache = true;
 error_log('run:' . __NAMESPACE__ . " mode={$runMode} cahce=" . ($useCache ? 'enable' : 'disable'));
 
 // Application

@@ -65,12 +65,13 @@ final class App implements AppContext
             // run mode module
             $modeModule = __NAMESPACE__ . '\Module\\' . $runMode . 'Module';
             try {
-                $modules = [new $modeModule(__NAMESPACE__)];
+                $modules = [new $modeModule];
             } catch (Exception $e) {
                 throw new LogicException('Run mode module not loaded', $runMode);
             }
 
             // return application object
+
             $injector = Injector::create($modules, $useCache);
             $app = $injector->getInstance(__CLASS__);
             $useCache ? apc_store($cacheKey, $app) : apc_clear_cache('user');

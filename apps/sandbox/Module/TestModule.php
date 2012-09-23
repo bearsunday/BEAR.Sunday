@@ -8,34 +8,24 @@
 namespace sandbox\Module;
 
 use BEAR\Framework\Module;
-use Ray\Di\AbstractModule;
+use BEAR\Framework\Module\NamedModule;
 
 /**
- * Test module
+ * Production module
  *
  * @package    sandbox
  * @subpackage Module
  */
-class TestModule extends AbstractModule
+class TestModule extends ProdModule
 {
     /**
-     * Constructor
-     *
-     * @param string $app
+     * Install config value
      */
-    public function __construct($app)
+    protected function installConstants()
     {
-        $this->app = $app;
-        parent::__construct();
-    }
-
-    /**
-     * Configure dependency binding
-     *
-     * @return void
-     */
-    protected function configure()
-    {
-        $this->install(new DevModule($this->app, 'test.config.php'));
+        $config = require __DIR__ . '/config.php';
+        $config['master_db']['dbname'] = 'blogbeartest';
+        $config['slave_db'] = $config['master_db'];
+        $this->install(new NamedModule($config));
     }
 }

@@ -15,7 +15,7 @@ class PerformanceTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $app = App::factory(App::RUN_MODE_PROD, true);
+        $app = App::factory(App::RUN_MODE_TEST, true);
         $this->resource = $app->resource;
     }
 

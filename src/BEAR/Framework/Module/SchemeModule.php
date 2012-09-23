@@ -10,20 +10,27 @@ namespace BEAR\Framework\Module;
 use Ray\Di\AbstractModule;
 
 /**
- * Named module
+ * Scheme module
  *
  * @package    BEAR.Framework
  * @subpackage Module
  */
-class NamedModule extends AbstractModule
+class SchemeModule extends AbstractModule
 {
+    /**
+     * Scheme collection provider
+     *
+     * @var string
+     */
+    private $schemeProvider;
+
     /**
      *
      * @param array $names
      */
-    public function __construct(array $names)
+    public function __construct($schemeProvider)
     {
-        $this->names = $names;
+        $this->schemeProvider = $schemeProvider;
         parent::__construct();
     }
 
@@ -34,8 +41,6 @@ class NamedModule extends AbstractModule
      */
     protected function configure()
     {
-        foreach ($this->names as $annotatedWith => $instance) {
-            $this->bind()->annotatedWith($annotatedWith)->toInstance($instance);
-        }
+        $this->bind('BEAR\Resource\SchemeCollection')->toProvider($this->schemeProvider);
     }
 }

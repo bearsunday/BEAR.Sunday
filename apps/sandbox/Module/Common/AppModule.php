@@ -5,18 +5,13 @@
  * @package    sandbox
  * @subpackage Module
  */
-namespace sandbox\Module;
+namespace sandbox\Module\Common;
 
-use sandbox\Interceptor\PostFormValidater;
-use sandbox\Interceptor\TimeMessage;
-use BEAR\Framework\Module;
-use BEAR\Framework\Module\Schema;
-use BEAR\Framework\Module\Cqrs;
-use BEAR\Framework\Module\WebContext;
-use BEAR\Framework\Module\TemplateEngine;
+use BEAR\Framework;
 use BEAR\Framework\Interceptor\TimeStamper;
 use BEAR\Framework\Interceptor\Transactional;
-use BEAR\Framework\Module\Database;
+use sandbox\Interceptor\PostFormValidater;
+use sandbox\Interceptor\TimeMessage;
 use Ray\Di\AbstractModule;
 use Ray\Di\InjectorInterface;
 
@@ -38,34 +33,32 @@ class AppModule extends AbstractModule
         $this->injector = $injector;
         parent::__construct();
     }
+
     /**
-     * Configure dependency binding
-     *
-     * @return void
+     * (non-PHPdoc)
+     * @see Ray\Di.AbstractModule::configure()
      */
     protected function configure()
     {
+        // di - application
         $this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');
         $this->bind('BEAR\Resource\Renderable')->annotatedWith('hal')->to('BEAR\Framework\Resource\View\HalRenderer');
-        $this->install(new Schema\StandardSchemaModule(__NAMESPACE__));
-        $this->install(new WebContext\AuraWebModule);
-        $this->install(new TemplateEngine\SmartyModule\SmartyModule);
-        $this->install(new Module\Database\DoctrineDbalModule($this->injector));
-        $this->install(new Cqrs\CacheModule($this->injector));
-        $this->installWritableChecker();
-        $this->installFormValidater();
+        // di - system
+        $this->install(new Framework\Module\SchemeModule( __NAMESPACE__ . '\SchemeCollectionProvider'));
+        $this->install(new Framework\Module\WebContext\AuraWebModule);
+        $this->install(new Framework\Module\TemplateEngine\SmartyModule\SmartyModule);
+        $this->install(new Framework\Module\Database\DoctrineDbalModule($this->injector));
+        $this->install(new Framework\Module\Cqrs\CacheModule($this->injector));
+        // aop
         $this->installTimeStamper();
         $this->installTransaction();
-        // time message binding
-        $this->bindInterceptor(
-            $this->matcher->subclassesOf('sandbox\Resource\App\First\Greeting\Aop'),
-            $this->matcher->any(),
-            [new TimeMessage]
-        );
+        $this->installTimeMessage();
+        $this->installWritableChecker();
+        $this->installNewpostFormValidater();
     }
 
     /**
-     * installWritableChecker
+     * Check writable directory
      */
     private function installWritableChecker()
     {
@@ -81,7 +74,7 @@ class AppModule extends AbstractModule
     /**
      * @Form - bind form validater
      */
-    private function installFormValidater()
+    private function installNewpostFormValidater()
     {
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\Page\Blog\Posts\Newpost'),
@@ -111,6 +104,19 @@ class AppModule extends AbstractModule
             $this->matcher->any(),
             $this->matcher->annotatedWith('BEAR\Framework\Annotation\Transactional'),
             [new Transactional]
+        );
+    }
+
+    /**
+     * Add time message aspect
+     */
+    private function installTimeMessage()
+    {
+        // time message binding
+        $this->bindInterceptor(
+            $this->matcher->subclassesOf('sandbox\Resource\App\First\Greeting\Aop'),
+            $this->matcher->any(),
+            [new TimeMessage]
         );
     }
 }

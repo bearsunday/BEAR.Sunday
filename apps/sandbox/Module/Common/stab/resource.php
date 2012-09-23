@@ -1,9 +1,6 @@
 <?php
-/**
- * Stab for app://sandbox/posts
- */
-return [
-    'sandbox\Resource\App\Posts' =>
+$stab = [
+    'sandbox\Resource\App\Blog\Posts' =>
         [
             [
                 'id' => 0,
@@ -43,3 +40,5 @@ return [
                  ]
             ],
 ];
+
+return $stab;

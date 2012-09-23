@@ -7,7 +7,9 @@
  */
 namespace helloworld\Module;
 
-use BEAR\Framework\Module;
+use BEAR\Framework\Module\FrameworkModule;
+
+use BEAR\Framework;
 use Ray\Di\AbstractModule;
 
 /**
@@ -19,12 +21,14 @@ use Ray\Di\AbstractModule;
 class AppModule extends AbstractModule
 {
     /**
-     * Configure dependency binding
-     *
-     * @return void
+     * (non-PHPdoc)
+     * @see Ray\Di.AbstractModule::configure()
      */
     protected function configure()
     {
-        $this->bind('BEAR\Resource\SchemeCollection')->toProvider('\helloworld\Module\SchemeCollectionProvider');
+        $config = require __DIR__ . '/config.php';
+        $this->install(new Framework\Module\NamedModule($config));
+        $this->install(new FrameworkModule($this));
+        $this->install(new Framework\Module\SchemeModule( __NAMESPACE__ . '\SchemeCollectionProvider'));
     }
 }

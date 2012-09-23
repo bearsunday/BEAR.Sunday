@@ -36,7 +36,7 @@ if (PHP_SAPI == 'cli-server') {
 }
 
 // Application
-$runMode = App::RUN_MODE_HAL;
+$runMode = App::RUN_MODE_API;
 $useCache = false;
 $app = App::factory($runMode, $useCache);
 

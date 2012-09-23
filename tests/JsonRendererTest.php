@@ -29,7 +29,7 @@ class JsonRendererTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $signal = require dirname(__DIR__) . '/vendor/aura/signal/scripts/instance.php';
-        $request = new Request(new Invoker(new Config(new Annotation(new Definition)), new Linker(new Reader), $signal));
+        $request = new Request(new Invoker(new Config(new Annotation(new Definition, new Reader)), new Linker(new Reader), $signal));
         $request->method = 'get';
         $this->testResource = new Ok;
         $request->ro = $this->testResource;

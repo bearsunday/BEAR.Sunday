@@ -1,59 +1,6 @@
 {
-    "hash": "8e8e8b2a99f2c0a62f7ef0ac656407ec",
+    "hash": "8b0e75fa543987dc42dd02abb845ead9",
     "packages": [
-        {
-            "name": "Ray/Di",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "git://github.com/koriym/Ray.Di.git",
-                "reference": "1.0.0-beta1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/koriym/Ray.Di/zipball/1.0.0-beta1",
-                "reference": "1.0.0-beta1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "doctrine/common": "2.3.*-dev",
-                "aura/di": ">=1.0.*-dev",
-                "ray/aop": "*"
-            },
-            "time": "1345435997",
-            "type": "library",
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Ray\\Di": "src/",
-                    "Aura\\Di": "vendor/Aura/Di/src/"
-                }
-            },
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Akihito Koriyama",
-                    "email": "akihito.koriyama@gmail.com",
-                    "homepage": "https://github.com/koriym"
-                }
-            ],
-            "description": "Guice style annotation-driven dependency injection framework",
-            "homepage": "https://github.com/koriym/Ray.Di",
-            "keywords": [
-                "dependency injection",
-                "container",
-                "aop",
-                "di",
-                "jsr",
-                "annotation",
-                "method interception",
-                "guice",
-                "ioc"
-            ]
-        },
         {
             "name": "aura/autoload",
             "version": "dev-master",
@@ -354,7 +301,7 @@
                 "ray/aop": "dev-master",
                 "ray/di": "dev-master"
             },
-            "time": "2012-09-21 11:21:38",
+            "time": "1348240898",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -599,7 +546,7 @@
                 "zend/zend-log1": "1.11",
                 "zend/zend-cache1": "1.11"
             },
-            "time": "2012-07-02 17:04:37",
+            "time": "2012-07-02 13:04:37",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -870,6 +817,29 @@
             ]
         },
         {
+            "name": "ray/di",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/koriym/Ray.Di.git",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/koriym/Ray.Di/zipball/master",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Ray\\Di": "src"
+                }
+            },
+            "time": "1348236851"
+        },
+        {
             "name": "smarty/smarty",
             "version": "v3.1.11",
             "source": {
@@ -880,7 +850,7 @@
             "require": {
                 "php": ">=5.2"
             },
-            "time": "2012-07-02 13:17:26",
+            "time": "2012-07-02 09:17:26",
             "type": "library",
             "installation-source": "source",
             "autoload": {

@@ -13,6 +13,7 @@ use Doctrine\Common\Cache\ArrayCache as CacheStorage;
 use Ray\Aop\ReflectiveMethodInvocation;
 use BEAR\Framework\Annotation\Cache as CacheAnnotation;
 use BEAR\Framework\Resource\CacheControl\Etag;
+use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
 require_once dirname(__DIR__) . '/Mock/ResourceObject/MockResource.php';
 
@@ -26,7 +27,7 @@ class CacheLoaderTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->cache = new CacheAdapter(new CacheStorage);
-        $config = new Config(new Annotation(new Definition));
+        $config = new Config(new Annotation(new Definition, new Reader));
         $this->cacheLoader = (new CacheLoader($this->cache, $config));
         $this->etag = new Etag;
         $this->cacheLoader->setEtag($this->etag);

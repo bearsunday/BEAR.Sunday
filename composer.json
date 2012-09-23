@@ -113,38 +113,6 @@
             }
         },
         {
-            "type":"package",
-            "package": {
-                "name": "zend/zend-log1",
-                "version": "1.11",
-                "source": {
-                    "url": "http://framework.zend.com/svn",
-                    "type": "svn",
-                    "reference": "framework/standard/trunk/library/Zend/Log/"
-                },
-                "target-dir": "Zend/Log",
-                "autoload": {
-                    "psr-0": { "Zend_Log": "/" }
-                }
-            }
-        },
-        {
-            "type":"package",
-            "package": {
-                "name": "zend/zend-cache1",
-                "version": "1.11",
-                "source": {
-                    "url": "http://framework.zend.com/svn",
-                    "type": "svn",
-                    "reference": "framework/standard/trunk/library/Zend/Cache/"
-                },
-                "target-dir": "Zend/Cache",
-                "autoload": {
-                    "psr-0": { "Zend_Cache": "/" }
-                }
-            }
-        },
-        {
            "type": "package",
            "package": {
                "version": "master",
@@ -163,6 +131,25 @@
        {
             "type": "composer",
             "url": "http://packages.zendframework.com/"
-        }
+       },
+       {
+            "type": "package",
+            "package": {
+                "name": "ray/di",
+                "version": "master",
+                "dist": {
+                    "url": "https://github.com/koriym/Ray.Di/zipball/master",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/koriym/Ray.Di.git",
+                    "type": "git",
+                    "reference": "master"
+                },
+                "autoload": {
+                    "psr-0": { "Ray\\Di": "src" }
+                }
+            }
+       } 
     ]
 }

@@ -24,17 +24,6 @@ use Ray\Di\InjectorInterface;
 class AppModule extends AbstractModule
 {
     /**
-     * Constructor
-     *
-     * @param InjectorInterface $injector
-     */
-    public function __construct(InjectorInterface $injector)
-    {
-        $this->injector = $injector;
-        parent::__construct();
-    }
-
-    /**
      * (non-PHPdoc)
      * @see Ray\Di.AbstractModule::configure()
      */
@@ -47,8 +36,8 @@ class AppModule extends AbstractModule
         $this->install(new Framework\Module\SchemeModule( __NAMESPACE__ . '\SchemeCollectionProvider'));
         $this->install(new Framework\Module\WebContext\AuraWebModule);
         $this->install(new Framework\Module\TemplateEngine\SmartyModule\SmartyModule);
-        $this->install(new Framework\Module\Database\DoctrineDbalModule($this->injector));
-        $this->install(new Framework\Module\Cqrs\CacheModule($this->injector));
+        $this->install(new Framework\Module\Database\DoctrineDbalModule($this));
+        $this->install(new Framework\Module\Cqrs\CacheModule($this));
         // aop
         $this->installTimeStamper();
         $this->installTransaction();
@@ -63,7 +52,7 @@ class AppModule extends AbstractModule
     private function installWritableChecker()
     {
         // bind tmp writable checker
-        $checker = $this->injector->getInstance('\sandbox\Interceptor\Checker');
+        $checker = $this->requestInjection('\sandbox\Interceptor\Checker');
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
             $this->matcher->startWith('onGet'),

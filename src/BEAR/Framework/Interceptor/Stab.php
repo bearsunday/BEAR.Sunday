@@ -50,12 +50,6 @@ class Stab implements MethodInterceptor
         } else {
             $object->body = $this->stab;
         }
-//         $msg = "stab: " . get_class($invocation->getThis());
-// //         $this->log->log($msg);
-//         return $this->stab;
-//         $result = $invocation->proceed();
-
-//         $result->body = $this->stab;
         return $object;
     }
 }

@@ -73,13 +73,12 @@ final class App implements AppContext
             }
 
             // return application object
-
             $injector = Injector::create($modules, $useCache);
             $app = $injector->getInstance(__CLASS__);
             $useCache ? apc_store($cacheKey, $app) : apc_clear_cache('user');
 
-            // log binding
-            file_put_contents(__DIR__ . '/log/di-log-'. $cacheKey . 'log', (string) $injector);
+            // log binding info
+            file_put_contents(__DIR__ . "/log/di-log-{$cacheKey}.log", (string) $injector);
         }
 
         return $app;

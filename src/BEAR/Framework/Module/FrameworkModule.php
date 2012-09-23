@@ -27,13 +27,12 @@ class FrameworkModule extends AbstractModule
     protected function configure()
     {
         // install
-        $this->install(new Log\MonologModule);
-        $injector = Injector::create([$this]);
-        $monologLogger = $injector->getInstance('BEAR\Framework\Module\Log\MonologModule\MonologProvider')->get();
+        $this->install(new Log\ZfLogModule);
+        $injector = Injector::create([$this], true);
         $logger = $this->requestInjection('BEAR\Framework\Inject\Logger\Adapter');
         $injector->setLogger($logger);
-        $config = $injector->getContainer()->getForge()->getConfig();
         $this->bind('')->annotatedWith('is_prod')->toInstance(false);
+        $config = $injector->getContainer()->getForge()->getConfig();
         $this->bind('Aura\Di\ConfigInterface')->toInstance($config);
         $this->bind('Ray\Di\InjectorInterface')->toInstance($injector);
         $this->bind('BEAR\Resource\ResourceInterface')->to('BEAR\Resource\Resource')->in(Scope::SINGLETON);
@@ -50,5 +49,6 @@ class FrameworkModule extends AbstractModule
         $this->bind('BEAR\Framework\Resource\CacheControl\Taggable')->to('BEAR\Framework\Resource\CacheControl\Etag');
         $this->bind('BEAR\Resource\Referable')->to('BEAR\Resource\A');
         $this->bind('Guzzle\Parser\UriTemplate\UriTemplateInterface')->to('Guzzle\Parser\UriTemplate\UriTemplate');
+        $this->bind('BEAR\Framework\Application\LoggerInterface')->to('BEAR\Framework\Application\Logger');
     }
 }

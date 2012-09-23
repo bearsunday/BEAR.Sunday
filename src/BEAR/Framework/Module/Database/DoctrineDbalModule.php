@@ -18,12 +18,6 @@ use Ray\Di\AbstractModule;
  */
 class DoctrineDbalModule extends AbstractModule
 {
-    public function __construct(InjectorInterface $injector)
-    {
-        $this->injector = $injector;
-        parent::__construct();
-    }
-
     /**
      * Configure dependency binding
      *
@@ -31,7 +25,7 @@ class DoctrineDbalModule extends AbstractModule
      */
     protected function configure()
     {
-        $dbInjector = $this->injector->getInstance('\BEAR\Framework\Interceptor\DbInjector');
+        $dbInjector = $this->requestInjection('\BEAR\Framework\Interceptor\DbInjector');
         $this->bindInterceptor(
             $this->matcher->annotatedWith('BEAR\Framework\Annotation\Db'),
             $this->matcher->startWith('on'),

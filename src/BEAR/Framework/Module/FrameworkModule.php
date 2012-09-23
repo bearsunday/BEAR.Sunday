@@ -29,8 +29,8 @@ class FrameworkModule extends AbstractModule
         // install
         $this->install(new Log\ZfLogModule);
         $injector = Injector::create([$this], true);
-        $logger = $this->requestInjection('BEAR\Framework\Inject\Logger\Adapter');
-        $injector->setLogger($logger);
+        //$logger = $this->requestInjection('BEAR\Framework\Inject\Logger\Adapter');
+        //$injector->setLogger($logger);
         $this->bind('')->annotatedWith('is_prod')->toInstance(false);
         $config = $injector->getContainer()->getForge()->getConfig();
         $this->bind('Aura\Di\ConfigInterface')->toInstance($config);

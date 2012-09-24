@@ -69,8 +69,8 @@ final class Framework
         $classes = require $system . '/vendor/composer/autoload_classmap.php';
         $loader->setClasses($classes);
         $loader->register();
-        AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di\\', $system . '/vendor/Ray/Di/src/');
-        AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation\\', $system . '/vendor/BEAR/Resource/src/');
+        AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di\\', $system . '/vendor/ray/di/src/');
+        AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation\\', $system . '/vendor/bear/resource/src/');
         AnnotationRegistry::registerAutoloadNamespace('BEAR\Framework\Annotation\\', $system . '/src/');
         AnnotationRegistry::registerAutoloadNamespace($namespace . '\Annotation', dirname($appDir));
 

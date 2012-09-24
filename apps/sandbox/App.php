@@ -8,6 +8,7 @@ namespace sandbox;
 
 use BEAR\Framework\Framework;
 use BEAR\Framework\AppContext;
+use BEAR\Framework\Application\AbstractApp;
 use BEAR\Framework\Inject\AppDependencyInject;
 use Ray\Di\Injector;
 use LogicException;
@@ -19,34 +20,16 @@ use Ray\Di\Di\Named;
  *
  * @package sandbox
  */
-final class App implements AppContext
+final class App extends AbstractApp
 {
-    use AppDependencyInject;
-
-    /** Version @var string */
-    const VERSION = '0.2.0';
-
-    /** Run mode Production */
+    /** run mode @var string*/
     const RUN_MODE_PROD = 'Prod';
-
-    /** Run mode API */
-    const RUN_MODE_API = 'Api';
-    const RUN_MODE_HAL = 'Hal';
-
-    /** Run mode Develop */
-    const RUN_MODE_DEV = 'Dev';
-
-    /** Run mode Stab */
+    const RUN_MODE_API  = 'Api';
+    const RUN_MODE_DEV  = 'Dev';
     const RUN_MODE_STAB = 'Stab';
-
-    /** Run mode unit test */
     const RUN_MODE_TEST = 'Test';
 
-    /**
-     * Dir
-     *
-     * @var string
-     */
+    /** application dir path @var string */
     const DIR = __DIR__;
 
     /**
@@ -60,7 +43,7 @@ final class App implements AppContext
         (new Framework)->setLoader(__NAMESPACE__, __DIR__);
 
         // cached application ?
-        $cacheKey = '[App] ' . __NAMESPACE__ . '-' . PHP_SAPI . '-' . $runMode;
+        $cacheKey = 'App-' . __NAMESPACE__ . PHP_SAPI . $runMode;
         if ($useCache && apc_exists($cacheKey)) {
             $app = apc_fetch($cacheKey);
         } else {

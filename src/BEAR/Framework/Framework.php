@@ -10,8 +10,9 @@ namespace BEAR\Framework;
 use Aura\Autoload\Loader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
+// minimun load file before auto loader set.
 require_once __DIR__ . '/AppContext.php';
-require_once __DIR__ . '/Inject/AppDependencyInject.php';
+require_once __DIR__ . '/Application/AbstractApp.php';
 
 /**
  * Framework

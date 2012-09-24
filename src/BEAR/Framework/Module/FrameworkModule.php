@@ -28,27 +28,27 @@ class FrameworkModule extends AbstractModule
     {
         // install
         $this->install(new Log\ZfLogModule);
-        $injector = Injector::create([$this], true);
+        $injector = Injector::create([$this], false);
         //$logger = $this->requestInjection('BEAR\Framework\Inject\Logger\Adapter');
         //$injector->setLogger($logger);
         $this->bind('')->annotatedWith('is_prod')->toInstance(false);
         $config = $injector->getContainer()->getForge()->getConfig();
         $this->bind('Aura\Di\ConfigInterface')->toInstance($config);
+        $this->bind('Aura\Signal\Manager')->toProvider('BEAR\Framework\Module\Provider\SignalProvider')->in(Scope::SINGLETON);
         $this->bind('Ray\Di\InjectorInterface')->toInstance($injector);
         $this->bind('BEAR\Resource\ResourceInterface')->to('BEAR\Resource\Resource')->in(Scope::SINGLETON);
         $this->bind('BEAR\Resource\InvokerInterface')->to('BEAR\Resource\Invoker')->in(Scope::SINGLETON);
         $this->bind('BEAR\Resource\LinkerInterface')->to('BEAR\Resource\Linker')->in(Scope::SINGLETON);
         $this->bind('BEAR\Resource\LoggerInterface')->annotatedWith("resource_logger")->to('BEAR\Resource\Logger');
         $this->bind('BEAR\Resource\LoggerInterface')->toProvider('BEAR\Framework\Module\Provider\ResourceLoggerProvider');
-        $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Framework\Module\Provider\ApcCacheProvider')->in(Scope::SINGLETON);
-        $this->bind('Aura\Signal\Manager')->toProvider('BEAR\Framework\Module\Provider\SignalProvider')->in(Scope::SINGLETON);
+        $this->bind('BEAR\Resource\Referable')->to('BEAR\Resource\A');
         $this->bind('BEAR\Framework\Web\ResponseInterface')->to('BEAR\Framework\Web\SymfonyResponse');
         $this->bind('BEAR\Framework\Exception\ExceptionHandlerInterface')->to('BEAR\Framework\Exception\ExceptionHandler');
         $this->bind('BEAR\Framework\Output\ConsoleInterface')->to('BEAR\Framework\Output\Console');
-        $this->bind('Doctrine\Common\Annotations\Reader')->to('Doctrine\Common\Annotations\AnnotationReader');
         $this->bind('BEAR\Framework\Resource\CacheControl\Taggable')->to('BEAR\Framework\Resource\CacheControl\Etag');
-        $this->bind('BEAR\Resource\Referable')->to('BEAR\Resource\A');
-        $this->bind('Guzzle\Parser\UriTemplate\UriTemplateInterface')->to('Guzzle\Parser\UriTemplate\UriTemplate');
         $this->bind('BEAR\Framework\Application\LoggerInterface')->to('BEAR\Framework\Application\Logger');
+        $this->bind('Doctrine\Common\Annotations\Reader')->to('Doctrine\Common\Annotations\AnnotationReader');
+        $this->bind('Guzzle\Parser\UriTemplate\UriTemplateInterface')->to('Guzzle\Parser\UriTemplate\UriTemplate');
+        $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Framework\Module\Provider\ApcCacheProvider')->in(Scope::SINGLETON);
     }
 }

@@ -6,7 +6,7 @@ use BEAR\Resource\AbstractObject as Page;
 /**
  * Hello World - min
  */
-class MinHello extends Page
+class Minhello extends Page
 {
     public $body = 'Hello World';
 

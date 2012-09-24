@@ -1,5 +1,5 @@
 {
-    "hash": "8b0e75fa543987dc42dd02abb845ead9",
+    "hash": "209809c57d9941d28493ac3a9582bbe1",
     "packages": [
         {
             "name": "aura/autoload",
@@ -378,9 +378,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -546,7 +546,7 @@
                 "zend/zend-log1": "1.11",
                 "zend/zend-cache1": "1.11"
             },
-            "time": "2012-07-01 00:04:37",
+            "time": "2012-07-02 19:04:37",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -579,62 +579,6 @@
                 "http client",
                 "client",
                 "web service"
-            ]
-        },
-        {
-            "name": "monolog/monolog",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Seldaek/monolog",
-                "reference": "09b3a80cfaf3e323e348a5e817afeee98d5e6b48"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/Seldaek/monolog/zipball/09b3a80cfaf3e323e348a5e817afeee98d5e6b48",
-                "reference": "09b3a80cfaf3e323e348a5e817afeee98d5e6b48",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "mlehner/gelf-php": "1.0.*"
-            },
-            "suggest": {
-                "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
-                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
-                "ext-mongo": "Allow sending log messages to a MongoDB server"
-            },
-            "time": "1347983448",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev"
-                }
-            },
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Monolog": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Logging for PHP 5.3",
-            "homepage": "http://github.com/Seldaek/monolog",
-            "keywords": [
-                "log",
-                "logging"
             ]
         },
         {
@@ -818,26 +762,55 @@
         },
         {
             "name": "ray/di",
-            "version": "master",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "master"
+                "url": "git://github.com/koriym/Ray.Di.git",
+                "reference": "6e9ef9069bca5c6e7c1eec11a2c52c3a949856d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/koriym/Ray.Di/zipball/master",
-                "reference": null,
-                "shasum": null
+                "url": "https://github.com/koriym/Ray.Di/zipball/6e9ef9069bca5c6e7c1eec11a2c52c3a949856d9",
+                "reference": "6e9ef9069bca5c6e7c1eec11a2c52c3a949856d9",
+                "shasum": ""
             },
+            "require": {
+                "php": ">=5.4.0",
+                "doctrine/common": "2.3.*-dev",
+                "aura/di": ">=1.0.*-dev",
+                "ray/aop": "*"
+            },
+            "time": "1348483446",
             "type": "library",
             "installation-source": "source",
             "autoload": {
                 "psr-0": {
-                    "Ray\\Di": "src"
+                    "Ray\\Di": "src/"
                 }
             },
-            "time": "1348236851"
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Akihito Koriyama",
+                    "email": "akihito.koriyama@gmail.com",
+                    "homepage": "https://github.com/koriym"
+                }
+            ],
+            "description": "Guice style annotation-driven dependency injection framework",
+            "homepage": "https://github.com/koriym/Ray.Di",
+            "keywords": [
+                "dependency injection",
+                "container",
+                "aop",
+                "di",
+                "jsr",
+                "annotation",
+                "method interception",
+                "guice",
+                "ioc"
+            ]
         },
         {
             "name": "smarty/smarty",
@@ -850,7 +823,7 @@
             "require": {
                 "php": ">=5.2"
             },
-            "time": "2012-06-30 20:17:26",
+            "time": "2012-07-02 15:17:26",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -1147,6 +1120,7 @@
         "ray/di": 20,
         "firephp/firephp-core": 20,
         "twitter/bootstrap": 20,
+        "nocarrier/hal": 20,
         "crodas/haanga": 20,
         "twig/twig": 20,
         "zendframework/zend-loader": 20,

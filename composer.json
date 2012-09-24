@@ -28,7 +28,6 @@
         "doctrine/dbal": "2.3.*-dev",
         "facebook/xhprof": "0.9.*",
         "guzzle/guzzle": "2.7.*",
-        "monolog/monolog": "1.*",
         "pagerfanta/pagerfanta": "dev-master",
         "smarty/smarty": "3.1.*",
         "symfony/console": "2.0.*",
@@ -39,7 +38,7 @@
         "printo/printo": "*",
         "firephp/firephp-core": "dev-master",
         "twitter/bootstrap": "dev-master",
-        "nocarrier/hal": "*",
+        "nocarrier/hal": "dev-master",
         "zendframework/zend-log": "2.0.*"
     },
     "autoload": {
@@ -60,7 +59,8 @@
         "zendframework/zend-log": "2.0.*-dev",
         "zendframework/zend-stdlib": "2.0.*-dev",
         "crodas/haanga": "dev-master",
-        "twig/twig": "dev-master"
+        "twig/twig": "dev-master",
+        "monolog/monolog": "1.*"
     },
     "repositories": [
         {
@@ -131,25 +131,6 @@
        {
             "type": "composer",
             "url": "http://packages.zendframework.com/"
-       },
-       {
-            "type": "package",
-            "package": {
-                "name": "ray/di",
-                "version": "master",
-                "dist": {
-                    "url": "https://github.com/koriym/Ray.Di/zipball/master",
-                    "type": "zip"
-                },
-                "source": {
-                    "url": "https://github.com/koriym/Ray.Di.git",
-                    "type": "git",
-                    "reference": "master"
-                },
-                "autoload": {
-                    "psr-0": { "Ray\\Di": "src" }
-                }
-            }
-       } 
+       }
     ]
 }

@@ -8,7 +8,7 @@
  */
 
 // profiler
-require dirname(dirname(dirname(__DIR__))) . '/scripts/profile.php';
+//require dirname(dirname(dirname(__DIR__))) . '/scripts/profile.php';
 
 $app = require dirname(__DIR__) . '/scripts/instance.php';
 $response = $app->resource->get->uri('page://self/minhello')->eager->request();

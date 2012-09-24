@@ -11,7 +11,7 @@ use BEAR\Framework\Router\Router;
 
 // profiler
 $system = dirname(dirname(dirname(__DIR__)));
-require $system . '/scripts/profile.php';
+//require $system . '/scripts/profile.php';
 
 // load
 require $system . '/src/BEAR/Framework/Framework.php';

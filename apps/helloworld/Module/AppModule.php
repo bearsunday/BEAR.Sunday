@@ -28,7 +28,19 @@ class AppModule extends AbstractModule
     {
         $config = require __DIR__ . '/config.php';
         $this->install(new Framework\Module\NamedModule($config));
+        $this->installResourceCache();
         $this->install(new FrameworkModule($this));
         $this->install(new Framework\Module\SchemeModule( __NAMESPACE__ . '\SchemeCollectionProvider'));
+    }
+
+    /**
+     * Bind resource_cache to APC
+     */
+    private function installResourceCache()
+    {
+        $this
+        ->bind('Guzzle\Common\Cache\CacheAdapterInterface')
+        ->annotatedWith('resource_cache')
+        ->toProvider('BEAR\Framework\Module\Provider\ApcCacheProvider');
     }
 }

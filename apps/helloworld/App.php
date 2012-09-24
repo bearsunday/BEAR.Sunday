@@ -9,7 +9,7 @@ namespace helloworld;
 use BEAR\Framework\Framework;
 use BEAR\Framework\AppContext;
 use BEAR\Framework\Module\FrameworkModule;
-use BEAR\Framework\Inject\AppDependencyInject;
+use BEAR\Framework\Application\AbstractApp;
 use Ray\Di\Injector;
 use Ray\Di\Di\Inject;
 
@@ -18,16 +18,8 @@ use Ray\Di\Di\Inject;
  *
  * @package helloworld
  */
-final class App implements AppContext
+final class App extends AbstractApp
 {
-    use AppDependencyInject;
-
-    /** Version @var string */
-    const VERSION = '0.1.0';
-
-    /** Name @var string */
-    const NAME = __NAMESPACE__;
-
     /** Path @var string */
     const DIR = __DIR__;
 

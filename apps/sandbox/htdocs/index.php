@@ -30,7 +30,13 @@ $globals = $GLOBALS;
 list($method, $pagePath, $query) = $router->match($globals);
 
 // Request
-$page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
+try {
+    $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
+} catch (\Exception $e) {
+    http_response_code($e->getCode());
+    echo $e->getMessage();
+    error_log((string) $e);
+}
 
 // Transfer
 $app->response->setResource($page)->render()->prepare()->send();

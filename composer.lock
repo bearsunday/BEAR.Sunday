@@ -546,7 +546,7 @@
                 "zend/zend-log1": "1.11",
                 "zend/zend-cache1": "1.11"
             },
-            "time": "2012-06-29 03:04:37",
+            "time": "2012-07-02 19:04:37",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -823,7 +823,7 @@
             "require": {
                 "php": ">=5.2"
             },
-            "time": "2012-06-28 23:17:26",
+            "time": "2012-07-02 15:17:26",
             "type": "library",
             "installation-source": "source",
             "autoload": {

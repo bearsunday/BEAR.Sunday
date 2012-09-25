@@ -13,9 +13,11 @@ use BEAR\Resource\Request;
 use BEAR\Resource\DevInvoker;
 use BEAR\Framework\Resource\View\TemplateEngineAdapter;
 use BEAR\Framework\Interceptor\CacheLoader;
+use BEAR\Framework;
 use ReflectionClass;
 use ReflectionObject;
 use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 use DateTime;
 use DateInterval;
 use Traversable;
@@ -88,11 +90,23 @@ class DevRenderer implements Renderable
         $ro->view  = $body = $this->templateEngineAdapter->fetch($templateFileBase);
         $body = $this->addJsDevToolLadingHtml($body);
         $templateFile = $this->templateEngineAdapter->getTemplateFile();
+        $templateFile = $this->makeRelativePath($templateFile);
         $label = $this->getLabel($body, $ro, $templateFile);
 
         return $label;
     }
 
+    /**
+     * Get relatvive path from system root.
+     *
+     * @param string $file
+     */
+    private function makeRelativePath($file)
+    {
+        $frameworkPath = dirname(dirname(dirname(dirname((new \ReflectionClass('BEAR\Framework\Framework'))->getFileName()))));
+        $file = str_replace($frameworkPath, '', $file);
+        return $file;
+    }
     /**
      * Return JS install html for dev tool
      *
@@ -159,6 +173,7 @@ return $body;
 
         // code editor
         $codeFile = (new ReflectionObject($ro))->getFileName();
+        $codeFile = $this->makeRelativePath($codeFile);
 
         // var
         $var = $this->getVar($ro->body);

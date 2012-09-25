@@ -339,6 +339,7 @@ EOT;
         $onGetInterceptors = isset($interceptors['onGet']) ? $interceptors['onGet'] : [];
         foreach ($onGetInterceptors as $interceptor) {
             $interceptorfile = (new ReflectionClass($interceptor))->getFileName();
+            $interceptorfile = $this->makeRelativePath($interceptorfile);
             $result .= <<<EOT
 <li><a target="_blank" href="/_dev/edit/?file={$interceptorfile}"><span class="icon-arrow-right"></span>{$interceptor}</a></li>
 EOT;

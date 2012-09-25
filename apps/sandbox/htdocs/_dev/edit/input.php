@@ -7,7 +7,7 @@
 
 // input
 $line = isset($_GET['line']) ? $_GET['line'] : 0;
-$path = isset($_REQUEST['file']) ?  $_REQUEST['file'] : false;
+$path = isset($_GET['file']) ?  $_GET['file'] : false;
 $rootDir = isset($_ENV['SUNDAY_ROOT']) ? $_ENV['SUNDAY_ROOT'] : dirname(dirname(dirname(dirname(dirname(__DIR__)))));
 if (file_exists($path)) {
     $fullPath = $path;
@@ -20,6 +20,7 @@ if (file_exists($path)) {
 if (!is_readable($fullPath)) {
     throw new \InvalidArgumentException("Not found. {$fullPath} is not readable.");
 }
+$fullPath = realpath($fullPath);
 if (strpos($fullPath, $rootDir) === false) {
     throw new \OutOfRangeException($fullPath);
 }

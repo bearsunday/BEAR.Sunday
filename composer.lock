@@ -1,5 +1,5 @@
 {
-    "hash": "b11ccb0f54b319cf05ecf3a25289c853",
+    "hash": "154a8ae2659ac510296caa2d697b2a68",
     "packages": [
         {
             "name": "aura/autoload",
@@ -283,12 +283,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "c620bb7ea1c20c9bec81c223a648eea7226c1754"
+                "reference": "774b4244395abae01f99f762689e892e1a11c1db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/koriym/BEAR.Resource/zipball/c620bb7ea1c20c9bec81c223a648eea7226c1754",
-                "reference": "c620bb7ea1c20c9bec81c223a648eea7226c1754",
+                "url": "https://github.com/koriym/BEAR.Resource/zipball/774b4244395abae01f99f762689e892e1a11c1db",
+                "reference": "774b4244395abae01f99f762689e892e1a11c1db",
                 "shasum": ""
             },
             "require": {
@@ -301,7 +301,7 @@
                 "ray/aop": "dev-master",
                 "ray/di": "dev-master"
             },
-            "time": "1348544822",
+            "time": "1348584823",
             "type": "library",
             "installation-source": "source",
             "autoload": {

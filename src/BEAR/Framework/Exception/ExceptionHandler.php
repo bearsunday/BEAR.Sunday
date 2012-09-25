@@ -9,9 +9,8 @@ namespace BEAR\Framework\Exception;
 
 use BEAR\Resource\Exception\BadRequest;
 use BEAR\Resource\Exception\MethodNotAllowed;
-use BEAR\Resource\Exception\InvalidParameter;
-use BEAR\Resource\Exception\InvalidScheme;
-use Ray\Di\Exception\InvalidBinding;
+use BEAR\Resource\Exception\Parameter;
+use BEAR\Resource\Exception\Scheme;
 use BEAR\Framework\Resource\Page\Error;
 use BEAR\Framework\Exception\ResourceNotFound;
 use BEAR\Framework\Web\ResponseInterface;
@@ -19,6 +18,7 @@ use BEAR\Framework\Inject\LogDirInject;
 use Exception;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
+use Ray\Di\Exception\InvalidBinding;
 
 /**
  * Exception handler
@@ -58,11 +58,11 @@ class ExceptionHandler implements ExceptionHandlerInterface
             $response->code = 400;
             $response->view = 'You sent a request that this service cound not understand.';
             goto METHOD_NOT_ALLOWED;
-        } catch (InvalidParameter $e) {
+        } catch (Parameter $e) {
             $response->code = 400;
             $response->view = 'You sent a request that query is not valid.';
             goto BAD_REQUEST;
-        } catch (InvalidScheme $e) {
+        } catch (Scheme $e) {
             $response->code = 400;
             $response->view = 'You sent a request that scheme is not valid.';
             goto BAD_REQUEST;

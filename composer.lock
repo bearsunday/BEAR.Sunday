@@ -1,5 +1,5 @@
 {
-    "hash": "209809c57d9941d28493ac3a9582bbe1",
+    "hash": "b11ccb0f54b319cf05ecf3a25289c853",
     "packages": [
         {
             "name": "aura/autoload",
@@ -283,12 +283,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "41b8a8ac9614a2e9fe86b90eecff648514dd804b"
+                "reference": "c620bb7ea1c20c9bec81c223a648eea7226c1754"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/koriym/BEAR.Resource/zipball/41b8a8ac9614a2e9fe86b90eecff648514dd804b",
-                "reference": "41b8a8ac9614a2e9fe86b90eecff648514dd804b",
+                "url": "https://github.com/koriym/BEAR.Resource/zipball/c620bb7ea1c20c9bec81c223a648eea7226c1754",
+                "reference": "c620bb7ea1c20c9bec81c223a648eea7226c1754",
                 "shasum": ""
             },
             "require": {
@@ -301,7 +301,7 @@
                 "ray/aop": "dev-master",
                 "ray/di": "dev-master"
             },
-            "time": "1348240898",
+            "time": "1348544822",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -546,7 +546,7 @@
                 "zend/zend-log1": "1.11",
                 "zend/zend-cache1": "1.11"
             },
-            "time": "2012-07-02 19:04:37",
+            "time": "2012-07-02 17:04:37",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -823,7 +823,7 @@
             "require": {
                 "php": ">=5.2"
             },
-            "time": "2012-07-02 15:17:26",
+            "time": "2012-07-02 13:17:26",
             "type": "library",
             "installation-source": "source",
             "autoload": {

@@ -26,7 +26,8 @@ $router = new Router; // page controller only.
 // $router = dirname(__DIR__) . '/scripts/router/standard_router.php'
 
 // Dispatch
-list($method, $pagePath, $query) = $router->match($GLOBALS);
+$globals = $GLOBALS;
+list($method, $pagePath, $query) = $router->match($globals);
 
 // Request
 $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();

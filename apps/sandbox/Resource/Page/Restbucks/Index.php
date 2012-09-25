@@ -18,7 +18,7 @@ use Ray\Di\Di\Inject;
  * Restbucks order
  *
  */
-class index extends Page
+class Index extends Page
 {
     use ResourceInject;
     use AInject;

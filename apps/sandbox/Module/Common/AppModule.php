@@ -36,8 +36,8 @@ class AppModule extends AbstractModule
         $this->install(new Framework\Module\SchemeModule( __NAMESPACE__ . '\SchemeCollectionProvider'));
         $this->install(new Framework\Module\WebContext\AuraWebModule);
         $this->install(new Framework\Module\TemplateEngine\SmartyModule\SmartyModule);
-        $this->install(new Framework\Module\Database\DoctrineDbalModule($this));
         $this->install(new Framework\Module\Cqrs\CacheModule($this));
+        $this->install(new Framework\Module\Database\DoctrineDbalModule($this));
         // aop
         $this->installTimeStamper();
         $this->installTransaction();

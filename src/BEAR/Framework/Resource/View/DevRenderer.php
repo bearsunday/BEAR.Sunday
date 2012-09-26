@@ -279,6 +279,7 @@ EOT;
             } else {
                 $type = 'unkonwn';
             }
+            $param = htmlspecialchars($param, ENT_QUOTES, "UTF-8");
             $paramInfo = "<li>($type) {$param}</li>";
         }
         if ($params === []) {

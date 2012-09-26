@@ -58,7 +58,7 @@ ini_set('display_errors', 1);
 
 // run mode
 $runMode = App::RUN_MODE_DEV;
-$useCache = true;
+$useCache = false;
 error_log('run:' . __NAMESPACE__ . " mode={$runMode} cahce=" . ($useCache ? 'enable' : 'disable'));
 
 // Application

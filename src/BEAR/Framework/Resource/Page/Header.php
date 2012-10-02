@@ -18,11 +18,20 @@ use ArrayIterator;
  */
 final class Header extends ArrayObject
 {
+    /**
+     * (non-PHPdoc)
+     * @see ArrayObject::getIterator()
+     */
     public function getIterator()
     {
         return new ArrayIterator((array) $this);
     }
 
+    /**
+     * Output
+     *
+     * @return void
+     */
     public function outout()
     {
         iterator_apply(
@@ -33,6 +42,11 @@ final class Header extends ArrayObject
         );
     }
 
+    /**
+     * Output as string
+     *
+     * @return void
+     */
     public function outoutAsString()
     {
         iterator_apply(

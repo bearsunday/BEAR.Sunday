@@ -28,7 +28,7 @@ trait AppDirInject
     /**
      * App directory path stter
      *
-     * @param string $viewPath
+     * @param string $appDir
      *
      * @return void
      *

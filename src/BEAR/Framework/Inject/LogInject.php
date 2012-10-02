@@ -28,7 +28,7 @@ trait LogInject
     /**
      * Logger stter
      *
-     * @param Log $log
+     * @param LogAdapterInterface $log
      *
      * @return void
      * @Inject

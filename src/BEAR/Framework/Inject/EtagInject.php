@@ -26,6 +26,10 @@ trait EtagInject
     private $etag;
 
     /**
+     * Set etag
+     *
+     * @param Taggable $etag
+     *
      * @Inject
      */
     public function setEtag(Taggable $etag)

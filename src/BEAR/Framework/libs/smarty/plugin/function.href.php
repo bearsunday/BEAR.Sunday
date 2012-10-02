@@ -1,4 +1,10 @@
 <?php
+/**
+ * This file is part of the BEAR.Framework package
+ *
+ * @package BEAR.Framework
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ */
 
 use Guzzle\Parser\UriTemplate\UriTemplate;
 use BEAR\Resource\Link;
@@ -28,6 +34,9 @@ use BEAR\Resource\Link;
  * {href rel="blog}
  * {href rel="entry" data=$resoirce->body}
  * </pre>
+ *
+ * @package BEAR.Framework
+ * @license http://opensource.org/licenses/bsd-license.php BSD
  *
  * @param array                    $params   parameters
  * @param Smarty_Internal_Template $template template object

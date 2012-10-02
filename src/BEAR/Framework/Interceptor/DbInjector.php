@@ -38,6 +38,9 @@ class DbInjector implements MethodInterceptor
     /**
      * Constructor
      *
+     * @param  array $masterDb
+     * @@param array $slaveDb
+     *
      * @Inject
      * @Named("masterDb=master_db,slaveDb=slave_db")
      */
@@ -48,6 +51,11 @@ class DbInjector implements MethodInterceptor
     }
 
     /**
+     * Set annotation reader
+     *
+     * @param Reader $reader
+     *
+     * @return void
      * @Inject
      */
     public function setReader(Reader $reader)

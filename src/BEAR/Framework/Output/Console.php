@@ -35,6 +35,7 @@ final class Console implements ConsoleInterface
      * Constructor
      *
      * @param ConsoleOutput $console
+     * @param UriTemplate   $uriTemplate
      *
      * @Inject
      */
@@ -47,7 +48,10 @@ final class Console implements ConsoleInterface
     /**
      * Sennd CLI output
      *
-     * @param bool $mode
+     * @param ResourceObject $resource
+     * @param \Exception     $e
+     * @param string         $statusText
+     * @param string         $mode
      */
     public function send(ResourceObject $resource, \Exception $e = null, $statusText, $mode = self::MODE_VIEW)
     {

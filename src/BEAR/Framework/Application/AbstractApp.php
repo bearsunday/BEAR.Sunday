@@ -56,6 +56,7 @@ abstract class AbstractApp implements AppContext
     private $cache;
 
     /**
+     * Exception handler
      *
      * @var EexceptionHandle
      */
@@ -71,14 +72,16 @@ abstract class AbstractApp implements AppContext
     /**
      * Constructor
      *
-     * @param CacheAdapterInterface     $cache
-     * @param InjectorInterface         $di
+     * @param InjectorInterface         $injector
+     * @param ResourceInterface         $resource
      * @param ExceptionHandlerInterface $exceptionHandler
      * @param ResponseInterface         $response
+     * @param CacheAdapterInterface     $cache
      * @param ApplicationLogger         $logger
      *
      * @Inject
      * @Named("cache=resource_cache")
+
      */
     public function __construct(
         InjectorInterface $injector,

@@ -43,6 +43,13 @@ class Router
         $this->map = $map;
     }
 
+    /**
+     * Match route
+     *
+     * @param array $globals
+     *
+     * @return multitype:Ambigous <unknown, multitype:NULL > Ambigous <multitype:, string> multitype:string unknown
+     */
     public function match($globals)
     {
         $this->globals = $globals;

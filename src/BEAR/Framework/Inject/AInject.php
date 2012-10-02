@@ -29,7 +29,7 @@ trait AInject
     /**
      * A(anchor) stter
      *
-     * @param string $viewPath
+     * @param Referable $a
      *
      * @return void
      *

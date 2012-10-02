@@ -11,7 +11,6 @@ use BEAR\Framework\Module\Database\DoctrineDbalModule\Pagerfanta\DoctrineDbalAda
 
 use Doctrine\DBAL\Connection as DbalConnection;
 use Doctrine\DBAL\Driver\Connection as DriverConnection;
-use BEAR\Framework\Module\Database\Pager;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\View\TwitterBootstrapView;
 
@@ -23,18 +22,72 @@ use Pagerfanta\View\TwitterBootstrapView;
  */
 class Connection extends DbalConnection implements DriverConnection
 {
+    /**
+     * Maximum item per page
+     *
+     * @var int
+     */
     private $maxPerPage = 10;
+
+    /**
+     * Pager query key
+     *
+     * @var string
+     */
     private $pageKey = '_start';
+
+    /**
+     * Pager
+     *
+     * @var array
+     */
     private $pager = [];
+
+    /**
+     * Current page number
+     *
+     * @var int
+     */
     private $currentPage;
+
+    /**
+     * Options
+     *
+     * @var array
+     */
     private $viewOptions = [
         'prev_message' => '&laquo;',
         'next_message' => '&raquo;'
     ];
+
+    /**
+     * View
+     *
+     * @var ViewInterface
+     */
     private $view;
+
+    /**
+     * Route generator
+     *
+     * @var Callable
+     */
     private $routeGenerator;
+
+   /**
+    * Pager library - pagerfanta
+    *
+    * @var Pagerfanta
+    */
     private $pagerfanta;
 
+    /**
+     * Set maximum item per page
+     *
+     * @param int $maxPerPage
+     *
+     * @return $this
+     */
     public function setMaxPerPage($maxPerPage)
     {
         $this->maxPerPage = $maxPerPage;
@@ -42,6 +95,13 @@ class Connection extends DbalConnection implements DriverConnection
         return $this;
     }
 
+    /**
+     * Set page query key (default:_page)
+     *
+     * @param string $pageKey
+     *
+     * @return $this
+     */
     public function setPageKey($pageKey)
     {
         $this->pageKey = $pageKey;
@@ -49,6 +109,13 @@ class Connection extends DbalConnection implements DriverConnection
         return $this;
     }
 
+    /**
+     * Set current page
+     *
+     * @param int $currentPage
+     *
+     * @return $this
+     */
     public function setCurrentPage($currentPage)
     {
         $this->currentPage = $currentPage;
@@ -56,6 +123,11 @@ class Connection extends DbalConnection implements DriverConnection
         return $this;
     }
 
+    /**
+     * Set view
+     *
+     * @param ViewInterface $view
+     */
     public function setView(ViewInterface $view)
     {
         $this->view = $view;
@@ -63,6 +135,13 @@ class Connection extends DbalConnection implements DriverConnection
         return $this;
     }
 
+    /**
+     * Set route generator
+     *
+     * @param Callable $routeGenerator
+     *
+     * @return $this
+     */
     public function setRouteGenerator(Callable $routeGenerator)
     {
         $this->routeGenerator = $routeGenerator;
@@ -70,9 +149,19 @@ class Connection extends DbalConnection implements DriverConnection
         return $this;
     }
 
+    /**
+     * Set view option
+     *
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return $this
+     */
     public function setViewOption($key, $value)
     {
         $this->viewOptions[$key] = $value;
+
+        return $this;
     }
 
     /**
@@ -94,9 +183,14 @@ class Connection extends DbalConnection implements DriverConnection
         return $result;
     }
 
+    /**
+     * Return pagers
+     *
+     * @return array
+     */
     public function getPager()
     {
-        //view
+        // view
         if (! $this->pagerfanta) {
             return [];
         }
@@ -112,12 +206,15 @@ class Connection extends DbalConnection implements DriverConnection
         return $pager;
     }
 
+    /**
+     * Return html
+     *
+     * @return string
+     */
     private function getHtml()
     {
         $view = $this->view ?: new TwitterBootstrapView;
-        $routeGenerator = $this->routeGenerator ?: function($page) {
-            return "?{$this->pageKey}={$page}";
-        };
+        $routeGenerator = $this->routeGenerator ?: function ($page){return "?{$this->pageKey}={$page}";};
         $html = $view->render(
             $this->pagerfanta,
             $routeGenerator,

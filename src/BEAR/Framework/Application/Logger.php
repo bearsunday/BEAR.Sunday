@@ -30,7 +30,7 @@ final class Logger implements LoggerInterface
     /**
      * Set resource logger
      *
-     * @param ResourceLoggerInterface $logger
+     * @param ResourceLoggerInterface $resourceLogger
      *
      * @Inject
      */
@@ -49,6 +49,7 @@ final class Logger implements LoggerInterface
         foreach ($logs as $log) {
             $log->apcLog();
         }
+        unset($app);
         // @todo to enable store $app, eliminate all unserializable object.
         // apc_store('request-' . get_class($app), var_export($app, true));
     }

@@ -49,10 +49,10 @@ class CacheLoader implements MethodInterceptor
     /**
      * Constructor
      *
+     * @param CacheAdapterInterface $cache
+     *
      * @Inject
      * @Named("resource_cache")
-     *
-     * @param Cache $cache
      */
     public function __construct(CacheAdapterInterface $cache)
     {

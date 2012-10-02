@@ -20,7 +20,7 @@ interface DbSetterInterface
     /**
      * Set db connection
      *
-     * @param Connection $db
+     * @param DriverConnection $db
      *
      * @return void
      */

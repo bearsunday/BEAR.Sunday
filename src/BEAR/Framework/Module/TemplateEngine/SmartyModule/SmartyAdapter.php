@@ -59,6 +59,8 @@ class SmartyAdapter implements TemplateEngineAdapter
     /**
      * Constructor
      *
+     * Smarty $smarty
+     *
      * @Inject
      */
     public function __construct(Smarty $smarty)
@@ -67,6 +69,8 @@ class SmartyAdapter implements TemplateEngineAdapter
     }
 
     /**
+     * Init
+     *
      * @PostConstruct
      */
     public function init()

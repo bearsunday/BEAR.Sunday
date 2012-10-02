@@ -15,8 +15,25 @@ namespace BEAR\Framework\Resource\Page;
  */
 final class Error extends AbstractPage
 {
+    /**
+     * Code
+     *
+     * @var int
+     */
     public $code = 500;
+
+    /**
+     * Headers
+     *
+     * @var array
+     */
     public $headers = [];
+
+    /**
+     * Body
+     *
+     * @var mixed
+     */
     public $body = '';
 
     /**

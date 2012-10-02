@@ -28,6 +28,12 @@ final class Etag implements Taggable
         return $etag;
     }
 
+    /**
+     * Tagging
+     *
+     * @param ResourceObject $ro
+     * @param unknown_type   $tag
+     */
     public function tag(ResourceObject $ro, $tag)
     {
         $this->ro['headers']['etag'] = $tag;

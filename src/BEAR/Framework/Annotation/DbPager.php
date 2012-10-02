@@ -18,5 +18,10 @@ namespace BEAR\Framework\Annotation;
  */
 final class DbPager
 {
+    /**
+     * Limit per page
+     *
+     * @var int
+     */
     public $limit = 10;
 }

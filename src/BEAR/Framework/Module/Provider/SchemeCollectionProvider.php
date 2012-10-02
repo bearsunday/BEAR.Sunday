@@ -27,8 +27,7 @@ class SchemeCollectionProvider implements Provide
     /**
      * Constructor
      *
-     * @param Inject     $injector
-     * @param AppContext $app
+     * @param Di $injector
      *
      * @Inject
      */
@@ -53,7 +52,7 @@ class SchemeCollectionProvider implements Provide
     /**
      * Set helloworld application dependency injector
      *
-     * @param InjectorInterface $injector
+     * @param Di $injector
      *
      * @Inject
      * @Named("HelloDi")

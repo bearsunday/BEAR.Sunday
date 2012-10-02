@@ -18,19 +18,16 @@ use Ray\Di\Di\Inject;
  */
 trait DefinitionInject
 {
-    /**
-     * Definition
-     *
-     * @var \Ray\Di\Definition
-     */
-    private $definition;
 
     /**
+     * Set definition
+     *
+     * @param Config $config
+     *
      * @Inject
      */
     public function setDefinition(Config $config)
     {
         $this->definition = $config->fetch(get_called_class())[2];
     }
-
 }

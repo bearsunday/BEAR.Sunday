@@ -34,6 +34,8 @@ abstract class AbstractSingletonProvider implements Provide
     abstract public function newInstance();
 
     /**
+     * Return singleton instance
+     *
      * @return object
      */
     public function get()

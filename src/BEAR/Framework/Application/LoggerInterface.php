@@ -22,7 +22,7 @@ interface LoggerInterface
     /**
      * Regster log function on shutddown
      *
-     * @return void
+     * @param AppContext $app
      */
     public function register(AppContext $app);
 }

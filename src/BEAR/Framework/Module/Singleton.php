@@ -16,6 +16,8 @@ namespace BEAR\Framework\Module;
 trait Singleton
 {
     /**
+     * Return singleton instance
+     *
      * @return object
      */
     public function get()

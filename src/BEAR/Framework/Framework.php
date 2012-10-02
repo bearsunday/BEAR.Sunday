@@ -46,9 +46,13 @@ final class Framework
     }
 
     /**
-     * Set auto loader
+     *  Set auto loader
      *
-     * @return void
+     * @param string $namespace
+     * @param string $appDir
+     * @param array  $namespaces
+     *
+     * @return \BEAR\Framework\Framework
      */
     public function setLoader($namespace, $appDir, array $namespaces = [])
     {

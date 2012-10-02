@@ -43,6 +43,10 @@ trait WebContextInject
     }
 
     /**
+     * Set web contexxt provider
+     *
+     * @param Provider $contextProvider
+     *
      * @Inject
      * @Named("webContext")
      */

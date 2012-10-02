@@ -28,6 +28,7 @@ final class ResourceLogIterator extends IteratorIterator implements Fireable
     private $request;
 
     /**
+     * Resource request result
      *
      * @var mixed
      */

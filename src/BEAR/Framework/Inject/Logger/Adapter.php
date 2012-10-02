@@ -23,16 +23,34 @@ class Adapter implements LoggerInterface
 {
     use LogInject;
 
+    /**
+     * Log
+     *
+     * @param string $class
+     * @param array  $params
+     * @param array  $setter
+     * @param objet  $object
+     * @param Bind   $bind
+     *
+     * @return void
+     */
     public function log($class, array $params, array $setter, $object, Bind $bind)
     {
         $log = "DI class={$class}"
         . ' params=' . $this->getString((array) $params)
         . ' setter=' . $this->getString((array) $setter)
-        . ' bind=' . $this->getString((array) $bind, true);// $this->getString((array) $bind);
+        . ' bind=' . $this->getString((array) $bind);// $this->getString((array) $bind);
         $this->log->log($log);
     }
 
-    private function getString(array $params, $isBind = false)
+    /**
+     * Return log message string
+     *
+     * @param array $params
+     *
+     * @return string
+     */
+    private function getString(array $params)
     {
         $paramInfo = [];
         foreach ($params as $num => $param) {

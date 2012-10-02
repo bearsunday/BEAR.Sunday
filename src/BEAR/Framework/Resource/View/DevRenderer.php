@@ -212,6 +212,11 @@ EOT;
         return $result;
     }
 
+    /**
+     * Return var
+     *
+     * @param mixed $body
+     */
     private function getVar($body)
     {
         if (is_scalar($body)) {

@@ -18,14 +18,39 @@ use BEAR\Resource\AbstractObject;
  */
 final class Ok extends AbstractObject implements ResourceObject
 {
+    /**
+     * Code
+     *
+     * @var int
+     */
     public $code = 200;
+
+    /**
+     * Headers
+     *
+     * @var array
+     */
     public $headers = [];
+
+    /**
+     * Body
+     *
+     * @var mixed
+     */
     public $body = '';
 
+    /**
+     * Counstructor
+     */
     public function __construct()
     {
     }
 
+    /**
+     * Get
+     *
+     * @return $this
+     */
     public function onGet()
     {
         return $this;

@@ -33,6 +33,8 @@ abstract class AbstractPrototypeProvider implements Provide
     abstract public function newInstance();
 
     /**
+     * Return cloned instance
+     *
      * @return object
      */
     public function get()

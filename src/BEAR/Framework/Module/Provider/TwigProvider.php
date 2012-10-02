@@ -19,7 +19,9 @@ class TwigProvider implements Provide
     use TmpDirInject;
 
     /**
-     * @return array
+     * Return twig instace
+     *
+     * @return Twig_Environment
      */
     public function get()
     {

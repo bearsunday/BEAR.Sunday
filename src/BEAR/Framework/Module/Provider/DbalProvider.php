@@ -21,6 +21,10 @@ use Ray\Di\Di\Named;
 class DbalProvider implements Provide
 {
     /**
+     * Set DSN
+     *
+     * @param string $dsn
+     *
      * @Inject
      * @Named("dsn=dsn");
      */

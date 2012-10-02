@@ -43,11 +43,6 @@ class PagerTest extends \PHPUnit_Extensions_Database_TestCase
         $this->pager = new Pager($db, new Pagerfanta(new DoctrineDbalAdapter($db, $this->query)));
     }
 
-    public function test_New()
-    {
-        $this->assertInstanceOf('BEAR\Framework\Module\Database\Pager', $this->pager);
-    }
-
     public function test_getPagerQuery()
     {
         $query = $this->pager->getPagerQuery($this->query);

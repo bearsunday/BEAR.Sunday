@@ -15,10 +15,30 @@ namespace BEAR\Framework\Resource\Page;
  */
 final class Ok extends AbstractPage
 {
+    /**
+     * Code
+     *
+     * @var int
+     */
     public $code = 200;
+
+    /**
+     * Headers
+     *
+     * @var array
+     */
     public $headers = [];
+
+    /**
+     * Body
+     *
+     * @var mixed
+     */
     public $body = '';
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
     }

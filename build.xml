@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="BEAR.Sunday" default="build" basedir=".">
- <property name="source" value="apps"/>
+<property name="source" value="src"/>
 
  <target name="clean" description="Clean up and create artifact directories">
   <delete dir="${basedir}/build/api"/>

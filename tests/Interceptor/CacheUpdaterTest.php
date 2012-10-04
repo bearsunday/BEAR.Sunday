@@ -2,7 +2,7 @@
 
 namespace BEAR\Framework\Tests;
 
-use BEAR\Framework\Framework;
+use BEAR\Framework\Framework\Framework;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
 use BEAR\Framework\Interceptor\CacheUpdater;
 use Ray\Di\Config;

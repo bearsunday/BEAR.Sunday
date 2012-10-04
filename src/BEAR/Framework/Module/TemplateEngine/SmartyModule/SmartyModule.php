@@ -9,6 +9,7 @@ namespace BEAR\Framework\Module\TemplateEngine\SmartyModule;
 
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
+
 /**
  * Smarty module
  *

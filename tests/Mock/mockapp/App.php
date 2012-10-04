@@ -6,7 +6,7 @@
  */
 namespace mockapp;
 
-use BEAR\Framework\AbstractAppContext as AppContext;
+use BEAR\Framework\Application\AbstractAppContext as AppContext;
 
 /**
  * Applicaton

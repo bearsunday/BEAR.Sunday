@@ -2,7 +2,7 @@
 
 namespace BEAR\Framework\Tests;
 
-use BEAR\Framework\Framework;
+use BEAR\Framework\Framework\Framework;
 
 /**
  * Test class for Annotation.

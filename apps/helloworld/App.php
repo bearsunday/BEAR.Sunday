@@ -6,8 +6,8 @@
  */
 namespace helloworld;
 
-use BEAR\Framework\Framework;
-use BEAR\Framework\AppContext;
+use BEAR\Framework\Framework\Framework;
+use BEAR\Framework\Application\AppContext;
 use BEAR\Framework\Module\FrameworkModule;
 use BEAR\Framework\Application\AbstractApp;
 use Ray\Di\Injector;

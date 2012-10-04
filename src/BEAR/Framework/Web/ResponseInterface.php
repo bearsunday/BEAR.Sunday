@@ -10,7 +10,8 @@ namespace BEAR\Framework\Web;
 /**
  * Intarface for http response
  *
- * @package BEAR.Framework
+ * @package    BEAR.Framework
+ * @subpackage Web
  */
 interface ResponseInterface
 {

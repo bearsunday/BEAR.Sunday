@@ -76,8 +76,8 @@ class SmartyAdapter implements TemplateEngineAdapter
     public function init()
     {
         if ($this->isProd) {
-           $this->smarty->force_compile = false;
-           $this->smarty->compile_check = false;
+            $this->smarty->force_compile = false;
+            $this->smarty->compile_check = false;
         }
     }
 

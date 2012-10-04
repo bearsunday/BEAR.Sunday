@@ -36,7 +36,7 @@ final class Header extends ArrayObject
     {
         iterator_apply(
             $this->getIterator(),
-            function ($header){
+            function ($header) {
                 header($header);
             }
         );
@@ -51,7 +51,7 @@ final class Header extends ArrayObject
     {
         iterator_apply(
             $this->getIterator(),
-            function ($header){
+            function ($header) {
                 echo "$header\n";
             }
         );

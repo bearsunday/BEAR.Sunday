@@ -3,13 +3,11 @@
 namespace sandbox;
 
 use BEAR\Framework\Router\Router;
-use BEAR\Framework\Globals;
+use BEAR\Framework\Framework\Globals;
 use BEAR\Framework\Framework;
 use Exception;
 
 $system = dirname(dirname(dirname(__DIR__)));
-require_once $system . '/src/BEAR/Framework/Framework.php';
-require_once dirname(__DIR__) . '/App.php';
 
 /**
  * CLI / Built-in web server script for development
@@ -31,27 +29,16 @@ require_once dirname(__DIR__) . '/App.php';
  * @global $useCache
  *
  * @package BEAR.Framework
- */
+*/
 
-// route static assets
-if (PHP_SAPI == 'cli-server') {
-    if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|ico)$/', $_SERVER["REQUEST_URI"])) {
-        return false;
-    }
+// loader
+$isStaticFile = (PHP_SAPI == 'cli-server' && preg_match('/\.(?:png|jpg|jpeg|gif|js|css|ico)$/', $_SERVER["REQUEST_URI"]));
+if ($isStaticFile) {
+    return false;
 }
-// reroute another PHP file
-$doIncludePHPfile = (
-    PHP_SAPI !== 'cli' &&
-    (substr($_SERVER['REQUEST_URI'], 0, 5) === '/_dev') &&
-    file_exists($_SERVER['SCRIPT_FILENAME'])
-);
-if ($doIncludePHPfile) {
-    include $_SERVER['SCRIPT_FILENAME'];
-    exit(0);
-}
-require_once $system . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php';
-require_once $system . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_lib.php';
-require_once $system . '/vendor/facebook/xhprof/xhprof_lib/utils/xhprof_runs.php';
+require_once $system . '/scripts/min_loader.php';
+require_once $system . '/scripts/debug_loader.php';
+require_once dirname(__DIR__) . '/App.php';
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

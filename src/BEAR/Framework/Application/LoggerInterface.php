@@ -7,7 +7,7 @@
  */
 namespace BEAR\Framework\Application;
 
-use BEAR\Framework\AppContext;
+use BEAR\Framework\Application\AppContext;
 use Ray\Di\Di\ImplementedBy;
 
 /**

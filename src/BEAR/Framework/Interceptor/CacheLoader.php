@@ -82,22 +82,26 @@ class CacheLoader implements MethodInterceptor
             $resource = $invocation->getThis();
             list($resource->code, $resource->headers, $resource->body) = $pagered;
             $cache = json_decode($resource->headers[self::HEADER_CACHE], true);
-            $resource->headers[self::HEADER_CACHE] = json_encode([
-                'mode' => 'R',
-                'date' => $cache['date'],
-                'life' => $cache['life']
-            ]);
+            $resource->headers[self::HEADER_CACHE] = json_encode(
+                [
+                    'mode' => 'R',
+                    'date' => $cache['date'],
+                    'life' => $cache['life']
+                ]
+            );
 
             return $resource;
         }
         $result = $invocation->proceed();
         $resource = $invocation->getThis();
         $time = $invocation->getAnnotation()->time;
-        $resource->headers[self::HEADER_CACHE] = json_encode([
-            'mode' => 'W',
-            'date' => date('r'),
-            'life' => $time
-        ]);
+        $resource->headers[self::HEADER_CACHE] = json_encode(
+            [
+                'mode' => 'W',
+                'date' => date('r'),
+                'life' => $time
+            ]
+        );
         $data = [$resource->code, $resource->headers, $resource->body];
         if ($pager) {
             $saved['pager'][$pager] = $data;

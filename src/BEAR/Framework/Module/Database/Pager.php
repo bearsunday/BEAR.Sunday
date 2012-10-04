@@ -132,7 +132,7 @@ class Pager
     private function getHtml(Pagerfanta $pagerfanta)
     {
         $view = $this->view ?: new TwitterBootstrapView;
-        $routeGenerator = $this->routeGenerator ?: function($page) {
+        $routeGenerator = $this->routeGenerator ?: function ($page) {
             return "?{$this->pageKey}={$page}";
         };
         $html = $view->render(

@@ -41,7 +41,7 @@ class DevModule extends AbstractModule
      */
     protected function installConstants()
     {
-        $config = require __DIR__ . '/config.php';
+        $config = include __DIR__ . '/config.php';
         $this->install(new NamedModule($config));
     }
 

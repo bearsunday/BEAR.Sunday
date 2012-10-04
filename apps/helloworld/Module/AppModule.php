@@ -9,7 +9,7 @@ namespace helloworld\Module;
 
 use BEAR\Framework\Module\FrameworkModule;
 
-use BEAR\Framework;
+use BEAR\Framework\Module;
 use Ray\Di\AbstractModule;
 
 /**
@@ -27,10 +27,10 @@ class AppModule extends AbstractModule
     protected function configure()
     {
         $config = require __DIR__ . '/config.php';
-        $this->install(new Framework\Module\NamedModule($config));
+        $this->install(new Module\NamedModule($config));
         $this->installResourceCache();
         $this->install(new FrameworkModule($this));
-        $this->install(new Framework\Module\SchemeModule( __NAMESPACE__ . '\SchemeCollectionProvider'));
+        $this->install(new Module\SchemeModule( __NAMESPACE__ . '\SchemeCollectionProvider'));
     }
 
     /**

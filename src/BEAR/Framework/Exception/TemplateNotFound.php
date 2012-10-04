@@ -7,7 +7,7 @@
  */
 namespace BEAR\Framework\Exception;
 
-use BEAR\Framework\Exception;
+use BEAR\Framework\Exception\Exception;
 
 /**
  * Template Not found

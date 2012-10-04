@@ -21,12 +21,12 @@
 namespace sandbox;
 
 use BEAR\Framework\Router\Router;
-use BEAR\Framework\Dispatcher;
-use BEAR\Framework\Globals;
+use BEAR\Framework\Framework\Dispatcher;
+use BEAR\Framework\Framework\Globals;
 use BEAR\Framework\Web;
 use Exception;
 
-require_once dirname(dirname(dirname(__DIR__))) . '/src/BEAR/Framework/Framework.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/scripts/min_loader.php';
 require_once dirname(__DIR__) . '/App.php';
 
 if (PHP_SAPI == 'cli-server') {

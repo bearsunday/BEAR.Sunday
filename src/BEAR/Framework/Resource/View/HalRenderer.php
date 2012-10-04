@@ -29,11 +29,14 @@ class HalRenderer implements Renderable
     {
         // evaluate all request in body.
         if (is_array($ro->body) || $ro->body instanceof \Traversable) {
-            array_walk_recursive($ro->body, function(&$element) {
-                if ($element instanceof Requestable) {
-                    $element = $element();
+            array_walk_recursive(
+                $ro->body,
+                function (&$element) {
+                    if ($element instanceof Requestable) {
+                        $element = $element();
+                    }
                 }
-            });
+            );
         }
 
         // HAL

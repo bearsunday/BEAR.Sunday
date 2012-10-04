@@ -39,11 +39,11 @@ final class Console implements ConsoleInterface
      *
      * @Inject
      */
-    public function __constcut(ConsoleOutput $console, UriTemplate $uriTemplate)
-    {
-        $this->console = $console;
-        $this->uriTemplate = $uriTemplate;
-    }
+//     public function __construct(ConsoleOutput $console, UriTemplate $uriTemplate)
+//     {
+//         $this->console = $console;
+//         $this->uriTemplate = $uriTemplate;
+//     }
 
     /**
      * Sennd CLI output
@@ -53,16 +53,22 @@ final class Console implements ConsoleInterface
      * @param string         $statusText
      * @param string         $mode
      */
-    public function send(ResourceObject $resource, \Exception $e = null, $statusText, $mode = self::MODE_VIEW)
-    {
+    public function send(
+        ResourceObject $resource,
+        \Exception $e = null,
+        $statusText = '',
+        $mode = self::MODE_VIEW
+    ) {
         if ($e) {
             $consoleOutput = $this->console;
             $msg = $e->getMessage();
-            $consoleOutput->writeln([
-                '',
-                (new Formatter)->formatBlock(get_class($e). ': ' . $msg, 'bg=red;fg=white', true),
-                '',
-                ]);
+            $consoleOutput->writeln(
+                [
+                    '',
+                    (new Formatter)->formatBlock(get_class($e). ': ' . $msg, 'bg=red;fg=white', true),
+                    '',
+                ]
+            );
         }
         $label = "\033[1;32m";
         $label1 = "\033[1;33m";
@@ -122,7 +128,10 @@ final class Console implements ConsoleInterface
             echo "{$label1}{$key}{$close}:" . $body. PHP_EOL;
         }
 
+        // @codingStandardsIgnoreStart
         complete:
+        // @codingStandardsIgnoreEnd
+
         // links
         echo PHP_EOL;
     }

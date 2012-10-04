@@ -7,7 +7,7 @@
  */
 namespace sandbox\Module\Common;
 
-use BEAR\Framework;
+use BEAR\Framework\Module;
 use BEAR\Framework\Interceptor\TimeStamper;
 use BEAR\Framework\Interceptor\Transactional;
 use sandbox\Interceptor\PostFormValidater;
@@ -33,11 +33,11 @@ class AppModule extends AbstractModule
         $this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');
         $this->bind('BEAR\Resource\Renderable')->annotatedWith('hal')->to('BEAR\Framework\Resource\View\HalRenderer');
         // di - system
-        $this->install(new Framework\Module\SchemeModule( __NAMESPACE__ . '\SchemeCollectionProvider'));
-        $this->install(new Framework\Module\WebContext\AuraWebModule);
-        $this->install(new Framework\Module\TemplateEngine\SmartyModule\SmartyModule);
-        $this->install(new Framework\Module\Cqrs\CacheModule($this));
-        $this->install(new Framework\Module\Database\DoctrineDbalModule($this));
+        $this->install(new Module\SchemeModule( __NAMESPACE__ . '\SchemeCollectionProvider'));
+        $this->install(new Module\WebContext\AuraWebModule);
+        $this->install(new Module\TemplateEngine\SmartyModule\SmartyModule);
+        $this->install(new Module\Cqrs\CacheModule($this));
+        $this->install(new Module\Database\DoctrineDbalModule($this));
         // aop
         $this->installTimeStamper();
         $this->installTransaction();

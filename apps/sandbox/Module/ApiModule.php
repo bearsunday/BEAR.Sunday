@@ -22,7 +22,7 @@ class ApiModule extends ProdModule
      */
     protected function configure()
     {
-        //$this->bind('BEAR\Resource\Renderable')->to('BEAR\Framework\Resource\View\JsonRenderer');
+        // $this->bind('BEAR\Resource\Renderable')->to('BEAR\Framework\Resource\View\JsonRenderer');
         $this->bind('BEAR\Resource\Renderable')->to('BEAR\Framework\Resource\View\HalRenderer');
         $this->install(new ProdModule);
     }

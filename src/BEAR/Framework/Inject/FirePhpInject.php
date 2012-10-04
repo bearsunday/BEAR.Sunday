@@ -9,6 +9,7 @@ namespace BEAR\Framework\Inject;
 
 use Ray\Di\Di\Inject;
 
+// @codingStandardsIgnoreFile
 /**
  * Inject FirePHP
  *

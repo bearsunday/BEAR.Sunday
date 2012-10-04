@@ -13,7 +13,7 @@ use BEAR\Resource\Request;
 use BEAR\Resource\DevInvoker;
 use BEAR\Framework\Resource\View\TemplateEngineAdapter;
 use BEAR\Framework\Interceptor\CacheLoader;
-use BEAR\Framework;
+use BEAR\Framework\Framework\Framework;
 use ReflectionClass;
 use ReflectionObject;
 use Ray\Di\Di\Inject;
@@ -103,8 +103,7 @@ class DevRenderer implements Renderable
      */
     private function makeRelativePath($file)
     {
-        $frameworkPath = dirname(dirname(dirname(dirname((new \ReflectionClass('BEAR\Framework\Framework'))->getFileName()))));
-        $file = str_replace($frameworkPath, '', $file);
+        $file = str_replace(Framework::$systemRoot, '', $file);
         return $file;
     }
     /**
@@ -144,10 +143,10 @@ $(function(){
 <!-- /BEAR.Sunday dev tool load -->
 </body>
 EOT;
-$toolLoad = str_replace(["\n", "  "],  '', $toolLoad);
-$body = str_replace('</html>', "{$toolLoad}\n</html>", $body);
-// $body = $body .  $toolLoad;
-return $body;
+        $toolLoad = str_replace(["\n", "  "], '', $toolLoad);
+        $body = str_replace('</html>', "{$toolLoad}\n</html>", $body);
+        // $body = $body .  $toolLoad;
+        return $body;
     }
 
     /**
@@ -181,7 +180,7 @@ return $body;
         $html = highlight_string($body, true);
 
         $info = $this->getResourceInfo($ro);
-        $rmReturn = function($str) {
+        $rmReturn = function ($str) {
             return str_replace("\n", '', $str);
         };
         $result = <<<EOT
@@ -226,17 +225,20 @@ EOT;
         if (! $isTraversable) {
             return '-';
         }
-        array_walk_recursive($body, function(&$value) {
-            if ($value instanceof Request) {
-                $value = '(Request)' . $value->toUri();
+        array_walk_recursive(
+            $body,
+            function (&$value) {
+                if ($value instanceof Request) {
+                    $value = '(Request)' . $value->toUri();
+                }
+                if ($value instanceof ResourceObject) {
+                    $value = $value->body;
+                }
+                if (is_object($value)) {
+                    $value = '(object) ' . get_class($value);
+                }
             }
-            if ($value instanceof ResourceObject) {
-                $value = $value->body;
-            }
-            if (is_object($value)) {
-                $value = '(object) ' . get_class($value);
-            }
-        });
+        );
 
         return highlight_string(var_export($body, true), true);
     }

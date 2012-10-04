@@ -8,9 +8,9 @@ $hello = $app->resource->get->uri('app://self/hello')->withQuery(['name' => 'Pul
 ?>
 <html>
     <body>
-        greeting: <?php echo $hello['greeting'];?>
+        greeting: <?php echo $hello['greeting']; ?>
 
-        time: <?php echo $hello['time'];?>
+        time: <?php echo $hello['time']; ?>
 
     </body>
 </html>

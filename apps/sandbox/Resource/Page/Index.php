@@ -10,7 +10,7 @@ namespace sandbox\Resource\Page;
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Resource\Link;
 use BEAR\Framework\Inject\ResourceInject;
-use BEAR\Framework\Framework;
+use BEAR\Framework\Framework\Framework;
 use Ray\Di\Di\Inject;
 
 /**

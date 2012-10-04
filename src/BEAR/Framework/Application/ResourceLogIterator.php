@@ -78,26 +78,29 @@ final class ResourceLogIterator extends IteratorIterator implements Fireable
         if (! (is_array($body) || $body instanceof Traversable)) {
             return $body;
         }
-        array_walk_recursive($body, function(&$value) {
-            if ($value instanceof Request) {
-                $value = '(Request) ' . $value->toUri();
+        array_walk_recursive(
+            $body,
+            function (&$value) {
+                if ($value instanceof Request) {
+                    $value = '(Request) ' . $value->toUri();
+                }
+                if ($value instanceof ResourceObject) {
+                    $value = '(ResourceObject) ' .  get_class($value) . json_encode($value->body);
+                }
+                if ($value instanceof \PDO || $value instanceof \PDOStatement) {
+                    $value = '(PDO) ' .  get_class($value);
+                }
+                if ($value instanceof \Doctrine\DBAL\Connection) {
+                    $value = '(\Doctrine\DBAL\Connection) ' .  get_class($value);
+                }
+                if (is_resource($value)) {
+                    $value = '(resource) ' . gettype($value);
+                }
+                if (is_object($value)) {
+                    $value = '(object) ' . get_class($value);
+                }
             }
-            if ($value instanceof ResourceObject) {
-                $value = '(ResourceObject) ' .  get_class($value) . json_encode($value->body);
-            }
-            if ($value instanceof \PDO || $value instanceof \PDOStatement) {
-                $value = '(PDO) ' .  get_class($value);
-            }
-            if ($value instanceof \Doctrine\DBAL\Connection) {
-                $value = '(\Doctrine\DBAL\Connection) ' .  get_class($value);
-            }
-            if (is_resource($value)) {
-                $value = '(resource) ' . gettype($value);
-            }
-            if (is_object($value)) {
-                $value = '(object) ' . get_class($value);
-            }
-        });
+        );
 
         return $body;
     }

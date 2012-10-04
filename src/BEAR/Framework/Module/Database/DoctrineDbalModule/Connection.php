@@ -214,7 +214,7 @@ class Connection extends DbalConnection implements DriverConnection
     private function getHtml()
     {
         $view = $this->view ?: new TwitterBootstrapView;
-        $routeGenerator = $this->routeGenerator ?: function ($page){return "?{$this->pageKey}={$page}";};
+        $routeGenerator = $this->routeGenerator ?: function ($page) { return "?{$this->pageKey}={$page}";};
         $html = $view->render(
             $this->pagerfanta,
             $routeGenerator,

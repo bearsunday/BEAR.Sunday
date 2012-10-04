@@ -11,7 +11,7 @@ use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 use Ray\Di\Injector;
 use Ray\Di\InjectorInterface;
-use BEAR\Framework\AppContext;
+use BEAR\Framework\Application\AppContext;
 use BEAR\Framework\Web\ResponseInterface;
 use BEAR\Framework\Exception\ExceptionHandlerInterface;
 use BEAR\Framework\Application\Logger as ApplicationLogger;
@@ -90,14 +90,13 @@ abstract class AbstractApp implements AppContext
         ResponseInterface $response,
         CacheAdapterInterface $cache = null,
         ApplicationLogger $logger = null
-    ){
+    ) {
         $this->injector = $injector;
         $this->resource = $resource;
         $this->response = $response;
         $this->exceptionHandler = $exceptionHandler;
         $this->cache = $cache;
         $this->logger = $logger;
-        //
         $resource->attachParamProvider('Provides', new Provides);
         if ($this->cache instanceof CacheAdapterInterface) {
             $resource->setCacheAdapter($this->cache);

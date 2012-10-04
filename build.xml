@@ -66,8 +66,9 @@
   <exec executable="phpcs" output="/dev/null">
    <arg line="--report=checkstyle
               --report-file=${basedir}/build/logs/checkstyle.xml
-              --standard=modernphp
-              --ignore=ArrayAccess.php
+              --standard=PSR2
+              --warning-severity=0
+              --ignore=plugin
               ${source}" />
   </exec>
  </target>

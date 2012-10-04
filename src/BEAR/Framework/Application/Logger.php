@@ -7,7 +7,7 @@
  */
 namespace BEAR\Framework\Application;
 
-use BEAR\Framework\AppContext;
+use BEAR\Framework\Application\AppContext;
 use BEAR\Framework\Application\ResourceLogIterator;
 use BEAR\Resource\LoggerInterface as ResourceLoggerInterface;
 use BEAR\Resource\Logger as ResourceLogger;
@@ -60,10 +60,12 @@ final class Logger implements LoggerInterface
      */
     public function register(AppContext $app)
     {
-        register_shutdown_function(function() use ($app) {
-            $logOnShutdown = [$this, 'logOnShutdown'];
-            $logOnShutdown($app);
-        });
+        register_shutdown_function(
+            function () use ($app) {
+                $logOnShutdown = [$this, 'logOnShutdown'];
+                $logOnShutdown($app);
+            }
+        );
     }
 
     /**

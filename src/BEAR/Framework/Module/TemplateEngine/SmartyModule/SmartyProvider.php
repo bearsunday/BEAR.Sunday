@@ -9,11 +9,12 @@ namespace BEAR\Framework\Module\TemplateEngine\SmartyModule;
 
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
-use BEAR\Framework\Framework;
+use BEAR\Framework\Framework\Framework;
 use BEAR\Framework\Inject\TmpDirInject;
 use BEAR\Framework\Inject\AppDirInject;
 use Ray\Di\ProviderInterface as Provide;
 use Smarty;
+// @codingStandardsIgnoreFile
 
 /**
  * Smarty3
@@ -36,8 +37,8 @@ class SmartyProvider implements Provide
         $smarty->compile_dir = $this->tmpDir . '/smarty/template_c';
         $smarty->cache_dir = $this->tmpDir . '/smarty/cache';
         $smarty->template_dir = $this->appDir . '/Resource/View';
-        $appPlugin = $this->appDir . '/libs/smarty/plugin/';
-        $frameworkPlugin = Framework::$systemRoot . '/src/BEAR/Framework/libs/smarty/plugin';
+        $appPlugin = $this->appDir . '/vendor/libs/smarty/plugin/';
+        $frameworkPlugin = dirname(__DIR__) . '/plugin';
         $smarty->plugins_dir = [$smarty->plugins_dir[0], $appPlugin, $frameworkPlugin];
 
         return $smarty;

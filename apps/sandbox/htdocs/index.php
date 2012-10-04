@@ -6,7 +6,7 @@
  */
 namespace sandbox;
 
-use BEAR\Framework\Framework;
+use BEAR\Framework\Framework\Framework;
 use BEAR\Framework\Router\Router;
 
 // profiler
@@ -14,9 +14,8 @@ $system = dirname(dirname(dirname(__DIR__)));
 //require $system . '/scripts/profile.php';
 
 // load
-require $system . '/src/BEAR/Framework/Framework.php';
+require_once $system . '/scripts/min_loader.php';
 require dirname(__DIR__) . '/App.php';
-require_once $system . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php';
 
 // App instance (init)
 $app = App::factory(App::RUN_MODE_PROD, true);

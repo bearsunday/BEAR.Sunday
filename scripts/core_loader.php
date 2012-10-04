@@ -9,7 +9,7 @@
  */
 namespace BEAR\Framework\Scripts;
 
-use BEAR\Framework\Framework;
+use BEAR\Framework\Framework\Framework;
 
 if (isset($system)) {
     return;

@@ -6,8 +6,8 @@
  */
 namespace sandbox;
 
-use BEAR\Framework\Framework;
-use BEAR\Framework\AppContext;
+use BEAR\Framework\Framework\Framework;
+use BEAR\Framework\Application\AppContext;
 use BEAR\Framework\Application\AbstractApp;
 use BEAR\Framework\Inject\AppDependencyInject;
 use Ray\Di\Injector;
@@ -41,6 +41,7 @@ final class App extends AbstractApp
     {
         // class loader
         (new Framework)->setLoader(__NAMESPACE__, __DIR__);
+        include_once Framework::$systemRoot . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php';
 
         // cached application ?
         $cacheKey = 'App-' . __NAMESPACE__ . PHP_SAPI . $runMode;

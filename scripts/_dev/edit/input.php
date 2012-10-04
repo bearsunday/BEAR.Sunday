@@ -8,7 +8,7 @@
 // input
 $line = isset($_GET['line']) ? $_GET['line'] : 0;
 $path = isset($_REQUEST['file']) ?  $_REQUEST['file'] : false;
-$rootDir = isset($_ENV['SUNDAY_ROOT']) ? $_ENV['SUNDAY_ROOT'] : dirname(dirname(dirname(dirname(dirname(__DIR__)))));
+$rootDir = isset($_ENV['SUNDAY_ROOT']) ? $_ENV['SUNDAY_ROOT'] : dirname(dirname(dirname(__DIR__)));
 
 // disallow full path
 $fullPath = $rootDir . '/' . $path;

@@ -7,10 +7,10 @@
  */
 namespace Sandbox\Resource\Page;
 
-use BEAR\Framework\Resource\AbstractPage as Page;
+use BEAR\Sunday\Resource\AbstractPage as Page;
 use BEAR\Resource\Link;
-use BEAR\Framework\Inject\ResourceInject;
-use BEAR\Framework\Framework\Framework;
+use BEAR\Sunday\Inject\ResourceInject;
+use BEAR\Sunday\Framework\Framework;
 use Ray\Di\Di\Inject;
 
 /**

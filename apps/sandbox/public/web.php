@@ -2,9 +2,9 @@
 
 namespace Sandbox;
 
-use BEAR\Framework\Router\Router;
-use BEAR\Framework\Framework\Globals;
-use BEAR\Framework\Framework;
+use BEAR\Sunday\Router\Router;
+use BEAR\Sunday\Framework\Globals;
+use BEAR\Sunday\Framework;
 use Exception;
 
 $system = dirname(dirname(dirname(__DIR__)));

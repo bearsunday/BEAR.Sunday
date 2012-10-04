@@ -7,10 +7,10 @@
  */
 namespace Sandbox\Module;
 
-use BEAR\Framework\Module;
-use BEAR\Framework\Module\NamedModule;
-use BEAR\Framework\Module\FrameworkModule;
-use BEAR\Framework\Module\TemplateEngine;
+use BEAR\Sunday\Module;
+use BEAR\Sunday\Module\NamedModule;
+use BEAR\Sunday\Module\FrameworkModule;
+use BEAR\Sunday\Module\TemplateEngine;
 use Ray\Di\Injector;
 use Doctrine\Common\Cache\ApcCache as Cache;
 use Ray\Di\AbstractModule;
@@ -54,7 +54,7 @@ class ProdModule extends AbstractModule
     {
         $this
         ->bind('Doctrine\Common\Annotations\Reader')
-        ->toProvider('BEAR\Framework\Module\Provider\CachedReaderProvider');
+        ->toProvider('BEAR\Sunday\Module\Provider\CachedReaderProvider');
     }
 
     /**
@@ -65,6 +65,6 @@ class ProdModule extends AbstractModule
         $this
         ->bind('Guzzle\Common\Cache\CacheAdapterInterface')
         ->annotatedWith('resource_cache')
-        ->toProvider('BEAR\Framework\Module\Provider\ApcCacheProvider');
+        ->toProvider('BEAR\Sunday\Module\Provider\ApcCacheProvider');
     }
 }

@@ -8,7 +8,7 @@
 namespace Sandbox\Module;
 
 use Ray\Di\AbstractModule;
-use BEAR\Framework\Interceptor\Stab;
+use BEAR\Sunday\Interceptor\Stab;
 
 /**
  * Stab module

@@ -1,8 +1,8 @@
 <?php
 
-namespace BEAR\Framework\Tests;
+namespace BEAR\Sunday\Tests;
 
-use BEAR\Framework\Framework\Framework;
+use BEAR\Sunday\Framework\Framework;
 
 /**
  * Test class for Annotation.

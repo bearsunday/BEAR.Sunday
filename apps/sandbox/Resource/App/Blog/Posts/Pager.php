@@ -1,10 +1,10 @@
 <?php
 namespace Sandbox\Resource\App\Blog\Posts;
 
-use BEAR\Framework\Annotation\Db;
-use BEAR\Framework\Annotation\Cache;
-use BEAR\Framework\Interceptor\DbSetterInterface;
-use BEAR\Framework\Annotation\DbPager;
+use BEAR\Sunday\Annotation\Db;
+use BEAR\Sunday\Annotation\Cache;
+use BEAR\Sunday\Interceptor\DbSetterInterface;
+use BEAR\Sunday\Annotation\DbPager;
 use PDO;
 
 use Sandbox\Resource\App\Blog\Posts;

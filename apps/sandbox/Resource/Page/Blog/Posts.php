@@ -7,10 +7,10 @@
  */
 namespace Sandbox\Resource\Page\Blog;
 
-use BEAR\Framework\Resource\AbstractPage as Page;
-use BEAR\Framework\Inject\ResourceInject;
-use BEAR\Framework\Annotation\Cache;
-use BEAR\Framework\Annotation;
+use BEAR\Sunday\Resource\AbstractPage as Page;
+use BEAR\Sunday\Inject\ResourceInject;
+use BEAR\Sunday\Annotation\Cache;
+use BEAR\Sunday\Annotation;
 use Ray\Di\Di\Inject;
 
 /**

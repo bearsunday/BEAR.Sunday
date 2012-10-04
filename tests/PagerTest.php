@@ -1,11 +1,11 @@
 <?php
 
-namespace BEAR\Framework\Tests;
+namespace BEAR\Sunday\Tests;
 
 use Pagerfanta\Pagerfanta;
 
-use BEAR\Framework\Module\Database\Pager;
-use BEAR\Framework\Module\Database\DoctrineDbalModule\Pagerfanta\DoctrineDbalAdapter;
+use BEAR\Sunday\Module\Database\Pager;
+use BEAR\Sunday\Module\Database\DoctrineDbalModule\Pagerfanta\DoctrineDbalAdapter;
 use PDO;
 use Doctrine\DBAL\DriverManager;
 

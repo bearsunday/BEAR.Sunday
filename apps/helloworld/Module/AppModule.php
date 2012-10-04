@@ -7,9 +7,9 @@
  */
 namespace Helloworld\Module;
 
-use BEAR\Framework\Module\FrameworkModule;
+use BEAR\Sunday\Module\FrameworkModule;
 
-use BEAR\Framework\Module;
+use BEAR\Sunday\Module;
 use Ray\Di\AbstractModule;
 
 /**
@@ -41,6 +41,6 @@ class AppModule extends AbstractModule
         $this
         ->bind('Guzzle\Common\Cache\CacheAdapterInterface')
         ->annotatedWith('resource_cache')
-        ->toProvider('BEAR\Framework\Module\Provider\ApcCacheProvider');
+        ->toProvider('BEAR\Sunday\Module\Provider\ApcCacheProvider');
     }
 }

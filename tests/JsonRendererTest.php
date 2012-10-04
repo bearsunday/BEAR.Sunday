@@ -1,6 +1,6 @@
 <?php
 
-namespace BEAR\Framework\Tests;
+namespace BEAR\Sunday\Tests;
 
 use Ray\Di\Config;
 use Ray\Di\Annotation;
@@ -8,8 +8,8 @@ use Ray\Di\Definition;
 use BEAR\Resource\Request;
 use BEAR\Resource\Linker;
 use BEAR\Resource\Invoker;
-use BEAR\Framework\Resource\Ok;
-use BEAR\Framework\Resource\View\JsonRenderer;
+use BEAR\Sunday\Resource\Ok;
+use BEAR\Sunday\Resource\View\JsonRenderer;
 use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
 class RequestSample

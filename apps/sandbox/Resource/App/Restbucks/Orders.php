@@ -7,7 +7,7 @@
  */
 namespace Sandbox\Resource\App\Restbucks;
 
-use BEAR\Framework\Inject\TmpDirInject;
+use BEAR\Sunday\Inject\TmpDirInject;
 use BEAR\Resource\AbstractObject;
 use BEAR\Resource\Link;
 use DirectoryIterator;

@@ -7,12 +7,12 @@
  */
 namespace Sandbox\Resource\App\Blog;
 
-use BEAR\Framework\Annotation\Db;
-use BEAR\Framework\Interceptor\DbSetterInterface;
-use BEAR\Framework\Annotation\Time;
-use BEAR\Framework\Annotation\Transactional;
-use BEAR\Framework\Annotation\Cache;
-use BEAR\Framework\Annotation\CacheUpdate;
+use BEAR\Sunday\Annotation\Db;
+use BEAR\Sunday\Interceptor\DbSetterInterface;
+use BEAR\Sunday\Annotation\Time;
+use BEAR\Sunday\Annotation\Transactional;
+use BEAR\Sunday\Annotation\Cache;
+use BEAR\Sunday\Annotation\CacheUpdate;
 use BEAR\Resource\AbstractObject as ResourceObject;
 use Doctrine\DBAL\Connection;
 use PDO;

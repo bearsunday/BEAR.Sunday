@@ -7,8 +7,8 @@
  */
 namespace Sandbox\Resource\Page\Blog\Posts;
 
-use BEAR\Framework\Resource\AbstractPage as Page;
-use BEAR\Framework\Inject\ResourceInject;
+use BEAR\Sunday\Resource\AbstractPage as Page;
+use BEAR\Sunday\Inject\ResourceInject;
 use Ray\Di\Di\Inject;
 
 /**

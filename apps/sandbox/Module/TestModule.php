@@ -7,8 +7,8 @@
  */
 namespace Sandbox\Module;
 
-use BEAR\Framework\Module;
-use BEAR\Framework\Module\NamedModule;
+use BEAR\Sunday\Module;
+use BEAR\Sunday\Module\NamedModule;
 
 /**
  * Production module

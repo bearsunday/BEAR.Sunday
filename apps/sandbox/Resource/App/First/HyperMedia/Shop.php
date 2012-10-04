@@ -2,8 +2,8 @@
 namespace Sandbox\Resource\App\First\HyperMedia;
 
 use BEAR\Resource\AbstractObject;
-use BEAR\Framework\Inject\ResourceInject;
-use BEAR\Framework\Inject\AInject;
+use BEAR\Sunday\Inject\ResourceInject;
+use BEAR\Sunday\Inject\AInject;
 /**
  * Greeting resource
  */

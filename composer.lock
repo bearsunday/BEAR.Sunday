@@ -1,5 +1,5 @@
 {
-    "hash": "154a8ae2659ac510296caa2d697b2a68",
+    "hash": "4df2d79342a4b65ae1b9cc4c2d409ec1",
     "packages": [
         {
             "name": "aura/autoload",
@@ -379,9 +379,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -589,18 +589,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/blongden/hal",
-                "reference": "896ed6cdb777a81731423ac05cf733de2dadd93b"
+                "reference": "3d7a0b2c1f2fd4a0e9e355d5ad314c7f55425e1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/blongden/hal/zipball/896ed6cdb777a81731423ac05cf733de2dadd93b",
-                "reference": "896ed6cdb777a81731423ac05cf733de2dadd93b",
+                "url": "https://github.com/blongden/hal/zipball/3d7a0b2c1f2fd4a0e9e355d5ad314c7f55425e1b",
+                "reference": "3d7a0b2c1f2fd4a0e9e355d5ad314c7f55425e1b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "1347272754",
+            "time": "1349340947",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -768,12 +768,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/koriym/Ray.Di.git",
-                "reference": "56323641c306e257206a20051032acb0ca1781d0"
+                "reference": "4cc05634b5849e766337e824586f6da90110587d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/koriym/Ray.Di/zipball/56323641c306e257206a20051032acb0ca1781d0",
-                "reference": "56323641c306e257206a20051032acb0ca1781d0",
+                "url": "https://github.com/koriym/Ray.Di/zipball/4cc05634b5849e766337e824586f6da90110587d",
+                "reference": "4cc05634b5849e766337e824586f6da90110587d",
                 "shasum": ""
             },
             "require": {
@@ -782,7 +782,7 @@
                 "aura/di": ">=1.0.*-dev",
                 "ray/aop": "*"
             },
-            "time": "1349080242",
+            "time": "1349358446",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -1067,13 +1067,7 @@
                 "zf2",
                 "log",
                 "logging"
-            ],
-            "support": {
-                "email": "fw-general-subscribe@lists.zend.com",
-                "irc": "irc://irc.freenode.net/zftalk",
-                "issues": "https://github.com/zendframework/zf2/issues",
-                "source": "https://github.com/zendframework/zf2"
-            }
+            ]
         },
         {
             "name": "zendframework/zend-stdlib",
@@ -1106,13 +1100,7 @@
             "keywords": [
                 "zf2",
                 "stdlib"
-            ],
-            "support": {
-                "email": "fw-general-subscribe@lists.zend.com",
-                "irc": "irc://irc.freenode.net/zftalk",
-                "issues": "https://github.com/zendframework/zf2/issues",
-                "source": "https://github.com/zendframework/zf2"
-            }
+            ]
         }
     ],
     "packages-dev": null,

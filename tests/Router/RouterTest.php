@@ -1,8 +1,8 @@
 <?php
 
-namespace BEAR\Framework\Tests;
+namespace BEAR\Sunday\Tests;
 
-use BEAR\Framework\Router\Router;
+use BEAR\Sunday\Router\Router;
 
 /**
  * Test class for Pager.
@@ -17,6 +17,6 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
     public function test_New()
     {
-        $this->assertInstanceOf('BEAR\Framework\Router\Router', $this->router);
+        $this->assertInstanceOf('BEAR\Sunday\Router\Router', $this->router);
     }
 }

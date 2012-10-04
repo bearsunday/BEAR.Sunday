@@ -1,18 +1,18 @@
 <?php
 
-namespace BEAR\Framework\Tests;
+namespace BEAR\Sunday\Tests;
 
-use BEAR\Framework\Framework\Framework;
+use BEAR\Sunday\Framework\Framework;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
-use BEAR\Framework\Interceptor\CacheUpdater;
+use BEAR\Sunday\Interceptor\CacheUpdater;
 use Ray\Di\Config;
 use Ray\Di\Annotation;
 use Ray\Di\Definition;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Doctrine\Common\Cache\ArrayCache as CacheStorage;
 use Ray\Aop\ReflectiveMethodInvocation;
-use BEAR\Framework\Annotation\CacheUpdate;
-use BEAR\Framework\Resource\CacheControl\Etag;
+use BEAR\Sunday\Annotation\CacheUpdate;
+use BEAR\Sunday\Resource\CacheControl\Etag;
 use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
 
@@ -35,7 +35,7 @@ class CacheUpdaterTest extends \PHPUnit_Framework_TestCase
 
     public function test_New()
     {
-        $this->assertInstanceOf('BEAR\Framework\Interceptor\CacheUpdater', $this->cacheUpdater);
+        $this->assertInstanceOf('BEAR\Sunday\Interceptor\CacheUpdater', $this->cacheUpdater);
     }
 
     public function test_invoke()

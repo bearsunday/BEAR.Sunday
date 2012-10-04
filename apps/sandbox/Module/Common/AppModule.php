@@ -7,9 +7,9 @@
  */
 namespace Sandbox\Module\Common;
 
-use BEAR\Framework\Module;
-use BEAR\Framework\Interceptor\TimeStamper;
-use BEAR\Framework\Interceptor\Transactional;
+use BEAR\Sunday\Module;
+use BEAR\Sunday\Interceptor\TimeStamper;
+use BEAR\Sunday\Interceptor\Transactional;
 use Sandbox\Interceptor\PostFormValidater;
 use Sandbox\Interceptor\TimeMessage;
 use Ray\Di\AbstractModule;
@@ -31,7 +31,7 @@ class AppModule extends AbstractModule
     {
         // di - application
         $this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');
-        $this->bind('BEAR\Resource\Renderable')->annotatedWith('hal')->to('BEAR\Framework\Resource\View\HalRenderer');
+        $this->bind('BEAR\Resource\Renderable')->annotatedWith('hal')->to('BEAR\Sunday\Resource\View\HalRenderer');
         // di - system
         $this->install(new Module\SchemeModule( __NAMESPACE__ . '\SchemeCollectionProvider'));
         $this->install(new Module\WebContext\AuraWebModule);
@@ -79,7 +79,7 @@ class AppModule extends AbstractModule
     {
         $this->bindInterceptor(
             $this->matcher->any(),
-            $this->matcher->annotatedWith('BEAR\Framework\Annotation\Time'),
+            $this->matcher->annotatedWith('BEAR\Sunday\Annotation\Time'),
             [new TimeStamper]
         );
     }
@@ -91,7 +91,7 @@ class AppModule extends AbstractModule
     {
         $this->bindInterceptor(
             $this->matcher->any(),
-            $this->matcher->annotatedWith('BEAR\Framework\Annotation\Transactional'),
+            $this->matcher->annotatedWith('BEAR\Sunday\Annotation\Transactional'),
             [new Transactional]
         );
     }

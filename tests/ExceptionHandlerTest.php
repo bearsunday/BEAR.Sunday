@@ -1,11 +1,11 @@
 <?php
 
-namespace BEAR\Framework\Tests;
+namespace BEAR\Sunday\Tests;
 
-use BEAR\Framework\Output\Console;
+use BEAR\Sunday\Output\Console;
 
-use BEAR\Framework\Exception\ExceptionHandler;
-use BEAR\Framework\Web\SymfonyResponse as Response;
+use BEAR\Sunday\Exception\ExceptionHandler;
+use BEAR\Sunday\Web\SymfonyResponse as Response;
 
 class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,13 +20,13 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testNew()
     {
-        $this->assertInstanceOf('BEAR\Framework\Exception\ExceptionHandler', $this->exceptionHandler);
+        $this->assertInstanceOf('BEAR\Sunday\Exception\ExceptionHandler', $this->exceptionHandler);
     }
 
     public function testHandlerException()
     {
         $e = new \Exception;
         $response = $this->exceptionHandler->handle($e);
-        $this->assertInstanceOf('BEAR\Framework\Resource\Page\Error', $response);
+        $this->assertInstanceOf('BEAR\Sunday\Resource\Page\Error', $response);
     }
 }

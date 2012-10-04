@@ -7,7 +7,7 @@
  */
 namespace Sandbox\Resource\Page\Test;
 
-use BEAR\Framework\Resource\AbstractPage as Page;
+use BEAR\Sunday\Resource\AbstractPage as Page;
 
 /**
  * Redirect page

@@ -1,18 +1,18 @@
 <?php
 
-namespace BEAR\Framework\Tests;
+namespace BEAR\Sunday\Tests;
 
-use BEAR\Framework\Framework\Framework;
+use BEAR\Sunday\Framework\Framework;
 use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
-use BEAR\Framework\Interceptor\CacheLoader;
+use BEAR\Sunday\Interceptor\CacheLoader;
 use Ray\Di\Config;
 use Ray\Di\Annotation;
 use Ray\Di\Definition;
 use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Doctrine\Common\Cache\ArrayCache as CacheStorage;
 use Ray\Aop\ReflectiveMethodInvocation;
-use BEAR\Framework\Annotation\Cache as CacheAnnotation;
-use BEAR\Framework\Resource\CacheControl\Etag;
+use BEAR\Sunday\Annotation\Cache as CacheAnnotation;
+use BEAR\Sunday\Resource\CacheControl\Etag;
 use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
 require_once dirname(__DIR__) . '/Mock/ResourceObject/MockResource.php';
@@ -35,7 +35,7 @@ class CacheLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function test_New()
     {
-        $this->assertInstanceOf('BEAR\Framework\Interceptor\CacheLoader', $this->cacheLoader);
+        $this->assertInstanceOf('BEAR\Sunday\Interceptor\CacheLoader', $this->cacheLoader);
     }
 
     public function test_invoke()

@@ -6,10 +6,10 @@
  */
 namespace Helloworld;
 
-use BEAR\Framework\Framework\Framework;
-use BEAR\Framework\Application\AppContext;
-use BEAR\Framework\Module\FrameworkModule;
-use BEAR\Framework\Application\AbstractApp;
+use BEAR\Sunday\Framework\Framework;
+use BEAR\Sunday\Application\AppContext;
+use BEAR\Sunday\Module\FrameworkModule;
+use BEAR\Sunday\Application\AbstractApp;
 use Ray\Di\Injector;
 use Ray\Di\Di\Inject;
 

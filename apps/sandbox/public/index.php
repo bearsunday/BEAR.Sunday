@@ -6,8 +6,8 @@
  */
 namespace Sandbox;
 
-use BEAR\Framework\Framework\Framework;
-use BEAR\Framework\Router\Router;
+use BEAR\Sunday\Framework\Framework;
+use BEAR\Sunday\Router\Router;
 
 // profiler
 $system = dirname(dirname(dirname(__DIR__)));

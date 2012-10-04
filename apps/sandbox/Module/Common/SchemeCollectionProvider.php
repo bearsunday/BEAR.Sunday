@@ -11,8 +11,8 @@ use Ray\Di\ProviderInterface as Provide;
 use BEAR\Resource\Adapter\App as AppAdapter;
 use BEAR\Resource\Adapter\Page;
 use BEAR\Resource\SchemeCollection;
-use BEAR\Framework\Inject\AppNameInject;
-use BEAR\Framework\Inject\InjectorInject;
+use BEAR\Sunday\Inject\AppNameInject;
+use BEAR\Sunday\Inject\InjectorInject;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 

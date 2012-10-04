@@ -6,10 +6,10 @@
  */
 namespace Sandbox;
 
-use BEAR\Framework\Framework\Framework;
-use BEAR\Framework\Application\AppContext;
-use BEAR\Framework\Application\AbstractApp;
-use BEAR\Framework\Inject\AppDependencyInject;
+use BEAR\Sunday\Framework\Framework;
+use BEAR\Sunday\Application\AppContext;
+use BEAR\Sunday\Application\AbstractApp;
+use BEAR\Sunday\Inject\AppDependencyInject;
 use Ray\Di\Injector;
 use LogicException;
 use Ray\Di\Di\Inject;

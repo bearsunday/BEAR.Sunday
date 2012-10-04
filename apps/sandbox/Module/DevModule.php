@@ -7,10 +7,10 @@
  */
 namespace Sandbox\Module;
 
-use BEAR\Framework\Module;
-use BEAR\Framework\Module\FrameworkModule;
-use BEAR\Framework\Module\NamedModule;
-use BEAR\Framework\Module\TemplateEngine;
+use BEAR\Sunday\Module;
+use BEAR\Sunday\Module\FrameworkModule;
+use BEAR\Sunday\Module\NamedModule;
+use BEAR\Sunday\Module\TemplateEngine;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 
@@ -61,10 +61,10 @@ class DevModule extends AbstractModule
      */
     private function installDevLogger()
     {
-        $logger = $this->requestInjection('BEAR\Framework\Interceptor\Logger');
+        $logger = $this->requestInjection('BEAR\Sunday\Interceptor\Logger');
         $this->bindInterceptor(
             $this->matcher->subclassesOf('BEAR\Resource\Object'),
-            $this->matcher->annotatedWith('BEAR\Framework\Annotation\Log'),
+            $this->matcher->annotatedWith('BEAR\Sunday\Annotation\Log'),
             [$logger]
         );
     }
@@ -77,6 +77,6 @@ class DevModule extends AbstractModule
         $this
         ->bind('Guzzle\Common\Cache\CacheAdapterInterface')
         ->annotatedWith('resource_cache')
-        ->toProvider('BEAR\Framework\Module\Provider\ApcCacheProvider');
+        ->toProvider('BEAR\Sunday\Module\Provider\ApcCacheProvider');
     }
 }

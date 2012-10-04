@@ -43,7 +43,7 @@
     },
     "autoload": {
         "psr-0": {
-            "BEAR\\Framework": "src/"
+            "BEAR\\Sunday": "src/"
         }
     },
     "minimum-stability": "dev",

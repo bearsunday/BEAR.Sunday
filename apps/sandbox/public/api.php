@@ -20,10 +20,10 @@
  */
 namespace Sandbox;
 
-use BEAR\Framework\Router\Router;
-use BEAR\Framework\Framework\Dispatcher;
-use BEAR\Framework\Framework\Globals;
-use BEAR\Framework\Web;
+use BEAR\Sunday\Router\Router;
+use BEAR\Sunday\Framework\Dispatcher;
+use BEAR\Sunday\Framework\Globals;
+use BEAR\Sunday\Web;
 use Exception;
 
 require_once dirname(dirname(dirname(__DIR__))) . '/scripts/min_loader.php';

@@ -1,8 +1,8 @@
 <?php
 
-namespace BEAR\Framework\Tests;
+namespace BEAR\Sunday\Tests;
 
-use BEAR\Framework\Module\Database\DoctrineDbalModule\Pagerfanta\DoctrineDbalAdapter;
+use BEAR\Sunday\Module\Database\DoctrineDbalModule\Pagerfanta\DoctrineDbalAdapter;
 use PDO;
 use Doctrine\DBAL\DriverManager;
 
@@ -42,7 +42,7 @@ class DoctrineDbalAdapterTest extends \PHPUnit_Extensions_Database_TestCase
 
     public function test_New()
     {
-        $this->assertInstanceOf('BEAR\Framework\Module\Database\DoctrineDbalModule\Pagerfanta\DoctrineDbalAdapter', $this->adapter);
+        $this->assertInstanceOf('BEAR\Sunday\Module\Database\DoctrineDbalModule\Pagerfanta\DoctrineDbalAdapter', $this->adapter);
     }
 
     public function test_count()

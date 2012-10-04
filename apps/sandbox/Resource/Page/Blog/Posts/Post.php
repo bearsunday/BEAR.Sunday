@@ -8,9 +8,9 @@
 namespace Sandbox\Resource\Page\Blog\Posts;
 
 use BEAR\Resource\Resource;
-use BEAR\Framework\Resource\AbstractPage as Page;
-use BEAR\Framework\Inject\ResourceInject;
-use BEAR\Framework\Annotation\Cache;
+use BEAR\Sunday\Resource\AbstractPage as Page;
+use BEAR\Sunday\Inject\ResourceInject;
+use BEAR\Sunday\Annotation\Cache;
 use Ray\Di\Di\Inject;
 
 /**

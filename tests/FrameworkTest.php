@@ -1,8 +1,8 @@
 <?php
 
-namespace BEAR\Framework\Tests;
+namespace BEAR\Sunday\Tests;
 
-use BEAR\Framework\Framework\Framework;
+use BEAR\Sunday\Framework\Framework;
 
 /**
  * Test class for Annotation.
@@ -17,7 +17,7 @@ class FrameworkTest extends \PHPUnit_Framework_TestCase
 
     public function test_New()
     {
-        $this->assertInstanceOf('BEAR\Framework\Framework\Framework', $this->framework);
+        $this->assertInstanceOf('BEAR\Sunday\Framework\Framework', $this->framework);
     }
 
     /**
@@ -25,6 +25,6 @@ class FrameworkTest extends \PHPUnit_Framework_TestCase
      */
     public function test_NewSecond()
     {
-        $this->assertInstanceOf('BEAR\Framework\Framework\Framework', $this->framework);
+        $this->assertInstanceOf('BEAR\Sunday\Framework\Framework', $this->framework);
     }
 }

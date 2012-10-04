@@ -1,11 +1,11 @@
 <?php
 
-namespace BEAR\Framework\Tests;
+namespace BEAR\Sunday\Tests;
 
-use BEAR\Framework\Output\Console;
+use BEAR\Sunday\Output\Console;
 
-use BEAR\Framework\Web\SymfonyResponse as Output;
-use BEAR\Framework\Resource\Page\Ok;
+use BEAR\Sunday\Web\SymfonyResponse as Output;
+use BEAR\Sunday\Resource\Page\Ok;
 /**
  * Test class for Annotation.
  */
@@ -19,7 +19,7 @@ class HttFoundationTest extends \PHPUnit_Framework_TestCase
 
     public function testNew()
     {
-        $this->assertInstanceOf('BEAR\Framework\Web\SymfonyResponse', $this->output);
+        $this->assertInstanceOf('BEAR\Sunday\Web\SymfonyResponse', $this->output);
     }
 
     public function test_Output()

@@ -4,7 +4,7 @@
  *
  * @package BEAR.Framework
  */
-namespace sandbox;
+namespace Sandbox;
 
 use BEAR\Framework\Framework\Framework;
 use BEAR\Framework\Router\Router;

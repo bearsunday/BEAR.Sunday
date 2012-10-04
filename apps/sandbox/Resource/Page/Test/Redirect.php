@@ -2,10 +2,10 @@
 /**
  * App resource
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage resource
  */
-namespace sandbox\Resource\Page\Test;
+namespace Sandbox\Resource\Page\Test;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
 

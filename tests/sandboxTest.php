@@ -10,7 +10,7 @@ class SandboxTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $app = require dirname(__DIR__) . '/apps/sandbox/scripts/instance.php';
+        $app = require dirname(__DIR__) . '/apps/Sandbox/scripts/instance.php';
         $this->resource = $app->resource;
     }
 

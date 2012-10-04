@@ -1,5 +1,5 @@
 <?php
-namespace sandbox\Resource\App\First\Greeting;
+namespace Sandbox\Resource\App\First\Greeting;
 
 use BEAR\Resource\AbstractObject;
 

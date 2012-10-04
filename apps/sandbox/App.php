@@ -1,10 +1,10 @@
 <?php
 /**
- * sandbox
+ * Sandbox
  *
- * @package sandbox
+ * @package Sandbox
  */
-namespace sandbox;
+namespace Sandbox;
 
 use BEAR\Framework\Framework\Framework;
 use BEAR\Framework\Application\AppContext;
@@ -18,7 +18,7 @@ use Ray\Di\Di\Named;
 /**
  * Applicaton
  *
- * @package sandbox
+ * @package Sandbox
  */
 final class App extends AbstractApp
 {

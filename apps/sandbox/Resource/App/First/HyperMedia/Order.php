@@ -1,5 +1,5 @@
 <?php
-namespace sandbox\Resource\App\First\HyperMedia;
+namespace Sandbox\Resource\App\First\HyperMedia;
 
 use BEAR\Resource\AbstractObject;
 use BEAR\Resource\Link;

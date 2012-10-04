@@ -1,7 +1,7 @@
 <?php
-namespace sandbox\tests\Resource\App\Blog;
+namespace Sandbox\tests\Resource\App\Blog;
 
-use sandbox\App;
+use Sandbox\App;
 
 class GreetingTest extends \PHPUnit_Framework_TestCase
 {

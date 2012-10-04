@@ -1,8 +1,8 @@
 <?php
 /**
- * sandbox
+ * Sandbox
  *
- * @package App.sandbox
+ * @package App.Sandbox
  */
 namespace helloworld;
 

@@ -2,23 +2,23 @@
 /**
  * Module
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
-namespace sandbox\Module\Common;
+namespace Sandbox\Module\Common;
 
 use BEAR\Framework\Module;
 use BEAR\Framework\Interceptor\TimeStamper;
 use BEAR\Framework\Interceptor\Transactional;
-use sandbox\Interceptor\PostFormValidater;
-use sandbox\Interceptor\TimeMessage;
+use Sandbox\Interceptor\PostFormValidater;
+use Sandbox\Interceptor\TimeMessage;
 use Ray\Di\AbstractModule;
 use Ray\Di\InjectorInterface;
 
 /**
  * Application module
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
 class AppModule extends AbstractModule
@@ -52,9 +52,9 @@ class AppModule extends AbstractModule
     private function installWritableChecker()
     {
         // bind tmp writable checker
-        $checker = $this->requestInjection('\sandbox\Interceptor\Checker');
+        $checker = $this->requestInjection('\Sandbox\Interceptor\Checker');
         $this->bindInterceptor(
-            $this->matcher->subclassesOf('sandbox\Resource\Page\Index'),
+            $this->matcher->subclassesOf('Sandbox\Resource\Page\Index'),
             $this->matcher->startWith('onGet'),
             [$checker]
         );
@@ -66,8 +66,8 @@ class AppModule extends AbstractModule
     private function installNewpostFormValidater()
     {
         $this->bindInterceptor(
-            $this->matcher->subclassesOf('sandbox\Resource\Page\Blog\Posts\Newpost'),
-            $this->matcher->annotatedWith('sandbox\Annotation\Form'),
+            $this->matcher->subclassesOf('Sandbox\Resource\Page\Blog\Posts\Newpost'),
+            $this->matcher->annotatedWith('Sandbox\Annotation\Form'),
             [new PostFormValidater]
         );
     }
@@ -103,7 +103,7 @@ class AppModule extends AbstractModule
     {
         // time message binding
         $this->bindInterceptor(
-            $this->matcher->subclassesOf('sandbox\Resource\App\First\Greeting\Aop'),
+            $this->matcher->subclassesOf('Sandbox\Resource\App\First\Greeting\Aop'),
             $this->matcher->any(),
             [new TimeMessage]
         );

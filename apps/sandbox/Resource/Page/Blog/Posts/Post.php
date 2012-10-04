@@ -2,10 +2,10 @@
 /**
  * App resource
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage resource
  */
-namespace sandbox\Resource\Page\Blog\Posts;
+namespace Sandbox\Resource\Page\Blog\Posts;
 
 use BEAR\Resource\Resource;
 use BEAR\Framework\Resource\AbstractPage as Page;
@@ -16,7 +16,7 @@ use Ray\Di\Di\Inject;
 /**
  * BLog post page
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage page
  */
 class Post extends Page

@@ -1,6 +1,6 @@
 <?php
 $stab = [
-    'sandbox\Resource\App\Blog\Posts' =>
+    'Sandbox\Resource\App\Blog\Posts' =>
         [
             [
                 'id' => 0,
@@ -21,7 +21,7 @@ $stab = [
                 'created' => '2011-05-07 16:13:33'
             ]
          ],
-    'sandbox\Resource\Page\Blog\Posts\Post' =>
+    'Sandbox\Resource\Page\Blog\Posts\Post' =>
             [
                 'post' => [
                     'title' => 'PHP とはなんでしょう?',
@@ -30,7 +30,7 @@ $stab = [
                  ]
             ],
 
-    'sandbox\Resource\Page\Blog\Posts\Edit' =>
+    'Sandbox\Resource\Page\Blog\Posts\Edit' =>
             [
                 'id' => '1',
                 'submit' => [

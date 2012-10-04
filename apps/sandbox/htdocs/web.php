@@ -1,6 +1,6 @@
 <?php
 
-namespace sandbox;
+namespace Sandbox;
 
 use BEAR\Framework\Router\Router;
 use BEAR\Framework\Framework\Globals;

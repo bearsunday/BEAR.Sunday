@@ -17,14 +17,14 @@ class CliTest extends \PHPUnit_Framework_TestCase
 
     public function test_devWebPhp()
     {
-        $cli = 'php ' . $this->systemRoot . '/apps/sandbox/htdocs/web.php get /index';
+        $cli = 'php ' . $this->systemRoot . '/apps/Sandbox/htdocs/web.php get /index';
         exec($cli, $return);
-        $pos = $this->assertContains('<html lang="en">', $return);
+        $pos = $this->assertContains('<!DOCTYPE html>', $return);
     }
 
     public function test_devApiPhp()
     {
-        $cli = 'php ' . $this->systemRoot . '/apps/sandbox/htdocs/api.php get page://self/index';
+        $cli = 'php ' . $this->systemRoot . '/apps/Sandbox/htdocs/api.php get page://self/index';
         exec($cli, $return);
         $html = implode('', $return);
         $pos = strpos($html, 'Hello, BEAR.Sunday');
@@ -33,7 +33,7 @@ class CliTest extends \PHPUnit_Framework_TestCase
 
     public function test_devApiPhpRep()
     {
-        $cli = 'php ' . $this->systemRoot . '/apps/sandbox/htdocs/api.php get page://self/index view';
+        $cli = 'php ' . $this->systemRoot . '/apps/Sandbox/htdocs/api.php get page://self/index view';
         exec($cli, $return);
         $html = implode('', $return);
         $pos = strpos($html, 'Hello, BEAR.Sunday');
@@ -42,7 +42,7 @@ class CliTest extends \PHPUnit_Framework_TestCase
 
     public function test_devApiPhpValue()
     {
-        $cli = 'php ' . $this->systemRoot . '/apps/sandbox/htdocs/api.php get page://self/index value';
+        $cli = 'php ' . $this->systemRoot . '/apps/Sandbox/htdocs/api.php get page://self/index value';
         exec($cli, $return);
         $html = implode('', $return);
         $pos = strpos($html, 'Hello, BEAR.Sunday');
@@ -51,7 +51,7 @@ class CliTest extends \PHPUnit_Framework_TestCase
 
     public function test_devApiPhpRequest()
     {
-        $cli = 'php ' . $this->systemRoot . '/apps/sandbox/htdocs/api.php get page://self/index request';
+        $cli = 'php ' . $this->systemRoot . '/apps/Sandbox/htdocs/api.php get page://self/index request';
         exec($cli, $return);
         $html = implode('', $return);
         $pos = strpos($html, 'Hello, BEAR.Sunday');

@@ -2,10 +2,10 @@
 /**
  * Scheme collection
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
-namespace sandbox\Module\Common;
+namespace Sandbox\Module\Common;
 
 use Ray\Di\ProviderInterface as Provide;
 use BEAR\Resource\Adapter\App as AppAdapter;
@@ -19,7 +19,7 @@ use Ray\Di\Di\Named;
 /**
  * Scheme collection
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
 class SchemeCollectionProvider implements Provide

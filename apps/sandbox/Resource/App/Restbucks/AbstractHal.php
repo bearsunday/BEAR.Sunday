@@ -2,10 +2,10 @@
 /**
  * App resource
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage resource
  */
-namespace sandbox\Resource\App\Restbucks;
+namespace Sandbox\Resource\App\Restbucks;
 
 use BEAR\Resource\AbstractObject;
 use BEAR\Resource\Renderable;

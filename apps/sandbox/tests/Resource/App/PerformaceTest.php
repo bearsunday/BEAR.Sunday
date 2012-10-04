@@ -1,7 +1,7 @@
 <?php
-namespace sandbox\tests\Resource\App;
+namespace Sandbox\tests\Resource\App;
 
-use sandbox\App;
+use Sandbox\App;
 
 class PerformanceTest extends \PHPUnit_Framework_TestCase
 {

@@ -26,7 +26,7 @@ $config = [
         'charset' => 'UTF8'
     ],
     // constants
-    'app_name' => 'sandbox',
+    'app_name' => 'Sandbox',
     'app_dir' => $appDir,
     'tmp_dir' => $appDir . '/tmp',
     'log_dir' => $appDir . '/log'

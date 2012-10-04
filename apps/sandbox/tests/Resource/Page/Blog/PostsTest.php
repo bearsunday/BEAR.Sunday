@@ -1,7 +1,7 @@
 <?php
-namespace sandbox\tests\Resource\Page\Blog;
+namespace Sandbox\tests\Resource\Page\Blog;
 
-use sandbox\App;
+use Sandbox\App;
 
 class PostsTest extends \PHPUnit_Extensions_Database_TestCase
 {

@@ -2,10 +2,10 @@
 /**
  * Module
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
-namespace sandbox\Module;
+namespace Sandbox\Module;
 
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\NamedModule;
@@ -13,7 +13,7 @@ use BEAR\Framework\Module\NamedModule;
 /**
  * Production module
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
 class TestModule extends ProdModule

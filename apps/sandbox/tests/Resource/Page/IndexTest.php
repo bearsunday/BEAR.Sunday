@@ -1,5 +1,5 @@
 <?php
-namespace sandbox;
+namespace Sandbox;
 
 class PageIndexTest extends \PHPUnit_Framework_TestCase
 {

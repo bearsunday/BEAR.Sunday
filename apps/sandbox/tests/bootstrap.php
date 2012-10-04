@@ -1,5 +1,5 @@
 <?php
-namespace sandbox\tests;
+namespace Sandbox\tests;
 
 require_once 'PHPUnit/Extensions/Database/TestCase.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/vendor/autoload.php';

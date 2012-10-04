@@ -2,10 +2,10 @@
 /**
  * Module
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
-namespace sandbox\Module;
+namespace Sandbox\Module;
 
 use Ray\Di\AbstractModule;
 use BEAR\Framework\Interceptor\Stab;
@@ -13,7 +13,7 @@ use BEAR\Framework\Interceptor\Stab;
 /**
  * Stab module
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
 class StabModule extends AbstractModule

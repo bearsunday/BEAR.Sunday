@@ -1,5 +1,5 @@
 <?php
-namespace sandbox\Resource\App\Blog\Posts;
+namespace Sandbox\Resource\App\Blog\Posts;
 
 use BEAR\Framework\Annotation\Db;
 use BEAR\Framework\Annotation\Cache;
@@ -7,7 +7,7 @@ use BEAR\Framework\Interceptor\DbSetterInterface;
 use BEAR\Framework\Annotation\DbPager;
 use PDO;
 
-use sandbox\Resource\App\Blog\Posts;
+use Sandbox\Resource\App\Blog\Posts;
 
 /**
  * Posts

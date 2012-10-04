@@ -2,15 +2,15 @@
 /**
  * Module
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
-namespace sandbox\Module;
+namespace Sandbox\Module;
 
 /**
  * Application module for API
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
 class ApiModule extends ProdModule

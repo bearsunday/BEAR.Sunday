@@ -2,10 +2,10 @@
 /**
  * App resource
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage resource
  */
-namespace sandbox\Resource\Page\Restbucks;
+namespace Sandbox\Resource\Page\Restbucks;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;
@@ -51,7 +51,7 @@ class Index extends Page
      * @param  string            $drink
      * @throws \RuntimeException
      *
-     * @return \sandbox\Resource\Page\Restbucks\Index
+     * @return \Sandbox\Resource\Page\Restbucks\Index
      */
     public function onPost($drink)
     {

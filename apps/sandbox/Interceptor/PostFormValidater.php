@@ -4,7 +4,7 @@
  *
  * @package BEAR.Framework
  */
-namespace sandbox\Interceptor;
+namespace Sandbox\Interceptor;
 
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;

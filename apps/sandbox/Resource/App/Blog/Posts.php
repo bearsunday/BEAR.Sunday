@@ -2,10 +2,10 @@
 /**
  * App resource
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage resource
  */
-namespace sandbox\Resource\App\Blog;
+namespace Sandbox\Resource\App\Blog;
 
 use BEAR\Framework\Annotation\Db;
 use BEAR\Framework\Interceptor\DbSetterInterface;

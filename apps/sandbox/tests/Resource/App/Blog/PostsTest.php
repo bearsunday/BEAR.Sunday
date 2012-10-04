@@ -1,7 +1,7 @@
 <?php
-namespace sandbox\tests\Resource\App\Blog;
+namespace Sandbox\tests\Resource\App\Blog;
 
-use sandbox\App;
+use Sandbox\App;
 use BEAR\Resource\Annotation\Post;
 
 class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase

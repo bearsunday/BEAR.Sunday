@@ -2,10 +2,10 @@
 /**
  * Module
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
-namespace sandbox\Module;
+namespace Sandbox\Module;
 
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\FrameworkModule;
@@ -17,7 +17,7 @@ use Ray\Di\Injector;
 /**
  * Dev module
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
 class DevModule extends AbstractModule

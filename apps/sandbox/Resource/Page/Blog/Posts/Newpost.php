@@ -2,22 +2,22 @@
 /**
  * App resource
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage resource
  */
-namespace sandbox\Resource\Page\Blog\Posts;
+namespace Sandbox\Resource\Page\Blog\Posts;
 
 use BEAR\Resource\Resource;
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;
 use Ray\Di\Di\Inject;
-use sandbox\Annotation\Form;
+use Sandbox\Annotation\Form;
 use BEAR\Resource\Link;
 
 /**
  * New post page
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage page
  */
 class Newpost extends Page

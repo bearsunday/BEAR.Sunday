@@ -2,10 +2,10 @@
 /**
  * Module
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
-namespace sandbox\Module;
+namespace Sandbox\Module;
 
 use BEAR\Framework\Module;
 use BEAR\Framework\Module\NamedModule;
@@ -18,7 +18,7 @@ use Ray\Di\AbstractModule;
 /**
  * Production module
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage Module
  */
 class ProdModule extends AbstractModule

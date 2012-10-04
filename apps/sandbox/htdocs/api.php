@@ -18,7 +18,7 @@
  * @package BEAR.Framework
  *
  */
-namespace sandbox;
+namespace Sandbox;
 
 use BEAR\Framework\Router\Router;
 use BEAR\Framework\Framework\Dispatcher;

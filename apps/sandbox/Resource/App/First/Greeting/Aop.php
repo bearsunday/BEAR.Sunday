@@ -2,10 +2,10 @@
 /**
  * App resource
  *
- * @package    sandbox
+ * @package    Sandbox
  * @subpackage resource
  */
-namespace sandbox\Resource\App\First\Greeting;
+namespace Sandbox\Resource\App\First\Greeting;
 
 use BEAR\Resource\AbstractObject;
 

@@ -60,20 +60,21 @@ final class Framework
             spl_autoload_unregister([$loader, 'load']);
         }
         $system = self::$systemRoot;
+        $packageDir = dirname(dirname($appDir));
         include_once $system . '/scripts/core_loader.php';
-        include_once $system . '/vendor/aura/autoload/src.php';
+        include_once $packageDir . '/vendor/aura/autoload/src.php';
         $loader = new Loader;
         $loader->setMode(Loader::MODE_DEBUG);
-        $autloadNamespaces = include $system . '/vendor/composer/autoload_namespaces.php';
+        $autloadNamespaces = include $packageDir . '/vendor/composer/autoload_namespaces.php';
         $autloadNamespaces[$namespace] = dirname($appDir);
         $autloadNamespaces += $namespaces;
         $loader->setPaths($autloadNamespaces);
-        $classes = include $system . '/vendor/composer/autoload_classmap.php';
+        $classes = include $packageDir . '/vendor/composer/autoload_classmap.php';
         $loader->setClasses($classes);
         $loader->register();
-        AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di\\', $system . '/vendor/ray/di/src/');
-        AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation\\', $system . '/vendor/bear/resource/src/');
-        AnnotationRegistry::registerAutoloadNamespace('BEAR\Sunday\Annotation\\', $system . '/src/');
+        AnnotationRegistry::registerAutoloadNamespace('Ray\Di\Di\\', $packageDir . '/vendor/ray/di/src/');
+        AnnotationRegistry::registerAutoloadNamespace('BEAR\Resource\Annotation\\', $packageDir . '/vendor/bear/resource/src/');
+        AnnotationRegistry::registerAutoloadNamespace('BEAR\Sunday\Annotation\\', $packageDir . '/src/');
         AnnotationRegistry::registerAutoloadNamespace($namespace . '\Annotation', dirname($appDir));
 
         return $this;

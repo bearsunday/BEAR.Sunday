@@ -12,7 +12,6 @@
   <testsuites>
     <testsuite name="BEAR.Sunday">
       <directory suffix="Test.php">tests</directory>
-      <directory suffix="Test.php">apps/sandbox/tests</directory>
     </testsuite>
   </testsuites>
 

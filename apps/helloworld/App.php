@@ -1,10 +1,10 @@
 <?php
 /**
- * helloworld
+ * Helloworld
  *
- * @package App.helloworld
+ * @package App.Helloworld
  */
-namespace helloworld;
+namespace Helloworld;
 
 use BEAR\Framework\Framework\Framework;
 use BEAR\Framework\Application\AppContext;
@@ -16,7 +16,7 @@ use Ray\Di\Di\Inject;
 /**
  * Applicaton
  *
- * @package helloworld
+ * @package Helloworld
  */
 final class App extends AbstractApp
 {

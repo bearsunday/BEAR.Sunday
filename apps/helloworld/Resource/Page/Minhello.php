@@ -1,5 +1,5 @@
 <?php
-namespace helloworld\Resource\Page;
+namespace Helloworld\Resource\Page;
 
 use BEAR\Resource\AbstractObject as Page;
 
@@ -13,7 +13,7 @@ class Minhello extends Page
     /**
      * Get
      *
-     * @return \helloworld\Resource\Page\MinHello
+     * @return \Helloworld\Resource\Page\MinHello
      */
     public function onGet()
     {

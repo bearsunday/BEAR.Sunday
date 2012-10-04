@@ -2,10 +2,10 @@
 /**
  * Module
  *
- * @package    helloworld
+ * @package    Helloworld
  * @subpackage Module
  */
-namespace helloworld\Module;
+namespace Helloworld\Module;
 
 use BEAR\Framework\Module\FrameworkModule;
 
@@ -15,7 +15,7 @@ use Ray\Di\AbstractModule;
 /**
  * Application module
  *
- * @package    helloworld
+ * @package    Helloworld
  * @subpackage Module
  */
 class AppModule extends AbstractModule

@@ -1,5 +1,5 @@
 <?php
-namespace helloworld\Resource\Page;
+namespace Helloworld\Resource\Page;
 
 use BEAR\Resource\AbstractObject as Page;
 

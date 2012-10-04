@@ -4,7 +4,7 @@
  *
  * @package App.Sandbox
  */
-namespace helloworld;
+namespace Helloworld;
 
 require_once dirname(dirname(dirname(__DIR__))) . '/src/BEAR/Framework/Framework/Framework.php';
 require_once dirname(__DIR__) . '/App.php';

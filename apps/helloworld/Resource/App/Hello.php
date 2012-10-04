@@ -1,5 +1,5 @@
 <?php
-namespace helloworld\Resource\App;
+namespace Helloworld\Resource\App;
 
 use BEAR\Resource\AbstractObject as Page;
 
@@ -14,7 +14,7 @@ use BEAR\Resource\AbstractObject as Page;
       *
       * @param string $name
       *
-      * @return \helloworld\Resource\App\Hello
+      * @return \Helloworld\Resource\App\Hello
       */
      public function onGet($name)
      {

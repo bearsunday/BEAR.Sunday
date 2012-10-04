@@ -2,10 +2,10 @@
 /**
  * Module
  *
- * @package    helloworld
+ * @package    Helloworld
  * @subpackage Module
  */
-namespace helloworld\Module;
+namespace Helloworld\Module;
 
 use Ray\Di\ProviderInterface as Provide;
 use BEAR\Resource\Adapter\App as AppAdapter;
@@ -19,7 +19,7 @@ use Ray\Di\Di\Named;
 /**
  * Scheme collection provider
  *
- * @package    helloworld
+ * @package    Helloworld
  * @subpackage Module
  */
 class SchemeCollectionProvider implements Provide

@@ -41,7 +41,7 @@ final class App extends AbstractApp
     {
         // class loader
         (new Framework)->setLoader(__NAMESPACE__, __DIR__);
-        include_once Framework::$systemRoot . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php';
+        require_once Framework::$systemRoot . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php';
 
         // cached application ?
         $cacheKey = 'App-' . __NAMESPACE__ . PHP_SAPI . $runMode;

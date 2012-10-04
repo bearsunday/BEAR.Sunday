@@ -15,6 +15,8 @@ use LogicException;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
+require_once dirname(dirname(__DIR__)) . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php';
+
 /**
  * Applicaton
  *
@@ -41,7 +43,6 @@ final class App extends AbstractApp
     {
         // class loader
         (new Framework)->setLoader(__NAMESPACE__, __DIR__);
-        require_once Framework::$systemRoot . '/vendor/smarty/smarty/distribution/libs/Smarty.class.php';
 
         // cached application ?
         $cacheKey = 'App-' . __NAMESPACE__ . PHP_SAPI . $runMode;

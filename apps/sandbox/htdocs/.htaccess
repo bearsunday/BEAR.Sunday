@@ -1,4 +1,5 @@
-# benchmark
+	#order deny,allow
+	#deny from /web.php
 <IfModule mod_rewrite.c>
     # turn on rewriting
     RewriteEngine On

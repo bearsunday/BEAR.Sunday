@@ -367,7 +367,8 @@
                 },
                 {
                     "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
+                    "email": "guilhermeblanco@gmail.com",
+                    "homepage": "http://www.instaclick.com"
                 },
                 {
                     "name": "Roman Borschel",
@@ -378,7 +379,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -436,7 +437,8 @@
                 },
                 {
                     "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
+                    "email": "guilhermeblanco@gmail.com",
+                    "homepage": "http://www.instaclick.com"
                 },
                 {
                     "name": "Roman Borschel",
@@ -546,7 +548,7 @@
                 "zend/zend-log1": "1.11",
                 "zend/zend-cache1": "1.11"
             },
-            "time": "2012-07-02 19:04:37",
+            "time": "2012-07-02 21:04:37",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -766,12 +768,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/koriym/Ray.Di.git",
-                "reference": "6e9ef9069bca5c6e7c1eec11a2c52c3a949856d9"
+                "reference": "56323641c306e257206a20051032acb0ca1781d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/koriym/Ray.Di/zipball/6e9ef9069bca5c6e7c1eec11a2c52c3a949856d9",
-                "reference": "6e9ef9069bca5c6e7c1eec11a2c52c3a949856d9",
+                "url": "https://github.com/koriym/Ray.Di/zipball/56323641c306e257206a20051032acb0ca1781d0",
+                "reference": "56323641c306e257206a20051032acb0ca1781d0",
                 "shasum": ""
             },
             "require": {
@@ -780,7 +782,7 @@
                 "aura/di": ">=1.0.*-dev",
                 "ray/aop": "*"
             },
-            "time": "1348483446",
+            "time": "1349080242",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -814,16 +816,16 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v3.1.11",
+            "version": "v3.1.12",
             "source": {
                 "type": "svn",
                 "url": "http://smarty-php.googlecode.com/svn",
-                "reference": "/tags/v3.1.11/@4636"
+                "reference": "/tags/v3.1.12/@4664"
             },
             "require": {
                 "php": ">=5.2"
             },
-            "time": "2012-07-02 15:17:26",
+            "time": "2012-09-25 22:13:16",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -861,18 +863,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console",
-                "reference": "v2.0.17"
+                "reference": "457f9f6b09dfa0ee68d07d660818fd9e6ab22cc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/Console/zipball/v2.0.17",
-                "reference": "v2.0.17",
+                "url": "https://github.com/symfony/Console/zipball/457f9f6b09dfa0ee68d07d660818fd9e6ab22cc2",
+                "reference": "457f9f6b09dfa0ee68d07d660818fd9e6ab22cc2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "1342761932",
+            "time": "1348842106",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -903,12 +905,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher",
-                "reference": "55c3658b46e62781af0fcf2119a07cdab2f12996"
+                "reference": "c0f5364342863351146fe86cd1fad9ccfdfa1d6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/EventDispatcher/zipball/55c3658b46e62781af0fcf2119a07cdab2f12996",
-                "reference": "55c3658b46e62781af0fcf2119a07cdab2f12996",
+                "url": "https://github.com/symfony/EventDispatcher/zipball/c0f5364342863351146fe86cd1fad9ccfdfa1d6a",
+                "reference": "c0f5364342863351146fe86cd1fad9ccfdfa1d6a",
                 "shasum": ""
             },
             "require": {
@@ -921,7 +923,7 @@
                 "symfony/dependency-injection": "2.2.*",
                 "symfony/http-kernel": "2.2.*"
             },
-            "time": "1347274777",
+            "time": "1349048798",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -931,7 +933,7 @@
             "installation-source": "source",
             "autoload": {
                 "psr-0": {
-                    "Symfony\\Component\\EventDispatcher": ""
+                    "Symfony\\Component\\EventDispatcher\\": ""
                 }
             },
             "license": [
@@ -957,18 +959,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation",
-                "reference": "v2.0.17"
+                "reference": "018fcbbc0587ffa6bf0bb69207a0b5c78cf3378e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/HttpFoundation/zipball/v2.0.17",
-                "reference": "v2.0.17",
+                "url": "https://github.com/symfony/HttpFoundation/zipball/018fcbbc0587ffa6bf0bb69207a0b5c78cf3378e",
+                "reference": "018fcbbc0587ffa6bf0bb69207a0b5c78cf3378e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "1343367114",
+            "time": "1349209894",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -1065,7 +1067,13 @@
                 "zf2",
                 "log",
                 "logging"
-            ]
+            ],
+            "support": {
+                "email": "fw-general-subscribe@lists.zend.com",
+                "irc": "irc://irc.freenode.net/zftalk",
+                "issues": "https://github.com/zendframework/zf2/issues",
+                "source": "https://github.com/zendframework/zf2"
+            }
         },
         {
             "name": "zendframework/zend-stdlib",
@@ -1098,7 +1106,13 @@
             "keywords": [
                 "zf2",
                 "stdlib"
-            ]
+            ],
+            "support": {
+                "email": "fw-general-subscribe@lists.zend.com",
+                "irc": "irc://irc.freenode.net/zftalk",
+                "issues": "https://github.com/zendframework/zf2/issues",
+                "source": "https://github.com/zendframework/zf2"
+            }
         }
     ],
     "packages-dev": null,

@@ -7,6 +7,10 @@
  */
 namespace BEAR\Sunday\Module;
 
+use Aura\Autoload\Exception;
+
+use BEAR\Sunday\Framework\Framework;
+
 use Ray\Di\Injector;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
@@ -27,28 +31,17 @@ class FrameworkModule extends AbstractModule
     protected function configure()
     {
         // install
-        $this->install(new Log\ZfLogModule);
-        $injector = Injector::create([$this], false);
-        //$logger = $this->requestInjection('BEAR\Sunday\Inject\Logger\Adapter');
-        //$injector->setLogger($logger);
         $this->bind('')->annotatedWith('is_prod')->toInstance(false);
-        $config = $injector->getContainer()->getForge()->getConfig();
-        $this->bind('Aura\Di\ConfigInterface')->toInstance($config);
-        $this->bind('Aura\Signal\Manager')->toProvider('BEAR\Sunday\Module\Provider\SignalProvider')->in(Scope::SINGLETON);
-        $this->bind('Ray\Di\InjectorInterface')->toInstance($injector);
-        $this->bind('BEAR\Resource\ResourceInterface')->to('BEAR\Resource\Resource')->in(Scope::SINGLETON);
-        $this->bind('BEAR\Resource\InvokerInterface')->to('BEAR\Resource\Invoker')->in(Scope::SINGLETON);
-        $this->bind('BEAR\Resource\LinkerInterface')->to('BEAR\Resource\Linker')->in(Scope::SINGLETON);
-        $this->bind('BEAR\Resource\LoggerInterface')->annotatedWith("resource_logger")->to('BEAR\Resource\Logger');
-        $this->bind('BEAR\Resource\LoggerInterface')->toProvider('BEAR\Sunday\Module\Provider\ResourceLoggerProvider');
-        $this->bind('BEAR\Resource\Referable')->to('BEAR\Resource\A');
-        $this->bind('BEAR\Sunday\Web\ResponseInterface')->to('BEAR\Sunday\Web\SymfonyResponse');
-        $this->bind('BEAR\Sunday\Exception\ExceptionHandlerInterface')->to('BEAR\Sunday\Exception\ExceptionHandler');
-        $this->bind('BEAR\Sunday\Output\ConsoleInterface')->to('BEAR\Sunday\Output\Console');
-        $this->bind('BEAR\Sunday\Resource\CacheControl\Taggable')->to('BEAR\Sunday\Resource\CacheControl\Etag');
-        $this->bind('BEAR\Sunday\Application\LoggerInterface')->to('BEAR\Sunday\Application\Logger');
-        $this->bind('Doctrine\Common\Annotations\Reader')->to('Doctrine\Common\Annotations\AnnotationReader');
-        $this->bind('Guzzle\Parser\UriTemplate\UriTemplateInterface')->to('Guzzle\Parser\UriTemplate\UriTemplate');
-        $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Sunday\Module\Provider\ApcCacheProvider')->in(Scope::SINGLETON);
+        $this->install(new Log\ZfLogModule);
+        $this->install(new Log\ApplicationLoggerModule);
+        $injector = Injector::create([$this], false);
+        $this->install(new Di\InjectorModule($injector));
+        $this->install(new Code\AnnotationModule);
+        $this->install(new Signal\SignalModule);
+        $this->install(new Resource\ResourceModule($injector));
+        $this->install(new ExceptionHandle\HandleModule);
+        $this->install(new Output\WebResponseModule);
+        $this->install(new Output\ConsoleModule);
+        $this->install(new Http\GuzzleModule);
     }
 }

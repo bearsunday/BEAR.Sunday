@@ -5,7 +5,7 @@
  * @package BEAR.Framework
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Module\Provider as Provide;
+namespace BEAR\Sunday\Module\Provider;
 
 use BEAR\Sunday\Inject\TmpDirInject;
 

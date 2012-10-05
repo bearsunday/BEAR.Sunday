@@ -4,3 +4,5 @@ tmp
 log
 apps/sandbox/build
 build
+
+cache.properties

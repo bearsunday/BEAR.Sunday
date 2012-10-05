@@ -24,16 +24,10 @@
   </logging>
 
   <filter>
-    <whitelist addUncoveredFilesFromWhitelist="false">
-      <directory suffix=".php">apps/*/Page</directory>
-      <directory suffix=".php">apps/*/Module</directory>
-      <directory suffix=".php">apps/*/ResourceObject</directory>
-      <directory suffix=".php">packages/BEAR.Framework</directory>
-	  <exclude>
-	      <directory suffix=".php">apps/*/Page/*/view/</directory>
-	      <directory suffix=".php">apps/*/*/view/</directory>
-	      <directory suffix=".php">packages/BEAR.Framework/script/</directory>
-	  </exclude>
-    </whitelist>
+    <blacklist>
+      <directory suffix=".php">scripts</directory>
+      <directory suffix=".php">tests</directory>
+      <directory suffix=".php">vendor</directory>
+    </blacklist>
   </filter>
 </phpunit>

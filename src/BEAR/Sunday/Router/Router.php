@@ -63,7 +63,8 @@ class Router
             $method = $route->values['action'];
             $pageUri = $route->values['page'];
             $query = [];
-            foreach ($route->params as $key => $params) {
+            $keys = array_keys($route->params);
+            foreach ($keys as $key) {
                 $query[$key] = $route->values[$key];
             }
         }

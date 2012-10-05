@@ -42,6 +42,7 @@ final class Logger implements LoggerInterface
     /**
      * (non-PHPdoc)
      * @see BEAR\Sunday\Application.LoggerInterface::log()
+     * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
      */
     private function logOnShutdown(AppContext $app)
     {

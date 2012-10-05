@@ -21,6 +21,7 @@ use Ray\Di\Di\Named;
  * @package    BEAR.Framework
  * @subpackage Intercetor
  */
+
 class CacheLoader implements MethodInterceptor
 {
     use EtagInject;
@@ -31,20 +32,6 @@ class CacheLoader implements MethodInterceptor
      * @var string
      */
     const HEADER_CACHE = 'x-cache';
-
-    /**
-     * Host
-     *
-     * @var string
-     */
-    private $host;
-
-    /**
-     * Life time
-     *
-     * @var int
-     */
-    private $lifeTime;
 
     /**
      * Constructor
@@ -67,7 +54,6 @@ class CacheLoader implements MethodInterceptor
     {
         $ro = $invocation->getThis();
         $args = $invocation->getArguments();
-        $method = $invocation->getMethod();
         $id = $this->etag->getEtag($ro, $args);
 
         $pager = (isset($_GET['_start'])) ? $_GET['_start'] : '';
@@ -92,7 +78,7 @@ class CacheLoader implements MethodInterceptor
 
             return $resource;
         }
-        $result = $invocation->proceed();
+        $invocation->proceed();
         $resource = $invocation->getThis();
         $time = $invocation->getAnnotation()->time;
         $resource->headers[self::HEADER_CACHE] = json_encode(

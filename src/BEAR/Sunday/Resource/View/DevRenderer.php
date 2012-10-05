@@ -27,6 +27,7 @@ use Traversable;
  *
  * @package    BEAR.Framework
  * @subpackage View
+ * @SuppressWarnings(PHPMD)
  */
 class DevRenderer implements Renderable
 {

@@ -28,7 +28,8 @@ class HalRenderer implements Renderable
     public function render(ResourceObject $ro)
     {
         // evaluate all request in body.
-        if (is_array($ro->body) || $ro->body instanceof \Traversable) {
+        $isArrayAccess = is_array($ro->body) || $ro->body instanceof \Traversable;
+        if ($isArrayAccess) {
             array_walk_recursive(
                 $ro->body,
                 function (&$element) {

@@ -36,6 +36,7 @@ class Adapter implements LoggerInterface
      */
     public function log($class, array $params, array $setter, $object, Bind $bind)
     {
+        unset($object);
         $log = "DI class={$class}"
         . ' params=' . $this->getString((array) $params)
         . ' setter=' . $this->getString((array) $setter)

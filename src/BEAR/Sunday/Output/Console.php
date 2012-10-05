@@ -73,7 +73,6 @@ final class Console implements ConsoleInterface
         $label = "\033[1;32m";
         $label1 = "\033[1;33m";
         $label2 = "\e[4;30m";
-        $label3 = "\e[0;36m";
         $close = "\033[0m";
         // code
         $codeMsg = $label . $resource->code . ' ' . $statusText . $close . PHP_EOL;

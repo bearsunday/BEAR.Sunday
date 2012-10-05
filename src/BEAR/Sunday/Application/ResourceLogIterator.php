@@ -152,7 +152,7 @@ final class ResourceLogIterator extends IteratorIterator implements Fireable
         if ($isTable) {
             $table = [];
             $table[] = (array_values(array_keys($body[0])));
-            foreach ((array) $body as $key => $val) {
+            foreach ((array) $body as $val) {
                 $table[] = array_values((array) $val);
             }
             $this->firePhp->table('body', $table);

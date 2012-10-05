@@ -45,7 +45,6 @@ class ExceptionHandler implements ExceptionHandlerInterface
      */
     public function handle(Exception $e)
     {
-        $mode = isset($_ENV['BEAR_OUTPUT_MODE']) ? $_ENV['BEAR_OUTPUT_MODE'] : 'prod';
         $exceptionId = 'e' . substr(md5((string) $e), 0, 5);
         try {
             $response = new Error;
@@ -115,7 +114,6 @@ class ExceptionHandler implements ExceptionHandlerInterface
     public function writeExceptionLog(Exception $e, $exceptionId)
     {
         $filename = "e.{$exceptionId}.log";
-        $trace = $e->getTrace();
         $data = PHP_EOL . $e->getTraceAsString();
         $previousE = $e->getPrevious();
         if ($previousE) {

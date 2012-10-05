@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Resource\View;
 
 /**
- * Intarface for template engine adapter
+ * Interface for template engine adapter
  *
  * @package    BEAR.Framework
  * @subpackage Resource

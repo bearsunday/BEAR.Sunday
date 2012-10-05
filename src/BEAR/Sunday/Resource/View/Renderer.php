@@ -35,6 +35,7 @@ class Renderer implements Renderable
      * @param TemplateEngineAdapter $templateEngineAdapter
      *
      * @Inject
+     * @SuppressWarnings("long")
      */
     public function __construct(TemplateEngineAdapter $templateEngineAdapter)
     {
@@ -44,6 +45,7 @@ class Renderer implements Renderable
     /**
      * (non-PHPdoc)
      * @see BEAR\Resource.Renderable::render()
+     * @SuppressWarnings("long")
      */
     public function render(ResourceObject $ro)
     {

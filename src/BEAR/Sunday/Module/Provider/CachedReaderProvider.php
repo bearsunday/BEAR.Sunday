@@ -30,7 +30,7 @@ class CachedReaderProvider implements Provide
         $reader = new CachedReader(
             new AnnotationReader,
             new ApcCache,
-            $debug = false
+            false
         );
 
         return $reader;

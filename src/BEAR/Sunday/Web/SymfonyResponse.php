@@ -51,13 +51,6 @@ final class SymfonyResponse implements ResponseInterface
      */
     private $response;
 
-    /**
-     * Mode
-     *
-     * @param string $mode
-     */
-    private $mode;
-
     private $code;
     private $headers;
     private $view;

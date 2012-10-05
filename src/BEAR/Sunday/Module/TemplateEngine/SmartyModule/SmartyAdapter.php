@@ -37,7 +37,7 @@ class SmartyAdapter implements TemplateEngineAdapter
     private $template;
 
     /**
-     * File extention
+     * File extension
      *
      * @var string
      */
@@ -103,9 +103,9 @@ class SmartyAdapter implements TemplateEngineAdapter
      * (non-PHPdoc)
      * @see BEAR\Sunday\View.Render::fetch()
      */
-    public function fetch($templatefileWithoutExtention)
+    public function fetch($tplWithoutExtention)
     {
-        $this->template = $templatefileWithoutExtention . self::EXT;
+        $this->template = $tplWithoutExtention . self::EXT;
         $this->fileExists($this->template);
 
         return $this->smarty->fetch($this->template);

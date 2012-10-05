@@ -77,7 +77,7 @@
   <exec executable="phpmd">
    <arg path="${basedir}/src" />
    <arg value="text" />
-   <arg value="${basedir}/build/phpmd.xml" />
+   <arg value="${basedir}/phpmd.xml" />
   </exec>
  </target>
 

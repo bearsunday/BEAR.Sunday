@@ -54,6 +54,46 @@ class DevRenderer implements Renderable
     private $templateEngineAdapter;
 
     /**
+     * BEAR.Package dir
+     *
+     * @var string
+     */
+    private $packageDir;
+
+    /**
+     * BEAR.Sunday dir
+     *
+     * @var string
+     */
+    private $sundayDir;
+
+    /**
+     * Set packageDir
+     *
+     * @param unknown $packageDir
+     *
+     * @Inject
+     * @Named("package_dir")
+     */
+    public function setPackageDir($packageDir)
+    {
+        $this->packageDir = $packageDir;
+    }
+
+    /**
+     * Set sunday_dir
+     *
+     * @param string $sundayDir
+     *
+     * @Inject
+     * @Named("sunday_dir")
+     */
+    public function setSundayDir($sundayDir)
+    {
+        $this->sundayDir = $sundayDir;
+    }
+
+    /**
      * ViewRenderer Setter
      *
      * @param TemplateEngineAdapter $templateEngineAdapter
@@ -98,13 +138,14 @@ class DevRenderer implements Renderable
     }
 
     /**
-     * Get relatvive path from system root.
+     * Get relative path from system root.
      *
      * @param string $file
      */
     private function makeRelativePath($file)
     {
-        $file = str_replace(Framework::$systemRoot, '', $file);
+        $file = str_replace($this->packageDir, '', $file);
+        $file = str_replace($this->sundayDir, '/vendor/bear/sunday', $file);
         return $file;
     }
     /**
@@ -192,8 +233,8 @@ EOT;
   <a data-toggle="tab" href="#{$resourceKey}_html"><span class="icon-font" rel="tooltip" title="View"></span></a>
   <a data-toggle="tab" href="#{$resourceKey}_info"><span class="icon-info-sign" rel="tooltip" title="Info"></span></a>
 <span style="padding:4px;"></span>
-  <a target="_blank" href="/_dev/edit/?file={$codeFile}"><span class="icon-edit" rel="tooltip" title="Code ({$codeFile})"></span></a>
-  <a target="_blank" href="/_dev/edit/?file={$templateFile}"><span class="icon-file" rel="tooltip" title="Template ({$templateFile})"></span></a>
+  <a target="_blank" href="/_dev/edit/index.php?file={$codeFile}"><span class="icon-edit" rel="tooltip" title="Code ({$codeFile})"></span></a>
+  <a target="_blank" href="/_dev/edit/index.php?file={$templateFile}"><span class="icon-file" rel="tooltip" title="Template ({$templateFile})"></span></a>
 </span>
 <div class="tab-content">
   <div id="{$resourceKey}_body" class="tab-pane fade active in"><div style="border: 1px dashed gray">
@@ -350,7 +391,7 @@ EOT;
             $interceptorfile = (new ReflectionClass($interceptor))->getFileName();
             $interceptorfile = $this->makeRelativePath($interceptorfile);
             $result .= <<<EOT
-<li><a target="_blank" href="/_dev/edit/?file={$interceptorfile}"><span class="icon-arrow-right"></span>{$interceptor}</a></li>
+<li><a target="_blank" href="/_dev/edit/index.php?file={$interceptorfile}"><span class="icon-arrow-right"></span>{$interceptor}</a></li>
 EOT;
         }
         $result .= '</ul></div>';

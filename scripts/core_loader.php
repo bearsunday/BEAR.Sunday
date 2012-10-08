@@ -11,10 +11,9 @@ namespace BEAR\Sunday\Scripts;
 
 use BEAR\Sunday\Framework\Framework;
 
-if (isset($system)) {
-    return;
-}
-$system = Framework::$systemRoot;
+$er = error_reporting();
+error_reporting(0);
+$system = dirname(__DIR__);
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/AnnotationRegistry.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/AbstractModule.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/Scope.php';
@@ -50,11 +49,6 @@ include $system . '/vendor/Ray/Di/src/Ray/Di/EmptyModule.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Bind.php';
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/TokenParser.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/Di/Annotation.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Logger.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Handler/HandlerInterface.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Handler/AbstractHandler.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessingHandler.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Handler/StreamHandler.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Log/LogAdapterInterface.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Log/AbstractLogAdapter.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Log/MonologLogAdapter.php';
@@ -114,9 +108,6 @@ include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Cache/CacheAdapterInt
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Cache/Cache.php';
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Cache/CacheProvider.php';
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Cache/ApcCache.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Formatter/FormatterInterface.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Cache/AbstractCacheAdapter.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Cache/DoctrineCacheAdapter.php';
 include $system . '/src/BEAR/Sunday/Annotation/Cache.php';
@@ -175,3 +166,5 @@ include $system . '/vendor/Ray/Di/src/Ray/Di/Di/Inject.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/Di/Named.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Matched.php';
 include $system . '/src/BEAR/Sunday/Interceptor/DbSetterInterface.php';
+error_reporting($er);
+unset($er);

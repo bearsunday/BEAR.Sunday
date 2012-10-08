@@ -10,7 +10,7 @@ use BEAR\Sunday\Framework\Framework;
 $sec = number_format((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 2);
 $memory = number_format(memory_get_peak_usage(true));
 
-$systemRoot = Framework::$systemRoot;
+$systemRoot = dirname(dirname(dirname(dirname(__DIR__))));
 
 $exceptionInfo = function (\Exception $e) use ($systemRoot) {
     return [
@@ -18,7 +18,7 @@ $exceptionInfo = function (\Exception $e) use ($systemRoot) {
     'traceString' => $e->getTraceAsString(),
     'traceRaw' => 'n/a', //print_r($e->getTrace(), true),
     'file' => $e->getFile(),
-    'href' => '/_dev/edit/?file=' . str_replace($systemRoot, '', $e->getFile()) . '&line=' . $e->getLine(),
+    'href' => '/_dev/edit/index.php?file=' . str_replace($systemRoot, '', $e->getFile()) . '&line=' . $e->getLine(),
     'title' => $e->getFile() . ':' . $e->getLine(),
     'line' => $e->getLine(),
     'fileContents' => htmlspecialchars(trim(file_get_contents($e->getFile()))),
@@ -119,7 +119,7 @@ foreach ($exception['trace'] as $trace) {
         $file =  $trace['file'];
         $line =  $trace['line'];
         $editFile = str_replace($systemRoot, '', $file);
-        $html .= "<a target=\"code_edit\" href=\"/_dev/edit/?file={$editFile}&line={$line}\">{$file}  : {$trace['line']} <span class=\"icon-share-alt\"></span></a><br>";
+        $html .= "<a target=\"code_edit\" href=\"/_dev/edit/index.php?file={$editFile}&line={$line}\">{$file}  : {$trace['line']} <span class=\"icon-share-alt\"></span></a><br>";
     }
 }
 $html .= <<<EOT

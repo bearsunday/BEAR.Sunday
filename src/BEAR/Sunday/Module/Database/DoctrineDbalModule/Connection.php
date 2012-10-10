@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module\Database\DoctrineDbalModule;
@@ -17,7 +17,7 @@ use Pagerfanta\View\TwitterBootstrapView;
 /**
  * Pager enabled connection
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Module
  */
 class Connection extends DbalConnection implements DriverConnection

@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Annotation;
@@ -13,9 +13,9 @@ namespace BEAR\Sunday\Annotation;
  * @Annotation
  * @Target({"METHOD","CLASS"})
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Annotation
  */
-final class Html
+final class Html implements Annotation
 {
 }

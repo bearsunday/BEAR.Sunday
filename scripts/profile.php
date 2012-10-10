@@ -4,7 +4,7 @@
  *
  * Prints all include file to help create manula loader script.
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 $enable = extension_loaded('xhprof') && (PHP_SAPI !== 'cli');

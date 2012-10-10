@@ -62,7 +62,8 @@ final class Logger implements LoggerInterface
     {
         register_shutdown_function(
             function () use ($app) {
-                    [$this, 'logOnShutdown']($app);
+                    $onShutdownLog =[$this, 'logOnShutdown'];
+                    $onShutdownLog($app);
                 }
             );
     }

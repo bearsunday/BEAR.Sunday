@@ -8,10 +8,9 @@
 namespace BEAR\Sunday\Module\Log;
 
 use Ray\Di\AbstractModule;
-use Ray\Di\Di\Scope;
 
 /**
- * ZF2 logger module
+ * Zf2 log module
  *
  * @package    BEAR.Framework
  * @subpackage Module
@@ -19,12 +18,14 @@ use Ray\Di\Di\Scope;
 class ZfLogModule extends AbstractModule
 {
     /**
-     * Configure
+     * Configure dependency binding
      *
      * @return void
      */
     protected function configure()
     {
-        $this->bind('Guzzle\Common\Log\LogAdapterInterface')->to('Guzzle\Common\Log\Zf2LogAdapter');
+        $this
+        ->bind('Guzzle\Common\Log\LogAdapterInterface')
+        ->toProvider('BEAR\Sunday\Module\Log\ZfLogModule\ZfLogProvider');
     }
 }

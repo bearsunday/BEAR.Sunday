@@ -8,7 +8,6 @@
 namespace BEAR\Sunday\Module\Log;
 
 use Ray\Di\AbstractModule;
-use Ray\Di\Di\Scope;
 
 /**
  * Application logger module
@@ -19,7 +18,7 @@ use Ray\Di\Di\Scope;
 class ApplicationLoggerModule extends AbstractModule
 {
     /**
-     * Configure
+     * Configure dependency binding
      *
      * @return void
      */

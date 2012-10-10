@@ -1,8 +1,9 @@
+.idea
 templates_c
 vendor
 tmp
-log
-apps/sandbox/build
+*.log
 build
-
 cache.properties
+
+composer.lock

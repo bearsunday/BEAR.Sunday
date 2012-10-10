@@ -5,15 +5,13 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday;
-
-use ArrayObject;
+namespace BEAR\Sunday\Annotation;
 
 /**
- * TraitName
+ * Annotation
  *
  * @package BEAR.Sunday
  */
-trait TraitName
+interface Annotation
 {
 }

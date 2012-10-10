@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
@@ -16,7 +16,7 @@ use Doctrine\Common\Annotations\AnnotationReader as Reader;
 /**
  * Cache interceptor
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Intercetor
  */
 class DbInjector implements MethodInterceptor

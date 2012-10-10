@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Output;
@@ -15,7 +15,7 @@ use Guzzle\Parser\UriTemplate\UriTemplate;
 /**
  * Cli Output
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Web
  */
 final class Console implements ConsoleInterface

@@ -18,7 +18,6 @@
         "php": ">=5.4.0",
         "ext-apc": "*",
         "ext-curl": "*",
-        "aura/autoload": "dev-master",
         "aura/di": "dev-master",
         "aura/router": "dev-master",
         "aura/signal": "dev-master",
@@ -48,19 +47,6 @@
     },
     "minimum-stability": "dev",
     "require-dev": {
-        "crodas/Haanga": "dev-master",
-        "twig/twig": "dev-master",
-        "zend/zend-log1": "1.11",
-        "zend/zend-cache1": "1.11",
-        "zendframework/zend-loader": "2.0.*-dev",
-        "zendframework/zend-eventmanager": "2.0.*-dev",
-        "zendframework/zend-servicemanager": "2.0.*-dev",
-        "zendframework/zend-cache": "2.0.*-dev",
-        "zendframework/zend-log": "2.0.*-dev",
-        "zendframework/zend-stdlib": "2.0.*-dev",
-        "crodas/haanga": "dev-master",
-        "twig/twig": "dev-master",
-        "monolog/monolog": "1.*"
     },
     "repositories": [
         {

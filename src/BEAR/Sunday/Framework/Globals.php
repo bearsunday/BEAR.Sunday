@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Framework;
@@ -16,7 +16,7 @@ use BEAR\Resource\Exception\MethodNotAllowed;
  *
  * Emulates web $GLOBALS in CLI
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Framework
  */
 final class Globals extends ArrayObject

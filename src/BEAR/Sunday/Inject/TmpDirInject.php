@@ -7,6 +7,8 @@
  */
 namespace BEAR\Sunday\Inject;
 
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Inject tmp_dir

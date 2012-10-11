@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Inject;
 
 use Ray\Di\InjectorInterface as Di;
-
+use Ray\Di\Di\Inject;
 
 /**
  * Inject injector

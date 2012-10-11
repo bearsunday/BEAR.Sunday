@@ -10,7 +10,8 @@ namespace BEAR\Sunday\Module\TemplateEngine\SmartyModule;
 use Smarty;
 use BEAR\Sunday\Resource\View\TemplateEngineAdapter;
 use BEAR\Sunday\Exception\TemplateNotFound;
-
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Smarty adapter

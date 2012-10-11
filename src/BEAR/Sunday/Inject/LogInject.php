@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Inject;
 
 use Guzzle\Common\Log\LogAdapterInterface;
-
+use Ray\Di\Di\Inject;
 
 /**
  * Inject logger

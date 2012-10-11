@@ -9,7 +9,7 @@ namespace BEAR\Sunday\Inject;
 
 use Aura\Di\ConfigInterface;
 use Ray\Di\Config;
-
+use Ray\Di\Di\Inject;
 
 /**
  * Inject class definition

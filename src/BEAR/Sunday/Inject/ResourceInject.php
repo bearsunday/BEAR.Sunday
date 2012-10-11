@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Inject;
 
 use BEAR\Resource\ResourceInterface;
-
+use Ray\Di\Di\Inject;
 
 /**
  * Inject resource client

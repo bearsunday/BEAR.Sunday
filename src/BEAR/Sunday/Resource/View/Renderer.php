@@ -8,10 +8,10 @@
 namespace BEAR\Sunday\Resource\View;
 
 use BEAR\Resource\Renderable;
+use BEAR\Resource\AbstractObject;
 use BEAR\Sunday\Resource\View\TemplateEngineAdapter;
 use Ray\Aop\Weave;
 use ReflectionClass;
-
 
 /**
  * Request renderer

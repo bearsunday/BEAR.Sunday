@@ -9,6 +9,7 @@ namespace BEAR\Sunday\Application;
 
 use BEAR\Sunday\Application\AppContext;
 
+use Ray\Di\Di\ImplementedBy;
 
 /**
  * Interface for application logger

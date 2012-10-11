@@ -23,7 +23,7 @@ final class ResourceLogIterator extends IteratorIterator implements Fireable
     /**
      * Resource request
      *
-     * @var \BEAR\Resource\Request
+     * @var Request
      */
     private $request;
 

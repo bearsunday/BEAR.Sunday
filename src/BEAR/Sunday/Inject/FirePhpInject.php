@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Inject;
 
-
+use Ray\Di\Di\Inject;
 
 // @codingStandardsIgnoreFile
 /**

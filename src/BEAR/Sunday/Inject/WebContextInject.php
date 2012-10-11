@@ -9,7 +9,8 @@ namespace BEAR\Sunday\Inject;
 
 use Ray\Di\Definition;
 use Ray\Di\ProviderInterface as Provider;
-
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Inject web context

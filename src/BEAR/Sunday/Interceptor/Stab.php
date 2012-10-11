@@ -10,6 +10,8 @@ namespace BEAR\Sunday\Interceptor;
 use BEAR\Sunday\Inject\LogInject;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Cache interceptor interface

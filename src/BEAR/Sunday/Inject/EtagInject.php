@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Inject;
 
 use BEAR\Sunday\Resource\CacheControl\Taggable;
-
+use Ray\Di\Di\Inject;
 
 /**
  * Inject etag tagger
@@ -21,7 +21,7 @@ trait EtagInject
     /**
      * Definition
      *
-     * @var \BEAR\Sunday\Resource\CacheControl\Taggable
+     * @var Taggable
      */
     private $etag;
 

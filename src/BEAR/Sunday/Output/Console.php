@@ -11,7 +11,6 @@ use BEAR\Resource\Object as ResourceObject;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Guzzle\Parser\UriTemplate\UriTemplate;
 
-
 /**
  * Cli Output
  *

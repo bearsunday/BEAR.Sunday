@@ -8,6 +8,7 @@
 namespace BEAR\Sunday\Inject;
 
 use BEAR\Resource\Referable;
+use Ray\Di\Di\Inject;
 
 
 /**
@@ -31,7 +32,6 @@ trait AInject
      * @param Referable $a
      *
      * @return void
-     *
      * @Inject
      */
     public function setAnchor(Referable $a)

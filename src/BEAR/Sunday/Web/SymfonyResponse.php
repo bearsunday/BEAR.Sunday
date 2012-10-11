@@ -16,7 +16,8 @@ use BEAR\Resource\Object as ResourceObject;
 use BEAR\Sunday\Resource\AbstractPage as Page;
 use Symfony\Component\HttpFoundation\Response;
 use Ray\Aop\Weave;
-
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 use Exception;
 
 /**

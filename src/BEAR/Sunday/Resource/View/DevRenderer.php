@@ -19,7 +19,8 @@ use ReflectionObject;
 use DateTime;
 use DateInterval;
 use Traversable;
-
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Request renderer
@@ -112,7 +113,6 @@ class DevRenderer implements Renderable
     {
         if (PHP_SAPI === 'cli') {
             // delegate original method to avoid render dev html.
-            /** @noinspection PhpParamsInspection */
             return (new Renderer($this->templateEngineAdapter))->render($resourceObject);
         }
         // resource code editor

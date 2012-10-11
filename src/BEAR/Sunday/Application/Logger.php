@@ -9,7 +9,7 @@ namespace BEAR\Sunday\Application;
 
 use BEAR\Resource\LoggerInterface as ResourceLoggerInterface;
 use BEAR\Resource\Logger as ResourceLogger;
-
+use Ray\Di\Di\Inject;
 
 /**
  * Logger

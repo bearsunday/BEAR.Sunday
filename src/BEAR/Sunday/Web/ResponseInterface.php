@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Web;
 
 /**
- * Intarface for http response
+ * Interface for http response
  *
  * @package    BEAR.Sunday
  * @subpackage Web

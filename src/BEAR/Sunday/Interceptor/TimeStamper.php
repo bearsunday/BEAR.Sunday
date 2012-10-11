@@ -25,6 +25,7 @@ class TimeStamper implements MethodInterceptor
     public function invoke(MethodInvocation $invocation)
     {
         $object = $invocation->getThis();
+        /** @noinspection PhpUndefinedFieldInspection */
         $object->time = date("Y-m-d H:i:s", time());
         $result = $invocation->proceed();
 

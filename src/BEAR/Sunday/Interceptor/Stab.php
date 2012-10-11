@@ -12,7 +12,7 @@ use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 
 /**
- * Cache intercepor interface
+ * Cache interceptor interface
  *
  * @package    BEAR.Sunday
  * @subpackage Interceptor

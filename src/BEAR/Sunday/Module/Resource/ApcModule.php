@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Module\Resource;
 
 use Ray\Di\AbstractModule;
-use Ray\Di\Scope;
+
 
 /**
  * Resource cache APC module

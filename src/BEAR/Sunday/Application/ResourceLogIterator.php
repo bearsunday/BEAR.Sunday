@@ -23,7 +23,7 @@ final class ResourceLogIterator extends IteratorIterator implements Fireable
     /**
      * Resource request
      *
-     * @var BEAR\Resource\Request
+     * @var \BEAR\Resource\Request
      */
     private $request;
 
@@ -35,21 +35,11 @@ final class ResourceLogIterator extends IteratorIterator implements Fireable
     private $result;
 
     /**
-     * Return edited cutrent
+     * Return edited current
      */
     public function current()
     {
-        list($request, $result) = parent::current();
-        $this->request = $request;
-        $this->result = $result;
-
-        // request
-        $request = ($request instanceof Request) ? $request->toUri() : $request;
-
-        // result
-        if ($result instanceof Weaver) {
-            $result = $result->___getObject();
-        }
+        list($this->request, $this->result) = parent::current();
 
         return $this;
     }
@@ -71,7 +61,7 @@ final class ResourceLogIterator extends IteratorIterator implements Fireable
      *
      * @param  array   $body
      * @return unknown
-     * @todo scan all prop like print_o, then eliminate all resource/PDO/etc.. unserializable objects...not like this.
+     * @todo scan all prop like print_o, then eliminate all resource/PDO/etc.. unrealisable objects...not like this.
      */
     public function format(&$body)
     {

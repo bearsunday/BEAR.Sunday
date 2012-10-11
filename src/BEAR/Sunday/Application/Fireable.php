@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Application;
 
 /**
- * Interdace for web console log
+ * Interface for web console log
  *
  * @package BEAR.Sunday
  *

@@ -9,6 +9,7 @@ namespace BEAR\Sunday\Module;
 
 use Ray\Di\AbstractModule;
 
+
 /**
  * Scheme module
  *
@@ -25,8 +26,9 @@ class SchemeModule extends AbstractModule
     private $schemeProvider;
 
     /**
+     * Constructor
      *
-     * @param array $names
+     * @param string $schemeProvider provider class name
      */
     public function __construct($schemeProvider)
     {

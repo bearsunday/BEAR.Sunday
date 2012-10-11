@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Output;
 
-use Ray\Di\Di\ImplementedBy;
+
 
 /**
  * Interface for console output

@@ -7,12 +7,10 @@
  */
 namespace BEAR\Sunday\Module\Di;
 
-use BEAR\Sunday\Framework\Framework;
-
 use Ray\Di\Injector;
 use Ray\Di\InjectorInterface;
 use Ray\Di\AbstractModule;
-use Ray\Di\Scope;
+
 
 /**
  * Application module
@@ -27,7 +25,7 @@ class InjectorModule extends AbstractModule
     /**
      * Constructor
      *
-     * @param InjectorInterfacce $injector
+     * @param InjectorInterface $injector
      */
     public function __construct(InjectorInterface $injector)
     {

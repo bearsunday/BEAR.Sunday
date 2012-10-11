@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Resource\View;
 
 use BEAR\Resource\Link;
-use BEAR\Resource\Object as ResourceObject;
+use BEAR\Resource\AbstractObject;
 use BEAR\Resource\Requestable;
 use BEAR\Resource\Renderable;
 use Nocarrier\Hal;
@@ -25,7 +25,7 @@ class HalRenderer implements Renderable
      * (non-PHPdoc)
      * @see BEAR\Resource.Renderable::render()
      */
-    public function render(ResourceObject $ro)
+    public function render(AbstractObject $ro)
     {
         // evaluate all request in body.
         $isArrayAccess = is_array($ro->body) || $ro->body instanceof \Traversable;

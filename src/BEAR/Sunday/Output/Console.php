@@ -8,9 +8,9 @@
 namespace BEAR\Sunday\Output;
 
 use BEAR\Resource\Object as ResourceObject;
-use Ray\Di\Di\Inject;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Guzzle\Parser\UriTemplate\UriTemplate;
+
 
 /**
  * Cli Output
@@ -27,7 +27,7 @@ final class Console implements ConsoleInterface
     /**
      * Console output
      *
-     * @var Symfony\Component\Console\Output\ConsoleOutput
+     * @var \Symfony\Component\Console\Output\ConsoleOutput
      */
     private $console;
 
@@ -46,7 +46,7 @@ final class Console implements ConsoleInterface
 //     }
 
     /**
-     * Sennd CLI output
+     * Send CLI output
      *
      * @param ResourceObject $resource
      * @param \Exception     $e
@@ -77,7 +77,7 @@ final class Console implements ConsoleInterface
         // code
         $codeMsg = $label . $resource->code . ' ' . $statusText . $close . PHP_EOL;
         echo $codeMsg;
-        // hedaers
+        // headers
         if (0) {
             // prepared HTTP headers
             foreach ($resource->headers as $name => $values) {

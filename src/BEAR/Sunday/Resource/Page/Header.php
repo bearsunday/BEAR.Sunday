@@ -32,7 +32,7 @@ final class Header extends ArrayObject
      *
      * @return void
      */
-    public function outout()
+    public function output()
     {
         iterator_apply(
             $this->getIterator(),
@@ -47,7 +47,7 @@ final class Header extends ArrayObject
      *
      * @return void
      */
-    public function outoutAsString()
+    public function outputAsString()
     {
         iterator_apply(
             $this->getIterator(),

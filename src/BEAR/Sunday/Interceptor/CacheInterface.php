@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Interceptor;
 
 /**
- * Interface for cache intercepor
+ * Interface for cache interceptor
  *
  * @package    BEAR.Sunday
  * @subpackage Interceptor

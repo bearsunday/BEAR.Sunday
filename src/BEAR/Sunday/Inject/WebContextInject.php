@@ -9,8 +9,7 @@ namespace BEAR\Sunday\Inject;
 
 use Ray\Di\Definition;
 use Ray\Di\ProviderInterface as Provider;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
+
 
 /**
  * Inject web context
@@ -23,7 +22,7 @@ trait WebContextInject
     use DefinitionInject;
 
     /**
-     * @var Aura\Web\Context
+     * @var \Aura\Web\Context
      */
     protected $webContext;
 
@@ -43,7 +42,7 @@ trait WebContextInject
     }
 
     /**
-     * Set web contexxt provider
+     * Set web context provider
      *
      * @param Provider $contextProvider
      *

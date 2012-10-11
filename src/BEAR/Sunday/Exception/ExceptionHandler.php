@@ -17,9 +17,8 @@ use BEAR\Sunday\Resource\Page\Error;
 use BEAR\Sunday\Web\ResponseInterface;
 use BEAR\Sunday\Inject\LogDirInject;
 use Exception;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 use Ray\Di\Exception\Binding;
+
 
 /**
  * Exception handler

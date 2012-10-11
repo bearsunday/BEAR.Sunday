@@ -9,7 +9,7 @@ namespace BEAR\Sunday\Application;
 
 use BEAR\Resource\LoggerInterface as ResourceLoggerInterface;
 use BEAR\Resource\Logger as ResourceLogger;
-use Ray\Di\Di\Inject;
+
 
 /**
  * Logger
@@ -40,8 +40,8 @@ final class Logger implements LoggerInterface
     /**
      * (non-PHPdoc)
      * @see BEAR\Sunday\Application.LoggerInterface::log()
-     * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
      */
+    /** @noinspection PhpUnusedPrivateMethodInspection */
     private function logOnShutdown(AppContext $app)
     {
         $logs = new ResourceLogIterator($this->resourceLogger);

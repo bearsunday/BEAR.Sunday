@@ -25,7 +25,7 @@ class ResourceModule extends AbstractModule
     /**
      * Constructor
      *
-     * @param InjectorInterfacce $injector
+     * @param InjectorInterface $injector
      */
     public function __construct(InjectorInterface $injector)
     {

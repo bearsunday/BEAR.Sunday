@@ -12,8 +12,7 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use Ray\Di\ProviderInterface as Provide;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
+
 
 /**
  * Cache

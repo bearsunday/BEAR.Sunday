@@ -7,8 +7,6 @@
  */
 namespace BEAR\Sunday\Inject;
 
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 
 /**
  * Inject log dir
@@ -33,7 +31,7 @@ trait LogDirInject
      * @Inject
      * @Named("log_dir")
      */
-    public function setlogDir($logDir)
+    public function setLogDir($logDir)
     {
         $this->logDir = $logDir;
     }

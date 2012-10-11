@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Resource\CacheControl;
 
 /**
- * Intaface for tag
+ * Interface for tag
  *
  * @package BEAR.Sunday
  */

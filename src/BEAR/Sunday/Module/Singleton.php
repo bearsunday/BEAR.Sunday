@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Module;
 
 /**
- * Singleton traint
+ * Singleton trait
  *
  * @package    BEAR.Sunday
  * @subpackage Module

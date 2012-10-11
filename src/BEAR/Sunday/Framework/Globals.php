@@ -25,6 +25,9 @@ final class Globals extends ArrayObject
      * Constructor
      *
      * @param array $argv
+     *
+     * @throws BadRequest
+     * @throws MethodNotAllowed
      */
     public function __construct(array $argv)
     {

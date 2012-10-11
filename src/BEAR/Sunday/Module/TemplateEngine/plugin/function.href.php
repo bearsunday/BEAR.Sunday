@@ -32,7 +32,7 @@ use BEAR\Resource\Link;
  * Examples:
  * <pre>
  * {href rel="blog}
- * {href rel="entry" data=$resoirce->body}
+ * {href rel="entry" data=$resource->body}
  * </pre>
  *
  * @package BEAR.Sunday

@@ -8,8 +8,7 @@
 namespace BEAR\Sunday\Inject;
 
 use BEAR\Resource\Referable;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
+
 
 /**
  * Inject A(anchor)
@@ -22,12 +21,12 @@ trait AInject
     /**
      * App directory path
      *
-     * @var BEAR\Resource\A
+     * @var \BEAR\Resource\A
      */
     private $a;
 
     /**
-     * A(anchor) stter
+     * A(anchor) setter
      *
      * @param Referable $a
      *

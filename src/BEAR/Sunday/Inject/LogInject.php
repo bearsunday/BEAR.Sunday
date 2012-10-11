@@ -7,8 +7,8 @@
  */
 namespace BEAR\Sunday\Inject;
 
-use Ray\Di\Di\Inject;
 use Guzzle\Common\Log\LogAdapterInterface;
+
 
 /**
  * Inject logger
@@ -26,7 +26,7 @@ trait LogInject
     private $log;
 
     /**
-     * Logger stter
+     * Logger setter
      *
      * @param LogAdapterInterface $log
      *

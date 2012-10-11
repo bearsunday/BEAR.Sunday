@@ -7,13 +7,12 @@
  */
 namespace BEAR\Sunday\Module\TemplateEngine\SmartyModule;
 
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
-use BEAR\Sunday\Framework\Framework;
 use BEAR\Sunday\Inject\TmpDirInject;
 use BEAR\Sunday\Inject\AppDirInject;
 use Ray\Di\ProviderInterface as Provide;
 use Smarty;
+
+
 // @codingStandardsIgnoreFile
 
 /**

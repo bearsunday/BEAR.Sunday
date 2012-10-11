@@ -37,13 +37,6 @@ class Connection extends DbalConnection implements DriverConnection
     private $pageKey = '_start';
 
     /**
-     * Pager
-     *
-     * @var array
-     */
-    private $pager = [];
-
-    /**
      * Current page number
      *
      * @var int
@@ -127,6 +120,9 @@ class Connection extends DbalConnection implements DriverConnection
      * Set view
      *
      * @param ViewInterface $view
+     *
+     * @return \BEAR\Sunday\Module\Database\DoctrineDbalModule\Connection
+     * @return self
      */
     public function setView(ViewInterface $view)
     {

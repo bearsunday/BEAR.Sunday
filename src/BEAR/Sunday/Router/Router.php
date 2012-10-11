@@ -26,7 +26,7 @@ class Router
     /**
      * map
      *
-     * @var Aura\Router\Map;
+     * @var \Aura\Router\Map;
      */
     private $map;
 
@@ -54,7 +54,6 @@ class Router
     {
         $this->globals = $globals;
         $uri = $globals['_SERVER']['REQUEST_URI'];
-        $query = $globals['_GET'];
         $route = $this->map ? $this->map->match(parse_url($uri, PHP_URL_PATH), $globals['_SERVER']) : false;
         if ($route === false) {
             list($method, $query) = $this->getMethodQuery($globals);
@@ -76,22 +75,29 @@ class Router
     /**
      * Return request method
      *
-     * @return string
+     * @param $globals
+     *
+     * @return array
      */
     public function getMethodQuery($globals)
     {
         if ($globals['_SERVER']['REQUEST_METHOD'] === 'GET' && isset($globals['_GET'][self::METHOD_OVERRIDE_GET])) {
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $method = $globals['_GET'][self::METHOD_OVERRIDE_GET];
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $query = $globals['_GET'];
             goto complete;
         }
         if ($globals['_SERVER']['REQUEST_METHOD'] === 'POST' && isset($globals['_POST'][self::METHOD_OVERRIDE])) {
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $method = $globals['_POST'][self::METHOD_OVERRIDE];
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $query = $globals['_POST'];
             goto complete;
         }
         $method = $globals['_SERVER']['REQUEST_METHOD'] ;
         $query = $globals['_GET'];
+
         complete:
         $method = strtolower($method);
 

@@ -10,9 +10,7 @@ namespace BEAR\Sunday\Module\TemplateEngine\SmartyModule;
 use Smarty;
 use BEAR\Sunday\Resource\View\TemplateEngineAdapter;
 use BEAR\Sunday\Exception\TemplateNotFound;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
-use Ray\Di\Di\PostConstruct;
+
 
 /**
  * Smarty adapter
@@ -103,9 +101,9 @@ class SmartyAdapter implements TemplateEngineAdapter
      * (non-PHPdoc)
      * @see BEAR\Sunday\View.Render::fetch()
      */
-    public function fetch($tplWithoutExtention)
+    public function fetch($tplWithoutExtension)
     {
-        $this->template = $tplWithoutExtention . self::EXT;
+        $this->template = $tplWithoutExtension . self::EXT;
         $this->fileExists($this->template);
 
         return $this->smarty->fetch($this->template);

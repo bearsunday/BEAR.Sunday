@@ -7,10 +7,9 @@
  */
 namespace BEAR\Sunday\Framework;
 
-use BEAR\Resource\Resource;
 use BEAR\Sunday\Application\AppContext;
 use Aura\Autoload\Exception\NotReadable;
-
+use BEAR\Sunday\Exception;
 /**
  * Dispatcher
  *
@@ -43,6 +42,7 @@ class Dispatcher
      *
      * @return array [BEAR\Resource\ResourceInterface $resource, BEAR\Resource\Object $page]
      * @throws Exception\ResourceNotFound
+     * @throws \Exception
      */
     public function getInstance($uri)
     {
@@ -59,6 +59,7 @@ class Dispatcher
             try {
                 $page = $resource->newInstance($uri . 'index');
             } catch (NotReadable $e) {
+                /** @noinspection PhpParamsInspection */
                 throw new Exception\ResourceNotFound($uri, 404, $e);
             }
         } catch (\Exception $e) {

@@ -33,6 +33,7 @@ class DevToolModule extends AbstractModule
     /**
      * Provide debug information
      */
+    /** @noinspection PhpUnusedPrivateMethodInspection */
     private function installDevTool()
     {
         $this->bind('BEAR\Resource\InvokerInterface')->to('BEAR\Resource\DevInvoker');

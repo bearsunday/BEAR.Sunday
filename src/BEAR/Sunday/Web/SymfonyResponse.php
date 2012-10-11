@@ -11,17 +11,16 @@ use BEAR\Sunday\Exception\InvalidResourceType;
 use BEAR\Sunday\Inject\LogInject;
 use BEAR\Sunday\Application\LoggerInterface as AppLogger;
 use BEAR\Sunday\Output\ConsoleInterface;
-use BEAR\Resource\LoggerInterface;
 use BEAR\Resource\Logger;
 use BEAR\Resource\Object as ResourceObject;
 use BEAR\Sunday\Resource\AbstractPage as Page;
 use Symfony\Component\HttpFoundation\Response;
 use Ray\Aop\Weave;
-use Ray\Di\Di\Inject;
+
 use Exception;
 
 /**
- * Output with using symfony HttpFoundation
+ * Output with using Symfony HttpFoundation
  *
  * @package    BEAR.Sunday
  * @subpackage Web
@@ -63,7 +62,7 @@ final class SymfonyResponse implements ResponseInterface
     /**
      * Set application logger
      *
-     * @param Logger $logger
+     * @param \BEAR\Sunday\Application\LoggerInterface $appLogger
      *
      * @Inject
      */
@@ -73,7 +72,9 @@ final class SymfonyResponse implements ResponseInterface
     }
 
     /**
-     * @param BEAR\Sunday\Output\Cli $cliOutput
+     * Constructor
+     *
+     * @param ConsoleInterface $consoleOutput
      *
      * @Inject
      */
@@ -85,7 +86,7 @@ final class SymfonyResponse implements ResponseInterface
     /**
      * Set Resource
      *
-     * @param mixed $resource BEAR\Rsource\Object | Ray\Aop\Weaver $resource
+     * @param mixed $resource BEAR\Resource\Object | Ray\Aop\Weaver $resource
      *
      * @throws InvalidResourceType
      * @return \BEAR\Sunday\Web\SymfonyResponse
@@ -105,11 +106,12 @@ final class SymfonyResponse implements ResponseInterface
     }
 
     /**
-     * Set Excpection
+     * Set Exception
      *
-     * @param Exception $e
+     * @param \Exception $e
+     * @param int        $exceptionId
      *
-     * @return \BEAR\Sunday\Web\SymfonyResponse
+     * @return SymfonyResponse
      */
     public function setException(Exception $e, $exceptionId)
     {
@@ -124,16 +126,16 @@ final class SymfonyResponse implements ResponseInterface
     /**
      * Render
      *
-     * @param Callback $renderer
+     * @param Callable $renderer
      *
      * @return self
      */
-    public function render(Callback $renderer = null)
+    public function render(Callable $renderer = null)
     {
         if (is_callable($renderer)) {
             $this->view = $renderer($this->body);
         } else {
-            $this->view = (string) $this->resource;
+            $this->view = (string)$this->resource;
         }
 
         return $this;
@@ -146,7 +148,7 @@ final class SymfonyResponse implements ResponseInterface
      */
     public function prepare()
     {
-        $this->response = new Response($this->view, $this->resource->code, (array) $this->resource->headers);
+        $this->response = new Response($this->view, $this->resource->code, (array)$this->resource->headers);
         // compliant with RFC 2616.
         $this->response->prepare();
 
@@ -166,7 +168,7 @@ final class SymfonyResponse implements ResponseInterface
     }
 
     /**
-     * Transfer representational state to http client (or consoleoutput)
+     * Transfer representational state to http client (or console output)
      *
      * @return \BEAR\Sunday\Web\SymfonyResponse
      */

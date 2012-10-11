@@ -106,8 +106,8 @@ class PagingQuery implements Countable, IteratorAggregate
                 $count = $this->pdo->query($countQuery)->fetchColumn();
             }
         } else {
-            // GROUP BY => fetch the whole resultset and count the rows returned
-            $result = $db->fetchAll($query);
+            // GROUP BY => fetch the whole result set and count the rows returned
+            $result = $this->pdo->fetchAll($query);
             $count = count($result);
         }
 
@@ -128,13 +128,13 @@ class PagingQuery implements Countable, IteratorAggregate
         }
         $openParenthesis = '(?:\()';
         $closeParenthesis = '(?:\))';
-        $subqueryInSelect = $openParenthesis . '.*\bFROM\b.*' . $closeParenthesis;
-        $pattern = '/(?:.*' . $subqueryInSelect . '.*)\bFROM\b\s+/Uims';
+        $subQueryInSelect = $openParenthesis . '.*\bFROM\b.*' . $closeParenthesis;
+        $pattern = '/(?:.*' . $subQueryInSelect . '.*)\bFROM\b\s+/Uims';
         if (preg_match($pattern, $query)) {
             return false;
         }
-        $subqueryWithLimitOrder = $openParenthesis . '.*\b(LIMIT|ORDER)\b.*' . $closeParenthesis;
-        $pattern = '/.*\bFROM\b.*(?:.*' . $subqueryWithLimitOrder . '.*).*/Uims';
+        $subQueryWithLimitOrder = $openParenthesis . '.*\b(LIMIT|ORDER)\b.*' . $closeParenthesis;
+        $pattern = '/.*\bFROM\b.*(?:.*' . $subQueryWithLimitOrder . '.*).*/Uims';
         if (preg_match($pattern, $query)) {
             return false;
         }

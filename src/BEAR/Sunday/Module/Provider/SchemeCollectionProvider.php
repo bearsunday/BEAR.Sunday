@@ -10,11 +10,9 @@ namespace BEAR\Sunday\Module\Provider;
 use BEAR\Resource\Adapter\App;
 use BEAR\Resource\Adapter\Http;
 use BEAR\Resource\SchemeCollection;
-use BEAR\Sunday\Application\AbstractAppContext as AppContext;
 use Ray\Di\InjectorInterface as Di;
 use Ray\Di\ProviderInterface as Provide;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
+
 
 /**
  * Application resource module

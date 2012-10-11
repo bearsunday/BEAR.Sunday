@@ -7,10 +7,8 @@
  */
 namespace BEAR\Sunday\Module\Cqrs;
 
-use Ray\Di\Di\Inject;
 use Ray\Di\AbstractModule;
-use Ray\Di\InjectorInterface;
-use Guzzle\Common\Cache\CacheAdapterInterface;
+
 
 /**
  * Cache module
@@ -28,7 +26,7 @@ class CacheModule extends AbstractModule
     protected function configure()
     {
         $cacheLoader = $this->requestInjection('BEAR\Sunday\Interceptor\CacheLoader');
-        // bind @Cache annotatated method in any class
+        // bind @Cache annotated method in any class
         $this->bindInterceptor(
             $this->matcher->any(),
             $this->matcher->annotatedWith('BEAR\Sunday\Annotation\Cache'),

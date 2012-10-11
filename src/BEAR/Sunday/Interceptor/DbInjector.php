@@ -9,9 +9,8 @@ namespace BEAR\Sunday\Interceptor;
 use Doctrine\DBAL\DriverManager;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 use Doctrine\Common\Annotations\AnnotationReader as Reader;
+
 
 /**
  * Cache interceptor

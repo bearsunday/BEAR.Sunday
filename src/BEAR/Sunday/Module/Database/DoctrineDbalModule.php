@@ -7,7 +7,6 @@
  */
 namespace BEAR\Sunday\Module\Database;
 
-use Ray\Di\InjectorInterface;
 use Ray\Di\AbstractModule;
 use BEAR\Sunday\Interceptor\TimeStamper;
 use BEAR\Sunday\Interceptor\Transactional;

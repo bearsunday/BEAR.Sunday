@@ -5,8 +5,6 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-use BEAR\Sunday\Framework\Framework;
-
 $sec = number_format((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 2);
 $memory = number_format(memory_get_peak_usage(true));
 
@@ -88,7 +86,7 @@ EOT;
 if ($previousE) {
     $html .= <<<EOT
       <div class="alert alert-block alert-warning fade in">
-          <span class="badge badge-warning">Privious Exception</span>
+          <span class="badge badge-warning">Previous Exception</span>
         <a class="close" data-dismiss="alert" href="#">&times;</a>
         <h1 class="alert-heading">{$previousE['class']}</h1>
         <h2>{$previousE['message']}</h2>

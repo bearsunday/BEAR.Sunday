@@ -12,8 +12,7 @@ use Ray\Aop\MethodInvocation;
 use Guzzle\Common\Cache\CacheAdapterInterface;
 use ReflectionMethod;
 use BEAR\Sunday\Inject\EtagInject;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
+
 
 /**
  * Cache update interceptor

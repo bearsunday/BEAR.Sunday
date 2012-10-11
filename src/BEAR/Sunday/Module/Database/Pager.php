@@ -49,13 +49,6 @@ class Pager
     private $currentPage;
     private $routeGenerator;
 
-    /**
-     * Total number
-     *
-     * @var int
-     */
-    private $count;
-
     public function setMaxPerPage($maxPerPage)
     {
         $this->maxPerPage = $maxPerPage;
@@ -101,7 +94,8 @@ class Pager
     /**
      * Constructor
      *
-     * @param Pagerfanta $pagerfanta
+     * @param \Doctrine\DBAL\Driver\Connection $db
+     * @param \Pagerfanta\Pagerfanta           $pagerfanta
      */
     public function __construct(DriverConnection $db, Pagerfanta $pagerfanta)
     {

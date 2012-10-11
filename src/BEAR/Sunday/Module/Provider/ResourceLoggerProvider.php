@@ -9,8 +9,7 @@ namespace BEAR\Sunday\Module\Provider;
 
 use Ray\Di\ProviderInterface;
 use BEAR\Resource\LoggerInterface;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
+
 
 /**
  * Resource logger
@@ -34,9 +33,9 @@ class ResourceLoggerProvider implements ProviderInterface
     }
 
     /**
-     * Looger instance
+     * Logger instance
      *
-     * @var BEAR\Resource\Logger
+     * @var \BEAR\Resource\Logger
      */
     private static $instance;
 

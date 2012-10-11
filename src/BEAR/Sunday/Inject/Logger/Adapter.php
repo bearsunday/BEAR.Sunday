@@ -10,8 +10,7 @@ namespace BEAR\Sunday\Inject\Logger;
 use Ray\Di\LoggerInterface;
 use Ray\Aop\Bind;
 use BEAR\Sunday\Inject\LogInject;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
+
 
 /**
  * Cache interceptor
@@ -29,7 +28,7 @@ class Adapter implements LoggerInterface
      * @param string $class
      * @param array  $params
      * @param array  $setter
-     * @param objet  $object
+     * @param object $object
      * @param Bind   $bind
      *
      * @return void

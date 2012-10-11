@@ -7,8 +7,9 @@
  */
 namespace BEAR\Sunday\Inject;
 
-use Aura\Di\ConfigInterface as Config;
-use Ray\Di\Di\Inject;
+use Aura\Di\ConfigInterface;
+use Ray\Di\Config;
+
 
 /**
  * Inject class definition
@@ -22,12 +23,12 @@ trait DefinitionInject
     /**
      * Set definition
      *
-     * @param Config $config
+     * @param ConfigInterface $config
      *
      * @Inject
      */
-    public function setDefinition(Config $config)
+    public function setDefinition(ConfigInterface $config)
     {
-        $this->definition = $config->fetch(get_called_class())[2];
+        $this->definition = $config->fetch(get_called_class())[Config::INDEX_DEFINITION];
     }
 }

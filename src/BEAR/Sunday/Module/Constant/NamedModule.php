@@ -10,7 +10,7 @@ namespace BEAR\Sunday\Module\Constant;
 use Ray\Di\AbstractModule;
 
 /**
- * Constans 'Named' module
+ * Constants 'Named' module
  *
  * @package    BEAR.Sunday
  * @subpackage Module

@@ -7,11 +7,10 @@
  */
 namespace BEAR\Sunday\Module\Framework;
 
-use Aura\Autoload\Exception;
 use BEAR\Sunday\Module;
 use Ray\Di\Injector;
 use Ray\Di\AbstractModule;
-use Ray\Di\Scope;
+
 
 /**
  * Application module

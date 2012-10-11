@@ -40,7 +40,7 @@ final class Ok extends AbstractObject implements ResourceObject
     public $body = '';
 
     /**
-     * Counstructor
+     * Constructor
      */
     public function __construct()
     {

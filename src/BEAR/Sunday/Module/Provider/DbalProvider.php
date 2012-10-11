@@ -9,8 +9,6 @@ namespace BEAR\Sunday\Module\Provider;
 
 use Ray\Di\ProviderInterface as Provide;
 
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 
 /**
  * PDO provider
@@ -36,7 +34,7 @@ class DbalProvider implements Provide
     /**
      * Return instance
      *
-     * @return Doctrine\DBAL\Connection
+     * @return \Doctrine\DBAL\Connection
      */
     public function get()
     {

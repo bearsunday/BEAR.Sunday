@@ -41,7 +41,6 @@ final class Logger implements LoggerInterface
      * (non-PHPdoc)
      * @see BEAR\Sunday\Application.LoggerInterface::log()
      */
-    /** @noinspection PhpUnusedPrivateMethodInspection */
     private function logOnShutdown(AppContext $app)
     {
         $logs = new ResourceLogIterator($this->resourceLogger);

@@ -12,6 +12,7 @@ use BEAR\Resource\AbstractObject;
 use BEAR\Sunday\Resource\View\TemplateEngineAdapter;
 use Ray\Aop\Weave;
 use ReflectionClass;
+use Ray\Di\Di\Inject;
 
 /**
  * Request renderer

@@ -12,6 +12,7 @@ use BEAR\Sunday\Resource\View\TemplateEngineAdapter;
 use BEAR\Sunday\Exception\TemplateNotFound;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
+use Ray\Di\Di\PostConstruct;
 
 /**
  * Smarty adapter

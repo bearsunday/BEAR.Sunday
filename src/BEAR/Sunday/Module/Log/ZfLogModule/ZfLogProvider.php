@@ -10,9 +10,10 @@ namespace BEAR\Sunday\Module\Log\ZfLogModule;
 use BEAR\Sunday\Inject\LogDirInject;
 use Guzzle\Common\Log\Zf2LogAdapter;
 use Ray\Di\ProviderInterface as Provide;
-use Ray\Di\Di\Inject;
 use Zend\Log\Logger;
 use Zend\Log\Writer\Stream;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
 
 /**
  * Zend log provider

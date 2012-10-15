@@ -9,7 +9,6 @@ namespace BEAR\Sunday\Module;
 
 use Ray\Di\AbstractModule;
 
-
 /**
  * Scheme module
  *

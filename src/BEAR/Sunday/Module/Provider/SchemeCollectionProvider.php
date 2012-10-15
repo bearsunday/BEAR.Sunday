@@ -13,7 +13,6 @@ use BEAR\Resource\SchemeCollection;
 use Ray\Di\InjectorInterface as Di;
 use Ray\Di\ProviderInterface as Provide;
 
-
 /**
  * Application resource module
  *

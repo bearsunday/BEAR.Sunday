@@ -20,7 +20,6 @@ use Exception;
 use Ray\Di\Exception\Binding;
 
 use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 
 /**
  * Exception handler

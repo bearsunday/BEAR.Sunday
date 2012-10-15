@@ -1,10 +1,11 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace Sandbox\Annotation;
+namespace BEAR\Sunday\Annotation;
 
 /**
  * Form

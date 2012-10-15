@@ -101,7 +101,7 @@ class Pager
     {
         $this->db = $db;
 
-        $currentPage = $this->currentPage ?: (isset($_GET[$this->pageKey]) ? $_GET[$this->pageKey] : 1);
+        $currentPage = $this->currentPage ? : (isset($_GET[$this->pageKey]) ? $_GET[$this->pageKey] : 1);
         $this->firstResult = ($currentPage - 1) * $this->maxPerPage;
         $pagerfanta->setMaxPerPage($this->maxPerPage);
         $pagerfanta->setCurrentPage($currentPage, false, true);
@@ -125,8 +125,8 @@ class Pager
 
     private function getHtml(Pagerfanta $pagerfanta)
     {
-        $view = $this->view ?: new TwitterBootstrapView;
-        $routeGenerator = $this->routeGenerator ?: function ($page) {
+        $view = $this->view ? : new TwitterBootstrapView;
+        $routeGenerator = $this->routeGenerator ? : function ($page) {
             return "?{$this->pageKey}={$page}";
         };
         $html = $view->render(

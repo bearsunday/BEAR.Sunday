@@ -58,7 +58,7 @@ class CacheLoader implements MethodInterceptor
 
         $pager = (isset($_GET['_start'])) ? $_GET['_start'] : '';
         $saved = $this->cache->fetch($id);
-        $pager = (! $pager && isset($saved['pager']) ) ? 1 : $pager;
+        $pager = (!$pager && isset($saved['pager'])) ? 1 : $pager;
         if ($pager) {
             $pagered = (isset($saved['pager'][$pager])) ? $saved['pager'][$pager] : false;
         } else {

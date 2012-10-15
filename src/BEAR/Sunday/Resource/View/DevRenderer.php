@@ -128,7 +128,7 @@ class DevRenderer implements Renderable
         $templateFileBase = $dir . DIRECTORY_SEPARATOR . substr(basename($pageFile), 0, strlen(basename($pageFile)) - 3);
 
         // add tool bar
-        $resourceObject->view  = $body = $this->templateEngineAdapter->fetch($templateFileBase);
+        $resourceObject->view = $body = $this->templateEngineAdapter->fetch($templateFileBase);
         $body = $this->addJsDevToolLadingHtml($body);
         $templateFile = $this->templateEngineAdapter->getTemplateFile();
         $templateFile = $this->makeRelativePath($templateFile);
@@ -151,6 +151,7 @@ class DevRenderer implements Renderable
         $file = str_replace($this->sundayDir, '/vendor/bear/sunday', $file);
         return $file;
     }
+
     /**
      * Return JS install html for dev tool
      *
@@ -213,7 +214,7 @@ EOT;
         } else {
             $labelColor = self::READ_CACHE;
         }
-        $resourceName = ($resourceObject->uri ?: get_class($resourceObject));
+        $resourceName = ($resourceObject->uri ? : get_class($resourceObject));
 
         // code editor
         $codeFile = (new ReflectionObject($resourceObject))->getFileName();
@@ -270,7 +271,7 @@ EOT;
             return $body;
         }
         $isTraversable = (is_array($body) || $body instanceof Traversable);
-        if (! $isTraversable) {
+        if (!$isTraversable) {
             return '-';
         }
         array_walk_recursive(
@@ -348,6 +349,7 @@ EOT;
 
         return $result . '</div>';
     }
+
     /**
      * Return cache info
      *
@@ -368,7 +370,7 @@ EOT;
 
         $life = $cache['life'] ? "{$cache['life']} sec" : 'Unlimited';
         if ($cache['mode'] === 'W') {
-            $result .=  "Write {$iconLife} {$life}";
+            $result .= "Write {$iconLife} {$life}";
         } else {
             if ($cache['life'] === false) {
                 $time = $cache['date'];
@@ -394,7 +396,7 @@ EOT;
     private function getInterceptorInfo(ResourceObject $resourceObject)
     {
         $result = self::BADGE_INTERCEPTORS . self::DIV_WELL;
-        if (! isset($resourceObject->headers[DevInvoker::HEADER_INTERCEPTORS])) {
+        if (!isset($resourceObject->headers[DevInvoker::HEADER_INTERCEPTORS])) {
             return $result . 'n/a</div>';
         }
         $result .= '<ul class="unstyled">';
@@ -422,7 +424,7 @@ EOT;
     private function getProfileInfo(ResourceObject $resourceObject)
     {
         // memory, time
-        $result = self::BADGE_PROFILE  . self::DIV_WELL;
+        $result = self::BADGE_PROFILE . self::DIV_WELL;
         $time = number_format($resourceObject->headers[DevInvoker::HEADER_EXECUTION_TIME], 3);
         $memory = number_format($resourceObject->headers[DevInvoker::HEADER_MEMORY_USAGE]);
         $result .= <<<EOT

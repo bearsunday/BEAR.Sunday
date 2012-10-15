@@ -30,7 +30,7 @@ class PdoProvider extends AbstractSingletonProvider
     public function newInstance()
     {
         $dbFile = $this->tmpDir . 'demo01.sqlite3';
-        $instance = new PDO('sqlite:' .$dbFile, null, null);
+        $instance = new PDO('sqlite:' . $dbFile, null, null);
         $instance->query("CREATE TABLE User (Id INTEGER PRIMARY KEY, Name TEXT, Age INTEGER)");
 
         return $instance;

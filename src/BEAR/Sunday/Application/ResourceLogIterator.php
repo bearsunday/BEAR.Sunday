@@ -60,12 +60,13 @@ final class ResourceLogIterator extends IteratorIterator implements Fireable
      * Format log data
      *
      * @param  array   $body
+     *
      * @return unknown
      * @todo scan all prop like print_o, then eliminate all resource/PDO/etc.. unrealisable objects...not like this.
      */
     public function format(&$body)
     {
-        if (! (is_array($body) || $body instanceof Traversable)) {
+        if (!(is_array($body) || $body instanceof Traversable)) {
             return $body;
         }
         array_walk_recursive(
@@ -75,13 +76,13 @@ final class ResourceLogIterator extends IteratorIterator implements Fireable
                     $value = '(Request) ' . $value->toUri();
                 }
                 if ($value instanceof ResourceObject) {
-                    $value = '(ResourceObject) ' .  get_class($value) . json_encode($value->body);
+                    $value = '(ResourceObject) ' . get_class($value) . json_encode($value->body);
                 }
                 if ($value instanceof \PDO || $value instanceof \PDOStatement) {
-                    $value = '(PDO) ' .  get_class($value);
+                    $value = '(PDO) ' . get_class($value);
                 }
                 if ($value instanceof \Doctrine\DBAL\Connection) {
-                    $value = '(\Doctrine\DBAL\Connection) ' .  get_class($value);
+                    $value = '(\Doctrine\DBAL\Connection) ' . get_class($value);
                 }
                 if (is_resource($value)) {
                     $value = '(resource) ' . gettype($value);
@@ -136,14 +137,14 @@ final class ResourceLogIterator extends IteratorIterator implements Fireable
         // body
         $body = $this->format($this->result->body);
         $isTable = is_array($body)
-        && isset($body[0])
-        && isset($body[1])
-        && (array_keys($body[0]) === array_keys($body[1]));
+            && isset($body[0])
+            && isset($body[1])
+            && (array_keys($body[0]) === array_keys($body[1]));
         if ($isTable) {
             $table = [];
             $table[] = (array_values(array_keys($body[0])));
-            foreach ((array) $body as $val) {
-                $table[] = array_values((array) $val);
+            foreach ((array)$body as $val) {
+                $table[] = array_values((array)$val);
             }
             $this->firePhp->table('body', $table);
         } else {

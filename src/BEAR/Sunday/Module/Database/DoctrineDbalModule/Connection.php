@@ -67,11 +67,11 @@ class Connection extends DbalConnection implements DriverConnection
      */
     private $routeGenerator;
 
-   /**
-    * Pager library - pagerfanta
-    *
-    * @var Pagerfanta
-    */
+    /**
+     * Pager library - pagerfanta
+     *
+     * @var Pagerfanta
+     */
     private $pagerfanta;
 
     /**
@@ -166,7 +166,7 @@ class Connection extends DbalConnection implements DriverConnection
      */
     public function query()
     {
-        $this->currentPage = $this->currentPage ?: (isset($_GET[$this->pageKey]) ? $_GET[$this->pageKey] : 1);
+        $this->currentPage = $this->currentPage ? : (isset($_GET[$this->pageKey]) ? $_GET[$this->pageKey] : 1);
         $firstResult = ($this->currentPage - 1) * $this->maxPerPage;
         $args = func_get_args();
         $query = $args[0];
@@ -187,7 +187,7 @@ class Connection extends DbalConnection implements DriverConnection
     public function getPager()
     {
         // view
-        if (! $this->pagerfanta) {
+        if (!$this->pagerfanta) {
             return [];
         }
         $pager = [
@@ -209,8 +209,10 @@ class Connection extends DbalConnection implements DriverConnection
      */
     private function getHtml()
     {
-        $view = $this->view ?: new TwitterBootstrapView;
-        $routeGenerator = $this->routeGenerator ?: function ($page) { return "?{$this->pageKey}={$page}";};
+        $view = $this->view ? : new TwitterBootstrapView;
+        $routeGenerator = $this->routeGenerator ? : function ($page) {
+            return "?{$this->pageKey}={$page}";
+        };
         $html = $view->render(
             $this->pagerfanta,
             $routeGenerator,

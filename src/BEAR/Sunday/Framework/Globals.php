@@ -35,7 +35,7 @@ final class Globals extends ArrayObject
             throw new BadRequest('Usage: [get|post|put|delete] [uri]');
         }
         $isMethodAllowed = in_array($argv[1], ['get', 'post', 'put', 'delete', 'options']);
-        if (! $isMethodAllowed) {
+        if (!$isMethodAllowed) {
             throw new MethodNotAllowed($argv[1]);
         }
         $globals['_SERVER']['REQUEST_METHOD'] = $argv[1];

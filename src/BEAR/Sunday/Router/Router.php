@@ -95,7 +95,7 @@ class Router
             $query = $globals['_POST'];
             goto complete;
         }
-        $method = $globals['_SERVER']['REQUEST_METHOD'] ;
+        $method = $globals['_SERVER']['REQUEST_METHOD'];
         $query = $globals['_GET'];
 
         complete:

@@ -120,7 +120,7 @@ class SmartyAdapter implements TemplateEngineAdapter
      */
     private function fileExists($template)
     {
-        if (! file_exists($template)) {
+        if (!file_exists($template)) {
             throw new TemplateNotFound($template);
         }
     }

@@ -25,7 +25,7 @@ class MonologModule extends AbstractModule
     protected function configure()
     {
         $this
-        ->bind('Guzzle\Common\Log\LogAdapterInterface')
-        ->toProvider('BEAR\Sunday\Module\Log\MonologModule\MonologProvider');
+            ->bind('Guzzle\Common\Log\LogAdapterInterface')
+            ->toProvider('BEAR\Sunday\Module\Log\MonologModule\MonologProvider');
     }
 }

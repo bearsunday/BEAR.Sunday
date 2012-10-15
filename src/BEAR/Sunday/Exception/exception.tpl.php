@@ -12,16 +12,16 @@ $systemRoot = dirname(dirname(dirname(dirname(__DIR__))));
 
 $exceptionInfo = function (\Exception $e) use ($systemRoot) {
     return [
-    'message' => $e->getMessage(),
-    'traceString' => $e->getTraceAsString(),
-    'traceRaw' => 'n/a', //print_r($e->getTrace(), true),
-    'file' => $e->getFile(),
-    'href' => '/_dev/edit/index.php?file=' . str_replace($systemRoot, '', $e->getFile()) . '&line=' . $e->getLine(),
-    'title' => $e->getFile() . ':' . $e->getLine(),
-    'line' => $e->getLine(),
-    'fileContents' => htmlspecialchars(trim(file_get_contents($e->getFile()))),
-    'class' => get_class($e),
-    'trace' => $e->getTrace()
+        'message' => $e->getMessage(),
+        'traceString' => $e->getTraceAsString(),
+        'traceRaw' => 'n/a', //print_r($e->getTrace(), true),
+        'file' => $e->getFile(),
+        'href' => '/_dev/edit/index.php?file=' . str_replace($systemRoot, '', $e->getFile()) . '&line=' . $e->getLine(),
+        'title' => $e->getFile() . ':' . $e->getLine(),
+        'line' => $e->getLine(),
+        'fileContents' => htmlspecialchars(trim(file_get_contents($e->getFile()))),
+        'class' => get_class($e),
+        'trace' => $e->getTrace()
     ];
 };
 $exception = $exceptionInfo($e);
@@ -114,8 +114,8 @@ $html .= <<<EOT
 EOT;
 foreach ($exception['trace'] as $trace) {
     if (isset($trace['file'])) {
-        $file =  $trace['file'];
-        $line =  $trace['line'];
+        $file = $trace['file'];
+        $line = $trace['line'];
         $editFile = str_replace($systemRoot, '', $file);
         $html .= "<a target=\"code_edit\" href=\"/_dev/edit/index.php?file={$editFile}&line={$line}\">{$file}  : {$trace['line']} <span class=\"icon-share-alt\"></span></a><br>";
     }

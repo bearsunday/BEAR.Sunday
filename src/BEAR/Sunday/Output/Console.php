@@ -20,8 +20,8 @@ use Guzzle\Parser\UriTemplate\UriTemplate;
 final class Console implements ConsoleInterface
 {
     const MODE_REQUEST = 'request';
-    const MODE_VIEW    = 'view';
-    const MODE_VALUE   = 'value';
+    const MODE_VIEW = 'view';
+    const MODE_VALUE = 'value';
 
     /**
      * Console output
@@ -64,7 +64,7 @@ final class Console implements ConsoleInterface
             $consoleOutput->writeln(
                 [
                     '',
-                    (new Formatter)->formatBlock(get_class($e). ': ' . $msg, 'bg=red;fg=white', true),
+                    (new Formatter)->formatBlock(get_class($e) . ': ' . $msg, 'bg=red;fg=white', true),
                     '',
                 ]
             );
@@ -101,7 +101,7 @@ final class Console implements ConsoleInterface
             goto complete;
         }
         $isTraversable = is_array($resource->body) || $resource->body instanceof \Traversable;
-        if (! $isTraversable) {
+        if (!$isTraversable) {
             $resource->body;
             goto complete;
         }
@@ -109,7 +109,7 @@ final class Console implements ConsoleInterface
             if ($body instanceof \BEAR\Resource\Request) {
                 switch ($mode) {
                     case self::MODE_REQUEST:
-                        $body = "{$label2}" . $body->toUri() .$close;
+                        $body = "{$label2}" . $body->toUri() . $close;
                         break;
                     case self::MODE_VALUE:
                         $value = $body();
@@ -117,13 +117,13 @@ final class Console implements ConsoleInterface
                         break;
                     case self::MODE_VIEW:
                     default:
-                        $body = (string) $body . " {$label2}" . $body->toUri() . $close;
+                        $body = (string)$body . " {$label2}" . $body->toUri() . $close;
                         break;
 
                 }
             }
             $body = is_array($body) ? var_export($body, true) : $body;
-            echo "{$label1}{$key}{$close}:" . $body. PHP_EOL;
+            echo "{$label1}{$key}{$close}:" . $body . PHP_EOL;
         }
 
         // @codingStandardsIgnoreStart

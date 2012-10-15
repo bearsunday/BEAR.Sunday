@@ -48,7 +48,7 @@ class PagingQuery implements Countable, IteratorAggregate
      */
     public function count()
     {
-        if (! is_null($this->count)) {
+        if (!is_null($this->count)) {
             return $this->count;
         }
         $this->count = $this->getCountNum($this->query, $this->params);
@@ -111,7 +111,7 @@ class PagingQuery implements Countable, IteratorAggregate
             $count = count($result);
         }
 
-        return (integer) $count;
+        return (integer)$count;
     }
 
     /**
@@ -139,8 +139,8 @@ class PagingQuery implements Countable, IteratorAggregate
             return false;
         }
         $queryCount = preg_replace('/(?:.*)\bFROM\b\s+/Uims', 'SELECT COUNT(*) FROM ', $query, 1);
-        list($queryCount, ) = preg_split('/\s+ORDER\s+BY\s+/is', $queryCount);
-        list($queryCount, ) = preg_split('/\bLIMIT\b/is', $queryCount);
+        list($queryCount,) = preg_split('/\s+ORDER\s+BY\s+/is', $queryCount);
+        list($queryCount,) = preg_split('/\bLIMIT\b/is', $queryCount);
 
         return trim($queryCount);
     }

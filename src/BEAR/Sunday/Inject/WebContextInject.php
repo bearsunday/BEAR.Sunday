@@ -34,7 +34,7 @@ trait WebContextInject
     {
         parent::__wakeup();
         $annotations = $this->definition[Definition::BY_NAME];
-        if (! isset($annotations['WakeUp'])) {
+        if (!isset($annotations['WakeUp'])) {
             return;
         }
         foreach ($annotations['WakeUp'] as $method) {

@@ -57,7 +57,7 @@ class Renderer implements Renderable
 
         // assign all
         if (is_array($resourceObject->body) || $resourceObject->body instanceof \Traversable) {
-            $this->templateEngineAdapter->assignAll((array) $resourceObject->body);
+            $this->templateEngineAdapter->assignAll((array)$resourceObject->body);
         }
         $templateFileWithoutExtension = substr($file, 0, -3);
         $resourceObject->view = $this->templateEngineAdapter->fetch($templateFileWithoutExtension);

@@ -16,7 +16,7 @@ use Ray\Di\Di\Named;
  * Resource logger
  *
  * @package BEAR.Sunday
- * @see https://github.com/auraphp/Aura.Web.git
+ * @see     https://github.com/auraphp/Aura.Web.git
  */
 class ResourceLoggerProvider implements ProviderInterface
 {
@@ -47,7 +47,7 @@ class ResourceLoggerProvider implements ProviderInterface
      */
     public function get()
     {
-        if (! self::$instance) {
+        if (!self::$instance) {
             self::$instance = $this->logger;
         }
 

@@ -12,7 +12,7 @@ use BEAR\Resource\Link;
 /**
  * Smarty plugin
  *
- * @package Smarty
+ * @package    Smarty
  * @subpackage PluginsFunction
  */
 
@@ -60,9 +60,9 @@ function smarty_function_href($params, $template)
     $data = (isset($params['data'])) ? $params['data'] : $template->smarty->tpl_vars['resource']->value->body;
     $resource = $template->smarty->tpl_vars['resource']->value;
     $link = $resource->links[$rel];
-    if (isset($link[Link::TEMPLATED]) &&  $link[Link::TEMPLATED] === true) {
+    if (isset($link[Link::TEMPLATED]) && $link[Link::TEMPLATED] === true) {
         // get expanded url
-        $uri = (new UriTemplate)->expand($link[Link::HREF], (array) $data);
+        $uri = (new UriTemplate)->expand($link[Link::HREF], (array)$data);
     } else {
         $uri = $link[Link::HREF];
     }

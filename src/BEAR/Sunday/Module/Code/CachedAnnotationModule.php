@@ -25,7 +25,7 @@ class CachedAnnotationModule extends AbstractModule
     protected function configure()
     {
         $this
-        ->bind('Doctrine\Common\Annotations\Reader')
-        ->toProvider('BEAR\Sunday\Module\Provider\CachedReaderProvider');
+            ->bind('Doctrine\Common\Annotations\Reader')
+            ->toProvider('BEAR\Sunday\Module\Provider\CachedReaderProvider');
     }
 }

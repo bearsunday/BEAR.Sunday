@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Application;
 
-use BEAR\Sunday\Application\AppContext;
+use BEAR\Sunday\Application\Context;
 
 use Ray\Di\Di\ImplementedBy;
 
@@ -23,7 +23,7 @@ interface LoggerInterface
     /**
      * Register log function on shutdown
      *
-     * @param AppContext $app
+     * @param Context $app
      */
-    public function register(AppContext $app);
+    public function register(Context $app);
 }

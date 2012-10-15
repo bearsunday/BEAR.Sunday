@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Framework;
 
-use BEAR\Sunday\Application\AppContext;
+use BEAR\Sunday\Application\Context;
 use Aura\Autoload\Exception\NotReadable;
 use BEAR\Sunday\Exception;
 
@@ -22,16 +22,16 @@ class Dispatcher
     /**
      * Application context
      *
-     * @var AppContext
+     * @var Context
      */
     private $app;
 
     /**
      * Constructor
      *
-     * @param AppContext $app
+     * @param Context $app
      */
-    public function __construct(AppContext $app)
+    public function __construct(Context $app)
     {
         $this->app = $app;
     }

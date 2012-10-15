@@ -41,7 +41,7 @@ final class Logger implements LoggerInterface
      * (non-PHPdoc)
      * @see BEAR\Sunday\Application.LoggerInterface::log()
      */
-    private function logOnShutdown(AppContext $app)
+    private function logOnShutdown(Context $app)
     {
         $logs = new ResourceLogIterator($this->resourceLogger);
         foreach ($logs as $log) {
@@ -57,7 +57,7 @@ final class Logger implements LoggerInterface
      * (non-PHPdoc)
      * @see BEAR\Sunday\Application.LoggerInterface::register()
      */
-    public function register(AppContext $app)
+    public function register(Context $app)
     {
         register_shutdown_function(
             function () use ($app) {

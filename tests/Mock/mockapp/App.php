@@ -6,14 +6,14 @@
  */
 namespace mockapp;
 
-use BEAR\Sunday\Application\AbstractAppContext as AppContext;
+use BEAR\Sunday\Application\Context;
 
 /**
  * Applicaton
  *
  * @package App.appmock
  */
-final class App extends AppContext
+final class App implements Context
 {
     public $name = __NAMESPACE__;
     public $path = __DIR__;

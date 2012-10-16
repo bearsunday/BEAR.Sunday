@@ -25,3 +25,4 @@ final class Cache implements Annotation
      */
     public $time = false;
 }
+

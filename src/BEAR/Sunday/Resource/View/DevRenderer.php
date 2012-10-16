@@ -295,11 +295,11 @@ EOT;
     /**
      * Return resource meta info
      *
-     * @param ResourceObject $resourceObject
+     * @param AbstractObject $resourceObject
      *
      * @return string
      */
-    private function getResourceInfo(ResourceObject $resourceObject)
+    private function getResourceInfo(AbstractObject $resourceObject)
     {
         $info = $this->getParamsInfo($resourceObject);
         $info .= $this->getInterceptorInfo($resourceObject);
@@ -312,12 +312,12 @@ EOT;
     /**
      * Return method invocation arguments info
      *
-     * @param ResourceObject $resourceObject
+     * @param AbstractObject $resourceObject
      *
      * @return string
      * @return string
      */
-    private function getParamsInfo(ResourceObject $resourceObject)
+    private function getParamsInfo(AbstractObject $resourceObject)
     {
         $result = self::BADGE_ARGS . self::DIV_WELL;
         if (isset($resourceObject->headers[DevInvoker::HEADER_PARAMS])) {

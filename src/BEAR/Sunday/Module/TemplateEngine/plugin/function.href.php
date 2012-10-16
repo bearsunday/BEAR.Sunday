@@ -47,13 +47,11 @@ function smarty_function_href($params, $template)
 {
     if (empty($params['rel'])) {
         trigger_error("href: missing 'rel' parameter", E_USER_WARNING);
-
-        return;
+        return '';
     }
     if (empty($template->smarty->tpl_vars['resource']->value->links[$params['rel']])) {
         trigger_error("href: links needs {$params['rel']} parameter", E_USER_WARNING);
-
-        return;
+        return '';
     }
 
     $rel = $params['rel'];
@@ -69,6 +67,5 @@ function smarty_function_href($params, $template)
 
     // remove "page://self/"
     $uri = str_replace('page://self/', '/', $uri);
-
     return $uri;
 }

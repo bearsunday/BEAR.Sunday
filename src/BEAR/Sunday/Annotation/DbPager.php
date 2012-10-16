@@ -25,3 +25,4 @@ final class DbPager implements Annotation
      */
     public $limit = 10;
 }
+

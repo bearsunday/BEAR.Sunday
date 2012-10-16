@@ -19,3 +19,4 @@ namespace BEAR\Sunday\Annotation;
 final class Transactional implements Annotation
 {
 }
+

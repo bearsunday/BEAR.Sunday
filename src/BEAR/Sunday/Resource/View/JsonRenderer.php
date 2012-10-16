@@ -32,6 +32,7 @@ class JsonRenderer implements Renderable
                 $ro->body,
                 function (&$element) {
                     if ($element instanceof Requestable) {
+                        /** @var $element Callable */
                         $element = $element();
                     }
                 }
@@ -42,3 +43,4 @@ class JsonRenderer implements Renderable
         return $ro->view;
     }
 }
+

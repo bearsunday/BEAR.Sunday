@@ -40,6 +40,7 @@ final class Logger implements LoggerInterface
     /**
      * (non-PHPdoc)
      * @see BEAR\Sunday\Application.LoggerInterface::log()
+     * @noinspection PhpUnusedPrivateMethodInspection
      */
     private function logOnShutdown(Context $app)
     {
@@ -62,6 +63,7 @@ final class Logger implements LoggerInterface
         register_shutdown_function(
             function () use ($app) {
                 $onShutdownLog = [$this, 'logOnShutdown'];
+                /** @var $onShutdownLog Callable */
                 $onShutdownLog($app);
             }
         );

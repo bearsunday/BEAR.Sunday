@@ -35,7 +35,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
     /**
      * Response
      *
-     * @var \BEAR\Sunday\Web\ResponseInterface
+     * @var ResponseInterface
      */
     private $response;
 

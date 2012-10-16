@@ -142,7 +142,7 @@ final class SymfonyResponse implements ResponseInterface
     }
 
     /**
-     * Make responce object with RFC 2616 compliant HTTP header
+     * Make response object with RFC 2616 compliant HTTP header
      *
      * @return \BEAR\Sunday\Web\SymfonyResponse
      */

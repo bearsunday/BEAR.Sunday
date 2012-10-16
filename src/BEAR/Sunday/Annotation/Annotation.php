@@ -15,3 +15,4 @@ namespace BEAR\Sunday\Annotation;
 interface Annotation
 {
 }
+

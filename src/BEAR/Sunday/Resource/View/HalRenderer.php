@@ -34,6 +34,7 @@ class HalRenderer implements Renderable
                 $ro->body,
                 function (&$element) {
                     if ($element instanceof Requestable) {
+                        /** @var $element Callable */
                         $element = $element();
                     }
                 }

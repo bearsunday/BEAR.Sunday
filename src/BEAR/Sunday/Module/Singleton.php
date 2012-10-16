@@ -16,6 +16,13 @@ namespace BEAR\Sunday\Module;
 trait Singleton
 {
     /**
+     * New instance
+     *
+     * @return mixed
+     */
+    abstract function newInstance();
+
+    /**
      * Return singleton instance
      *
      * @return object

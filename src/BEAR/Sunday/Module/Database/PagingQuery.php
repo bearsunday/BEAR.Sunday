@@ -29,6 +29,20 @@ class PagingQuery implements Countable, IteratorAggregate
     private $count;
 
     /**
+     * Page offset
+     *
+     * @var int
+     */
+    private $offset;
+
+    /**
+     * Page length
+     *
+     * @var int
+     */
+    private $length;
+
+    /**
      * Constructor
      *
      * @param DriverConnection $db
@@ -57,12 +71,24 @@ class PagingQuery implements Countable, IteratorAggregate
     }
 
     /**
+     * Set offset, length
+     *
+     * @param int $offset
+     * @param int $length
+     */
+    public function setOffsetLength($offset, $length)
+    {
+        $this->offset = $offset;
+        $this->length = $length;
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function getIterator($offset, $length)
+    public function getIterator()
     {
         $pdo = $this->db->getWrappedConnection();
-        $query = $this->getPagerSql($offset, $length);
+        $query = $this->getPagerSql($this->offset, $this->length);
         if ($this->params) {
             $result = $pdo->prepare($query)->execute($this->params)->fetchColumn();
         } else {
@@ -82,6 +108,8 @@ class PagingQuery implements Countable, IteratorAggregate
      */
     public function getPagerSql($offset, $length)
     {
+        var_dump($offset);
+        debug_print_backtrace();
         $query = $this->db->getDatabasePlatform()->modifyLimitQuery($this->query, $length, $offset);
 
         return $query;

@@ -13,7 +13,7 @@ use Pagerfanta\View\ViewInterface;
 use Pagerfanta\View\TwitterBootstrapView;
 
 /**
- * Paging Query
+ * Paging query
  *
  * @package    BEAR.Sunday
  * @subpackage Module
@@ -49,6 +49,11 @@ class Pager
     private $currentPage;
     private $routeGenerator;
 
+    /**
+     * @param $maxPerPage
+     *
+     * @return Pager
+     */
     public function setMaxPerPage($maxPerPage)
     {
         $this->maxPerPage = $maxPerPage;
@@ -56,6 +61,11 @@ class Pager
         return $this;
     }
 
+    /**
+     * @param $pageKey
+     *
+     * @return Pager
+     */
     public function setPageKey($pageKey)
     {
         $this->pageKey = $pageKey;
@@ -63,6 +73,11 @@ class Pager
         return $this;
     }
 
+    /**
+     * @param $currentPage
+     *
+     * @return Pager
+     */
     public function setCurrentPage($currentPage)
     {
         $this->currentPage = $currentPage;
@@ -70,6 +85,11 @@ class Pager
         return $this;
     }
 
+    /**
+     * @param \Pagerfanta\View\ViewInterface $view
+     *
+     * @return Pager
+     */
     public function setView(ViewInterface $view)
     {
         $this->view = $view;
@@ -77,6 +97,11 @@ class Pager
         return $this;
     }
 
+    /**
+     * @param $routeGenerator
+     *
+     * @return Pager
+     */
     public function setRouteGenerator(Callable $routeGenerator)
     {
         $this->routeGenerator = $routeGenerator;
@@ -84,6 +109,12 @@ class Pager
         return $this;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     *
+     * @return Pager
+     */
     public function setViewOption($key, $value)
     {
         $this->viewOptions[$key] = $value;
@@ -116,6 +147,13 @@ class Pager
         ];
     }
 
+    /**
+     * Return pagered query result
+     *
+     * @param $query
+     *
+     * @return mixed
+     */
     public function getPagerQuery($query)
     {
         $pagerQuery = $this->db->getDatabasePlatform()->modifyLimitQuery($query, $this->maxPerPage, $this->firstResult);
@@ -123,6 +161,13 @@ class Pager
         return $pagerQuery;
     }
 
+    /**
+     * Return paging html
+     *
+     * @param \Pagerfanta\Pagerfanta $pagerfanta
+     *
+     * @return string
+     */
     private function getHtml(Pagerfanta $pagerfanta)
     {
         $view = $this->view ? : new TwitterBootstrapView;

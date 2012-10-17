@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Interceptor;
@@ -10,11 +10,12 @@ namespace BEAR\Sunday\Interceptor;
 use BEAR\Sunday\Inject\LogInject;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
+use Ray\Di\Di\Inject;
 
 /**
- * Cache intercepor interface
+ * Cache interceptor interface
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Interceptor
  */
 class Stab implements MethodInterceptor

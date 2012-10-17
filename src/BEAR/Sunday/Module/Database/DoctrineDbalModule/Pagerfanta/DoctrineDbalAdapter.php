@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module\Database\DoctrineDbalModule\Pagerfanta;
@@ -14,7 +14,7 @@ use BEAR\Sunday\Module\Database\PagingQuery;
 /**
  * DoctrineDbal adapter.
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Module
  */
 class DoctrineDbalAdapter implements AdapterInterface
@@ -43,7 +43,8 @@ class DoctrineDbalAdapter implements AdapterInterface
      */
     public function getSlice($offset, $length)
     {
-        $iterator = $this->query->getIterator($offset, $length);
+        $this->query->setOffsetLength($offset, $length);
+        $iterator = $this->query->getIterator();
 
         return $iterator;
     }

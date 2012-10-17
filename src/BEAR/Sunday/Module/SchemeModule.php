@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module;
@@ -12,7 +12,7 @@ use Ray\Di\AbstractModule;
 /**
  * Scheme module
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Module
  */
 class SchemeModule extends AbstractModule
@@ -25,8 +25,9 @@ class SchemeModule extends AbstractModule
     private $schemeProvider;
 
     /**
+     * Constructor
      *
-     * @param array $names
+     * @param string $schemeProvider provider class name
      */
     public function __construct($schemeProvider)
     {

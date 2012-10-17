@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module\Provider;
@@ -15,7 +15,7 @@ use PDO;
 /**
  * PDO provider
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Module
  */
 class PdoProvider extends AbstractSingletonProvider
@@ -29,8 +29,8 @@ class PdoProvider extends AbstractSingletonProvider
      */
     public function newInstance()
     {
-        $dbfile = $this->tmpDir . 'demo01.sqlite3';
-        $instance = new PDO('sqlite:' .$dbfile, null, null);
+        $dbFile = $this->tmpDir . 'demo01.sqlite3';
+        $instance = new PDO('sqlite:' . $dbFile, null, null);
         $instance->query("CREATE TABLE User (Id INTEGER PRIMARY KEY, Name TEXT, Age INTEGER)");
 
         return $instance;

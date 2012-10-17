@@ -1,19 +1,20 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module\TemplateEngine\SmartyModule;
 
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
-use BEAR\Sunday\Framework\Framework;
 use BEAR\Sunday\Inject\TmpDirInject;
 use BEAR\Sunday\Inject\AppDirInject;
 use Ray\Di\ProviderInterface as Provide;
 use Smarty;
+use Ray\Di\Di\Inject;
+use Ray\Di\Di\Named;
+
+
 // @codingStandardsIgnoreFile
 
 /**

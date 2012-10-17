@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Module\Provider as Provide;
+namespace BEAR\Sunday\Module\Provider;
 
 use BEAR\Sunday\Inject\TmpDirInject;
 
@@ -19,7 +19,7 @@ class TwigProvider implements Provide
     use TmpDirInject;
 
     /**
-     * Return twig instace
+     * Return twig instance
      *
      * @return Twig_Environment
      */

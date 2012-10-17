@@ -1,19 +1,19 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Inject;
 
-use Ray\Di\Di\Inject;
 use Guzzle\Common\Log\LogAdapterInterface;
+use Ray\Di\Di\Inject;
 
 /**
  * Inject logger
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Inject
  */
 trait LogInject
@@ -26,7 +26,7 @@ trait LogInject
     private $log;
 
     /**
-     * Logger stter
+     * Logger setter
      *
      * @param LogAdapterInterface $log
      *

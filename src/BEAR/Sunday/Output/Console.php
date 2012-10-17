@@ -1,33 +1,32 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Output;
 
 use BEAR\Resource\Object as ResourceObject;
-use Ray\Di\Di\Inject;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Guzzle\Parser\UriTemplate\UriTemplate;
 
 /**
  * Cli Output
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Web
  */
 final class Console implements ConsoleInterface
 {
     const MODE_REQUEST = 'request';
-    const MODE_VIEW    = 'view';
-    const MODE_VALUE   = 'value';
+    const MODE_VIEW = 'view';
+    const MODE_VALUE = 'value';
 
     /**
      * Console output
      *
-     * @var Symfony\Component\Console\Output\ConsoleOutput
+     * @var \Symfony\Component\Console\Output\ConsoleOutput
      */
     private $console;
 
@@ -46,7 +45,7 @@ final class Console implements ConsoleInterface
 //     }
 
     /**
-     * Sennd CLI output
+     * Send CLI output
      *
      * @param ResourceObject $resource
      * @param \Exception     $e
@@ -65,7 +64,7 @@ final class Console implements ConsoleInterface
             $consoleOutput->writeln(
                 [
                     '',
-                    (new Formatter)->formatBlock(get_class($e). ': ' . $msg, 'bg=red;fg=white', true),
+                    (new Formatter)->formatBlock(get_class($e) . ': ' . $msg, 'bg=red;fg=white', true),
                     '',
                 ]
             );
@@ -73,12 +72,11 @@ final class Console implements ConsoleInterface
         $label = "\033[1;32m";
         $label1 = "\033[1;33m";
         $label2 = "\e[4;30m";
-        $label3 = "\e[0;36m";
         $close = "\033[0m";
         // code
         $codeMsg = $label . $resource->code . ' ' . $statusText . $close . PHP_EOL;
         echo $codeMsg;
-        // hedaers
+        // headers
         if (0) {
             // prepared HTTP headers
             foreach ($resource->headers as $name => $values) {
@@ -103,7 +101,7 @@ final class Console implements ConsoleInterface
             goto complete;
         }
         $isTraversable = is_array($resource->body) || $resource->body instanceof \Traversable;
-        if (! $isTraversable) {
+        if (!$isTraversable) {
             $resource->body;
             goto complete;
         }
@@ -111,7 +109,7 @@ final class Console implements ConsoleInterface
             if ($body instanceof \BEAR\Resource\Request) {
                 switch ($mode) {
                     case self::MODE_REQUEST:
-                        $body = "{$label2}" . $body->toUri() .$close;
+                        $body = "{$label2}" . $body->toUri() . $close;
                         break;
                     case self::MODE_VALUE:
                         $value = $body();
@@ -119,13 +117,13 @@ final class Console implements ConsoleInterface
                         break;
                     case self::MODE_VIEW:
                     default:
-                        $body = (string) $body . " {$label2}" . $body->toUri() . $close;
+                        $body = (string)$body . " {$label2}" . $body->toUri() . $close;
                         break;
 
                 }
             }
             $body = is_array($body) ? var_export($body, true) : $body;
-            echo "{$label1}{$key}{$close}:" . $body. PHP_EOL;
+            echo "{$label1}{$key}{$close}:" . $body . PHP_EOL;
         }
 
         // @codingStandardsIgnoreStart

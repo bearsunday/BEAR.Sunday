@@ -1,20 +1,27 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module;
 
 /**
- * Singleton traint
+ * Singleton trait
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Module
  */
 trait Singleton
 {
+    /**
+     * New instance
+     *
+     * @return mixed
+     */
+    abstract function newInstance();
+
     /**
      * Return singleton instance
      *

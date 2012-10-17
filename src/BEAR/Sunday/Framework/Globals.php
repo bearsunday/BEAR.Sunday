@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Framework;
@@ -16,7 +16,7 @@ use BEAR\Resource\Exception\MethodNotAllowed;
  *
  * Emulates web $GLOBALS in CLI
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Framework
  */
 final class Globals extends ArrayObject
@@ -25,6 +25,9 @@ final class Globals extends ArrayObject
      * Constructor
      *
      * @param array $argv
+     *
+     * @throws BadRequest
+     * @throws MethodNotAllowed
      */
     public function __construct(array $argv)
     {
@@ -32,7 +35,7 @@ final class Globals extends ArrayObject
             throw new BadRequest('Usage: [get|post|put|delete] [uri]');
         }
         $isMethodAllowed = in_array($argv[1], ['get', 'post', 'put', 'delete', 'options']);
-        if (! $isMethodAllowed) {
+        if (!$isMethodAllowed) {
             throw new MethodNotAllowed($argv[1]);
         }
         $globals['_SERVER']['REQUEST_METHOD'] = $argv[1];

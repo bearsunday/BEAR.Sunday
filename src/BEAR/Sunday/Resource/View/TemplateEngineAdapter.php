@@ -1,16 +1,16 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Resource\View;
 
 /**
- * Intarface for template engine adapter
+ * Interface for template engine adapter
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Resource
  */
 interface TemplateEngineAdapter

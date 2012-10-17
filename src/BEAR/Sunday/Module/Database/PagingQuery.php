@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module\Database;
@@ -16,7 +16,7 @@ use IteratorAggregate;
 /**
  * Paging Query
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Module
  */
 class PagingQuery implements Countable, IteratorAggregate
@@ -27,6 +27,20 @@ class PagingQuery implements Countable, IteratorAggregate
      * @var int
      */
     private $count;
+
+    /**
+     * Page offset
+     *
+     * @var int
+     */
+    private $offset;
+
+    /**
+     * Page length
+     *
+     * @var int
+     */
+    private $length;
 
     /**
      * Constructor
@@ -48,7 +62,7 @@ class PagingQuery implements Countable, IteratorAggregate
      */
     public function count()
     {
-        if (! is_null($this->count)) {
+        if (!is_null($this->count)) {
             return $this->count;
         }
         $this->count = $this->getCountNum($this->query, $this->params);
@@ -57,12 +71,24 @@ class PagingQuery implements Countable, IteratorAggregate
     }
 
     /**
+     * Set offset, length
+     *
+     * @param int $offset
+     * @param int $length
+     */
+    public function setOffsetLength($offset, $length)
+    {
+        $this->offset = $offset;
+        $this->length = $length;
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function getIterator($offset, $length)
+    public function getIterator()
     {
         $pdo = $this->db->getWrappedConnection();
-        $query = $this->getPagerSql($offset, $length);
+        $query = $this->getPagerSql($this->offset, $this->length);
         if ($this->params) {
             $result = $pdo->prepare($query)->execute($this->params)->fetchColumn();
         } else {
@@ -106,12 +132,12 @@ class PagingQuery implements Countable, IteratorAggregate
                 $count = $this->pdo->query($countQuery)->fetchColumn();
             }
         } else {
-            // GROUP BY => fetch the whole resultset and count the rows returned
-            $result = $db->fetchAll($query);
+            // GROUP BY => fetch the whole result set and count the rows returned
+            $result = $this->pdo->fetchAll($query);
             $count = count($result);
         }
 
-        return (integer) $count;
+        return (integer)$count;
     }
 
     /**
@@ -128,19 +154,19 @@ class PagingQuery implements Countable, IteratorAggregate
         }
         $openParenthesis = '(?:\()';
         $closeParenthesis = '(?:\))';
-        $subqueryInSelect = $openParenthesis . '.*\bFROM\b.*' . $closeParenthesis;
-        $pattern = '/(?:.*' . $subqueryInSelect . '.*)\bFROM\b\s+/Uims';
+        $subQueryInSelect = $openParenthesis . '.*\bFROM\b.*' . $closeParenthesis;
+        $pattern = '/(?:.*' . $subQueryInSelect . '.*)\bFROM\b\s+/Uims';
         if (preg_match($pattern, $query)) {
             return false;
         }
-        $subqueryWithLimitOrder = $openParenthesis . '.*\b(LIMIT|ORDER)\b.*' . $closeParenthesis;
-        $pattern = '/.*\bFROM\b.*(?:.*' . $subqueryWithLimitOrder . '.*).*/Uims';
+        $subQueryWithLimitOrder = $openParenthesis . '.*\b(LIMIT|ORDER)\b.*' . $closeParenthesis;
+        $pattern = '/.*\bFROM\b.*(?:.*' . $subQueryWithLimitOrder . '.*).*/Uims';
         if (preg_match($pattern, $query)) {
             return false;
         }
         $queryCount = preg_replace('/(?:.*)\bFROM\b\s+/Uims', 'SELECT COUNT(*) FROM ', $query, 1);
-        list($queryCount, ) = preg_split('/\s+ORDER\s+BY\s+/is', $queryCount);
-        list($queryCount, ) = preg_split('/\bLIMIT\b/is', $queryCount);
+        list($queryCount,) = preg_split('/\s+ORDER\s+BY\s+/is', $queryCount);
+        list($queryCount,) = preg_split('/\bLIMIT\b/is', $queryCount);
 
         return trim($queryCount);
     }

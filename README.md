@@ -98,24 +98,21 @@ Aspect oriented programing
 
 Dependencies
 ------------
-Rahter than reinvent the wheel and develop our library, BEAR.Sunday use (or will use) these great libraries.
+Rather than reinvent the wheel and develop our library, BEAR.Sunday use (or will use) these great libraries.
 
- * [Aura/Autoload](https://github.com/auraphp/Aura.Autoload)
  * [Aura/Router](https://github.com/auraphp/Aura.Router)
  * [Aura/Signal](https://github.com/auraphp/Aura.Signal)
  * [Aura/Web](https://github.com/auraphp/Aura.Web)
  * [Doctrine/Common](http://www.doctrine-project.org/projects/common)
  * [Doctrine/DBAL](http://www.doctrine-project.org/projects/dbal)
- * [Monolog](https://github.com/Seldaek/monolog.git)
+ * [Guzzle/Guzzle](http://guzzlephp.org/ "Guzzle")
  * [Pagerfanta](git://github.com/whiteoctober/Pagerfanta.git)
  * [Smarty3](http://www.smarty.net/)
- * [Symfony/HttpFoundation](https://github.com/symfony/HttpFoundation)
- * [Zend/Cache](https://github.com/zendframework/zf2)
- * [Zend/Log](https://github.com/zendframework/zf2)
- * [Haanga](http://haanga.org/ "Haanga")
  * [Twig/Twig](http://twig.sensiolabs.org/ "Twig")
+ * [Haanga](http://haanga.org/ "Haanga")
+ * [Symfony/HttpFoundation](https://github.com/symfony/HttpFoundation)
  * [Symfony/Validator](https://github.com/symfony/Validator "Symfony.Validator")
- * [Guzzle/Guzzle](http://guzzlephp.org/ "Guzzle")
+ * [Zend/Log](https://github.com/zendframework/zf2)
 
 ## Requirement
 
@@ -129,25 +126,22 @@ Rahter than reinvent the wheel and develop our library, BEAR.Sunday use (or will
     apc.enable_cli = 1
     xhprof.output_dir = /tmp
 
-Testing BEAR.Sunday
 ------- 
 
-Here's how to install BEAR.Sunday:
+Here's how to install sandbox application using BEAR.Sunday:
 
-    $ git clone git://github.com/koriym/BEAR.Sunday.git
-    $ cd BEAR.Sunday
+    $ git clone git://github.com/koriym/BEAR.Package.git
+    $ cd BEAR.Package
     $ wget http://getcomposer.org/composer.phar
-    $ php ./composer.phar update
-    $ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
-
+    $ php ./composer.phar install
+    $ php scripts/check_env.php
+    $ chmod -R 777 apps/Sandbox/data
+    
 ### buil-in web server
     
-    $ cd apps/sandbox/htdocs
+    $ cd apps/Sandbox/htdocs
     $ php -S localhost:8088 web.php
-    $ curl http://localhost:8088/
-
     $ php -S localhost:8089 api.php
-    $ curl http://localhost:8089/blog/posts
 
 ### CLI
 

@@ -1,14 +1,14 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Resource\View;
 
 use BEAR\Resource\Link;
-use BEAR\Resource\Object as ResourceObject;
+use BEAR\Resource\AbstractObject;
 use BEAR\Resource\Requestable;
 use BEAR\Resource\Renderable;
 use Nocarrier\Hal;
@@ -16,7 +16,7 @@ use Nocarrier\Hal;
 /**
  * Request renderer
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage View
  */
 class HalRenderer implements Renderable
@@ -25,14 +25,16 @@ class HalRenderer implements Renderable
      * (non-PHPdoc)
      * @see BEAR\Resource.Renderable::render()
      */
-    public function render(ResourceObject $ro)
+    public function render(AbstractObject $ro)
     {
         // evaluate all request in body.
-        if (is_array($ro->body) || $ro->body instanceof \Traversable) {
+        $isArrayAccess = is_array($ro->body) || $ro->body instanceof \Traversable;
+        if ($isArrayAccess) {
             array_walk_recursive(
                 $ro->body,
                 function (&$element) {
                     if ($element instanceof Requestable) {
+                        /** @var $element Callable */
                         $element = $element();
                     }
                 }

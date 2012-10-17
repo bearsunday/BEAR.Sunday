@@ -1,19 +1,20 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Inject;
 
-use Aura\Di\ConfigInterface as Config;
+use Aura\Di\ConfigInterface;
+use Ray\Di\Config;
 use Ray\Di\Di\Inject;
 
 /**
  * Inject class definition
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Inject
  */
 trait DefinitionInject
@@ -22,12 +23,12 @@ trait DefinitionInject
     /**
      * Set definition
      *
-     * @param Config $config
+     * @param ConfigInterface $config
      *
      * @Inject
      */
-    public function setDefinition(Config $config)
+    public function setDefinition(ConfigInterface $config)
     {
-        $this->definition = $config->fetch(get_called_class())[2];
+        $this->definition = $config->fetch(get_called_class())[Config::INDEX_DEFINITION];
     }
 }

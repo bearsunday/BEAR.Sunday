@@ -1,20 +1,20 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Framework;
 
-use BEAR\Resource\Resource;
-use BEAR\Sunday\Application\AppContext;
+use BEAR\Sunday\Application\Context;
 use Aura\Autoload\Exception\NotReadable;
+use BEAR\Sunday\Exception;
 
 /**
  * Dispatcher
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Framework
  */
 class Dispatcher
@@ -22,16 +22,16 @@ class Dispatcher
     /**
      * Application context
      *
-     * @var AppContext
+     * @var Context
      */
     private $app;
 
     /**
      * Constructor
      *
-     * @param AppContext $app
+     * @param Context $app
      */
-    public function __construct(AppContext $app)
+    public function __construct(Context $app)
     {
         $this->app = $app;
     }
@@ -43,6 +43,7 @@ class Dispatcher
      *
      * @return array [BEAR\Resource\ResourceInterface $resource, BEAR\Resource\Object $page]
      * @throws Exception\ResourceNotFound
+     * @throws \Exception
      */
     public function getInstance($uri)
     {
@@ -59,6 +60,7 @@ class Dispatcher
             try {
                 $page = $resource->newInstance($uri . 'index');
             } catch (NotReadable $e) {
+                /** @noinspection PhpParamsInspection */
                 throw new Exception\ResourceNotFound($uri, 404, $e);
             }
         } catch (\Exception $e) {

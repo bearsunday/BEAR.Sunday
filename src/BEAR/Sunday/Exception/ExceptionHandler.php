@@ -1,9 +1,10 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
- * @license http://opensource.org/licenses/bsd-license.php BSD
+ * @package    BEAR.Sunday
+ * @subpackage Exception
+ * @license    http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Exception;
 
@@ -11,23 +12,32 @@ use BEAR\Resource\Exception\BadRequest;
 use BEAR\Resource\Exception\MethodNotAllowed;
 use BEAR\Resource\Exception\Parameter;
 use BEAR\Resource\Exception\Scheme;
+use BEAR\Resource\Exception\Uri;
 use BEAR\Sunday\Resource\Page\Error;
-use BEAR\Sunday\Exception\ResourceNotFound;
 use BEAR\Sunday\Web\ResponseInterface;
 use BEAR\Sunday\Inject\LogDirInject;
 use Exception;
+use Ray\Di\Exception\Binding;
+
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
-use Ray\Di\Exception\InvalidBinding;
 
 /**
  * Exception handler
  *
- * @package BEAR.Framework
+ * @package    BEAR.Sunday
+ * @subpackage Exception
  */
 class ExceptionHandler implements ExceptionHandlerInterface
 {
     use LogDirInject;
+
+    /**
+     * Response
+     *
+     * @var ResponseInterface
+     */
+    private $response;
 
     /**
      * Set response
@@ -41,12 +51,12 @@ class ExceptionHandler implements ExceptionHandlerInterface
 
     /**
      * (non-PHPdoc)
+     *
      * @see BEAR\Sunday\Exception.ExceptionHandlerInterface::handle()
      */
     public function handle(Exception $e)
     {
-        $mode = isset($_ENV['BEAR_OUTPUT_MODE']) ? $_ENV['BEAR_OUTPUT_MODE'] : 'prod';
-        $exceptionId = 'e' . substr(md5((string) $e), 0, 5);
+        $exceptionId = 'e' . substr(md5((string)$e), 0, 5);
         try {
             $response = new Error;
             throw $e;
@@ -56,7 +66,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
             goto NOT_FOUND;
         } catch (BadRequest $e) {
             $response->code = 400;
-            $response->view = 'You sent a request that this service cound not understand.';
+            $response->view = 'You sent a request that this service could not understand.';
             goto METHOD_NOT_ALLOWED;
         } catch (Parameter $e) {
             $response->code = 400;
@@ -70,12 +80,12 @@ class ExceptionHandler implements ExceptionHandlerInterface
             $response->code = 405;
             $response->view = 'The requested method is not allowed for this URI.';
             goto METHOD_NOT_ALLOWED;
-        } catch (InvalidBinding $e) {
+        } catch (Binding $e) {
             goto INVALID_BINDING;
-        } catch (InvalidUri $e) {
+        } catch (Uri $e) {
             $response->code = 400;
             goto INVALID_URI;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             goto SERVER_ERROR;
         }
 
@@ -98,8 +108,9 @@ class ExceptionHandler implements ExceptionHandlerInterface
         $response->headers['X-EXCEPTION-MESSAGE'] = str_replace(PHP_EOL, ' ', $e->getMessage());
         $response->headers['X-EXCEPTION-CODE'] = $e->getCode();
         $response->headers['X-EXCEPTION-FILE-LINE'] = $e->getFile() . ':' . $e->getLine();
-        $previous = $e->getPrevious() ? (get_class($e->getPrevious()) .': ' . str_replace(PHP_EOL, ' ', $e->getPrevious()->getMessage())) : '-';
-        $response->headers['X-EXCEPTION-PREVIOUS'] =  $previous;
+        $previous = $e->getPrevious() ? (
+            get_class($e->getPrevious()) . ': ' . str_replace(PHP_EOL, ' ', $e->getPrevious()->getMessage())) : '-';
+        $response->headers['X-EXCEPTION-PREVIOUS'] = $previous;
         $response->headers['X-EXCEPTION-ID'] = $exceptionId;
         $this->writeExceptionLog($e, $exceptionId);
 
@@ -107,7 +118,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
     }
 
     /**
-     * Write exception log
+     * Write exception logs
      *
      * @param Exception $e
      * @param string    $exceptionId
@@ -115,15 +126,15 @@ class ExceptionHandler implements ExceptionHandlerInterface
     public function writeExceptionLog(Exception $e, $exceptionId)
     {
         $filename = "e.{$exceptionId}.log";
-        $trace = $e->getTrace();
         $data = PHP_EOL . $e->getTraceAsString();
         $previousE = $e->getPrevious();
         if ($previousE) {
             $data .= PHP_EOL . PHP_EOL . '-- Previous Exception --' . PHP_EOL . PHP_EOL;
             $data .= $previousE->getTraceAsString();
         }
-        $data .= (string) $e;
+        $data .= (string)$e;
         $file = "{$this->logDir}/" . $filename;
         file_put_contents($file, $data);
     }
 }
+

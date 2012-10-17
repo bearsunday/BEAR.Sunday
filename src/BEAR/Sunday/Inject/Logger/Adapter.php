@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Inject\Logger;
@@ -10,13 +10,12 @@ namespace BEAR\Sunday\Inject\Logger;
 use Ray\Di\LoggerInterface;
 use Ray\Aop\Bind;
 use BEAR\Sunday\Inject\LogInject;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
+
 
 /**
  * Cache interceptor
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Intercetor
  */
 class Adapter implements LoggerInterface
@@ -29,17 +28,19 @@ class Adapter implements LoggerInterface
      * @param string $class
      * @param array  $params
      * @param array  $setter
-     * @param objet  $object
+     * @param object $object
      * @param Bind   $bind
      *
      * @return void
      */
     public function log($class, array $params, array $setter, $object, Bind $bind)
     {
+        unset($object);
         $log = "DI class={$class}"
-        . ' params=' . $this->getString((array) $params)
-        . ' setter=' . $this->getString((array) $setter)
-        . ' bind=' . $this->getString((array) $bind);// $this->getString((array) $bind);
+            . ' params=' . $this->getString((array)$params)
+            . ' setter=' . $this->getString((array)$setter)
+            . ' bind=' . $this->getString((array)$bind);
+        // $this->getString((array) $bind);
         $this->log->log($log);
     }
 

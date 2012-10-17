@@ -2,7 +2,7 @@
 /**
  * Core file loader
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
  * @global  $system system path
@@ -11,10 +11,7 @@ namespace BEAR\Sunday\Scripts;
 
 use BEAR\Sunday\Framework\Framework;
 
-if (isset($system)) {
-    return;
-}
-$system = Framework::$systemRoot;
+$system = dirname(__DIR__);
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/AnnotationRegistry.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/AbstractModule.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/Scope.php';
@@ -27,11 +24,7 @@ include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/Annot
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/PhpParser.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Matchable.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Matcher.php';
-include $system . '/src/BEAR/Sunday/Module/NamedModule.php';
-include $system . '/src/BEAR/Sunday/Module/FrameworkModule.php';
-include $system . '/src/BEAR/Sunday/Module/Log/MonologModule.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/ProviderInterface.php';
-include $system . '/src/BEAR/Sunday/Module/Log/MonologModule/MonologProvider.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/InjectorInterface.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/Injector.php';
 include $system . '/vendor/aura/di/src/Aura/Di/ContainerInterface.php';
@@ -46,15 +39,9 @@ include $system . '/vendor/Ray/Di/src/Ray/Di/ApcConfig.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/AnnotationInterface.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/Annotation.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/Definition.php';
-include $system . '/vendor/Ray/Di/src/Ray/Di/EmptyModule.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Bind.php';
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Annotations/TokenParser.php';
 include $system . '/vendor/Ray/Di/src/Ray/Di/Di/Annotation.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Logger.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Handler/HandlerInterface.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Handler/AbstractHandler.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessingHandler.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Handler/StreamHandler.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Log/LogAdapterInterface.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Log/AbstractLogAdapter.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Log/MonologLogAdapter.php';
@@ -69,9 +56,6 @@ include $system . '/vendor/bear/resource/src/BEAR/Resource/LinkerInterface.php';
 include $system . '/vendor/bear/resource/src/BEAR/Resource/Linker.php';
 include $system . '/vendor/bear/resource/src/BEAR/Resource/LoggerInterface.php';
 include $system . '/vendor/bear/resource/src/BEAR/Resource/Logger.php';
-include $system . '/src/BEAR/Sunday/Module/Provider/ResourceLoggerProvider.php';
-include $system . '/src/BEAR/Sunday/Module/Provider/ApcCacheProvider.php';
-include $system . '/src/BEAR/Sunday/Module/Provider/SignalProvider.php';
 include $system . '/src/BEAR/Sunday/Web/ResponseInterface.php';
 include $system . '/src/BEAR/Sunday/Web/SymfonyResponse.php';
 include $system . '/src/BEAR/Sunday/Exception/ExceptionHandlerInterface.php';
@@ -82,7 +66,6 @@ include $system . '/src/BEAR/Sunday/Output/Console.php';
 include $system . '/src/BEAR/Sunday/Resource/CacheControl/Taggable.php';
 include $system . '/src/BEAR/Sunday/Resource/CacheControl/Etag.php';
 include $system . '/vendor/bear/resource/src/BEAR/Resource/DevInvoker.php';
-include $system . '/src/BEAR/Sunday/Module/TemplateEngine/DevRendererModule.php';
 include $system . '/vendor/bear/resource/src/BEAR/Resource/Renderable.php';
 include $system . '/src/BEAR/Sunday/Resource/View/DevRenderer.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Advice.php';
@@ -92,31 +75,20 @@ include $system . '/src/BEAR/Sunday/Interceptor/Logger.php';
 include $system . '/src/BEAR/Sunday/Annotation/Log.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Pointcut.php';
 include $system . '/src/BEAR/Sunday/Resource/View/HalRenderer.php';
-include $system . '/src/BEAR/Sunday/Module/SchemeModule.php';
 include $system . '/src/BEAR/Sunday/Inject/AppNameInject.php';
 include $system . '/src/BEAR/Sunday/Inject/InjectorInject.php';
-include $system . '/src/BEAR/Sunday/Module/WebContext/AuraWebModule.php';
-include $system . '/src/BEAR/Sunday/Module/Provider/WebContextProvider.php';
-include $system . '/src/BEAR/Sunday/Module/TemplateEngine/SmartyModule/SmartyModule.php';
 include $system . '/src/BEAR/Sunday/Inject/TmpDirInject.php';
 include $system . '/src/BEAR/Sunday/Inject/AppDirInject.php';
-include $system . '/src/BEAR/Sunday/Module/TemplateEngine/SmartyModule/SmartyProvider.php';
 include $system . '/src/BEAR/Sunday/Resource/View/TemplateEngineAdapter.php';
-include $system . '/src/BEAR/Sunday/Module/TemplateEngine/SmartyModule/SmartyAdapter.php';
-include $system . '/src/BEAR/Sunday/Module/Database/DoctrineDbalModule.php';
 include $system . '/src/BEAR/Sunday/Interceptor/DbInjector.php';
 include $system . '/vendor/bear/resource/src/BEAR/Resource/Object.php';
 include $system . '/src/BEAR/Sunday/Annotation/Db.php';
-include $system . '/src/BEAR/Sunday/Module/Cqrs/CacheModule.php';
 include $system . '/src/BEAR/Sunday/Inject/EtagInject.php';
 include $system . '/src/BEAR/Sunday/Interceptor/CacheLoader.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Cache/CacheAdapterInterface.php';
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Cache/Cache.php';
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Cache/CacheProvider.php';
 include $system . '/vendor/doctrine/common/lib/Doctrine/Common/Cache/ApcCache.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Formatter/FormatterInterface.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php';
-include $system . '/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Cache/AbstractCacheAdapter.php';
 include $system . '/vendor/guzzle/guzzle/src/Guzzle/Common/Cache/DoctrineCacheAdapter.php';
 include $system . '/src/BEAR/Sunday/Annotation/Cache.php';

@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module\Provider;
@@ -15,8 +15,8 @@ use Ray\Di\Di\Named;
 /**
  * Resource logger
  *
- * @package BEAR.Framework
- * @see https://github.com/auraphp/Aura.Web.git
+ * @package BEAR.Sunday
+ * @see     https://github.com/auraphp/Aura.Web.git
  */
 class ResourceLoggerProvider implements ProviderInterface
 {
@@ -34,9 +34,9 @@ class ResourceLoggerProvider implements ProviderInterface
     }
 
     /**
-     * Looger instance
+     * Logger instance
      *
-     * @var BEAR\Resource\Logger
+     * @var \BEAR\Resource\Logger
      */
     private static $instance;
 
@@ -47,7 +47,7 @@ class ResourceLoggerProvider implements ProviderInterface
      */
     public function get()
     {
-        if (! self::$instance) {
+        if (!self::$instance) {
             self::$instance = $this->logger;
         }
 

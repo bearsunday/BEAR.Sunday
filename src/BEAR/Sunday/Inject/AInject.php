@@ -1,20 +1,20 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Inject;
 
 use BEAR\Resource\Referable;
 use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
+
 
 /**
  * Inject A(anchor)
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Inject
  */
 trait AInject
@@ -22,17 +22,16 @@ trait AInject
     /**
      * App directory path
      *
-     * @var BEAR\Resource\A
+     * @var \BEAR\Resource\A
      */
     private $a;
 
     /**
-     * A(anchor) stter
+     * A(anchor) setter
      *
      * @param Referable $a
      *
      * @return void
-     *
      * @Inject
      */
     public function setAnchor(Referable $a)

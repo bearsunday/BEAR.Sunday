@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Interceptor;
@@ -18,9 +18,10 @@ use Ray\Di\Di\Named;
 /**
  * Cache load interceptor
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Intercetor
  */
+
 class CacheLoader implements MethodInterceptor
 {
     use EtagInject;
@@ -31,20 +32,6 @@ class CacheLoader implements MethodInterceptor
      * @var string
      */
     const HEADER_CACHE = 'x-cache';
-
-    /**
-     * Host
-     *
-     * @var string
-     */
-    private $host;
-
-    /**
-     * Life time
-     *
-     * @var int
-     */
-    private $lifeTime;
 
     /**
      * Constructor
@@ -67,12 +54,11 @@ class CacheLoader implements MethodInterceptor
     {
         $ro = $invocation->getThis();
         $args = $invocation->getArguments();
-        $method = $invocation->getMethod();
         $id = $this->etag->getEtag($ro, $args);
 
         $pager = (isset($_GET['_start'])) ? $_GET['_start'] : '';
         $saved = $this->cache->fetch($id);
-        $pager = (! $pager && isset($saved['pager']) ) ? 1 : $pager;
+        $pager = (!$pager && isset($saved['pager'])) ? 1 : $pager;
         if ($pager) {
             $pagered = (isset($saved['pager'][$pager])) ? $saved['pager'][$pager] : false;
         } else {
@@ -92,7 +78,7 @@ class CacheLoader implements MethodInterceptor
 
             return $resource;
         }
-        $result = $invocation->proceed();
+        $invocation->proceed();
         $resource = $invocation->getThis();
         $time = $invocation->getAnnotation()->time;
         $resource->headers[self::HEADER_CACHE] = json_encode(

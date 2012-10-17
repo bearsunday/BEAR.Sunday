@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
@@ -9,14 +9,14 @@ namespace BEAR\Sunday\Interceptor;
 use Doctrine\DBAL\DriverManager;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
+use Doctrine\Common\Annotations\AnnotationReader as Reader;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
-use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
 /**
  * Cache interceptor
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Intercetor
  */
 class DbInjector implements MethodInterceptor

@@ -1,14 +1,12 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Application;
 
-use BEAR\Sunday\Application\AppContext;
-use BEAR\Sunday\Application\ResourceLogIterator;
 use BEAR\Resource\LoggerInterface as ResourceLoggerInterface;
 use BEAR\Resource\Logger as ResourceLogger;
 use Ray\Di\Di\Inject;
@@ -16,12 +14,12 @@ use Ray\Di\Di\Inject;
 /**
  * Logger
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  */
 final class Logger implements LoggerInterface
 {
     /**
-     * Resorce logger
+     * Resource logger
      *
      * @var ResourceLogger
      */
@@ -42,15 +40,17 @@ final class Logger implements LoggerInterface
     /**
      * (non-PHPdoc)
      * @see BEAR\Sunday\Application.LoggerInterface::log()
+     * @noinspection PhpUnusedPrivateMethodInspection
      */
-    private function logOnShutdown(AppContext $app)
+    private function logOnShutdown(Context $app)
     {
         $logs = new ResourceLogIterator($this->resourceLogger);
         foreach ($logs as $log) {
+            /** @var $log ResourceLogIterator */
             $log->apcLog();
         }
         unset($app);
-        // @todo to enable store $app, eliminate all unserializable object.
+        // @todo eliminate all unrealizable objects to enable store $app.
         // apc_store('request-' . get_class($app), var_export($app, true));
     }
 
@@ -58,12 +58,13 @@ final class Logger implements LoggerInterface
      * (non-PHPdoc)
      * @see BEAR\Sunday\Application.LoggerInterface::register()
      */
-    public function register(AppContext $app)
+    public function register(Context $app)
     {
         register_shutdown_function(
             function () use ($app) {
-                $logOnShutdown = [$this, 'logOnShutdown'];
-                $logOnShutdown($app);
+                $onShutdownLog = [$this, 'logOnShutdown'];
+                /** @var $onShutdownLog Callable */
+                $onShutdownLog($app);
             }
         );
     }
@@ -77,6 +78,7 @@ final class Logger implements LoggerInterface
     {
         $logs = new ResourceLogIterator($this->resourceLogger);
         foreach ($logs as $log) {
+            /** @var $log ResourceLogIterator */
             $log->fire();
         }
     }

@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module\TemplateEngine\SmartyModule;
@@ -17,7 +17,7 @@ use Ray\Di\Di\PostConstruct;
 /**
  * Smarty adapter
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Module
  */
 class SmartyAdapter implements TemplateEngineAdapter
@@ -37,7 +37,7 @@ class SmartyAdapter implements TemplateEngineAdapter
     private $template;
 
     /**
-     * File extention
+     * File extension
      *
      * @var string
      */
@@ -103,9 +103,9 @@ class SmartyAdapter implements TemplateEngineAdapter
      * (non-PHPdoc)
      * @see BEAR\Sunday\View.Render::fetch()
      */
-    public function fetch($templatefileWithoutExtention)
+    public function fetch($tplWithoutExtension)
     {
-        $this->template = $templatefileWithoutExtention . self::EXT;
+        $this->template = $tplWithoutExtension . self::EXT;
         $this->fileExists($this->template);
 
         return $this->smarty->fetch($this->template);
@@ -120,7 +120,7 @@ class SmartyAdapter implements TemplateEngineAdapter
      */
     private function fileExists($template)
     {
-        if (! file_exists($template)) {
+        if (!file_exists($template)) {
             throw new TemplateNotFound($template);
         }
     }

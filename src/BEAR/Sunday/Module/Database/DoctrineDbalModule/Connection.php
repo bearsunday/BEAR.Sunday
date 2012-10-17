@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module\Database\DoctrineDbalModule;
@@ -17,7 +17,7 @@ use Pagerfanta\View\TwitterBootstrapView;
 /**
  * Pager enabled connection
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Module
  */
 class Connection extends DbalConnection implements DriverConnection
@@ -35,13 +35,6 @@ class Connection extends DbalConnection implements DriverConnection
      * @var string
      */
     private $pageKey = '_start';
-
-    /**
-     * Pager
-     *
-     * @var array
-     */
-    private $pager = [];
 
     /**
      * Current page number
@@ -74,11 +67,11 @@ class Connection extends DbalConnection implements DriverConnection
      */
     private $routeGenerator;
 
-   /**
-    * Pager library - pagerfanta
-    *
-    * @var Pagerfanta
-    */
+    /**
+     * Pager library - pagerfanta
+     *
+     * @var Pagerfanta
+     */
     private $pagerfanta;
 
     /**
@@ -127,6 +120,9 @@ class Connection extends DbalConnection implements DriverConnection
      * Set view
      *
      * @param ViewInterface $view
+     *
+     * @return \BEAR\Sunday\Module\Database\DoctrineDbalModule\Connection
+     * @return self
      */
     public function setView(ViewInterface $view)
     {
@@ -170,7 +166,7 @@ class Connection extends DbalConnection implements DriverConnection
      */
     public function query()
     {
-        $this->currentPage = $this->currentPage ?: (isset($_GET[$this->pageKey]) ? $_GET[$this->pageKey] : 1);
+        $this->currentPage = $this->currentPage ? : (isset($_GET[$this->pageKey]) ? $_GET[$this->pageKey] : 1);
         $firstResult = ($this->currentPage - 1) * $this->maxPerPage;
         $args = func_get_args();
         $query = $args[0];
@@ -191,7 +187,7 @@ class Connection extends DbalConnection implements DriverConnection
     public function getPager()
     {
         // view
-        if (! $this->pagerfanta) {
+        if (!$this->pagerfanta) {
             return [];
         }
         $pager = [
@@ -213,8 +209,10 @@ class Connection extends DbalConnection implements DriverConnection
      */
     private function getHtml()
     {
-        $view = $this->view ?: new TwitterBootstrapView;
-        $routeGenerator = $this->routeGenerator ?: function ($page) { return "?{$this->pageKey}={$page}";};
+        $view = $this->view ? : new TwitterBootstrapView;
+        $routeGenerator = $this->routeGenerator ? : function ($page) {
+            return "?{$this->pageKey}={$page}";
+        };
         $html = $view->render(
             $this->pagerfanta,
             $routeGenerator,

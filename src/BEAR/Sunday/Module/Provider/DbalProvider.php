@@ -1,21 +1,19 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module\Provider;
 
 use Ray\Di\ProviderInterface as Provide;
 
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 
 /**
  * PDO provider
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Module
  */
 class DbalProvider implements Provide
@@ -36,7 +34,7 @@ class DbalProvider implements Provide
     /**
      * Return instance
      *
-     * @return Doctrine\DBAL\Connection
+     * @return \Doctrine\DBAL\Connection
      */
     public function get()
     {

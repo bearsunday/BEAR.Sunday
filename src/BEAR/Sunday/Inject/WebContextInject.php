@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the BEAR.Framework package
+ * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Framework
+ * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Inject;
@@ -15,7 +15,7 @@ use Ray\Di\Di\Named;
 /**
  * Inject web context
  *
- * @package    BEAR.Framework
+ * @package    BEAR.Sunday
  * @subpackage Inject
  */
 trait WebContextInject
@@ -23,7 +23,7 @@ trait WebContextInject
     use DefinitionInject;
 
     /**
-     * @var Aura\Web\Context
+     * @var \Aura\Web\Context
      */
     protected $webContext;
 
@@ -34,7 +34,7 @@ trait WebContextInject
     {
         parent::__wakeup();
         $annotations = $this->definition[Definition::BY_NAME];
-        if (! isset($annotations['WakeUp'])) {
+        if (!isset($annotations['WakeUp'])) {
             return;
         }
         foreach ($annotations['WakeUp'] as $method) {
@@ -43,7 +43,7 @@ trait WebContextInject
     }
 
     /**
-     * Set web contexxt provider
+     * Set web context provider
      *
      * @param Provider $contextProvider
      *

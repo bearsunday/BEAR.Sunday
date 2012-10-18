@@ -31,7 +31,7 @@ class FrameworkModule extends AbstractModule
         $this->install(new Module\Framework\ConstantModule);
         $this->install(new Module\Log\ZfLogModule);
         $this->install(new Module\Log\ApplicationLoggerModule);
-        $injector = Injector::create([$this], false);
+        $injector = Injector::create([$this], on);
         $this->install(new Module\Di\InjectorModule($injector));
         $this->install(new Module\Code\AnnotationModule);
         $this->install(new Module\Signal\SignalModule);

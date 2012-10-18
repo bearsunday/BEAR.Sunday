@@ -58,6 +58,10 @@
     },
     "repositories": [
         {
+            "type": "composer",
+            "url": "http://packages.zendframework.com/"
+        },
+        {
             "type": "package",
             "package": {
                 "name": "crodas/haanga",

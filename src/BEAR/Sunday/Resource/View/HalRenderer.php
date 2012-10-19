@@ -43,6 +43,9 @@ class HalRenderer implements Renderable
 
         // HAL
         $data = $ro->body ?: [];
+        if (is_scalar($data)) {
+            $data = ['value' => $data];
+        }
         $hal = new Hal($ro->uri, $data);
         foreach ($ro->links as $rel => $link) {
             $title = (isset($link[Link::TITLE])) ? $link[Link::TITLE] : null;

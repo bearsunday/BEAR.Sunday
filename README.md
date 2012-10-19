@@ -126,26 +126,8 @@ Rather than reinvent the wheel and develop our library, BEAR.Sunday use (or will
     apc.enable_cli = 1
     xhprof.output_dir = /tmp
 
-------- 
+BEAR.Package
+------------
 
-Here's how to install sandbox application using BEAR.Sunday:
-
-    $ git clone git://github.com/koriym/BEAR.Package.git
-    $ cd BEAR.Package
-    $ wget http://getcomposer.org/composer.phar
-    $ php ./composer.phar install
-    $ php scripts/check_env.php
-    $ chmod -R 777 apps/Sandbox/data
-    
-### buil-in web server
-    
-    $ cd apps/Sandbox/htdocs
-    $ php -S localhost:8088 web.php
-    $ php -S localhost:8089 api.php
-
-### CLI
-
-    $ php web.php get /index
-    $ php api.php get app://self/greetings?lang=ja
-    $ php api.php get app://self/greetings?lang=en
-    $ php api.php get page://self/index
+BEAR.Package is a simple sandbox application using BEAR.Sunday.
+See how to install at https://github.com/koriym/BEAR.Sunday.

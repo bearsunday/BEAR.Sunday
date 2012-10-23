@@ -108,8 +108,6 @@ class PagingQuery implements Countable, IteratorAggregate
      */
     public function getPagerSql($offset, $length)
     {
-        var_dump($offset);
-        debug_print_backtrace();
         $query = $this->db->getDatabasePlatform()->modifyLimitQuery($this->query, $length, $offset);
 
         return $query;

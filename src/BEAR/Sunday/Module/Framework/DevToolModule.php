@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Module\Framework;
 
 use Ray\Di\AbstractModule;
-use BEAR\Sunday\Module;
+use BEAR\Sunday\Module as SundayModule;
 
 /**
  * Package module
@@ -25,8 +25,8 @@ class DevToolModule extends AbstractModule
     protected function configure()
     {
         $this->bind('BEAR\Resource\InvokerInterface')->to('BEAR\Resource\DevInvoker');
-        $this->install(new Module\TemplateEngine\DevRendererModule);
-        $this->install(new Module\Framework\FrameworkModule($this));
+        $this->install(new SundayModule\TemplateEngine\DevRendererModule);
+        $this->install(new SundayModule\Framework\FrameworkModule($this));
         $this->installDevLogger();
     }
 

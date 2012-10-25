@@ -31,20 +31,6 @@ final class Console implements ConsoleInterface
     private $console;
 
     /**
-     * Constructor
-     *
-     * @param ConsoleOutput $console
-     * @param UriTemplate   $uriTemplate
-     *
-     * @Inject
-     */
-//     public function __construct(ConsoleOutput $console, UriTemplate $uriTemplate)
-//     {
-//         $this->console = $console;
-//         $this->uriTemplate = $uriTemplate;
-//     }
-
-    /**
      * Send CLI output
      *
      * @param ResourceObject $resource

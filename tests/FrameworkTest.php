@@ -19,12 +19,4 @@ class FrameworkTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('BEAR\Sunday\Framework\Framework', $this->framework);
     }
-
-    /**
-     * loader already set, no error triggerd.
-     */
-    public function test_NewSecond()
-    {
-        $this->assertInstanceOf('BEAR\Sunday\Framework\Framework', $this->framework);
-    }
 }

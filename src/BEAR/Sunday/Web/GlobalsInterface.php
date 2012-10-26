@@ -5,16 +5,14 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Framework;
-
-use ArrayObject;
+namespace BEAR\Sunday\Web;
 
 /**
- * Arguments
+ * Interface GLOBAL
  *
  * @package    BEAR.Sunday
- * @subpackage Framework
+ * @subpackage Web
  */
-class Args extends ArrayObject
+interface GlobalsInterface
 {
 }

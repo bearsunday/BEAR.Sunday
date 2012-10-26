@@ -29,7 +29,6 @@ class FrameworkModule extends AbstractModule
     {
         // install
         $this->install(new Module\Framework\ConstantModule);
-        $this->install(new Module\Log\ZfLogModule);
         $this->install(new Module\Log\ApplicationLoggerModule);
         $injector = Injector::create([$this], true);
         $this->install(new Module\Di\InjectorModule($injector));
@@ -37,7 +36,6 @@ class FrameworkModule extends AbstractModule
         $this->install(new Module\Signal\SignalModule);
         $this->install(new Module\Resource\ResourceModule($injector));
         $this->install(new Module\ExceptionHandle\HandleModule);
-        $this->install(new Module\Output\WebResponseModule);
         $this->install(new Module\Output\ConsoleModule);
         $this->install(new Module\Http\GuzzleModule);
     }

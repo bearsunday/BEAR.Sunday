@@ -33,7 +33,7 @@ RESTful Service
 Dependency injection
 --------------------
 
-### Bidning
+### Binding
 ```php
 <?php
     $this->bind('Doctrine\Common\Annotations')
@@ -52,7 +52,7 @@ Dependency injection
         $this->reader = $reader;
     }
 ```
-Aspect oriented programing
+Aspect oriented progrmaming
 --------------------------
 
 ### Interceptor
@@ -65,7 +65,7 @@ Aspect oriented programing
             $today = getdate();
             if ($today['weekday'][0] === 'S') {
                 throw new \RuntimeException(
-                      $invocation->getMethod()->getName() . " not allowed on weekends!"
+                      $invocation->getMethod()->getName() . " is not allowed on weekends!"
                 );
             }
             return $invocation->proceed();
@@ -98,7 +98,7 @@ Aspect oriented programing
 
 Dependencies
 ------------
-Rather than reinvent the wheel and develop our library, BEAR.Sunday use (or will use) these great libraries.
+Rather than reinvent the wheel and develop our own library, BEAR.Sunday uses (or will use) these great libraries.
 
  * [Aura/Router](https://github.com/auraphp/Aura.Router)
  * [Aura/Signal](https://github.com/auraphp/Aura.Signal)
@@ -114,7 +114,7 @@ Rather than reinvent the wheel and develop our library, BEAR.Sunday use (or will
  * [Symfony/Validator](https://github.com/symfony/Validator "Symfony.Validator")
  * [Zend/Log](https://github.com/zendframework/zf2)
 
-## Requirement
+## Requirements
 
  * php 5.4
  * [APC](http://jp.php.net/manual/en/book.apc.php)
@@ -130,4 +130,4 @@ BEAR.Package
 ------------
 
 BEAR.Package is a simple sandbox application using BEAR.Sunday.
-See how to install at https://github.com/koriym/BEAR.Sunday.
+See how to install and use at https://github.com/koriym/BEAR.Package.

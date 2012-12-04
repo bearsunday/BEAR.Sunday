@@ -171,7 +171,7 @@ class DevRenderer implements Renderable
         $tabJs = strpos($body, '/assets/js/bootstrap-tab.js') ? '' : '<script src="/assets/js/bootstrap-tab.js"></script>';
         $toolLoad = <<<EOT
 <!-- BEAR.Sunday dev tool load -->
-<script src="http://www.google.com/jsapi"></script>
+<script src="//www.google.com/jsapi"></script>
 <script>
 if (typeof jQuery == "undefined") {
     google.load("jquery", "1.7.1");

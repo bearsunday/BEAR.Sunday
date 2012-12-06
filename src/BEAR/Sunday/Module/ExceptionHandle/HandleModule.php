@@ -24,6 +24,8 @@ class HandleModule extends AbstractModule
      */
     protected function configure()
     {
+        $this->bind('')->annotatedWith('exceptionTpl')->toInstance(__DIR__ . '/template/exception.tpl.php');
+        $this->bind('BEAR\Resource\AbstractObject')->annotatedWith('errorPage')->to('BEAR\Sunday\Resource\Page\Error');
         $this->bind('BEAR\Sunday\Exception\ExceptionHandlerInterface')->to('BEAR\Sunday\Exception\ExceptionHandler');
     }
 }

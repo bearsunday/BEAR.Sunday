@@ -9,6 +9,9 @@
 namespace BEAR\Sunday\Exception;
 
 use BEAR\Resource\Exception\BadRequest;
+use Ray\Di\InjectorInterface;
+use Ray\Di\AbstractModule;
+use BEAR\Resource\AbstractObject as ResourceObject;
 use BEAR\Resource\Exception\MethodNotAllowed;
 use BEAR\Resource\Exception\Parameter;
 use BEAR\Resource\Exception\Scheme;
@@ -23,12 +26,12 @@ use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
 /**
- * Exception handler
+ * Exception handler for development
  *
  * @package    BEAR.Sunday
  * @subpackage Exception
  */
-class ExceptionHandler implements ExceptionHandlerInterface
+final class ExceptionHandler implements ExceptionHandlerInterface
 {
     use LogDirInject;
 
@@ -40,13 +43,73 @@ class ExceptionHandler implements ExceptionHandlerInterface
     private $response;
 
     /**
+     * @var Error
+     */
+    private $errorPage;
+
+    /**
+     * @var InjectorInterface
+     */
+    private $injector;
+
+    /**
+     * @var string
+     */
+    private $viewTemplate;
+
+    /**
+     * Error message
+     *
+     * @var array
+     */
+    private $message = [
+        'ResourceNotFound' => 'The requested URI was not found on this service.',
+        'BadRequest' => 'You sent a request that this service could not understand.',
+        'Parameter' => 'You sent a request that query is not valid.',
+        'Scheme' => 'You sent a request that scheme is not valid.',
+        'MethodNotAllowed' => 'The requested method is not allowed for this URI.'
+    ];
+
+    /**
+     * Set message
+     *
+     * @param array $message
+     *
+     * @Inject(optional = true);
+     */
+    public function setMessage(array $message)
+    {
+        $this->message = $message;
+    }
+
+    /**
+     * Set Injector for logging
+     *
+     * @param array $message
+     *
+     * @Inject(optional = true);
+     */
+    public function setModule(InjectorInterface $injector)
+    {
+        $this->injector = $injector;
+    }
+
+    /**
      * Set response
      *
      * @param ResponseInterface $response
+     *
+     * @Inject
+     * @Named("exceptionTpl=exceptionTpl,errorPage=errorPage")
      */
-    public function setResponse(ResponseInterface $response)
-    {
+    public function __construct(
+        ResponseInterface $response,
+        $exceptionTpl = null,
+        ResourceObject $errorPage = null
+    ){
         $this->response = $response;
+        $this->viewTemplate = $exceptionTpl;
+        $this->errorPage = $errorPage ?: new Error;
     }
 
     /**
@@ -56,29 +119,46 @@ class ExceptionHandler implements ExceptionHandlerInterface
      */
     public function handle(Exception $e)
     {
+        error_log($e);
         $exceptionId = 'e' . substr(md5((string)$e), 0, 5);
+        $this->writeExceptionLog($e, $exceptionId);
+        $page = $this->buildErrorPage($e, $exceptionId, $this->errorPage);
+        $this->response->setResource($page)->render()->prepare()->send();
+        exit(1);
+    }
+
+    /**
+     * Return error page
+     *
+     * @param $e
+     * @param $exceptionId
+     *
+     * @return \BEAR\Sunday\Resource\Page\Error
+     * @throws
+     */
+    private function buildErrorPage($e, $exceptionId, ResourceObject $response)
+    {
         try {
-            $response = new Error;
             throw $e;
         } catch (ResourceNotFound $e) {
             $response->code = 404;
-            $response->view = 'The requested URI was not found on this service.';
+            $response->view = $this->message['ResourceNotFound'];
             goto NOT_FOUND;
         } catch (BadRequest $e) {
             $response->code = 400;
-            $response->view = 'You sent a request that this service could not understand.';
+            $response->view = $this->message['BadRequest'];
             goto METHOD_NOT_ALLOWED;
         } catch (Parameter $e) {
             $response->code = 400;
-            $response->view = 'You sent a request that query is not valid.';
+            $response->view = $this->message['Parameter'];
             goto BAD_REQUEST;
         } catch (Scheme $e) {
             $response->code = 400;
-            $response->view = 'You sent a request that scheme is not valid.';
+            $response->view = $this->message['Scheme'];
             goto BAD_REQUEST;
         } catch (MethodNotAllowed $e) {
             $response->code = 405;
-            $response->view = 'The requested method is not allowed for this URI.';
+            $response->view = $this->message['MethodNotAllowed'];
             goto METHOD_NOT_ALLOWED;
         } catch (Binding $e) {
             goto INVALID_BINDING;
@@ -101,8 +181,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
         if (PHP_SAPI === 'cli') {
             $response->view = "Internal error occurred ({$exceptionId})";
         } else {
-            // exception screen in develop
-            $response->view = include __DIR__ . "/exception.tpl.php";
+            $response->view = $this->getView($e);
         }
         $response->headers['X-EXCEPTION-CLASS'] = get_class($e);
         $response->headers['X-EXCEPTION-MESSAGE'] = str_replace(PHP_EOL, ' ', $e->getMessage());
@@ -115,6 +194,23 @@ class ExceptionHandler implements ExceptionHandlerInterface
         $this->writeExceptionLog($e, $exceptionId);
 
         return $response;
+    }
+
+    private function getView($e)
+    {
+        // exception screen in develop
+        if (isset($this->injector)) {
+            $dependencyBindings = (string) $this->injector;
+            $modules = $this->injector->getModule()->modules;
+        } elseif (isset($e->module)) {
+            $dependencyBindings = (string) $e->module;
+            $modules = $e->module->modules;
+        } else {
+            $dependencyBindings = 'n/a';
+            $modules = 'n/a';
+        }
+        return include $this->viewTemplate;
+
     }
 
     /**
@@ -134,7 +230,8 @@ class ExceptionHandler implements ExceptionHandlerInterface
         }
         $data .= (string)$e;
         $file = "{$this->logDir}/" . $filename;
-        file_put_contents($file, $data);
+        if (is_writable($file)) {
+            file_put_contents($file, $data);
+        }
     }
 }
-

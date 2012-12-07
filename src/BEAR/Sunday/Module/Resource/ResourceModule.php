@@ -23,17 +23,6 @@ class ResourceModule extends AbstractModule
     private $injector;
 
     /**
-     * Constructor
-     *
-     * @param InjectorInterface $injector
-     */
-    public function __construct(InjectorInterface $injector)
-    {
-        $this->injector = $injector;
-        parent::__construct();
-    }
-
-    /**
      * Configure
      *
      * @return void
@@ -48,5 +37,7 @@ class ResourceModule extends AbstractModule
         $this->bind('BEAR\Resource\LoggerInterface')->toProvider('BEAR\Sunday\Module\Provider\ResourceLoggerProvider');
         $this->bind('BEAR\Resource\Referable')->to('BEAR\Resource\A');
         $this->bind('BEAR\Sunday\Resource\CacheControl\Taggable')->to('BEAR\Sunday\Resource\CacheControl\Etag');
+        $this->bind('Aura\Signal\Manager')->toProvider('BEAR\Sunday\Module\Provider\SignalProvider')->in(Scope::SINGLETON);
+        $this->bind('Guzzle\Parser\UriTemplate\UriTemplateInterface')->to('Guzzle\Parser\UriTemplate\UriTemplate');
     }
 }

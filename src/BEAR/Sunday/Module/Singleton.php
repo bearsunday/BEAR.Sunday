@@ -20,7 +20,7 @@ trait Singleton
      *
      * @return mixed
      */
-    abstract function newInstance();
+    abstract public function newInstance();
 
     /**
      * Return singleton instance

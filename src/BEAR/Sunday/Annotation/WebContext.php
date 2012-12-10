@@ -19,4 +19,3 @@ namespace BEAR\Sunday\Annotation;
 final class WebContext implements Annotation
 {
 }
-

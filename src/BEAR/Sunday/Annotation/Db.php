@@ -19,4 +19,3 @@ namespace BEAR\Sunday\Annotation;
 final class Db implements Annotation
 {
 }
-

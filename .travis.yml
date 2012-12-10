@@ -13,7 +13,7 @@ before_script:
  - pear install pear.phpunit.de/DbUnit
  - wget http://getcomposer.org/composer.phar
  - wget http://cs.sensiolabs.org/get/php-cs-fixer.phar
- - php composer.phar update
+ - php composer.phar install
 script:
  - phpunit --coverage-text
  - output=$(php php-cs-fixer.phar fix -v --dry-run --level=psr2 src); if [[ $output ]]; then while read -r line; do echo -e "\e[00;31m$line\e[00m"; done <<< "$output"; false; fi;

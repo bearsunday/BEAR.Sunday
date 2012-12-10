@@ -12,6 +12,7 @@ before_script:
  - pear install pear.phpunit.de/PHP_Invoker
  - pear install pear.phpunit.de/DbUnit
  - wget http://getcomposer.org/composer.phar
+ - wget http://cs.sensiolabs.org/get/php-cs-fixer.phar
  - php composer.phar update
 script:
  - phpunit --coverage-text

@@ -27,16 +27,15 @@ class FrameworkModule extends AbstractModule
      */
     protected function configure()
     {
-        // install
+        // core
         $this->install(new Module\Framework\ConstantModule);
+        $this->install(new Module\Di\InjectorModule);
+        $this->install(new Module\Resource\ResourceModule);
+        $this->install(new Module\Code\CachedAnnotationModule);
+        // extension
+        $this->install(new Module\Cache\ApcModule);
         $this->install(new Module\Log\ApplicationLoggerModule);
-        $injector = Injector::create([$this], true);
-        $this->install(new Module\Di\InjectorModule($injector));
-        $this->install(new Module\Code\AnnotationModule);
-        $this->install(new Module\Signal\SignalModule);
-        $this->install(new Module\Resource\ResourceModule($injector));
-        $this->install(new Module\ExceptionHandle\HandleModule);
         $this->install(new Module\Output\ConsoleModule);
-        $this->install(new Module\Http\GuzzleModule);
+        $this->install(new Module\TemplateEngine\ProdRendererModule);
     }
 }

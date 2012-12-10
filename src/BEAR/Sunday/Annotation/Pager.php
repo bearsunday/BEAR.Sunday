@@ -25,4 +25,3 @@ final class Pager implements Annotation
      */
     public $limit = 10;
 }
-

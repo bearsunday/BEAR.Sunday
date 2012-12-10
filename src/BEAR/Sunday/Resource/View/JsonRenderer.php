@@ -43,4 +43,3 @@ class JsonRenderer implements Renderable
         return $ro->view;
     }
 }
-

@@ -24,7 +24,6 @@ trait ResourceInject
      *
      * @param ResourceInterface $resource
      *
-     * @return void
      * @Inject
      */
     public function setResource(ResourceInterface $resource)

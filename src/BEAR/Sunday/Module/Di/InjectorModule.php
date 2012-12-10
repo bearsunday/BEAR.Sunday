@@ -27,11 +27,11 @@ class InjectorModule extends AbstractModule
      *
      * @param InjectorInterface $injector
      */
-    public function __construct(InjectorInterface $injector)
+    public function construct(InjectorInterface $injector)
     {
         $this->injector = $injector;
-        //$logger = $this->requestInjection('BEAR\Sunday\Inject\Logger\Adapter');
-        //$this->injector->setLogger($logger);
+        $logger = $this->requestInjection('BEAR\Sunday\Inject\Logger\Adapter');
+        $this->injector->setLogger($logger);
         parent::__construct();
     }
 
@@ -42,8 +42,10 @@ class InjectorModule extends AbstractModule
      */
     protected function configure()
     {
-        $config = $this->injector->getContainer()->getForge()->getConfig();
+        $config = $this->dependencyInjector->getContainer()->getForge()->getConfig();
         $this->bind('Aura\Di\ConfigInterface')->toInstance($config);
-        $this->bind('Ray\Di\InjectorInterface')->toInstance($this->injector);
+        $this->bind('Ray\Di\InjectorInterface')->toInstance($this->dependencyInjector);
+        $module = $this->dependencyInjector->getModule();
+        $this->bind('Ray\Di\AbstractModule')->toInstance($module);
     }
 }

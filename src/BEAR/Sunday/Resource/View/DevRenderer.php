@@ -171,7 +171,7 @@ class DevRenderer implements Renderable
         $tabJs = strpos($body, '/assets/js/bootstrap-tab.js') ? '' : '<script src="/assets/js/bootstrap-tab.js"></script>';
         $toolLoad = <<<EOT
 <!-- BEAR.Sunday dev tool load -->
-<script src="http://www.google.com/jsapi"></script>
+<script src="//www.google.com/jsapi"></script>
 <script>
 if (typeof jQuery == "undefined") {
     google.load("jquery", "1.7.1");
@@ -425,8 +425,16 @@ EOT;
     {
         // memory, time
         $result = self::BADGE_PROFILE . self::DIV_WELL;
-        $time = number_format($resourceObject->headers[DevInvoker::HEADER_EXECUTION_TIME], 3);
-        $memory = number_format($resourceObject->headers[DevInvoker::HEADER_MEMORY_USAGE]);
+        if (isset($resourceObject->headers[DevInvoker::HEADER_EXECUTION_TIME])) {
+            $time = number_format($resourceObject->headers[DevInvoker::HEADER_EXECUTION_TIME], 3);
+        } else {
+            $time = 0;
+        }
+        if (isset($resourceObject->headers[DevInvoker::HEADER_MEMORY_USAGE])) {
+            $memory = number_format($resourceObject->headers[DevInvoker::HEADER_MEMORY_USAGE]);
+        } else {
+            $memory = 0;
+        }
         $result .= <<<EOT
 <span class="icon-time"></span> {$time} sec <span class="icon-signal"></span> {$memory} bytes
 EOT;

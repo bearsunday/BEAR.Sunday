@@ -35,7 +35,7 @@ class Transactional implements MethodInterceptor
             $invocation->proceed();
             $db->commit();
         } catch (Exception $e) {
-            $db->roleback();
+            $db->rollback();
         }
     }
 }

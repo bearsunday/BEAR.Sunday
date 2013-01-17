@@ -49,6 +49,11 @@ class Renderer implements Renderable
      */
     public function render(AbstractObject $resourceObject)
     {
+        if (is_scalar($resourceObject->body)) {
+            $resourceObject->view = $resourceObject->body;
+            return (string)$resourceObject->body;
+        }
+
         $class = ($resourceObject instanceof Weave) ? get_class($resourceObject->___getObject()) : get_class($resourceObject);
         $file = (new ReflectionClass($class))->getFileName();
 

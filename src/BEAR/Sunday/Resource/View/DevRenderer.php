@@ -111,6 +111,10 @@ class DevRenderer implements Renderable
      */
     public function render(AbstractObject $resourceObject)
     {
+        if (is_scalar($resourceObject->body)) {
+            $resourceObject->view = $resourceObject->body;
+            return $resourceObject->body;
+        }
         if (PHP_SAPI === 'cli') {
             // delegate original method to avoid render dev html.
             return (new Renderer($this->templateEngineAdapter))->render($resourceObject);

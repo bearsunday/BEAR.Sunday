@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Application;
 
-use BEAR\Sunday\Application\ContextInterface;
+use BEAR\Sunday\Application\AppInterface;
 
 use Ray\Di\Di\ImplementedBy;
 
@@ -25,5 +25,5 @@ interface LoggerInterface
      *
      * @param Context $app
      */
-    public function register(ContextInterface $app);
+    public function register(AppInterface $app);
 }

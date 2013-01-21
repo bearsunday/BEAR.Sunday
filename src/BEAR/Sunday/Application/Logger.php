@@ -42,7 +42,7 @@ final class Logger implements LoggerInterface
      * @see BEAR\Sunday\Application.LoggerInterface::log()
      * @noinspection PhpUnusedPrivateMethodInspection
      */
-    private function logOnShutdown(ContextInterface $app)
+    private function logOnShutdown(AppInterface $app)
     {
         $logs = new ResourceLogIterator($this->resourceLogger);
         foreach ($logs as $log) {
@@ -58,7 +58,7 @@ final class Logger implements LoggerInterface
      * (non-PHPdoc)
      * @see BEAR\Sunday\Application.LoggerInterface::register()
      */
-    public function register(ContextInterface $app)
+    public function register(AppInterface $app)
     {
         register_shutdown_function(
             function () use ($app) {

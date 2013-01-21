@@ -13,6 +13,6 @@ namespace BEAR\Sunday\Application;
  * @package    BEAR.Sunday
  * @subpackage Application
  */
-interface ContextInterface
+interface AppInterface
 {
 }

@@ -13,7 +13,7 @@ namespace BEAR\Sunday\Resource\View;
  * @package    BEAR.Sunday
  * @subpackage Resource
  */
-interface TemplateEngineAdapter
+interface TemplateEngineAdapterInterface
 {
     /**
      * Assigns a variable

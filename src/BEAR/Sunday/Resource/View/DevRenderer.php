@@ -7,12 +7,12 @@
  */
 namespace BEAR\Sunday\Resource\View;
 
-use BEAR\Resource\Object as ResourceObject;
+use BEAR\Resource\ObjectInterface as ResourceObject;
 use BEAR\Resource\AbstractObject;
-use BEAR\Resource\Renderable;
+use BEAR\Resource\RenderInterface;
 use BEAR\Resource\Request;
 use BEAR\Resource\DevInvoker;
-use BEAR\Sunday\Resource\View\TemplateEngineAdapter;
+use BEAR\Sunday\Resource\View\TemplateEngineAdapterInterface;
 use BEAR\Sunday\Interceptor\CacheLoader;
 use ReflectionClass;
 use ReflectionObject;
@@ -29,7 +29,7 @@ use Ray\Di\Di\Named;
  * @subpackage View
  * @SuppressWarnings(PHPMD)
  */
-class DevRenderer implements Renderable
+class DevRenderer implements RenderInterface
 {
     const NO_CACHE = '';
     const WRITE_CACHE = 'label-important';
@@ -100,14 +100,14 @@ class DevRenderer implements Renderable
      *
      * @Inject
      */
-    public function __construct(TemplateEngineAdapter $templateEngineAdapter)
+    public function __construct(TemplateEngineAdapterInterface $templateEngineAdapter)
     {
         $this->templateEngineAdapter = $templateEngineAdapter;
     }
 
     /**
      * (non-PHPdoc)
-     * @see BEAR\Resource.Renderable::render()
+     * @see BEAR\Resource.RenderInterface::render()
      */
     public function render(AbstractObject $resourceObject)
     {

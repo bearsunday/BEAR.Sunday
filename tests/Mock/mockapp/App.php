@@ -6,14 +6,14 @@
  */
 namespace mockapp;
 
-use BEAR\Sunday\Application\Context;
+use BEAR\Sunday\Application\ContextInterface;
 
 /**
  * Applicaton
  *
  * @package App.appmock
  */
-final class App implements Context
+final class App implements ContextInterface
 {
     public $name = __NAMESPACE__;
     public $path = __DIR__;

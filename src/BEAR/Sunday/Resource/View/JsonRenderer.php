@@ -8,8 +8,8 @@
 namespace BEAR\Sunday\Resource\View;
 
 use BEAR\Resource\AbstractObject;
-use BEAR\Resource\Requestable;
-use BEAR\Resource\Renderable;
+use BEAR\Resource\RequestInterface;
+use BEAR\Resource\RenderInterface;
 
 /**
  * Request renderer
@@ -17,11 +17,11 @@ use BEAR\Resource\Renderable;
  * @package    BEAR.Sunday
  * @subpackage View
  */
-class JsonRenderer implements Renderable
+class JsonRenderer implements RenderInterface
 {
     /**
      * (non-PHPdoc)
-     * @see BEAR\Resource.Renderable::render()
+     * @see BEAR\Resource.RenderInterface::render()
      */
     public function render(AbstractObject $ro)
     {
@@ -31,7 +31,7 @@ class JsonRenderer implements Renderable
             array_walk_recursive(
                 $ro->body,
                 function (&$element) {
-                    if ($element instanceof Requestable) {
+                    if ($element instanceof RequestInterface) {
                         /** @var $element Callable */
                         $element = $element();
                     }
@@ -39,7 +39,6 @@ class JsonRenderer implements Renderable
             );
         }
         $ro->view = @json_encode($ro->body, JSON_PRETTY_PRINT);
-
         return $ro->view;
     }
 }

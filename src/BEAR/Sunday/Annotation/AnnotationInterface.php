@@ -5,13 +5,13 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Web;
+namespace BEAR\Sunday\Annotation;
 
 /**
- * Generic exception interface
+ * Annotation
  *
  * @package BEAR.Sunday
  */
-interface Exception
+interface AnnotationInterface
 {
 }

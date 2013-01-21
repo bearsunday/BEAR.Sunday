@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Resource\CacheControl;
 
-use BEAR\Resource\Object as ResourceObject;
+use BEAR\Resource\ObjectInterface as ResourceObject;
 
 /**
  * Resource Links
@@ -15,11 +15,11 @@ use BEAR\Resource\Object as ResourceObject;
  * @package    BEAR.Sunday
  * @subpackage Page
  */
-final class Etag implements Taggable
+final class Etag implements TagInterface
 {
     /**
      * (non-PHPdoc)
-     * @see BEAR\Sunday\Resource\CacheControl.Taggable::getEtag()
+     * @see BEAR\Sunday\Resource\CacheControl.TagInterface::getEtag()
      */
     public function getEtag($object, $args)
     {

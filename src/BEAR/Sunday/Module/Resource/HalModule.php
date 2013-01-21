@@ -25,6 +25,6 @@ class HalModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('BEAR\Resource\Renderable')->to('BEAR\Sunday\Resource\View\HalRenderer')->in(Scope::SINGLETON);
+        $this->bind('BEAR\Resource\RenderInterface')->to('BEAR\Sunday\Resource\View\HalRenderer')->in(Scope::SINGLETON);
     }
 }

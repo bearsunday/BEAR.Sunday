@@ -14,7 +14,7 @@ namespace BEAR\Sunday\Application;
  *
  * @ImplementedBy("BEAR\Sunday\Application\Logger")
  */
-interface Fireable
+interface FireInterface
 {
     /**
      * Fire web console log (FirePHP)

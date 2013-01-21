@@ -66,7 +66,7 @@ include $system . '/src/BEAR/Sunday/Output/Console.php';
 include $system . '/src/BEAR/Sunday/Resource/CacheControl/Taggable.php';
 include $system . '/src/BEAR/Sunday/Resource/CacheControl/Etag.php';
 include $system . '/vendor/bear/resource/src/BEAR/Resource/DevInvoker.php';
-include $system . '/vendor/bear/resource/src/BEAR/Resource/Renderable.php';
+include $system . '/vendor/bear/resource/src/BEAR/Resource/RenderInterface.php';
 include $system . '/src/BEAR/Sunday/Resource/View/DevRenderer.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Advice.php';
 include $system . '/vendor/Ray/Aop/src/Ray/Aop/Interceptor.php';

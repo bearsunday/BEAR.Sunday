@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Output;
 
-use BEAR\Resource\Object as ResourceObject;
+use BEAR\Resource\ObjectInterface as ResourceObject;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Guzzle\Parser\UriTemplate\UriTemplate;
 

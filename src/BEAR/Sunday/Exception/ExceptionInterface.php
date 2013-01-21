@@ -12,6 +12,6 @@ namespace BEAR\Sunday\Exception;
  *
  * @package BEAR.Sunday
  */
-interface Exception
+interface ExceptionInterface
 {
 }

@@ -16,6 +16,6 @@ namespace BEAR\Sunday\Annotation;
  * @package    BEAR.Sunday
  * @subpackage Annotation
  */
-final class Time implements Annotation
+final class Time implements AnnotationInterface
 {
 }

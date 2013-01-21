@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Inject;
 
-use BEAR\Sunday\Resource\CacheControl\Taggable;
+use BEAR\Sunday\Resource\CacheControl\TagInterface;
 use Ray\Di\Di\Inject;
 
 /**
@@ -32,7 +32,7 @@ trait EtagInject
      *
      * @Inject
      */
-    public function setEtag(Taggable $etag)
+    public function setEtag(TagInterface $etag)
     {
         $this->etag = $etag;
     }

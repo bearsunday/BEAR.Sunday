@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Application;
 
-use BEAR\Resource\Object as ResourceObject;
+use BEAR\Resource\ObjectInterface as ResourceObject;
 use BEAR\Resource\Request;
 use IteratorIterator;
 use Traversable;
@@ -18,7 +18,7 @@ use FirePHP;
  *
  * @package BEAR.Sunday
  */
-final class ResourceLogIterator extends IteratorIterator implements Fireable
+final class ResourceLogIterator extends IteratorIterator implements FireInterface
 {
     /**
      * Resource request

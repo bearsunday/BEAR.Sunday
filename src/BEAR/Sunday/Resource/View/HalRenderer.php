@@ -10,7 +10,7 @@ namespace BEAR\Sunday\Resource\View;
 use BEAR\Resource\Link;
 use BEAR\Resource\AbstractObject;
 use BEAR\Resource\Requestable;
-use BEAR\Resource\Renderable;
+use BEAR\Resource\RenderInterface;
 use Nocarrier\Hal;
 
 /**
@@ -19,11 +19,11 @@ use Nocarrier\Hal;
  * @package    BEAR.Sunday
  * @subpackage View
  */
-class HalRenderer implements Renderable
+class HalRenderer implements RenderInterface
 {
     /**
      * (non-PHPdoc)
-     * @see BEAR\Resource.Renderable::render()
+     * @see BEAR\Resource.RenderInterface::render()
      */
     public function render(AbstractObject $ro)
     {

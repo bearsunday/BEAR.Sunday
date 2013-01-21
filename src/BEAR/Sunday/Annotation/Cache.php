@@ -16,7 +16,7 @@ namespace BEAR\Sunday\Annotation;
  * @package    BEAR.Sunday
  * @subpackage Annotation
  */
-final class Cache implements Annotation
+final class Cache implements AnnotationInterface
 {
     /**
      * Cache time

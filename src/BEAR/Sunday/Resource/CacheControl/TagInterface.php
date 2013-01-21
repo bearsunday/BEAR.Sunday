@@ -12,7 +12,7 @@ namespace BEAR\Sunday\Resource\CacheControl;
  *
  * @package BEAR.Sunday
  */
-interface Taggable
+interface TagInterface
 {
     /**
      * Get etag

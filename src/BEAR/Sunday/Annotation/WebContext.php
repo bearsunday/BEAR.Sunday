@@ -16,6 +16,6 @@ namespace BEAR\Sunday\Annotation;
  * @package    BEAR.Sunday
  * @subpackage Annotation
  */
-final class WebContext implements Annotation
+final class WebContext implements AnnotationInterface
 {
 }

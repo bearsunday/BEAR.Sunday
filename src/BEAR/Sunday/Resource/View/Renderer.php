@@ -7,9 +7,9 @@
  */
 namespace BEAR\Sunday\Resource\View;
 
-use BEAR\Resource\Renderable;
+use BEAR\Resource\RenderInterface;
 use BEAR\Resource\AbstractObject;
-use BEAR\Sunday\Resource\View\TemplateEngineAdapter;
+use BEAR\Sunday\Resource\View\TemplateEngineAdapterInterface;
 use Ray\Aop\Weave;
 use ReflectionClass;
 use Ray\Di\Di\Inject;
@@ -20,7 +20,7 @@ use Ray\Di\Di\Inject;
  * @package    BEAR.Sunday
  * @subpackage View
  */
-class Renderer implements Renderable
+class Renderer implements RenderInterface
 {
     /**
      * Template engine adapter
@@ -37,14 +37,14 @@ class Renderer implements Renderable
      * @Inject
      * @SuppressWarnings("long")
      */
-    public function __construct(TemplateEngineAdapter $templateEngineAdapter)
+    public function __construct(TemplateEngineAdapterInterface $templateEngineAdapter)
     {
         $this->templateEngineAdapter = $templateEngineAdapter;
     }
 
     /**
      * (non-PHPdoc)
-     * @see BEAR\Resource.Renderable::render()
+     * @see BEAR\Resource.RenderInterface::render()
      * @SuppressWarnings("long")
      */
     public function render(AbstractObject $resourceObject)

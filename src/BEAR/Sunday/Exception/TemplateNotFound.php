@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Exception;
 
-use BEAR\Sunday\Exception\Exception;
+use BEAR\Sunday\Exception\ExceptionInterface;
 
 /**
  * Template Not found
@@ -15,6 +15,6 @@ use BEAR\Sunday\Exception\Exception;
  * @package   BEAR.Sunday
  * @subpackge Exception
  */
-class TemplateNotFound extends \LogicException implements Exception
+class TemplateNotFound extends \LogicException implements ExceptionInterface
 {
 }

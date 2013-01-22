@@ -24,6 +24,6 @@ class ConsoleModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('BEAR\Sunday\Output\ConsoleInterface')->to('BEAR\Sunday\Output\Console');
+        $this->bind('BEAR\Sunday\Output\ConsoleInterface')->to('BEAR\Package\Output\Console');
     }
 }

@@ -14,7 +14,7 @@ use Ray\Di\Di\ImplementedBy;
  *
  * @package    BEAR.Sunday
  *
- * @ImplementedBy("BEAR\Sunday\Output\Console")
+ * @ImplementedBy("BEAR\Package\Output\Console")
  */
 interface ConsoleInterface
 {

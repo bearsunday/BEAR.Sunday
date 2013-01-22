@@ -9,7 +9,6 @@ namespace BEAR\Sunday\Module\Provider;
 
 use BEAR\Sunday\Inject\TmpDirInject;
 use BEAR\Sunday\Module\AbstractSingletonProvider;
-use BEAR\Sunday\Inject\TmpDir;
 use PDO;
 
 /**

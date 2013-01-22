@@ -49,7 +49,7 @@ class DevRenderer implements RenderInterface
     /**
      * Template engine adapter
      *
-     * @var Templatable
+     * @var TemplateEngineAdapter
      */
     private $templateEngineAdapter;
 
@@ -70,7 +70,7 @@ class DevRenderer implements RenderInterface
     /**
      * Set packageDir
      *
-     * @param unknown $packageDir
+     * @param string $packageDir
      *
      * @Inject
      * @Named("package_dir")

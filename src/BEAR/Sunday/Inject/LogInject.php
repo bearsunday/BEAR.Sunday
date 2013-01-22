@@ -21,7 +21,7 @@ trait LogInject
     /**
      * Logger
      *
-     * @var Log
+     * @var LogAdapterInterface
      */
     private $log;
 

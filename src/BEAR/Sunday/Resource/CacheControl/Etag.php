@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Resource\CacheControl;
 
-use BEAR\Resource\ObjectInterface as ResourceObject;
+use BEAR\Resource\AbstractObject as ResourceObject;
 
 /**
  * Resource Links

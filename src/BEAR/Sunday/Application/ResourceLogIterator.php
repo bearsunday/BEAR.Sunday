@@ -7,8 +7,8 @@
  */
 namespace BEAR\Sunday\Application;
 
-use BEAR\Resource\ObjectInterface as ResourceObject;
-use BEAR\Resource\Request;
+use BEAR\Resource\AbstractObject as ResourceObject;
+use BEAR\Resource\RequestInterface;
 use IteratorIterator;
 use Traversable;
 use FirePHP;
@@ -23,7 +23,7 @@ final class ResourceLogIterator extends IteratorIterator implements FireInterfac
     /**
      * Resource request
      *
-     * @var Request
+     * @var RequestInterface
      */
     private $request;
 
@@ -33,6 +33,11 @@ final class ResourceLogIterator extends IteratorIterator implements FireInterfac
      * @var mixed
      */
     private $result;
+
+    /**
+     * @var \FirePHP
+     */
+    private $firePhp;
 
     /**
      * Return edited current
@@ -59,9 +64,9 @@ final class ResourceLogIterator extends IteratorIterator implements FireInterfac
     /**
      * Format log data
      *
-     * @param  array   $body
+     * @param  mixed $body
      *
-     * @return unknown
+     * @return mixed
      * @todo scan all prop like print_o, then eliminate all resource/PDO/etc.. unrealisable objects...not like this.
      */
     public function format(&$body)
@@ -72,10 +77,11 @@ final class ResourceLogIterator extends IteratorIterator implements FireInterfac
         array_walk_recursive(
             $body,
             function (&$value) {
-                if ($value instanceof Request) {
+                if ($value instanceof RequestInterface) {
                     $value = '(Request) ' . $value->toUri();
                 }
                 if ($value instanceof ResourceObject) {
+                    /** @var $value ResourceObject */
                     $value = '(ResourceObject) ' . get_class($value) . json_encode($value->body);
                 }
                 if ($value instanceof \PDO || $value instanceof \PDOStatement) {

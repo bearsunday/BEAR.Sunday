@@ -22,7 +22,7 @@ trait AInject
     /**
      * App directory path
      *
-     * @var \BEAR\Resource\HrefInterface
+     * @var HrefInterface
      */
     private $a;
 

@@ -7,6 +7,8 @@
  */
 namespace BEAR\Sunday\Web;
 
+use \BEAR\Resource\AbstractObject;
+
 /**
  * Interface for http response
  *
@@ -15,4 +17,10 @@ namespace BEAR\Sunday\Web;
  */
 interface ResponseInterface
 {
+    /**
+     * @param $page
+     *
+     * @return mixed
+     */
+    public function setResource($page);
 }

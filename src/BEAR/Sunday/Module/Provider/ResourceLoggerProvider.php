@@ -9,6 +9,7 @@ namespace BEAR\Sunday\Module\Provider;
 
 use Ray\Di\ProviderInterface;
 use BEAR\Resource\LoggerInterface;
+use BEAR\Sunday\Application\AppInterface;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
@@ -48,7 +49,7 @@ class ResourceLoggerProvider implements ProviderInterface
     /**
      * Return instance
      *
-     * @return Context
+     * @return AppInterface
      */
     public function get()
     {

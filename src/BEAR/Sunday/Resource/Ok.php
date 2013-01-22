@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Resource;
 
-use BEAR\Resource\AbstractObject as ResourceObject;
+use BEAR\Resource\AbstractObject;
 
 /**
  * Ok page
@@ -15,7 +15,7 @@ use BEAR\Resource\AbstractObject as ResourceObject;
  * @package    BEAR.Sunday
  * @subpackage Page
  */
-final class Ok extends AbstractObject implements ResourceObject
+final class Ok extends AbstractObject
 {
     /**
      * Code

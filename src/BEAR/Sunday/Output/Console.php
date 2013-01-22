@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Output;
 
-use BEAR\Resource\ObjectInterface as ResourceObject;
+use BEAR\Resource\AbstractObject as ResourceObject;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Guzzle\Parser\UriTemplate\UriTemplate;
 
@@ -26,7 +26,7 @@ final class Console implements ConsoleInterface
     /**
      * Console output
      *
-     * @var \Symfony\Component\Console\Output\ConsoleOutput
+     * @var ConsoleOutput
      */
     private $console;
 

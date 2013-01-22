@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Resource\View;
 
-use BEAR\Resource\ObjectInterface as ResourceObject;
+use BEAR\Resource\AbstractObject as ResourceObject;
 use BEAR\Resource\AbstractObject;
 use BEAR\Resource\RenderInterface;
 use BEAR\Resource\Request;
@@ -49,7 +49,7 @@ class DevRenderer implements RenderInterface
     /**
      * Template engine adapter
      *
-     * @var TemplateEngineAdapter
+     * @var TemplateEngineAdapterInterface
      */
     private $templateEngineAdapter;
 

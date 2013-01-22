@@ -46,7 +46,7 @@ final class Logger implements LoggerInterface
     {
         $logs = new ResourceLogIterator($this->resourceLogger);
         foreach ($logs as $log) {
-            /** @var $log BEAR\Sunday\Application\ResourceLogIterator */
+            /** @var $log ResourceLogIterator */
             $log->apcLog();
         }
         unset($app);

@@ -23,7 +23,7 @@ class CachedReaderProvider implements Provide
     /**
      * Return instance
      *
-     * @return CacheAdapter
+     * @return CachedReader
      */
     public function get()
     {

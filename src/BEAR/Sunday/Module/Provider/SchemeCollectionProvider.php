@@ -21,6 +21,8 @@ use Ray\Di\ProviderInterface as Provide;
  */
 class SchemeCollectionProvider implements Provide
 {
+    public $namespace;
+
     /**
      * Constructor
      *
@@ -47,19 +49,6 @@ class SchemeCollectionProvider implements Provide
     }
 
     /**
-     * Set helloworld application dependency injector
-     *
-     * @param Di $injector
-     *
-     * @Inject
-     * @Named("HelloDi")
-     */
-    public function setHelloInjector(Di $injector)
-    {
-        $this->helloInjector = $injector;
-    }
-
-    /**
      * Return resource adapter set.
      *
      * @return array
@@ -69,7 +58,6 @@ class SchemeCollectionProvider implements Provide
         $schemeCollection = new SchemeCollection;
         $schemeCollection->scheme('app')->host('self')->toAdapter(new App($this->injector, $this->namespace, 'Resource\App'));
         $schemeCollection->scheme('page')->host('self')->toAdapter(new App($this->injector, $this->namespace, 'Resource\Page'));
-        // $schemeCollection->scheme('page')->host('helloworld')->toAdapter(new App($this->helloInjector, 'helloworld', 'Resource\Page'));
         $schemeCollection->scheme('http')->host('*')->toAdapter(new Http);
 
         return $schemeCollection;

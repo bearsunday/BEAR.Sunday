@@ -21,6 +21,11 @@ use Ray\Di\Di\Named;
 class ResourceLoggerProvider implements ProviderInterface
 {
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * Set logger name
      *
      * @param LoggerInterface $logger

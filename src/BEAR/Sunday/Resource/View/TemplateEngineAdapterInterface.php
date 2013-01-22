@@ -42,4 +42,11 @@ interface TemplateEngineAdapterInterface
      * @return string rendered template output
      */
     public function fetch($template);
+
+    /**
+     * Return template full path.
+     *
+     * @return string
+     */
+    public function getTemplateFile();
 }

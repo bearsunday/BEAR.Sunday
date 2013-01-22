@@ -9,7 +9,7 @@ namespace BEAR\Sunday\Resource\View;
 
 use BEAR\Resource\Link;
 use BEAR\Resource\AbstractObject;
-use BEAR\Resource\Requestable;
+use BEAR\Resource\RequestInterface;
 use BEAR\Resource\RenderInterface;
 use Nocarrier\Hal;
 
@@ -33,7 +33,7 @@ class HalRenderer implements RenderInterface
             array_walk_recursive(
                 $ro->body,
                 function (&$element) {
-                    if ($element instanceof Requestable) {
+                    if ($element instanceof RequestInterface) {
                         /** @var $element Callable */
                         $element = $element();
                     }

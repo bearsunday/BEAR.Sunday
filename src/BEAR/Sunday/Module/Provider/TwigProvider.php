@@ -8,13 +8,15 @@
 namespace BEAR\Sunday\Module\Provider;
 
 use BEAR\Sunday\Inject\TmpDirInject;
+use Ray\Di\ProviderInterface;
+use Twig_Environment;
 
 /**
  * Twig
  *
  * @see http://twig.sensiolabs.org/
  */
-class TwigProvider implements Provide
+class TwigProvider implements ProviderInterface
 {
     use TmpDirInject;
 
@@ -25,7 +27,7 @@ class TwigProvider implements Provide
      */
     public function get()
     {
-        $twig = new \Twig_Environment(
+        $twig = new Twig_Environment(
             new \Twig_Loader_Filesystem('/'),
             [
                 'cache' => $this->tmpDir . '/tmp/twig',

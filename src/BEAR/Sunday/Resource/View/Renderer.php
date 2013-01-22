@@ -25,14 +25,14 @@ class Renderer implements RenderInterface
     /**
      * Template engine adapter
      *
-     * @var Templatable
+     * @var TemplateEngineAdapterInterface
      */
     private $templateEngineAdapter;
 
     /**
      * ViewRenderer Setter
      *
-     * @param TemplateEngineAdapter $templateEngineAdapter
+     * @param TemplateEngineAdapterInterface $templateEngineAdapter
      *
      * @Inject
      * @SuppressWarnings("long")

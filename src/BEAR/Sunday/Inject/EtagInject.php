@@ -21,14 +21,14 @@ trait EtagInject
     /**
      * Definition
      *
-     * @var Taggable
+     * @var TagInterface
      */
     private $etag;
 
     /**
      * Set etag
      *
-     * @param Taggable $etag
+     * @param TagInterface $etag
      *
      * @Inject
      */

@@ -96,7 +96,7 @@ class DevRenderer implements RenderInterface
     /**
      * ViewRenderer Setter
      *
-     * @param TemplateEngineAdapter $templateEngineAdapter
+     * @param TemplateEngineAdapterInterface $templateEngineAdapter
      *
      * @Inject
      */

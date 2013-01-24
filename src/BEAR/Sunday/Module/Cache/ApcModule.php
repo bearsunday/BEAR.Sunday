@@ -25,6 +25,6 @@ class ApcModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('Guzzle\Common\Cache\AbstractCacheAdapter')->toProvider('BEAR\Sunday\Module\Provider\ApcCacheProvider')->in(Scope::SINGLETON);
+        $this->bind('Guzzle\Cache\AbstractCacheAdapter')->toProvider('BEAR\Sunday\Module\Provider\ApcCacheProvider')->in(Scope::SINGLETON);
     }
 }

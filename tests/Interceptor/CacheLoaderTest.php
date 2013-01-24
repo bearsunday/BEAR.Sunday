@@ -3,12 +3,12 @@
 namespace BEAR\Sunday\Tests;
 
 use BEAR\Sunday\Framework\Framework;
-use Guzzle\Common\Cache\CacheAdapterInterface as Cache;
+use Guzzle\Cache\CacheAdapterInterface as Cache;
 use BEAR\Sunday\Interceptor\CacheLoader;
 use Ray\Di\Config;
 use Ray\Di\Annotation;
 use Ray\Di\Definition;
-use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
+use Guzzle\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Doctrine\Common\Cache\ArrayCache as CacheStorage;
 use Ray\Aop\ReflectiveMethodInvocation;
 use BEAR\Sunday\Annotation\Cache as CacheAnnotation;

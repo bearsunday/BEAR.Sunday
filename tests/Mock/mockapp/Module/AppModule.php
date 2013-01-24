@@ -5,7 +5,7 @@ use Ray\Di\AbstractModule;
 use Ray\Di\InjectorInterface as Di;
 use Ray\Di\Injector;
 
-// use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
+// use Guzzle\Cache\DoctrineCacheAdapter as CacheAdapter;
 // use Doctrine\Common\Cache\ApcCache as CacheBackEnd;
 
 use Zend\Cache\Backend\File as CacheBackEnd;

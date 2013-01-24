@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Module\Provider;
 
 use Doctrine\Common\Cache\ApcCache as Cache;
-use Guzzle\Common\Cache\DoctrineCacheAdapter as CacheAdapter;
+use Guzzle\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Ray\Di\ProviderInterface as Provide;
 
 /**

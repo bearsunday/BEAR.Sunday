@@ -9,7 +9,7 @@ namespace BEAR\Sunday\Interceptor;
 
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
-use Guzzle\Common\Cache\CacheAdapterInterface;
+use Guzzle\Cache\CacheAdapterInterface;
 use BEAR\Sunday\Inject\EtagInject;
 use Exception;
 use Ray\Di\Di\Inject;

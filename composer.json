@@ -31,7 +31,7 @@
         "ray/di"                 : ">=1.0.0-beta3",
         "ray/aop"                : ">=1.0.0-beta2",
         "bear/resource"          : ">=0.5.1",
-        "guzzle/guzzle"          : "2.7.*",
+        "guzzle/guzzle"          : "3.0.*",
         "nocarrier/hal"          : "dev-master"
     },
     "autoload": {

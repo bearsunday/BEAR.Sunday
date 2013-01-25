@@ -5,9 +5,8 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Interceptor;
+namespace BEAR\Sunday\Module\Cqrs\Interceptor;
 
-use BEAR\Sunday\Interceptor\Cache\EtagTrait;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 use Guzzle\Cache\CacheAdapterInterface;

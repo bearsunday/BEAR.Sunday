@@ -5,7 +5,7 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Interceptor\Cache;
+namespace BEAR\Sunday\Module\Cqrs\Interceptor;
 
 use BEAR\Resource\AbstractObject as ResourceObject;
 

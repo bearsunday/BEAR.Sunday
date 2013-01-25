@@ -5,7 +5,9 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Resource\View;
+namespace BEAR\Sunday\Extension\TemplateEngine;
+
+use BEAR\Sunday\Extension\ExtensionInterface;
 
 /**
  * Interface for template engine adapter
@@ -13,7 +15,7 @@ namespace BEAR\Sunday\Resource\View;
  * @package    BEAR.Sunday
  * @subpackage Resource
  */
-interface TemplateEngineAdapterInterface
+interface TemplateEngineAdapterInterface extends ExtensionInterface
 {
     /**
      * Assigns a variable

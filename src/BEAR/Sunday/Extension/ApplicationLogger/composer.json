@@ -1,0 +1,20 @@
+{
+    "name": "bearsunday/resource_logger",
+    "description": "BEAR.Sunday resource logger component",
+    "keywords": ["bearsunday", "logger"],
+    "authors": [
+        {
+            "name": "Akihito Koriyama",
+            "email": "akihito.koriyama@gmail.com",
+            "homepage": "https://github.com/koriym"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "bear/sunday": "self.version"
+    },
+    "autoload": {
+        "psr-0": { "BEAR\\Sunday\\Extention": "" }
+    },
+    "target-dir": "BEAR/Sunday/Extension"
+}

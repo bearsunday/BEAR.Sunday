@@ -5,7 +5,7 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Resource\CacheControl;
+namespace BEAR\Sunday\Interceptor\Cache;
 
 use BEAR\Resource\AbstractObject as ResourceObject;
 
@@ -15,7 +15,7 @@ use BEAR\Resource\AbstractObject as ResourceObject;
  * @package    BEAR.Sunday
  * @subpackage Page
  */
-final class Etag implements TagInterface
+trait EtagTrait
 {
     /**
      * (non-PHPdoc)

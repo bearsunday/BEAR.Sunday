@@ -6,7 +6,7 @@
  */
 namespace mockapp;
 
-use BEAR\Sunday\Application\AppInterface;
+use BEAR\Sunday\Extension\Application\AppInterface;
 
 /**
  * Applicaton

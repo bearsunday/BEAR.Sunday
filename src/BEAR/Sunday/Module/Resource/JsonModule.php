@@ -25,6 +25,9 @@ class JsonModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('BEAR\Resource\RenderInterface')->to('BEAR\Sunday\Resource\View\JsonRenderer')->in(Scope::SINGLETON);
+        $this
+            ->bind('BEAR\Resource\RenderInterface')
+            ->to('BEAR\Package\Provide\ResourceView\JsonRenderer')
+            ->in(Scope::SINGLETON);
     }
 }

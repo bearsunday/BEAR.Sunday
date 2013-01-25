@@ -5,14 +5,15 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Application;
+namespace BEAR\Sunday\Extension\ConsoleOutput;
+
+use BEAR\Sunday\Extension\ExtensionInterface;
 
 /**
- * Interface for application context
+ * Interface for console output
  *
  * @package    BEAR.Sunday
- * @subpackage Application
  */
-interface AppInterface
+interface ConsoleOutputInterface extends ExtensionInterface
 {
 }

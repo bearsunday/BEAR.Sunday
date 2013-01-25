@@ -8,8 +8,9 @@ use Ray\Di\Definition;
 use BEAR\Resource\Request;
 use BEAR\Resource\Linker;
 use BEAR\Resource\Invoker;
-use BEAR\Sunday\Resource\Ok;
+use BEAR\Resource\AbstractObject;
 use BEAR\Sunday\Resource\View\JsonRenderer;
+
 use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
 class RequestSample
@@ -64,5 +65,46 @@ class JsonRendererTest extends \PHPUnit_Framework_TestCase
   ),
 );
         $this->assertSame($expected, $data);
+    }
+}
+
+final class Ok extends AbstractObject
+{
+    /**
+     * Code
+     *
+     * @var int
+     */
+    public $code = 200;
+
+    /**
+     * Headers
+     *
+     * @var array
+     */
+    public $headers = [];
+
+    /**
+     * Body
+     *
+     * @var mixed
+     */
+    public $body = '';
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+    }
+
+    /**
+     * Get
+     *
+     * @return $this
+     */
+    public function onGet()
+    {
+        return $this;
     }
 }

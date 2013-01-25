@@ -5,7 +5,9 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Resource\Page;
+namespace tests\Mock\ResourceObject;
+
+use BEAR\Resource\AbstractObject;
 
 /**
  * Ok page
@@ -13,7 +15,7 @@ namespace BEAR\Sunday\Resource\Page;
  * @package    BEAR.Sunday
  * @subpackage Page
  */
-final class Ok extends AbstractPage
+final class Ok extends AbstractObject
 {
     /**
      * Code
@@ -41,5 +43,15 @@ final class Ok extends AbstractPage
      */
     public function __construct()
     {
+    }
+
+    /**
+     * Get
+     *
+     * @return $this
+     */
+    public function onGet()
+    {
+        return $this;
     }
 }

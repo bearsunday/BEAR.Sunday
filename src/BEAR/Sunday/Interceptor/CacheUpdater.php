@@ -7,11 +7,11 @@
  */
 namespace BEAR\Sunday\Interceptor;
 
+use BEAR\Sunday\Interceptor\Cache\EtagTrait;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 use Guzzle\Cache\CacheAdapterInterface;
 use ReflectionMethod;
-use BEAR\Sunday\Inject\EtagInject;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
@@ -24,7 +24,7 @@ use Ray\Di\Di\Named;
  */
 class CacheUpdater implements MethodInterceptor
 {
-    use EtagInject;
+    use EtagTrait;
 
     /**
      * Constructor
@@ -48,7 +48,7 @@ class CacheUpdater implements MethodInterceptor
         $ro = $invocation->getThis();
 
         // onGet(void) clear cache
-        $id = $this->etag->getEtag($ro, [0 => null]);
+        $id = $this->getEtag($ro, [0 => null]);
         $this->cache->delete($id);
 
         // onGet($id, $x, $y...) clear cache
@@ -56,7 +56,7 @@ class CacheUpdater implements MethodInterceptor
         $parameterNum = count($getMethod->getParameters());
         // cut as same size and order as onGet
         $slicedInvocationArgs = array_slice($invocation->getArguments(), 0, $parameterNum);
-        $id = $this->etag->getEtag($ro, $slicedInvocationArgs);
+        $id = $this->getEtag($ro, $slicedInvocationArgs);
         $this->cache->delete($id);
 
         return $invocation->proceed();

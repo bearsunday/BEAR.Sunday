@@ -9,7 +9,7 @@ namespace BEAR\Sunday\Module\Provider;
 
 use Ray\Di\ProviderInterface;
 use BEAR\Resource\LoggerInterface;
-use BEAR\Sunday\Application\AppInterface;
+use BEAR\Sunday\Extension\Application\AppInterface;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 

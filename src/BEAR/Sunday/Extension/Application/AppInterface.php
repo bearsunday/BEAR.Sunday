@@ -5,14 +5,14 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Web;
+namespace BEAR\Sunday\Extension\Application;
 
 /**
- * Interface GLOBAL
+ * Interface for application context
  *
  * @package    BEAR.Sunday
- * @subpackage Web
+ * @subpackage Application
  */
-interface GlobalsInterface
+interface AppInterface
 {
 }

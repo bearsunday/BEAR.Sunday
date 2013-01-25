@@ -5,22 +5,20 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Web;
-
-use \BEAR\Resource\AbstractObject;
+namespace BEAR\Sunday\Extension\Router;
 
 /**
- * Interface for http response
+ * Interface for router
  *
  * @package    BEAR.Sunday
  * @subpackage Web
  */
-interface ResponseInterface
+interface RouterInterface
 {
     /**
-     * @param $page
+     * Match route
      *
-     * @return mixed
+     * @return array [$method, $pageUri, $query]
      */
-    public function setResource($page);
+    public function match();
 }

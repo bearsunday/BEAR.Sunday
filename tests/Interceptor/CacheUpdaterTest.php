@@ -3,6 +3,7 @@
 namespace BEAR\Sunday\Tests;
 
 use BEAR\Sunday\Framework\Framework;
+use BEAR\Sunday\Interceptor\CacheLoader;
 use Guzzle\Cache\CacheAdapterInterface as Cache;
 use BEAR\Sunday\Interceptor\CacheUpdater;
 use Ray\Di\Config;
@@ -12,7 +13,6 @@ use Guzzle\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Doctrine\Common\Cache\ArrayCache as CacheStorage;
 use Ray\Aop\ReflectiveMethodInvocation;
 use BEAR\Sunday\Annotation\CacheUpdate;
-use BEAR\Sunday\Resource\CacheControl\Etag;
 use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
 
@@ -29,8 +29,6 @@ class CacheUpdaterTest extends \PHPUnit_Framework_TestCase
         $this->cache = new CacheAdapter(new CacheStorage);
         $config = new Config(new Annotation(new Definition, new Reader));
         $this->cacheUpdater = (new CacheUpdater($this->cache, $config));
-        $this->etag = new Etag;
-        $this->cacheUpdater->setEtag($this->etag);
     }
 
     public function test_New()
@@ -47,7 +45,7 @@ class CacheUpdaterTest extends \PHPUnit_Framework_TestCase
         $annotation->args = [];
         $invocation = new ReflectiveMethodInvocation([$ro, 'onPost'], $args, $interceptors, $annotation);
 
-        $id = $this->etag->getEtag($ro, $args);
+        $id = $this->cacheUpdater->getEtag($ro, $args);
         $cacheData = "cache_data";
         $this->cache->save($id, $cacheData);
         $contents = $this->cache->fetch($id);

@@ -7,10 +7,10 @@
  */
 namespace BEAR\Sunday\Interceptor;
 
+use BEAR\Sunday\Interceptor\Cache\EtagTrait;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 use Guzzle\Cache\CacheAdapterInterface;
-use BEAR\Sunday\Inject\EtagInject;
 use Exception;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
@@ -24,7 +24,7 @@ use Ray\Di\Di\Named;
 
 class CacheLoader implements MethodInterceptor
 {
-    use EtagInject;
+    use EtagTrait;
 
     /**
      * Cache header key
@@ -54,7 +54,7 @@ class CacheLoader implements MethodInterceptor
     {
         $ro = $invocation->getThis();
         $args = $invocation->getArguments();
-        $id = $this->etag->getEtag($ro, $args);
+        $id = $this->getEtag($ro, $args);
 
         $pager = (isset($_GET['_start'])) ? $_GET['_start'] : '';
         $saved = $this->cache->fetch($id);

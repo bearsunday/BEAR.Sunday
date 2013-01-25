@@ -34,8 +34,5 @@ class FrameworkModule extends AbstractModule
         $this->install(new Module\Code\CachedAnnotationModule);
         // extension
         $this->install(new Module\Cache\ApcModule);
-        $this->install(new Module\Log\ApplicationLoggerModule);
-        $this->install(new Module\Output\ConsoleModule);
-        $this->install(new Module\TemplateEngine\ProdRendererModule);
     }
 }

@@ -20,5 +20,5 @@ final class Version
      *
      * Framework version identification
      */
-    const VERSION = '0.5.5';
+    const VERSION = '0.6.0';
 }

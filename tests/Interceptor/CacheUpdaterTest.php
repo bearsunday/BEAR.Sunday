@@ -5,7 +5,7 @@ namespace BEAR\Sunday\Tests;
 use BEAR\Sunday\Framework\Framework;
 use BEAR\Sunday\Interceptor\CacheLoader;
 use Guzzle\Cache\CacheAdapterInterface as Cache;
-use BEAR\Sunday\Interceptor\CacheUpdater;
+use BEAR\Sunday\Module\Cqrs\Interceptor\CacheUpdater;
 use Ray\Di\Config;
 use Ray\Di\Annotation;
 use Ray\Di\Definition;
@@ -33,7 +33,7 @@ class CacheUpdaterTest extends \PHPUnit_Framework_TestCase
 
     public function test_New()
     {
-        $this->assertInstanceOf('BEAR\Sunday\Interceptor\CacheUpdater', $this->cacheUpdater);
+        $this->assertInstanceOf('BEAR\Sunday\Module\Cqrs\Interceptor\CacheUpdater', $this->cacheUpdater);
     }
 
     public function test_invoke()

@@ -7,9 +7,6 @@
  */
 namespace BEAR\Sunday\Inject;
 
-use BEAR\Sunday\Resource\CacheControl\TagInterface;
-use Ray\Di\Di\Inject;
-
 /**
  * Inject etag tagger
  *

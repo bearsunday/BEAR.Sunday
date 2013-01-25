@@ -31,6 +31,7 @@ class InjectorModule extends AbstractModule
     {
         $this->injector = $injector;
         $logger = $this->requestInjection('BEAR\Sunday\Inject\Logger\Adapter');
+        /** @var $logger \Ray\Di\LoggerInterface */
         $this->injector->setLogger($logger);
         parent::__construct();
     }

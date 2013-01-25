@@ -16,6 +16,6 @@ namespace BEAR\Sunday\Annotation;
  * @package    BEAR.Sunday
  * @subpackage Annotation
  */
-final class Transactional implements Annotation
+final class Transactional implements AnnotationInterface
 {
 }

@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Inject;
 
-use BEAR\Resource\Referable;
+use BEAR\Resource\HrefInterface;
 use Ray\Di\Di\Inject;
 
 
@@ -22,19 +22,19 @@ trait AInject
     /**
      * App directory path
      *
-     * @var \BEAR\Resource\A
+     * @var HrefInterface
      */
     private $a;
 
     /**
      * A(anchor) setter
      *
-     * @param Referable $a
+     * @param HrefInterface $a
      *
      * @return void
      * @Inject
      */
-    public function setAnchor(Referable $a)
+    public function setAnchor(HrefInterface $a)
     {
         $this->a = $a;
     }

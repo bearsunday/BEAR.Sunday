@@ -7,14 +7,11 @@
  */
 namespace BEAR\Sunday\Exception;
 
-use BEAR\Resource\Exception;
-
 /**
- * Not found
+ * Generic exception interface
  *
- * @package   BEAR.Sunday
- * @subpackge Exception
+ * @package BEAR.Sunday
  */
-class ResourceNotFound extends \BadMethodCallException implements ExceptionInterface
+interface ExceptionInterface
 {
 }

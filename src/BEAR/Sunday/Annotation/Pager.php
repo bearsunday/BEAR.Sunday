@@ -16,7 +16,7 @@ namespace BEAR\Sunday\Annotation;
  * @package    BEAR.Sunday
  * @subpackage Annotation
  */
-final class Pager implements Annotation
+final class Pager implements AnnotationInterface
 {
     /**
      * Limit per page

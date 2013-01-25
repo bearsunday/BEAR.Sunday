@@ -5,17 +5,15 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Annotation;
+namespace BEAR\Sunday\Extension\ConsoleOutput;
+
+use BEAR\Sunday\Extension\ExtensionInterface;
 
 /**
- * Db
- *
- * @Annotation
- * @Target("CLASS")
+ * Interface for console output
  *
  * @package    BEAR.Sunday
- * @subpackage Annotation
  */
-final class Db implements AnnotationInterface
+interface ConsoleOutputInterface extends ExtensionInterface
 {
 }

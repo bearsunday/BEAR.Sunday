@@ -5,17 +5,14 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Annotation;
+namespace BEAR\Sunday\Extension\Application;
 
 /**
- * Db
- *
- * @Annotation
- * @Target("CLASS")
+ * Interface for application context
  *
  * @package    BEAR.Sunday
- * @subpackage Annotation
+ * @subpackage Application
  */
-final class Db implements AnnotationInterface
+interface AppInterface
 {
 }

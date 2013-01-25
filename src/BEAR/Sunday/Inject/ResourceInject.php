@@ -20,6 +20,11 @@ trait ResourceInject
 {
 
     /**
+     * @var ResourceInterface
+     */
+    protected $resource;
+
+    /**
      * Set resource
      *
      * @param ResourceInterface $resource

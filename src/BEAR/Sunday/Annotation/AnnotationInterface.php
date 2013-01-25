@@ -8,14 +8,10 @@
 namespace BEAR\Sunday\Annotation;
 
 /**
- * Db
+ * Annotation
  *
- * @Annotation
- * @Target("CLASS")
- *
- * @package    BEAR.Sunday
- * @subpackage Annotation
+ * @package BEAR.Sunday
  */
-final class Db implements AnnotationInterface
+interface AnnotationInterface
 {
 }

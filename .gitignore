@@ -7,3 +7,5 @@ build
 cache.properties
 
 composer.lock
+
+composer.phar

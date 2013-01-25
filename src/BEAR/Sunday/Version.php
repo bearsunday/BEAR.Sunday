@@ -5,15 +5,15 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Framework;
+namespace BEAR\Sunday;
 
 /**
- * Framework
+ * Framework version
  *
  * @package    BEAR.Sunday
  * @subpackage Framework
  */
-final class Framework
+final class Version
 {
     /**
      * BEAR.Sunday

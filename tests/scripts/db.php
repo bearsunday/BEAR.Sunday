@@ -5,7 +5,7 @@
  * @var PDO
  *
  * @global $_ENV['BEAR_DB_ID']
- * @global $_ENV['BEAR_DB_PASSOWRD']
+ * @global $_ENV['BEAR_DB_PASSWORD']
  */
 $id = isset($_ENV['BEAR_DB_ID']) ? $_ENV['BEAR_DB_ID'] : 'root';
 $password = isset($_ENV['BEAR_DB_PASSWORD']) ? $_ENV['BEAR_DB_PASSWORD'] : '';

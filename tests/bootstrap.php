@@ -4,7 +4,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 
 error_reporting(E_ALL);
 
-ob_start(); // to hide chekcer message
+ob_start(); // to hide checker message
 $isInstallOk = require dirname(__DIR__) . '/scripts/check_env.php';
 if (! $isInstallOk) {
     echo "Please fix the install problem before tests." . PHP_EOL;

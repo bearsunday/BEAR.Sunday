@@ -8,7 +8,7 @@
 namespace BEAR\Sunday\Extension\WebResponse;
 
 use BEAR\Sunday\Extension\ExtensionInterface;
-use BEAR\Resource\AbstractObject;
+
 
 /**
  * Interface for http response

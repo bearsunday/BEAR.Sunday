@@ -9,7 +9,7 @@ namespace mockapp;
 use BEAR\Sunday\Extension\Application\AppInterface;
 
 /**
- * Applicaton
+ * Application
  *
  * @package App.appmock
  */

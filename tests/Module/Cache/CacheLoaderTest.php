@@ -1,9 +1,7 @@
 <?php
 
-namespace BEAR\Sunday\Tests;
+namespace BEAR\Sunday\tests\Module\Cache;
 
-use BEAR\Sunday\Framework\Framework;
-use Guzzle\Cache\CacheAdapterInterface as Cache;
 use BEAR\Sunday\Module\Cqrs\Interceptor\CacheLoader;
 use Ray\Di\Config;
 use Ray\Di\Annotation;
@@ -18,7 +16,6 @@ require_once dirname(__DIR__) . '/Mock/ResourceObject/MockResource.php';
 
 class CacheLoaderTest extends \PHPUnit_Framework_TestCase
 {
-    private $cahce;
     private $cacheLoader;
 
     protected function setUp()

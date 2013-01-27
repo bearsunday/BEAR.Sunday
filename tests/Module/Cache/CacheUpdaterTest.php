@@ -2,9 +2,6 @@
 
 namespace BEAR\Sunday\Tests;
 
-use BEAR\Sunday\Framework\Framework;
-use BEAR\Sunday\Interceptor\CacheLoader;
-use Guzzle\Cache\CacheAdapterInterface as Cache;
 use BEAR\Sunday\Module\Cqrs\Interceptor\CacheUpdater;
 use Ray\Di\Config;
 use Ray\Di\Annotation;
@@ -15,14 +12,10 @@ use Ray\Aop\ReflectiveMethodInvocation;
 use BEAR\Sunday\Annotation\CacheUpdate;
 use Doctrine\Common\Annotations\AnnotationReader as Reader;
 
-
 require_once dirname(__DIR__) . '/Mock/ResourceObject/MockResource.php';
 
 class CacheUpdaterTest extends \PHPUnit_Framework_TestCase
 {
-    private $cahce;
-    private $etag;
-
     protected function setUp()
     {
         parent::setUp();
@@ -50,7 +43,7 @@ class CacheUpdaterTest extends \PHPUnit_Framework_TestCase
         $this->cache->save($id, $cacheData);
         $contents = $this->cache->fetch($id);
         $this->assertSame($contents, $cacheData);
-        $result = $this->cacheUpdater->invoke($invocation);
+        $this->cacheUpdater->invoke($invocation);
         $contents = $this->cache->fetch($id);
         $this->assertSame($contents, false);
     }

@@ -29,8 +29,8 @@ trait TmpDirInject
      *
      * @param string $tmpDir
      *
-     * @Inject
-     * @Named("tmp_dir")
+     * @Ray\Di\Di\Inject
+     * @Ray\Di\Di\Named("tmp_dir")
      */
     public function setTmpDir($tmpDir)
     {

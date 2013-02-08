@@ -7,9 +7,6 @@
  */
 namespace BEAR\Sunday\Inject;
 
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
-
 /**
  * Inject application namespace
  *
@@ -30,8 +27,8 @@ trait AppNameInject
      *
      * @param string $appName
      *
-     * @Inject
-     * @Named("app_name")
+     * @Ray\Di\Di\Inject
+     * @Ray\Di\Di\Named("app_name")
      */
     public function setAppName($appName)
     {

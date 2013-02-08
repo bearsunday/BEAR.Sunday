@@ -30,8 +30,8 @@ trait LogDirInject
      *
      * @param string $logDir
      *
-     * @Inject
-     * @Named("log_dir")
+     * @Ray\Di\Di\Inject
+     * @Ray\Di\Di\Named("log_dir")
      */
     public function setLogDir($logDir)
     {

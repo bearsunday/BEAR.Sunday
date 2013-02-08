@@ -11,7 +11,6 @@ use Ray\Di\LoggerInterface;
 use Ray\Aop\Bind;
 use BEAR\Sunday\Inject\LogInject;
 
-
 /**
  * Cache interceptor
  *

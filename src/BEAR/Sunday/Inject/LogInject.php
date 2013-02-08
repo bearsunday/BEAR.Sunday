@@ -31,7 +31,7 @@ trait LogInject
      * @param LogAdapterInterface $log
      *
      * @return void
-     * @Inject
+     * @Ray\Di\Di\Inject
      */
     public function setLog(LogAdapterInterface $log)
     {

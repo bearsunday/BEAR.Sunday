@@ -27,7 +27,7 @@ trait EtagInject
      *
      * @param TagInterface $etag
      *
-     * @Inject
+     * @Ray\Di\Di\Inject
      */
     public function setEtag(TagInterface $etag)
     {

@@ -8,7 +8,6 @@
 namespace BEAR\Sunday\Inject;
 
 use Ray\Di\InjectorInterface as Di;
-use Ray\Di\Di\Inject;
 
 /**
  * Inject injector
@@ -30,7 +29,7 @@ trait InjectorInject
      *
      * @param Di $injector
      *
-     * @Inject
+     * @Ray\Di\Di\Inject
      */
     public function setInjector(Di $injector)
     {

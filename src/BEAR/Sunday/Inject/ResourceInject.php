@@ -8,7 +8,6 @@
 namespace BEAR\Sunday\Inject;
 
 use BEAR\Resource\ResourceInterface;
-use Ray\Di\Di\Inject;
 
 /**
  * Inject resource client
@@ -29,7 +28,7 @@ trait ResourceInject
      *
      * @param ResourceInterface $resource
      *
-     * @Inject
+     * @Ray\Di\Di\Inject
      */
     public function setResource(ResourceInterface $resource)
     {

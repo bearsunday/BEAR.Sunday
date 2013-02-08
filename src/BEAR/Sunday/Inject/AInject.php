@@ -8,8 +8,6 @@
 namespace BEAR\Sunday\Inject;
 
 use BEAR\Resource\HrefInterface;
-use Ray\Di\Di\Inject;
-
 
 /**
  * Inject A(anchor)
@@ -32,7 +30,7 @@ trait AInject
      * @param HrefInterface $a
      *
      * @return void
-     * @Inject
+     * @Ray\Di\Di\Inject
      */
     public function setAnchor(HrefInterface $a)
     {

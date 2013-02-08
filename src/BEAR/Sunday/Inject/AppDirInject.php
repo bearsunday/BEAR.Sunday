@@ -7,9 +7,6 @@
  */
 namespace BEAR\Sunday\Inject;
 
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
-
 /**
  * Inject app dir
  *
@@ -32,8 +29,8 @@ trait AppDirInject
      *
      * @return void
      *
-     * @Inject
-     * @Named("app_dir")
+     * @Ray\Di\Di\Inject
+     * @Ray\Di\Di\Named("app_dir")
      */
     public function setAppDir($appDir)
     {

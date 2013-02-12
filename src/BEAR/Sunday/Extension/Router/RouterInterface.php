@@ -16,6 +16,24 @@ namespace BEAR\Sunday\Extension\Router;
 interface RouterInterface
 {
     /**
+     * Set globals
+     *
+     * @param mixed $globals array | \ArrayAccess
+     *
+     * @return self
+     */
+    public function setGlobals($globals);
+
+    /**
+     * Set argv
+     *
+     * @param $argv array | \ArrayAccess
+     *
+     * @return mixed
+     */
+    public function setArgv($argv);
+
+    /**
      * Match route
      *
      * @return array [$method, $pageUri, $query]

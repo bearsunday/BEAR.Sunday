@@ -24,7 +24,6 @@
     "minimum-stability": "dev",
     "require": {
         "php"                    : ">=5.4.0",
-        "ext-apc"                : "*",
         "ext-curl"               : "*",
         "aura/di"                : "1.0.*",
         "aura/signal"            : "1.0.*",

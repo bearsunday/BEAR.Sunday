@@ -7,9 +7,11 @@
  */
 namespace BEAR\Sunday\Module\Provider;
 
-use Doctrine\Common\Cache\ApcCache as Cache;
+use Doctrine\Common\Cache\ApcCache;
 use Guzzle\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Ray\Di\ProviderInterface as Provide;
+use BEAR\Sunday\Inject\TmpDirInject;
+use Doctrine\Common\Cache\FilesystemCache;
 
 /**
  * Cache
@@ -20,6 +22,8 @@ use Ray\Di\ProviderInterface as Provide;
 class ApcCacheProvider implements Provide
 {
 
+    use TmpDirInject;
+
     /**
      * Return instance
      *
@@ -27,7 +31,11 @@ class ApcCacheProvider implements Provide
      */
     public function get()
     {
-        $cache = new CacheAdapter(new Cache);
+        if (function_exists('apc_cache_info')) {
+            $cache = new CacheAdapter(new ApcCache);
+        } else {
+            $cache = new CacheAdapter(new FilesystemCache($this->tmpDir));
+        }
 
         return $cache;
     }

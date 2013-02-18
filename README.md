@@ -52,7 +52,7 @@ Dependency injection
         $this->reader = $reader;
     }
 ```
-Aspect oriented progrmaming
+Aspect oriented programming
 --------------------------
 
 ### Interceptor

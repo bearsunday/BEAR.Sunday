@@ -114,18 +114,6 @@ Rather than reinvent the wheel and develop our own library, BEAR.Sunday uses (or
  * [Symfony/Validator](https://github.com/symfony/Validator "Symfony.Validator")
  * [Zend/Log](https://github.com/zendframework/zf2)
 
-## Requirements
-
- * php 5.4
- * [APC](http://jp.php.net/manual/en/book.apc.php)
-
-### optional
- * [xhprof](http://jp.php.net/manual/en/book.xhprof.php)
- 
-### php.ini
-    apc.enable_cli = 1
-    xhprof.output_dir = /tmp
-
 BEAR.Package
 ------------
 

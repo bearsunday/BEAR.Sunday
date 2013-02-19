@@ -6,36 +6,11 @@ BEAR, a resource oriented framework for PHP5.4
 One minute example
 ==================
 
-RESTful Service
------------
-
-### Resource object
-```php
-<?php
-    class Greetings extends AbstractObject
-    {
-        public function onGet($lang = 'en')
-        {
-            $this['greeting'] = $this->message[$lang];
-            return $this;
-        }
-    }
-```
-
-### Resource client
-
-```php
-<?php
-    use ResourceInject;
-    
-    $this->resource->get->uri('app://self/greetings')->withQuery(['lang' => 'ja'])->eager->request();
-```
 Dependency injection
 --------------------
 
 ### Binding
 ```php
-<?php
     $this->bind('Doctrine\Common\Annotations')
          ->to('Doctrine\Common\Annotations\FileCacheReader')
          ->in(Scope::SINGLETON);
@@ -43,7 +18,6 @@ Dependency injection
 
 ### Consumer
 ```php
-<?php
     /**
      * @Inject
      */
@@ -57,7 +31,6 @@ Aspect oriented programming
 
 ### Interceptor
 ```php
-<?php
     class WeekendBlocker implements MethodInterceptor
     {
         public function invoke(MethodInvocation $invocation)
@@ -74,7 +47,6 @@ Aspect oriented programming
 ```
 ### Service
 ```php
-<?php
     class RealBillingService implements BillingService
     {
         /**
@@ -88,12 +60,34 @@ Aspect oriented programming
 ```
 ### Weaving an Interceptor
 ```php
-<?php
     $this->bindInterceptor(
         $this->matcher->any(),
         $this->matcher->annotatedWith('WeekendBlock'),
         [new WeekendBlocker]
     );
+```
+
+RESTful Service
+-----------
+
+### Resource object
+```php
+    class Greetings extends AbstractObject
+    {
+        public function onGet($lang = 'en')
+        {
+            $this['greeting'] = $this->message[$lang];
+            return $this;
+        }
+    }
+```
+
+### Resource client
+
+```php
+    use ResourceInject;
+    
+    $this->resource->get->uri('app://self/greetings')->withQuery(['lang' => 'ja'])->eager->request();
 ```
 
 Dependencies

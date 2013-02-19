@@ -98,7 +98,7 @@ Aspect oriented programming
 
 Dependencies
 ------------
-Rather than reinvent the wheel and develop our own library, BEAR.Sunday uses (or will use) these great libraries.
+Rather than reinvent the wheel and develop our own library, BEAR.Sunday are using these great libraries.
 
  * [Aura/Router](https://github.com/auraphp/Aura.Router)
  * [Aura/Signal](https://github.com/auraphp/Aura.Signal)
@@ -109,10 +109,13 @@ Rather than reinvent the wheel and develop our own library, BEAR.Sunday uses (or
  * [Pagerfanta](git://github.com/whiteoctober/Pagerfanta.git)
  * [Smarty3](http://www.smarty.net/)
  * [Twig/Twig](http://twig.sensiolabs.org/ "Twig")
- * [Haanga](http://haanga.org/ "Haanga")
+ * [Ray/Di](https://github.com/koriym/Ray.Di) ([Aura/Di](https://github.com/auraphp/Aura.Di))
+ * [Ray/Aop](https://github.com/koriym/Aop.Di)
  * [Symfony/HttpFoundation](https://github.com/symfony/HttpFoundation)
- * [Symfony/Validator](https://github.com/symfony/Validator "Symfony.Validator")
+ * [Symfony/Routing](https://github.com/symfony/Validator "Symfony.Validator")
+ * [Nocarrier\Hal](https://github.com/blongden/hal)
  * [Zend/Log](https://github.com/zendframework/zf2)
+ * [Zend/Db](git@github.com:zendframework/Component_ZendDb.git)
 
 BEAR.Package
 ------------

@@ -1,16 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="BEAR.Sunday" default="build">
-    <target name="composer" description="Installing dependencies">
-        <exec executable="composer.phar" failonerror="true">
+    <target name="install-pear" description="Installs PEAR">
+        <!-- auto-discover channels -->
+        <exec executable="pear">
+            <arg value="config-set"/>
+            <arg value="auto_discover"/>
+            <arg value="1" />
+        </exec>
+
+        <exec executable="pear">
             <arg value="install" />
+            <arg value="--alldeps" />
+            <arg value="PHP_CodeSniffer" />
+            <arg value="pear.phpunit.de/PHPUnit" />
+            <arg value="pear.phpunit.de/DbUnit" />
+            <arg value="pear.phpunit.de/PHP_Invoker" />
+            <arg value="pear.pdepend.org/PHP_Depend" />
+            <arg value="pear.phpmd.org/PHP_PMD" />
+            <arg value="pear.phpqatools.org/phpqatools" />
+            <arg value="pear.netpirates.net/phpDox" />
+            <arg value="pear.apigen.org/apigen" />
+            <arg value="pear.docblox-project.org/docblox" />
         </exec>
     </target>
+
+    <target name="install-pecl" description="Installs PECL">
+        <exec executable="pecl">
+            <arg value="install" />
+            <arg value="xdebug"/>
+            <arg value="intl"/>
+            <arg value="xhprof-beta"/>
+        </exec>
+    </target>
+
+    <target name="composer" description="Installing dependencies">
+        <exec executable="wget" failonerror="true">
+            <arg value="-nc" />
+            <arg value="http://getcomposer.org/composer.phar" />
+        </exec>
+        <exec executable="php" failonerror="true">
+            <arg value="composer.phar" />
+            <arg value="install" />
+            <arg value="--dev" />
+        </exec>
+    </target>
+
     <target name="build"
-            depends="composer,prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpunit,phpcb,phpdoc,apigen"/>
+            depends="install-pear,composer,prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpunit,phpcb,phpdoc,apigen"/>
 
     <target name="build-parallel"
             depends="composer,prepare,lint,tools-parallel,phpunit,phpcb"/>
+
 
     <target name="tools-parallel" description="Run tools in parallel">
         <parallel threadCount="2">
@@ -90,17 +131,16 @@
         <exec executable="phpmd">
             <arg path="${basedir}/src" />
             <arg value="xml" />
-            <arg value="${basedir}/phpmd.xml" />
-            <arg value="--reportfile" />
             <arg value="${basedir}/cs/phpmd/phpmd.xml" />
+            <arg value="--reportfile" />
+            <arg value="${basedir}/build/logs/pmd.xml" />
         </exec>
     </target>
 
     <target name="phpcs"
             description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
         <exec executable="phpcs">
-            <arg value="--standard=${basedir}/cs/ruleset.xml" />
-            <arg value="--warning-severity=0" />
+            <arg value="--standard=${basedir}/build/phpcs.xml" />
             <arg path="${basedir}/src" />
         </exec>
     </target>

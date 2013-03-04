@@ -2,7 +2,7 @@
     "name": "bear/sunday",
     "type": "library",
     "description": "BEAR.Sunday, a resource oriented framework",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "keywords": [
         "framework",
         "api",

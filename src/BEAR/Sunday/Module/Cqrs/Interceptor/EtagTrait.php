@@ -18,8 +18,10 @@ use BEAR\Resource\AbstractObject as ResourceObject;
 trait EtagTrait
 {
     /**
-     * (non-PHPdoc)
-     * @see BEAR\Sunday\Resource\CacheControl.TagInterface::getEtag()
+     * @param $object
+     * @param $args
+     *
+     * @return int
      */
     public function getEtag($object, $args)
     {

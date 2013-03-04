@@ -8,6 +8,7 @@
 namespace BEAR\Sunday\Module\Code;
 
 use Ray\Di\AbstractModule;
+use Ray\Di\Scope;
 
 /**
  * Annotation reader module
@@ -24,6 +25,6 @@ class AnnotationModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('Doctrine\Common\Annotations\Reader')->to('Doctrine\Common\Annotations\AnnotationReader');
+        $this->bind('Doctrine\Common\Annotations\Reader')->to('Doctrine\Common\Annotations\AnnotationReader')->in(Scope::SINGLETON);
     }
 }

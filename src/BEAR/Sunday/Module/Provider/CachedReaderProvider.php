@@ -27,11 +27,7 @@ class CachedReaderProvider implements Provide
      */
     public function get()
     {
-        $reader = new CachedReader(
-            new AnnotationReader,
-            new ApcCache,
-            true
-        );
+        $reader = new CachedReader(new AnnotationReader, new ApcCache, true);
 
         return $reader;
     }

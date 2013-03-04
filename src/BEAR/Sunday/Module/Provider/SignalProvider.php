@@ -28,10 +28,6 @@ class SignalProvider implements Provide
      */
     public function get()
     {
-        return new Manager(
-            new HandlerFactory,
-            new ResultFactory,
-            new ResultCollection
-        );
+        return new Manager(new HandlerFactory, new ResultFactory, new ResultCollection);
     }
 }

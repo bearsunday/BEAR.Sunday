@@ -11,6 +11,7 @@ use BEAR\Sunday\Extension\ExtensionInterface;
 use BEAR\Resource\LoggerInterface as ResourceLoggerInterface;
 use BEAR\Sunday\Extension\Application\AppInterface;
 use Ray\Di\Di\Inject;
+
 /**
  * Extension interface for application logger
  *

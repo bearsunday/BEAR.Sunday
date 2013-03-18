@@ -27,13 +27,6 @@ abstract class AbstractSingletonProvider implements Provide
     private $instance;
 
     /**
-     * New instance
-     *
-     * @return object
-     */
-    abstract public function newInstance();
-
-    /**
      * Return singleton instance
      *
      * @return object
@@ -46,4 +39,11 @@ abstract class AbstractSingletonProvider implements Provide
 
         return $this->instance;
     }
+
+    /**
+     * New instance
+     *
+     * @return object
+     */
+    abstract public function newInstance();
 }

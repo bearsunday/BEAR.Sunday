@@ -20,7 +20,7 @@ echo "{$isPhpVersionOk}PHP:" . phpversion() . PHP_EOL;
 $apcVersion = phpversion("apc");
 $isAPCVersionOk = version_compare(phpversion("apc"), '3.1.8', '>=') ? $ok : $ng;
 echo "{$isAPCVersionOk}APC:" . phpversion("apc") . PHP_EOL;
-$apcEnableCli =  ini_get('apc.enable_cli') ? $ok : $ng;
+$apcEnableCli = ini_get('apc.enable_cli') ? $ok : $ng;
 echo "{$apcEnableCli}apc.enable_cli" . PHP_EOL;
 
 // DB
@@ -48,12 +48,15 @@ if (phpversion("xhprof")) {
 echo '(info) variables_order: ' . ini_get('variables_order') . PHP_EOL;
 echo '(info) php.ini: ' . ini_get('variables_order') . PHP_EOL;
 
-$isEnvOk = ($isPhpVersionOk === $ok
-            && ($isAPCVersionOk === $ok)
-            && ($isVendorInstalledOk === $ok)
-            && ($isDbConnectionOk === $ok));
-$isInsallOk = $isEnvOk ? $ok : $ng;
+$isEnvOk = (
+        $isPhpVersionOk === $ok
+        && ($isAPCVersionOk === $ok)
+        && ($isVendorInstalledOk === $ok)
+        && ($isDbConnectionOk === $ok)
+);
+$isInstallOk = $isEnvOk ? $ok : $ng;
 
 echo PHP_EOL;
-echo "BEAR.Sunday INSTALL: {$isInsallOk}" . PHP_EOL;
+echo "BEAR.Sunday INSTALL: {$isInstallOk}" . PHP_EOL;
+
 return $isEnvOk;

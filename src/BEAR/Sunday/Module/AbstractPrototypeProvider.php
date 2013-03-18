@@ -26,13 +26,6 @@ abstract class AbstractPrototypeProvider implements Provide
     private $instance;
 
     /**
-     * Create new instance
-     *
-     * @return object
-     */
-    abstract public function newInstance();
-
-    /**
      * Return cloned instance
      *
      * @return object
@@ -45,4 +38,11 @@ abstract class AbstractPrototypeProvider implements Provide
 
         return clone $this->instance;
     }
+
+    /**
+     * Create new instance
+     *
+     * @return object
+     */
+    abstract public function newInstance();
 }

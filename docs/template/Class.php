@@ -16,9 +16,6 @@ use ArrayObject;
  */
 class ClassName
 {
-    /**
-     * Constructor
-     */
     public function __construct()
     {
     }

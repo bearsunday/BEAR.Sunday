@@ -7,9 +7,9 @@
  */
 namespace BEAR\Sunday\Inject\Logger;
 
-use Ray\Di\LoggerInterface;
-use Ray\Aop\Bind;
 use BEAR\Sunday\Inject\LogInject;
+use Ray\Aop\Bind;
+use Ray\Di\LoggerInterface;
 
 /**
  * Cache interceptor

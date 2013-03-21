@@ -24,6 +24,8 @@ class ApplicationLoggerModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('BEAR\Sunday\Application\LoggerInterface')->to('BEAR\Sunday\Application\Logger');
+        $this
+            ->bind('BEAR\Sunday\Application\LoggerInterface')
+            ->to('BEAR\Sunday\Application\Logger');
     }
 }

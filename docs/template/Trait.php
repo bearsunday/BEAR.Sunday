@@ -7,8 +7,6 @@
  */
 namespace BEAR\Sunday;
 
-use ArrayObject;
-
 /**
  * TraitName
  *

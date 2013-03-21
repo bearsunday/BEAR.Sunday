@@ -7,12 +7,12 @@
  */
 namespace BEAR\Sunday\Module\Cqrs\Interceptor;
 
+use Guzzle\Cache\CacheAdapterInterface;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
-use Guzzle\Cache\CacheAdapterInterface;
-use ReflectionMethod;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
+use ReflectionMethod;
 
 
 /**

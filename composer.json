@@ -2,7 +2,7 @@
     "name": "bear/sunday",
     "type": "library",
     "description": "BEAR.Sunday, a resource oriented framework",
-    "version": "0.6.1",
+    "version": "0.6.2",
     "keywords": [
         "framework",
         "api",
@@ -27,8 +27,8 @@
         "ext-curl"               : "*",
         "aura/di"                : "1.0.*",
         "aura/signal"            : "1.0.*",
-        "ray/di"                 : ">=1.0.0-beta3",
-        "ray/aop"                : ">=1.0.0-beta2",
+        "ray/di"                 : "1.0.*",
+        "ray/aop"                : "1.0.*",
         "bear/resource"          : "0.7.*",
         "guzzle/guzzle"          : "3.3.*",
         "nocarrier/hal"          : "dev-master"

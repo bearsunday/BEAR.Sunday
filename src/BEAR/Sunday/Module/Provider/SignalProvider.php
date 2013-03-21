@@ -7,11 +7,11 @@
  */
 namespace BEAR\Sunday\Module\Provider;
 
-use Ray\Di\ProviderInterface as Provide;
-use Aura\Signal\Manager;
 use Aura\Signal\HandlerFactory;
-use Aura\Signal\ResultFactory;
+use Aura\Signal\Manager;
 use Aura\Signal\ResultCollection;
+use Aura\Signal\ResultFactory;
+use Ray\Di\ProviderInterface as Provide;
 
 /**
  * Signal

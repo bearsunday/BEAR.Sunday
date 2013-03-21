@@ -25,6 +25,9 @@ class AnnotationModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('Doctrine\Common\Annotations\Reader')->to('Doctrine\Common\Annotations\AnnotationReader')->in(Scope::SINGLETON);
+        $this
+            ->bind('Doctrine\Common\Annotations\Reader')
+            ->to('Doctrine\Common\Annotations\AnnotationReader')
+            ->in(Scope::SINGLETON);
     }
 }

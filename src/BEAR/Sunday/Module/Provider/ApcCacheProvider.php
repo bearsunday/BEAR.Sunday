@@ -7,11 +7,11 @@
  */
 namespace BEAR\Sunday\Module\Provider;
 
+use BEAR\Sunday\Inject\TmpDirInject;
 use Doctrine\Common\Cache\ApcCache;
+use Doctrine\Common\Cache\FilesystemCache;
 use Guzzle\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Ray\Di\ProviderInterface as Provide;
-use BEAR\Sunday\Inject\TmpDirInject;
-use Doctrine\Common\Cache\FilesystemCache;
 
 /**
  * Cache

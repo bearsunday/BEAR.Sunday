@@ -7,9 +7,9 @@
  */
 namespace BEAR\Sunday\Extension\ApplicationLogger;
 
-use BEAR\Sunday\Extension\ExtensionInterface;
 use BEAR\Resource\LoggerInterface as ResourceLoggerInterface;
 use BEAR\Sunday\Extension\Application\AppInterface;
+use BEAR\Sunday\Extension\ExtensionInterface;
 use Ray\Di\Di\Inject;
 
 /**

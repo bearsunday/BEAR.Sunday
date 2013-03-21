@@ -56,9 +56,18 @@ class SchemeCollectionProvider implements Provide
     public function get()
     {
         $schemeCollection = new SchemeCollection;
-        $schemeCollection->scheme('app')->host('self')->toAdapter(new App($this->injector, $this->namespace, 'Resource\App'));
-        $schemeCollection->scheme('page')->host('self')->toAdapter(new App($this->injector, $this->namespace, 'Resource\Page'));
-        $schemeCollection->scheme('http')->host('*')->toAdapter(new Http);
+        $schemeCollection->scheme('app')->host('self')->toAdapter(
+            new App($this->injector, $this->namespace, 'Resource\App')
+        );
+        $schemeCollection
+            ->scheme('page')
+            ->host('self')
+            ->toAdapter(new App($this->injector, $this->namespace, 'Resource\Page')
+        );
+        $schemeCollection
+            ->scheme('http')
+            ->host('*')
+            ->toAdapter(new Http);
 
         return $schemeCollection;
     }

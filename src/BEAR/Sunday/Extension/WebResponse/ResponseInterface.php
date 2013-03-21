@@ -9,7 +9,6 @@ namespace BEAR\Sunday\Extension\WebResponse;
 
 use BEAR\Sunday\Extension\ExtensionInterface;
 
-
 /**
  * Interface for http response
  *

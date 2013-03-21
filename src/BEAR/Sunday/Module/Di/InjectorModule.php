@@ -7,9 +7,9 @@
  */
 namespace BEAR\Sunday\Module\Di;
 
+use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 use Ray\Di\InjectorInterface;
-use Ray\Di\AbstractModule;
 
 
 /**

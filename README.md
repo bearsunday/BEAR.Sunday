@@ -100,16 +100,16 @@ Rather than reinvent the wheel and develop our own library, BEAR.Sunday are usin
  * [Doctrine/Common](http://www.doctrine-project.org/projects/common)
  * [Doctrine/DBAL](http://www.doctrine-project.org/projects/dbal)
  * [Guzzle/Guzzle](http://guzzlephp.org/ "Guzzle")
- * [Pagerfanta](git://github.com/whiteoctober/Pagerfanta.git)
+ * [Pagerfanta](https://github.com/whiteoctober/Pagerfanta)
  * [Smarty3](http://www.smarty.net/)
- * [Twig/Twig](http://twig.sensiolabs.org/ "Twig")
+ * [Twig](http://twig.sensiolabs.org/ "Twig")
  * [Ray/Di](https://github.com/koriym/Ray.Di) ([Aura/Di](https://github.com/auraphp/Aura.Di))
  * [Ray/Aop](https://github.com/koriym/Aop.Di)
  * [Symfony/HttpFoundation](https://github.com/symfony/HttpFoundation)
- * [Symfony/Routing](https://github.com/symfony/Validator "Symfony.Validator")
+ * [Symfony/Routing](https://github.com/symfony/routing)
  * [Nocarrier\Hal](https://github.com/blongden/hal)
- * [Zend/Log](https://github.com/zendframework/zf2)
- * [Zend/Db](git@github.com:zendframework/Component_ZendDb.git)
+ * [Zend/Log](https://github.com/zendframework/Component_ZendLog)
+ * [Zend/Db](https://github.com/zendframework/Component_ZendDb)
 
 BEAR.Package
 ------------

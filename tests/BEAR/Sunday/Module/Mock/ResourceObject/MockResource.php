@@ -1,5 +1,5 @@
 <?php
-namespace tests\Mock\ResourceObject;
+namespace BEAR\Sunday\Module\Mock\ResourceObject;
 
 use BEAR\Resource\AbstractObject as ResourceObject;
 

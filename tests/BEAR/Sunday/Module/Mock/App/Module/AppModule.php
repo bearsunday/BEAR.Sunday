@@ -1,5 +1,5 @@
 <?php
-namespace mockapp\Module;
+namespace BEAR\Sunday\Module\Mock\App\Module;
 
 use Ray\Di\AbstractModule;
 use Ray\Di\InjectorInterface as Di;

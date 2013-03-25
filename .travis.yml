@@ -1,19 +1,9 @@
 language: php
 php:
  - 5.4
-env:
- - DB=mysql
 before_script:
- - if [[ "$DB" == "mysql" ]]; then mysql -e "CREATE DATABASE IF NOT EXISTS blogbeartest;USE blogbeartest;CREATE TABLE IF NOT EXISTS posts (id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,title VARCHAR(50),body TEXT,created DATETIME DEFAULT NULL,modified DATETIME DEFAULT NULL);" -u root; fi
- - if [[ "$DB" == "mysql" ]]; then mysql -e "CREATE DATABASE IF NOT EXISTS blogbear;USE blogbeartest;CREATE TABLE IF NOT EXISTS posts (id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,title VARCHAR(50),body TEXT,created DATETIME DEFAULT NULL,modified DATETIME DEFAULT NULL);" -u root; fi
- - 'wget http://pecl.php.net/get/memcache-2.2.6.tgz ; tar -xzf memcache-2.2.6.tgz; sh -c "cd memcache-2.2.6 && phpize && ./configure --enable-memcache && make && sudo make install" ; echo "extension=memcache.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`'
- - 'wget http://pecl.php.net/get/APC-3.1.10.tgz ; tar -xzf APC-3.1.10.tgz ; sh -c "cd APC-3.1.10 && phpize && ./configure  && make && sudo make install" ; echo -e "extension=apc.so\napc.enable_cli=on" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`'
- - pear config-set auto_discover 1
- - pear install pear.phpunit.de/PHP_Invoker
- - pear install pear.phpunit.de/DbUnit
- - wget http://getcomposer.org/composer.phar
  - wget http://cs.sensiolabs.org/get/php-cs-fixer.phar
- - php composer.phar install
+ - composer install
 script:
  - phpunit --coverage-text
  - output=$(php php-cs-fixer.phar fix -v --dry-run --level=psr2 src); if [[ $output ]]; then while read -r line; do echo -e "\e[00;31m$line\e[00m"; done <<< "$output"; false; fi;

@@ -5,7 +5,7 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace tests\Mock\ResourceObject;
+namespace BEAR\Sunday\Module\Mock\ResourceObject;
 
 use BEAR\Resource\AbstractObject;
 

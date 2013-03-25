@@ -18,13 +18,14 @@
     "require": {
         "php": ">=5.4.0",
         "ext-curl": "*",
-        "bear/resource": "0.*",
-        "nocarrier/hal": "dev-master"
+        "ray/di": "1.0.*@dev",
+        "ray/aop": "1.0.*@dev",
+        "bear/resource": "*",
+        "nocarrier/hal": "dev-master@dev"
     },
     "autoload": {
         "psr-0": {
             "BEAR\\Sunday": "src/"
         }
-    },
-    "minimum-stability": "beta"
+    }
 }

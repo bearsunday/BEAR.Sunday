@@ -1,6 +1,6 @@
 <?php
 
-namespace BEAR\Sunday\Tests;
+namespace BEAR\Sunday\Module\Cache;
 
 use BEAR\Sunday\Module\Cqrs\Interceptor\CacheUpdater;
 use Ray\Di\Config;
@@ -11,8 +11,7 @@ use Doctrine\Common\Cache\ArrayCache as CacheStorage;
 use Ray\Aop\ReflectiveMethodInvocation;
 use BEAR\Sunday\Annotation\CacheUpdate;
 use Doctrine\Common\Annotations\AnnotationReader as Reader;
-
-require_once dirname(__DIR__) . '/Mock/ResourceObject/MockResource.php';
+use BEAR\Sunday\Module\Mock\ResourceObject\MockResource;
 
 class CacheUpdaterTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,7 +30,7 @@ class CacheUpdaterTest extends \PHPUnit_Framework_TestCase
 
     public function test_invoke()
     {
-        $ro = new \tests\Mock\ResourceObject\MockResource;
+        $ro = new MockResource;
         $args = [];
         $interceptors = [$this->cacheUpdater];
         $annotation = new CacheUpdate;

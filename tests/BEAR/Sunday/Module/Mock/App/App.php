@@ -4,7 +4,7 @@
  *
  * @package BEAR.appmock
  */
-namespace mockapp;
+namespace BEAR\Sunday\Module\App;
 
 use BEAR\Sunday\Extension\Application\AppInterface;
 

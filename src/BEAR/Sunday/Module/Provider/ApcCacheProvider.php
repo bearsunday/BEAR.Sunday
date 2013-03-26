@@ -34,7 +34,7 @@ class ApcCacheProvider implements Provide
         if (function_exists('apc_cache_info')) {
             $cache = new CacheAdapter(new ApcCache);
         } else {
-            $cache = new CacheAdapter(new FilesystemCache($this->tmpDir));
+            $cache = new CacheAdapter(new FilesystemCache($this->tmpDir . '/cache'));
         }
 
         return $cache;

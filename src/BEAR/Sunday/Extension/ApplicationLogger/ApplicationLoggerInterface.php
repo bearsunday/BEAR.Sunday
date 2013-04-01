@@ -15,7 +15,8 @@ use Ray\Di\Di\Inject;
 /**
  * Extension interface for application logger
  *
- * @package BEAR.Sunday
+ * @package    BEAR.Sunday
+ * @subpackage Extension
  */
 interface ApplicationLoggerInterface extends ExtensionInterface
 {

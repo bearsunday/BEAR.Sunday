@@ -13,7 +13,8 @@ use Ray\Di\Di\Inject;
 /**
  * Inject named parameter converter
  *
- * @package BEAR.Sunday
+ * @package    BEAR.Sunday
+ * @subpackage Inject
  */
 trait NamedArgsInject
 {

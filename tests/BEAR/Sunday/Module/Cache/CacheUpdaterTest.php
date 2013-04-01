@@ -15,6 +15,16 @@ use BEAR\Sunday\Module\Mock\ResourceObject\MockResource;
 
 class CacheUpdaterTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var CacheAdapter
+     */
+    private $cache;
+
+    /**
+     * @var CacheUpdater
+     */
+    private $cacheUpdater;
+
     protected function setUp()
     {
         parent::setUp();
@@ -23,18 +33,17 @@ class CacheUpdaterTest extends \PHPUnit_Framework_TestCase
         $this->cacheUpdater = (new CacheUpdater($this->cache, $config));
     }
 
-    public function test_New()
+    public function testNew()
     {
         $this->assertInstanceOf('BEAR\Sunday\Module\Cqrs\Interceptor\CacheUpdater', $this->cacheUpdater);
     }
 
-    public function test_invoke()
+    public function testInvoke()
     {
         $ro = new MockResource;
         $args = [];
         $interceptors = [$this->cacheUpdater];
         $annotation = new CacheUpdate;
-        $annotation->args = [];
         $invocation = new ReflectiveMethodInvocation([$ro, 'onPost'], $args, $interceptors, $annotation);
 
         $id = $this->cacheUpdater->getEtag($ro, $args);

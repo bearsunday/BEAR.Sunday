@@ -1,6 +1,6 @@
 <?php
 /**
- * mockapp
+ * mock app
  *
  * @package BEAR.appmock
  */

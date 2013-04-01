@@ -13,7 +13,7 @@ use BEAR\Sunday\Extension\ExtensionInterface;
  * Interface for template engine adapter
  *
  * @package    BEAR.Sunday
- * @subpackage Resource
+ * @subpackage Extension
  */
 interface TemplateEngineAdapterInterface extends ExtensionInterface
 {

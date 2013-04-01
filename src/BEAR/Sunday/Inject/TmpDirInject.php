@@ -10,7 +10,8 @@ namespace BEAR\Sunday\Inject;
 /**
  * Inject tmp_dir
  *
- * @package BEAR.Sunday
+ * @package    BEAR.Sunday
+ * @subpackage Inject
  */
 trait TmpDirInject
 {

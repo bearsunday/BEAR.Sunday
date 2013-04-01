@@ -10,7 +10,7 @@ namespace BEAR\Sunday\Module;
 use Ray\Di\ProviderInterface as Provide;
 
 /**
- * Singleton Provider
+ * Singleton provider
  *
  * @package    BEAR.Sunday
  * @subpackage Module

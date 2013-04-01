@@ -13,7 +13,7 @@ use Doctrine\Common\Cache\ApcCache;
 use Ray\Di\ProviderInterface as Provide;
 
 /**
- * APC cached reader
+ * APC cached reader provider
  *
  * @package    BEAR.Sunday
  * @subpackage Module

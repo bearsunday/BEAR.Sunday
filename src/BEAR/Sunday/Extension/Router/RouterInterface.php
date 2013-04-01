@@ -11,7 +11,7 @@ namespace BEAR\Sunday\Extension\Router;
  * Interface for router
  *
  * @package    BEAR.Sunday
- * @subpackage Web
+ * @subpackage Extension
  */
 interface RouterInterface
 {

@@ -13,7 +13,7 @@ use BEAR\Resource\AbstractObject as ResourceObject;
  * Resource Links
  *
  * @package    BEAR.Sunday
- * @subpackage Page
+ * @subpackage Intercetor
  */
 trait EtagTrait
 {
@@ -28,16 +28,5 @@ trait EtagTrait
         $etag = crc32(get_class($object) . serialize($args));
 
         return $etag;
-    }
-
-    /**
-     * Tagging
-     *
-     * @param ResourceObject $ro
-     * @param string         $tag
-     */
-    public function tag(ResourceObject $ro, $tag)
-    {
-        $ro['headers']['etag'] = $tag;
     }
 }

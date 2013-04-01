@@ -12,7 +12,7 @@ use Ray\Aop\Bind;
 use Ray\Di\LoggerInterface;
 
 /**
- * Cache interceptor
+ * Log adapter
  *
  * @package    BEAR.Sunday
  * @subpackage Intercetor

@@ -11,7 +11,7 @@ use Ray\Di\AbstractModule;
 
 
 /**
- * Resource cache APC module
+ * APC Resource cache module
  *
  * @package    BEAR.Sunday
  * @subpackage Module

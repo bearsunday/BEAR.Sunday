@@ -14,6 +14,7 @@ use BEAR\Sunday\Extension\TemplateEngine\TemplateEngineAdapterInterface;
  * Interface for console output
  *
  * @package    BEAR.Sunday
+ * @subpackage Extension
  */
 interface TemplateEngineRendererInterface extends RenderInterface
 {

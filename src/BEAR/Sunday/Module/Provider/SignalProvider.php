@@ -14,7 +14,7 @@ use Aura\Signal\ResultFactory;
 use Ray\Di\ProviderInterface as Provide;
 
 /**
- * Signal
+ * Signal provider
  *
  * @package    BEAR.Sunday
  * @subpackage Module

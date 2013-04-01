@@ -13,6 +13,7 @@ use BEAR\Sunday\Extension\ExtensionInterface;
  * Interface for console output
  *
  * @package    BEAR.Sunday
+ * @subpackage Extension
  */
 interface ConsoleOutputInterface extends ExtensionInterface
 {

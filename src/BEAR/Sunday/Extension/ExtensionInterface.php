@@ -10,7 +10,8 @@ namespace BEAR\Sunday\Extension;
 /**
  * Interface for application extension
  *
- * @package BEAR.Sunday
+ * @package    BEAR.Sunday
+ * @subpackage Extension
  */
 interface ExtensionInterface
 {

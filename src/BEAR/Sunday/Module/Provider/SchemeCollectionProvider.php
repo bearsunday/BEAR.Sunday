@@ -14,7 +14,7 @@ use Ray\Di\InjectorInterface as Di;
 use Ray\Di\ProviderInterface as Provide;
 
 /**
- * Application resource module
+ * Scheme collection provider
  *
  * @package    BEAR.Sunday
  * @subpackage Module

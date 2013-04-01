@@ -27,6 +27,7 @@ class ResourceLoggerProvider implements ProviderInterface
      * @var \BEAR\Resource\Logger
      */
     private static $instance;
+
     /**
      * @var LoggerInterface
      */

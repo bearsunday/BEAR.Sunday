@@ -13,7 +13,7 @@ use BEAR\Resource\AbstractObject as ResourceObject;
  * Resource Links
  *
  * @package    BEAR.Sunday
- * @subpackage Page
+ * @subpackage Intercetor
  */
 trait EtagTrait
 {

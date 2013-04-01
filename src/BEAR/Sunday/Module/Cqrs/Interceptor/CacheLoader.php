@@ -47,6 +47,7 @@ class CacheLoader implements MethodInterceptor
     /**
      * @param $pagerKey
      *
+     * @return $this
      * @Inject
      * @Named("pager_key")
      */
@@ -66,7 +67,7 @@ class CacheLoader implements MethodInterceptor
         /** @var $ro \BEAR\Resource\AbstractObject */
         $args = $invocation->getArguments();
         $id = $this->getEtag($ro, $args);
-        $ro->headers['Tag'] =  $id;
+        $ro->headers['Tag'] = $id;
         $saved = $this->cache->fetch($id);
         $pagerNum = $this->getPagerNum($saved);
         if ($pagerNum) {

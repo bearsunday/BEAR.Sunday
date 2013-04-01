@@ -11,7 +11,7 @@ use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 
 /**
- * Aura.Web Context module
+ * Aura.Web context module
  *
  * @package    BEAR.Sunday
  * @subpackage Module

@@ -13,7 +13,7 @@ use BEAR\Sunday\Extension\ExtensionInterface;
  * Interface for http response
  *
  * @package    BEAR.Sunday
- * @subpackage Web
+ * @subpackage Extension
  */
 interface ResponseInterface extends ExtensionInterface
 {

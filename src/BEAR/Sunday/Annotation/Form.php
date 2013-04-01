@@ -13,7 +13,7 @@ namespace BEAR\Sunday\Annotation;
  * @Annotation
  * @Target({"METHOD"})
  *
- * @package    Sandbox
+ * @package    BEAR.Sunday
  * @subpackage Annotation
  */
 final class Form

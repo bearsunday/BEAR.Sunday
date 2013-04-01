@@ -14,14 +14,13 @@ use Guzzle\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Ray\Di\ProviderInterface as Provide;
 
 /**
- * Cache
+ * Apc cache provider
  *
  * @package    BEAR.Sunday
  * @subpackage Module
  */
 class ApcCacheProvider implements Provide
 {
-
     use TmpDirInject;
 
     /**

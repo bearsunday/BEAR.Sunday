@@ -29,15 +29,4 @@ trait EtagTrait
 
         return $etag;
     }
-
-    /**
-     * Tagging
-     *
-     * @param ResourceObject $ro
-     * @param string         $tag
-     */
-    public function tag(ResourceObject $ro, $tag)
-    {
-        $ro['headers']['etag'] = $tag;
-    }
 }

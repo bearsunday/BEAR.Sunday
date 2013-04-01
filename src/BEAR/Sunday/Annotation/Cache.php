@@ -23,5 +23,5 @@ final class Cache implements AnnotationInterface
      *
      * @var integer
      */
-    public $time = false;
+    public $time = 0;
 }

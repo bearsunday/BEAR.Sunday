@@ -7,12 +7,9 @@
  */
 namespace BEAR\Sunday\Module\Cqrs\Interceptor;
 
+use Guzzle\Cache\CacheAdapterInterface;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
-use Guzzle\Cache\CacheAdapterInterface;
-use Exception;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 
 /**
  * Cache load interceptor
@@ -24,6 +21,8 @@ use Ray\Di\Di\Named;
 class CacheLoader implements MethodInterceptor
 {
     use EtagTrait;
+
+    private $pagerKey = '_start';
 
     /**
      * Cache header key
@@ -46,39 +45,92 @@ class CacheLoader implements MethodInterceptor
     }
 
     /**
+     * @param $pagerKey
+     *
+     * @Inject
+     * @Named("pager_key")
+     */
+    public function setPagerQueryKey($pagerKey)
+    {
+        $this->pagerKey = $pagerKey;
+
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function invoke(MethodInvocation $invocation)
     {
         $ro = $invocation->getThis();
+        /** @var $ro \BEAR\Resource\AbstractObject */
         $args = $invocation->getArguments();
         $id = $this->getEtag($ro, $args);
-
-        $pager = (isset($_GET['_start'])) ? $_GET['_start'] : '';
+        $ro->headers['Tag'] =  $id;
         $saved = $this->cache->fetch($id);
-        $pager = (!$pager && isset($saved['pager'])) ? 1 : $pager;
-        if ($pager) {
-            $pagered = (isset($saved['pager'][$pager])) ? $saved['pager'][$pager] : false;
-        } else {
-            $pagered = $saved;
+        $pagerNum = $this->getPagerNum($saved);
+        if ($pagerNum) {
+            $saved = (isset($saved['pager'][$pagerNum])) ? $saved['pager'][$pagerNum] : false;
         }
-        if ($pagered) {
-            $resource = $invocation->getThis();
-            list($resource->code, $resource->headers, $resource->body) = $pagered;
-            $cache = json_decode($resource->headers[self::HEADER_CACHE], true);
-            $resource->headers[self::HEADER_CACHE] = json_encode(
-                [
-                    'mode' => 'R',
-                    'date' => $cache['date'],
-                    'life' => $cache['life']
-                ]
-            );
+        if ($saved) {
+            return $this->getSavedResource($invocation, $saved);
+        }
 
-            return $resource;
+        return $this->save($invocation, $pagerNum, $id);
+    }
+
+    /**
+     * @param $saved
+     *
+     * @return bool|int
+     */
+    private function getPagerNum($saved)
+    {
+        if (isset($_GET[$this->pagerKey])) {
+            $pagerNum = $_GET[$this->pagerKey];
+        } elseif (isset($saved['pager'])) {
+            $pagerNum = 1;
+        } else {
+            $pagerNum = false;
         }
+
+        return $pagerNum;
+    }
+
+    /**
+     * @param MethodInvocation $invocation
+     * @param mixed            $saved
+     *
+     * @return object
+     */
+    private function getSavedResource(MethodInvocation $invocation, $saved)
+    {
+        $resource = $invocation->getThis();
+        list($resource->code, $resource->headers, $resource->body) = $saved;
+        $cache = json_decode($resource->headers[self::HEADER_CACHE], true);
+        $resource->headers[self::HEADER_CACHE] = json_encode(
+            [
+                'mode' => 'R',
+                'date' => $cache['date'],
+                'life' => $cache['life']
+            ]
+        );
+
+        return $resource;
+    }
+
+    /**
+     * @param MethodInvocation $invocation
+     * @param int              $pagerNum
+     * @param string           $id
+     *
+     * @return object
+     */
+    private function save(MethodInvocation $invocation, $pagerNum, $id)
+    {
         $invocation->proceed();
         $resource = $invocation->getThis();
-        $time = $invocation->getAnnotation()->time;
+        $time = $this->getSaveTime($invocation);
         $resource->headers[self::HEADER_CACHE] = json_encode(
             [
                 'mode' => 'W',
@@ -87,16 +139,24 @@ class CacheLoader implements MethodInterceptor
             ]
         );
         $data = [$resource->code, $resource->headers, $resource->body];
-        if ($pager) {
-            $saved['pager'][$pager] = $data;
+        if ($pagerNum) {
+            $saved['pager'][$pagerNum] = $data;
             $data = $saved;
         }
-        try {
-            $this->cache->save($id, $data, $time);
-        } catch (Exception $e) {
-            error_log(get_class($e) . ':' . $e->getMessage());
-        }
+        $this->cache->save($id, $data, $time);
 
         return $resource;
+    }
+
+    /**
+     * @param MethodInvocation $invocation
+     *
+     * @return int
+     */
+    protected function getSaveTime(MethodInvocation $invocation)
+    {
+        $time = $invocation->getAnnotation()->time;
+
+        return $time;
     }
 }

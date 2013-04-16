@@ -1,18 +1,22 @@
 {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
     "hash": "0b5fb7cfb824fbf030bdc0c2be783c5a",
     "packages": [
         {
             "name": "aura/di",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/auraphp/Aura.Di",
-                "reference": "1.0.1"
+                "url": "https://github.com/auraphp/Aura.Di.git",
+                "reference": "1.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/auraphp/Aura.Di/archive/1.0.1.zip",
-                "reference": "1.0.1",
+                "url": "https://api.github.com/repos/auraphp/Aura.Di/zipball/1.1.0",
+                "reference": "1.1.0",
                 "shasum": ""
             },
             "require": {
@@ -27,7 +31,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD"
+                "BSD-2-Clause"
             ],
             "authors": [
                 {
@@ -58,7 +62,7 @@
                 "di",
                 "di container"
             ],
-            "time": "2012-11-28 00:00:00"
+            "time": "2013-04-07 00:00:00"
         },
         {
             "name": "aura/installer-default",
@@ -158,16 +162,16 @@
         },
         {
             "name": "bear/resource",
-            "version": "0.7.4",
+            "version": "0.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "0.7.4"
+                "reference": "0.7.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/0.7.4",
-                "reference": "0.7.4",
+                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/0.7.5",
+                "reference": "0.7.5",
                 "shasum": ""
             },
             "require": {
@@ -204,7 +208,7 @@
                 "rest",
                 "service layer"
             ],
-            "time": "2013-03-31 16:14:52"
+            "time": "2013-04-15 08:21:21"
         },
         {
             "name": "doctrine/annotations",
@@ -569,21 +573,20 @@
         },
         {
             "name": "ray/di",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "1.0.0"
+                "reference": "1.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/1.0.0",
-                "reference": "1.0.0",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/1.0.1",
+                "reference": "1.0.1",
                 "shasum": ""
             },
             "require": {
-                "aura/di": "1.0.*",
-                "aura/installer-default": "1.0.*",
+                "aura/di": "1.1.*",
                 "doctrine/annotations": "1.*",
                 "doctrine/cache": "1.*",
                 "php": ">=5.4.0",
@@ -611,29 +614,27 @@
             "keywords": [
                 "annotation",
                 "aop",
-                "container",
+                "aspect oriented programming",
                 "dependency injection",
                 "di",
                 "guice",
-                "ioc",
-                "jsr",
-                "method interception"
+                "jsr"
             ],
-            "time": "2013-03-31 12:46:44"
+            "time": "2013-04-16 08:03:56"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.2.0",
+            "version": "v2.2.1",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "v2.2.0-RC3"
+                "reference": "v2.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.2.0-RC3",
-                "reference": "v2.2.0-RC3",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.2.1",
+                "reference": "v2.2.1",
                 "shasum": ""
             },
             "require": {

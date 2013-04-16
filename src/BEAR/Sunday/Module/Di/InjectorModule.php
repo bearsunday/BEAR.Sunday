@@ -27,14 +27,14 @@ class InjectorModule extends AbstractModule
      *
      * @param InjectorInterface $injector
      */
-    public function construct(InjectorInterface $injector)
-    {
-        $this->injector = $injector;
-        $logger = $this->requestInjection('BEAR\Sunday\Inject\Logger\Adapter');
-        /** @var $logger \Ray\Di\LoggerInterface */
-        $this->injector->setLogger($logger);
-        parent::__construct();
-    }
+//    public function construct()
+//    {
+////        $this->injector = $injector;
+////        $logger = $this->requestInjection('BEAR\Sunday\Inject\Logger\Adapter');
+//        /** @var $logger \Ray\Di\LoggerInterface */
+////        $this->injector->setLogger($logger);
+//        parent::__construct();
+//    }
 
     /**
      * Configure
@@ -43,10 +43,11 @@ class InjectorModule extends AbstractModule
      */
     protected function configure()
     {
-        $config = $this->dependencyInjector->getContainer()->getForge()->getConfig();
-        $this->bind('Aura\Di\ConfigInterface')->toInstance($config);
-        $this->bind('Ray\Di\InjectorInterface')->toInstance($this->dependencyInjector);
-        $module = $this->dependencyInjector->getModule();
-        $this->bind('Ray\Di\AbstractModule')->toInstance($module);
+        $this->bind('Aura\Di\ConfigInterface')->to('Aura\Di\Config');
+        $this->bind('Aura\ForgeInterface')->to('Aura\ForgeI');
+        $this->bind('Aura\Di\ContainerInterface')->to('Ray\Di\Container');
+        $this->bind('Aura\Di\ForgeInterface')->to('Ray\Di\Forge');
+        $this->bind('Ray\Di\InjectorInterface')->to('Ray\Di\Injector');
+        $this->bind('Ray\Di\AbstractModule')->toInstance($this);
     }
 }

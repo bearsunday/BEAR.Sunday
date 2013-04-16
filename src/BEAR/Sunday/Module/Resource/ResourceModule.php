@@ -35,6 +35,7 @@ class ResourceModule extends AbstractModule
         $this->bind('BEAR\Resource\LoggerInterface')->annotatedWith("resource_logger")->to('BEAR\Resource\Logger');
         $this->bind('BEAR\Resource\LoggerInterface')->toProvider('BEAR\Sunday\Module\Provider\ResourceLoggerProvider');
         $this->bind('BEAR\Resource\HrefInterface')->to('BEAR\Resource\A');
+        $this->bind('BEAR\Resource\SignalParamsInterface')->to('BEAR\Resource\SignalParam');
         $this
             ->bind('Aura\Signal\Manager')
             ->toProvider('BEAR\Sunday\Module\Provider\SignalProvider')

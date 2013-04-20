@@ -12,6 +12,7 @@ use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
+
 /**
  * Cache load interceptor
  *

@@ -4,6 +4,7 @@ namespace BEAR\Sunday\Module\Framework;
 
 use BEAR\Sunday\Module\Framework\FrameworkModule;
 use Ray\Di\Injector;
+use Ray\Di\Module\InjectorModule;
 
 class FrameworkModuleTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,7 +17,7 @@ class FrameworkModuleTest extends \PHPUnit_Framework_TestCase
     {
         $this->injector = Injector::create(
             [
-                new FrameworkModule
+                new InjectorModule(new FrameworkModule)
             ]
         );
 

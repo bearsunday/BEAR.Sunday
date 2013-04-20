@@ -162,16 +162,16 @@
         },
         {
             "name": "bear/resource",
-            "version": "0.7.5",
+            "version": "0.7.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "0.7.5"
+                "reference": "0.7.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/0.7.5",
-                "reference": "0.7.5",
+                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/0.7.7",
+                "reference": "0.7.7",
                 "shasum": ""
             },
             "require": {
@@ -197,8 +197,7 @@
             "authors": [
                 {
                     "name": "Akihito Koriyama",
-                    "email": "akihito.koriyama@gmail.com",
-                    "homepage": "https://github.com/koriym"
+                    "email": "akihito.koriyama@gmail.com"
                 }
             ],
             "description": "RESTful service layer framework",
@@ -208,20 +207,20 @@
                 "rest",
                 "service layer"
             ],
-            "time": "2013-04-15 08:21:21"
+            "time": "2013-04-20 12:20:56"
         },
         {
             "name": "doctrine/annotations",
-            "version": "v1.1",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "v1.1"
+                "reference": "v1.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/v1.1",
-                "reference": "v1.1",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/v1.1.1",
+                "reference": "v1.1.1",
                 "shasum": ""
             },
             "require": {
@@ -232,6 +231,11 @@
                 "doctrine/cache": "1.*"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Doctrine\\Common\\Annotations\\": "lib/"
@@ -263,7 +267,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -274,7 +278,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2013-03-17 14:03:10"
+            "time": "2013-04-20 08:30:17"
         },
         {
             "name": "doctrine/cache",
@@ -323,9 +327,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -573,16 +577,16 @@
         },
         {
             "name": "ray/di",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "1.0.1"
+                "reference": "1.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/1.0.1",
-                "reference": "1.0.1",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/1.0.2",
+                "reference": "1.0.2",
                 "shasum": ""
             },
             "require": {
@@ -620,7 +624,7 @@
                 "guice",
                 "jsr"
             ],
-            "time": "2013-04-16 08:03:56"
+            "time": "2013-04-19 08:42:37"
         },
         {
             "name": "symfony/event-dispatcher",

@@ -28,7 +28,7 @@ class AuraWebModule extends AbstractModule
         $this
             ->bind('Ray\Di\ProviderInterface')
             ->annotatedWith('webContext')
-            ->to('BEAR\Sunday\Module\Provider\WebContextProvider')
+            ->to('BEAR\Sunday\Module\WebContext\WebContextProvider')
             ->in(Scope::SINGLETON);
     }
 }

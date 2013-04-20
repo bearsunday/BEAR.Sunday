@@ -17,7 +17,6 @@ use BEAR\Resource\ResourceInterface;
  */
 trait ResourceInject
 {
-
     /**
      * @var ResourceInterface
      */

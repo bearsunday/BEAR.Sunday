@@ -24,6 +24,9 @@ class NamedModule extends AbstractModule
      */
     public function __construct(array $names)
     {
+        $names += [
+            'sunday_dir' =>dirname(dirname(dirname(dirname(dirname(__DIR__)))))
+        ];
         $this->names = $names;
         parent::__construct();
     }

@@ -3,14 +3,15 @@
 namespace BEAR\Sunday\Module\Cache;
 
 use BEAR\Sunday\Module\Constant\NamedModule;
-use BEAR\Sunday\Module\Resource\ApcModule;
+use BEAR\Sunday\Module\Resource\ResourceCacheModule;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 use Guzzle\Cache\CacheAdapterInterface;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
+use BEAR\Sunday\Annotation\Cache;
 
-class ResourceModuleTestClass
+class CacheModuleTestClass
 {
     public $cache;
 
@@ -24,9 +25,18 @@ class ResourceModuleTestClass
     {
         $this->cache = $cache;
     }
+
+    /**
+     * @Cache
+     */
+    public function onGet()
+    {
+        return rand(0, 100);
+    }
+
 }
 
-class ResourceModuleTest extends \PHPUnit_Framework_TestCase
+class CacheModuleTest extends \PHPUnit_Framework_TestCase
 {
     private $instance;
 
@@ -35,9 +45,9 @@ class ResourceModuleTest extends \PHPUnit_Framework_TestCase
         $this->instance = Injector::create(
             [
                 new NamedModule(['tmp_dir' => sys_get_temp_dir()]),
-                new ApcModule
+                new ResourceCacheModule
             ]
-        )->getInstance(__NAMESPACE__ . '\ResourceModuleTestClass');
+        )->getInstance(__NAMESPACE__ . '\CacheModuleTestClass');
     }
 
     public function testGetInstance()

@@ -5,17 +5,18 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Module\Framework;
+namespace BEAR\Sunday\Module\Resource;
 
 use Ray\Di\AbstractModule;
 
+
 /**
- * Output console module
+ * APC Resource cache module
  *
  * @package    BEAR.Sunday
  * @subpackage Module
  */
-class ConstantModule extends AbstractModule
+class ResourceCacheModule extends AbstractModule
 {
     /**
      * Configure
@@ -24,8 +25,9 @@ class ConstantModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('')->annotatedWith('is_prod')->toInstance(false);
-        $sundayDir = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
-        $this->bind('')->annotatedWith('sunday_dir')->toInstance($sundayDir);
+        $this
+            ->bind('Guzzle\Cache\CacheAdapterInterface')
+            ->annotatedWith('resource_cache')
+            ->toProvider('BEAR\Sunday\Module\Cache\CacheProvider');
     }
 }

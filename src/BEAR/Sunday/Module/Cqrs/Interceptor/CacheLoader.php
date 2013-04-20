@@ -49,7 +49,7 @@ class CacheLoader implements MethodInterceptor
      * @param $pagerKey
      *
      * @return $this
-     * @Inject
+     * @Inject(optional=true)
      * @Named("pager_key")
      */
     public function setPagerQueryKey($pagerKey)

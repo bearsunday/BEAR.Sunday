@@ -6,11 +6,11 @@
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 
-namespace BEAR\Sunday\Module\Di;
+namespace BEAR\Sunday\Module\DependencyInjection;
 
-use BEAR\Sunday\Module\Di\InjectorModule;
-use Ray\Di\Injector;
+use Ray\Di\Module\InjectorModule;
 use Doctrine\Common\Annotations\AnnotationReader;
+use Ray\Di\Injector;
 
 class InjectorModuleTest extends \PHPUnit_Framework_TestCase {
 

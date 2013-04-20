@@ -5,7 +5,7 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Module\Provider;
+namespace BEAR\Sunday\Module\Cache;
 
 use BEAR\Sunday\Inject\TmpDirInject;
 use Doctrine\Common\Cache\ApcCache;
@@ -19,11 +19,13 @@ use Ray\Di\ProviderInterface as Provide;
  * @package    BEAR.Sunday
  * @subpackage Module
  */
-class ApcCacheProvider implements Provide
+class CacheProvider implements Provide
 {
     use TmpDirInject;
 
     /**
+     * Return instance
+     *
      * @return CacheAdapter
      */
     public function get()

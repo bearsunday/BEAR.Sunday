@@ -12,24 +12,13 @@ use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 use Ray\Di\ProviderInterface;
 
-class TestScheme implements ProviderInterface
-{
-    public function get()
-    {
-        return new SchemeCollection;
-    }
-}
-
 class ResourceModuleTest extends \PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
         $this->resource = Injector::create(
             [
-                new AnnotationModule,
-                new InjectorModule,
-                new ResourceModule,
-                new SchemeModule(__NAMESPACE__ . '\TestScheme')
+                new ResourceModule
             ]
         )->getInstance('BEAR\Resource\Resource');
     }

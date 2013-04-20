@@ -26,6 +26,6 @@ class CachedAnnotationModule extends AbstractModule
     {
         $this
             ->bind('Doctrine\Common\Annotations\Reader')
-            ->toProvider('BEAR\Sunday\Module\Provider\CachedReaderProvider');
+            ->toProvider('BEAR\Sunday\Module\Code\CachedReaderProvider');
     }
 }

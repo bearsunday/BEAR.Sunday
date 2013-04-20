@@ -16,7 +16,7 @@ use Ray\Di\Di\Scope;
  * @package    BEAR.Sunday
  * @subpackage Module
  */
-class ApcModule extends AbstractModule
+class CacheModule extends AbstractModule
 {
     /**
      * Configure
@@ -27,7 +27,7 @@ class ApcModule extends AbstractModule
     {
         $this
             ->bind('Guzzle\Cache\AbstractCacheAdapter')
-            ->toProvider('BEAR\Sunday\Module\Provider\ApcCacheProvider')
+            ->toProvider('BEAR\Sunday\Module\Cache\CacheProvider')
             ->in(Scope::SINGLETON);
     }
 }

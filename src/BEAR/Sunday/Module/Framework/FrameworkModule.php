@@ -10,7 +10,7 @@ namespace BEAR\Sunday\Module\Framework;
 use BEAR\Sunday\Module;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
-
+use Ray\Di\Module\InjectorModule;
 
 /**
  * Application module
@@ -20,19 +20,10 @@ use Ray\Di\Injector;
  */
 class FrameworkModule extends AbstractModule
 {
-    /**
-     * Configure
-     *
-     * @return void
-     */
     protected function configure()
     {
-        // core
-        $this->install(new Module\Framework\ConstantModule);
-        $this->install(new Module\Di\InjectorModule);
-        $this->install(new Module\Resource\ResourceModule);
+        $this->install(new Module\Cache\CacheModule);
         $this->install(new Module\Code\CachedAnnotationModule);
-        // extension
-        $this->install(new Module\Cache\ApcModule);
+        $this->install(new Module\Resource\ResourceModule($this));
     }
 }

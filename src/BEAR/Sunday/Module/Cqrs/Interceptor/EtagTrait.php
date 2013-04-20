@@ -7,10 +7,8 @@
  */
 namespace BEAR\Sunday\Module\Cqrs\Interceptor;
 
-use BEAR\Resource\AbstractObject as ResourceObject;
-
 /**
- * Resource Links
+ * EtagTrait
  *
  * @package    BEAR.Sunday
  * @subpackage Intercetor

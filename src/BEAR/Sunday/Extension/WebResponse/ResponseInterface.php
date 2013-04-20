@@ -20,7 +20,21 @@ interface ResponseInterface extends ExtensionInterface
     /**
      * @param $page
      *
-     * @return mixed
+     * @return self
      */
     public function setResource($page);
+
+    /**
+     * Render resource
+     *
+     * @return self
+     */
+    public function render();
+
+    /**
+     * Send transfer
+     *
+     * @return self
+     */
+    public function send();
 }

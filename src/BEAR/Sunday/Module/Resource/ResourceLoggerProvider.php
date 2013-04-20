@@ -5,7 +5,7 @@
  * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Module\Provider;
+namespace BEAR\Sunday\Module\Resource;
 
 use BEAR\Resource\LoggerInterface;
 use BEAR\Sunday\Extension\Application\AppInterface;
@@ -35,7 +35,7 @@ class ResourceLoggerProvider implements ProviderInterface
 
     /**
      * Set logger name
-     *
+     *ResourceLoggerProvider
      * @param LoggerInterface $logger
      *
      * @Inject

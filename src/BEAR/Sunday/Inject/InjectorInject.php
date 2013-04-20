@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Inject;
 
-use Ray\Di\InjectorInterface as Di;
+use Ray\Di\InjectorInterface;
 
 /**
  * Inject injector
@@ -20,18 +20,18 @@ trait InjectorInject
     /**
      * Dependency injector
      *
-     * @var Di
+     * @var InjectorInterface
      */
     private $injector;
 
     /**
      * Injector setter
      *
-     * @param Di $injector
+     * @param InjectorInterface $injector
      *
      * @Ray\Di\Di\Inject
      */
-    public function setInjector(Di $injector)
+    public function setInjector(InjectorInterface $injector)
     {
         $this->injector = $injector;
     }

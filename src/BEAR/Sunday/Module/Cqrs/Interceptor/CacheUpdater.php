@@ -14,7 +14,6 @@ use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 use ReflectionMethod;
 
-
 /**
  * Cache update interceptor
  *

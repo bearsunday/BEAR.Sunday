@@ -27,12 +27,13 @@ class SchemeModule extends AbstractModule
     /**
      * Constructor
      *
-     * @param string $schemeProvider provider class name
+     * @param AbstractModule   $module
+     * @param \Ray\Aop\Matcher $schemeProvider
      */
-    public function __construct($schemeProvider)
+    public function __construct(AbstractModule $module, $schemeProvider)
     {
         $this->schemeProvider = $schemeProvider;
-        parent::__construct();
+        parent::__construct($module);
     }
 
     /**
@@ -42,6 +43,6 @@ class SchemeModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('BEAR\Resource\SchemeCollection')->toProvider($this->schemeProvider);
+        $this->bind('BEAR\Resource\SchemeCollectionInterface')->toProvider($this->schemeProvider);
     }
 }

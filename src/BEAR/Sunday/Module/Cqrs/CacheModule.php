@@ -9,7 +9,6 @@ namespace BEAR\Sunday\Module\Cqrs;
 
 use Ray\Di\AbstractModule;
 
-
 /**
  * Cache module
  *

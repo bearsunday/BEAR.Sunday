@@ -27,7 +27,7 @@ trait InjectorInject
     /**
      * Injector setter
      *
-     * @param Di $injector
+     * @param InjectorInterface $injector
      *
      * @Ray\Di\Di\Inject
      */

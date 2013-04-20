@@ -26,10 +26,9 @@ trait NamedArgsInject
     private $namedArgs;
 
     /**
-     * Set tmp dir path
+     * Set named arg
      *
-     * @param string $tmpDir
-     *
+     * @param NamedArgsInterface $namedArgs
      * @Ray\Di\Di\Inject
      */
     public function setNamedArgs(NamedArgsInterface $namedArgs)

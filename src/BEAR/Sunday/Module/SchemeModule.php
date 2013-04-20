@@ -27,7 +27,8 @@ class SchemeModule extends AbstractModule
     /**
      * Constructor
      *
-     * @param string $schemeProvider provider class name
+     * @param AbstractModule   $module
+     * @param \Ray\Aop\Matcher $schemeProvider
      */
     public function __construct(AbstractModule $module, $schemeProvider)
     {

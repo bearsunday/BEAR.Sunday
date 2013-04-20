@@ -20,8 +20,6 @@ use BEAR\Resource\Module\ResourceModule as BearResourceModule;
  */
 class ResourceModule extends AbstractModule
 {
-    private $injector;
-
     /**
      * Configure
      *

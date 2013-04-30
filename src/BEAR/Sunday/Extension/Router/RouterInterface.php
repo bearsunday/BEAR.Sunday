@@ -7,13 +7,15 @@
  */
 namespace BEAR\Sunday\Extension\Router;
 
+use BEAR\Sunday\Extension\ExtensionInterface;
+
 /**
  * Interface for router
  *
  * @package    BEAR.Sunday
  * @subpackage Extension
  */
-interface RouterInterface
+interface RouterInterface extends ExtensionInterface
 {
     /**
      * Set globals

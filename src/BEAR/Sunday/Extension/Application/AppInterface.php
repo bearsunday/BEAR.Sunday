@@ -7,12 +7,14 @@
  */
 namespace BEAR\Sunday\Extension\Application;
 
+use BEAR\Sunday\Extension\ExtensionInterface;
+
 /**
  * Interface for application context
  *
  * @package    BEAR.Sunday
  * @subpackage Extension
  */
-interface AppInterface
+interface AppInterface extends ExtensionInterface
 {
 }

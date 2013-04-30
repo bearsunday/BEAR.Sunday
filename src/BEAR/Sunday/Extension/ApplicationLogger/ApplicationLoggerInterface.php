@@ -2,7 +2,6 @@
 /**
  * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Extension\ApplicationLogger;
@@ -14,9 +13,6 @@ use Ray\Di\Di\Inject;
 
 /**
  * Extension interface for application logger
- *
- * @package    BEAR.Sunday
- * @subpackage Extension
  */
 interface ApplicationLoggerInterface extends ExtensionInterface
 {

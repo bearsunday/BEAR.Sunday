@@ -17,4 +17,20 @@ use BEAR\Sunday\Extension\ExtensionInterface;
  */
 interface ConsoleOutputInterface extends ExtensionInterface
 {
+    /**
+     * Disable output
+     *
+     * @return self
+     */
+    public function disableOutput();
+
+    /**
+     * Send CLI output
+     *
+     * @param ResourceObject $resource
+     * @param string         $statusText
+     *
+     * @return string
+     */
+    public function send(ResourceObject $resource, $statusText = '');
 }

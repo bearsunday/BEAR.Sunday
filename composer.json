@@ -16,10 +16,10 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "ext-curl": "*",
-        "bear/resource": "*",
-        "nocarrier/hal": "0.9.*"
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "bear/resource": "0.7.*"
     },
     "autoload": {
         "psr-0": {

@@ -1,0 +1,28 @@
+{
+    "name": "bear/template-engine",
+    "description": "BEAR.Sunday template engine extension",
+    "keywords": [
+        "BEAR.Sunday",
+        "template engine"
+    ],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Akihito Koriyama",
+            "email": "akihito.koriyama@gmail.com",
+            "homepage": "https://github.com/koriym"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": { "BEAR\\Sunday\\Extension\\TemplateEngine\\": "" }
+    },
+    "target-dir": "BEAR/Sunday/Extension/TemplateEngine",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.7-dev"
+        }
+    }
+}

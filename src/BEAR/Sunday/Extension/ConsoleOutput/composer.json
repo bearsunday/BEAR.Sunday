@@ -1,0 +1,28 @@
+{
+    "name": "bear/console-output",
+    "description": "BEAR.Sunday console output extension",
+    "keywords": [
+        "BEAR.Sunday",
+        "console output"
+    ],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Akihito Koriyama",
+            "email": "akihito.koriyama@gmail.com",
+            "homepage": "https://github.com/koriym"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": { "BEAR\\Sunday\\Extension\\ConsoleOutput\\": "" }
+    },
+    "target-dir": "BEAR/Sunday/Extension/ConsoleOutput",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.7-dev"
+        }
+    }
+}

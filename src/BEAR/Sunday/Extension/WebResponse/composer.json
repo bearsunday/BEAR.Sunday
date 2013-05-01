@@ -1,8 +1,9 @@
 {
-    "name": "bear/web-response",
+    "name": "bear/ext-web-response",
     "description": "BEAR.Sunday template engine extension",
     "keywords": [
-        "BEAR.Sunday",
+        "BEAR.Sunday extension",
+        "interface",
         "web response"
     ],
     "license": "BSD-3-Clause",
@@ -14,7 +15,8 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "bear/web-response" : "0.7.*"
     },
     "autoload": {
         "psr-0": { "BEAR\\Sunday\\Extension\\WebResponse\\": "" }

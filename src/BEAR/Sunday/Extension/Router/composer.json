@@ -1,8 +1,9 @@
 {
-    "name": "bear/router",
+    "name": "bear/ext-router",
     "description": "BEAR.Sunday router extension",
     "keywords": [
-        "BEAR.Sunday",
+        "BEAR.Sunday extension",
+        "interface",
         "router"
     ],
     "license": "BSD-3-Clause",
@@ -14,7 +15,8 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "bear/router" : "0.7.*"
     },
     "autoload": {
         "psr-0": { "BEAR\\Sunday\\Extension\\Router\\": "" }

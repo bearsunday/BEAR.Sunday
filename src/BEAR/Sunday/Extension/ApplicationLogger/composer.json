@@ -1,8 +1,9 @@
 {
-    "name": "bear/application-logger",
+    "name": "bear/ext-application-logger",
     "description": "BEAR.Sunday application logger extension",
     "keywords": [
-        "BEAR.Sunday",
+        "BEAR.Sunday extension",
+        "interface",
         "application logger"
     ],
     "license": "BSD-3-Clause",
@@ -14,7 +15,8 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "bear/application-logger" : "0.7.*"
     },
     "autoload": {
         "psr-0": { "BEAR\\Sunday\\Extension\\ApplicationLogger\\": "" }

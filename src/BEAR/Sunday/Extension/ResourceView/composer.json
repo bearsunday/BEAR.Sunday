@@ -1,8 +1,8 @@
 {
-    "name": "bear/resource-view",
+    "name": "bear/ext-resource-view",
     "description": "BEAR.Sunday resource view extension",
     "keywords": [
-        "BEAR.Sunday",
+        "BEAR.Sunday extension",
         "resource view"
     ],
     "license": "BSD-3-Clause",
@@ -14,7 +14,8 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "bear/resource-view" : "0.7.*"
     },
     "autoload": {
         "psr-0": { "BEAR\\Sunday\\Extension\\ResourceView\\": "" }

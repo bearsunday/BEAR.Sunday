@@ -2,7 +2,6 @@
 /**
  * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module\Cache;
@@ -14,10 +13,9 @@ use Guzzle\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Ray\Di\ProviderInterface as Provide;
 
 /**
- * Apc cache provider
+ * Cache provider
  *
- * @package    BEAR.Sunday
- * @subpackage Module
+ * (primary:APC, secondary:FileCache)
  */
 class CacheProvider implements Provide
 {

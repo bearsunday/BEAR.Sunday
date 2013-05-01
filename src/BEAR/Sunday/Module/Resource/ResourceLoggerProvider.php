@@ -2,7 +2,6 @@
 /**
  * This file is part of the BEAR.Sunday package
  *
- * @package BEAR.Sunday
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
 namespace BEAR\Sunday\Module\Resource;
@@ -16,7 +15,6 @@ use Ray\Di\ProviderInterface;
 /**
  * Resource logger
  *
- * @package BEAR.Sunday
  * @see     https://github.com/auraphp/Aura.Web.git
  */
 class ResourceLoggerProvider implements ProviderInterface

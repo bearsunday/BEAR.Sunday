@@ -15,11 +15,15 @@ use Ray\Di\Di\Named;
 /**
  * Cache load interceptor
  */
-
 class CacheLoader implements MethodInterceptor
 {
     use EtagTrait;
 
+    /**
+     * Pager key
+     *
+     * @var string
+     */
     private $pagerKey = '_start';
 
     /**
@@ -43,6 +47,8 @@ class CacheLoader implements MethodInterceptor
     }
 
     /**
+     * Set pager query key
+     *
      * @param $pagerKey
      *
      * @return $this
@@ -79,6 +85,8 @@ class CacheLoader implements MethodInterceptor
     }
 
     /**
+     * Return pager number
+     *
      * @param $saved
      *
      * @return bool|int
@@ -97,6 +105,8 @@ class CacheLoader implements MethodInterceptor
     }
 
     /**
+     * Return saved resource
+     *
      * @param MethodInvocation $invocation
      * @param mixed            $saved
      *
@@ -119,6 +129,8 @@ class CacheLoader implements MethodInterceptor
     }
 
     /**
+     * Save
+     *
      * @param MethodInvocation $invocation
      * @param int              $pagerNum
      * @param string           $id
@@ -148,6 +160,8 @@ class CacheLoader implements MethodInterceptor
     }
 
     /**
+     * Return TTL
+     *
      * @param MethodInvocation $invocation
      *
      * @return int

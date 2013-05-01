@@ -7,7 +7,7 @@
 namespace BEAR\Sunday\Inject;
 
 /**
- * Inject tmp_dir
+ * Inject temporary directory path
  */
 trait TmpDirInject
 {

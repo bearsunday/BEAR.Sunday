@@ -14,11 +14,6 @@ use Ray\Di\Scope;
  */
 class AuraWebModule extends AbstractModule
 {
-    /**
-     * Configure dependency binding
-     *
-     * @return void
-     */
     protected function configure()
     {
         $this

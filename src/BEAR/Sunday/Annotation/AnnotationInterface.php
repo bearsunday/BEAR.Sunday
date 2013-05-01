@@ -7,7 +7,7 @@
 namespace BEAR\Sunday\Annotation;
 
 /**
- * Annotation
+ * Interface for annotation
  */
 interface AnnotationInterface
 {

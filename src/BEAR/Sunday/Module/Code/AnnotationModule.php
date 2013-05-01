@@ -14,11 +14,6 @@ use Ray\Di\Scope;
  */
 class AnnotationModule extends AbstractModule
 {
-    /**
-     * Configure
-     *
-     * @return void
-     */
     protected function configure()
     {
         $this

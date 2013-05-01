@@ -7,9 +7,7 @@
 namespace BEAR\Sunday\Exception;
 
 /**
- * Invalid Resource Type
- *
- * @subpackge Exception
+ * Invalid Resource type  exception
  */
 class InvalidResourceType extends \LogicException implements ExceptionInterface
 {

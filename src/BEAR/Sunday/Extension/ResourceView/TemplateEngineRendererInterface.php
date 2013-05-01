@@ -10,7 +10,7 @@ use BEAR\Resource\RenderInterface;
 use BEAR\Sunday\Extension\TemplateEngine\TemplateEngineAdapterInterface;
 
 /**
- * Interface for console output
+ * Interface for template engine renderer
  */
 interface TemplateEngineRendererInterface extends RenderInterface
 {

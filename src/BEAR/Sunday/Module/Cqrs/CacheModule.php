@@ -13,11 +13,6 @@ use Ray\Di\AbstractModule;
  */
 class CacheModule extends AbstractModule
 {
-    /**
-     * Configure dependency binding
-     *
-     * @return void
-     */
     protected function configure()
     {
         $cacheLoader = $this->requestInjection(__NAMESPACE__ . '\Interceptor\CacheLoader');

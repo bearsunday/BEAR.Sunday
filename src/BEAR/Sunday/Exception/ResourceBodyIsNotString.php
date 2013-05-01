@@ -9,9 +9,7 @@ namespace BEAR\Sunday\Exception;
 use BEAR\Resource\Exception;
 
 /**
- * Body is not string
- *
- * @subpackge Exception
+ * Body is not string exception
  */
 class ResourceBodyIsNotString extends \RuntimeException implements ExceptionInterface
 {

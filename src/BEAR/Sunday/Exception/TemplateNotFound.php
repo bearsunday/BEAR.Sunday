@@ -9,9 +9,7 @@ namespace BEAR\Sunday\Exception;
 use BEAR\Sunday\Exception\ExceptionInterface;
 
 /**
- * Template Not found
- *
- * @subpackge Exception
+ * Template Not found exception
  */
 class TemplateNotFound extends \LogicException implements ExceptionInterface
 {

@@ -7,7 +7,7 @@
 namespace BEAR\Sunday\Inject;
 
 /**
- * Inject app dir
+ * Inject application root directory path
  */
 trait AppDirInject
 {

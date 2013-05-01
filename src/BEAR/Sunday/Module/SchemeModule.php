@@ -32,11 +32,6 @@ class SchemeModule extends AbstractModule
         parent::__construct($module);
     }
 
-    /**
-     * Configure
-     *
-     * @return void
-     */
     protected function configure()
     {
         $this->bind('BEAR\Resource\SchemeCollectionInterface')->toProvider($this->schemeProvider);

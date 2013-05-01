@@ -12,7 +12,7 @@ use BEAR\Sunday\Extension\ExtensionInterface;
 use Ray\Di\Di\Inject;
 
 /**
- * Extension interface for application logger
+ * Interface for application logger
  */
 interface ApplicationLoggerInterface extends ExtensionInterface
 {

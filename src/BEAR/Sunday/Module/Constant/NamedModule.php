@@ -27,11 +27,6 @@ class NamedModule extends AbstractModule
         parent::__construct();
     }
 
-    /**
-     * Configure
-     *
-     * @return void
-     */
     protected function configure()
     {
         foreach ($this->names as $annotatedWith => $instance) {

@@ -9,7 +9,7 @@ namespace BEAR\Sunday\Inject;
 use Ray\Di\InjectorInterface;
 
 /**
- * Inject injector
+ * Inject dependency injector
  */
 trait InjectorInject
 {

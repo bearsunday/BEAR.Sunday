@@ -13,11 +13,6 @@ use Ray\Di\AbstractModule;
  */
 class CachedAnnotationModule extends AbstractModule
 {
-    /**
-     * Configure
-     *
-     * @return void
-     */
     protected function configure()
     {
         $this

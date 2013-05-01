@@ -13,7 +13,9 @@ use Guzzle\Cache\DoctrineCacheAdapter as CacheAdapter;
 use Ray\Di\ProviderInterface as Provide;
 
 /**
- * Apc cache provider
+ * Cache provider
+ *
+ * (primary:APC, secondary:FileCache)
  */
 class CacheProvider implements Provide
 {

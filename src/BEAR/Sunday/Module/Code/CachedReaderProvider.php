@@ -17,8 +17,6 @@ use Ray\Di\ProviderInterface as Provide;
 class CachedReaderProvider implements Provide
 {
     /**
-     * Return instance
-     *
      * @return CachedReader
      */
     public function get()

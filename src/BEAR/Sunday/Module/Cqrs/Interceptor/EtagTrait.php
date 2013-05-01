@@ -12,6 +12,8 @@ namespace BEAR\Sunday\Module\Cqrs\Interceptor;
 trait EtagTrait
 {
     /**
+     * Return etag
+     *
      * @param $object
      * @param $args
      *

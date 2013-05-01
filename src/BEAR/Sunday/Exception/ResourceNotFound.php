@@ -9,7 +9,7 @@ namespace BEAR\Sunday\Exception;
 use BEAR\Resource\Exception;
 
 /**
- * Not found
+ * Not found exception
  *
  * @subpackge Exception
  */

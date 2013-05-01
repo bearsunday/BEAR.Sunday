@@ -13,11 +13,6 @@ use Ray\Di\AbstractModule;
  */
 class ResourceCacheModule extends AbstractModule
 {
-    /**
-     * Configure
-     *
-     * @return void
-     */
     protected function configure()
     {
         $this

@@ -1,8 +1,9 @@
 {
-    "name": "bear/console-output",
+    "name": "bear/ext-console-output",
     "description": "BEAR.Sunday console output extension",
     "keywords": [
-        "BEAR.Sunday",
+        "BEAR.Sunday extension",
+        "interface",
         "console output"
     ],
     "license": "BSD-3-Clause",
@@ -14,7 +15,8 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "bear/console-output" : "0.7.*"
     },
     "autoload": {
         "psr-0": { "BEAR\\Sunday\\Extension\\ConsoleOutput\\": "" }

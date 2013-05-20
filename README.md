@@ -235,8 +235,8 @@ ERROR: {
 
 Application Object
 ------------------
-Application itself just are stored in one object variable.
-You can access all resource of application with resources clients, use is also easy from plain PHP files or CMS, and other frameworks.
+Application is just stored in one object variable. 
+You can access all resource of application with resources clients, easy use from plain PHP files or CMS and other frameworks as well.
 
 ```php
 <?php
@@ -284,7 +284,7 @@ It is google guice style annotation-based DI framework.
 
 Aspect oriented programming
 ---------------------------
-Many features of the framework is implemented as an aspect.
+Many features of the framework are implemented as an aspect.
 
 ### Interceptor
 ```php

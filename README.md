@@ -34,7 +34,7 @@ The resource class receive a named argument over the query parameters of the URL
 
 ```php
 class Hello extends Page
-{S
+{
     public function onGet($name = "World")
     {
         $this['greeting'] = "Hello " . $name;
@@ -62,7 +62,7 @@ Method-Override
 
 ```
 http://myapp/entry/10/?_method=DELETE
-````
+```
 
 
 Development tools
@@ -141,38 +141,38 @@ Annotations
 Aspects like Log or cache can be specified in the annotation 
 ```php
 /**
-* @Cache(60)
-*/
+ * @Cache(60)
+ */
 public function onGet($name = "World")
 {
 ```
 
 ```php
 /**
-* @Auth("admin")
-*/
+ * @Auth("admin")
+ */
 public function onGet($id)
 {
 ```
 
 ```php
 /**
-* @Time
-* @Transactional
-* @CacheUpdate
-* @Log
-*/
+ * @Time
+ * @Transactional
+ * @CacheUpdate
+ * @Log
+ */
 public function onPost($title, $body)
 {
 ```
 
-SQL in the method is converted to paging enabled SQL with @ DbPager.
+SQL in the method is converted to paging enabled SQL with @DbPager.
 
 ```php
 /**
-* @Db
-* @DbPager(10)
-*/
+ * @Db
+ * @DbPager(10)
+ */
 public function onGet($id)
 {
 ```
@@ -183,22 +183,22 @@ Application execution sequence is scripted by the user-defined application scrip
 
 ```php
 /**
-* Here we get the production application instance. No $mode variable is needed as it defaults to Prod.
-*
-* @var $app \BEAR\Package\Provide\Application\AbstractApp
-*/
+ * Here we get the production application instance. No $mode variable is needed as it defaults to Prod.
+ *
+ * @var $app \BEAR\Package\Provide\Application\AbstractApp
+ */
 $app = require dirname(__DIR__) . '/scripts/instance.php';
 
 /**
-* Calling the match of a BEAR.Sunday compatible router will give us the $method, $pagePath, $query to be used
-* in the page request.
-*/
+ * Calling the match of a BEAR.Sunday compatible router will give us the $method, $pagePath, $query to be used
+ * in the page request.
+ */
 list($method, $pagePath, $query) = $app->router->match();
 
 /**
-* An attempt to request the page resource is made.
-* Upon failure the appropriate error code is assigned and forwarded to ERROR.
-*/
+ * An attempt to request the page resource is made.
+ * Upon failure the appropriate error code is assigned and forwarded to ERROR.
+ */
 try {
     $app->page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
 } catch (NotFound $e) {
@@ -217,9 +217,9 @@ try {
 }
 
 /**
-* OK: Sets the response resources and renders
-* ERROR: sets the response code and loads error page.
-*/
+ * OK: Sets the response resources and renders
+ * ERROR: sets the response code and loads error page.
+ */
 OK: {
     $app->response->setResource($app->page)->render()->send();
     exit(0);
@@ -313,7 +313,7 @@ class RealBillingService implements BillingService
     {
         ...
     }
-}S
+}
 ```
 ### Weaving an Interceptor
 ```php

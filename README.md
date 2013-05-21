@@ -266,20 +266,20 @@ It is google guice style annotation-based DI framework.
 
 ### Binding
 ```php
-    $this->bind('Doctrine\Common\Annotations')
-         ->to('Doctrine\Common\Annotations\FileCacheReader')
-         ->in(Scope::SINGLETON);
+$this->bind('Doctrine\Common\Annotations')
+     ->to('Doctrine\Common\Annotations\FileCacheReader')
+     ->in(Scope::SINGLETON);
 ```
 
 ### Consumer
 ```php
-    /**
-     * @Inject
-     */
-    public function __construct(Annotations $reader)
-    {
-        $this->reader = $reader;
-    }
+/**
+ * @Inject
+ */
+public function __construct(Annotations $reader)
+{
+    $this->reader = $reader;
+}
 ```
 
 Aspect oriented programming
@@ -317,27 +317,27 @@ class RealBillingService implements BillingService
 ```
 ### Weaving an Interceptor
 ```php
-$ This-> bindInterceptor (
-    $ This-> matcher-> any (),
-    $ This-> matcher-> annotatedWith ('WeekendBlock'),
+$this->bindInterceptor(
+    $this-> matcher->any(),
+    $this-> matcher->annotatedWith('WeekendBlock'),
     [New WeekendBlocker]
 );
-`` `
+```
 
 RESTful Service
 ---------------
 Resource object fusion resources and web PHP class.
 
 ### Resource object
-`` `Php
+```php
 class Greetings extends AbstractObject
-{S
+{
     public function onGet($lang = 'en')
     {
         $this['greeting'] = $this->message[$lang];
-        return $ this;S
-    }S
-}S
+        return $this;
+    }
+}
 ```
 
 ### Resource client
@@ -346,7 +346,7 @@ class Greetings extends AbstractObject
 use ResourceInject;
     
 $this->resource->get->uri('app://self/greetings')->withQuery(['lang' => 'ja'])->eager->request();
-`` `
+```
 
 Signal Parameter
 ----------------
@@ -389,7 +389,6 @@ class Param extends Page
         return $this;
     }
 }
-
 ```
 
 Performance

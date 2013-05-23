@@ -100,7 +100,7 @@ Console access
 ### for web
 Resources can also be accessed from the console.
 ```bash
-$ php web.php get '/hello/world?name = World '
+$ php web.php get '/hello/world?name=World'
 
 200 OK
 date: ["Tue, 07 May 2013 07:25:58 GMT"]
@@ -118,7 +118,7 @@ greeting: Hello World
 
 ### for API (HAL)
 
-```php
+```bash
 $ php api.php get 'page://self/hello/world?name=World'
 200 OK
 date: ["Tue, 07 May 2013 07:28:09 GMT"]

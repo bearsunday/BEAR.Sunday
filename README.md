@@ -438,3 +438,8 @@ built-in web server for development
 Virtual Host for Production
 ------------
 Set up a virtual host to point to the public / directory of the application.
+
+Documentation
+-------------
+Documentation is available in English http://code.google.com/p/bearsunday/wiki/introduction?wl=en and Japanese http://code.google.com/p/bearsunday/wiki/introduction
+

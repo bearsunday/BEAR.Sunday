@@ -110,16 +110,16 @@
         },
         {
             "name": "aura/signal",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/auraphp/Aura.Signal",
-                "reference": "1.0.0"
+                "url": "https://github.com/auraphp/Aura.Signal.git",
+                "reference": "1.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/auraphp/Aura.Signal/archive/1.0.0.zip",
-                "reference": "1.0.0",
+                "url": "https://api.github.com/repos/auraphp/Aura.Signal/zipball/1.0.1",
+                "reference": "1.0.1",
                 "shasum": ""
             },
             "require": {
@@ -150,6 +150,10 @@
                 {
                     "name": "Aura.Signal Contributors",
                     "homepage": "https://github.com/auraphp/Aura.Signal/contributors"
+                },
+                {
+                    "name": "Akihito Koriyama",
+                    "email": "akihito.koriyama@gmail.com"
                 }
             ],
             "description": "A SignalSlots/EventHandler implementation for PHP; with it, we can invoke handlers (\"slots\" or \"hooks\") whenever an object sends a signal (\"notification\" or \"event\") to the signal manager.",
@@ -161,7 +165,7 @@
                 "signal",
                 "signal slots"
             ],
-            "time": "2012-11-28 00:00:00"
+            "time": "2013-05-10 00:00:00"
         },
         {
             "name": "bear/resource",
@@ -535,16 +539,16 @@
         },
         {
             "name": "ray/di",
-            "version": "1.0.2",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "1.0.2"
+                "reference": "1.0.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/1.0.2",
-                "reference": "1.0.2",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/1.0.4",
+                "reference": "1.0.4",
                 "shasum": ""
             },
             "require": {
@@ -567,7 +571,8 @@
             "authors": [
                 {
                     "name": "Akihito Koriyama",
-                    "email": "akihito.koriyama@gmail.com"
+                    "email": "akihito.koriyama@gmail.com",
+                    "homepage": "https://github.com/koriym"
                 }
             ],
             "description": "Guice style annotation-driven dependency injection framework",
@@ -581,21 +586,21 @@
                 "guice",
                 "jsr"
             ],
-            "time": "2013-04-19 08:42:37"
+            "time": "2013-06-22 14:22:09"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.2.1",
+            "version": "v2.3.1",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "v2.2.1"
+                "reference": "v2.3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.2.1",
-                "reference": "v2.2.1",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.3.1",
+                "reference": "v2.3.1",
                 "shasum": ""
             },
             "require": {
@@ -605,13 +610,13 @@
                 "symfony/dependency-injection": ">=2.0,<3.0"
             },
             "suggest": {
-                "symfony/dependency-injection": "2.2.*",
-                "symfony/http-kernel": "2.2.*"
+                "symfony/dependency-injection": "",
+                "symfony/http-kernel": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -635,7 +640,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-02-11 11:26:43"
+            "time": "2013-05-13 14:36:40"
         }
     ],
     "aliases": [

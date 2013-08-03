@@ -19,7 +19,7 @@ BEAR.SundayはアプリケーションをRESTアーキテクチャで構築す�
 BEAR.Sundayは独自のコンポーネントをほとんど持ちません。再発名を避け定評ある既存ライブラリを利用します。
 コンポーネントそのものよりそれらの接続に注目し、開発者が構成可能でSOLIDなフレームを提供します。
 
-Everythins is a resource
+Everything is a resource
 ------------------------------
 In BEAR.Sunday everything is a REST resource which leads to far simpler design and extensibility. Interactions with your database, services and even pages and sections of your app all sit comfortably in a resource which can be consumed or rendered at will. 
 

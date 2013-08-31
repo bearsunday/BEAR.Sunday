@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<ul class="nav nav-pills nav-stacked">
+  			<li><a href="#">Home</a></li>
+  			<li><a href="#">Profile</a></li>
+  			<li><a href="#">Messages</a></li>
+		</ul>
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">ディペンデンシーインジェクター</h1>
+
+<p>BEAR.Sundayのオブジェクトは必要とするオブジェクト、つまり依存(dependency）を外部から代入されることを期待します。 依存を必要とするオブジェクトに対して、インジェクターは*モジュール* に基づき外部からの代入、つまり注入(injection）を行います。モジュールは抽象と実クラスの束縛の集合で、依存解決に用いられます。</p>
+
+<p>BEAR.SundayのDI(<a href="http://code.google.com/p/rayphp/wiki/Motivation?tm=6">Ray.Di</a>)ではオブジェクトを提供する側と利用する側にはっきり区別があります。オブジェクトは生成をするか、または利用をするか、そのどちらかで１つのクラスが両方を行う事は原則ありません。</p>
+
+<p>ファクトリーと同じように「依存性の注入」はデザインパターンです。振る舞いと依存解決の分離が基本原理です。</p>
+
+<h2 id="toc_1">依存関係の逆転原則</h2>
+
+<p>A. 上位モジュールは下位モジュールに依存してはならない。両者は抽象に依存すべきである。</p>
+
+<p>B. 抽象は詳細（抽象の実装クラス）に依存してはならない。詳細は抽象に依存すべきである。</p>
+
+<p><a href="http://d.hatena.ne.jp/asakichy/20090128/1233144989">Dependency Inversion Principle (DIP)</a></p>
+
+<p>全てのオブジェクトの依存は抽象、つまりインターフェイスや抽象クラスに依存してインジェクトされます。</p>
+
+<h2 id="toc_2">オブジェクトグラフ</h2>
+
+<p>依存性の注入ではコンストラクターで依存（オブジェクト）を受け取ります。オブジェクトを生成するためにはまずその依存が必要です。しかしその依存もまた依存が必要で、そのまた..と続きます。つまりオブジェクトを生成するためには、オブジェクトグラフ（オブジェクト間の関係性）を作る事が必要です。 </p>
+
+<p>BEAR.Sundayでは、オブジェクトグラフの作成がbootstrapの時に一度だけ行われます。これをコンパイルと呼び、オブジェクトが振る舞うランタイムと区別しています。</p>
+
+<h2 id="toc_3">インジェクターの生成</h2>
+
+<p>インジェクターはモジュールを使って以下の様に生成します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$injector = Inject::create([new AppModule]);
+</code></pre></div>
+<p>上記のスクリプトは以下の記述を簡略化したものです。インジェクター自身の依存も手動でインジェクトできるようにコンストラクタにインジェクターの依存が渡されます。それぞれはインターフェイスに依存していて入れ替えが可能です。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">use Ray\Di;
+
+$injector = new Di\Injector(
+    new Di\Container(
+        new Di\Forge(
+            new Di\ApcConfig(
+                new Di\Annotation(
+                    new Di\Definition, new AnnotationReader
+                )
+            )
+        )
+    ), 
+    new AppModule
+);
+</code></pre></div>
+<p>モジュールは複数設定することができます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$injector = Inject::create([new OneModule, new TwoModule, ...]);
+</code></pre></div>
+<p>※モジュールは原則的はそれぞれ独立しています。<code>OneModule</code>でバインドした内容は<code>TwoModule</code>内では適用されません。</p>
+
+<h2 id="toc_4">モジュール</h2>
+
+<p>モジュールは*@Inject* アノテーションでアノテートされた依存の要求に対するインスタンスまたはインスタンスの取得方法をバインドしインジェクションの設定を行います。</p>
+
+<p>モジュールは<code>AbstractModule</code>を継承し、<code>configure</code>メソッド内のバンディングDSLで、依存を必要とする場所（インジェクションポイント）と依存（または依存の提供方法）をバインドします。 </p>
+
+<p>例）<code>CreditCardProcessor</code>インターフェイスに<code>CheckoutCreditCardProcessor</code>クラスをバインドしています。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">class AppModule extends AbstractModule
+{
+    /**
+     * Configure dependency binding
+     *
+     * @return void
+     */
+    protected function configure()
+    {
+        $this-&gt;bind(&#39;CreditCardProcessor&#39;)-&gt;to(&#39;CheckoutCreditCardProcessor&#39;);
+    }
+</code></pre></div>
+<h2 id="toc_5">モジュール内での依存</h2>
+
+<p>モジュールの<code>configure</code>メソッド内で依存を得るためにDIが必要な事があります。そのときには*requestInjection* メソッドを使ってインジェクションすることができます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind()-&gt;annototatedWith(&#39;age&#39;)-&gt;toInstance(25);
+$user = $this-&gt;requireInjection(&#39;User&#39;);
+</code></pre></div>
+<p><code>User</code>クラスのインスタンスがつくられ、<code>@Named(&quot;age&quot;)</code>というインジェクションポイントに25がインジェクトされます</p>
+
+<h2 id="toc_6">モジュールのインストール</h2>
+
+<p>他のモジュールをインストールして設定を合成することができます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;install(new MySqlModule);
+</code></pre></div>
+<p>自己のモジュールの設定を使って、インストールするモジュール内でインスタンスを取得したい時にはインジェクターを作成して渡します。渡されたインジェクターは元モジュールの構成知識を持っているのでその知識で依存解決されます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind()-&gt;(&#39;socket_path&#39;)-&gt;toInstance(&#39;/tmp/mysql.sock&#39;);
+$this-&gt;install(new MySqlModule($this);
+</code></pre></div>
+<p>※MySqlModuleモジュール内では<code>@Inject @Named(&#39;socket_path&#39;)</code>とアノテートすると<code>&#39;/tmp/mysql.sock&#39;</code>がインジェクトされます。</p>
+
+<h2 id="toc_7">モジュールの合成</h2>
+
+<p>sandboxアプリケーションでは３つのモジュールが合成され１つのアプリケーションの設定を行っています。</p>
+
+<h4 id="toc_8">フレームワークモジュール <code>FrameworkModule</code></h4>
+
+<p>フレームワークそのもの設定です。このモジュールを自作のものに入れ替える、またはこのモジュールをインストールするまえに<code>bind</code>するとフレームワークで使われているクラスを入れ替える事ができます。</p>
+
+<h4 id="toc_9">モードモジュール <code>DevModule</code>, <code>ProdModule</code>,...</h4>
+
+<p>実行モードに応じたアプリケーション設定です。sandboxアプリケーションではPROD（プロダクション）、DEV（開発）、STAB（スタブデータ）のモードが用意されています。</p>
+
+<h4 id="toc_10">アプリケーションモジュール <code>AppModule</code></h4>
+
+<p>実行モードによらないアプリケーション設定です。</p>
+
+<p>ジュール数は３つに限定されていません。例えばチーム共通のモジュール、同型等サービスの共通ジュール、自作ユーティリティのモジュールなど関心に応じてモジュールを作成して合成利用することができます。</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+    </body>
+</html>

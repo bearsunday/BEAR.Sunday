@@ -1,6 +1,8 @@
 name: BEAR.Sunday
 safe: true
 lsi: false
+site:
+  url: http://localhost:4000
 markdown: redcarpet
 redcarpet:
   extensions: ["autolink", "no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data", "tables"]

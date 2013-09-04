@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | blogチュートリアル(7) バリデーション</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>ブログ・チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">BEARのインストールとプロジェクト作成</a></li>
+<li><a href="blog_db.html">データベースの設定</a></li>
+<li><a href="blog_get.html">記事リソースの作成</a></li>
+<li><a href="blog_page.html">記事表示ページの作成</a></li>
+<li><a href="blog_template.html">テンプレートの作成</a></li>
+<li><a href="blog_create.html">記事の追加</a></li>
+<li><a href="blog_validate.html">バリデーション</a></li>
+<li><a href="blog_delete.html">記事の削除</a></li>
+<li><a href="blog_update.html">記事の編集</a></li>
+<li><a href="blog_more.html">まとめとカスタマイズ</a></li>
+		
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">blogチュートリアル(7) バリデーション</h1>
+
+<h1 id="toc_1">フォーム</h1>
+
+<p>前回のセクションで記事追加ページにPOSTインターフェイスが実装され、記事の追加をHTTPメソッドで受ける事ができるようになりました。</p>
+
+<p>次はできあがったPOSTインターフェイスに、バリデーション、フィルター、エラー再入力時のデフォルト値設定などのwebフォームとして機能を加えましょう。</p>
+
+<p>Note: このチュートリアルでは特別な専用ライブラリを使用しないでプレーンなPHPでコーディングしています。実際にはZend FrameworkやSymfony、あるいはその他のバリデーションライブラリやフォームライブラリーを利用するのがいいでしょう。</p>
+
+<h2 id="toc_2">バリデーション</h2>
+
+<p>特定のライブラリに依存しないフォームをインターセプターとして実装してみます。まずは<code>@Form</code>アノテーションとフォームバリデーションインターセプターの束縛です。</p>
+
+<p>アノテーション sandbox\Annotation\Form</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">namespace Sandbox\Annotation;
+
+/**
+ * Form
+ *
+ * @Annotation
+ * @Target({&quot;METHOD&quot;})
+ */
+final class Form
+{
+}
+</code></pre></div>
+<p>インターセプターの束縛</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * @Form - bind form validator
+ */
+private function installFormValidator()
+{
+    $this-&gt;bindInterceptor(
+        $this-&gt;matcher-&gt;subclassesOf(&#39;Sandbox\Resource\Page\Blog\Posts\Newpost&#39;),
+        $this-&gt;matcher-&gt;annotatedWith(&#39;sandbox\Annotation\Form&#39;),
+        [new PostsFormValidator]
+    );
+}
+</code></pre></div>
+<p>これで@Formとアノテートされているメソッドに<code>PostsFormValidator</code>が束縛されました。リクエストがPOSTメソッドをコールする前にこのバリデートインターセプターが呼ばれます。</p>
+
+<h2 id="toc_3">@Formバリデーションインターセプター</h2>
+
+<p>リクエストとメソッドに割り込んだインターセプターでは、タグを取り除くフィルター処理の後にバリデーションをしています。バリデーションが通れば元のPOSTメソッドを呼びます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">return $invocation-&gt;proceed();
+</code></pre></div>
+<p>バリデーションNGならエラーメッセージや初期値などをセットし*加工したGETリクエストのページ* を出力します。POSTインターフェイスメソッドは呼ばれません。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">return $page-&gt;onGet();
+</code></pre></div>
+<p>すべてをまとめた<code>PostsFormValidator</code>はこのようになります</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * Log Interceptor
+ */
+class PostsFormValidator implements MethodInterceptor
+{
+    const TITLE = 0;
+    const BODY = 1;
+
+    /**
+     * Error
+     * 
+     * @var array
+     */
+    private $errors = [
+        &#39;title&#39; =&gt; &#39;&#39;,
+        &#39;body&#39; =&gt; &#39;&#39;
+    ];
+
+    /**
+     * (non-PHPdoc)
+     * @see Ray\Aop.MethodInterceptor::invoke()
+     */
+    public function invoke(MethodInvocation $invocation)
+    {
+        // retrieve page and query
+        $args = $invocation-&gt;getArguments();
+        $page = $invocation-&gt;getThis();
+
+        // strip tags
+        foreach ($args as &amp;$arg) {
+            $arg = strip_tags($arg);
+        }
+
+        // required title
+        if ($args[self::TITLE] # = &#39;&#39;) {
+            $this-&gt;errors[&#39;title&#39;] = &#39;title required.&#39;;
+        }
+
+        // required body
+        if ($args[self::BODY] # = &#39;&#39;) {
+            $this-&gt;errors[&#39;body&#39;] = &#39;body required.&#39;;
+        }
+
+        // valid form ?
+        if (implode(&#39;&#39;, $this-&gt;errors) # = &#39;&#39;) {
+            return $invocation-&gt;proceed();
+        }
+
+        // error, modify &#39;GET&#39; page with error message.
+        $page[&#39;errors&#39;] = $this-&gt;errors;
+        $page[&#39;submit&#39;] =[
+            &#39;title&#39; =&gt; $args[self::TITLE],
+            &#39;body&#39; =&gt; $args[self::BODY]
+        ];
+        return $page-&gt;onGet();
+    }
+}
+</code></pre></div>
+<p><a href="http://aopalliance.sourceforge.net/">Aopアライアンス</a>準拠の<a href="https://github.com/koriym/Ray.Aop/blob/master/src/Ray/Aop/MethodInterceptor.php">MethodInterceptor</a>インターフェイスを実装します。invokeに渡される<code>$invocation</code>は<code>MethodInvocation</code>型の*メソッド実行オブジェクト*です。</p>
+
+<p><code>$invocation-&gt;getArguments()</code>でメソッド呼び出し時の引数が、<code>$invocation-&gt;getThis();</code>で呼び出し元の記事表示ページリソースオブジェクトが得られています。</p>
+
+<p>Note: 引数は名前付き引数でなく、メソッドコールの時と同じ様に順番で指定され渡ります。</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

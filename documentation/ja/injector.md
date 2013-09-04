@@ -1,6 +1,6 @@
 ---
 layout: default
-title: BEAR.Sunday
+title: BEAR.Sunday | ディペンデンシーインジェクター
 ---
 
 # ディペンデンシーインジェクター

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | アプリケーションクラス</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		
+
+		<div class="panel panel-default">
+  			<div class="panel-heading"><strong></strong></div>
+  			<div class="panel-body">
+
+				<ul class="nav nav-pills nav-stacked">
+		  			<li><a href="#">Home</a></li>
+		  			<li><a href="#">Profile</a></li>
+		  			<li><a href="#">A really long long long linklong long long link</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+
+		 <h2 id="toc_0">導入</h2>
+
+<p>アプリケーションオブジェクトはアプリケーションの実行を規定するアプリケーションスクリプトで使用する全てのサービスオブジェクトを保持したオブジェクトです。</p>
+
+<h1 id="toc_1">アプリケーションクラス</h1>
+
+<p>以下は最小構成のアプリケーションクラスです。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">use BEAR\Sunday\Extension\Application\AppInterface;
+
+final class App implements Context
+{
+    public $resource;
+    public $response;
+    public $logger;
+
+    /**
+     * Constructor
+     *
+     * @param ResourceInterface $resource Resource client
+     * @param ResponseInterface $response Web / Console response
+     * @param ApplicationLogger $logger   Application logger
+     *
+     * @Inject
+     */
+    public function __construct
+        ResourceInterface $resource,
+        ResponseInterface $response,
+        ApplicationLogger $logger
+    ) {
+        $this-&gt;resource = $resource;
+        $this-&gt;response = $response;
+        $this-&gt;logger = $logger;
+        $resource-&gt;attachParamProvider(&#39;Provides&#39;, new Provides);
+    }
+}
+</code></pre></div>
+<p>アプリケーションスクリプトに必要な、リソースクライアント、レスポンス、ロガーがコンストラクタで渡されプロパティに格納されています。</p>
+
+<p>アプリケーション構成によりそれぞれのインターフェイスに応じた適切なオブジェクトがインジェクトされます。例えば開発用の構成ではより多くのデバック情報が提供される開発用のリソースクライントが、API用のアプリケーションではHTML出力する代わりにJSON+HAL（またはJSON)の出力がされるコンポーネントが入ります。</p>
+
+<p>このクラスはインスタンススクリプトでインスタンス化されます。</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

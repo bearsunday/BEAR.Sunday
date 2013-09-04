@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+	<div class="panel-heading"><strong>{{ page.category }}</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		{% if page.category == "ブログ・チュートリアル" %}
+   			{% include docs/ja/blog.html %}
+		{% endif %}
+		{% if page.category == "インストールと設定" %}
+   			{% include docs/ja/install.html %}
+		{% endif %}
+	</ul>
+</div>
+</div>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | blogチュートリアル(4) 閲覧ページの作成</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>ブログ・チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">BEARのインストールとプロジェクト作成</a></li>
+<li><a href="blog_db.html">データベースの設定</a></li>
+<li><a href="blog_get.html">記事リソースの作成</a></li>
+<li><a href="blog_page.html">記事表示ページの作成</a></li>
+<li><a href="blog_template.html">テンプレートの作成</a></li>
+<li><a href="blog_create.html">記事の追加</a></li>
+<li><a href="blog_validate.html">バリデーション</a></li>
+<li><a href="blog_delete.html">記事の削除</a></li>
+<li><a href="blog_update.html">記事の編集</a></li>
+<li><a href="blog_more.html">まとめとカスタマイズ</a></li>
+		
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">blogチュートリアル(4) 閲覧ページの作成</h1>
+
+<h2 id="toc_1">ページリソース</h2>
+
+<h3 id="toc_2">ページの作成</h3>
+
+<p>BEAR.Sundayで新しくページを作成する場合、通常次の２つを作成します。</p>
+
+<ul>
+<li>ページリソースクラス</li>
+<li>ページリソーステンプレート</li>
+</ul>
+
+<p>ページリソースもアプリケーションリソースと同じ構成、インターフェイスを持ちます。アプリケーションリソースが標準の状態では何も持たず必要なDBオブジェクトをDIでインジェクトしたように、ページリソースも依存をインジェクトして使用します。</p>
+
+<h2 id="toc_3">ページコントローラー</h2>
+
+<p>MVCのコントローラにあたる部分はBEARではページリソースです。ページはwebのリクエストを受け取り、アプリケーションリソースをリクエストして、自らを構成します。ページはそのまま出力用のオブジェクトとしても扱われます。</p>
+
+<p>Note: BEAR.Sundayではルーターも利用できますが、このブログアプリでは利用しません。</p>
+
+<p>Note: BEAR.Sundayではサイトの１ページが１ページリソースクラスに相当し：<a href="http://capsctrl.que.jp/kdmsnr/wiki/PofEAA/?PageController">ページコントローラー</a>の働きをします。</p>
+
+<h2 id="toc_4">ページクラス</h2>
+
+<p>この記事表示ページの役割は「アプリケーションAPIの記事リソースをGETリクエストで取得してページのpostsスロットにアサインする」ということです。</p>
+
+<p>[アプリケーションリソース app_resource]のセクションではコンソールからアプリケーションリソースを行いましたがPHPでリソースリクエストを行うにはリソースクライアントを使います。リソースクライントはtraitでインジェクトすることが出来ます。</p>
+
+<p>traitを使用するuse文でこのように記述するとリソースクライアントが$resourceプロパティにインジェクトされます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">use ResourceInject;
+</code></pre></div>
+<p>インジェクトされたリソースクライアントを使ってリソースリクエストを行うにはこのようにします。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/posts&#39;)-&gt;request();
+</code></pre></div>
+<p>まとめるとこうなります。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+namespace Sandbox\Resource\Page\Blog;
+
+use BEAR\Resource\AbstractObject as Page;
+use BEAR\Sunday\Inject\ResourceInject;
+use BEAR\Sunday\Annotation;
+
+class Posts extends Page
+{
+    use ResourceInject;
+
+    public $body = [
+        &#39;posts&#39; =&gt; &#39;&#39;
+    ];
+
+    /**
+     * Get
+     *
+     * @Cache
+     */
+    public function onGet()
+    {
+        $this[&#39;posts&#39;] = $this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/posts&#39;)-&gt;request();
+        return $this;
+    }
+}
+</code></pre></div>
+<p><code>app://self/posts</code>リソースへのリクエストを自らのpostsというスロットに格納しています。</p>
+
+<p>Note: $this[&#39;posts&#39;] は $this-&gt;body[&#39;body&#39;]の省略した書き方のシンタックスシュガー(=読み書きのしやすさのために導入される構文)です。</p>
+
+<p>Note:MVCのコントローラーと違って、出力に関心が払われてないのに注目してみてください。テンプレートファイルの指定や、テンプレートに対しての変数のアサイン等がありません。</p>
+
+<h2 id="toc_5">リソースとしてのページ</h2>
+
+<p>それではページリソースをアプリケーションリソースと同じようにコンソールでアクセスしてみましょう。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php api.php get page://self/blog/posts
+
+200 OK
+...
+\[BODY]
+{
+    &quot;posts&quot;: {
+...
+</code></pre></div>
+<p>postsというスロットに*get app://self/posts* というリクエスト結果が格納されてます。</p>
+
+<p>ページリソースはページコントローラーの役割をするとともに出力用のオブジェクトの役割も果たしています。しかしどのように表現されるかにはまだ関心が払われていません。</p>
+
+<h2 id="toc_6">リソースキャッシュ</h2>
+
+<p>ページリソースには<code>@Cache</code>とアノテートされていてsandboxアプリケーションではこのアノテーションを持つメソッドにはキャシュインターセプターがバインドされています。例えば30秒間リソースをキャッシュしたいならこのように表記します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">use BEAR\Sunday\Annotation\Cache;
+
+...
+
+/**
+ * @Cache(30)
+ */
+</code></pre></div>
+<p>Note: CacheのFQNのためにuse文が必要です</p>
+
+<h2 id="toc_7">無期限キャッシュ</h2>
+
+<p>このページリソースには時間が指定されていないので、リソースのGETリクエストは無期限にキャッシュされonGetメソッドが実行されるのは最初の一回のみです。それでは記事が追加されたり削除されてもこの記事表示ページは変更されないのでしょうか？</p>
+
+<p>この記事表示ページリソースの役割は、記事リソースをリクエストしてpostsにセットすることです。その役割はリクエストによらず不変でこの役割がキャッシュされます。</p>
+
+<p>ページリソースにセットしているのはリクエストの結果ではなくて、リクエストそのものです。@Cacheで無期限のキャッシュを指定してもキャッシュされた記事リソースリクエストは毎回実行され、記事リソースのリソース状態は反映されます。 (この場合、@Cacheでセーブされるのは<code>OnGet()</code>メソッド内でリクエストを作るわずかなコストだけです)</p>
+
+<p>つまりこのキャッシュでカットしているのはリソースリクエストを組み立てるコストです。</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

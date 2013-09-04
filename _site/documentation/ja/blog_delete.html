@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | blogチュートリアル(8) 記事の削除</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>ブログ・チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">BEARのインストールとプロジェクト作成</a></li>
+<li><a href="blog_db.html">データベースの設定</a></li>
+<li><a href="blog_get.html">記事リソースの作成</a></li>
+<li><a href="blog_page.html">記事表示ページの作成</a></li>
+<li><a href="blog_template.html">テンプレートの作成</a></li>
+<li><a href="blog_create.html">記事の追加</a></li>
+<li><a href="blog_validate.html">バリデーション</a></li>
+<li><a href="blog_delete.html">記事の削除</a></li>
+<li><a href="blog_update.html">記事の編集</a></li>
+<li><a href="blog_more.html">まとめとカスタマイズ</a></li>
+		
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">blogチュートリアル(8) 記事の削除</h1>
+
+<h2 id="toc_1">記事ページの削除</h2>
+
+<p>記事ページからid指定した記事を削除できるように、記事ページリソースにonDelete()メソッドを作成しDELETEリクエストに対応します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * Delte
+ * 
+ * @param int $id
+ */
+public function onDelete($id)
+{
+    // delete
+    $this-&gt;resource
+    -&gt;delete
+    -&gt;uri(&#39;app://self/posts&#39;)
+    -&gt;withQuery([&#39;id&#39; =&gt; $id])
+    -&gt;eager
+    -&gt;request();
+
+    // message
+    $this[&#39;message&#39;] = &#39;Entry deleted.&#39;;
+    return $this-&gt;onGet();
+}
+</code></pre></div>
+<p>webブラウザからのDELETEリクエストを受け取ったページリソースは記事リソースを同じようにDELETEリクエストしています。</p>
+
+<p>この記事ページリソースへのリンクは記事リソースのテンプレートに記述します。Javascriptを使って確認ダイアログを出し、ページリクエストを<code>DELETE</code>にするために<code>_method</code>クエリーを使っています。</p>
+
+<p>Note: POSTの時にフォームに<code>X-HTTP-Method-Override</code>hiddenエレメントを埋め込んだり、GETクエリーで<code>_method</code>を使ったりするのは_HTTPメソッドオーバーライド_という方法でPUT/DELETEのサポートがないブラウザやサーバー環境でHTTP動詞をフルに使う為の仕組みです。</p>
+
+<h2 id="toc_2">記事リソースのDELETEインターフェイスの作成</h2>
+
+<p>記事ページからリクエストを受け取った記事リソースがDBアクセスで記事を削除します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function onDelete($id)
+{
+    $this-&gt;db-&gt;delete($this-&gt;table, [&#39;id&#39; =&gt; $id]);
+    $this-&gt;code = 204;
+    return $this;
+}
+</code></pre></div>
+<p>Note: GETリクエストインターフェイスと同じく<code>$this-&gt;db</code>プロパティはインジェクターによって自動でセットされます。GETの時と違うのはmasterDB用の接続が使われる事です。</p>
+
+<h2 id="toc_3">コマンドで確認</h2>
+
+<p>ではコンソールで試してみましょう。codeに204を指定したのでこのような表示になるはずです。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php api.php delete app://self/posts?id=1
+204 No Content
+[BODY]
+</code></pre></div>
+<h2 id="toc_4">ユニットテスト</h2>
+
+<p>DELETEアクセスすると記事が１つ減っているはずです。テストはこのようなものになるでしょう。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * @test
+ */
+public function delete()
+{
+    // dec 1
+    $before = $this-&gt;getConnection()-&gt;getRowCount(&#39;posts&#39;);
+    $response = $this-&gt;resource
+    -&gt;delete
+    -&gt;uri(&#39;app://self/posts&#39;)
+    -&gt;withQuery([&#39;id&#39; =&gt; 1])
+    -&gt;eager
+    -&gt;request();
+    $this-&gt;assertEquals($before - 1, $this-&gt;getConnection()-&gt;getRowCount(&#39;posts&#39;), &quot;faild to delete post&quot;);
+}
+</code></pre></div>
+<h2 id="toc_5">確認ダイアログJS</h2>
+
+<p>削除の確認をするためにsandboxアプリケーションが持つJSライブラリを利用しています。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;a title# &quot;Delete post&quot; class=&quot;btn&quot; href=&quot;#&quot; onclick=&quot;return MyDialogs.loadConfirmationModal(&#39;my_dialog&#39;, &#39;/blog/posts?_method=delete&amp;id={$post.id}&#39;, &#39;Are you sure ?&#39;, &#39;The entry will be deleted permanently.&#39;);&quot;&gt;&lt;span class&quot;icon-trash&quot;&gt;&lt;/span&gt;&lt;/a&gt;
+</code></pre></div>
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

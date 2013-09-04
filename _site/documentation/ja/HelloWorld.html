@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Hello World</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>はじめに</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">Hello World</h1>
+
+<p>最小構成アプリをでBEAR.Sundayアプリの構成を学習します。
+このアプリケーションは主に３つのファイルで構成されています。</p>
+
+<ul>
+<li>web/cli用アプリケーションスクリプト Helloworld/public/min.php</li>
+<li>Helloページリソース Helloworld/Resource/Page/Hello.php</li>
+<li>インスタンススクリプト Helloworld/scripts/instance.php</li>
+</ul>
+
+<p>インスタンススクリプトでアプリケーションオブジェクトを生成し、Helloページリソースをリクエストしてその結果を表示します。</p>
+
+<h2 id="toc_1">CLI / Webで実行</h2>
+
+<p>CLIでHello World。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php /path/to/bear/apps/Helloworld/htdocs/min.php
+</code></pre></div>
+<p>PHP5.4 built-in web serverでHello World。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php -S localhost:8088 /path/to/bear/apps/Helloworld/htdocs/min.php
+</code></pre></div>
+<h1 id="toc_2">リソース用最小構成　</h1>
+
+<h3 id="toc_3">アプリケーションスクリプト (Helloworld/public/min.php )</h3>
+
+<p>アプリケーションの実行内容が記述されています。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// application
+$app = require dirname(__DIR__) . &#39;/scripts/instance.php&#39;;
+$response # $app-&gt;resource-&gt;get-&gt;uri(&#39;page://self/hello&#39;)-&gt;withQuery([&#39;name&#39; &gt; &#39;World !&#39;])-&gt;eager-&gt;request();
+
+// output
+foreach ($response-&gt;headers as $header) {
+    header($header);
+}
+echo $response-&gt;body;
+exit(0);
+</code></pre></div>
+<h3 id="toc_4">インスタンススクリプト (Helloworld/scripts/instance.php)</h3>
+
+<p>アプリケーションオブジェクトを生成するスクリプトです。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$injector = Injector::create([new AppModule]);
+$app = $injector-&gt;getInstance(&#39;BEAR\Sunday\Extension\Application\AppInterface&#39;);
+return $app;
+</code></pre></div>
+<h2 id="toc_5">アプリケーションスクリプトの説明</h2>
+
+<p>アプリケーションスクリプトの各行を説明します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$app = require dirname(__DIR__) . &#39;/scripts/instance.php&#39;;
+</code></pre></div>
+<p>アプリケーションのインスタンスをスクリプトで取得します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$response # $app-&gt;resource-&gt;get-&gt;uri(&#39;page://self/hello&#39;)-&gt;withQuery([&#39;name&#39; &gt; &#39;World !&#39;])-&gt;eager-&gt;request();
+</code></pre></div>
+<p>アプリケーションオブジェクトのプロパティの一つリソースクライアント($app-&gt;resource)で<code>page://self/hello</code>というURIを持つリソース<code>get</code>メソッドでアクセスしています。クエリー（引き数）を指定し<code>eager-&gt;request()</code>ですぐに値を取得しています。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">foreach ($response-&gt;headers as $header) {
+    header($header);
+}
+echo $response-&gt;body;
+</code></pre></div>
+<p>値はHTTPレスポンスと同じようにcode, headers, bodyという３つのプロパティを持っていて出力しています。</p>
+
+<h2 id="toc_6">Helloページリソース</h2>
+
+<p>BEAR.SundayではMVCでコントローラーにあたるものはページリソースです。ページリソースはクエリーを引数に受け、自身を構成し返します。</p>
+
+<p><em>Helloworld/Resource/Page/Hello.php</em></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">class Hello extends Page
+{
+    /**
+     * @return self
+     */
+    public function onGet($name)
+    {
+        $this-&gt;body = &#39;Hello &#39; . $name;
+        return $this;
+    }
+}
+</code></pre></div>
+<p>ページリソースはMVCで言えばコントローラーあたる部分ですが、テンプレートに値をセットするのではなく<code>$this-&gt;body = &#39;Hello &#39; . $name;</code>として自らをページオブジェクトとして構成して$thisを返しています。</p>
+
+<p>以下の様に文字列を返しても同じ結果になります。クライアントにはリソースオブジェクトが返るからです。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{
+    $body = &#39;Hello &#39; . $name;
+    return $body;
+}
+</code></pre></div>
+<h2 id="toc_7">アプリケーションクラス</h2>
+
+<p><em>Helloworld/App.php</em></p>
+
+<p>アプリケーションオブジェクトはアプリケーションスクリプトが必要とするサービスの全てをプロパティに持ちます。</p>
+
+<p>モジュールでインターフェイスにバインドされたオブジェクトがコンストラクタでインジェクトされます。</p>
+
+<h2 id="toc_8">アプリケーションモジュール</h2>
+
+<p><em><code>Helloworld/Module/AppModule.php</code></em></p>
+
+<p>アプリケーションモジュールはアプリケーションが必要とする依存と実装の束縛とメソッドと横断的関心事の束縛の集合です。</p>
+
+<p>インジェクトを必要とする&quot;インジェクションポイント&quot;に対し実装を静的束縛するDependency Injection、特定のメソッドに対して横断的関心事のインターセプターを束縛するAspect Oriented Programing、この両者の設定をモジュールで一元して行う事でアプリケーションの構成を行います。</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | blogチュートリアル(3) 記事リソースの作成</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>ブログ・チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">BEARのインストールとプロジェクト作成</a></li>
+<li><a href="blog_db.html">データベースの設定</a></li>
+<li><a href="blog_get.html">記事リソースの作成</a></li>
+<li><a href="blog_page.html">記事表示ページの作成</a></li>
+<li><a href="blog_template.html">テンプレートの作成</a></li>
+<li><a href="blog_create.html">記事の追加</a></li>
+<li><a href="blog_validate.html">バリデーション</a></li>
+<li><a href="blog_delete.html">記事の削除</a></li>
+<li><a href="blog_update.html">記事の編集</a></li>
+<li><a href="blog_more.html">まとめとカスタマイズ</a></li>
+		
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">blogチュートリアル(3) 記事リソースの作成</h1>
+
+<h2 id="toc_1">リソースオブジェクト</h2>
+
+<p>BEAR.Sundayはリソース指向のフレームワークです。意味のある情報のまとまりに*リソース* としてURIが与えられ、GET/POST等リソースリクエストに対応するリクエストインターフェイスを持ちます。</p>
+
+<p>MVCでいうとCやVというコンポーネントの役割はBEAR.Sundayではそれぞれページコントローラーとしてページリソース、モデルはアプリケーション(app)リソースが担います。これらのリソースは基本的に１リソース＝１クラスにマップされ、また名前空間を含んだクラス名がURIに対応しリクエストインターフェイスはメソッドとして記述します。</p>
+
+<p>例えば、記事を閲覧するページは記事表示ページリソース(page://self/blog/posts)、記事そのものを表すのは記事アプリケーションリソース(app://self/posts)といった具合です。このチュートリアルではそれぞれ*記事表示ページ*、*記事リソース* と表記します。</p>
+
+<h2 id="toc_2">記事リソース</h2>
+
+<p>アプリケーションリソースはいわばアプリケーションの*内部API* です。MVCでいうとモデルに当たります。内部にデータベースアクセスやビジネスロジックを持ちページコントローラーの役割を持つページリソースに対してアプリケーション内部のAPIを提供します。</p>
+
+<p>記事リソースでは閲覧のためにGETリクエストに対応するonGetメソッドを実装します。</p>
+
+<p>このようなリソースクラスのひな形から実装します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+namespace Sandbox\Resource\App;
+
+/**
+ * Posts
+ *
+ */
+class Posts extends ResourceObject
+{
+    /**
+     * Get
+     */
+    public function onGet($id = null)
+    {
+        $this-&gt;body = _DBから読み出したデータ_
+        return $this;
+    }
+}
+</code></pre></div>
+<p>リクエストに応じたメソッド（リクエストインターフェイス）内ではデータをbodyプロパティにセットして$thisを返します。</p>
+
+<p>Note: $bodyプロパティにセットする代わりにデータを直接返すこともできます。その場合でも受け取る方にはreturn $this;と同じものが返ります。</p>
+
+<h2 id="toc_3">リソース・スタブ</h2>
+
+<p>onGetメソッドを記述するまえに、ダミーのデータでリソースを利用してみましょう。スタブデータ（ダミーデータ）を使ったリソースはアプリケーションのプロトタイピングやテスト等に便利です。sandboxアプリケーションは専用の<code>STABモード</code>を持っていて、アプリケーションオブジェトを作成するときに指定します。</p>
+
+<p><code>apps/Sandbox/htdocs/api.php</code>(APIアクセス） または <code>apps/Sandbox/htdocs/web.php</code>(webアクセス)</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$mode = &#39;Stab&quot;;
+$app = require &#39;/path/to/script/instance.php&#39;;
+</code></pre></div>
+<p>スタブデータを用意します。</p>
+
+<p><code>apps/Sandbox/stub/resource.php</code></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">return [
+    &#39;Sandbox\Resource\App\Posts&#39; =&gt;
+        [
+            [
+                &#39;id&#39; =&gt; 0,
+                &#39;title&#39; =&gt; &#39;Alan Kay 1&#39;,
+                &#39;body&#39; =&gt; &#39;People who are really serious about software should make their own hardware.&#39;,
+                &#39;created&#39; =&gt; &#39;2011-05-07 16:13:11&#39;
+            ],
+            [
+                &#39;id&#39; =&gt; 1,
+                &#39;title&#39; =&gt; &#39;Alan Kay 2&#39;,
+                &#39;body&#39; =&gt; &#39;Perspective is worth 80 IQ points.&#39;,
+                &#39;created&#39; =&gt; &#39;2011-05-07 16:13:22&#39;
+            ],
+            [
+                &#39;id&#39; =&gt; 2,
+                &#39;title&#39; =&gt; &#39;Alan Kay 3&#39;,
+                &#39;body&#39; =&gt; &#39;The best way to predict the future is to invent it.&#39;,
+                &#39;created&#39; =&gt; &#39;2011-05-07 16:13:33&#39;
+            ]
+         ]
+];
+</code></pre></div>
+<p>作成したappリソースをコンソールで確認します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php apps/Sandbox/htdocs/api.php get app://self/posts
+200 OK
+[BODY]
+0:array (
+  &#39;id&#39; =&gt; 0,
+  &#39;title&#39; =&gt; &#39;Alan Kay 1&#39;,
+  &#39;body&#39; =&gt; &#39;People who are really serious about software should make their own hardware.&#39;,
+  &#39;created&#39; =&gt; &#39;2011-05-07 16:13:11&#39;,
+)
+1:array (
+  &#39;id&#39; =&gt; 1,
+  &#39;title&#39; =&gt; &#39;Alan Kay 2&#39;,
+  &#39;body&#39; =&gt; &#39;Perspective is worth 80 IQ points.&#39;,
+  &#39;created&#39; =&gt; &#39;2011-05-07 16:13:22&#39;,
+)
+2:array (
+  &#39;id&#39; =&gt; 2,
+  &#39;title&#39; =&gt; &#39;Alan Kay 3&#39;,
+  &#39;body&#39; =&gt; &#39;The best way to predict the future is to invent it.&#39;,
+  &#39;created&#39; =&gt; &#39;2011-05-07 16:13:33&#39;,
+)
+</code></pre></div>
+<p>ダミーのデータでどのようなリクエスト結果を求めるのかが明らかになりました。</p>
+
+<h2 id="toc_4">スタブモジュール</h2>
+
+<p>リソースがスタブのデータを返すのは、リソースの各メソッドにスタブインターセプターを束縛してるアスペクト指向プログラミングによって実現されています。</p>
+
+<p>apps/Sandbox/Module/StabModule.php</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">foreach ($stub as $class =&gt; $value) {
+    $this-&gt;bindInterceptor(
+        $this-&gt;matcher-&gt;subclassesOf($class),
+       $this-&gt;matcher-&gt;startWith(&#39;on&#39;),
+        [new Stab($value)]
+    );
+}
+</code></pre></div>
+<p>Note:クライントはリソースをリクエストしてるつもりでも、実際はクライントとリソースの間に割り込んだ（インターセプトした）スタブインターセプターがダミーのデータを返しています。</p>
+
+<h2 id="toc_5">リクエスインターフェイス実装</h2>
+
+<p>次は実際にDBをアクセスしてデータを取り出すGETリクエストに対するonGetメソッドを実装します。</p>
+
+<p>BEAR.Sundayは自身のデータベース利用ライブラリや抽象化ライブラリを持ちません。アプリケーションリソースクラス内で他のライブラリを使ってSQLを直接利用したり、ORMを使用したりします。sandboxアプリケーションでは[<a href="http://www.doctrine-project.org/projects/dbal.html">http://www.doctrine-project.org/projects/dbal.html</a> Docrine DBAL]でSQLを記述します。</p>
+
+<p><em>Sandbox/Resource/App/Blog/Posts.php</em></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+/**
+ * @package    Sandbox
+ * @subpackage Resource
+ */
+namespace Sandbox\Resource\App\Blog;
+
+use BEAR\Package\Module\Database\Dbal\Setter\DbSetterTrait;
+use BEAR\Resource\AbstractObject as ResourceObject;
+use BEAR\Resource\Link;
+use BEAR\Resource\Code;
+use PDO;
+
+use BEAR\Sunday\Annotation\Db;
+use BEAR\Sunday\Annotation\Time;
+use BEAR\Sunday\Annotation\Transactional;
+use BEAR\Sunday\Annotation\Cache;
+use BEAR\Sunday\Annotation\CacheUpdate;
+
+/**
+ * Posts
+ *
+ * @package    Sandbox
+ * @subpackage Resource
+ *
+ * @Db
+ */
+class Posts extends ResourceObject
+{
+    use DbSetter;
+
+    /**
+     * @var string
+     */
+    public $time;
+
+    /**
+     * @var string
+     */
+    protected $table = &#39;posts&#39;;
+
+    /**
+     * @var array
+     */
+    public $links = [
+        &#39;page_post&#39; # &gt; [Link::HREF &gt; &#39;page://self/blog/posts/post&#39;],
+        &#39;page_item&#39; # &gt; [Link::HREF =&gt; &#39;page://self/blog/posts/post{?id}&#39;, Link::TEMPLATED &gt; true],
+        &#39;page_edit&#39; # &gt; [Link::HREF =&gt; &#39;page://self/blog/posts/edit{?id}&#39;, Link::TEMPLATED &gt; true],
+        &#39;page_delete&#39; # &gt; [Link::HREF =&gt; &#39;page://self/blog/posts?_method=delete{&amp;id}&#39;, Link::TEMPLATED &gt; true]
+    ];
+
+    /**
+     * @param int $id
+     *
+     * @return Posts
+     * @Cache(100)
+     */
+    public function onGet($id = null)
+    {
+        $sql = &quot;SELECT id, title, body, created, modified FROM {$this-&gt;table}&quot;;
+        if (is_null($id)) {
+            $stmt = $this-&gt;db-&gt;query($sql);
+            $this-&gt;body = $stmt-&gt;fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            $sql .# &quot; WHERE id  :id&quot;;
+            $stmt = $this-&gt;db-&gt;prepare($sql);
+            $stmt-&gt;bindValue(&#39;id&#39;, $id);
+            $stmt-&gt;execute();
+            $this-&gt;body = $stmt-&gt;fetch(PDO::FETCH_ASSOC);
+        }
+        return $this;
+    }
+
+        /**
+         * @param string $title
+         * @param string $body
+         *
+         * @return Posts
+         * @Time
+         * @Transactional
+         * @CacheUpdate
+         */
+        public function onPost($title, $body)
+        {
+            $values = [
+                &#39;title&#39; =&gt; $title,
+                &#39;body&#39; =&gt; $body,
+                &#39;created&#39; =&gt; $this-&gt;time
+            ];
+            $this-&gt;db-&gt;insert($this-&gt;table, $values);
+            //
+            $lastId = $this-&gt;db-&gt;lastInsertId(&#39;id&#39;);
+            $this-&gt;code = Code::CREATED;
+            $this-&gt;links[&#39;new_post&#39;] # [Link::HREF =&gt; &quot;app://self/posts/post?id{$lastId}&quot;];
+            $this-&gt;links[&#39;page_new_post&#39;] # [Link::HREF =&gt; &quot;page://self/blog/posts/post?id{$lastId}&quot;];
+            return $this;
+        }
+
+    /**
+     * @param int    $id
+     * @param string $title
+     * @param string $body
+     *
+     * @return Posts
+     * @Time
+     * @CacheUpdate
+     */
+    public function onPut($id, $title, $body)
+    {
+        $values = [
+            &#39;title&#39; =&gt; $title,
+            &#39;body&#39; =&gt; $body,
+            &#39;created&#39; =&gt; $this-&gt;time
+        ];
+        $this-&gt;db-&gt;update($this-&gt;table, $values, [&#39;id&#39; =&gt; $id]);
+        $this-&gt;code = Code::NO_CONTENT;
+        return $this;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Posts
+     * @CacheUpdate
+     */
+    public function onDelete($id)
+    {
+        $this-&gt;db-&gt;delete($this-&gt;table, [&#39;id&#39; =&gt; $id]);
+        $this-&gt;code = Code::NO_CONTENT;
+        return $this;
+    }
+}
+</code></pre></div>
+<p>リソースクラスではリソースのリクエストインターフェイスに対応するメソッドを記述します。この記事リソースでは$idが指定されると記事１つが、指定されないと記事全てを返しています。</p>
+
+<h2 id="toc_6">コマンドラインからリソースの利用</h2>
+
+<p><em>Sandbox/Resource/App/Posts.php</em> に設置した<code>Sandbox/Resource/App/Posts</code>クラスのこのappリソースは<code>app://self/posts</code>というURIが与えられます。</p>
+
+<p>作成したリソースはをコマンドラインからみてみましょう。まずはアプリケーションの実行モードを戻します。</p>
+
+<p>public/api.php</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$mode = &#39;Stab&quot;;
+$app = require &#39;/path/to/script/instance.php&#39;;
+</code></pre></div>
+<p>コンソールで呼び出します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php api.php get app://self/blog/posts
+
+200 OK
+[BODY]
+array (
+  0 =&gt; 
+  array (
+    &#39;id&#39; =&gt; &#39;1&#39;,
+    &#39;title&#39; =&gt; &#39;タイトル&#39;,
+    &#39;body&#39; =&gt; &#39;これは、記事の本文です。&#39;,
+    &#39;created&#39; =&gt; &#39;2011-07-01 22:30:25&#39;,
+    &#39;modified&#39; =&gt; NULL,
+  ),
+  1 =&gt; 
+  array (
+    &#39;id&#39; =&gt; &#39;2&#39;,
+    &#39;title&#39; =&gt; &#39;またタイトル&#39;,
+    &#39;body&#39; =&gt; &#39;そこに本文が続きます。&#39;,
+    &#39;created&#39; =&gt; &#39;2011-07-01 22:30:25&#39;,
+    &#39;modified&#39; =&gt; NULL,
+  ),
+  2 =&gt; 
+  array (
+    &#39;id&#39; =&gt; &#39;3&#39;,
+    &#39;title&#39; =&gt; &#39;タイトルの逆襲&#39;,
+    &#39;body&#39; =&gt; &#39;こりゃ本当に面白そう！うそ。&#39;,
+    &#39;created&#39; =&gt; &#39;2011-07-01 22:30:27&#39;,
+    &#39;modified&#39; =&gt; NULL,
+  ),
+)
+</code></pre></div>
+<p>STABモードの実行と同じ形式の出力が得られました。</p>
+
+<p>モードを切り替えることでダミーデータ表示がいつでもできます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Note: `self`は自己のアプリケーションのリソースという意味です。BEAR.Sundayでは他のアプリケーションのリソースをリクエストする事や、アプリケーションを横断して利用するリソースを設置することが可能です。
+</code></pre></div>
+<p>引き数はクエリーの形式で指定します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php apps/Sandbox/htdocs/api.php get &#39;app://self/posts?id=1&#39;
+</code></pre></div>
+<h2 id="toc_7">aliasの設定</h2>
+
+<p>シェルスクリプトでaliasをフルパスで設定しておくと便利です。</p>
+
+<p><em>~/.bash_profile</em></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">alias api=&#39;php /path/to/apps/Sandbox/htdocs/api.php&#39;
+alias web=&#39;php /path/to/apps/Sandbox/htdocs/web.php&#39;
+</code></pre></div>
+<p>上段がリソースのAPI利用、下段はwebリクエストに対応します。簡単な表記になり、どのディレクトリからもコンソールでリソースを利用できるようになりました。バッチ処理などのOSからのスクリプト利用にも便利です。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// APIアクセス
+$ api get app://self/posts
+
+// webアクセス
+$ web get /posts
+</code></pre></div>
+<h2 id="toc_8">API駆動開発</h2>
+
+<p>このようにBEAR.Sundayでは内部API開発をベースにwebアプリケーションを構築します。リソースはサービスレイヤーとして機能し、データソースやビジネスロジックを含んだ処理のまとまりにRESTfulな限定された統一とインターフェイスと名前（URI）を与えます。</p>
+
+<p>webアプリケーションを元に外部API用インターフェイスを作成・提供する_のでなく_、内部リソースAPIをベースにアプリケーションをAPIの集合のように構築します。</p>
+
+<h2 id="toc_9">ランタイムインジェクション</h2>
+
+<p>このappリソースはGETリクエストされる度、直前にsetDb()が呼ばれDBオブジェクが外部から代入（インジェクト）されます。このクラスにはどのDBオブジェクトを利用するかという指定はなく、外部からの代入にその選定を任せている事に注目してください。*GET* リクエストではスレーブ用DBオブジェクトが、その他の*PUT*,*POST*,*DELETE* リクエストではマスター用DBオブジェクトが代入されます。</p>
+
+<p>この実行時（ランタイム）のオブジェクトのインジェクションをランタイムインジェクションと呼びます。これは特定のメソッド(この場合onGet)に、そのメソッドの実行前に呼び出されるインターセプター(この場合Dbオブジェクトインジェクター）が束縛されていることで実現されています。</p>
+
+<p>このDBオブジェクトがランタイムでインジェクトされる仕組みはBEAR.Sundayで固定化された仕組みではなくappModuleでインストールした<code>DotriDbalModule</code>の働きです。<code>DotriDbalModule</code>では*@Db* とアノテートされたクラスのメソッドにはDBインジェクターを束縛していて、そのDBインジェクターがリクエストメソッドを見てmaster/slave DBを決定し、DBオブジェクトをセットしています。</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

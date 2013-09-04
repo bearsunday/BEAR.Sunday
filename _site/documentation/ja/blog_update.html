@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | blogチュートリアル(9) 記事の編集</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>ブログ・チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">BEARのインストールとプロジェクト作成</a></li>
+<li><a href="blog_db.html">データベースの設定</a></li>
+<li><a href="blog_get.html">記事リソースの作成</a></li>
+<li><a href="blog_page.html">記事表示ページの作成</a></li>
+<li><a href="blog_template.html">テンプレートの作成</a></li>
+<li><a href="blog_create.html">記事の追加</a></li>
+<li><a href="blog_validate.html">バリデーション</a></li>
+<li><a href="blog_delete.html">記事の削除</a></li>
+<li><a href="blog_update.html">記事の編集</a></li>
+<li><a href="blog_more.html">まとめとカスタマイズ</a></li>
+		
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">blogチュートリアル(9) 記事の編集</h1>
+
+<h2 id="toc_1">PUTメソッド</h2>
+
+<h2 id="toc_2">記事編集ページの作成</h2>
+
+<p>記事作成ページとほとんど同じです。違いは最初の表示(GETリクエスト）で指定された記事データを読み込みデフォルトをセットしてることだけです。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * Get
+ * 
+ * @param int $id
+ */
+public function onGet($id)
+{
+    $this[&#39;submit&#39;] # $this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/posts&#39;)-&gt;withQuery([&#39;id&#39; &gt; $id])-&gt;eager-&gt;request()-&gt;body;
+    $this[&#39;id&#39;] = $id;
+    return $this;
+}
+
+/**
+ * Put
+ *
+ * @param int    $id
+ * @param string $title
+ * @param string $body
+ *
+ * @Form
+ */
+public function onPut($id, $title, $body)
+{
+    // create post
+    $this-&gt;resource
+    -&gt;put
+    -&gt;uri(&#39;app://self/posts&#39;)
+    -&gt;withQuery([&#39;id&#39; # &gt; $id, &#39;title&#39; =&gt; $title, &#39;body&#39; &gt; $body])
+    -&gt;eager-&gt;request();
+
+    // redirect
+    $this-&gt;code = 303;
+    $this-&gt;headers # [&#39;Location&#39; &gt; &#39;/blog/posts&#39;];
+    return $this;
+}
+</code></pre></div>
+<h2 id="toc_3">PUTリクエスト</h2>
+
+<p>変更にはPUTインターフェイスを使っています。</p>
+
+<p>PUTリクエストにするために<code>&lt;form&gt;</code>にHTTPメソッドオーバーライドのための項目を埋め込みます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;input name# &quot;X-HTTP-Method-Override&quot; type=&quot;hidden&quot; value&quot;PUT&quot; /&gt;
+</code></pre></div>
+<p>Note: このチュートリアルではPOSTを記事の作成、PUTを記事の変更と扱ってきました。POST/PUTの区別は*<a href="http://ja.wikipedia.org/wiki/%E5%86%AA%E7%AD%89">べき等性</a>*により行われます。記事リソースに同じPOSTリクエストを複数回行うとどんどん記事が増えていきますが、変更では１回行っても複数回行っても同じです。一般にメソッドの選択はこのべき等性に基づいて行うのが適当でしょう。</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

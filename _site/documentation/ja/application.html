@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | アプリケーション</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		
+
+		<div class="panel panel-default">
+  			<div class="panel-heading"><strong></strong></div>
+  			<div class="panel-body">
+
+				<ul class="nav nav-pills nav-stacked">
+		  			<li><a href="#">Home</a></li>
+		  			<li><a href="#">Profile</a></li>
+		  			<li><a href="#">A really long long long linklong long long link</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">アプリケーション</h1>
+
+<h2 id="toc_1">導入</h2>
+
+<p>bootstrapで生成されるアプリケーションオブジェクトはアプリケーションの実行が記述してあるアプリケーションスクリプトに必要な全てのサービスオブジェクトを含んでいます。利用する全てのオブジェクトはこのオブジェクトに含まれるか、含まれたファクトリーで生成されます。</p>
+
+<p>オブジェクトを生成するためにはまずその依存が必要です。しかしその依存もまた依存が必要で、そのまた..と続き最終的にアプリケーションオブジェクトがオブジェクトグラフ（オブジェクト間の関係性）として取得されます。</p>
+
+<h2 id="toc_2">コンパイルとランタイム　</h2>
+
+<p>[module モジュール]はオブジェクトの抽象（インターフェイスや抽象クラス）と実装（実クラスやファクトリー）の束縛、それにメソッドとその横断的振る舞い（アスペクト）の束縛の集合です。アプリケーションはモードによってそのモジュールが選択され、その構成知識でアプリケーションオブジェクトが生成されます。</p>
+
+<p>BEAR.Sundayは「依存性の注入パターン」に基づいていて、アプリケーションオブジェクトはそのコンストラクション（コンパイルタイム）と実行（ランタイム）にはっきりとした区別があります。オブジェクトはconstructionを行うオブジェクトと、executionを行うオブジェクトにはっきりと区別され混ざりません。</p>
+
+<ul>
+<li>boot時にモードに応じたアプリケーションオブジェクトが生成されます。（コンパイルタイム）</li>
+<li>その後はオブジェクトのexecution（実行）が始まります（ランタイム）</li>
+<li>executionの時に新しいオブジェクトを都度取得するときには<code>Provider</code>を使います。それ以外の方法ではオブジェクトの取得を原則行いません。</li>
+</ul>
+
+<h2 id="toc_3">コンストラクションの再利用</h2>
+
+<p>オブジェクトの組み立ては一度しか行われません。オブジェクトは実行モードに応じたモジュールに基づいて依存が注入されアスペクトが特定メソッドに織り込ます。これが依存の依存も…という風に繰り返され最終的なオブジェクトグラフになります。出来上がったオブジェクトグラフはAPCのオブジェクトコンテナに格納されリクエストをまたいで再利用されます。</p>
+
+<p>つまりBEAR.Sundayアプリケーションではコンストラクタはサービスを開始してオブジェクトの最初の実行時のコンパイルの一度だけしか実行されません。二度目からはコンストラクションが行われずコンテナから取り出し再利用されるからです。</p>
+
+<h2 id="toc_4">早期束縛</h2>
+
+<p>アプリケーションのランタイムに依存せず、リクエスト毎に変わらない依存の注入はこのコンパイルで完了しておくようにします。</p>
+
+<p>モジュールを使ったコンフィギュレーションはオブジェクトがどのように構成されるかを決めるものであって、オブジェクトのランタイムでの実行を直接決めるものではありません。</p>
+
+<p>例えばランタイムでコンフィギュレーションを見て振る舞いを変更する事は推奨されません。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// 非推奨
+if ($config[&#39;debug&#39;] # = true) {
+    // debug用の振る舞い
+}
+</code></pre></div>
+<p>その代わりに <em>コンパイル時にコンフィギュレーションを見て振る舞いの違うオブジェクトを束縛</em> します。コンパイルが完了したオブジェクトは、ランタイムでの可変点のみの処理を行うようにします。つまり毎リクエスト同じ文字列をアサインするようなコードは非推奨です。</p>
+
+<p>例えば開発画面で様々なオブジェクトの情報が確認できるツールが現れるのは、レンダラインターフェイスに開発用レンダラが束縛されているためで、レンダラがモードを確認してレンダリングを変えているのでありません。つまりアプリケーションの<code>mode</code>は実行時の振る舞いをランタイムで変えるための変数ではなくて、そのモードに応じたオブジェクトを生成するためのものです。<code>Sandbox</code>アプリケーションを構成するそれぞれのオブジェクトは実行モードを知りません。</p>
+
+<h2 id="toc_5">遅延束縛</h2>
+
+<p>依存にはリクエストを通じて変わらないものと、ランタイムの時にしか決定できないものがあります。例えばログオブジェクトはどのリクエストでも必要かもしれませんが、DBオブジェクトはリクエストメソッドに応じたインスタンスが必要で（master/slave)、コンパイル時に早期束縛する事はできません。</p>
+
+<p>メソッドに対して割込むインターセプターが依存を遅延束縛することでその問題を解決します。インターセプターはメソッドが実行される直前にコンテキストに応じて依存を注入する事ができます。</p>
+
+<p>早期束縛と遅延束縛の明確な区別はソフトウエアの品質とパフォーマンスの向上を目的としていて、BEAR.Sundayの特徴になってます。</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -29,14 +29,15 @@ category: インストールと設定
   * [application_object ..オブジェクト]
   * [application_instance_script ..インスタンススクリプト]
   * [interface ..インターフェイス]
-#### リソース 
 
+#### リソース 
   * [resource イントロダクション]
   * [resource_client リソースクライアント]
   * [resource_object リソースオブジェクト]
   * [resource_renderer リソースレンダラー]
   * [resource_link リソースリンク]
   * [resource_adapter リソースアダプター]
+
 #### ライブラリ 
   * [annotation アノテーション]
   * [database データベース]

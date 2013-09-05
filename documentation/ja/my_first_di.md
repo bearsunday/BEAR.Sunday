@@ -1,4 +1,9 @@
-#summary はじめてのDI
+---
+layout: default_ja
+title: BEAR.Sunday | はじめてのDI
+category: 「はじめての」チュートリアル
+---
+# はじめてのDI
 
 ## 挨拶を依存にしてさまざまな挨拶を可能にする 
 
@@ -25,7 +30,7 @@
 コンストラクタはこのようなコードになります。
 `外部からの代入（注入）が欲しいコンストラクタにに`@Inject`とマークしています。その際この注入を特定するために、注入個所（インジェクトポイント）に`@Named`で名前をつけています。
 
-{{{
+```
     /**
      * Constructor
      * 
@@ -38,7 +43,7 @@
     {
         $this->message = $message;
     }
-}}}
+```
 
 ### まずは注入失敗を実験してみる 
 
@@ -46,10 +51,10 @@
 
 注入される箇所のマークは行いましたが、何を注入するかは設定していません。これでは注入を行うインジェクターはうまく注入をすることができません。その失敗を実験してみます。
 
-{{{
+```
 $ php api.php get 'app://self/first/greeting/di'
-}}}
-{{{
+```
+```
 500 Internal Server Error
 X-EXCEPTION-CLASS: Ray\Di\Exception\NotBound
 X-EXCEPTION-MESSAGE: typehint# '', annotate'greeting_msg' for $message in class 'Sandbox\Resource\App\First\Greeting\Di'
@@ -68,15 +73,15 @@ Internal error occurred (e5f464)
 
 DI設定（注入の設定）はモジュールの`configure`メソッド内で行います。[AppModule](https://github.com/koriym/BEAR.Sunday/blob/master/apps/Sandbox/Module/AppModule.php)の`configure`メソッドのどこでもよいので下記の行を追加します。
 
-{{{
+```
 $this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');
-}}}
+```
 
 これで`@Inject`とマークし`@Named("greeting_msg")`と名前を指定したメソッド（またはコンストラクタ）に'Hola'が渡ります。
 
 ここでは何かの実体（インスタンス）を直接していますが、クラス名やファクトリークラス名を指定する事もできます。ファクトリーでは複雑なインスタンス生成が可能です。※ 生成方法は変わっても受けとる方の記述は同じです。
 
-{{{
+```
     /**
      * @Inject
      * @Named("greeting_msg")
@@ -85,17 +90,17 @@ $this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');
     {
         $this->message = $message;
     }
-}}}
+```
 ## 確認します 
-{{{
+```
 $ php api.php get 'app://self/first/greeting/di?name=BEAR'
-}}}
-{{{
+```
+```
 200 OK
 ...
 [BODY]
 "Hola, BEAR"
-}}}
+```
 
 モジュールで設定したインスタンス（文字列）が注入されています！これで挨拶文字列の用意は利用クラスから切り離されました。挨拶文字列がDBやファイルから用意されるようになっても、利用クラスに変更はありません。準備するモジュールに変更があるだけです。
 

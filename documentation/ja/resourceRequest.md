@@ -1,18 +1,23 @@
-#summary リソースリクエスト
+---
+layout: default_ja
+title: BEAR.Sunday | リソースリクエスト
+category: リソース
+--- 
+# リソースリクエスト
 
 ## リクエストのタイミング 
 
 リソースのリクエストはlazyとeagerがありリクエストのタイミングに違いがあります。eagerリクエストはすぐにリソースリクエストが行われるのに対して、lazyではviewテンプレートで出現した時に行われます。
 
 ### lazyリクエスト
-{{{
+```
 $this['posts'] = $this->resource->get->uri('app://self/posts')->request();
-}}}
+```
 
 ### eagerリクエスト
-{{{
+```
 $this['posts'] = $this->resource->get->uri('app://self/posts')->eager->request();
-}}}
+```
 
 ## テンプレートでの表記 
 

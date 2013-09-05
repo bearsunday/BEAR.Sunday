@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | インターフェイス</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>アプリケーション</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+			<li><a href="application.html">イントロダクション</a></li>
+<li><a href="application_script.html">スクリプト</a></li>
+<li><a href="application_object.html">オブジェクト</a></li>
+<li><a href="application_instance_script.html">インスタンススクリプト</a></li>
+<li><a href="interface.html">インターフェイス</a></li>
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">インターフェイス</h1>
+
+<p>BEAR.Sundayではインターフェイスとクラスの束縛（binding)を変更することでフレームワークの振る舞いを柔軟に構成することができます。</p>
+
+<h2 id="toc_1">モジュールの合成</h2>
+
+<p><code>BEAR\Sunday\Module\Framework\FrameworkModule</code>はBEAR.Sundayフレームワークの基本の束縛を行っています。アプリケーションはこのバインディングを変更して特定または独自の実装に変更することができます。</p>
+
+<h3 id="toc_2">FrameworkModule</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">class FrameworkModule extends AbstractModule
+{
+    protected function configure()
+    {
+        $this-&gt;install(new Module\Framework\ConstantModule);
+        $this-&gt;install(new Module\Log\ApplicationLoggerModule);
+        $this-&gt;install(new Module\Di\InjectorModule($this-&gt;dependencyInjector));
+        $this-&gt;install(new Module\Code\CachedAnnotationModule);
+        $this-&gt;install(new Module\Signal\SignalModule);
+        $this-&gt;install(new Module\Resource\ResourceModule($this-&gt;dependencyInjector));
+        $this-&gt;install(new Module\Output\ConsoleModule);
+        $this-&gt;install(new Module\Http\GuzzleModule);
+        $this-&gt;install(new Module\TemplateEngine\ProdRendererModule);
+    }
+}
+</code></pre></div>
+<p>これらのモジュール内ではフレームワークの機能に最小限度必要なデフォルトの束縛が行われています。
+このフレームワークモジュールにアプリケーションを横断するパッケージモジュール<code>BEAR\Package\Module\Package\PackageModule</code>とアプリケーションモジュール、またコンテキストに応じたモードモジュールが合成されアプリケーション実行に必要な全ての束縛が完了します。</p>
+
+<h2 id="toc_3">コンテキストによる束縛</h2>
+
+<p>アプリケーションのコンテキスト（モードや方針）に応じて束縛が求められるインターフェイスもあります。たとえばリソースをどのようにレンダリングするか(HTML or JSON ?)や、テンプレートエンジン、キャッシュライブラリ等です。通常<code>AppModule</code>が使われます。</p>
+
+<p>|| <em>インターフェイス</em> || <em>束縛されているクラス</em> || <em>サービス</em> ||
+|| <code>BEAR\Resource\Renderable</code> || <code>BEAR\Framework\Resource\View\Renderer</code> || HTML||
+|| || <code>BEAR\Framework\Resource\View\DevRenderer</code> || Dev用HTML||
+||  || <code>BEAR\Framework\Resource\View\JsonRenderer</code> || JSON||
+||  || <code>BEAR\Framework\Resource\View\HalRenderer</code> || JSON+HAL　||
+|| <code>BEAR\Framework\Resource\View\TemplateEngineAdapter</code> || <code>BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyAdapter</code> || Smarty ||
+|| <code>Guzzle\Common\Cache\CacheAdapterInterface @Named(&quot;resource_cache&quot;)</code> || <code>BEAR\Framework\Module\Provider\ApcCacheProvider</code> ||リソースキャッシュ ||</p>
+
+<h3 id="toc_4">モジュールのオーバーライド</h3>
+
+<p>モジュール内で既存のモジュールで束縛されている内容を上書きするにはこのように$thisを渡します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;install(new OverRideModule($this));
+</code></pre></div>
+<p>$thisを渡さない<code>install</code>は束縛が行われていないインターフェイスにしか束縛が行われません。
+<code>
+$this-&gt;install(new SomeModule);
+</code></p>
+
+<h2 id="toc_5">トレイト名前一覧</h2>
+
+<h3 id="toc_6">定数</h3>
+
+<p>|| <em>トレイト名</em> || <em>インジェクトされる依存</em> || namespace ||
+|| <code>TmpDirInject</code> || Tmpディレクトリ || BEAR\Sunday\Inject ||
+|| <code>LogDirInject</code> || Logディレクトリ || BEAR\Sunday\Inject ||
+|| <code>AppDirInject</code> || Appディレクトリ || BEAR\Sunday\Inject ||
+|| <code>AppNameInject</code> || App名|| BEAR\Sunday\Inject ||</p>
+
+<h3 id="toc_7">サービスオブジェクト</h3>
+
+<p>|| <code>LogInject</code> || <a href="http://guzzlephp.org/api/class-Guzzle.Common.Log.LogAdapterInterface.html">LOGオブジェクト</a> || BEAR\Sunday\Inject ||
+|| <code>ResourceInject</code> || <a href="http://code.google.com/p/bearsunday/wiki/resource_client">リソースクライアント</a> || BEAR\Sunday\Inject ||</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

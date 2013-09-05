@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | はじめてのリソース</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>「はじめての」チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+			<li><a href="my_first_resource.html">はじめてのリソース</a></li>
+<li><a href="my_first_web_api.html">はじめてのWeb API</a></li>
+<li><a href="my_first_test.html">はじめてのテスト</a></li>
+<li><a href="my_first_web_page.html">はじめてのWebページ</a></li>
+<li><a href="my_first_resource_request.html">はじめてのリソースリクエスト</a></li>
+<li><a href="my_first_di.html">はじめての注入</a></li>
+<li><a href="my_first_aop.html">はじめてのアスペクト</a></li>
+<li><a href="my_first_pull.html">はじめてのプル</a></li>
+<li><a href="my_first_hypermedia.html">はじめてのハイパーメディア</a></li>
+<li><a href="my_first_lazy.html">はじめての遅延評価</a></li>
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">はじめてのリソース</h1>
+
+<h2 id="toc_1">アプリケーションリソース</h2>
+
+<p>ここでは<code>name</code>を渡すと挨拶を返してくれる<code>greeting</code>リソースをつくってみます。
+MVCでいうとモデルにあたる部分をBEAR.Sundayではアプリケーション(app)リソースと呼びます。アプリケーションリソースはアプリケーションの内部APIとして利用されます。</p>
+
+<h2 id="toc_2">リソース設計</h2>
+
+<p>リソースとは情報のかたまりです。ここでは挨拶(<code>greeting</code>)が「挨拶リソース」として使われます。リソースオブジェクトクラスには以下のものが必要です。</p>
+
+<ul>
+<li>URI</li>
+<li>リクエストインターフェイス </li>
+</ul>
+
+<p>ここではこういう風に決めました。</p>
+
+<p>|| URI || メソッド || クエリー ||
+|| app://self/first/greeting || get || ?name=名前 ||</p>
+
+<p>期待するgreetingリソースはこういうものです。</p>
+
+<p>リクエスト
+<code>
+get app://self/first/greeting?name=BEAR
+</code>
+レスポンス
+<code>
+Hello, BEAR.
+</code></p>
+
+<h2 id="toc_3">リソースオブジェクト</h2>
+
+<p>sandboxアプリケーションに実装します。URIとPHPのクラス、ファイル位置はこのように対応します。</p>
+
+<p>|| URI || Class || File ||
+|| <code>app://self/first/greeting</code> || <code>Sandbox\Resource\App\First\Greeting</code> || <code>apps/Sandbox/Resource/App/First/Greeting.php</code> ||</p>
+
+<p>リクエストインターフェイス（メソッド）を実装します。
+```
+namespace Sandbox\Resource\App\First;</p>
+
+<p>use BEAR\Resource\AbstractObject;</p>
+
+<p>/**
+ * Greeting resource
+ <em>/
+class Greeting extends AbstractObject
+{
+    /</em>*
+     * Get
+     *
+     * @param  string $name
+     * 
+     * @return string
+     *
+     */
+    public function onGet($name)
+    {
+        return &quot;Hello, {$name}&quot;;
+    }
+}
+```</p>
+
+<h2 id="toc_4">コマンドラインでためしてみましょう</h2>
+
+<p>ではコマンドラインインターフェイス(CLI)で試してみましょう。コンソールから入力します。まずは*失敗*から。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">php api.php get app://self/first/greeting
+</code></pre></div>
+<p>400 Bad Requestのレスポンスが帰ってきます。
+<code>
+400 Bad Request
+...
+[BODY]
+Internal error occured (e613b4)
+</code>
+ヘッダーをみると例外発生の情報があり、クエリーにnameが必要だというこ
+とがわかります。*<code>OPTIONS</code>メソッド* を使ってもっと正確に調べてみることができます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">php api.php options app://self/first/greeting
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+allow: [&quot;get&quot;]
+param-get: name
+</code></pre></div>
+<p>このリソースは<code>GET</code>メソッドだけが有効で、パラメーターは１つ、<code>name</code>が必要だというのが分かります。もしこの<code>name</code>パラメーターがオプションであるなら(name)と表示されます。では引き数がOPTIONSメソッドでわかったところで再度試してみます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">php api.php get &#39;app://self/first/greeting?name=BEAR&#39;
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+cache-control: no-cache
+date: Tue, 10 Jul 2012 23:55:16 GMT
+content-type: text/html; charset=UTF-8
+[BODY]
+&quot;Hello, BEAR&quot;
+</code></pre></div>
+<p>今度は正しいレスポンスが返ってきました。成功です！</p>
+
+<h2 id="toc_5">リソースオブジェクトが返ります</h2>
+
+<p>この挨拶リソース実装では文字列を返していますが、以下の記述のと同じものとして扱われます。どちらの記述でもリクエストしたクライアントのはリソースオブジェクトが返ります。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function onGet($name)
+ {
+    $this-&gt;body = &quot;Hello, {$name}&quot;;
+    return $this;
+}
+</code></pre></div>
+<p><code>onGet</code>メソッド内をこのように変えてレスポンスが変わらない事を確認してみましょう。</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -1,43 +1,46 @@
+---
+layout: default_ja
+title: BEAR.Sunday | はじめてのアスペクト
+category: 「はじめての」チュートリアル
+---
 #summary はじめてのアスペクト
 
 ## 挨拶に現在時間を追加する 
 
 [my_first_resource greetingリソース]に現在時刻を追加します。出来上がりイメージはこうです。
 
-{{{
-"Hello, BEAR. It is 10:22."
-}}}
+    "Hello, BEAR. It is 10:22."
 
 このようにメッセージの後ろに時間を追加すれば簡単に実現できます。
 
-{{{
+
     public function onGet($name = 'anonymous')
     {
         $time = date('g:i');
         return "{$this->message}, {$name}". " It is {$time} now";
     }
-}}}
+
 
 ではこの現在時刻の追加を他の10のリソースでも行いたいとしたらどうでしょう？「何かのメッセージの後に時間情報を追加」という処理を他の10のリソースでも行います。同じ処理を何度もするので関数にしてみます。
 
-{{{
+
     public function onGet($name = 'anonymous')
     {
         return "{$this->message}, {$name}". timeMessage();
     }
-}}}
+
 
 集約され、再利用性が高まりました。
 あるいはtraitを使ってみましょうか。
 
-{{{
+
     use TimeMessageTrait;
 
     public function onGet($name = 'anonymous')
     {
         return "{$this->message}, {$name}". $this->getTimeMessage();
     }
-}}}
+
 
 同じですね。
 
@@ -75,32 +78,30 @@ DBのトランザクションのコード、`begin, [query], (commit | rollback)
 まずは元メソッドを横取りする横断処理、つまりインターセプターです。
 
 まずは横断処理を「何もしない」インターセプターです。
-{{{
-class TimeMessage implements MethodInterceptor
-{
-    /**
-     * (non-PHPdoc)
-     * @see Ray\Aop.MethodInterceptor::invoke()
-     */
-    public function invoke(MethodInvocation $invocation)
+
+    class TimeMessage implements MethodInterceptor
     {
-        $result = $invocation->proceed();
-        return $result;
+        /**
+         * (non-PHPdoc)
+         * @see Ray\Aop.MethodInterceptor::invoke()
+         */
+        public function invoke(MethodInvocation $invocation)
+        {
+            $result = $invocation->proceed();
+            return $result;
+        }
     }
-}
-}}}
 
 元のメソッドを実行（`$invocation->proceed()`）し、その結果を返しています。
 
 `$invocation->proceed()`でオリジナルのメソッドを実行した後ろに時刻メッセージを追加します。
-{{{
+
     public function invoke(MethodInvocation $invocation)
     {
         $time = date('g:i');
         $result = $invocation->proceed();
         return $result . " It is {$time} now";
     }
-}}}
 
 ## このインターセプターを特定のメソッドにバインドする 
 
@@ -110,27 +111,25 @@ class TimeMessage implements MethodInterceptor
 
 以下のコードを`sandbox/Module/AppModule.php`の`configure`メソッドに追加します。
 
-{{{
+
         // time message binding
         $this->bindInterceptor(
             $this->matcher->subclassesOf('Sandbox\Resource\App\First\Greeting\Aop'),
             $this->matcher->any(),
             [new TimeMessage]
         );
-}}}
 
 これで`'Sandbox\Resource\App\First\Greeting\Aop'`クラス（およびそのサブクラス）のどのメソッド($this->matcher->any())にも`TimeMessage`インターセプターがバインドされます。
 
 ### 実行してみましょう 
-{{{
-get app://self/first/greeting/aop?name=BEAR
-}}}
-{{{
-200 OK
-...
-[BODY]
-"Hello, BEAR. It is 3:12 now !"
-}}}
+
+    get app://self/first/greeting/aop?name=BEAR
+
+    200 OK
+    ...
+    [BODY]
+    "Hello, BEAR. It is 3:12 now !"
+
 
 時刻伝えるアスペクトと挨拶リソースが合成されました！挨拶リソースは自身が加工編集されることに無関心です。横断処理が元処理を呼ぶコードに乗っ取られています。
 

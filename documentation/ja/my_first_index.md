@@ -1,7 +1,7 @@
 ---
 layout: default_ja
 title: BEAR.Sunday | はじめての"チュートリアル
-category: はじめての"チュートリアル 
+category: 「はじめての」チュートリアル
 ---
 
 # "はじめての"チュートリアル 

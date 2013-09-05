@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: default_ja
 title: BEAR.Sunday | アプリケーション
+category: アプリケーション
 ---
 # アプリケーション
 ## 導入 

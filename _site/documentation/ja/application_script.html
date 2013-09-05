@@ -36,29 +36,38 @@
 <div class="row">
 	<div class="col-md-3">
 
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>アプリケーション</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
 		
 
-		<div class="panel panel-default">
-  			<div class="panel-heading"><strong></strong></div>
-  			<div class="panel-body">
+		
 
-				<ul class="nav nav-pills nav-stacked">
-		  			<li><a href="#">Home</a></li>
-		  			<li><a href="#">Profile</a></li>
-		  			<li><a href="#">A really long long long linklong long long link</a></li>
-				</ul>
-			</div>
-		</div>
+		
+			<li><a href="application.html">イントロダクション</a></li>
+<li><a href="application_script.html">スクリプト</a></li>
+<li><a href="application_object.html">オブジェクト</a></li>
+<li><a href="application_instance_script.html">インスタンススクリプト</a></li>
+<li><a href="interface.html">インターフェイス</a></li>
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
 	</div>
 	<div class="col-md-9">
 
-		 <h2 id="toc_0">導入</h2>
-
-<p>BEAR.Sundayではフレームワークが固定された実行フローを持つ代わりに、アプリケーションスクリプトがアプリケーションがどのようなフローで実行されるかを表します。</p>
+		 <p>BEAR.Sundayではフレームワークが固定された実行フローを持つ代わりに、アプリケーションスクリプトがアプリケーションがどのようなフローで実行されるかを表します。</p>
 
 <p>変更するにはこのアプリケーションスクリプトを直接編集します。</p>
 
-<h1 id="toc_1">アプリケーションスクリプト</h1>
+<h1 id="toc_0">アプリケーションスクリプト</h1>
 
 <p>以下は<code>Sandboxアプリケーション</code>のプロダクションスクリプトです。</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">// Application instance with loader
@@ -98,21 +107,21 @@ ERROR: {
 </code></pre></div>
 <p>アプリケーションインスタンススクリプトからアプリケーションオブジェクトを取得しています。アプリケーションオブジェクトはアプリケーションスクリプトで必要な全てのサービスオブジェクトをプロパティに保持しています。</p>
 
-<h2 id="toc_2">スクリプト解説</h2>
+<h2 id="toc_1">スクリプト解説</h2>
 
-<h3 id="toc_3">アプリケーションインスタンス取得</h3>
+<h3 id="toc_2">アプリケーションインスタンス取得</h3>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">$mode = &#39;Prod&#39;;
 $app = require dirname(__DIR__) . &#39;/scripts/instance.php&#39;;
 </code></pre></div>
 <p>アプリケーションインスタンススクリプトからアプリケーションオブジェクトを取得しています。このスクリプトではクラスローダーの設定も行われます。</p>
 
-<h3 id="toc_4">ディスパッチ</h3>
+<h3 id="toc_3">ディスパッチ</h3>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">// Dispatch
 list($method, $pagePath, $query) = $app-&gt;router-&gt;match($GLOBALS);
 </code></pre></div>
 <p>グローバル変数からページリソースに対するリクエストメソッド、URI、クエリーが取り出されます。</p>
 
-<h3 id="toc_5">ページリソースリクエスト、出力</h3>
+<h3 id="toc_4">ページリソースリクエスト、出力</h3>
 
 <p>以下、その変数を使ってページをリクエストします。OKとERRORでページ出力を変えています。</p>
 

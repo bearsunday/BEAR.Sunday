@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BEAR.Sunday | はじめての"チュートリアル</title>
+        <title>BEAR.Sunday | はじめてのWeb API</title>
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -68,22 +68,23 @@
 	</div>
 	<div class="col-md-9">
 
-		 <h1 id="toc_0">&quot;はじめての&quot;チュートリアル</h1>
+		 <h1 id="toc_0">はじめてのWeb API</h1>
 
-<p>サンプルを打ち込みながら、BEAR.Sundayのリソースの作成やその利用および関連するソフトウエア技術を学びます。</p>
+<p>[my_first_resource はじめてのリソース]でつくったリソースをWeb APIとして利用してみましょう。</p>
 
-<ul>
-<li>[my_first_resource はじめてのリソース]</li>
-<li>[my_first_web_api はじめてのWeb API]</li>
-<li>[my_first_test はじめてのテスト]</li>
-<li>[my_first_web_page はじめてのWebページ]</li>
-<li>[my_first_resource_request はじめてのリソースリクエスト]</li>
-<li>[my_first_di はじめての注入]</li>
-<li>[my_first_aop はじめてのアスペクト]</li>
-<li>[my_first_pull はじめてのプル]</li>
-<li>[my_first_hypermedia はじめてのハイパーメディア]</li>
-<li>[my_first_lazy はじめての遅延評価]</li>
-</ul>
+<p>API用built-in webサーバーを起動します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ cd apps/Sandbox/htdocs
+$ php -S localhost:8089 api.php
+</code></pre></div>
+<p>ブラウザのAdd onのRESTクライアント、[<a href="https://addons.mozilla.org/ja/firefox/addon/restclient/">https://addons.mozilla.org/ja/firefox/addon/restclient/</a> Firefox RESTClient], [<a href="https://chrome.google.com/webstore/detail/dev-http-client/aejoelaoggembcahagimdiliamlcdmfm?hl=ja">https://chrome.google.com/webstore/detail/dev-http-client/aejoelaoggembcahagimdiliamlcdmfm?hl=ja</a> Chrome Dev HTTP Client] 等でアクセスします。</p>
+
+<p>※Webブラウザで直接アクセスするとダウンロードされます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">http://localhost:8089/first/greeting?name=BEAR
+</code></pre></div>
+<p>JSONで挨拶がかえってきたでしょうか？</p>
+
+<p>これであなたの作成したリソースはWebAPIとして利用できるようになりました。
+apache等のサーバーで運用すれば世界中の人からこのリソースをWeb APIとして利用できます！</p>
 
 	</div>
 </div>

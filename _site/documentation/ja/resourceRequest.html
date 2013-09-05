@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | リソースリクエスト</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>リソース</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+
+		
+			<li><a href="resource.html">イントロダクション</a></li>
+<li><a href="resource_client.html">リソースクライアント</a></li>
+<li><a href="resource_object.html">リソースオブジェクト</a></li>
+<li><a href="resource_renderer.html">リソースレンダラー</a></li>
+<li><a href="resource_link.html">リソースリンク</a></li>
+<li><a href="resource_adapter.html">リソースアダプター</a></li>
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">リソースリクエスト</h1>
+
+<h2 id="toc_1">リクエストのタイミング</h2>
+
+<p>リソースのリクエストはlazyとeagerがありリクエストのタイミングに違いがあります。eagerリクエストはすぐにリソースリクエストが行われるのに対して、lazyではviewテンプレートで出現した時に行われます。</p>
+
+<h3 id="toc_2">lazyリクエスト</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this[&#39;posts&#39;] = $this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/posts&#39;)-&gt;request();
+</code></pre></div>
+<h3 id="toc_3">eagerリクエスト</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this[&#39;posts&#39;] = $this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/posts&#39;)-&gt;eager-&gt;request();
+</code></pre></div>
+<h2 id="toc_4">テンプレートでの表記</h2>
+
+<p>|| 文字列 || {$posts} || 結果がテンプレートエンジンでレンダリングされた文字列 || 
+|| 配列 || {$posts[&#39;id&#39;]} || 結果の連想配列アクセス ||
+|| オブジェクト || {$posts-&gt;header} || 結果のオブジェクトアクセス ||</p>
+
+<p>※eagerでもlazyでもテンプレートの表記に違いはありません。</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

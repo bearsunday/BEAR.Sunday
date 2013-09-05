@@ -1,11 +1,17 @@
-#summary 初めてのプル
+---
+layout: default_ja
+title: BEAR.Sunday | 初めてのプル
+category: 「はじめての」チュートリアル
+--- 
+
+# 初めてのプル
 
 ## テンプレートからリソースを呼び出してみましょう 
 
 ビュー(PHPスクリプト)から直接リソースを利用してみましょう。
 以前つくった挨拶リソースをHTMLから直接利用するにはこうなります。
 
-{{{
+```
 <?php
 $app = require dirname(dirname(__DIR__)) . '/scripts/instance.php';
 $message # $app->resource->get->uri('app://self/first/greeting')->withQuery(['name' > 'BEAR'])->eager->request()->body;
@@ -13,7 +19,7 @@ $message # $app->resource->get->uri('app://self/first/greeting')->withQuery(['na
 <html>
     <body><?php echo $message;?></body>
 </html>
-}}}
+```
 
 この *プレーンなPHPスクリプト* はwebドキュメント領域に直接公開して、webクライアントから直接リクエストを受けます。
 

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | リソースオブジェクト</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>リソース</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+
+		
+			<li><a href="resource.html">イントロダクション</a></li>
+<li><a href="resource_client.html">リソースクライアント</a></li>
+<li><a href="resource_object.html">リソースオブジェクト</a></li>
+<li><a href="resource_renderer.html">リソースレンダラー</a></li>
+<li><a href="resource_link.html">リソースリンク</a></li>
+<li><a href="resource_adapter.html">リソースアダプター</a></li>
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">リソースオブジェクト</h1>
+
+<p><em>Representational State Transfer(REST) は、ウェブのような分散ハイパーメディアシステムのためのソフトウェアアーキテクチャのスタイルのひとつである。 ... REST において重要な概念は、「リソース」(情報の断片) である。個々のリソースは、グローバルな識別子 (URI) により参照することができる。- wikipedia &quot;REST&quot;</em></p>
+
+<p>BEAR.SundayのリソースオブジェクトはこのRESTのリソースの特徴を内部APIとしてwebアプリケーション内に構築しようとするものです。リソースオブジェクトはリソースの状態とリクエストインターフェイス、リンク先、を持つ事ができます。</p>
+
+<h2 id="toc_1">リソースオブジェクトの種類</h2>
+
+<p>リソースオブジェクトはスキーマによって区別されます。現在のsandboxアプリケーションはアプリケーションリソース(app）とページリソース(page)の２種類があります。</p>
+
+<h2 id="toc_2">リソースオブジェクトクラス</h2>
+
+<p>リソースは状態とリクエストインターフェイスを持ちます。クエリーを除いた１つのURIは１つのクラスに対応します。</p>
+
+<p>|| URI || Class || File ||
+|| page://self/index || Sandbox\Resource\Page\Index ||Sandbox/Resource/Page/Index.php ||
+|| app://self/blog/posts || Sandbox\Resource\App\Blog\Posts || Sandbox/Resource/App/Blog/Posts.php ||</p>
+
+<p>リソースのリクエストリソースインターフェイスがPHPのクラスにマップされたものです。</p>
+
+<p>Note: スキーマとその処理は固定化されたものではありません。ユーザーはアプリケーションを横断するリソースに名前をつけ再利用することや、テストのために別の処理系にまかしモックにする事もできます。リソースURIは実際の実装を指定したものでなく、対象を意図として表したものです。</p>
+
+<h1 id="toc_3">リソースプロパティ</h1>
+
+<p>リソースは公開された5つのプロパティを持ちます。</p>
+
+<p>|| プロパティ || 名前 || 意味　|| 型 ||
+|| code || コード　|| 状態 || int ||
+|| headers  || ヘッダー || メタ情報 || array&lt;$name =&gt; $value&gt; ||
+|| links || リンク || リソースリンク || array&lt;$rel =&gt; $uri&gt;  ||
+|| body || ボディ || リソース状態 || mixed ||
+|| view || ビュー || リソース表現 || string||</p>
+
+<h3 id="toc_4">コード</h3>
+
+<p>リソースの状態を表します。ページリソースの場合はそのままHTTPステータスになります。デフォルトは200(OK)です。</p>
+
+<h3 id="toc_5">ヘッダー</h3>
+
+<p>リソースのメタ情報です。例えばページングを伴うリソースでは件数や何ページ目を表示してるか、あるいはページャーの全体件数やナビゲーション用HTMLなど本質的関心ではないメタ情報がここに格納されます。ページリソースの場合はそのままHTTPヘッダーになります。</p>
+
+<h3 id="toc_6">リンク</h3>
+
+<p>リソースのリンク機能はリソース間の関係性をカプセル化します。利用するクライアントは関係性の実際を理解する必要なしに関係性を利用できます。これはwebのAタグをイメージすれば分かりやすいと思います。クリック先URLの情報はクライアントでなくサービスが管理していて、利用者はリンクテキストをクリックするだけです。関係性はリソース側にあり、クライアントにありません。</p>
+
+<h2 id="toc_7">ボディ</h2>
+
+<p>リソースの真の価値はこのリソースコンテンツを表すボディにあります。型の制限はありませんが、リソースが単一でなくコンポジションされてる場合は配列になります。</p>
+
+<p>例)車の走行スピードリソース
+<code>
+(int) 60
+</code>
+例)車の走行リソース
+<code>
+[
+ &#39;speed&#39; =&gt; 60,
+ &#39;passenger&#39; =&gt; 1,
+ &#39;gear&#39; =&gt; 4
+ ...
+]
+</code></p>
+
+<h2 id="toc_8">ビュー</h2>
+
+<p>ビューはリソースを「表現」にしたものです。例えば明日の天気リソース(app://self/wheaterh/tomorrow)は以下のようになります。</p>
+
+<p>リソース状態は「晴れ」
+リソース表現は「天気： <img src="sky.gif">晴れ」</p>
+
+<h1 id="toc_9">リクエストインターフェイス</h1>
+
+<h2 id="toc_10">メソッド</h2>
+
+<p>リソースはリクエストに応じたインターフェイスを持つ事ができます。例えばGETリクエストだけを受け付けるリソースには<code>onGet</code>メソッドを用意します。</p>
+
+<p>例  $id, $body, $titleをクエリー（引数）として受け付けるGETインターフェイス
+<code>
+public function onGet($id, $body, $title = &#39;untitle&#39;)
+{
+}
+</code></p>
+
+<p>BEAR.Saturdayと違って通常のPHPのメソッドのように記述します。これを利用するほうは名前付き引数（ネームドパラメーター）で呼ぶので順序は関係ありません。</p>
+
+<p>Note: 前後を入れ替えても呼ぶ側に修正は必要ありません。
+ Note: なるべく引数はスカラー値のみで受け取ります。</p>
+
+<h2 id="toc_11">自らを構成します</h2>
+
+<p>リクエストを受け取ったメソッド（リクエストインターフェイス）はデーターベースや外部Web API、あるいはビジネスロジックによって自らのリソースの状態を変更します。(つまり$bodyプロパティや$headers, $codeプロパティを更新します。)更新が終われば、自身を返します。
+<code>
+return $this
+</code></p>
+
+<p>Note: もし$this以外のものを返せば、それが$bodyに代入された$thisが返ります。例) return 3; は $this-&gt;body = 3; return $this;と同じです。</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

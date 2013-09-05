@@ -1,5 +1,9 @@
-#summary リソースレンダラー
-# 導入 
+---
+layout: default_ja
+title: BEAR.Sunday | リソースレンダラー
+category: リソース
+--- 
+# リソースレンダラー 
 
 リソースは状態から表現に変わります。たとえばユーザーページはユーザーに関する情報を変数として保持していますが、クライアントにはHTMLとして伝わります。
 
@@ -12,19 +16,19 @@
 レンダラーはDependency Injectorによってインジェクトされます。DIの設定を行うアプリケーションモジュールでこのレンダラーを別のレンダラーにする事ができます。例えば開発中は開発情報が付加表示される`DevRenderer`がインジェクトされています。Web API用には例えばJSONをレンダリングする`JsonRenderer`やJSONにリンク情報を持たせた[HAL](http://stateless.co/hal_specification.html)フォーマットレンダラー(JSON+HAL)のDI設定を行います。
 
 開発用の`DevModule`ではリソースレンダラーインターフェイスに開発用`DevRenderer`を束縛しています。この束縛を変える事で全てのリソースをWeb API用にJSON出力することができます。
-{{{
+```
 $this->bind('BEAR\Resource\Renderable')->to('BEAR\Framework\Resource\View\DevRenderer');
-}}}
+```
 
 ## レンダリング 
 レンダラーはリソース状態を`ResourceObject`として受け取り、インジェクトしたテンプレートエンジン等を使って文字列にします。
 
-{{{
+```
 public function render(ResourceObject $ro)
 {
  ....
  return $ro->body;
 }
-}}}
+```
 
  Note: リソースオブジェクトはリソースリクエストメソッドの中でテンプレートを直接指定しないようにします。間接的にリソースに状態を持たせて（たとえばLogin NG)、レンダラー、あるいはビューテンプレートがそれを判定してテンプレートを変えます。モデルがビューに関知しないように、リソースがリソースレンダリングの詳細を知らないようにします。

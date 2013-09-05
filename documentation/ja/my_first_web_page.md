@@ -1,6 +1,10 @@
-#summary はじめてのwebページ
+---
+layout: default_ja
+title: BEAR.Sunday | はじめてのwebページ
+category: 「はじめての」チュートリアル
+---
 
-# Webページにしましょう 
+# はじめてのwebページ 
 
 ## ページリソース 
 
@@ -12,7 +16,7 @@
 
  挨拶が"Hello"と固定化されている静的なページです。
 
-{{{
+```
 <?php
 namespace Sandbox\Resource\Page\First;
 
@@ -32,7 +36,7 @@ class Greeting extends Page
         return $this;
     }
 }
-}}}
+```
 
 ページのコンテンツの"greeting"というスロットに'Hello.'という文字列を格納しています。GETリクエストは呼ばれると何もしないで自身を返しています。
 
@@ -40,7 +44,7 @@ class Greeting extends Page
 
 このリソースをコマンドラインで確認してみましょう。
 
-{{{
+```
 $ cd apps/Sandbox/htdocs/
 $ php api.php get page://self/first/greeting
 
@@ -48,7 +52,7 @@ $ php api.php get page://self/first/greeting
 ...
 [BODY]
 greeting:Hello.
-}}}
+```
 
 greetingというスロットに`Hello.`という文字列が入っているのが確認できました。
 
@@ -64,14 +68,14 @@ greetingというスロットに`Hello.`という文字列が入っているの�
 
 
 ### テンプレート 
-{{{
+```
 <!DOCTYPE html>
 <html lang="en">
   <body>
       <h1>{$greeting}</h1>
   </body>
 </html>
-}}}
+```
 ## コマンドラインでページHTMLを確認します 
 
 リソースの状態をテンプレートにアサインしてレンダリングするとリソースのHTML表現になります。つまりHTMLページになります。これもコマンドラインで
@@ -79,10 +83,10 @@ greetingというスロットに`Hello.`という文字列が入っているの�
 
 では確認してみましょう。
 
-{{{
+```
 $ php web.php get /first/greeting
-}}}
-{{{
+```
+```
 200 OK
 cache-control: ["no-cache"]
 date: ["Fri, 01 Feb 2013 14:21:45 GMT"]
@@ -100,9 +104,9 @@ HTMLが確認できました。
 ## webブラウザでページHTMLを確認します 
 
 ビルトインウェブサーバーを立ち上げます
-{{{
+```
 $ php -S localhost:8088 web.php
-}}}
+```
 
 http://localhost:8088/first/greeting をアクセスします。
 無事ページが見えたでしょうか？

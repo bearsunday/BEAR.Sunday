@@ -1,6 +1,12 @@
-#summary はじめてのテスト
+---
+layout: default_ja
+title: BEAR.Sunday | はじめてのテスト
+category: 「はじめての」チュートリアル
+---
 
-# リソーステスト 
+# はじめてのテスト
+
+## リソーステスト 
 
 [my_first_resource はじめてのリソース]で作成した挨拶リソーステストします。
 
@@ -15,7 +21,7 @@
 
 このクラスを`apps/Sandbox/tests/Resource/App/First/GreetingTest.php`として保存します。
 
-{{{
+```
 <?php
 namespace Sandbox\tests\Resource\App\Blog;
 
@@ -86,22 +92,22 @@ class GreetingTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('Hello, BEAR', $resource->body);
     }
 }
-}}}
+```
 
 ## テストを実行してみましょう　
 
 アプリケーションディレクトリに移動します。
 
-{{{
+```
 cd apps/Sandbox/
-}}}
+```
 
 テスト実行します。
-{{{
+```
 phpunit tests/Resource/App/First/GreetingTest.php
-}}}
+```
 
-{{{
+```
 ...
 
 Time: 2 seconds, Memory: 10.00Mb
@@ -111,7 +117,7 @@ OK (3 tests, 3 assertions)
 Generating code coverage report in Clover XML format ... done
 
 Generating code coverage report in HTML format ... done
-}}}
+```
 OKでました！
 
 ### カバレッジレポート 
@@ -121,20 +127,20 @@ OKでました！
 ## テストコードをみてみましょう 
 
 ### setup() 
-{{{
+```
 $injector = Injector::create([new TestModule]);
 $app = $injector->getInstance('BEAR\Sunday\Extension\Application\AppInterface');
 $this->resource = $app->resource;
-}}}
+```
 
 テスト用のモジュール（設定）でインジェクターを作成し、そのインジェクターでアプリケーションオブジェクトを取得しています。テストではアプリケーションオブジェクトはプロパティにあるリソースクライアントを利用します。
 
 
 ### resource() 
-{{{
+```
 $resource # $this->resource->get->uri('app://self/first/greeting')->withQuery(['name' > 'BEAR'])->eager->request();
 
-}}}
+```
 resource()メソッド内ではリソースクライアントを使ってリソースをアクセスしています。
 
 ### その他のテストメソッド 

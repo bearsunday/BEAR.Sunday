@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | 初めてのプル</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>「はじめての」チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+			<li><a href="my_first_resource.html">はじめてのリソース</a></li>
+<li><a href="my_first_web_api.html">はじめてのWeb API</a></li>
+<li><a href="my_first_test.html">はじめてのテスト</a></li>
+<li><a href="my_first_web_page.html">はじめてのWebページ</a></li>
+<li><a href="my_first_resource_request.html">はじめてのリソースリクエスト</a></li>
+<li><a href="my_first_di.html">はじめての注入</a></li>
+<li><a href="my_first_aop.html">はじめてのアスペクト</a></li>
+<li><a href="my_first_pull.html">はじめてのプル</a></li>
+<li><a href="my_first_hypermedia.html">はじめてのハイパーメディア</a></li>
+<li><a href="my_first_lazy.html">はじめての遅延評価</a></li>
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">初めてのプル</h1>
+
+<h2 id="toc_1">テンプレートからリソースを呼び出してみましょう</h2>
+
+<p>ビュー(PHPスクリプト)から直接リソースを利用してみましょう。
+以前つくった挨拶リソースをHTMLから直接利用するにはこうなります。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+$app = require dirname(dirname(__DIR__)) . &#39;/scripts/instance.php&#39;;
+$message # $app-&gt;resource-&gt;get-&gt;uri(&#39;app://self/first/greeting&#39;)-&gt;withQuery([&#39;name&#39; &gt; &#39;BEAR&#39;])-&gt;eager-&gt;request()-&gt;body;
+?&gt;
+&lt;html&gt;
+    &lt;body&gt;&lt;?php echo $message;?&gt;&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+<p>この <em>プレーンなPHPスクリプト</em> はwebドキュメント領域に直接公開して、webクライアントから直接リクエストを受けます。</p>
+
+<p>アプリケーションオブジェクトを($app)をスクリプトから取得しそのリソースクライアントをつかってアプリケーションリソースを取り出しています。</p>
+
+<p>Note: $appはアプリケーションのコントロールに必要なリソースクライントやディペンデヒンシーインジェクター、HTTP出力などアプリケーションの重要な機能をもっています。</p>
+
+<p>この短いスクリプトはBEAR.Sundayでは全ての情報はリソースで、簡単に利用可能という事を表しています。</p>
+
+<h2 id="toc_2">これまでと違うところ</h2>
+
+<p>これまでリソースをコマンドラインかWebから利用していました。リソースをAPIとしてコマンドラインでの確認やWeb APIとして利用しました。またページリはwebからアクセスしてwebページとして表示されました。どちらにしてもフロントスクリプトがあり、それからリソースがリクエストされ出力されてました。</p>
+
+<p>一方、このスクリプトではリソースが直接利用されています。</p>
+
+<h2 id="toc_3">これはいいのでしょうか</h2>
+
+<p>MVCでいえばこれはビューからモデルが取得されてる事と同じです。順序が逆になってないでしょうか？これで良いのでしょうか、デザインとロジックが混ざってる、良くないコードとも言えないのでしょうか？</p>
+
+<h2 id="toc_4">プル型アーキテクチャ</h2>
+
+<p>この表示レイヤから処理を開始し、必要に応じて結果を「プル」するアーキテクチャを<a href="http://ja.wikipedia.org/wiki/Web%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF#.E3.83.97.E3.83.83.E3.82.B7.E3.83.A5.E5.9E.8B_vs._.E3.83.97.E3.83.AB.E5.9E.8B">プル型アーキテクチャ</a>といいます。</p>
+
+<p>多くのWeb MVC フレームワークはこの逆の「プッシュ型」です。処理を要求するアクションを実行し、次に結果を出力するためにデータを表示のレイヤに「プッシュ」します。「プル」はその逆です。</p>
+
+<p>Note: [<a href="http://en.wikipedia.org/wiki/Comparison_of_web_application_frameworks">http://en.wikipedia.org/wiki/Comparison_of_web_application_frameworks</a> Comparison of web application frameworks]では様々なフレームワークでのPUSH/PULL分類がわかります。</p>
+
+<p>またこのBEAR.Sundayの「リソースプル」はPHPのコードでリソースをプルしていますが、ドメインロジック、コントロールロジックなどのロジックがこのビューに紛れ込んでるわけではありません。あくまでリソースのプレースフォルダ(<code>&lt;?php echo $message;?&gt;</code>)とそのリソースを束縛してるだけす。</p>
+
+<h2 id="toc_5">APIとしてリソースを使う</h2>
+
+<p>このPHPスクリプトはBEAR.Sundayフレームワークを利用していますが、利用はされていません。主がこのスクリプトで、直接リソースを呼び出して利用しています。</p>
+
+<p>それにはリソースクライアントを取得しリクエストするだけです。準備なしにこれだけでリソースを使う事ができます。HTTPを介する事なくAPIとして、他のCMSやフレームワークのPHPプログラムからリソースを利用できます。</p>
+
+<p>Note: HTTP越しにしたり<a href="http://thrift.apache.org/">Thrift</a>等の多言語フレームワークを使う事で更にポータビリティは高まります。ドキュメントDB、クライアントサイドMVC、モバイルデバイス、SNSアプリ等... 今日の多様化するアプリケーションに対してAPIをコアにアプリケーションを構築する事は大きな意味があります。</p>
+
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

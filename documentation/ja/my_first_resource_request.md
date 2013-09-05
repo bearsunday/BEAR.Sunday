@@ -1,4 +1,9 @@
-#summary はじめてのリソースリクエスト
+---
+layout: default_ja
+title: BEAR.Sunday | はじめてのリソースリクエスト
+category: 「はじめての」チュートリアル
+---
+# はじめてのリソースリクエスト
 
 ## アプリケーションリソースを利用します 
 
@@ -17,11 +22,11 @@ BEAR.Sundayでは必要なサービス（オブジェクト）は基本的に全
 
 リソースクライアントインターフェイス（`BEAR\Resource\ResourceInterface`）をタイプヒントにして@Injectとアノテーションでマークするとインジェクト（外部から代入）してもらいます。
 
-{{{
+```
 use BEAR\Resource\ResourceInterface;
 use Ray\Di\Di\Inject;
-}}}
-{{{
+```
+```
 class User
 {
     /**
@@ -31,24 +36,24 @@ class User
     {
         $this->resource = $resource;
     }
-}}}
+```
 
 ## traitセッターの利用 
 このセッターはtraitとして用意されていてこのように表記できます。
-{{{
+```
 use BEAR\Sunday\Inject\ResourceInject;
 
 class User
 {
     use ResourceInject;
 }
-}}}
+```
 
 ## GETリクエスト 
 
 `app://self/first/greeting`というURIのアプリケーションリソースに?name=$nameのクエリーを付けたリソースリクエストを行うのはこのようなメソッドになります。
 
-{{{
+```
     /**
      * Get
      *
@@ -64,7 +69,7 @@ class User
         
         return $this;
     }
-}}}
+```
 
 ## `$_GET`クエリー 
 
@@ -78,24 +83,24 @@ class User
 
 まずAPIとしてページリソースを確認します。
 
-{{{
+```
 $ php api.php get 'page://self/first/greeting?name=BEAR'
-}}}
-{{{
+```
+```
 200 OK
 cache-control: no-cache
 date: Fri, 13 Jul 2012 13:47:28 GMT
 content-type: text/html; charset=UTF-8
 [BODY]
 greeting:Hello, BEAR
-}}}
+```
 
 `greeting`スロットに'Hello, BEAR'が渡されてます。クエリーを無くすとどうなるでしょうか。
 
-{{{
+```
 $ php api.php get 'page://self/first/greeting'
-}}}
-{{{
+```
+```
 200 OK
 content-type: ["application\/hal+json; charset=UTF-8"]
 cache-control: ["no-cache"]
@@ -109,28 +114,28 @@ date: ["Mon, 12 Nov 2012 01:32:07 GMT"]
         }
     }
 }
-}}}
+```
 
 デフォルトの値が代入されてるのが確認できます。
 
 ## ページテンプレートを用意 
 
 ページリソース用のテンプレートは同じです。
-{{{
+```
 <!DOCTYPE html>
 <html lang="en">
   <body>
       <h1>{$greeting}</h1>
   </body>
 </html>
-}}}
+```
 
 ## HTMLをコマンドラインで確認 
 
-{{{
+```
 $ php web.php get '/first/greeting?name=Sunday'
-}}}
-{{{
+```
+```
 200 OK
 cache-control: ["no-cache"]
 date: ["Fri, 01 Feb 2013 14:27:46 GMT"]
@@ -141,7 +146,7 @@ date: ["Fri, 01 Feb 2013 14:27:46 GMT"]
 <h1>Hello, Sunday</h1>
 </body>
 </html>
-}}}
+```
 
 ## ページのテスト 
 ページもリソースです。テストの仕方は[my_first_test はじめてのテスト]で紹介をしたようにページリソースをテストします。

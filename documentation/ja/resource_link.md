@@ -1,4 +1,8 @@
-#summary リソースリンク
+---
+layout: default_ja
+title: BEAR.Sunday | リソースリンク 
+category: リソース
+--- 
 
 # リソースリンク 
 
@@ -14,7 +18,7 @@
 
 例えば`sandboxトップページリソース`は各ページのリンク情報をこのように持っています。
 
-{{{
+```
 use BEAR\Framework\Resource\Link;
 
 class Index extends Page
@@ -30,14 +34,14 @@ class Index extends Page
         'blog' # > [Link::HREF > 'page://self/blog/posts'],
         'restbucks' # > [Link::HREF > 'page://self/restbucks/index']
     ];
-}}}
+```
 
 キーが関係性(rel)を表し、値がリンク先URIを表します。この接続情報をViewテンプレートで使用するには次の様にします。
 
-{{{
+```
 <a href# "{href rel"helloworld"}">Hello World</a>
 <a href# "{href rel"blog"}">Blog tutorial</a>
-}}}
+```
 
 
 ## URIテンプレート 
@@ -46,7 +50,7 @@ class Index extends Page
 
 `ブログの記事・アプリケーションリソース`では各`記事の編集、削除ページリソース`等にリンクされています。
 
-{{{
+```
     /**
      * Links
      *
@@ -57,21 +61,21 @@ class Index extends Page
         'page_edit' # > [Link::HREF => 'page://self/blog/posts/edit{?id}', Link::TEMPLATED > true],
         'page_delete' # > [Link::HREF => 'page://self/blog/posts?_method=delete{&id}', Link::TEMPLATED > true]
     ];
-}}}
+```
 
 ではこれらの`id`(記事ID）はどうやって指定するのでしょうか？
 これらの値はリソースの出力から得られたものが割り当てられます。例えば以下の出力ならid=2が割り当てられます。
 
-{{{
+```
     public function onGet($id = null)
     {
          return ['name' # > 'BEAR', 'id' > 2];
     }
-}}}
+```
 
 次のDBクエリーならselect文の結果の'id'コラムの値です。
 
-{{{
+```
     public function onGet($id)
     {
         $sql = "SELECT id, title, body, created, modified FROM {$this->table}";
@@ -83,7 +87,7 @@ class Index extends Page
         }
         return $this;
     }
-}}}
+```
 
 # リンクメソッド 
 
@@ -91,7 +95,7 @@ class Index extends Page
 
 例えば以下の例は`ブログ記事`に対しての`コメントリソース`をリンクメソッドで繋げています。
 
-{{{
+```
     public function onLinkComment(array $body)
     {
         $request = $this
@@ -104,7 +108,7 @@ class Index extends Page
 
         return $request;
     }
-}}}
+```
 
 リンクメソッドの中では実体（実際の値）を返すか、この例のように次のリソースのリンクを返します。
 
@@ -112,7 +116,7 @@ class Index extends Page
 
 リソースクライアントはこのようにして、リンクメソッドにアクセスします。
 
-{{{
+```
 $blog = $this
 ->resource
 ->get
@@ -121,7 +125,7 @@ $blog = $this
 ->linkSelf("blog")
 ->eager
 ->request()->body;
-}}}
+```
 
 この例ではID=1のユーザーの"blog"という名前でリンクされてるリソースを取得しています。
 

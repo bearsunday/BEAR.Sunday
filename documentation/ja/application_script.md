@@ -1,8 +1,8 @@
 ---
-layout: default
+layout: default_ja
 title: BEAR.Sunday | アプリケーションスクリプト
+category: アプリケーション
 ---
-## 導入 
 
 BEAR.Sundayではフレームワークが固定された実行フローを持つ代わりに、アプリケーションスクリプトがアプリケーションがどのようなフローで実行されるかを表します。
 

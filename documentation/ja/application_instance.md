@@ -1,6 +1,7 @@
 ---
-layout: default
-title: BEAR.Sunday | アプリケーションインスタンススクリプト
+layout: default_ja
+title: BEAR.Sunday | アプリケーションインスタンス
+category: アプリケーション
 ---
 # アプリケーションインスタンススクリプト
 

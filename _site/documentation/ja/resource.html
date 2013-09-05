@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | リソースイントロダクション</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Code</a></li>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/ja">Japanese</a></li>
+              <li><a href="/">English</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>リソース</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+
+		
+			<li><a href="resource.html">イントロダクション</a></li>
+<li><a href="resource_client.html">リソースクライアント</a></li>
+<li><a href="resource_object.html">リソースオブジェクト</a></li>
+<li><a href="resource_renderer.html">リソースレンダラー</a></li>
+<li><a href="resource_link.html">リソースリンク</a></li>
+<li><a href="resource_adapter.html">リソースアダプター</a></li>
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">リソースイントロダクション</h1>
+
+<h2 id="toc_1">Representational State Transfer</h2>
+
+<p><a href="http://ja.wikipedia.org/wiki/REST">REST</a> (Representational State Transfer) は 2000年、HTTP 仕様の中心的作成者の 1 人である Roy Fielding の博士論文で初めて紹介されました。</p>
+
+<p>リソースとは意味のある情報のかたまりです。リソースの状態から表現がつくられその表現がクライアントに渡ります。これがREST(Representational State Transfer=表現可能な状態の転送) です。例えば在庫情報はリソースです。その状態からHTMLページという表現がつくられWebブラウザに渡され在庫情報ページになります。これはRESTです。</p>
+
+<h2 id="toc_2">アプリケーションリソース</h2>
+
+<p>MVCフレームワークでコントローラーがモデルにアクセスするように、BEAR.Sundayではページリソースがアプリケーションリソースにリクエストします。</p>
+
+<p>モデルをオブジェクト設計されたものとして扱わず、RESTに従ったリソースとして扱います。リソースはレイヤーとしても機能し、内部のプロシージャやオブジェクトをラップし統一したリソースの扱いを可能にします。リソースクライアントはインスタンスを直接扱う事なく、URIで得られるリソースオブジェクトはリクエストインターフェイスを通じて操作されます。</p>
+
+<p>オブジェクトモデル</p>
+
+<p>|| <em>cart:</em> || show, addItem, removeItem, addCoupon, remoteCoupon, increaseQuantity, decreaseQuantity ||</p>
+
+<p>REST</p>
+
+<p>|| <em><code>cart</code>* || get, post, put, delete || 
+|| *<code>cart/item</code>* || get, post, put, delete || 
+|| *<code>cart/coupon</code></em> || get, post, put, delete || </p>
+
+<h2 id="toc_3">ROA（リソース指向アーキテクチャ)</h2>
+
+<p>BEARのリソースもHTTPアプリケーションと同じようにROA(<a href="http://en.wikipedia.org/wiki/Resource-oriented_architecture">リソース指向設計</a>）の次の４つの特徴を持ちます。</p>
+
+<ul>
+<li>アドレス可能性　(Addressability)</li>
+<li>統一インターフェイス (Unified Interface)</li>
+<li>ステートレス (Statelessness)</li>
+<li>リンク (Connectedness)</li>
+</ul>
+
+<h3 id="toc_4">アドレス可能性</h3>
+
+<p>リソースはWebのURLと同じようなURIを持ちます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">app://self/blog/posts/?id=3
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">page://self/index
+</code></pre></div>
+<p>MVCでモデルにあたるものがアプリケーションリソースです。BEAR.Sundayでは内部APIとして機能しますがRESTでデザインされてるので外部APIの転換も用意です。BEAR.Sundayではページコントローラーの役割をする「ページ」もリソースです。ページはURLに対応しアプリケーションリソースを呼び出し自身を構成します。</p>
+
+<p>リソースは「それぞれの領域の関心」に注意を払います。記事表示 <em>page</em> リソースは自らを構成するために「記事 <em>アプリケーション</em> リソース」を自身のコンテンツのとしてbodyプロパティにセットします。ここでページ記事の詳細については関心を払いません。アプリケーションリソースのリクエストを自身の一部に束縛するのがページの役割です。</p>
+
+<p><code>app</code>, <code>page</code>等それぞれの領域（情報体系）を表すスキーマは<code>http</code>等用意されてるものの他にも、ユーザーが登録可能です。例えば特定システムのスキーマを用意して、<code>office://self/room/meething/reservation/?room=3</code>等と旧来の情報システムに新しいURIを与えることができます。</p>
+
+<p>独自のスキーマや別のサービスにリクエストをするための詳細は[resource_adapter リソースアダプター]をご覧ください。なお<code>self</code>は「自身のサービス」を表します。他のサービスのリソースを利用可能にするための識別です。</p>
+
+<h3 id="toc_5">統一インターフェイス</h3>
+
+<p>リソースの状態（データ）はインターフェイスを通じて操作することができます。その操作を行うのがリソースクライアントです。</p>
+
+<p>HTTPアプリケーションで考えてみましょう。リソースはHTTPクライアントでリクエストすることができますが、そのメソッドはGET/PUT/POST...等と既定の統一したものに限定されています。リソースに応じてそのメソッドが変わる事がありません。</p>
+
+<p>BEAR.SundayのリソースもHTTPのメソッドに準じた４つのインターフェイスを持ちます。</p>
+
+<p>|| GET || リソースの取得 ||
+|| PUT || リソースの変更または作成 ||
+|| POST || リソースの作成 ||
+|| DELETE || リソースの削除 ||
+|| OPTIONS || リソースアクセス方法の調査 ||</p>
+
+<h4 id="toc_6">#### GET</h4>
+
+<p>リソースの読み出しです。このメソッドはリソースの状態には何の変化も与えません。副作用のない安全なメソッドです。</p>
+
+<h4 id="toc_7">#### PUT</h4>
+
+<p>リソースの変更、または作成を行います。このメソッドの特徴はリクエストを1度行っても、複数回行っても変わらないこ<a href="http://ja.wikipedia.org/wiki/%E5%86%AA%E7%AD%89">冪等</a>の特徴がある事です。</p>
+
+<h4 id="toc_8">#### POST</h4>
+
+<p>リソースの作成を行います。リクエストを複数回行うとその回数に応じてリソースが作成されます。冪等性のないメソッドです。</p>
+
+<h4 id="toc_9">#### DELETE</h4>
+
+<p>リソースの消去です。PUTとおなじ冪等性があります。</p>
+
+<h4 id="toc_10">#### OPTIONS</h4>
+
+<p>リソースが利用可能なメソッドとパラメーターを調査します。<code>GET</code>と同じくリソースには影響を与えません。</p>
+
+<h2 id="toc_11">ステートレス</h2>
+
+<p>これはリソースのリクエストにステート（状態）がないという事です。</p>
+
+<p>例えば以下のようなオブジェクトモデルに対するアクセスはリクエストに状態があります。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$user = new User;
+$user-&gt;setUserId($id); 
+$name = $user-&gt;getName(); // $idがセットされてる状態を前提にしている
+</code></pre></div>
+<p>リソースリクエストには状態がありません。
+<code>
+$name = $resource
+  -&gt;get
+  -&gt;uri(&#39;app://self/user&#39;)
+  -&gt;eager
+  -&gt;request([&#39;id&#39; =&gt; 1)
+  -&gt;body[&#39;name&#39;];
+</code></p>
+
+<h2 id="toc_12">リンク</h2>
+
+<p>リソースは他のリソースとリンクすることができます。例えばユーザーリソースは*ブログリンク*よってブログリソースにリンクされます。ブログリソースは*最新記事リンク*や*人気記事リンク*で記事リソースにリンクされます。</p>
+
+<p>リンクはリソース内部でカプセル化され、外部からはリソースからはリンクをたどるだけです。htmlのaタグのイメージです。hrefで指定されたリンク情報はクライアントは管理しません。利用するだけです。もしリンク先リンク方法が変わったとしても利用の仕方は変わりません。</p>
+
+<p>DBのリレーションやアソシエーション機能とは独立していうるので例えばDBデーターの特定カラムが、WebAPIを利用するhttpリソースにリンクしたりなどスキーマを超えて情報（リソース）をリンクすることができます。</p>
+
+<h1 id="toc_13">RESTとBEAR.Sunday</h1>
+
+<p><sup>REST自身は、多くの異なる技術を利用して実装されうる高水準なスタイルなのです。RESTは、リソースや統一インターフェースの考えを持っています。つまり、全てのリソースが同じメソッドによって応答するという考えなのです。しかし、RESTはどのメソッドでなければならないのかや、メソッドの数がどれくらい必要であるのかといったことには言及していません。REST</sup> スタイルを「具現化」したものの1つが、HTTP(と、URIなどの関連する標準セット)です。もしくは、少し抽象的になりますが、Webのアーキテクチャそれ自身であるとも言えます。HTTPは、RESTの統一インターフェースをHTTPの動詞(操作)からなる特別な形で「具体化」したものと言えます。^
+,,作者 Stefan Tilkov, 翻訳者 松本 清一 <a href="http://www.infoq.com/jp/articles/rest-introduction">http://www.infoq.com/jp/articles/rest-introduction</a>,,</p>
+
+<p>BEAR.Sundayの核心はこのRESTです。情報／処理のまとまりをリソースとしてとらえHTTPやwebのアーキテクチャのように振る舞います。APIまたはWebフレームワークとしてのBEAR.Sundayはこれらのリソースの集合として構成されます。</p>
+
+<h2 id="toc_14">REST参考リンク</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">* [REST(Wikipedia)](http://ja.wikipedia.org/wiki/REST)
+* [infoQREST入門](http://www.infoq.com/jp/articles/rest-introduction)
+* [REST入門](http://yohei-y.blogspot.com/2005/04/rest_23.html)
+* [http://text.art-code.org/presen/restfulreading/ REST &amp; ROA Best Practice]
+</code></pre></div>
+	</div>
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

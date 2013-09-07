@@ -1,8 +1,10 @@
 name: BEAR.Sunday
 safe: true
 lsi: false
-site:
-  url: mackstar.github.io/BEAR.Sunday
+
+url: http://mackstar.github.io/BEAR.Sunday
+
+
 markdown: redcarpet
 redcarpet:
   extensions: ["autolink", "no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data", "tables"]

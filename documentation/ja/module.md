@@ -1,5 +1,10 @@
-#summary モジュール
-# 導入 
+---
+layout: default_ja
+title: BEAR.Sunday | モジュール
+category: DI＆AOP
+---
+
+# モジュール 
 
 モジュールはDIとAOPの束縛（バインド）の設定の集合です。オブジェクトの抽象、つまりインターフェイスや抽象クラスと実装、実クラスやファクトリーの束縛、それにメソッドとその横断的振る舞い、つまりアスペクトの束縛の集合です。DIの設定ではインターフェイスに対してクラスを束縛します。AOPは特定のメソッドに対してインターセプターを束縛します。
 
@@ -50,35 +55,34 @@ _コンシュマー_
 
 インターフェイスがないscalar型への束縛には`@Named`で指定する名前が必須です。
 
-{{{
+```
  $this->bind()->annotatedWith('secret_key')->toInstance(1234);
-}}}
+```
 
 _コンシュマー_
-{{{
+```
 /**
  * @Inject
  * @Named("serceret_key")
  */
 public function setKey($stringKey)
-}}}
+```
 
 ## Instance Bindings 
 
 インスタンス（実体）をバインドします。これはnewキーワードで作成されたクラスのインスタンスに限りません。数値や文字列も含みます。インスタンスバインディングは他のバインディグ方法が利用可能なら、なるべく避けるべきバインディングです。他のbind()と違って実際に使用されないインスタンスも作成されてしまいます。
 
-{{{
+```
 $this->bind()->annotatedWith("login_timeout_seconds")->toInstance(10);
-}}}
+```
 
 ## Provider Bindings 
 
 オブジェクトのコンストラクションに引数が必要なものや、オブジェクトのコンストラクションが複雑なものはプロバイダーというファクトリークラスをバインドします。プロバイダーは`provider`インターフェイスを実装したgetメソッドがインスタンスを返します。
 
-{{{  
+```  
 $this->bind('TransactionLog')->toProvider('DatabaseTransactionLogProvider');
-
-}}}
+```
 
 ※TransactionLogインターフェイスはDatabaseTransactionLogProvidergetプロバイダーにバインドされます。このインジェクトが行われるタイミングでgetメソッドがコールされインスタンスが取得されます。
 
@@ -88,26 +92,26 @@ $this->bind('TransactionLog')->toProvider('DatabaseTransactionLogProvider');
 
 コンストラクターの変数名をインジェクションポイントとして指定して束縛ドします。
 
-{{{
+```
 $this->bind('TransactionLog')->toConstructor(['db' => new Database]);
-}}}
+```
 
 ## Scope 
 
 オブジェクトを*Singleton* として指定するために２つの方法があります。１つはクラスにアノテーションで指定する方法、もう一つはバインドの時に指定する方法です。
 
-{{{
+```
 /**
  * @Scope(Scope::SINGLETON)
  */
 public class InMemoryTransactionLog implements TransactionLog
 {
 }
-}}}
+```
 
-{{{
+```
 $this->bind('TransactionLog')->to('InMemoryTransactionLog')->in(Scope::Singleton);
-}}}
+```
 
 ## Ray.DI 
 

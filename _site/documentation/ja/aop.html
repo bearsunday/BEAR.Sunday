@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BEAR.Sunday | アスペクト指向プログラミング (AOP)</title>
+        <title>BEAR.Sunday | アスペクト指向プログラミング</title>
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -15,20 +15,28 @@
       <div class="container">
         <img src="/img/logo.png" />
 
-        <!-- Static navbar -->
-        <div class="navbar navbar-default">
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="#">Documentation</a></li>
-              <li><a href="#">Code</a></li>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/ja">Japanese</a></li>
-              <li><a href="/">English</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+
         </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li class="active"><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
 
 
 
@@ -36,25 +44,40 @@
 <div class="row">
 	<div class="col-md-3">
 
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>DI＆AOP</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
 		
 
-		<div class="panel panel-default">
-  			<div class="panel-heading"><strong></strong></div>
-  			<div class="panel-body">
+		
 
-				<ul class="nav nav-pills nav-stacked">
-		  			<li><a href="#">Home</a></li>
-		  			<li><a href="#">Profile</a></li>
-		  			<li><a href="#">A really long long long linklong long long link</a></li>
-				</ul>
-			</div>
-		</div>
+		
+
+		
+
+
+		
+			<li><a href="di_aop_introduction.html">イントロダクション</a></li>
+<li><a href="module.html">モジュール</a></li>
+<li><a href="injector.html">インジェクター</a></li>
+<li><a href="aop.html">アスペクト</a></li>
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
 	</div>
 	<div class="col-md-9">
 
 		 <h1 id="toc_0">アスペクト指向プログラミング (AOP)</h1>
-
-<h2 id="toc_1">導入</h2>
 
 <p>BEAR.Sundayの<a href="http://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%B9%E3%83%9A%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0">アスペクト指向プログラミング(AOP)</a> で、例えば「*@Log* とアノテートされたメソッドはその結果を必ず記録する」ということが*対象のメソッドや呼び出し元を変更する事なし*に可能になります。</p>
 
@@ -64,7 +87,7 @@
 
 <p>BEAR.Sundayで使用しているAOPフレームワークRay.AopはAOPアライアンスの<a href="http://aopalliance.sourceforge.net/doc/org/aopalliance/intercept/MethodInvocation.html#getMethod%28%29">MethodInterceptorインターフェイス</a>を実装していてGoogle Guice, Spring等のAOPと同様のものです。</p>
 
-<h2 id="toc_2">インターセプター</h2>
+<h2 id="toc_1">インターセプター</h2>
 
 <p>インターセプターはメソッドの呼び出しに割り込んで、クラスの横断的処理を行います。インターセプターは<code>invoke</code>メソッドを実装し、そのメソッド内でオリジナルのメソッドを呼び出す事で横断的処理を実現します。</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">public function invoke(MethodInvocation $invocation);
@@ -95,7 +118,7 @@
 
 <p>このロガーがバインドされたメソッドには何の変更もありませんがログ機能が追加されました。元のメソッドはロガーの更新、着脱に元のメソッドは無関心です。関心は元のメソッドが本来もつ*本質的関心時 (core concern)* と、ログをとるというメソッドをまたいで適用される*横断的関心事(cross cutting concern)* に分離されています。ロガーが使うログオブジェクトもインジェクトされ、ロガーはそのログオブジェクトの実装に依存することなく抽象（インターフェイス）に依存しています。</p>
 
-<h2 id="toc_3">マッチャー・バインディング</h2>
+<h2 id="toc_2">マッチャー・バインディング</h2>
 
 <p>作成したインターセプターはメソッドにバインドすることで機能します。どのメソッドにバインドするかに利用するのが*matcher* です。以下はログオブジェクトをインジェクトした<code>Logger</code>オブジェクトを<code>BEAR\Resource\Object</code>を継承したクラスの&#39;on&#39;で始まる全てのメソッドに束縛します。</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">$logger = $this-&gt;requestInjection(&#39;BEAR\Framework\Interceptor\Logger&#39;);
@@ -134,7 +157,7 @@ $this-&gt;bindInterceptor(
 <p>例えば以下をメソッドマッチで指定するとsetXXという名前のメソッドにマッチします。</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;matcher-&gt;startWith(&#39;set&#39;)
 </code></pre></div>
-<h2 id="toc_4"><code>MethodInvocation</code></h2>
+<h2 id="toc_3"><code>MethodInvocation</code></h2>
 
 <p>インターセプターはMethodInvocation（メソッド実行）型の変数を受け取り、メソッドの実行の前後に処理を挟んだり、その変数を使って元のメソッドを実行します。<code>MethodInvocation</code>の主なメソッドは以下の通りです。</p>
 
@@ -166,11 +189,13 @@ $this-&gt;bindInterceptor(
 </tr>
 </tbody></table>
 
-<h2 id="toc_5">Ray.Aop</h2>
+<h2 id="toc_4">Ray.Aop</h2>
 
 <p>BEAR.Sundayが利用しているAOPフレームワーク、<a href="http://code.google.com/p/rayphp/wiki/AOP">Ray.Aop</a>のマニュアルもご覧下さい。</p>
 
 	</div>
+</div>
+
 </div>
  
 

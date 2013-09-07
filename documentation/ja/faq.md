@@ -1,32 +1,38 @@
-#summary FAQ
+---
+layout: default_ja
+title: BEAR.Sunday | FAQ
+category: その他
+---
+
+# FAQ
 # インストールでの問題 
 
 ## ext-curl 
 エラー表示
-{{{
+```
   Problem 1
     - The requested PHP extension ext-curl * is missing from your system.
-}}}
+```
 
 cURLが必要です。
 
 Ubuntuインストール例)
-{{{
+```
 sudo apt-get install php5-curl
-}}}
+```
 ## svn 
 エラー表示
-{{{
+```
 [RuntimeException]                                      
   Package could not be downloaded, sh: 1: svn: not found
-}}}
+```
 
 SVNがありません。インストールします。インストール時のみ必要です。
 
 Ubunutuインストール例)
-{{{
+```
 $ sudo apt-get install subversion"
-}}}
+```
 
  * `PHP Fatal error:  Uncaught exception 'Zend\Cache\Exception\ExtensionNotLoadedException' with message 'ext/apc is disabled - see 'apc.enabled' and 'apc.enable_cli''`
 

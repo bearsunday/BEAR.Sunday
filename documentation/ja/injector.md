@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: default_ja
 title: BEAR.Sunday | ディペンデンシーインジェクター
+category: DI＆AOP
 ---
 
 # ディペンデンシーインジェクター

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | データベース</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li class="active"><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>その他</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+
+		
+
+
+		
+
+		
+			<li><a href="faq.html">FAQ</a></li>
+<li><a href="annotations.html">アノテーション</a></li>
+<li><a href="database.html">データベース</a></li>
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">　データベース</h1>
+
+<p>BEAR.Sundayは独自のDB / ORMライブラリを持ちませんが、DB利用を補助する仕組みがいくつか用意されています。<code>Doctrine DBAL, ORM</code>,<code>ZF2\Db</code>, <code>PDO</code>等のライブラリを選択して、リソースオブジェクトにインジェクト、またはインターセプトしてデータベースを使用します。</p>
+
+<p><em>sandboxアプリケーションではDoctrine.DBALを使っています。</em></p>
+
+<h2 id="toc_1">@Db</h2>
+
+<p>sandboxアプリケーションではクラスに<code>@Db</code>とアノテートしているクラスの<code>onメソッドにDbオブジェクトインジェクターがバインドされます。@Dbとクラスにアノテートされた</code>onGet`リクエストがコールされたタイミングでDBオブジェクトがインジェクトされます。DBの接続と利用の関心は分離されていて、利用コードは接続に関して無知です。</p>
+
+<p>DB利用コード</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * @Db
+ */
+class Posts extends ResourceObject implements DbSetterInterface
+{
+    /**
+     * @var Doctrine\DBAL\Connection
+     */
+    protected $db;
+
+    public function setDb(DriverConnection $db = null)
+    {
+        $this-&gt;db = $db;
+    }
+
+    public function onGet($id)
+    {
+        $sql = &quot;SELECT id, title, body, created, modified FROM {$this-&gt;table}&quot;;
+        $this-&gt;body = $this-&gt;db-&gt;query($sql)-&gt;fetchAll(PDO::FETCH_ASSOC);
+        return $this;
+    }
+}
+</code></pre></div>
+<p>DBインジェクターはマスターDBとスレーブDBの接続情報それぞれ@Named(&quot;master_db&quot;) と @Named(&quot;slave_db&quot;)を依存に持ちます、sandboxアプリケーションでは!ConstantModuleでそれらの定数の依存がインストールされています。</p>
+
+<h3 id="toc_2">master/slave自動選択</h3>
+
+<p><code>DbInjector</code>はリクエストメソッドを見てDB接続先選択し(GET=slave)、接続してDBオブジェクトをセットします。</p>
+
+<h3 id="toc_3">パーティショニング</h3>
+
+<p>IDによるDBパーティショニングが必要な場合には、インジェクターを別に用意しバインドし、選択ロジックを記述します。</p>
+
+<h2 id="toc_4">@!DbPager</h2>
+
+<p>このDBインジェクターはメソッドが<code>@DbPager</code>とアノテートされてると、クエリーをDBページャーのクエリーに変換し、ページャーのメタ情報がヘッダーの <em>pager</em> というキーに格納されます。</p>
+
+<p>|| maxPerPage || ページ辺りのアイテム数 ||
+|| current || 現在のページ番号 ||
+|| total || トータルページ数 ||
+|| hasNext || 次の存在 ||
+|| hasPrevious || 前の存在 ||
+|| html || ページャーリンク(twitter/bootstrapフォーマット) ||</p>
+
+<p>例えば<code>$posts</code>とアサインされたテンプレートでページャーリンクを指定するには以下のようにします。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{$posts-&gt;headers.pager.html}
+</code></pre></div>
+<p><em>※smartyテンプレートエンジンの場合</em></p>
+
+<h2 id="toc_5">@Transactional</h2>
+
+<p><code>@Transactional</code>とアノテートされたメソッドにはトランザクションインターセプターがバインドされています。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * @Time
+ * @Transactional
+ * @CacheUpdate
+ */
+public function onPost($title, $body)
+{
+    $values = [
+        &#39;title&#39; =&gt; $title,
+        &#39;body&#39; =&gt; $body,
+        &#39;created&#39; =&gt; $this-&gt;time
+    ];
+    $this-&gt;db-&gt;insert($this-&gt;table, $values);
+
+    return $this;
+}
+</code></pre></div>
+<h3 id="toc_6">@Time</h3>
+
+<h3 id="toc_7">@!CacheUpdate</h3>
+
+<p>このメソッドは<code>@Time</code>でバインドされた現在時刻($this-&gt;time)を利用し、トランザクションを使ってinsertクエリーが行われます。commitされた時だけ<code>@CacheUpdate</code>でバインドされたキャッシュアップデーターが働き古いキャッシュが破棄され新しいものに変わります。</p>
+
+<h2 id="toc_8">ヒント</h2>
+
+<ul>
+<li>SQLやテーブル名を依存として@Injectする事も検討してみましょう。</li>
+<li>バリデーションはメソッド内で行わず、インターセプターとしてバインドします。フォームバリデーションと兼用できるかもしれません。</li>
+<li>メソッド内の解析済みをクエリーを再利用して、インターセプターで<code>execute</code>だけを行うインターセプターとかどうでしょうか。</li>
+</ul>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

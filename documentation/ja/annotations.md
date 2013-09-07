@@ -1,10 +1,9 @@
 ---
-layout: default
+layout: default_ja
 title: BEAR.Sunday | アノテーション
+category: その他
 ---
 #アノテーション
-
-## 導入
 
 アノテーションとは、クラスやメソッドのコードに対するメタデータです。BEAR.Sundayでは[http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html Doctrine Annotations]を用います。メソッドやクラスのdocコメントに書かれたアノテーションは、DIでインジェクションポイントの指定に使われたり、AOPでインターセプターを束縛するときのマーカー等に使われます。
 

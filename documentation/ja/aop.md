@@ -1,10 +1,9 @@
 ---
-layout: default
-title: BEAR.Sunday | アスペクト指向プログラミング (AOP)
+layout: default_ja
+title: BEAR.Sunday | アスペクト指向プログラミング
+category: DI＆AOP
 ---
 # アスペクト指向プログラミング (AOP)
-
-## 導入 
 
 BEAR.Sundayの[アスペクト指向プログラミング(AOP)](http://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%B9%E3%83%9A%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0) で、例えば「*@Log* とアノテートされたメソッドはその結果を必ず記録する」ということが*対象のメソッドや呼び出し元を変更する事なし*に可能になります。
 

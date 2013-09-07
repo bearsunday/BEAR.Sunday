@@ -1,6 +1,9 @@
-#summary データベース
-
-# 導入 
+---
+layout: default_ja
+title: BEAR.Sunday | データベース
+category: その他
+---
+#　データベース
 
 BEAR.Sundayは独自のDB / ORMライブラリを持ちませんが、DB利用を補助する仕組みがいくつか用意されています。`Doctrine DBAL, ORM`,`ZF2\Db`, `PDO`等のライブラリを選択して、リソースオブジェクトにインジェクト、またはインターセプトしてデータベースを使用します。
 

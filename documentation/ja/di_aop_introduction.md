@@ -1,5 +1,10 @@
-#summary Ray.Di Ray.Aop イントロダクション
-# 導入 
+---
+layout: default_ja
+title: BEAR.Sunday | アスペクト指向プログラミング
+category: DI＆AOP
+---
+
+# Ray.Di Ray.Aop イントロダクション
 
 BEAR.SundayではDI, Dependency Injection（依存性の注入）パターンとAOP, Aspect Oriented Programing（アスペクト指向プログラミング）をコードの全域に渡って利用しています。[Ray](http://code.google.com/p/rayphp/wiki/Motivation?tm=6)という[http://ja.wikipedia.org/wiki/Google_Guice Google Guice]のPHPクローンのDI/AOPフレームワークを利用していて、アノテーションを使用したオブジェクトへの依存性の注入 をサポートしているのが特徴です。
 

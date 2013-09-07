@@ -1,7 +1,7 @@
 ---
 layout: default_ja
-title: BEAR.Sunday | BEAR.Sundayについて
-category: はじめに
+title: BEAR.Sunday | インストール
+category: インストールと設定
 ---
 
 # BEAR.Sundayについて

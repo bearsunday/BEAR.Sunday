@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | モジュール</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li class="active"><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>DI＆AOP</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+
+		
+
+
+		
+			<li><a href="di_aop_introduction.html">イントロダクション</a></li>
+<li><a href="module.html">モジュール</a></li>
+<li><a href="injector.html">インジェクター</a></li>
+<li><a href="aop.html">アスペクト</a></li>
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">モジュール</h1>
+
+<p>モジュールはDIとAOPの束縛（バインド）の設定の集合です。オブジェクトの抽象、つまりインターフェイスや抽象クラスと実装、実クラスやファクトリーの束縛、それにメソッドとその横断的振る舞い、つまりアスペクトの束縛の集合です。DIの設定ではインターフェイスに対してクラスを束縛します。AOPは特定のメソッドに対してインターセプターを束縛します。</p>
+
+<p>モジュールはこの束縛の集合によってオブジェクトがどのように組み立てられ利用されるかを決定します。インジェクターはそのモジュールを利用してオブジェクトの生成を行います。そのオブジェクトのメソッドの利用には束縛されたインターセプターが機能します。</p>
+
+<p>例えば<code>APIモジュール</code>では出力インターフェイスにJSON出力のクラスが束縛されているので出力がJSONになります。出力オブジェクトがモードに応じて振る舞いを*変えているのではない事*に注目してください。モードに応じて振る舞いを帰るのではなく、モードに応じてオブジェクトの構成を変更しています。</p>
+
+<p>BEAR.Sundayは変更に対して開いていて修正に対して閉じている<a href="http://d.hatena.ne.jp/asakichy/20090126/1232979830">オブジェクトの開放閉鎖原則(OCP)</a>に従っています。</p>
+
+<h2 id="toc_1">束縛DSL</h2>
+
+<p>モジュールは<code>AbstractModule</code>を継承し、<code>configure</code>メソッド内ではバインドDSLをDSLを使い@Injectでアノテートされたインジェクションポイントにどのようにインスタンス提供するかを束縛します。 </p>
+
+<h2 id="toc_2">バインドの種類</h2>
+
+<p><code>AbstractModule</code>を継承したモジュールの<code>configure</code>メソッド内で、<code>@Inject</code>でアノテートされたインジェクションポイントにどのようにインスタンス提供をするかを束縛します。インスタンスの提供は様々な方法があり、引き数なしのクラス名を指定する<code>Linked Binding</code>、名前を使って束縛する<code>&quot;Named&quot; Binding</code>、プロバイダーといわれる専用のファクトリーを使って束縛する<code>Provider Bindings</code>等があります。</p>
+
+<h1 id="toc_3">束縛 (binding)</h1>
+
+<h2 id="toc_4">Linked Binding</h2>
+
+<p>インターフェイス名と実クラス名を束縛します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind(&#39;TransactionLog&#39;)-&gt;to(&#39;DatabaseTransactionLog&#39;);
+</code></pre></div>
+<p>最も単純で一般的な方法です。コンストラクタに引数を渡す事は出来ない事に注意してください。これは以下のように<code>@Inject</code>で指定された<code>TransactionLog</code>インターフェイスに<code>new DatabaseTransactionLog();</code>で生成したインスタンスをインジェクトします</p>
+
+<p><em>コンシュマー（インジェクトされる側）</em>
+    /**
+     * @Inject
+     */
+    public function setLog(TransactionLog $log)</p>
+
+<h2 id="toc_5">&quot;Named&quot; Binding</h2>
+
+<p>バインドに名前をつけます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind(&#39;CreditCardProcessor&#39;)-&gt;annotatedWith(&#39;Checkout&#39;)-&gt;to(&#39;CheckoutCreditCardProcessor&#39;);
+</code></pre></div>
+<p><em>コンシュマー</em></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * @Inject
+ * @Named(&quot;serceret_key&quot;)
+ */
+public function setProcessor(CreditCardProcessor $processor)
+</code></pre></div>
+<p>インターフェイスがないscalar型への束縛には<code>@Named</code>で指定する名前が必須です。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text"> $this-&gt;bind()-&gt;annotatedWith(&#39;secret_key&#39;)-&gt;toInstance(1234);
+</code></pre></div>
+<p><em>コンシュマー</em>
+<code>
+/**
+ * @Inject
+ * @Named(&quot;serceret_key&quot;)
+ */
+public function setKey($stringKey)
+</code></p>
+
+<h2 id="toc_6">Instance Bindings</h2>
+
+<p>インスタンス（実体）をバインドします。これはnewキーワードで作成されたクラスのインスタンスに限りません。数値や文字列も含みます。インスタンスバインディングは他のバインディグ方法が利用可能なら、なるべく避けるべきバインディングです。他のbind()と違って実際に使用されないインスタンスも作成されてしまいます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind()-&gt;annotatedWith(&quot;login_timeout_seconds&quot;)-&gt;toInstance(10);
+</code></pre></div>
+<h2 id="toc_7">Provider Bindings</h2>
+
+<p>オブジェクトのコンストラクションに引数が必要なものや、オブジェクトのコンストラクションが複雑なものはプロバイダーというファクトリークラスをバインドします。プロバイダーは<code>provider</code>インターフェイスを実装したgetメソッドがインスタンスを返します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind(&#39;TransactionLog&#39;)-&gt;toProvider(&#39;DatabaseTransactionLogProvider&#39;);
+</code></pre></div>
+<p>※TransactionLogインターフェイスはDatabaseTransactionLogProvidergetプロバイダーにバインドされます。このインジェクトが行われるタイミングでgetメソッドがコールされインスタンスが取得されます。</p>
+
+<h2 id="toc_8">Constructor Bindings</h2>
+
+<p>コンストラクターバインディングは、3rd partyのクラス（BEAR.Sunday、そのアプリケーション以外）、つまり<code>@Inject</code>でインジェクションポイントがマークされてないクラスのインジェクションを行うための束縛です。</p>
+
+<p>コンストラクターの変数名をインジェクションポイントとして指定して束縛ドします。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind(&#39;TransactionLog&#39;)-&gt;toConstructor([&#39;db&#39; =&gt; new Database]);
+</code></pre></div>
+<h2 id="toc_9">Scope</h2>
+
+<p>オブジェクトを*Singleton* として指定するために２つの方法があります。１つはクラスにアノテーションで指定する方法、もう一つはバインドの時に指定する方法です。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * @Scope(Scope::SINGLETON)
+ */
+public class InMemoryTransactionLog implements TransactionLog
+{
+}
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind(&#39;TransactionLog&#39;)-&gt;to(&#39;InMemoryTransactionLog&#39;)-&gt;in(Scope::Singleton);
+</code></pre></div>
+<h2 id="toc_10">Ray.DI</h2>
+
+<p>BEAR.Sundayが利用しているDIフレームワーク、[<a href="http://code.google.com/p/rayphp/wiki/Bindings">http://code.google.com/p/rayphp/wiki/Bindings</a> Ray.Di Ray.Di]のマニュアルもご覧下さい。 </p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

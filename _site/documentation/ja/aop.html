@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | アスペクト指向プログラミング</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li class="active"><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>DI＆AOP</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+
+		
+
+
+		
+			<li><a href="di_aop_introduction.html">イントロダクション</a></li>
+<li><a href="module.html">モジュール</a></li>
+<li><a href="injector.html">インジェクター</a></li>
+<li><a href="aop.html">アスペクト</a></li>
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">アスペクト指向プログラミング (AOP)</h1>
+
+<p>BEAR.Sundayの<a href="http://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%B9%E3%83%9A%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0">アスペクト指向プログラミング(AOP)</a> で、例えば「*@Log* とアノテートされたメソッドはその結果を必ず記録する」ということが*対象のメソッドや呼び出し元を変更する事なし*に可能になります。</p>
+
+<p>AOPはクラスの直接的な責務ではない、各モジュールから共通で使われる処理を、独立して切り出す手法です。多くのクラスに重複コードが生まれてしまうような処理は、アスペクト(横断的関心事) として<a href="http://ja.wikipedia.org/wiki/%E9%96%A2%E5%BF%83%E3%81%AE%E5%88%86%E9%9B%A2">関心を分離</a>し別のモジュールにしてしまうという手法をとることが出来ます。</p>
+
+<p>BEAR.Sundayではフレームワークの様々な機能をアスペクトの集合と考え横断的な機能をAOPで実装しています。[injector インジェクター]はオブジェクトを生成する際にモジュールに従い特定の条件の適合するメソッドにアスペクトを織りみます。アスペクトはインターセプターとも呼ばれメソッドをコールする側とメソッドの間に割り込むように働きます。アスペクトが織り込まれたメソッドは常に横断的な処理が補完されますが、関心と実装は完全に分離されその束縛は動的です。</p>
+
+<p>BEAR.Sundayで使用しているAOPフレームワークRay.AopはAOPアライアンスの<a href="http://aopalliance.sourceforge.net/doc/org/aopalliance/intercept/MethodInvocation.html#getMethod%28%29">MethodInterceptorインターフェイス</a>を実装していてGoogle Guice, Spring等のAOPと同様のものです。</p>
+
+<h2 id="toc_1">インターセプター</h2>
+
+<p>インターセプターはメソッドの呼び出しに割り込んで、クラスの横断的処理を行います。インターセプターは<code>invoke</code>メソッドを実装し、そのメソッド内でオリジナルのメソッドを呼び出す事で横断的処理を実現します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function invoke(MethodInvocation $invocation);
+</code></pre></div>
+<p>以下は受け取った引数と実行した出力をログに記録するロガーインターセプターです。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">class Logger implements MethodInterceptor
+{
+    use LogInject;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ray\Aop.MethodInterceptor::invoke()
+     */
+    public function invoke(MethodInvocation $invocation)
+    {
+        $result = $invocation-&gt;proceed();
+        $class = get_class($invocation-&gt;getThis());
+        $args = $invocation-&gt;getArguments();
+        $input = json_encode($args);
+        $output = json_encode($result);
+        $log # &quot;target = [{$class}], input = [{$input}], result  [{$output}]&quot;;
+        $this-&gt;log-&gt;log($log);
+        return $result;
+    }
+}
+</code></pre></div>
+<p>このインターセプターにはインジェクトされたLogオブジェクトを使って、呼び出し引数とその結果をJSON形式でログに記録します。このインターセプターはsandboxアプリケーションではDEVモードでは全てのリソースにバインドされデバックに役立てる事ができるようになっています。</p>
+
+<p>このロガーがバインドされたメソッドには何の変更もありませんがログ機能が追加されました。元のメソッドはロガーの更新、着脱に元のメソッドは無関心です。関心は元のメソッドが本来もつ*本質的関心時 (core concern)* と、ログをとるというメソッドをまたいで適用される*横断的関心事(cross cutting concern)* に分離されています。ロガーが使うログオブジェクトもインジェクトされ、ロガーはそのログオブジェクトの実装に依存することなく抽象（インターフェイス）に依存しています。</p>
+
+<h2 id="toc_2">マッチャー・バインディング</h2>
+
+<p>作成したインターセプターはメソッドにバインドすることで機能します。どのメソッドにバインドするかに利用するのが*matcher* です。以下はログオブジェクトをインジェクトした<code>Logger</code>オブジェクトを<code>BEAR\Resource\Object</code>を継承したクラスの&#39;on&#39;で始まる全てのメソッドに束縛します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$logger = $this-&gt;requestInjection(&#39;BEAR\Framework\Interceptor\Logger&#39;);
+$this-&gt;bindInterceptor(
+    $this-&gt;matcher-&gt;subclassesOf(&#39;BEAR\Resource\Object&#39;),
+    $this-&gt;matcher-&gt;startWith(&#39;on&#39;),
+    [$logger]
+);
+</code></pre></div>
+<p><code>bindInterceptor</code>は３つのパラメーターをとり、１つめがクラスマッチ、２つ目がメソッドマッチ、３つ目がインターセプターです。</p>
+
+<table><thead>
+<tr>
+<th>メソッドシグネチャ</th>
+<th>　機能</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bool subclassesOf($class)</td>
+<td>サブクラスを指定します。第二引数には指定できません。</td>
+</tr>
+<tr>
+<td>bool any()</td>
+<td>どれにもマッチします。</td>
+</tr>
+<tr>
+<td>bool annotatedWith($annotation)</td>
+<td>$annotationはアノテーションのフルパスです。このアノテーションが付いているものにマッチします。</td>
+</tr>
+<tr>
+<td>bool startWith($prefix)</td>
+<td>この文字列で始まるクラス／メソッドにマッチします。</td>
+</tr>
+</tbody></table>
+
+<p>例えば以下をメソッドマッチで指定するとsetXXという名前のメソッドにマッチします。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;matcher-&gt;startWith(&#39;set&#39;)
+</code></pre></div>
+<h2 id="toc_3"><code>MethodInvocation</code></h2>
+
+<p>インターセプターはMethodInvocation（メソッド実行）型の変数を受け取り、メソッドの実行の前後に処理を挟んだり、その変数を使って元のメソッドを実行します。<code>MethodInvocation</code>の主なメソッドは以下の通りです。</p>
+
+<table><thead>
+<tr>
+<th>メソッドシグネチャ</th>
+<th>　機能</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>void proceed()</td>
+<td>対象メソッド実行</td>
+</tr>
+<tr>
+<td>Reflectionmethod getMethod()</td>
+<td>対象メソッドリフレクションの取得</td>
+</tr>
+<tr>
+<td>Object getThis()</td>
+<td>対象オブジェクトの取得</td>
+</tr>
+<tr>
+<td>array getArguments() (</td>
+<td>呼び出し引数配列の取得</td>
+</tr>
+<tr>
+<td>array getAnnoattions()</td>
+<td>対象メソッドのアノテーション取得</td>
+</tr>
+</tbody></table>
+
+<h2 id="toc_4">Ray.Aop</h2>
+
+<p>BEAR.Sundayが利用しているAOPフレームワーク、<a href="http://code.google.com/p/rayphp/wiki/AOP">Ray.Aop</a>のマニュアルもご覧下さい。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

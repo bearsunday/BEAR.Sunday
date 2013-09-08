@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | FAQ</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li class="active"><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>その他</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+
+		
+
+
+		
+
+		
+			<li><a href="faq.html">FAQ</a></li>
+<li><a href="annotations.html">アノテーション</a></li>
+<li><a href="database.html">データベース</a></li>
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">FAQ</h1>
+
+<h1 id="toc_1">インストールでの問題</h1>
+
+<h2 id="toc_2">ext-curl</h2>
+
+<p>エラー表示
+<code>
+  Problem 1
+    - The requested PHP extension ext-curl * is missing from your system.
+</code></p>
+
+<p>cURLが必要です。</p>
+
+<p>Ubuntuインストール例)
+<code>
+sudo apt-get install php5-curl
+</code></p>
+
+<h2 id="toc_3">svn</h2>
+
+<p>エラー表示
+<code>
+[RuntimeException]                                      
+  Package could not be downloaded, sh: 1: svn: not found
+</code></p>
+
+<p>SVNがありません。インストールします。インストール時のみ必要です。</p>
+
+<p>Ubunutuインストール例)
+<code>
+$ sudo apt-get install subversion&quot;
+</code></p>
+
+<ul>
+<li><code>PHP Fatal error:  Uncaught exception &#39;Zend\Cache\Exception\ExtensionNotLoadedException&#39; with message &#39;ext/apc is disabled - see &#39;apc.enabled&#39; and &#39;apc.enable_cli&#39;&#39;</code></li>
+</ul>
+
+<p>APCをオンにします。</p>
+
+<h2 id="toc_4">MySQL</h2>
+
+<ul>
+<li><code>PDOException: SQLSTATE[HY000] [2002] No such file or directory</code></li>
+</ul>
+
+<p>ソケットファイルの場所が正しく指定されていません。<code>mysqladmin version</code>(OSXなら<code>mysqladmin5 version</code>）で表示されるソケットファイルの場所をPHPのiniファイルで指定します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ mysqladmin version
+UNIX socket     /opt/local/var/run/mysql5/mysqld.sock
+</code></pre></div>
+<p>※/opt/local/var/run/mysql5/mysqld.sockはmacportsでmysqlをインストールしている場合です。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">pdo_mysql.default_socket= /opt/local/var/run/mysql5/mysqld.sock
+mysql.default_socket = /opt/local/var/run/mysql5/mysqld.sock
+mysqli.default_socket = /opt/local/var/run/mysql5/mysqld.sock
+</code></pre></div>
+<h1 id="toc_5">ランタイムでの問題</h1>
+
+<h2 id="toc_6">アノテーション</h2>
+
+<h3 id="toc_7"><code>[Semantical Error] The annotation</code> 例外</h3>
+
+<p>これはアノテーションクラスが不明という例外です。</p>
+
+<p>アノテーションの読み込みに失敗するのはオートロードが効いてないか、use文で名前解決ができてないためです。※doctrineアノーテション用オートロードは通常のクラスローダーと区別されます。</p>
+
+<p>解決策
+ * use文でimportする。
+ * アプリケーションbootの箇所(App.php等)で手動でアノテーションクラスを読み込む、または <a href="http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html">オートローダーを設定する</a>
+ * フルパスでアノテーションを指定する</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

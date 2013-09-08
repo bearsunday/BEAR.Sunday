@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | はじめてのwebページ</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li class="active"><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>「はじめての」チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+			<li><a href="my_first_resource.html">はじめてのリソース</a></li>
+<li><a href="my_first_web_api.html">はじめてのWeb API</a></li>
+<li><a href="my_first_test.html">はじめてのテスト</a></li>
+<li><a href="my_first_web_page.html">はじめてのWebページ</a></li>
+<li><a href="my_first_resource_request.html">はじめてのリソースリクエスト</a></li>
+<li><a href="my_first_di.html">はじめての注入</a></li>
+<li><a href="my_first_aop.html">はじめてのアスペクト</a></li>
+<li><a href="my_first_pull.html">はじめてのプル</a></li>
+<li><a href="my_first_hypermedia.html">はじめてのハイパーメディア</a></li>
+<li><a href="my_first_lazy.html">はじめての遅延評価</a></li>
+		
+
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">はじめてのwebページ</h1>
+
+<h2 id="toc_1">ページリソース</h2>
+
+<p>まず最初に*アプリケーションリソースを利用しない最小限のページクラスを作成します。*  （モデルを使わないコントローラーだけのHelloWorldページのようなページです。)</p>
+
+<h2 id="toc_2">最小構成のページから始めます</h2>
+
+<p>アプリケーションリソースがリソースの状態を構成したように、ページリソースでもページリソースがページの状態を構成します。</p>
+
+<p>挨拶が&quot;Hello&quot;と固定化されている静的なページです。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+namespace Sandbox\Resource\Page\First;
+
+use BEAR\Resource\AbstractPage as Page;
+
+/**
+ * Greeting page
+ */
+class Greeting extends Page
+{    
+    public $body = [
+        &#39;greeting&#39; =&gt; &#39;Hello.&#39;
+    ];
+
+    public function onGet()
+    {
+        return $this;
+    }
+}
+</code></pre></div>
+<p>ページのコンテンツの&quot;greeting&quot;というスロットに&#39;Hello.&#39;という文字列を格納しています。GETリクエストは呼ばれると何もしないで自身を返しています。</p>
+
+<h2 id="toc_3">コマンドラインでページリソース状態確認します</h2>
+
+<p>このリソースをコマンドラインで確認してみましょう。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ cd apps/Sandbox/htdocs/
+$ php api.php get page://self/first/greeting
+
+200 OK
+...
+[BODY]
+greeting:Hello.
+</code></pre></div>
+<p>greetingというスロットに<code>Hello.</code>という文字列が入っているのが確認できました。</p>
+
+<h2 id="toc_4">ページリソースの状態を表現にします</h2>
+
+<p>このページリソースの状態をHTML表現としてレンダリングするためにテンプレートが必要です。リソースと同じ場所に拡張子だけ変更します。</p>
+
+<h3 id="toc_5">ファイルパス</h3>
+
+<p>|| URI || <code>page://self/first/greeting</code> ||
+|| リソースクラス || <code>apps/Sandbox/Resource/Page/First/Greeting.php</code> ||
+|| リソーステンプレート || <code>apps/Sandbox/Resource/Page/First/Greeting.tpl</code> ||</p>
+
+<h3 id="toc_6">テンプレート</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;body&gt;
+      &lt;h1&gt;{$greeting}&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+<h2 id="toc_7">コマンドラインでページHTMLを確認します</h2>
+
+<p>リソースの状態をテンプレートにアサインしてレンダリングするとリソースのHTML表現になります。つまりHTMLページになります。これもコマンドラインで
+確認することができます。</p>
+
+<p>では確認してみましょう。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php web.php get /first/greeting
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+cache-control: [&quot;no-cache&quot;]
+date: [&quot;Fri, 01 Feb 2013 14:21:45 GMT&quot;]
+[BODY]
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello, anonymous&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+HTMLが確認できました。
+
+ Note:開発用途で動作させてるのでヘッダーには、`x-`ではじまる開発用の様々な情報が入っています。
+
+## webブラウザでページHTMLを確認します 
+
+ビルトインウェブサーバーを立ち上げます
+</code></pre></div>
+<p>$ php -S localhost:8088 web.php
+```</p>
+
+<p>http://localhost:8088/first/greeting をアクセスします。
+無事ページが見えたでしょうか？</p>
+
+<h2 id="toc_8">ページの役割</h2>
+
+<p>ページは情報のかたまり（リソース）を集めページ自身を構成します。ここでは１つの&quot;greeting&quot;というスロットに&quot;Hello&quot;という文字列の情報を格納しましたが、多くのページは複数のスロットがあるでしょう。</p>
+
+<p>ページの役割は、ページを構成する他のリソースを合成しページの状態を決定する事です。リソース状態はリソーステンプレートと合成されリソース表現(HTML)になりユーザーに転送され表示されます。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

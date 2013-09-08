@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | アプリケーションインスタンス</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li class="active"><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>アプリケーション</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+			<li><a href="application.html">イントロダクション</a></li>
+<li><a href="application_script.html">スクリプト</a></li>
+<li><a href="application_object.html">オブジェクト</a></li>
+<li><a href="application_instance_script.html">インスタンススクリプト</a></li>
+<li><a href="interface.html">インターフェイス</a></li>
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">アプリケーションインスタンススクリプト</h1>
+
+<h2 id="toc_1">導入</h2>
+
+<p>インスタンススクリプトはアプリケーションインスタンスを作成するスクリプトです。アプリケーション利用に必要なオートローダーの設定も行います。</p>
+
+<h1 id="toc_2">インスタンス作成</h1>
+
+<p>インスタンススクリプトの確信部分は以下のコードにあたる部分です。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$injector = Injector::create([new ProdModule]);
+$app = $injector-&gt;getInstance(&#39;BEAR\Sunday\Extension\Application\AppInterface&#39;);
+</code></pre></div>
+<p><code>ProdModule</code>は[module モジュール]の一つで、アプリケーションの実行モードに応じた構成の知識(DIとAOPの設定)があります。</p>
+
+<p>アプリケーションクラス名もまたモジュールで構成されています。インジェクターはアプリケーションクラスが束縛されたアプリケーションコンテキストインターフェイスを指定することでアプリケーションオブジェクトが取得されます。</p>
+
+<h2 id="toc_3">インスタンス取得の再利用</h2>
+
+<p>アプリケーションオブジェクトを取得するコストは巨大です。モジュールで設定されたアノテーションの名前解決のための元PHPスクリプトの構文解析、DIのインジェクト、AOPのメソッドインタセプター束縛、これらのコストをカットするためにプロダクション環境ではアプリケーションオブジェクトをこのインスタンススクリプト内でキャッシュして再利用します。</p>
+
+<h2 id="toc_4">パフォーマンス</h2>
+
+<p>再利用することでbootstrap時のアノテーション解析、DIやAOPの束縛コストが原理的にゼロになります。BEAR.Sundayは多くの抽象化レイヤーを持った柔軟な設計が可能ですがこの再利用によって、機能によるパフォーマンスインパクトを最小限にし、最高度の柔軟性と最高度のパフォーマンスを両立させています。</p>
+
+<p>またアプリケーションが利用するサービスコンポーネントがリクエスト毎に変わらない事の保証は、より安定したソフトウエア品質にも寄与しています。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

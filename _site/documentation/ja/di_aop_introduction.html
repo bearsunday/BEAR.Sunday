@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | アスペクト指向プログラミング</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li class="active"><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>DI＆AOP</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+
+		
+
+
+		
+			<li><a href="di_aop_introduction.html">イントロダクション</a></li>
+<li><a href="module.html">モジュール</a></li>
+<li><a href="injector.html">インジェクター</a></li>
+<li><a href="aop.html">アスペクト</a></li>
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">Ray.Di Ray.Aop イントロダクション</h1>
+
+<p>BEAR.SundayではDI, Dependency Injection（依存性の注入）パターンとAOP, Aspect Oriented Programing（アスペクト指向プログラミング）をコードの全域に渡って利用しています。<a href="http://code.google.com/p/rayphp/wiki/Motivation?tm=6">Ray</a>という[<a href="http://ja.wikipedia.org/wiki/Google_Guice">http://ja.wikipedia.org/wiki/Google_Guice</a> Google Guice]のPHPクローンのDI/AOPフレームワークを利用していて、アノテーションを使用したオブジェクトへの依存性の注入 をサポートしているのが特徴です。</p>
+
+<p>AOPは[<a href="http://aopalliance.sourceforge.net/">http://aopalliance.sourceforge.net/</a> AOP Alliance]が策定したインターフェイスをPHPで実装しています。アノテーションや名前で指定した特定のメソッドに複数の横断的処理を束縛する事ができます。</p>
+
+<p>動的言語のDI/AOP導入はしばしばパフォーマンス上の懸念がもたれます。しかしBEAR.Sundayは低結合で多くの抽象化機能を持ちながら、APCコンテナを使いオブジェクトグラフの生成を再利用することでDI/AOP導入によるパフォーマンス低下が原理的にほとんどありません。アプリケーションのミニマムブートストラップコストも非常に低いのが特徴です。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

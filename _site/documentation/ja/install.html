@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | インストール</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li class="active"><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>インストールと設定</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+   			
+<li><a href="introduction.html">BEAR.Sundayについて</a></li>
+<li><a href="install.html">インストール</a></li>
+<li><a href="installphp54.html">PHP5.4構築(OSX)</a></li>
+<li><a href="ubuntu.html">PHP5.4構築(Unbuntu)</a></li>
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">インストール</h1>
+
+<h2 id="toc_1">必要要件</h2>
+
+<ul>
+<li>PHP 5.4</li>
+<li><a href="http://php.net/manual/ja/book.curl.php">curl</a></li>
+</ul>
+
+<h2 id="toc_2">推奨</h2>
+
+<ul>
+<li><a href="http://php.net/manual/ja/book.apc.php">APC</a> </li>
+</ul>
+
+<h2 id="toc_3">開発用オプション</h2>
+
+<ul>
+<li>プロファイラ　<a href="http://jp.php.net/manual/en/book.xhprof.php">xhprof</a></li>
+<li>コールグラフ描画 <a href="http://www.graphviz.org/">graphviz</a></li>
+</ul>
+
+<h1 id="toc_4">インストール</h1>
+
+<p>composerでsandboxアプリケーションをインストールします。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ curl -s http://getcomposer.org/installer | php
+$ php composer.phar create-project -s dev --dev bear/package ./bear
+</code></pre></div>
+<h2 id="toc_5">環境確認</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php bin/env.php
+</code></pre></div>
+<p>必要なphp.iniの状態の確認、DB接続のテストを行います。</p>
+
+<h3 id="toc_6">DBの接続確認</h3>
+
+<p>DBの接続ができないときはコンソールで以下のコマンドでPHPとmysqlが正しくセットアップできてるかをお試しください。エラーが出なければ問題ありません。</p>
+
+<p>※ root/(パスワードなし）の場合</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php -r &#39;new mysqli(&quot;localhost&quot;, &quot;root&quot;, &quot;&quot;, &quot;mysql&quot;);&#39;
+$ php -r &#39;new PDO(&quot;mysql:host# localhost;dbnamemysql&quot;, &quot;root&quot;, &quot;&quot;);&#39;
+</code></pre></div>
+<p>インストールに問題がある場合は<a href="http://code.google.com/p/bearsunday/wiki/faq#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A7%E3%81%AE%E5%95%8F%E9%A1%8C">FAQ:インストール</a>をご覧下さい。</p>
+
+<h2 id="toc_7">DB接続</h2>
+
+<p><code>localhost</code>に<code>root/（パスなし)</code>で接続できる場合は設定不要です。
+そうでない場合はIDとパスワードを指定します。二種類の方法があります。</p>
+
+<h3 id="toc_8">1) 環境変数で設定（推奨）</h3>
+
+<p>下記の変数を設定して、PHPが環境変数を読めるようにphp.iniを設定します。</p>
+
+<p>|| BEAR_DB_ID || ID || 
+|| BEAR_DB_PASSWORD || パスワード ||</p>
+
+<p>オプションでSLAVE DBも設定できます。
+|| BEAR_DB_ID_SLAVE || ID（SLAVE DB) || 
+|| BEAR_DB_PASSWORD_SLAVE || パスワード（SLAVE DB) ||</p>
+
+<p>例) &quot;root&quot; / &quot;password&quot; を環境変数として~/.bashrcでエクスポート</p>
+
+<p>~/.bashrc 追記</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">export BEAR_DB_ID=root
+export BEAR_DB_PASSWORD=password
+</code></pre></div>
+<p>~/.bashrcでエクスポート</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">. ~/.bashrc
+</code></pre></div>
+<h3 id="toc_9">2) ファイルで設定</h3>
+
+<p><code>apps/Sandbox/Module/config.php</code>を編集して直接値を指定します。</p>
+
+<h2 id="toc_10">DBの作成</h2>
+
+<p>テストを実行するためにsandboxアプリで利用するDBとテスト用のDBを作成します。</p>
+
+<p>シェルスクリプト、または手動で入力します。</p>
+
+<h3 id="toc_11">シェルスクリプトで（推奨）</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ apps/Sandbox/scripts/install_db.sh
+</code></pre></div>
+<p>※DBのID、パスワードを必要に応じて変更します。</p>
+
+<h3 id="toc_12">手動で</h3>
+
+<p>blogbearデーターベースを作成</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">CREATE DATABASE `blogbear` DEFAULT CHARACTER SET &#39;utf8&#39;;
+</code></pre></div>
+<p>postsテーブルを作成</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">CREATE TABLE posts (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(50),
+    body TEXT,
+    created DATETIME DEFAULT NULL,
+    modified DATETIME DEFAULT NULL
+);
+/* それから、テスト用に記事をいくつか入れておきます。 */
+INSERT INTO posts (title,body,created)
+VALUES (&#39;タイトル&#39;, &#39;これは、記事の本文です。&#39;, NOW());
+INSERT INTO posts (title,body,created)
+VALUES (&#39;またタイトル&#39;, &#39;そこに本文が続きます。&#39;, NOW());
+INSERT INTO posts (title,body,created)
+VALUES (&#39;タイトルの逆襲&#39;, &#39;こりゃ本当に面白そう！うそ。&#39;, NOW());
+</code></pre></div>
+<h3 id="toc_13">ユニットテスト用データベースの準備</h3>
+
+<p>こちらはテスト毎にセット/破棄されるのでコンテンツを用意しておく必要はありません。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">CREATE DATABASE `blogbeartest` DEFAULT CHARACTER SET &#39;utf8&#39;;
+
+CREATE TABLE posts (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(50),
+    body TEXT,
+    created DATETIME DEFAULT NULL,
+    modified DATETIME DEFAULT NULL
+);
+</code></pre></div>
+<h1 id="toc_14">sandboxアプリケーション実行</h1>
+
+<p>BEAR.SundayのアプリケーションはWebまたはCLI双方からアクセスできます。
+[<a href="https://github.com/koriym/BEAR.package#buil-in-web-server-for-development">https://github.com/koriym/BEAR.package#buil-in-web-server-for-development</a> buil-in web server for development]をご覧下さい</p>
+
+<h2 id="toc_15">コンソールアクセス</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ cd apps/Sandbox/public
+$ php web.php get /index
+$ php api.php get page://self/index
+$ php api.php get &#39;app://self/first/greeting?name=World&#39;
+$ php api.php options app://self/blog/posts
+$ php api.php post &#39;app://self/blog/posts?title# hello&amp;bodyworld&#39;
+</code></pre></div>
+<h3 id="toc_16">Web (HTML)</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ cd apps/Sandbox/public
+$ php -S localhost:8088 web.php
+</code></pre></div>
+<h3 id="toc_17">API (JSON+HAL)</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ cd apps/Sandbox/public
+$ php -S localhost:8089 api.php
+</code></pre></div>
+<h2 id="toc_18">プロダクション</h2>
+
+<p><code>public/index.php</code>をweb公開エリアに設置してください。</p>
+
+<h1 id="toc_19">Unit Test</h1>
+
+<h2 id="toc_20">テスト環境</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ pear config-set auto_discover 1
+$ pear install pear.phpunit.de/PHPUnit
+$ pear install phpunit/DbUnit
+$ pear install phpunit/PHP_Invoker
+</code></pre></div>
+<p>Note: 環境によっては、root として実行しなければならないかもしれません。</p>
+
+<h2 id="toc_21">テスト実行</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ phpunit
+</code></pre></div>
+<h2 id="toc_22">トラブルシューティング</h2>
+
+<p>[faq FAQ]をご覧下さい。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

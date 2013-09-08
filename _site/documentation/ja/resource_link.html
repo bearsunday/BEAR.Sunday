@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | リソースリンク</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li class="active"><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>リソース</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+
+		
+			<li><a href="resource.html">イントロダクション</a></li>
+<li><a href="resource_client.html">リソースクライアント</a></li>
+<li><a href="resource_object.html">リソースオブジェクト</a></li>
+<li><a href="resource_renderer.html">リソースレンダラー</a></li>
+<li><a href="resource_link.html">リソースリンク</a></li>
+<li><a href="resource_adapter.html">リソースアダプター</a></li>
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">リソースリンク</h1>
+
+<p>リソースは他のリソースにリンクする事ができます。クライアントはリソースとリソースが実際にどのように接続されているかを知らずに、関係性（rel)を利用してリンクをたどる事ができます。</p>
+
+<p>複雑なオブジェクトがオブジェクトグラフで現される様に、webサイトはhtml（リソース）とhtmlがaタグで繋がれたリソースグラフです。BEAR.Sundayでは、アプリケーションドメインのリソースがスキーマを超えて互いに接続されます。</p>
+
+<p>リンクは<code>links</code>プロパティを使ってURIを直接指定する方法と、同じクラスのリンクメソッドを呼ぶ方法の二種類があります。</p>
+
+<h1 id="toc_1">リンクプロパティ</h1>
+
+<p>リソースオブジェクトは<code>links</code>というプロパティにarrayまたは<a href="http://php.net/manual/ja/class.arrayaccess.php">ArrayAccess</a>インターフェイスを実装したリンクオブジェクトで他のリソースへの接続情報を保持します。フォーマットは<code>$rel</code> # &gt; [&#39;href&#39; &gt; $uri];`が最低限必要なものです。</p>
+
+<p>例えば<code>sandboxトップページリソース</code>は各ページのリンク情報をこのように持っています。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">use BEAR\Framework\Resource\Link;
+
+class Index extends Page
+{
+...
+    /**
+     * Links
+     *
+     * @var array
+     */
+    public $links = [
+        &#39;helloworld&#39; # &gt; [Link::HREF &gt; &#39;page://self/hello/world&#39;],
+        &#39;blog&#39; # &gt; [Link::HREF &gt; &#39;page://self/blog/posts&#39;],
+        &#39;restbucks&#39; # &gt; [Link::HREF &gt; &#39;page://self/restbucks/index&#39;]
+    ];
+</code></pre></div>
+<p>キーが関係性(rel)を表し、値がリンク先URIを表します。この接続情報をViewテンプレートで使用するには次の様にします。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;a href# &quot;{href rel&quot;helloworld&quot;}&quot;&gt;Hello World&lt;/a&gt;
+&lt;a href# &quot;{href rel&quot;blog&quot;}&quot;&gt;Blog tutorial&lt;/a&gt;
+</code></pre></div>
+<h2 id="toc_2">URIテンプレート</h2>
+
+<p>リンクには[<a href="http://code.google.com/p/uri-templates/">http://code.google.com/p/uri-templates/</a> URI template]を用います。<a href="http://code.google.com/p/uri-templates/">URIテンプレート</a>とはURI用の一種のテンプレート言語です。変数をアサインするとプロセッサにより展開されます。URIテンプレートのは<code>templated</code>オプションを<code>true</code>にします。$rel<code># &gt; [&#39;href&#39; =&gt; $uri, &#39;templated&#39; &gt; true];</code></p>
+
+<p><code>ブログの記事・アプリケーションリソース</code>では各<code>記事の編集、削除ページリソース</code>等にリンクされています。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    /**
+     * Links
+     *
+     * @var array
+     */
+    public $links = [
+        &#39;page_post&#39; # &gt; [Link::HREF &gt; &#39;page://self/blog/posts/post&#39;],
+        &#39;page_edit&#39; # &gt; [Link::HREF =&gt; &#39;page://self/blog/posts/edit{?id}&#39;, Link::TEMPLATED &gt; true],
+        &#39;page_delete&#39; # &gt; [Link::HREF =&gt; &#39;page://self/blog/posts?_method=delete{&amp;id}&#39;, Link::TEMPLATED &gt; true]
+    ];
+</code></pre></div>
+<p>ではこれらの<code>id</code>(記事ID）はどうやって指定するのでしょうか？
+これらの値はリソースの出力から得られたものが割り当てられます。例えば以下の出力ならid=2が割り当てられます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    public function onGet($id = null)
+    {
+         return [&#39;name&#39; # &gt; &#39;BEAR&#39;, &#39;id&#39; &gt; 2];
+    }
+</code></pre></div>
+<p>次のDBクエリーならselect文の結果の&#39;id&#39;コラムの値です。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    public function onGet($id)
+    {
+        $sql = &quot;SELECT id, title, body, created, modified FROM {$this-&gt;table}&quot;;
+            $sql .# &quot; WHERE id  :id&quot;;
+            $stmt = $this-&gt;db-&gt;prepare($sql);
+            $stmt-&gt;bindValue(&#39;id&#39;, $id);
+            $stmt-&gt;execute();
+            $this-&gt;body = $stmt-&gt;fetch(PDO::FETCH_ASSOC);
+        }
+        return $this;
+    }
+</code></pre></div>
+<h1 id="toc_3">リンクメソッド</h1>
+
+<p>リソースオブジェクトにリンク用のメソッドを付加します。<code>on</code>+リンク名のメソッドがリンクメソッドになります。メソッドにはonGet等で返した値が入力されます。</p>
+
+<p>例えば以下の例は<code>ブログ記事</code>に対しての<code>コメントリソース</code>をリンクメソッドで繋げています。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    public function onLinkComment(array $body)
+    {
+        $request = $this
+        -&gt;resource
+        -&gt;get
+        -&gt;uri(&#39;app://self/User/Entry/Comment&#39;)
+        -&gt;withQuery([&#39;entry_id&#39; =&gt; $body[&#39;id&#39;]])
+        -&gt;eager
+        -&gt;request();
+
+        return $request;
+    }
+</code></pre></div>
+<p>リンクメソッドの中では実体（実際の値）を返すか、この例のように次のリソースのリンクを返します。</p>
+
+<h1 id="toc_4">クライント</h1>
+
+<p>リソースクライアントはこのようにして、リンクメソッドにアクセスします。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$blog = $this
+-&gt;resource
+-&gt;get
+-&gt;uri(&#39;app://self/User&#39;)
+-&gt;withQuery([&#39;id&#39; =&gt; 1])
+-&gt;linkSelf(&quot;blog&quot;)
+-&gt;eager
+-&gt;request()-&gt;body;
+</code></pre></div>
+<p>この例ではID=1のユーザーの&quot;blog&quot;という名前でリンクされてるリソースを取得しています。</p>
+
+<h2 id="toc_5">リンクメソッド</h2>
+
+<p>リンクメソッドは３つあります。</p>
+
+<p>|| <em>メソッド名</em> || <em>リンク動作</em> ||
+|| linkSelf($rel) || リンク先と入れ替わります ||
+|| linkNew($rel) || リンク先のリソースがリンク元のリソースに追加されます。 ||
+|| linkCrawl($rel) || 1:n の関係のリンクの時に複数のリンク先を元のリソースに追加します。||</p>
+
+<p>リソースの追加はbodyに対して行われます。relがキーになったリソース結果の値が追加されます。</p>
+
+<h3 id="toc_6">Not implemented / tested</h3>
+
+<p>これらのリンクは未実装またはテストが不十分です。</p>
+
+<p># リソースプロパティのリンクをリソースクライアントのlinkメソッドで利用すること
+ # @Linkアノテーションでのリンク指定</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

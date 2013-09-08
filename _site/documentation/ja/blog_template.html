@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | blogチュートリアル(5) テンプレートの作成</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li class="active"><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>ブログ・チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">BEARのインストールとプロジェクト作成</a></li>
+<li><a href="blog_db.html">データベースの設定</a></li>
+<li><a href="blog_get.html">記事リソースの作成</a></li>
+<li><a href="blog_page.html">記事表示ページの作成</a></li>
+<li><a href="blog_template.html">テンプレートの作成</a></li>
+<li><a href="blog_create.html">記事の追加</a></li>
+<li><a href="blog_validate.html">バリデーション</a></li>
+<li><a href="blog_delete.html">記事の削除</a></li>
+<li><a href="blog_update.html">記事の編集</a></li>
+<li><a href="blog_more.html">まとめとカスタマイズ</a></li>
+		
+		
+
+		
+
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">blogチュートリアル(5) テンプレートの作成</h1>
+
+<h2 id="toc_1">リソースレンダリング</h2>
+
+<h2 id="toc_2">リソース状態を表現するリソースレンダラー</h2>
+
+<p>前回までのステップで記事リソースには記事情報が、ページリソースには記事リソースへのリクエストがセットされました。これらの*リソース状態* を <em>表現</em> にするためにHTMLレンダリングします。</p>
+
+<p>リソースはそれぞれが内部にレンダラーを持っています。sandboxアプリケーションでは、HTML出力するためのテンプレートエンジン(Smarty3)が全てのリソースにインジェクトされています。</p>
+
+<p>Note: コントローラがモデルから取得したデータをテンプレートエンジンに渡して出力用文字列を得るのではなく、BEAR.Sundayでは全てのリソースがビュー用レンダラーを内包しています。モデルの出力の責任はそれぞれのリソースが持ちます。</p>
+
+<h2 id="toc_3">記事リソーステンプレート</h2>
+
+<p><em>Sandbox/Resource/App/Posts.tpl</em></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;table class=&quot;table table-bordered table-striped&quot;&gt;
+    &lt;tr&gt;
+        &lt;th class=&quot;span1&quot;&gt;Id&lt;/th&gt;
+        &lt;th&gt;Title&lt;/th&gt;
+        &lt;th&gt;Body&lt;/th&gt;
+        &lt;th&gt;CreatedAt&lt;/th&gt;
+    &lt;/tr&gt;
+    {foreach from# $resource-&gt;body itempost}
+    &lt;tr&gt;
+        &lt;td&gt;{$post.id}&lt;/td&gt;
+        &lt;td&gt;&lt;a href# &quot;posts/post?id{$post.id}&quot;&gt;{$post.title}&lt;/a&gt;&lt;/td&gt;
+        &lt;td&gt;{$post.body|truncate:60}&lt;/td&gt;
+        &lt;td&gt;{$post.created}&lt;/td&gt;
+    &lt;/tr&gt;
+    {/foreach}    
+&lt;/table&gt;
+</code></pre></div>
+<p>記事リソース($posts)のコンテンツ(bodyプロパティ)を展開しています。</p>
+
+<h2 id="toc_4">記事表示ページテンプレート</h2>
+
+<p><em>Sandbox/Resource/Resource/Posts.tpl</em></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;html&gt;
+    &lt;body&gt;
+    &lt;h1&gt;Posts&lt;/h1&gt;
+    {$posts}
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+<p>postsリソースが持つ情報の詳細はページテンプレートでは表されてないことに注目してください。postsリソースのプレースフォルダだけがあり、記事が&quot;title&quot;や&quot;body&quot;等どういうプロパティを持つかにページはページリソースもページテンプレートも関心を持っていません。記事リソースの構成（要素）が変わっても、それを利用するページリソースには変更がありません。</p>
+
+<p>postsリソースをどう表現するかは、postsリソース自身が持つテンプレートで構成されます。リソースの表現はリソースの責任です。</p>
+
+<p>Note: オブジェクトへの責任割り当てにおける一般原則で責任の遂行に必要な情報を持っているクラス、「情報エキスパート」に責任を割り当てる [<a href="http://ja.wikipedia.org/wiki/GRASP#.E6.83.85.E5.A0.B1.E3.82.A8.E3.82.AD.E3.82.B9.E3.83.91.E3.83.BC.E3.83.88">http://ja.wikipedia.org/wiki/GRASP#.E6.83.85.E5.A0.B1.E3.82.A8.E3.82.AD.E3.82.B9.E3.83.91.E3.83.BC.E3.83.88</a> 情報エキスパート（Information Expert）パターン] の原則に従っています。この場合記事リソースだけが記事テンプレートに関わりがあり、記事表示ページは記事リソーステンプレートや記事リソースの構成に対して無関心です。</p>
+
+<h2 id="toc_5">リソース表現 = リソース状態＋リソーステンプレート</h2>
+
+<p>これまで見てきたようにリソース状態はリソーステンプレートと合成されレンダリングされた結果がリソース表現としてクライアントに伝えられます。</p>
+
+<p>コマンドラインで確認してみましょう。今度はapi.phpではなく、web.phpを使ってweb表現(HTML)をリクエストしてみます。</p>
+
+<p>$ php web.php get page://self/blog/posts</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+...
+x-interceptors: [&quot;{\&quot;onGet\&quot;:[\&quot;BEAR\\\\Sunday\\\\Interceptor\\\\CacheLoader\&quot;]}&quot;]
+x-query: [&quot;[]&quot;]
+x-params: [&quot;[]&quot;]
+x-cache: [&quot;{\&quot;mode\&quot;:\&quot;W\&quot;,\&quot;date\&quot;:\&quot;Tue, 13 Nov 2012 10:49:19 +0100\&quot;,\&quot;life\&quot;:false}&quot;]
+x-execution-time: [0.10759687423706]
+x-memory-usage: [416528]
+x-profile-id: [&quot;50a2179f66680&quot;]
+cache-control: [&quot;no-cache&quot;]
+date: [&quot;Tue, 13 Nov 2012 09:49:19 GMT&quot;]
+content-type: [&quot;text\/html; charset=UTF-8&quot;]
+[BODY]
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;ja&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Posts &amp;laquo; BEAR.Sunday Blog&lt;/title&gt;
+</code></pre></div>
+<p>ヘッダーには開発に役立つめた情報が格納されていて、[BODY]では最終的に出力されるHTMLが確認できます。</p>
+
+<p>記事リソースへのリクエストが行われリソースリクエスト結果がpostsスロットに格納されています。</p>
+
+<h2 id="toc_6">レイジーリクエスト</h2>
+
+<p>ページリソースではpostsリソースへのリクエストが{$posts}にセットされていました。このリクエストはテンプレート内に{$posts}プレースフォルダが出現した時点でリクエストされます。</p>
+
+<p>つまり出現しなければこのリクエストは実行されず、リクエストを行うかどうかがテンプレートで決定されます。</p>
+
+<h2 id="toc_7">リソースオブジェクト</h2>
+
+<p>セットされたリソースは表現として扱うだけでなくその要素を直接とりだすこともできます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{$posts.0.title}
+</code></pre></div>
+<p>もし必要ならメソッドやプロパティを指定してオブジェクトしても扱えます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{$posts-&gt;owner}
+{$posts-&gt;isPublic()}
+</code></pre></div>
+<p>※独自のメソッドを持つというのはリソース指向設計ではありません。</p>
+
+<p>テンプレートにアサインされたリソースはその扱い方で振る舞いが変わります。コントローラーであるページがアクセスが必要かどうか、どのようにアサインするかを決めるのではなく、*ビュー側がコンテキストに応じて後から決定します*。</p>
+
+<p>これはBEAR.Sundayの特徴の一つです。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

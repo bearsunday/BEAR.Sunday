@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | リソースレンダラー</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li class="active"><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>リソース</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+
+		
+			<li><a href="resource.html">イントロダクション</a></li>
+<li><a href="resource_client.html">リソースクライアント</a></li>
+<li><a href="resource_object.html">リソースオブジェクト</a></li>
+<li><a href="resource_renderer.html">リソースレンダラー</a></li>
+<li><a href="resource_link.html">リソースリンク</a></li>
+<li><a href="resource_adapter.html">リソースアダプター</a></li>
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">リソースレンダラー</h1>
+
+<p>リソースは状態から表現に変わります。たとえばユーザーページはユーザーに関する情報を変数として保持していますが、クライアントにはHTMLとして伝わります。</p>
+
+<p>この状態から表現に変えるのがリソースレンダラーです。レンダラーはリソースが文字列として評価されたときにレンダリングを行います。多くの場合、レンダラーにインジェクトされたテンプレートエンジンがレンダリングします。</p>
+
+<h2 id="toc_1">レンダラーのインジェクト</h2>
+
+<p>リソース状態（リソースの値）を表現にするのはリソース内部のリソースレンダラーの責任です。リソースの利用者ではありません。MVCでいうと、モデル内部にそのモデルをどう表現するかというレンダラーが内蔵されているイメージです。</p>
+
+<p>レンダラーはDependency Injectorによってインジェクトされます。DIの設定を行うアプリケーションモジュールでこのレンダラーを別のレンダラーにする事ができます。例えば開発中は開発情報が付加表示される<code>DevRenderer</code>がインジェクトされています。Web API用には例えばJSONをレンダリングする<code>JsonRenderer</code>やJSONにリンク情報を持たせた<a href="http://stateless.co/hal_specification.html">HAL</a>フォーマットレンダラー(JSON+HAL)のDI設定を行います。</p>
+
+<p>開発用の<code>DevModule</code>ではリソースレンダラーインターフェイスに開発用<code>DevRenderer</code>を束縛しています。この束縛を変える事で全てのリソースをWeb API用にJSON出力することができます。
+<code>
+$this-&gt;bind(&#39;BEAR\Resource\Renderable&#39;)-&gt;to(&#39;BEAR\Framework\Resource\View\DevRenderer&#39;);
+</code></p>
+
+<h2 id="toc_2">レンダリング</h2>
+
+<p>レンダラーはリソース状態を<code>ResourceObject</code>として受け取り、インジェクトしたテンプレートエンジン等を使って文字列にします。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function render(ResourceObject $ro)
+{
+ ....
+ return $ro-&gt;body;
+}
+</code></pre></div>
+<p>Note: リソースオブジェクトはリソースリクエストメソッドの中でテンプレートを直接指定しないようにします。間接的にリソースに状態を持たせて（たとえばLogin NG)、レンダラー、あるいはビューテンプレートがそれを判定してテンプレートを変えます。モデルがビューに関知しないように、リソースがリソースレンダリングの詳細を知らないようにします。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

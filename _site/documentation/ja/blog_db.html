@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | blogチュートリアル(2) データベースの設定</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li class="active"><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>ブログ・チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">BEARのインストールとプロジェクト作成</a></li>
+<li><a href="blog_db.html">データベースの設定</a></li>
+<li><a href="blog_get.html">記事リソースの作成</a></li>
+<li><a href="blog_page.html">記事表示ページの作成</a></li>
+<li><a href="blog_template.html">テンプレートの作成</a></li>
+<li><a href="blog_create.html">記事の追加</a></li>
+<li><a href="blog_validate.html">バリデーション</a></li>
+<li><a href="blog_delete.html">記事の削除</a></li>
+<li><a href="blog_update.html">記事の編集</a></li>
+<li><a href="blog_more.html">まとめとカスタマイズ</a></li>
+		
+		
+
+		
+
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">blogチュートリアル(2) データベースの設定</h1>
+
+<h2 id="toc_1">利用の準備</h2>
+
+<p><a href="install.html#DB">インストール</a>のDBのセクションに従ってDBを利用可能にし、テスト用のレコードを入力します。</p>
+
+<h2 id="toc_2">確認</h2>
+
+<p>以下のコードでDBレコードの呼び出し確認できるのを確認します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">php -r &#39;$pdo# new PDO(&quot;mysql:host=localhost;dbnameblogbear&quot;, &quot;root&quot;, &quot;&quot;);foreach($pdo-&gt;query(&quot;SELECT * from posts&quot;) as $row){print_r($row);}&#39;
+</code></pre></div>
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | はじめてのハイパーメディア</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li class="active"><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>「はじめての」チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+			<li><a href="my_first_resource.html">はじめてのリソース</a></li>
+<li><a href="my_first_web_api.html">はじめてのWeb API</a></li>
+<li><a href="my_first_test.html">はじめてのテスト</a></li>
+<li><a href="my_first_web_page.html">はじめてのWebページ</a></li>
+<li><a href="my_first_resource_request.html">はじめてのリソースリクエスト</a></li>
+<li><a href="my_first_di.html">はじめての注入</a></li>
+<li><a href="my_first_aop.html">はじめてのアスペクト</a></li>
+<li><a href="my_first_pull.html">はじめてのプル</a></li>
+<li><a href="my_first_hypermedia.html">はじめてのハイパーメディア</a></li>
+<li><a href="my_first_lazy.html">はじめての遅延評価</a></li>
+		
+
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">はじめてのハイパーメディア</h1>
+
+<h2 id="toc_1">ハイパーメディアとはなんでしょうか</h2>
+
+<p>1962年、Ted Nelson氏が<a href="http://ja.wikipedia.org/wiki/%E3%83%8F%E3%82%A4%E3%83%91%E3%83%BC%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88">ハイパーテキスト</a>`を発案しました。これはテキストが他のテキストを参照するための参照リンクをテキストに埋め込むというもので、テキスト間を結びつける参照をハイパーリンクと呼びます。</p>
+
+<p>最も有名で成功したハイパーテキスト実装がWWWです。（<code>&lt;a&gt;</code>タグの<code>href</code>はハイパーリファレンスの略です。）これをテキストに制限しないであらゆるメディアにしたのがハイパーメディアです。重要なのは*相互参照(hyper reference)のためのリンク*が埋め込まれてるということです。</p>
+
+<p>ちなみにPHPは <em>PHP: Hypertext Preprocessor</em> の略です。([<a href="http://www.php.net/manual/ja/faq.general.php#faq.general.acronym">http://www.php.net/manual/ja/faq.general.php#faq.general.acronym</a> PHP とは何の略ですか?])</p>
+
+<h2 id="toc_2">ハイパーメディアではないもの</h2>
+
+<p>例えばコーヒーショップでコーヒーをオーダーする、これを<code>REST API</code>として考えてみます。</p>
+
+<p>飲み物を注文する<code>REST API</code>が以下の様に与えられています。</p>
+
+<p>|| METHOD || POST ||
+|| URI || <code>http://restbucks.com/order/{?drink}</code> ||
+|| Query || drink=ドリンク名 ||</p>
+
+<p>この<code>API</code>を使って飲み物を注文します。これのAPIを使って<code>注文リソース</code>を作成(POST)します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">post http://restbucks.com/order/?drink=latte
+</code></pre></div>
+<p>注文リソースは作成され注文内容が返ってきました。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{
+    &quot;drink&quot;: &quot;latte&quot;,
+    &quot;cost&quot;: 2.5,
+    &quot;id&quot;: &quot;5052&quot;,
+}
+</code></pre></div>
+<p>これは*ハイパーメディアではありません*。情報を一意に現すURIが付いていないし参照リンクもありません。</p>
+
+<h2 id="toc_3">HAL - Hypertext Application Language</h2>
+
+<p>JSONは本来ハイパーメディアのためのフォーマットではありませんが、<code>JSON+HAL</code>というメディアタイプを与えハイパーメディアとしてJSONを扱おうという[<a href="http://stateless.co/hal_specification.html">http://stateless.co/hal_specification.html</a> HAL - Hypertext Application Language]という<a href="http://tools.ietf.org/html/draft-kelly-json-hal-00">RFCドラフト規格</a>があります。BEAR.Sundayではリソースのレンダリングを<code>HalRenderer</code>にすることでHALフォーマットで出力することができます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{
+    &quot;drink&quot;: &quot;latte&quot;,
+    &quot;cost&quot;: 2.5,
+    &quot;id&quot;: &quot;1545&quot;,
+    &quot;_links&quot;: {
+        &quot;self&quot;: {
+            &quot;href&quot;: &quot;app://self/restbucks/order?id=1545&quot;
+        },
+        &quot;payment&quot;: {
+            &quot;href&quot;: &quot;app://self/restbucks/payment?id=1545&quot;
+        }
+    }
+}
+</code></pre></div>
+<p>これが<code>HAL</code>のフォーマットで出力された注文リソースです。自己のURIと関連するリンクの情報が<code>_links</code>に埋め込まれています。注文と支払いの*関係性*をクライアントでなくサービスが保持しています。</p>
+
+<p>サービス側はサービスの都合でリンク先を変える事ができます。そのときにクライアントの利用に変更はありません。リンクを辿るだけです。リンクを持つ事でデータは単なるフォーマットから自己記述的なハイパーメディアになりました。</p>
+
+<h2 id="toc_4">ハイパーリンクを追加する</h2>
+
+<p>リソースオブジェクトの<code>links</code>プロパティでこのように指定します。
+<code>
+    public $links = [
+        &#39;news&#39; # &gt; [Link::HREF &gt; &#39;page://self/news/today&#39;]
+    ];
+</code></p>
+
+<h2 id="toc_5">クエリーをURIテンプレートを使う</h2>
+
+<p>URIが動的に決まる場合にはこのようにonPost等のメソッド内でクエリーをつくることもできます。
+<code>
+$this-&gt;links[&#39;friend&#39;] # [Link::HREF =&gt; &quot;app://self/sns/friend?id{$id}&quot;];
+</code></p>
+
+<p><code>links</code>プロパティでこのようにURIテンプレートを指定することもできます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    public $links =&gt; [
+        &#39;friend&#39; # &gt; [Link::HREF =&gt; &#39;app://self/sns/friend{?id}&#39;, Link::TEMPLATED &gt; true]
+    ];
+</code></pre></div>
+<p>ここに必要な変数<code>{id}</code>はリソース<code>body</code>から取得されます。</p>
+
+<h2 id="toc_6">試してみましょう</h2>
+
+<p><code>$item</code>を指定すると注文リソースを作成するクラスです。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+namespace Sandbox\Resource\App\First\HyperMedia;
+
+use BEAR\Resource\AbstractObject;
+use BEAR\Resource\Link;
+
+/**
+ * Greeting resource
+ */
+class Order extends AbstractObject
+{
+    public function onPost($item)
+    {
+        $this[&#39;item&#39;] = $item;
+        $this[&#39;id&#39;] = date(&#39;is&#39;); // min+sec
+
+        return $this;
+    }
+}
+</code></pre></div>
+<p>これにハイパーリンクを加えるために<code>links</code>プロパティを設置します。
+<code>
+    public $links = [
+        &#39;payment&#39; # &gt; [Link::HREF =&gt; &#39;app:/self/first/hypermedia/payment{?id}&#39;, Link::TEMPLATED &gt; true]
+    ];
+</code></p>
+
+<h2 id="toc_7">コンソールでAPIリクエストしてみます</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ api get app://self/first/hypermedia/user?id=1
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+content-type: application/hal+json; charset=UTF-8
+[BODY]
+{
+    &quot;item&quot;: &quot;book&quot;,
+    &quot;id&quot;: &quot;1442&quot;,
+    &quot;_links&quot;: {
+        &quot;self&quot;: {
+            &quot;href&quot;: &quot;app://self/first/hypermedia/order?item=book&quot;
+        },
+        &quot;payment&quot;: {
+            &quot;href&quot;: &quot;app:/self/first/hypermedia/payment{?id}&quot;,
+            &quot;templated&quot;: true
+        }
+    }
+}
+</code></pre></div>
+<p><code>payment</code>リンクが現れるようになりました。</p>
+
+<h2 id="toc_8">リンクをプログラムで利用する</h2>
+
+<p>リンクをコードで利用するためには<code>use AInject;</code>で<code>A</code>オブジェクトをインジェクトしてその<code>href</code>メソッドでリンクを取得します。リソースのボディがURIテンプレートに合成されてリンクが取得できます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+namespace Sandbox\Resource\App\First\HyperMedia;
+
+use BEAR\Resource\AbstractObject;
+use BEAR\Sunday\Inject\ResourceInject;
+use BEAR\Sunday\Inject\AInject;
+/**
+ * Greeting resource
+ */
+class Shop extends AbstractObject
+{
+    use ResourceInject;
+    use AInject;
+
+    public function onPost($item, $card_no)
+    {
+        $order = $this
+        -&gt;resource
+        -&gt;post
+        -&gt;uri(&#39;app://self/first/hypermedia/order&#39;)
+        -&gt;withQuery([&#39;item&#39; =&gt; $item])
+        -&gt;eager
+        -&gt;request();
+
+        $payment = $this-&gt;a-&gt;href(&#39;payment&#39;, $order);
+
+        $this
+        -&gt;resource
+        -&gt;put
+        -&gt;uri($payment)
+        -&gt;withQuery([&#39;card_no&#39; =&gt; $card_no])
+        -&gt;request();
+
+        $this-&gt;code = 204;
+        return $this;
+    }
+}
+</code></pre></div>
+<p>Webページでリンクをクリックするだけで次のページに移れるように、次のリンクをサービス側がコントロールできるようになりました。リンク先に変更があってもクライアントには変更がありません。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | はじめてのWeb API</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li class="active"><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>「はじめての」チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+			<li><a href="my_first_resource.html">はじめてのリソース</a></li>
+<li><a href="my_first_web_api.html">はじめてのWeb API</a></li>
+<li><a href="my_first_test.html">はじめてのテスト</a></li>
+<li><a href="my_first_web_page.html">はじめてのWebページ</a></li>
+<li><a href="my_first_resource_request.html">はじめてのリソースリクエスト</a></li>
+<li><a href="my_first_di.html">はじめての注入</a></li>
+<li><a href="my_first_aop.html">はじめてのアスペクト</a></li>
+<li><a href="my_first_pull.html">はじめてのプル</a></li>
+<li><a href="my_first_hypermedia.html">はじめてのハイパーメディア</a></li>
+<li><a href="my_first_lazy.html">はじめての遅延評価</a></li>
+		
+
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">はじめてのWeb API</h1>
+
+<p>[my_first_resource はじめてのリソース]でつくったリソースをWeb APIとして利用してみましょう。</p>
+
+<p>API用built-in webサーバーを起動します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ cd apps/Sandbox/htdocs
+$ php -S localhost:8089 api.php
+</code></pre></div>
+<p>ブラウザのAdd onのRESTクライアント、[<a href="https://addons.mozilla.org/ja/firefox/addon/restclient/">https://addons.mozilla.org/ja/firefox/addon/restclient/</a> Firefox RESTClient], [<a href="https://chrome.google.com/webstore/detail/dev-http-client/aejoelaoggembcahagimdiliamlcdmfm?hl=ja">https://chrome.google.com/webstore/detail/dev-http-client/aejoelaoggembcahagimdiliamlcdmfm?hl=ja</a> Chrome Dev HTTP Client] 等でアクセスします。</p>
+
+<p>※Webブラウザで直接アクセスするとダウンロードされます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">http://localhost:8089/first/greeting?name=BEAR
+</code></pre></div>
+<p>JSONで挨拶がかえってきたでしょうか？</p>
+
+<p>これであなたの作成したリソースはWebAPIとして利用できるようになりました。
+apache等のサーバーで運用すれば世界中の人からこのリソースをWeb APIとして利用できます！</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+{% include header.html %}
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li{% if page.category == "インストールと設定" %} class="active"{% endif %}><a href="install.html">インストールと設定</a></li>
+		  <li{% if page.category == "「はじめての」チュートリアル" %} class="active"{% endif %}><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li{% if page.category == "ブログ・チュートリアル" %} class="active"{% endif %}><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li{% if page.category == "アプリケーション" %} class="active"{% endif %}><a href="application.html">アプリケーション</a></li>
+		  <li{% if page.category == "リソース" %} class="active"{% endif %}><a href="resource.html">リソース</a></li>
+		  <li{% if page.category == "DI＆AOP" %} class="active"{% endif %}><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li{% if page.category == "その他" %} class="active"{% endif %}><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		{% include docs/ja/subnav.html %}
+
+
+	</div>
+	<div class="col-md-9">
+
+		 {{ content }}
+	</div>
+</div>
+
+</div>
+ 
+
+{% include footer.html %}

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | はじめてのアスペクト</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li class="active"><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>「はじめての」チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+			<li><a href="my_first_resource.html">はじめてのリソース</a></li>
+<li><a href="my_first_web_api.html">はじめてのWeb API</a></li>
+<li><a href="my_first_test.html">はじめてのテスト</a></li>
+<li><a href="my_first_web_page.html">はじめてのWebページ</a></li>
+<li><a href="my_first_resource_request.html">はじめてのリソースリクエスト</a></li>
+<li><a href="my_first_di.html">はじめての注入</a></li>
+<li><a href="my_first_aop.html">はじめてのアスペクト</a></li>
+<li><a href="my_first_pull.html">はじめてのプル</a></li>
+<li><a href="my_first_hypermedia.html">はじめてのハイパーメディア</a></li>
+<li><a href="my_first_lazy.html">はじめての遅延評価</a></li>
+		
+
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">summary はじめてのアスペクト</h1>
+
+<h2 id="toc_1">挨拶に現在時間を追加する</h2>
+
+<p>[my_first_resource greetingリソース]に現在時刻を追加します。出来上がりイメージはこうです。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&quot;Hello, BEAR. It is 10:22.&quot;
+</code></pre></div>
+<p>このようにメッセージの後ろに時間を追加すれば簡単に実現できます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function onGet($name = &#39;anonymous&#39;)
+{
+    $time = date(&#39;g:i&#39;);
+    return &quot;{$this-&gt;message}, {$name}&quot;. &quot; It is {$time} now&quot;;
+}
+</code></pre></div>
+<p>ではこの現在時刻の追加を他の10のリソースでも行いたいとしたらどうでしょう？「何かのメッセージの後に時間情報を追加」という処理を他の10のリソースでも行います。同じ処理を何度もするので関数にしてみます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function onGet($name = &#39;anonymous&#39;)
+{
+    return &quot;{$this-&gt;message}, {$name}&quot;. timeMessage();
+}
+</code></pre></div>
+<p>集約され、再利用性が高まりました。
+あるいはtraitを使ってみましょうか。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">use TimeMessageTrait;
+
+public function onGet($name = &#39;anonymous&#39;)
+{
+    return &quot;{$this-&gt;message}, {$name}&quot;. $this-&gt;getTimeMessage();
+}
+</code></pre></div>
+<p>同じですね。</p>
+
+<p>しかし集約することはできましたが利用メソッドの数だけ変更が必要です。</p>
+
+<p>今度は時間ではなくて、挨拶の後は天気情報を付加するように変更がありました。<code>timeMessage</code>を<code>weatherMessage</code>に変えましょうか？</p>
+
+<p>それとも、後ろにメッセージが付加される事を汎用的に<code>postMessage</code>としましょうか。...だんだん無理が出てきました。このようなメソッドを横断して同じ処理を適用する良い方法はないでしょうか？</p>
+
+<h2 id="toc_2">アスペクトにする</h2>
+
+<p>このようなメソッドを横断する処理はそもそもコーディングが難しい面があります。ログやキャッシュ、トランザクションなど何かの処理の前後に行うようなコードはあちこちに同じものを記述した経験はないでしょうか？</p>
+
+<p>DBのトランザクションのコード、<code>begin, [query], (commit | rollback)</code> という処理は<code>[query]</code>が変わるだけなのにいつも同じように全てを記述したりしなかったでしょうか。</p>
+
+<p>ではこの横断的な処理を、元の本質的な処理と合成するようにしてみてはどうでしょうか。元のメッセージと付加するメッセージを動的に結合するのです。</p>
+
+<p>この例では、「時刻情報を追加する」という処理をクラスをまたがって使われる（＝横断的な）処理とみなし、アスペクトと呼びます。このアスペクトと元の処理を合成するのがアスペクト指向プログラミングです。</p>
+
+<h2 id="toc_3">リフレクティブ・メソッドインボケーショ(<code>ReflectiveMethodInvocation</code>)</h2>
+
+<p>この横断的な処理と本質的な処理を合成するのにBEAR.Sundayではインターセプターというパターンを使います。</p>
+
+<p>横断処理を元のメソッドの中から利用するのではなくて、元のメソッドを横断処理が横取り（インターセプト）して、横断処理が元のメソッドを呼ぶようにします。</p>
+
+<p>さっきの例でいえば「あいさつ」という処理から「時刻付加」という色々なメソッドから呼ばれる処理（＝横断処理）を呼ぶのではなくて、時刻付加という横断処理からメインの処理、あいさつを呼びます。</p>
+
+<p>呼び出す側と呼ばれる側の関係が通常と逆になってるのが分かるでしょうか。DBアクセスのコードから結果を記録するためにログを呼び出していたのを、ログのコードからDBアクセスのコードを呼ぶようにするのです。</p>
+
+<p>この時に元のコードの実行そのものがリフレクションを使ったメソッド実行（メソッドインボケーション）オブジェクトになっています。そのオブジェクトを利用すると呼び出し引数を調べたり、呼び出しそのものを実行できるようになります。そのオブジェクトを使ってインターセプトします。</p>
+
+<h2 id="toc_4">インターセプターを作成します</h2>
+
+<p>ではコードを見てみましょう。
+まずは元メソッドを横取りする横断処理、つまりインターセプターです。</p>
+
+<p>まずは横断処理を「何もしない」インターセプターです。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">class TimeMessage implements MethodInterceptor
+{
+    /**
+     * (non-PHPdoc)
+     * @see Ray\Aop.MethodInterceptor::invoke()
+     */
+    public function invoke(MethodInvocation $invocation)
+    {
+        $result = $invocation-&gt;proceed();
+        return $result;
+    }
+}
+</code></pre></div>
+<p>元のメソッドを実行（<code>$invocation-&gt;proceed()</code>）し、その結果を返しています。</p>
+
+<p><code>$invocation-&gt;proceed()</code>でオリジナルのメソッドを実行した後ろに時刻メッセージを追加します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function invoke(MethodInvocation $invocation)
+{
+    $time = date(&#39;g:i&#39;);
+    $result = $invocation-&gt;proceed();
+    return $result . &quot; It is {$time} now&quot;;
+}
+</code></pre></div>
+<h2 id="toc_5">このインターセプターを特定のメソッドにバインドする</h2>
+
+<p>これで横断処理から元メソッドの実行を実行するインターセプターができました。つぎに特定のメソッドとこのアスペクトを束縛（バインド）します。</p>
+
+<p>アノテーションを使う方法が一般的ですが、ここでは使わない最も簡単な方法で行ってみます。</p>
+
+<p>以下のコードを<code>sandbox/Module/AppModule.php</code>の<code>configure</code>メソッドに追加します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    // time message binding
+    $this-&gt;bindInterceptor(
+        $this-&gt;matcher-&gt;subclassesOf(&#39;Sandbox\Resource\App\First\Greeting\Aop&#39;),
+        $this-&gt;matcher-&gt;any(),
+        [new TimeMessage]
+    );
+</code></pre></div>
+<p>これで<code>&#39;Sandbox\Resource\App\First\Greeting\Aop&#39;</code>クラス（およびそのサブクラス）のどのメソッド($this-&gt;matcher-&gt;any())にも<code>TimeMessage</code>インターセプターがバインドされます。</p>
+
+<h3 id="toc_6">実行してみましょう</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">get app://self/first/greeting/aop?name=BEAR
+
+200 OK
+...
+[BODY]
+&quot;Hello, BEAR. It is 3:12 now !&quot;
+</code></pre></div>
+<p>時刻伝えるアスペクトと挨拶リソースが合成されました！挨拶リソースは自身が加工編集されることに無関心です。横断処理が元処理を呼ぶコードに乗っ取られています。</p>
+
+<p>挨拶リソースには依存はなく、またtraitを使った横断処理の追加と違って束縛は動的です。このリソースに他のアスペクトを束縛できるし、このアスペクトは他のリソースにも束縛可能です。</p>
+
+<p>このアスペクトの織り込みはリソースだけに適用可能ではありません。他の一般オブジェクトにも適用可能です。ただし型が元の型から<code>Weave</code>という型に変わってしまい、この点では互換性が失われてしまう事に注意が必要です。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

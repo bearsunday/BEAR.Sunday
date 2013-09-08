@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | はじめてのテスト</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li class="active"><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>「はじめての」チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+			<li><a href="my_first_resource.html">はじめてのリソース</a></li>
+<li><a href="my_first_web_api.html">はじめてのWeb API</a></li>
+<li><a href="my_first_test.html">はじめてのテスト</a></li>
+<li><a href="my_first_web_page.html">はじめてのWebページ</a></li>
+<li><a href="my_first_resource_request.html">はじめてのリソースリクエスト</a></li>
+<li><a href="my_first_di.html">はじめての注入</a></li>
+<li><a href="my_first_aop.html">はじめてのアスペクト</a></li>
+<li><a href="my_first_pull.html">はじめてのプル</a></li>
+<li><a href="my_first_hypermedia.html">はじめてのハイパーメディア</a></li>
+<li><a href="my_first_lazy.html">はじめての遅延評価</a></li>
+		
+
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">はじめてのテスト</h1>
+
+<h2 id="toc_1">リソーステスト</h2>
+
+<p>[my_first_resource はじめてのリソース]で作成した挨拶リソーステストします。</p>
+
+<h2 id="toc_2">テストファイルの配置場所</h2>
+
+<p>テストファイルを配置します。リソースファイルとの場所はこのようになります。</p>
+
+<p>|| リソースファイル || <code>apps/Sandbox/Resource/App/First/Greeting.php</code> ||
+|| テストファイル　|| <code>apps/Sandbox/tests/Resource/App/First/GreetingTest.php</code> ||</p>
+
+<h2 id="toc_3">テストクラスファイルを作成します</h2>
+
+<p>このクラスを<code>apps/Sandbox/tests/Resource/App/First/GreetingTest.php</code>として保存します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+namespace Sandbox\tests\Resource\App\Blog;
+
+use Sandbox\Module\TestModule;
+use Ray\Di\Injector;
+
+class GreetingTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * Resource client
+     *
+     * @var BEAR\Resource\ResourceInterface
+     */
+    private $resource;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        if (! $this-&gt;resource) {
+            $injector = Injector::create([new TestModule]);
+            $this-&gt;resource = $injector-&gt;getInstance(&#39;BEAR\Resource\ResourceInterface&#39;);
+        }
+    }
+
+    /**
+     * resource
+     *
+     * @test
+     */
+    public function resource()
+    {
+        // resource request
+        $resource # $this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/first/greeting&#39;)-&gt;withQuery([&#39;name&#39; &gt; &#39;BEAR&#39;])-&gt;eager-&gt;request();
+        $this-&gt;assertSame(200, $resource-&gt;code);
+
+        return $resource;
+    }
+
+    /**
+     * Type ?
+     *
+     * @depends resource
+     * @test
+     */
+    public function type($resource)
+    {
+        $this-&gt;assertInternalType(&#39;string&#39;, $resource-&gt;body);
+    }
+
+    /**
+     * Renderable ?
+     *
+     * @depends resource
+     * test
+     */
+    public function render($resource)
+    {
+        $html = (string)$resource;
+        $this-&gt;assertInternalType(&#39;string&#39;, $html);
+    }
+
+    /**
+     * @depends resource
+     * @test
+     */
+    public function body($resource)
+    {
+        $this-&gt;assertSame(&#39;Hello, BEAR&#39;, $resource-&gt;body);
+    }
+}
+</code></pre></div>
+<h2 id="toc_4">テストを実行してみましょう　</h2>
+
+<p>アプリケーションディレクトリに移動します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">cd apps/Sandbox/
+</code></pre></div>
+<p>テスト実行します。
+<code>
+phpunit tests/Resource/App/First/GreetingTest.php
+</code></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">...
+
+Time: 2 seconds, Memory: 10.00Mb
+
+OK (3 tests, 3 assertions)
+
+Generating code coverage report in Clover XML format ... done
+
+Generating code coverage report in HTML format ... done
+</code></pre></div>
+<p>OKでました！</p>
+
+<h3 id="toc_5">カバレッジレポート</h3>
+
+<p><code>build/coverage/index.html</code>にはどの範囲のコードが今のテストでカバーできたら確認することができます。</p>
+
+<h2 id="toc_6">テストコードをみてみましょう</h2>
+
+<h3 id="toc_7">setup()</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$injector = Injector::create([new TestModule]);
+$app = $injector-&gt;getInstance(&#39;BEAR\Sunday\Extension\Application\AppInterface&#39;);
+$this-&gt;resource = $app-&gt;resource;
+</code></pre></div>
+<p>テスト用のモジュール（設定）でインジェクターを作成し、そのインジェクターでアプリケーションオブジェクトを取得しています。テストではアプリケーションオブジェクトはプロパティにあるリソースクライアントを利用します。</p>
+
+<h3 id="toc_8">resource()</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$resource # $this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/first/greeting&#39;)-&gt;withQuery([&#39;name&#39; &gt; &#39;BEAR&#39;])-&gt;eager-&gt;request();
+</code></pre></div>
+<p>resource()メソッド内ではリソースクライアントを使ってリソースをアクセスしています。</p>
+
+<h3 id="toc_9">その他のテストメソッド</h3>
+
+<p>その他の<code>@test</code>とアノテートされたメソッドでは<code>resource()</code>で得られた結果をチェックしています。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | インジェクション</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li class="active"><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>DI＆AOP</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+
+		
+
+
+		
+			<li><a href="di_aop_introduction.html">イントロダクション</a></li>
+<li><a href="module.html">モジュール</a></li>
+<li><a href="injector.html">インジェクター</a></li>
+<li><a href="aop.html">アスペクト</a></li>
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">インジェクション</h1>
+
+<p>フレームワークが予めバインドしているインターフェイスを変更することによってアプリケーションの振る舞いを変更することができます。またtraitを使ったセッターインジェクションでコードの可読性をたかめ、依存をより簡単に利用することができます。</p>
+
+<h2 id="toc_1">バイディング済みインターフェイス</h2>
+
+<p><code>FrameworkModule</code>はBEAR.Sundayフレームワークの基本のバインディングを行っています。アプリケーションはこのバインディングを変更して特定または独自の実装に変更することができます。</p>
+
+<p>例えば例外発生のハンドリングを変更するには<code>BEAR\Framework\Exception\ExceptionHandlerInterface</code>に独自に作成した例外ハンドルクラスをバインドします。</p>
+
+<p>|| <em>インターフェイス</em> || <em>バインドされているクラスまたはプロバイダー</em> || <em>内容</em> || 
+|| <code>BEAR\Framework\Exception\ExceptionHandlerInterface</code> || <code>BEAR\Framework\Exception\ExceptionHandler</code> || 例外ハンドル ||
+|| <code>BEAR\Framework\Web\ResponseInterface</code> || <code>BEAR\Framework\Web\SymfonyResponse</code> || HTTP出力 ||
+|| <code>BEAR\Framework\Output\ConsoleInterface</code> || <code>BEAR\Framework\Output\Console</code> || コンソール出力 ||
+|| <code>Doctrine\Common\Annotations\Reader</code> || <code>Doctrine\Common\Annotations\AnnotationReader</code> || アノテーションリーダー ||
+|| <code>BEAR\Resource\LoggerInterface</code> || <code>BEAR\Framework\Module\Provider\ResourceLoggerProvider</code> || リソースロガー ||
+|| <code>BEAR\Framework\Application\LoggerInterface</code> || <code>BEAR\Framework\Module\Provider\ResourceLoggerProvider</code> || アプリケーションロガー ||
+|| <code>Guzzle\Parser\UriTemplate\UriTemplateInterface</code> || <code>Guzzle\Parser\UriTemplate\UriTemplate</code> || URIテンプレート ||
+|| <code>BEAR\Framework\Resource\Taggable</code> || <code>BEAR\Framework\Resource\Etag</code> || キャッシュキー ||
+|| <code>Guzzle\Common\Cache\CacheAdapterInterface</code> || <code>BEAR\Framework\Module\Provider\ApcCacheProvider</code> ||キャッシュアダプター ||</p>
+
+<h2 id="toc_2">アプリケーションバインディング</h2>
+
+<p>アプリケーションのモードや方針に応じてバインディングが求められるインターフェイスもあります。たとえばリソースをどのようにレンダリングするか(HTML or JSON ?)や、テンプレートエンジン、キャッシュライブラリ等です。通常<code>AppModule</code>が使われます。</p>
+
+<p>|| <em>インターフェイス</em> || <em>バインドされているクラス</em> || <em>サービス</em> ||
+|| <code>BEAR\Resource\Renderable</code> || <code>BEAR\Framework\Resource\View\Renderer</code> || HTML||
+|| || <code>BEAR\Framework\Resource\View\DevRenderer</code> || Dev用HTML||
+||  || <code>BEAR\Framework\Resource\View\JsonRenderer</code> || JSON||
+||  || <code>BEAR\Framework\Resource\View\HalRenderer</code> || JSON+HAL　||
+|| <code>BEAR\Framework\Resource\View\TemplateEngineAdapter</code> || <code>BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyAdapter</code> || Smarty ||
+|| <code>Guzzle\Common\Cache\CacheAdapterInterface @Named(&quot;resource_cache&quot;)</code> || <code>BEAR\Framework\Module\Provider\ApcCacheProvider</code> ||リソースキャッシュ ||</p>
+
+<h3 id="toc_3">フレームワークバインドを変更するバインドのタイミング</h3>
+
+<p><code>$this-&gt;installModule()</code>とフレームワークモジュールをインストールする前に独自のバインディングを行います。</p>
+
+<h2 id="toc_4">トレイトインジェクション</h2>
+
+<p>コードの可読性の向上や簡素化のためセッターメソッドのコードをtraitにすることができます。</p>
+
+<p>トレイト名は<code>&quot;{プロパティ名}Inject&quot;</code>とインジェクトされた依存を代入したプロパティに<code>Inject</code>を付けてものになります。例えば<code>TmpDirInject</code>トレイトを<code>use</code>すると<code>tmpDir</code>プロパティに<code>TMPディレクトリ</code>がインジェクトされます。</p>
+
+<p>例)
+    class Foo {
+        use TmpDirInject;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    public function onGet()
+    {
+        $tmpDir = $this-&gt;tmpDir;
+        ...
+</code></pre></div>
+<h2 id="toc_5">トレイト名前一覧</h2>
+
+<p>|| <em>トレイト名</em> || <em>インジェクトされる依存</em> ||
+|| <code>TmpDirInject</code> || Tmpディレクトリ ||
+|| <code>LogDirInject</code> || Logディレクトリ ||
+|| <code>AppDirInject</code> || Appディレクトリ ||
+|| <code>LogInject</code> || <a href="http://guzzlephp.org/api/class-Guzzle.Common.Log.LogAdapterInterface.html">Logオブジェクト</a> ||
+|| <code>ResourceInject</code> || <a href="http://code.google.com/p/bearsunday/wiki/resource_client">リソースクライアント</a> ||</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | アノテーション</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li class="active"><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>その他</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+
+		
+
+
+		
+
+		
+			<li><a href="faq.html">FAQ</a></li>
+<li><a href="annotations.html">アノテーション</a></li>
+<li><a href="database.html">データベース</a></li>
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">アノテーション</h1>
+
+<p>アノテーションとは、クラスやメソッドのコードに対するメタデータです。BEAR.Sundayでは[<a href="http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html">http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html</a> Doctrine Annotations]を用います。メソッドやクラスのdocコメントに書かれたアノテーションは、DIでインジェクションポイントの指定に使われたり、AOPでインターセプターを束縛するときのマーカー等に使われます。</p>
+
+<h2 id="toc_1">ビルトイン・アノテーション</h2>
+
+<p><code>Ray.Di</code>や<code>BEAR.Framework</code>にはデフォルトで用意されているアノテーションがあります。<code>BEAR.Framework</code>のアノテーションはほとんどがAOPで使われるもので、モジュールでの束縛されなければ動作に影響はありません。</p>
+
+<h3 id="toc_2">Ray.Di</h3>
+
+<p>|| アノテーション || 意味 || プロパティ ||
+|| <code>@Inject</code> || インジェクションポイント || optional:必須ではない ||
+|| <code>@Named</code> || インジェクションポイント名 || value:名前 ||
+|| <code>@Scope</code> || スコープ || value:&quot;singleton&quot; or &quot;prototype&quot;(デフォルト) ||
+|| <code>@ImplementedBy</code> || デフォルトインプリメンテーション || クラス ||
+|| <code>@ProviderdBy</code> || デフォルトプロバイダー || プロバイダー ||</p>
+
+<p>詳しくはRay.Diの<a href="http://code.google.com/p/rayphp/wiki/Motivation?tm=6">マニュアル</a>をご覧下さい。</p>
+
+<h3 id="toc_3">BEAR.Framework</h3>
+
+<p>|| アノテーション || 意味 || プロパティ || インターセプター ||
+|| <code>@Cache</code> || キャッシュ || value:キャッシュ秒数 || <code>BEAR\Framework\Interceptor\CacheLoader</code> ||
+|| <code>@CacheUpdate</code> || キャッシュ更新 || n/a || <code>BEAR\Framework\Interceptor\CacheUpdate</code> ||
+|| <code>@Db</code> || DAOインジェクト|| n/a ||<code>BEAR\Framework\Interceptor\DbSetter</code> ||
+|| <code>@DbPager</code> || DBページャー || n/a || n/a ||
+|| <code>@Transactional</code> || トランザクション || n/a || <code>BEAR\Framework\Interceptor\Transaction</code> ||
+|| <code>@Time</code> || 時間 || n/a || <code>BEAR\Framework\Interceptor\TimeStamper</code> ||</p>
+
+<p><em>インターセプターの詳しい説明は現在ありません。ソースをご覧下さい。</em></p>
+
+<h2 id="toc_4">ユーザーアノテーション</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+* @Annotation
+* @Target({&quot;METHOD&quot;,&quot;CLASS&quot;})
+*
+*/
+class Foo
+{
+    public $value;
+}
+</code></pre></div>
+<p>これはメソッドとクラスに付ける事のできるアノテーションの例です。一つだけプロパティを持つアノテーションを *単一値アノテーション * と呼び以下のように記述します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * @Foo(&quot;bar&quot;)
+ */
+</code></pre></div>
+<p>この場合<code>&quot;bar&quot;</code>が<code>$value</code>プロパティに代入されます。他にもプロパティのないマーカーアノテーション、複数のプロパティを持つ <em>フルアノテーション</em> 等があります。</p>
+
+<p>詳しくは<code>Doctrine Annotation</code>の<a href="http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html">マニュアル</a>を参照してください。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | インストール</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li class="active"><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>インストールと設定</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+   			
+<li><a href="introduction.html">BEAR.Sundayについて</a></li>
+<li><a href="install.html">インストール</a></li>
+<li><a href="installphp54.html">PHP5.4構築(OSX)</a></li>
+<li><a href="ubuntu.html">PHP5.4構築(Unbuntu)</a></li>
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">BEAR.Sundayについて</h1>
+
+<h2 id="toc_1">BEAR.Sunday, a resource oriented framework for PHP</h2>
+
+<h2 id="toc_2">リソース指向</h2>
+
+<p>BEAR.Sundayはアプリケーション内部もRESTアーキテクチャのリソース指向フレームワークです。全域に渡って適用される「依存性の注入」と「アスペクト指向プログラミング」がアプリケーションをシンプルでありながら柔軟でソリッドなものにします。自身のコンポーネントをなるべく持たず従来のライブラリを利用しますがこれも同じ効果のためです。</p>
+
+<p>BEAR.Sundayのシンプルな設計と高い拡張性は*全てがリソース* である事によってもたらされます。データベースアクセスはもちろんwebサービスやローカルファイル、ページコントローラーでさえも同じように「リソース」としてURIを持ち利用やレンダリングが可能です。</p>
+
+<h2 id="toc_3">オブジェクトフレームワーク</h2>
+
+<p>BEAR.Sundayでは機能を新たな実装ではなく設計と組み合わせによって実現しようとしますが、そのためには最大限の疎結合と適切な関心の分離それにそれらの動的結合が必要です。</p>
+
+<p>その実現のためBEAR.Sundayは各々のモデルやソフトウエアコンポーネントがどういうものであるかということよりそれらをどう結ぶかという接続技術により注目します。抽象と実装を束縛したモジュールによって依存解決を行い、フレームワークの機能をさまざまなアスペクトの集合とみなしメソッドに動的に横断的関心事を束縛します。オブジェクトにRESTの振る舞いを与えるリソースオブジェクトと合わせたこれらのオブジェクトフレームはBEAR.Sundayのベースになっています。</p>
+
+<h2 id="toc_4">ADD (API driven development)</h2>
+
+<p>リソースは内部APIとして機能します。APIはWebアプリケーションプロジェクトのサブセットではなく、アプリケーションドメインの核心として扱われます。Webサイトはそのアプリケーションの１つです。</p>
+
+<p>内部APIとして機能するリソースに、認証のアスペクトを織り込み外部APIとして使う事は容易です。AJAX、モバイルデバイスアプリケーケションやMVC JSのバックエンドとしても自然に機能します。</p>
+
+<h2 id="toc_5">対象</h2>
+
+<p>BEAR.Sundayでは二種類のユーザーを想定しています。</p>
+
+<ul>
+<li><p><em>アプリケーションアーキテクト</em> プロジェクトの構造（フレームワーク）をアプリケーションアーキテクチャとして構築します。必要なサービスやアスペクトを検討して、テンプレートエンジン等のライブラリの選定や既存のライブラリや情報システムの結合なども行います。つまりアーキテクトとはアプリケーションを構成、設計やそれに必要な実装をする人です。</p></li>
+<li><p><em>アプリケーションエンジニア</em> アプリケーションアーキテクチャのほぼ決定された状態でその実装を行います。DIの設定等を行う事は少なく、インジェクトされたサービスを使ってアプリケーションを実装します。アプリケーションの実装を行う人です。</p></li>
+</ul>
+
+<p>実際にはこれらを混合して行う事も多いでしょうが、規模の大小や参加スタッフによってこの対象を意識するのは有用かと思います。</p>
+
+<h2 id="toc_6">影響を受けたフレームワーク・ソフトウエア技術</h2>
+
+<ul>
+<li>[<a href="http://code.google.com/p/google-guice/">http://code.google.com/p/google-guice/</a> Google Guice]</li>
+<li>[<a href="http://aopalliance.sourceforge.net/AOP">http://aopalliance.sourceforge.net/AOP</a> AOP Alliance (Java/J2EE AOP standards)]</li>
+<li><a href="http://auraphp.github.com/">Aura</a></li>
+<li>[<a href="http://jcp.org/en/jsr/detail?id=311">http://jcp.org/en/jsr/detail?id=311</a> JSR311 Jax-RS],  <a href="http://jersey.java.net/">Jersey</a></li>
+<li>[<a href="http://click.sourceforge.net/">http://click.sourceforge.net/</a> Click Framework]</li>
+<li>[<a href="http://framework.zend.com/">http://framework.zend.com/</a> Zend Framework] / <a href="http://symfony.com/what-is-symfony">Symfony</a> / <a href="http://flow3.typo3.org/">Flow3</a> / <a href="http://marcelog.github.com/Ding/">Ding</a> / <a href="http://guzzlephp.org/">Guzzle</a> / <a href="http://www.doctrine-project.org/about.html">Doctrine</a> / <a href="http://pear.php.net/">PEAR</a></li>
+</ul>
+
+<h2 id="toc_7">開発途中です</h2>
+
+<ul>
+<li>BEAR.Sundayは開発途中です。2013年の早期リリースを目指してます。</li>
+</ul>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

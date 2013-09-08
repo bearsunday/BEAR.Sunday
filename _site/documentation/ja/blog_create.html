@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | blogチュートリアル(6) 記事の追加</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li class="active"><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>ブログ・チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">BEARのインストールとプロジェクト作成</a></li>
+<li><a href="blog_db.html">データベースの設定</a></li>
+<li><a href="blog_get.html">記事リソースの作成</a></li>
+<li><a href="blog_page.html">記事表示ページの作成</a></li>
+<li><a href="blog_template.html">テンプレートの作成</a></li>
+<li><a href="blog_create.html">記事の追加</a></li>
+<li><a href="blog_validate.html">バリデーション</a></li>
+<li><a href="blog_delete.html">記事の削除</a></li>
+<li><a href="blog_update.html">記事の編集</a></li>
+<li><a href="blog_more.html">まとめとカスタマイズ</a></li>
+		
+		
+
+		
+
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">blogチュートリアル(6) 記事の追加</h1>
+
+<h1 id="toc_1">POSTメソッド</h1>
+
+<p>これまでのステップでデータベースに登録されている記事を表示できるようになりました。次はいよいよフォームを作成しますが、まずはその前にコンソールのリソース操作で記事を追加できるようにしましょう。</p>
+
+<h2 id="toc_2">記事リソースのPOSTインターフェイスを作成</h2>
+
+<p>GETインターフェイスメソッドしかない記事リソースに記事を追加することのできるPOSTインターフェイスを加えます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function onPost($title, $body, $created # null, $modified  null)
+{
+    return $this;
+}
+</code></pre></div>
+<p>まず、この状態でPOSTしてみましょう。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php api.php post &#39;app://self/blog/posts&#39;
+
+
+400 Bad Request
+X-EXCEPTION-CLASS: BEAR\Resource\Exception\InvalidParameter
+X-EXCEPTION-MESSAGE: $title in Sandbox\Resource\App\Posts::onPost
+[BODY]
+You sent a request that query is not valid.
+</code></pre></div>
+<p>必要な引数を指定していないので、リクエスト不正という*400 Bad Request* のレスポンスが帰ってきました。</p>
+
+<p>リソースリクエストに必要な引数は<code>options</code>メソッドで調べる事ができます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$php api.php options &#39;app://self/blog/posts&#39;
+
+
+200 OK
+allow: [&quot;get&quot;,&quot;post&quot;,&quot;put&quot;,&quot;delete&quot;]
+param-get: (id)
+param-post: title,body
+param-put: id,title,body
+param-delete: id
+content-type: application/hal+json; charset=UTF-8
+</code></pre></div>
+<p>利用可能なメソッドはallowで表され、続いてそれぞれに利用可能な引数が表示されます。括弧で囲まれているのはオプション指定で省力可能です。</p>
+
+<p>例えばGETメソッドは、引数なし、あるいは&quot;id&quot;を指定してリクエストします。POSTメソッドはかならず&quot;title&quot;と&quot;body&quot;が必要です。</p>
+
+<p>必要な指定引数が明らかになりました。次はクエリーを付けてリクエストします。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">php api.php post &#39;app://self/posts?title# hello&amp;body&quot;this is first post&quot;&#39;
+
+
+200 OK
+[BODY]
+NULL
+</code></pre></div>
+<p>コンテンツNULLの200 OKが帰ってきました。
+問題はありませんが、もっと正確な204（No Content）のステータスコードに変更してみましょう。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function onPost($title, $body, $created # null, $modified  null)
+{
+    $this-&gt;code = 204;
+    return $this;
+}
+</code></pre></div>
+<p>リソースのステータスコードを変更するにはcodeプロパティを指定します。</p>
+
+<p>ステータスコードはよりリソースの正確なステータスを報告してくれるようになりました。ユニットテストにも役立ちそうです。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">204 No Content
+[BODY]
+NULL
+</code></pre></div>
+<p>POSTインターフェイスを実装します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function onPost($title, $body, $created # null, $modified  null)
+{
+    $this-&gt;db-&gt;insert($this-&gt;table, [&#39;title&#39; # &gt; $title, &#39;body&#39; &gt; $body]);
+    $this-&gt;code = 204;
+    return $this;
+}
+</code></pre></div>
+<p>リクエストを受け取ったPOSTインターフェイスメソッドがDBに記事をインサートします。これで記事の追加ができるようになりました。</p>
+
+<p>このメソッドでもGETインターフェイスの時と同じく外部からインジェクトされたDBオブジェクトを用いています。GETインターフェイスと違うのslaveではなく、masterのDBオブジェクトがインジェクトされていることです。</p>
+
+<p>GETインターフェイスでこのクラスのonで始まる全てのメソッドに束縛したDBオブジェクトをインジェクトするインターセプターをバインドした事を思い出してください。束縛されたDBインジェクターはメソッドがリクエストされる直前に`リソースリクエストに応じたDBオブジェクトをインジェクトします。リソースリクエストは*必要とする依存の準備や取得に関心を払う事なく、そのオブジェクトを利用してる* 事に注目してください。これはBEAR.Sundayが一貫して指向している *関心の分離 *の原則に従っています。</p>
+
+<h2 id="toc_3">記事リソースのテスト</h2>
+
+<p>記事が追加され、その追加した内容を確認するテストを作成します。DBのテストを含んだリソースのユニットテストはこのようなコードになります。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
+{
+    public function getConnection()
+    {
+        // DB接続
+    }
+
+    public function getDataSet()
+    {
+        // 初期データセット
+    }
+
+    /**
+     * @test
+     */
+    public function post()
+    {
+        // +1
+        $before = $this-&gt;getConnection()-&gt;getRowCount(&#39;posts&#39;);
+        $response = $this-&gt;resource
+        -&gt;post
+        -&gt;uri(&#39;app://self/posts&#39;)
+        -&gt;withQuery([&#39;title&#39; # &gt; &#39;test_title&#39;, &#39;body&#39; &gt; &#39;test_body&#39;])
+        -&gt;eager
+        -&gt;request();
+        $this-&gt;assertEquals($before + 1, $this-&gt;getConnection()-&gt;getRowCount(&#39;posts&#39;), &quot;faild to add post&quot;);
+
+        // new post
+        $body = $this-&gt;resource
+        -&gt;get
+        -&gt;uri(&#39;app://self/posts&#39;)
+        -&gt;withQuery([&#39;id&#39; =&gt; 4])
+        -&gt;eager
+        -&gt;request()-&gt;body;
+        return $body;
+    }
+
+    /**
+     * @test
+     * @depends post
+     */
+    public function postData($body)
+    {
+        $this-&gt;assertEquals(&#39;test_title&#39;, $body[&#39;title&#39;]);
+        $this-&gt;assertEquals(&#39;test_body&#39;, $body[&#39;body&#39;]);
+    }
+}
+</code></pre></div>
+<p>postメソッドで記事が追加されたかをテストし、postDataメソッドでその内容を確認しています。</p>
+
+<h2 id="toc_4">記事を追加するページを作成</h2>
+
+<p>記事を追加するappリソースが出来たので、次はwebからの入力を受け取ってそのappリソースをリクエストするページリソースを作成します。</p>
+
+<p>テンプレートにフォームを追加します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;h1&gt;New Post&lt;/h1&gt;
+&lt;form action# &quot;/blog/posts/newpost&quot; method&quot;POST&quot;&gt;
+    &lt;input name# &quot;X-HTTP-Method-Override&quot; type=&quot;hidden&quot; value&quot;POST&quot; /&gt;
+    &lt;div class=&quot;control-group {if $errors.title}error{/if}&quot;&gt;
+        &lt;label class# &quot;control-label&quot; for&quot;title&quot;&gt;Title&lt;/label&gt;
+        &lt;div class=&quot;controls&quot;&gt;
+            &lt;input type# &quot;text&quot; id=&quot;title&quot; name=&quot;title&quot; value&quot;{$submit.title}&quot;&gt;
+            &lt;p class=&quot;help-inline&quot;&gt;{$errors.title}&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;control-group {if $errors.body}error{/if}&quot;&gt;
+        &lt;label&gt;Body&lt;/label&gt;
+        &lt;textarea name# &quot;body&quot; rows=&quot;10&quot; cols&quot;40&quot;&gt;{$submit.body}&lt;/textarea&gt;
+        &lt;p class=&quot;help-inline&quot;&gt;{$errors.body}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;input type# &quot;submit&quot; value&quot;送信&quot;&gt;
+&lt;/form&gt;
+</code></pre></div>
+<p>Note: <code>X-HTTP-Method-Override</code>というhideen項目に注目してください。これはページリソースへのリクエストメソッドを指定しています。ブラウザやWebサーバーがGET/POSTしかサポートしていなくても、その外部プロトコルとは別にソフトウエアの内部プロトコルとして機能します。</p>
+
+<p>Note:<code>$_GET</code>クエリーで指定するときは<code>$_GET[&#39;_method&#39;]</code>で指定します。</p>
+
+<p>ページリソースにPOSTインターフェイスを実装します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * Post
+ *
+ * @param string $title
+ * @param string $body
+ */
+public function onPost($title, $body)
+{
+    // create post
+    $this-&gt;resource
+    -&gt;post
+    -&gt;uri(&#39;app://self/posts&#39;)
+    -&gt;withQuery([&#39;title&#39; # &gt; $title, &#39;body&#39; &gt; $body])
+    -&gt;eager-&gt;request();
+
+    // redirect
+    $this-&gt;code = 303;
+    $this-&gt;headers # [&#39;Location&#39; &gt; &#39;/blog/posts&#39;];
+    return $this;
+}
+</code></pre></div>
+<p>GETインターフェイスの時と違って<code>withQuery()</code>メソッドでリソースリクエストに引数を指定しています。通常のPHPのメソッド引数と違って順番でなく、名前で引数を指定しているのに注目してください。Webのリクエストと同じようにkey=valueと並べたものクエリーとしてメソッドリクエストに用いてます。(keyが変数名です)</p>
+
+<p><code>eager-&gt;request();</code>は<code>すぐに</code>リソースリクエストを行う事を表しています。</p>
+
+<p>コンソールから記事をページリソースリクエスト経由で<code>POST</code>してみます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">php api.php post &#39;page://self/posts?title# &quot;hello again&quot;&amp;body&quot;how have you been ?&quot;&#39;
+</code></pre></div>
+<p>記事表示ページにPOSTリクエストをすると記事リソースが追加されます。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

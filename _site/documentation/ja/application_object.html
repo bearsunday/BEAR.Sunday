@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | アプリケーションオブジェクト</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li class="active"><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>アプリケーション</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+
+		
+			<li><a href="application.html">イントロダクション</a></li>
+<li><a href="application_script.html">スクリプト</a></li>
+<li><a href="application_object.html">オブジェクト</a></li>
+<li><a href="application_instance_script.html">インスタンススクリプト</a></li>
+<li><a href="interface.html">インターフェイス</a></li>
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">アプリケーションオブジェクト</h1>
+
+<p>アプリケーションオブジェクトはアプリケーションの実行を規定するアプリケーションスクリプトで使用する全てのサービスオブジェクトを保持したオブジェクトです。</p>
+
+<h1 id="toc_1">アプリケーションクラス</h1>
+
+<p>以下は最小構成のアプリケーションクラスです。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">use BEAR\Sunday\Extension\Application\AppInterface;
+
+final class App implements Context
+{
+    public $resource;
+    public $response;
+    public $logger;
+
+    /**
+     * Constructor
+     *
+     * @param ResourceInterface $resource Resource client
+     * @param ResponseInterface $response Web / Console response
+     * @param ApplicationLogger $logger   Application logger
+     *
+     * @Inject
+     */
+    public function __construct
+        ResourceInterface $resource,
+        ResponseInterface $response,
+        ApplicationLogger $logger
+    ) {
+        $this-&gt;resource = $resource;
+        $this-&gt;response = $response;
+        $this-&gt;logger = $logger;
+        $resource-&gt;attachParamProvider(&#39;Provides&#39;, new Provides);
+    }
+}
+</code></pre></div>
+<p>アプリケーションスクリプトに必要な、リソースクライアント、レスポンス、ロガーがコンストラクタで渡されプロパティに格納されています。</p>
+
+<p>アプリケーション構成によりそれぞれのインターフェイスに応じた適切なオブジェクトがインジェクトされます。例えば開発用の構成ではより多くのデバック情報が提供される開発用のリソースクライントが、API用のアプリケーションではHTML出力する代わりにJSON+HAL（またはJSON)の出力がされるコンポーネントが入ります。</p>
+
+<p>このクラスはインスタンススクリプトでインスタンス化されます。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

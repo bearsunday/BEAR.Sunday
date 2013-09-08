@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | はじめてのリソースリクエスト</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li><a href="install.html">インストールと設定</a></li>
+		  <li class="active"><a href="my_first_resource.html">「はじめての」チュートリアル"</a></li>
+		  <li><a href="blog_install.html">ブログ・チュートリアル</a></li>
+		  <li><a href="application.html">アプリケーション</a></li>
+		  <li><a href="resource.html">リソース</a></li>
+		  <li><a href="di_aop_introduction.html">DI＆AOP</a></li>
+		  <li><a href="faq.html">その他/Faq</a></li>
+		</ul>
+	</div>
+</div>
+<p></p>
+
+
+
+
+<div class="row">
+	<div class="col-md-3">
+
+		<div class="panel panel-default">
+	<div class="panel-heading"><strong>「はじめての」チュートリアル</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+		
+
+		
+			<li><a href="my_first_resource.html">はじめてのリソース</a></li>
+<li><a href="my_first_web_api.html">はじめてのWeb API</a></li>
+<li><a href="my_first_test.html">はじめてのテスト</a></li>
+<li><a href="my_first_web_page.html">はじめてのWebページ</a></li>
+<li><a href="my_first_resource_request.html">はじめてのリソースリクエスト</a></li>
+<li><a href="my_first_di.html">はじめての注入</a></li>
+<li><a href="my_first_aop.html">はじめてのアスペクト</a></li>
+<li><a href="my_first_pull.html">はじめてのプル</a></li>
+<li><a href="my_first_hypermedia.html">はじめてのハイパーメディア</a></li>
+<li><a href="my_first_lazy.html">はじめての遅延評価</a></li>
+		
+
+		
+
+		
+
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+	</div>
+	<div class="col-md-9">
+
+		 <h1 id="toc_0">はじめてのリソースリクエスト</h1>
+
+<h2 id="toc_1">アプリケーションリソースを利用します</h2>
+
+<p>今までのチュートリアルではコンソールやwebブラウザからリソースをリクエストしていましたが、このチュートリアルではリソースからリソースのリクエストを行います。</p>
+
+<p>ここでは[my_first_web_page はじめてのwebページ]で作成したページを[my_first_resource はじめてのリソース]を利用したものに変更します。</p>
+
+<p>ページリソースがアプリケーションリソースをリクエストしています。ページリソースはページに関心を持つリソースです。通常、ページリソースは自身（ページ）を構成するために必要なアプリケーションリソースをリクエストして自らを構成します。</p>
+
+<p>Note: 例えていうとコントローラーが&quot;Hello World&quot;を返してたページが、モデルが返した&quot;Hello World&quot;を表示するページに変更します。</p>
+
+<h2 id="toc_2">リソースクライアントの準備</h2>
+
+<p>BEAR.Sundayでは必要なサービス（オブジェクト）は基本的に全て外部からインジェクトしてもらうのを期待します。リソースリクエストにはリソースクライアントが必要です。</p>
+
+<p>リソースクライアントインターフェイス（<code>BEAR\Resource\ResourceInterface</code>）をタイプヒントにして@Injectとアノテーションでマークするとインジェクト（外部から代入）してもらいます。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">use BEAR\Resource\ResourceInterface;
+use Ray\Di\Di\Inject;
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">class User
+{
+    /**
+     * @Inject
+     */
+    public function setResource(ResourceInterface $resource)
+    {
+        $this-&gt;resource = $resource;
+    }
+</code></pre></div>
+<h2 id="toc_3">traitセッターの利用</h2>
+
+<p>このセッターはtraitとして用意されていてこのように表記できます。
+```
+use BEAR\Sunday\Inject\ResourceInject;</p>
+
+<p>class User
+{
+    use ResourceInject;
+}
+```</p>
+
+<h2 id="toc_4">GETリクエスト</h2>
+
+<p><code>app://self/first/greeting</code>というURIのアプリケーションリソースに?name=$nameのクエリーを付けたリソースリクエストを行うのはこのようなメソッドになります。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    /**
+     * Get
+     *
+     * @param  string $name
+     */
+    public function onGet($name = &#39;anonymous&#39;)
+    {
+        $this[&#39;greeting&#39;] = $this-&gt;resource
+        -&gt;get
+        -&gt;uri(&#39;app://self/first/greeting&#39;)
+        -&gt;withQuery([&#39;name&#39; =&gt; $name])
+        -&gt;request();
+
+        return $this;
+    }
+</code></pre></div>
+<h2 id="toc_5"><code>$_GET</code>クエリー</h2>
+
+<p><code>$_GET[&#39;name&#39;]</code>の内容が引き数の<code>$name</code>に渡ります。<code>$_GET[&#39;name&#39;]</code>が存在しない場合はデフォルトの&#39;anonymous&#39;が渡されます。</p>
+
+<h2 id="toc_6">コマンドラインでページを確認</h2>
+
+<p>&#39;greeting&#39;スロットには<code>&#39;app://self/first/greeting&#39;</code>リソースのリクエストが格納されました。</p>
+
+<h2 id="toc_7">APIとして確認</h2>
+
+<p>まずAPIとしてページリソースを確認します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php api.php get &#39;page://self/first/greeting?name=BEAR&#39;
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+cache-control: no-cache
+date: Fri, 13 Jul 2012 13:47:28 GMT
+content-type: text/html; charset=UTF-8
+[BODY]
+greeting:Hello, BEAR
+</code></pre></div>
+<p><code>greeting</code>スロットに&#39;Hello, BEAR&#39;が渡されてます。クエリーを無くすとどうなるでしょうか。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php api.php get &#39;page://self/first/greeting&#39;
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+content-type: [&quot;application\/hal+json; charset=UTF-8&quot;]
+cache-control: [&quot;no-cache&quot;]
+date: [&quot;Mon, 12 Nov 2012 01:32:07 GMT&quot;]
+[BODY]
+{
+    &quot;greeting&quot;: &quot;Hello, anonymous&quot;,
+    &quot;_links&quot;: {
+        &quot;self&quot;: {
+            &quot;href&quot;: &quot;page://self/first/greeting&quot;
+        }
+    }
+}
+</code></pre></div>
+<p>デフォルトの値が代入されてるのが確認できます。</p>
+
+<h2 id="toc_8">ページテンプレートを用意</h2>
+
+<p>ページリソース用のテンプレートは同じです。
+<code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;body&gt;
+      &lt;h1&gt;{$greeting}&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></p>
+
+<h2 id="toc_9">HTMLをコマンドラインで確認</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php web.php get &#39;/first/greeting?name=Sunday&#39;
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+cache-control: [&quot;no-cache&quot;]
+date: [&quot;Fri, 01 Feb 2013 14:27:46 GMT&quot;]
+[BODY]
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello, Sunday&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+<h2 id="toc_10">ページのテスト</h2>
+
+<p>ページもリソースです。テストの仕方は[my_first_test はじめてのテスト]で紹介をしたようにページリソースをテストします。</p>
+
+	</div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

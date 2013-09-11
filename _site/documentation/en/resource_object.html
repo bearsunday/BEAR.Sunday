@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Resource Object</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li class="active"><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Resource</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+
+		
+			<li><a href="resource.html">Introduction</a></li>
+<li><a href="resource_client.html">Resource Client</a></li>
+<li><a href="resource_object.html">Resource Object</a></li>
+<li><a href="resource_renderer.html">Resource Renderer</a></li>
+<li><a href="resource_link.html">Resource Link</a></li>
+<li><a href="resource_adapter.html">Resource Adapter</a></li>
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Resource Object</h1>
+
+<p><em>Representational State Transfer (REST) is a style of software architecture for distributed systems such as the World Wide Web...Individual resources are identified in requests, for example using URIs in web-based REST systems.- wikipedia &quot;REST&quot;</em></p>
+
+<p>BEAR.Sundays resource object takes these REST resource features and allows you build up these in a web application in an internal API.</p>
+
+<p>A resource object can contain the resource state, request interface and links.</p>
+
+<h2 id="toc_1">Resource Object Type</h2>
+
+<p>Resource objects are made distinct by their schema. In the current sandbox application there are 2 types the application resource (app） and page resource (page).</p>
+
+<h2 id="toc_2">Resource object class</h2>
+
+<p>This hold the resource status and the request interface. Except for the query 1 URI corresponds to 1 class.</p>
+
+<p>|| URI || Class || File ||
+|| page://self/index || Sandbox\Resource\Page\Index ||Sandbox/Resource/Page/Index.php ||
+|| app://self/blog/posts || Sandbox\Resource\App\Blog\Posts || Sandbox/Resource/App/Blog/Posts.php ||</p>
+
+<p>The resources request resource interface is mapped to a PHP class.</p>
+
+<p>Note: The schema and the process are not fixed. The user can add names to the applications cross-cutting concerns and re-use them or pass the processing over to a mock for testing.</p>
+
+<h1 id="toc_3">Resource Property</h1>
+
+<p>A resource has 5 public properties.</p>
+
+<p>|| Property || Name || Meaning　|| Type ||
+|| code || Code　|| Status || int ||
+|| headers  || Header || Meta Data || array&lt;$name =&gt; $value&gt; ||
+|| links || Link || Resource Link || array&lt;$rel =&gt; $uri&gt;  ||
+|| body || Body || Resource Status || mixed ||
+|| view || View || Resource View || string||</p>
+
+<h3 id="toc_4">Code</h3>
+
+<p>Displays the resource status. When it is a page resource this is the HTTP status. The default is 200(OK). </p>
+
+<h3 id="toc_5">Header</h3>
+
+<p>The resources meta data. For example in a resource that handles paging, how many records are displayed or which page is currently being shown, pagers total records or even html for the navigation or other non essential meta data can be stored here. In the case of a page resource, these will be in the HTTP headers.</p>
+
+<h3 id="toc_6">Link</h3>
+
+<p>The resource link functionality encapsulates the link relationships between resource. The active client can use the relationships without any knowledge relationships are implemented. Using the web a tag as example it is simple to understand. It is not the client that manages the link url&#39;s instead it is the web service, the user only needs to click on the link text. The relationship info is all contained within the resource not the client.</p>
+
+<h2 id="toc_7">Body</h2>
+
+<p>The resources true value is in the body that displays the resource content.</p>
+
+<p>Example) Car speed resource
+<code>
+(int) 60
+</code></p>
+
+<p>Example) Car journey resource
+<code>
+[
+ &#39;speed&#39; =&gt; 60,
+ &#39;passenger&#39; =&gt; 1,
+ &#39;gear&#39; =&gt; 4
+ ...
+]
+</code></p>
+
+<h2 id="toc_8">View</h2>
+
+<p>The view is something that &#39;expresses&#39; the resource. For example a resource for tomorrows weather could be something like the following.</p>
+
+<p>Resource state: &#39;Sunny&#39;
+Resource expression: &#39;Weather: <img src="sky.gif">Sunny&#39;</p>
+
+<h1 id="toc_9">Request Interface</h1>
+
+<h2 id="toc_10">Method</h2>
+
+<p>A resource can contain an interface that responds to the request. For example a resource that only responds to a GET request will have an <code>onGet</code> method.</p>
+
+<p>Example  a GET interface that responds to $id, $body, $title　as a query (parameters).
+<code>
+public function onGet($id, $body, $title = &#39;untitled&#39;) 
+{
+}
+</code></p>
+
+<p>This is different to BEAR.Saturday which has the notation of a a regular PHP method. When using this you call it using named parameters the ordering is not important.</p>
+
+<p>Note: If you change the ordering there is no need to edit the calling side.
+ Note: Where possible only receive scaler variables.</p>
+
+<h2 id="toc_11">Self Building</h2>
+
+<p>The method that receives the request (Request Interface) can be change the resource status by means of a database, external web API or through business logic. (hence changing properties of the $body property, $headers or $code).
+<code>
+return $this
+</code></p>
+
+<p>Note: If anything other than $this is returned, that will be used to populate $body and $this is returned.
+ Example) return 3; is the same as $this-&gt;body = 3; return $this;</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

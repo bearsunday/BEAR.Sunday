@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Resource Renderer</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li class="active"><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Resource</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+
+		
+			<li><a href="resource.html">Introduction</a></li>
+<li><a href="resource_client.html">Resource Client</a></li>
+<li><a href="resource_object.html">Resource Object</a></li>
+<li><a href="resource_renderer.html">Resource Renderer</a></li>
+<li><a href="resource_link.html">Resource Link</a></li>
+<li><a href="resource_adapter.html">Resource Adapter</a></li>
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Resource Renderer</h1>
+
+<p>The resource changes from the state to presentation. For example the user page saves all of the information about a user in properties, however this is expressed to the client as HTML.</p>
+
+<p>It is the resource renderer that converts it from the state to the presentation. Rendering occurs when renderer resolves the resource as a string. In many cases the rendering is carried out by the template engine which is injected into the renderer.</p>
+
+<h2 id="toc_1">Injecting the Renderer</h2>
+
+<p>It is the responsibility of the resources internal resource renderer to display the resource state. It is not the user. In MVC terms, this is like if inside a model there is a renderer that decides how the model should be displayed. </p>
+
+<p>The renderer is injected using <code>Dependency Injection</code>. In the application module you can set the DI configuration to use an alternative renderer. For example when you are in development the <code>DevRenderer</code> which displays detailed development information will be injected.
+When creating a Web API for example a <code>JsonRenderer</code> which renders JSON or a format renderer that outputs JSON and link information <a href="http://stateless.co/hal_specification.html">HAL</a> (JSON+HAL) can be setup in the DI Settings.</p>
+
+<p>In the <code>DevModule</code> which is used for development the resource renderer interface is bound to the <code>DevRenderer</code> for development use. By changing this binding you can change every resource to output JSON data for a Web API.
+<code>
+$this-&gt;bind(&#39;BEAR\Resource\Renderable&#39;)-&gt;to(&#39;BEAR\Framework\Resource\View\DevRenderer&#39;);
+</code></p>
+
+<h2 id="toc_2">Rendering</h2>
+
+<p>The renderer grabs hold of the resource state as a <code>ResourceObject</code>, then uses the injected template engine to turn this into a string.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function render(ResourceObject $ro)
+{
+ ....
+ return $ro-&gt;body;
+}
+</code></pre></div>
+<p>Note: It is set up so that the resource object does not directly setup the template inside the resource request method. The renderer which indirectly holds the state of the resource (eg: Failed Login), or even view template decides based on that which template is used. So that the model is not concerned by the view, we make sure that the resource does not know any details about the rendering.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

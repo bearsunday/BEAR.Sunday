@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+	<div class="panel-heading"><strong>{{ page.category }}</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		{% if page.category == "Blog Tutorial" %}
+   			{% include docs/en/blog.html %}
+		{% endif %}
+
+		{% if page.category == "Installation" %}
+   			{% include docs/en/install.html %}
+		{% endif %}
+
+		{% if page.category == "My First - Tutorial" %}
+			{% include docs/en/my_first.html %}
+		{% endif %}
+
+		{% if page.category == "Application" %}
+			{% include docs/en/application.html %}
+		{% endif %}
+
+		{% if page.category == "Resource" %}
+			{% include docs/en/resource.html %}
+		{% endif %}
+
+		{% if page.category == "DI & AOP" %}
+			{% include docs/en/di_aop.html %}
+		{% endif %}
+
+		{% if page.category == "Others" %}
+			{% include docs/en/libraries.html %}
+		{% endif %}
+
+		
+	</ul>
+</div>
+</div>

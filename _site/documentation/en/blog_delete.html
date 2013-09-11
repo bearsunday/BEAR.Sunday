@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Blog Tutorial(8) Deleting Posts</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li class="active"><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Blog Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">Installing BEAR</a></li>
+<li><a href="blog_db.html">DB Settings</a></li>
+<li><a href="blog_get.html">Creating a Post Resource</a></li>
+<li><a href="blog_page.html">Creating a Post Detail Page</a></li>
+<li><a href="blog_template.html">Creating a Template</a></li>
+<li><a href="blog_create.html">Adding a Post</a></li>
+<li><a href="blog_validate.html">Validation</a></li>
+<li><a href="blog_delete.html">Removing a Post</a></li>
+<li><a href="blog_update.html">Editing a Post</a></li>
+<li><a href="blog_more.html">More</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">DELETE Method</h1>
+
+<h2 id="toc_1">Deleting a Post page</h2>
+
+<p>So that you can delete a post that has is identified with an <code>id</code> from our posts page, we will create an <code>onDelete()</code> method in the posts page resource, this will respond to a DELETE request.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    /**
+     * Delte
+     * 
+     * @param int $id
+     */
+    public function onDelete($id)
+    {
+        // delete
+        $this-&gt;resource
+        -&gt;delete
+        -&gt;uri(&#39;app://self/posts&#39;)
+        -&gt;withQuery([&#39;id&#39; =&gt; $id])
+        -&gt;eager
+        -&gt;request();
+
+        // message
+        $this[&#39;message&#39;] = &#39;Entry deleted.&#39;;
+        return $this-&gt;onGet();
+    }
+</code></pre></div>
+<p>As a page resource receives a <code>DELETE</code> request from a web browser it in the same way makes a <code>DELETE</code> request to the posts resource.s</p>
+
+<p>This link to the posts page resource will be available on the posts resource template. Using Javascript show a confirmation dialog, then so that the page request is made as a <code>DELETE</code> method use the <code>_method</code> query.</p>
+
+<p>Note: When posting using the <code>X-HTTP-Method-Override</code> hidden element or in the GET query a <code>_method</code> parameter is an <em>HTTP Method Override</em> method of supporting PUT/DELETE when your browser or when your server environment prevents you from fully using HTTP verbs.</p>
+
+<h2 id="toc_2">Create a Posts Resource DELETE interface</h2>
+
+<p>Receive a request post from a posts page and through accessing the DB delete the post. </p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    public function onDelete($id)
+    {
+        $this-&gt;db-&gt;delete($this-&gt;table, [&#39;id&#39; =&gt; $id]);
+        $this-&gt;code = 204;
+        return $this;
+    }
+</code></pre></div>
+<p>Note: Like the GET request interface the <code>$this-&gt;db</code> is automatically set by the injector. What is different to the GET request is that it used the master DB connection.</p>
+
+<h2 id="toc_3">Checking this with through the Command Line</h2>
+
+<p>Lets try it out. We have set it up with a 204 status code so it should look like this.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php api.php delete app://self/posts?id=1
+204 No Content
+[BODY]
+</code></pre></div>
+<h2 id="toc_4">Unit Test</h2>
+
+<p>If we access with DELETE the records should be reduced by 1. The test will look something like this.
+<code>
+    /**
+     * @test
+     */
+    public function delete()
+    {
+        // dec 1
+        $before = $this-&gt;getConnection()-&gt;getRowCount(&#39;posts&#39;);
+        $response = $this-&gt;resource
+        -&gt;delete
+        -&gt;uri(&#39;app://self/posts&#39;)
+        -&gt;withQuery([&#39;id&#39; =&gt; 1])
+        -&gt;eager
+        -&gt;request();
+        $this-&gt;assertEquals($before - 1, $this-&gt;getConnection()-&gt;getRowCount(&#39;posts&#39;), &quot;faild to delete post&quot;);
+    }
+</code></p>
+
+<h2 id="toc_5">Javascript Confirmation Dialogue</h2>
+
+<p>In order to add a confirmation to a delete action the we use the JS library that is included with the sandbox application.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;a title# &quot;Delete post&quot; class=&quot;btn&quot; href=&quot;#&quot; onclick=&quot;return MyDialogs.loadConfirmationModal(&#39;my_dialog&#39;, &#39;/blog/posts?_method=delete&amp;id={$post.id}&#39;, &#39;Are you sure ?&#39;, &#39;The entry will be deleted permanently.&#39;);&quot;&gt;&lt;span class&quot;icon-trash&quot;&gt;&lt;/span&gt;&lt;/a&gt;
+</code></pre></div>
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

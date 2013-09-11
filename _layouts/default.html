@@ -1,26 +1,34 @@
 {% include header.html %}
 
+<p></p>
 <div class="container">
 
-	        <!-- Static navbar -->
-        <div class="navbar navbar-default">
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="#">Documentation</a></li>
-              <li><a href="#">Code</a></li>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/ja">Japanese</a></li>
-              <li><a href="/">English</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li{% if page.category == "Installation" %} class="active"{% endif %}><a href="install.html">Installation</a></li>
+      <li{% if page.category == "My First - Tutorial" %} class="active"{% endif %}><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li{% if page.category == "Blog Tutorial" %} class="active"{% endif %}><a href="blog_install.html">Blog Tutorial</a></li>
+      <li{% if page.category == "Application" %} class="active"{% endif %}><a href="application.html">Application</a></li>
+      <li{% if page.category == "Resource" %} class="active"{% endif %}><a href="resource.html">Resource</a></li>
+      <li{% if page.category == "DI & AOP" %} class="active"{% endif %}><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li{% if page.category == "Others" %} class="active"{% endif %}><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
 
 <div class="row">
-	<div class="col-md-12">
+  <div class="col-md-3">
 
-		 {{ content }}
-	</div>
+    {% include docs/en/subnav.html %}
+
+
+  </div>
+  <div class="col-md-9">
+
+     {{ content }}
+  </div>
 </div>
 
 </div>

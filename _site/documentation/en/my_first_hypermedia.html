@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | My First Hypermedia</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li class="active"><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>My First - Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+			<li><a href="my_first_resource.html">My First Web Resource</a></li>
+<li><a href="my_first_web_api.html">My First Web API</a></li>
+<li><a href="my_first_test.html">My First Test</a></li>
+<li><a href="my_first_web_page.html">My First Web Page</a></li>
+<li><a href="my_first_resource_request.html">My First Resource Request</a></li>
+<li><a href="my_first_di.html">My First Injection</a></li>
+<li><a href="my_first_aop.html">My First Aspect</a></li>
+<li><a href="my_first_pull.html">My First Pull</a></li>
+<li><a href="my_first_hypermedia.html">My First Hyper Media</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Hypermedia</h1>
+
+<h2 id="toc_1">What is Hypermedia?</h2>
+
+<p>In 1962 Ted Nelson proposed <a href="http://en.wikipedia.org/wiki/Hypertext">Hypertext</a>`.
+This is when in order to refer some text other text referral links are embedded in the text itself, the referrals that joins the text are called Hyperlinks.</p>
+
+<p>The most famous and successful implementation of Hypertext is the Worldwide Web.</p>
+
+<p>(The href in a property of the <code>&lt;a&gt;</code> tag is an abbreviation for hyper-reference).
+Also to note is that PHP is an acronym of <em>PHP: Hypertext Preprocessor</em> ([<a href="http://www.php.net/manual/en/faq.general.php#faq.general.acronym">http://www.php.net/manual/en/faq.general.php#faq.general.acronym</a> PHP an acronym for what?])</p>
+
+<h2 id="toc_2">Non Existent Hypermedia</h2>
+
+<p>Let&#39;s think in terms of a <code>REST API</code> for example when you order a coffee at a coffee shop.</p>
+
+<p>When you order a coffee, the <code>REST API</code> is provided with the following.</p>
+
+<p>|| METHOD || POST ||
+|| URI || <code>http://restbucks.com/order/{?drink}</code> ||
+|| Query || drink=Drink Name ||</p>
+
+<p>You use this <code>API</code> when ordering a drink. When using this API you create a (POST) <code>Order Resource</code>.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">post http://restbucks.com/order/?drink=latte
+</code></pre></div>
+<p>The order resource has been created and the order contents are returned.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{
+    &quot;drink&quot;: &quot;latte&quot;,
+    &quot;cost&quot;: 2.5,
+    &quot;id&quot;: &quot;5052&quot;,
+}
+</code></pre></div>
+<p>This is <em>not hypermedia</em>. The data does not have any attached uniquely displayed URI&#39;s or related links.</p>
+
+<h2 id="toc_3">HAL - Hypertext Application Language</h2>
+
+<p>JSON is not essentially a hypermedia format, however using JSON the 
+[<a href="http://stateless.co/hal_specification.html">http://stateless.co/hal_specification.html</a> HAL - Hypertext Application Language]
+which is a [<a href="http://tools.ietf.org/html/draft-kelly-json-hal-00">http://tools.ietf.org/html/draft-kelly-json-hal-00</a> RFC Draft Standard] 
+is used to provide <code>JSON+HAL</code> hyper-media.</p>
+
+<p>In BEAR.Sunday when you set your resource rendering to <code>HalRenderer</code> you can output in HAL format.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{
+    &quot;drink&quot;: &quot;latte&quot;,
+    &quot;cost&quot;: 2.5,
+    &quot;id&quot;: &quot;1545&quot;,
+    &quot;_links&quot;: {
+        &quot;self&quot;: {
+            &quot;href&quot;: &quot;app://self/restbucks/order?id=1545&quot;
+        },
+        &quot;payment&quot;: {
+            &quot;href&quot;: &quot;app://self/restbucks/payment?id=1545&quot;
+        }
+    }
+}
+</code></pre></div>
+<p>This is an order resource output in the <code>HAL</code> Format.
+The URI&#39;s and related link information for itself are embedded in the <code>_links</code> property.
+The order and payment relationship is not saved by the client, but by the service.</p>
+
+<p>On the service side you can change the link references according to service circumstances.
+In those times you need to change nothing on the client, just carry on following the provided link.
+By having links you transform your service from just another data format to a self descriptive Hyper-Media resource.</p>
+
+<h2 id="toc_4">Adding Hyperlinks</h2>
+
+<p>You declare your resource object&#39;s <code>links</code> property like this. </p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    public $links = [
+        &#39;news&#39; # &gt; [Link::HREF &gt; &#39;page://self/news/today&#39;]
+    ];
+</code></pre></div>
+<h2 id="toc_5">Using a URI Template for your Query</h2>
+
+<p>When the URI to dynamically decided you can for example you can create a query in the onPost method like this.
+<code>
+$this-&gt;links[&#39;friend&#39;] # [Link::HREF =&gt; &quot;app://self/sns/friend?id{$id}&quot;];
+</code></p>
+
+<p>In the <code>links</code> property you can set the URI template like this.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    public $links =&gt; [
+        &#39;friend&#39; # &gt; [Link::HREF =&gt; &#39;app://self/sns/friend{?id}&#39;, Link::TEMPLATED &gt; true]
+    ];
+</code></pre></div>
+<p>Here the necessary variable <code>{id}</code> is retrieved from the resource <code>body</code>.</p>
+
+<h2 id="toc_6">Lets Try</h2>
+
+<p>Here is the class that assigns <code>$item</code> and creates the order resource.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+namespace Sandbox\Resource\App\First\HyperMedia;
+
+use BEAR\Resource\AbstractObject;
+use BEAR\Resource\Link;
+
+/**
+ * Greeting resource
+ */
+class Order extends AbstractObject
+{
+    public function onPost($item)
+    {
+        $this[&#39;item&#39;] = $item;
+        $this[&#39;id&#39;] = date(&#39;is&#39;); // min+sec
+
+        return $this;
+    }
+}
+</code></pre></div>
+<p>In order to add hyperlinks setup the <code>links</code> property.
+<code>
+    public $links = [
+        &#39;payment&#39; # &gt; [Link::HREF =&gt; &#39;app:/self/first/hypermedia/payment{?id}&#39;, Link::TEMPLATED &gt; true]
+    ];
+</code></p>
+
+<h2 id="toc_7">Make API Request From the Console</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ api get app://self/first/hypermedia/user?id=1
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+content-type: application/hal+json; charset=UTF-8
+[BODY]
+{
+    &quot;item&quot;: &quot;book&quot;,
+    &quot;id&quot;: &quot;1442&quot;,
+    &quot;_links&quot;: {
+        &quot;self&quot;: {
+            &quot;href&quot;: &quot;app://self/first/hypermedia/order?item=book&quot;
+        },
+        &quot;payment&quot;: {
+            &quot;href&quot;: &quot;app:/self/first/hypermedia/payment{?id}&quot;,
+            &quot;templated&quot;: true
+        }
+    }
+}
+</code></pre></div>
+<p>The <code>payment</code> link now appears.</p>
+
+<h2 id="toc_8">Using Links in a Program</h2>
+
+<p>In order to use links in your code, inject the <code>A</code> object using the trait <code>AInject</code> and use the <code>href</code> method to retrieve links.
+The resource body can retrieve the link composed by the URI template.
+```
+&lt;?php
+namespace Sandbox\Resource\App\First\HyperMedia;</p>
+
+<p>use BEAR\Resource\AbstractObject;
+use BEAR\Sunday\Inject\ResourceInject;
+use BEAR\Sunday\Inject\AInject;
+/**
+ * Greeting resource
+ */
+class Shop extends AbstractObject
+{
+    use ResourceInject;
+    use AInject;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function onPost($item, $card_no)
+{
+    $order = $this
+    -&gt;resource
+    -&gt;post
+    -&gt;uri(&#39;app://self/first/hypermedia/order&#39;)
+    -&gt;withQuery([&#39;item&#39; =&gt; $item])
+    -&gt;eager
+    -&gt;request();
+
+    $payment = $this-&gt;a-&gt;href(&#39;payment&#39;, $order);
+
+    $this
+    -&gt;resource
+    -&gt;put
+    -&gt;uri($payment)
+    -&gt;withQuery([&#39;card_no&#39; =&gt; $card_no])
+    -&gt;request();
+
+    $this-&gt;code = 204;
+    return $this;
+}
+</code></pre></div>
+<p>}
+```
+Just like on a web page and you just click a link to go on to the next page, you are now able to control the next links in the service layer.
+Even when the links change there is no need for any change in the client.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

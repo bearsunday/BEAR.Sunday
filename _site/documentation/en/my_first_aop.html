@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | My First Aspect</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li class="active"><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>My First - Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+			<li><a href="my_first_resource.html">My First Web Resource</a></li>
+<li><a href="my_first_web_api.html">My First Web API</a></li>
+<li><a href="my_first_test.html">My First Test</a></li>
+<li><a href="my_first_web_page.html">My First Web Page</a></li>
+<li><a href="my_first_resource_request.html">My First Resource Request</a></li>
+<li><a href="my_first_di.html">My First Injection</a></li>
+<li><a href="my_first_aop.html">My First Aspect</a></li>
+<li><a href="my_first_pull.html">My First Pull</a></li>
+<li><a href="my_first_hypermedia.html">My First Hyper Media</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">My First Aspect</h1>
+
+<h2 id="toc_1">Add the current time to the greeting</h2>
+
+<p>Add the current time to the greeting resource. The final outcome is like this.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&quot;Hello, BEAR. It is 10:22.&quot;
+</code></pre></div>
+<p>Placing the time after the message like this example is an easy way of implementing this.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    public function onGet($name = &#39;anonymous&#39;)
+    {
+        $time = date(&#39;g:i&#39;);
+        return &quot;{$this-&gt;message}, {$name}&quot;. &quot; It is {$time} now&quot;;
+    }
+</code></pre></div>
+<p>How about if you had to add the current time like this to another 10 resources? 
+Carry out on another 10 resources an &#39;Add the time info to the end of some message&#39; process.<br>
+We need to do the same process over and over again so lets make it a method.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    public function onGet($name = &#39;anonymous&#39;)
+    {
+        return &quot;{$this-&gt;message}, {$name}&quot;. timeMessage();
+    }
+</code></pre></div>
+<p>This brings consolidation and increases re-usability.</p>
+
+<p>But we could do the same using a trait.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    use TimeMessageTrait;
+
+    public function onGet($name = &#39;anonymous&#39;)
+    {
+        return &quot;{$this-&gt;message}, {$name}&quot;. $this-&gt;getTimeMessage();
+    }
+</code></pre></div>
+<p>It is the same.</p>
+
+<p>Even though this brings us some consolidation the number of methods being used needs to change.</p>
+
+<p>Say not the time, after the greeting we want to change it to add the weather.
+Shall we change <code>timeMessage</code> to <code>weatherMessage</code>?</p>
+
+<p>Or shall we add after the message <code>postMessage</code> to be more generic?
+We are starting to exhaust ourselves. 
+It is not really a good way to use methods like this, to transversely deal with the same types of processing.  </p>
+
+<h2 id="toc_2">Making this an Aspect</h2>
+
+<p>When you use this kind of method to carry out transverse processing a rather difficult side of coding appears.
+When you run code either before and/or after a process like logging, caching, transactions etc,
+have you ever experienced the same sort of code being left all over the place? </p>
+
+<p>In processing like <code>begin, [query], (commit | rollback)</code>, even though
+<code>[query]</code> is the the only thing that changes we write often this the same way all about the shop.</p>
+
+<p>So how about implementing crosscutting processing to consolidate code and keep the original core process.
+We combine the original message and the added message dynamically.</p>
+
+<p>In in this example, the re-usability of the &#39;Adding the time information&#39; (crosscutting) process is called an &#39;Aspect&#39;.
+The binding of this aspect and the original process is what we refer to as &#39;Aspect Orientated Programming&#39;</p>
+
+<h2 id="toc_3">Reflective method invocation interceptor</h2>
+
+<p>In BEAR.Sunday uses the interceptor pattern to bind this crosscutting process to the original process.  </p>
+
+<p>The crosscutting process is not used inside the original method, the original method is snatched (intercepted) by the 
+crosscutting process, the crosscutting process then calls the original method.</p>
+
+<p>In the previous example you are not calling the a process made up from various methods in &#39;Adding time&#39; (=crosscutting process) from the &#39;greeting&#39; method call.
+The main process is called from the time adding crosscutting method, then calls the greeting.</p>
+
+<p>Can you see that the Master/Slave (Dependency Relationship) has been reversed. 
+Where the logging code was called by the DB access code, 
+now the DB access code is called by the logging code.</p>
+
+<p>This time the original code being run is called by a method using reflection, this is the (Method Invocation) object.
+When using this object the parameters being used can be inspected and you can run the it just as fully intended. 
+We use this object and intercept it.</p>
+
+<h2 id="toc_4">Create an Interceptor</h2>
+
+<p>Lets take a look at the code.
+Lets first take the original methods crosscutting process, this is an interceptor.</p>
+
+<p>First of all a crosscutting process interceptor that does nothing.
+<code>
+class TimeMessage implements MethodInterceptor
+{
+    /**
+     * (non-PHPdoc)
+     * @see Ray\Aop.MethodInterceptor::invoke()
+     */
+    public function invoke(MethodInvocation $invocation)
+    {
+        $result = $invocation-&gt;proceed();
+        return $result;
+    }
+}
+</code></p>
+
+<p>Run the original method（<code>$invocation-&gt;proceed()</code>）, and return its response.</p>
+
+<p>Using <code>$invocation-&gt;proceed()</code> when we run the original method the time message is added at the end of it.
+<code>
+    public function invoke(MethodInvocation $invocation)
+    {
+        $time = date(&#39;g:i&#39;);
+        $result = $invocation-&gt;proceed();
+        return $result . &quot; It is {$time} now&quot;;
+    }
+</code></p>
+
+<h2 id="toc_5">Bind this interceptor to a specific method.</h2>
+
+<p>In this way a we have created an interceptor which a from crosscutting process 
+triggers the original method to run. Next we will assign (bind) the aspect to specific methods.</p>
+
+<p>Using annotations is the general way, not using them here can also be done easily.</p>
+
+<p>Add this to the <code>configure</code> method in <code>sandbox/Module/AppModule.php</code>.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">        // time message binding
+        $this-&gt;bindInterceptor(
+            $this-&gt;matcher-&gt;subclassesOf(&#39;Sandbox\Resource\App\First\Greeting\Aop&#39;),
+            $this-&gt;matcher-&gt;any(),
+            [new TimeMessage]
+        );
+</code></pre></div>
+<p>In this way the <code>TimeMessage</code> interceptor is bound to any method in the <code>&#39;Sandbox\Resource\App\First\Greeting\Aop&#39;</code> class or sub-class.</p>
+
+<h3 id="toc_6">Lets run it</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">get app://self/first/greeting/aop?name=BEAR
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+...
+[BODY]
+&quot;Hello, BEAR. It is 3:12 now !&quot;
+</code></pre></div>
+<p>We have now successfully bound our greeting resource to our aspect which states the time.
+The greeting resource is has no knowledge of the fact that it is being overridden.
+The crosscutting process has called the original code and rides on top of it.</p>
+
+<p>This has not built a dependency on the greeting resource, 
+it is also different to a crosscutting process that uses a trait, it is a dynamic binding.
+This resource can be bound to other aspects, and the aspect can be bound to other resources.</p>
+
+<p>The weaving of this aspect can not only be applied to a resource.
+It can be applied to any other standard object.
+However the original format changes to a <code>weaving</code> format, hence compatibility may be lost.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

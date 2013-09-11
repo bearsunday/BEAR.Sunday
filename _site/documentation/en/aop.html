@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Aspect Orientated Programming (AOP)</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li class="active"><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>DI & AOP</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+			<li><a href="di_aop_introduction.html">Introduction</a></li>
+<li><a href="module.html">Module</a></li>
+<li><a href="injector.html">Injector</a></li>
+<li><a href="aop.html">Aspect</a></li>
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Aspect Orientated Programming (AOP)</h1>
+
+<p>With BEAR.Sunday&#39;s [<a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">http://en.wikipedia.org/wiki/Aspect-oriented_programming</a> Aspect Orientated Programming(AOP)], you can for example with a <code>method annotated with *@Log* log the result</code> and you can do that <em>without changing the original method being called</em>.</p>
+
+<p>AOP class does not directly affect the class, it is a way of each module to independently separate process logic that is shared between modules. For processing where many classes in which normally code duplication may creep in, we can use a technique where as an aspect (cross-cutting concerns) we can add this to a different module.</p>
+
+<p>In the BEAR.Sunday framework there are many functions which the thinking is to gather aspects and implement cross-cutting functionality in AOP. When the object is created the <code>Injector</code> depending on conditions set in the module weaves the aspect to the respective method.</p>
+
+<p>BEAR.Sunday uses an AOP framework called Ray.Aop which implements the [<a href="http://aopalliance.sourceforge.net/doc/org/aopalliance/intercept/MethodInvocation.html#getMethod%28%29">http://aopalliance.sourceforge.net/doc/org/aopalliance/intercept/MethodInvocation.html#getMethod%28%29</a> MethodInterceptor Interface] set out in the AOP Alliance which is similar to Google Guice or Springs implementation of AOP.</p>
+
+<h2 id="toc_1">Interceptor</h2>
+
+<p>The interceptor takes hold of the method being called and performs cross-cutting processing on it. The interceptor implements the <code>invoke</code> method, inside that method the original method is called and the cross-cutting operations are performed.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function invoke(MethodInvocation $invocation);
+</code></pre></div>
+<p>Below is a logger interceptor which logs the the parameters from the operation output.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">class Logger implements MethodInterceptor
+{
+    use LogInject;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ray\Aop.MethodInterceptor::invoke()
+     */
+    public function invoke(MethodInvocation $invocation)
+    {
+        $result = $invocation-&gt;proceed();
+        $class = get_class($invocation-&gt;getThis());
+        $args = $invocation-&gt;getArguments();
+        $input = json_encode($args);
+        $output = json_encode($result);
+        $log # &quot;target = [{$class}], input = [{$input}], result  [{$output}]&quot;;
+        $this-&gt;log-&gt;log($log);
+        return $result;
+    }
+}
+</code></pre></div>
+<p>In this interceptor it uses the injected Log object, the called parameters and the result are logged in JSON format. This interceptor is bound to all resources in the sandbox application&#39;s DEV mode allowing you to easily debug your app.</p>
+
+<p>This method the logger is bound to has no changes at all, yet logging functionality has been added.
+The original method doesn&#39;t care if the logger changes or if it is added or removed.</p>
+
+<p>The primary concern of the original method is its <em>(core concern)</em>, this is completely separated from the method that takes the logs the <em>(cross-cutting concern)</em>.</p>
+
+<h2 id="toc_2">Matcher Binding</h2>
+
+<p>The interceptor you made operates by being bound to the method. You use the <em>matcher</em> to decides what method it will be bound to. The object below binds all methods that begin with <code>on</code> in classes that inherit from <code>BEAR\Resource\Object</code> to the injected log object.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$logger = $this-&gt;requestInjection(&#39;BEAR\Framework\Interceptor\Logger&#39;);
+$this-&gt;bindInterceptor(
+    $this-&gt;matcher-&gt;subclassesOf(&#39;BEAR\Resource\Object&#39;),
+    $this-&gt;matcher-&gt;startWith(&#39;on&#39;),
+    [$logger]
+);
+</code></pre></div>
+<p><code>bindInterceptor</code> takes 3 parameters, the first is a class match, the second is a method match and the 3rd in an interceptor.</p>
+
+<p>|| Method Signature ||　Function ||
+|| bool subclassesOf($class) || Specifies the subclass. Cannot be specified in multi-dimensional arrays.  ||
+|| bool any() || Matches anything||
+|| bool annotatedWith($annotation) || $annotation is the annotations full path. Matches whatever is marked with this annotation. ||
+|| bool startWith($prefix) || Matches whatever class/method begins with this string||</p>
+
+<p>For example when you specify the following method matching, methods that are named setXX are matched.
+<code>
+$this-&gt;matcher-&gt;startWith(&#39;set&#39;)
+</code></p>
+
+<h2 id="toc_3"><code>MethodInvocation</code></h2>
+
+<p>The interceptor receives the MethodInvocation model variables, wraps the method runtime before and after processing and uses the variables to invoke the original method.
+The <code>MethodInvocation</code> main methods are as below.</p>
+
+<p>|| Method Signature ||　Function ||
+|| void proceed() || Run the target method ||
+|| Reflectionmethod getMethod() || Retrieve the target method reflection ||
+|| Object getThis() || Retrieve the target object ||
+|| array getArguments() (|| Retrieve the argument array  || 
+|| array getAnnotations() || Retrieve the target methods annotations ||</p>
+
+<h2 id="toc_4">Ray.Aop</h2>
+
+<p>Please see the <a href="http://code.google.com/p/rayphp/wiki/AOP">Ray.Aop</a> manual for more info on the framework BEAR.Sunday uses.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

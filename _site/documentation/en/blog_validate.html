@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Blog Tutorial(5) Validation</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li class="active"><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Blog Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">Installing BEAR</a></li>
+<li><a href="blog_db.html">DB Settings</a></li>
+<li><a href="blog_get.html">Creating a Post Resource</a></li>
+<li><a href="blog_page.html">Creating a Post Detail Page</a></li>
+<li><a href="blog_template.html">Creating a Template</a></li>
+<li><a href="blog_create.html">Adding a Post</a></li>
+<li><a href="blog_validate.html">Validation</a></li>
+<li><a href="blog_delete.html">Removing a Post</a></li>
+<li><a href="blog_update.html">Editing a Post</a></li>
+<li><a href="blog_more.html">More</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Form</h1>
+
+<p>In the previous section we implemented the POST interface in the posts add page, we were then able to add posts by receiving a HTTP mtethod.</p>
+
+<p>Next we will add to the POST interface validation, folder, pre populated fields on error functionality as a web form.</p>
+
+<p>Note: In this tutorial we won&#39;t use any special libraries we will just code in plain PHP. In reality it might be better to use a validation library that is part of Zend Framework or Symfony.</p>
+
+<h2 id="toc_1">Validation</h2>
+
+<p>We will implement a form interceptor that doesn&#39;t depend on a specific library. First we will bind the form validation interceptor and the <code>@Form</code> annotation.</p>
+
+<p>Annotation sandbox\Annotation\Form</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">namespace Sandbox\Annotation;
+
+/**
+ * Form
+ *
+ * @Annotation
+ * @Target({&quot;METHOD&quot;})
+ */
+final class Form
+{
+}
+</code></pre></div>
+<p>Interceptor binding
+<code>
+    /**
+     * @Form - bind form validator
+     */
+    private function installFormValidator()
+    {
+        $this-&gt;bindInterceptor(
+            $this-&gt;matcher-&gt;subclassesOf(&#39;Sandbox\Resource\Page\Blog\Posts\Newpost&#39;),
+            $this-&gt;matcher-&gt;annotatedWith(&#39;sandbox\Annotation\Form&#39;),
+            [new PostsFormValidator]
+        );
+    }
+</code></p>
+
+<p>In this case the <code>PostsFormValidator</code> is bound to methods annotated with <code>@Form</code>. Before the request calls the POST method this validation interceptor is called.</p>
+
+<h2 id="toc_2">@Form Validation Interceptor</h2>
+
+<p>In the interceptor that is　wedged between the request and the method, after the tag removal process is when the validation happens. 
+<code>
+return $invocation-&gt;proceed();
+</code>
+If the validation fails then the <em>processing GET request page</em> that shows an error message and preset values etc is output. The POST interface method will not be called.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">return $page-&gt;onGet();
+</code></pre></div>
+<p>When this is all wrapped up in the <code>PostsFormValidator</code> it looks like this.
+```
+/**
+ * Log Interceptor
+ */
+class PostsFormValidator implements MethodInterceptor
+{
+    const TITLE = 0;
+    const BODY = 1;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * Error
+ * 
+ * @var array
+ */
+private $errors = [
+    &#39;title&#39; =&gt; &#39;&#39;,
+    &#39;body&#39; =&gt; &#39;&#39;
+];
+
+/**
+ * (non-PHPdoc)
+ * @see Ray\Aop.MethodInterceptor::invoke()
+ */
+public function invoke(MethodInvocation $invocation)
+{
+    // retrieve page and query
+    $args = $invocation-&gt;getArguments();
+    $page = $invocation-&gt;getThis();
+
+    // strip tags
+    foreach ($args as &amp;$arg) {
+        $arg = strip_tags($arg);
+    }
+
+    // required title
+    if ($args[self::TITLE] # = &#39;&#39;) {
+        $this-&gt;errors[&#39;title&#39;] = &#39;title required.&#39;;
+    }
+
+    // required body
+    if ($args[self::BODY] # = &#39;&#39;) {
+        $this-&gt;errors[&#39;body&#39;] = &#39;body required.&#39;;
+    }
+
+    // valid form ?
+    if (implode(&#39;&#39;, $this-&gt;errors) # = &#39;&#39;) {
+        return $invocation-&gt;proceed();
+    }
+
+    // error, modify &#39;GET&#39; page with error message.
+    $page[&#39;errors&#39;] = $this-&gt;errors;
+    $page[&#39;submit&#39;] =[
+        &#39;title&#39; =&gt; $args[self::TITLE],
+        &#39;body&#39; =&gt; $args[self::BODY]
+    ];
+    return $page-&gt;onGet();
+}
+</code></pre></div>
+<p>}
+```</p>
+
+<p><a href="https://github.com/koriym/Ray.Aop/blob/master/src/Ray/Aop/MethodInterceptor.php">MethodInterceptor</a> which conforms to the [<a href="http://aopalliance.sourceforge.net/">http://aopalliance.sourceforge.net/</a> AOP Alliance]. The <code>$invocation</code> object passed to the <code>invoke</code> method is as it suggests method invoking object of the <code>MethodInvocation</code> type.</p>
+
+<p>The parameters at the time the method can be obtained by calling <code>$invocation-&gt;getArguments()</code> and<br>
+the original page display resource object can be obtained by calling <code>$invocation-&gt;getThis();</code>.</p>
+
+<p>Note: The parameters are not in the named parameters style, they are the ordered style that can normally be picked up in the method call.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Application Instance Script</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li class="active"><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Application</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+			<li><a href="application.html">Introduction</a></li>
+<li><a href="application_script.html">Script</a></li>
+<li><a href="application_object.html">Object</a></li>
+<li><a href="application_instance_script.html">Instance Script</a></li>
+<li><a href="interface.html">Interface</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Application Instance Script</h1>
+
+<p>The instance script is a script that creates the application instance. It also runs the configuration for class autoloader which is needed by the application.</p>
+
+<h1 id="toc_1">Instance Creation</h1>
+
+<p>The section of code that applies to the instance script is below.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$injector = Injector::create([new ProdModule]);
+$app = $injector-&gt;getInstance(&#39;BEAR\Sunday\Extension\Application\AppInterface&#39;);
+</code></pre></div>
+<p>The <code>ProdModule</code> is a type of [module module], for each application mode there is specific build information (DI and AOP settings).</p>
+
+<p>It is then built up with application class names and with modules. The injector retrieves the application object set by the application context interface bound by the application class.</p>
+
+<h2 id="toc_2">Instance Retrieval Reuse</h2>
+
+<p>The cost of retrieving the application object is huge.</p>
+
+<p>Syntax analysis of the original PHP script in order to resolve the annotation names set in the the module, DI injection, AOP method interceptor bindings in order to cut the cost of all of these in the production environment the application object is cached inside this instance script and reused.</p>
+
+<h2 id="toc_3">Performance</h2>
+
+<p>At bootstrap time annotation resolution, DI and AOP binding cost becomes virtually zero.<br>
+In BEAR.Sunday a very flexible architecture is possible by having many abstraction layers, but due to this reuse there is minimal performance impact with maximum flexibility and performance both being met.</p>
+
+<p>Also the service components used by the application are guaranteed not to change on each request, delivering a more stable software quality. </p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

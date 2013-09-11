@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Application Object</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li class="active"><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Application</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+			<li><a href="application.html">Introduction</a></li>
+<li><a href="application_script.html">Script</a></li>
+<li><a href="application_object.html">Object</a></li>
+<li><a href="application_instance_script.html">Instance Script</a></li>
+<li><a href="interface.html">Interface</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Application Object</h1>
+
+<p>The application object is an object that holds all of the service objects used by the application script to regulate the application runtime.</p>
+
+<h1 id="toc_1">Application Class</h1>
+
+<p>Below an application class with minimal configuration.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">use BEAR\Sunday\Extension\Application\AppInterface;
+
+final class App implements Context
+{
+    public $resource;
+    public $response;
+    public $logger;
+
+    /**
+     * Constructor
+     *
+     * @param ResourceInterface $resource Resource client
+     * @param ResponseInterface $response Web / Console response
+     * @param ApplicationLogger $logger   Application logger
+     *
+     * @Inject
+     */
+    public function __construct
+        ResourceInterface $resource,
+        ResponseInterface $response,
+        ApplicationLogger $logger
+    ) {
+        $this-&gt;resource = $resource;
+        $this-&gt;response = $response;
+        $this-&gt;logger = $logger;
+        $resource-&gt;attachParamProvider(&#39;Provides&#39;, new Provides);
+    }
+}
+</code></pre></div>
+<p>The resource client, response and logger needed by the application script is passed to the constructor and is stored into their respective properties.</p>
+
+<p>The relevant objects are injected for each interface according to the application configuration. For example when using a development configuration the development resource client provides more debugging information, in an API based application rather than have HTML output a component that outputs JSON+HAL(or just JSON) is used.</p>
+
+<p>This class provides an instance through the instance script.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

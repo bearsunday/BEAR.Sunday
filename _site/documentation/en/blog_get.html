@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Blog Tutorial(3) Creating an posts resource</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li class="active"><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Blog Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">Installing BEAR</a></li>
+<li><a href="blog_db.html">DB Settings</a></li>
+<li><a href="blog_get.html">Creating a Post Resource</a></li>
+<li><a href="blog_page.html">Creating a Post Detail Page</a></li>
+<li><a href="blog_template.html">Creating a Template</a></li>
+<li><a href="blog_create.html">Adding a Post</a></li>
+<li><a href="blog_validate.html">Validation</a></li>
+<li><a href="blog_delete.html">Removing a Post</a></li>
+<li><a href="blog_update.html">Editing a Post</a></li>
+<li><a href="blog_more.html">More</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Resource Object</h1>
+
+<p>BEAR.Sunday is a resource orientated framework. The relevant information is grouped into a resource, given a URI and has a request interface so that it works with GET/POST requests.</p>
+
+<p>In terms of MVC the role of M and C component are taken care of in BEAR.Sunday each by a page resource which acts as a page resource, the model is carried by application (app) resource. These resources are basically mapped as 1 resource to one class, the class name including the namespace responding to a URI the request interface is described as a method.</p>
+
+<p>For example, page for browsing posts is set up as a posts view resource (page://self/blog/posts), the so called state application resource (app://self/posts) shows the article itself.  </p>
+
+<h2 id="toc_1">Post Resource</h2>
+
+<p>The application resource so to speak is an application <em>internal</em> API. In MVC terms this would be as a model. This holds the internal database accessing or business logic and offers an application internal API to the page resource which has the role of a controller.</p>
+
+<p>In the post resource in order to browse posts we need to implement an <code>onGet</code> method that responds to a GET request.</p>
+
+<p>It is implemented in this kind of example resource class.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+namespace Sandbox\Resource\App;
+
+/**
+ * Posts
+ *
+ */
+class Posts extends ResourceObject
+{
+    /**
+     * Get
+     */
+    public function onGet($id = null)
+    {
+        $this-&gt;body = _Data that has been read from a database_
+        return $this;
+    }
+}
+</code></pre></div>
+<p>The inside the method that corresponds to the request (request interface) data is assigned to the <code>body</code> property and <code>$this</code> is returned.</p>
+
+<p>Note: Instead of setting the $body property you can just directly return data. In which case in the receiving side the equivalent of <code>return $this;</code> is returned.</p>
+
+<h2 id="toc_2">Resource Stub</h2>
+
+<p>Before we call the <code>onGet</code> method, lets try using some dummy data in the resource. A resource that uses stub data (dummy data) is handy for prototyping or testing an application. The sandbox application runs in a custom <code>STUB mode</code> which is set when creating the application object.</p>
+
+<p><code>apps/Sandbox/htdocs/api.php</code>(API access) and <code>apps/Sandbox/htdocs/web.php</code>(web access)</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$mode = &#39;Stub&quot;;
+$app = require &#39;/path/to/script/instance.php&#39;;
+</code></pre></div>
+<p>Lets prepare some stub data.</p>
+
+<p><code>apps/Sandbox/stub/resource.php</code>
+<code>
+return [
+    &#39;Sandbox\Resource\App\Posts&#39; =&gt;
+        [
+            [
+                &#39;id&#39; =&gt; 0,
+                &#39;title&#39; =&gt; &#39;Alan Kay 1&#39;,
+                &#39;body&#39; =&gt; &#39;People who are really serious about software should make their own hardware.&#39;,
+                &#39;created&#39; =&gt; &#39;2011-05-07 16:13:11&#39;
+            ],
+            [
+                &#39;id&#39; =&gt; 1,
+                &#39;title&#39; =&gt; &#39;Alan Kay 2&#39;,
+                &#39;body&#39; =&gt; &#39;Perspective is worth 80 IQ points.&#39;,
+                &#39;created&#39; =&gt; &#39;2011-05-07 16:13:22&#39;
+            ],
+            [
+                &#39;id&#39; =&gt; 2,
+                &#39;title&#39; =&gt; &#39;Alan Kay 3&#39;,
+                &#39;body&#39; =&gt; &#39;The best way to predict the future is to invent it.&#39;,
+                &#39;created&#39; =&gt; &#39;2011-05-07 16:13:33&#39;
+            ]
+         ]
+];
+</code></p>
+
+<p>Lets check the app we resource we made through via the console.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php apps/Sandbox/htdocs/api.php get app://self/posts
+200 OK
+[BODY]
+0:array (
+  &#39;id&#39; =&gt; 0,
+  &#39;title&#39; =&gt; &#39;Alan Kay 1&#39;,
+  &#39;body&#39; =&gt; &#39;People who are really serious about software should make their own hardware.&#39;,
+  &#39;created&#39; =&gt; &#39;2011-05-07 16:13:11&#39;,
+)
+1:array (
+  &#39;id&#39; =&gt; 1,
+  &#39;title&#39; =&gt; &#39;Alan Kay 2&#39;,
+  &#39;body&#39; =&gt; &#39;Perspective is worth 80 IQ points.&#39;,
+  &#39;created&#39; =&gt; &#39;2011-05-07 16:13:22&#39;,
+)
+2:array (
+  &#39;id&#39; =&gt; 2,
+  &#39;title&#39; =&gt; &#39;Alan Kay 3&#39;,
+  &#39;body&#39; =&gt; &#39;The best way to predict the future is to invent it.&#39;,
+  &#39;created&#39; =&gt; &#39;2011-05-07 16:13:33&#39;,
+)
+</code></pre></div>
+<p>It has become clear what kind of request result you are looking for using dummy data.</p>
+
+<h2 id="toc_3">Stub Module</h2>
+
+<p>The resource returns stub data by the resource method name being bound to the stub interceptor 
+and implemented through aspect orientated programming.</p>
+
+<p>apps/Sandbox/Module/StabModule.php
+<code>
+foreach ($stub as $class =&gt; $value) {
+    $this-&gt;bindInterceptor(
+        $this-&gt;matcher-&gt;subclassesOf($class),
+        $this-&gt;matcher-&gt;startWith(&#39;on&#39;),
+        [new Stab($value)]
+    );
+}
+</code>
+　
+ Note:Even though the client intends to request a resource, in reality the stub data interceptor that is wedged (intercepted) between the client and the resource returns the dummy data.</p>
+
+<h2 id="toc_4">Implement the Request Interface</h2>
+
+<p>Next we will actually access a db and extract data to be used in an <code>onGet</code> method to respond to a GET request.</p>
+
+<p>BEAR.Sunday doesn&#39;t have its own database usage library or database abstraction library. Inside the application resource by using other libraries you can directly use SQL or using an ORM. Inside the sandbox application [<a href="http://www.doctrine-project.org/projects/dbal.html">http://www.doctrine-project.org/projects/dbal.html</a> Docrine DBAL] is used.</p>
+
+<p><em>Sandbox/Resource/App/Blog/Posts.php</em>
+```
+&lt;?php
+/**
+ * @package    Sandbox
+ * @subpackage Resource
+ */
+namespace Sandbox\Resource\App\Blog;</p>
+
+<p>use BEAR\Package\Module\Database\Dbal\Setter\DbSetterTrait;
+use BEAR\Resource\AbstractObject as ResourceObject;
+use BEAR\Resource\Link;
+use BEAR\Resource\Code;
+use PDO;</p>
+
+<p>use BEAR\Sunday\Annotation\Db;
+use BEAR\Sunday\Annotation\Time;
+use BEAR\Sunday\Annotation\Transactional;
+use BEAR\Sunday\Annotation\Cache;
+use BEAR\Sunday\Annotation\CacheUpdate;</p>
+
+<p>/**
+ * Posts
+ *
+ * @package    Sandbox
+ * @subpackage Resource
+ *
+ * @Db
+ */
+class Posts extends ResourceObject
+{
+    use DbSetter;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * @var string
+ */
+public $time;
+
+/**
+ * @var string
+ */
+protected $table = &#39;posts&#39;;
+
+/**
+ * @var array
+ */
+public $links = [
+    &#39;page_post&#39; # &gt; [Link::HREF &gt; &#39;page://self/blog/posts/post&#39;],
+    &#39;page_item&#39; # &gt; [Link::HREF =&gt; &#39;page://self/blog/posts/post{?id}&#39;, Link::TEMPLATED &gt; true],
+    &#39;page_edit&#39; # &gt; [Link::HREF =&gt; &#39;page://self/blog/posts/edit{?id}&#39;, Link::TEMPLATED &gt; true],
+    &#39;page_delete&#39; # &gt; [Link::HREF =&gt; &#39;page://self/blog/posts?_method=delete{&amp;id}&#39;, Link::TEMPLATED &gt; true]
+];
+
+/**
+ * @param int $id
+ *
+ * @return Posts
+ * @Cache(100)
+ */
+public function onGet($id = null)
+{
+    $sql = &quot;SELECT id, title, body, created, modified FROM {$this-&gt;table}&quot;;
+    if (is_null($id)) {
+        $stmt = $this-&gt;db-&gt;query($sql);
+        $this-&gt;body = $stmt-&gt;fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        $sql .# &quot; WHERE id  :id&quot;;
+        $stmt = $this-&gt;db-&gt;prepare($sql);
+        $stmt-&gt;bindValue(&#39;id&#39;, $id);
+        $stmt-&gt;execute();
+        $this-&gt;body = $stmt-&gt;fetch(PDO::FETCH_ASSOC);
+    }
+    return $this;
+}
+
+    /**
+     * @param string $title
+     * @param string $body
+     *
+     * @return Posts
+     * @Time
+     * @Transactional
+     * @CacheUpdate
+     */
+    public function onPost($title, $body)
+    {
+        $values = [
+            &#39;title&#39; =&gt; $title,
+            &#39;body&#39; =&gt; $body,
+            &#39;created&#39; =&gt; $this-&gt;time
+        ];
+        $this-&gt;db-&gt;insert($this-&gt;table, $values);
+        //
+        $lastId = $this-&gt;db-&gt;lastInsertId(&#39;id&#39;);
+        $this-&gt;code = Code::CREATED;
+        $this-&gt;links[&#39;new_post&#39;] # [Link::HREF =&gt; &quot;app://self/posts/post?id{$lastId}&quot;];
+        $this-&gt;links[&#39;page_new_post&#39;] # [Link::HREF =&gt; &quot;page://self/blog/posts/post?id{$lastId}&quot;];
+        return $this;
+    }
+
+/**
+ * @param int    $id
+ * @param string $title
+ * @param string $body
+ *
+ * @return Posts
+ * @Time
+ * @CacheUpdate
+ */
+public function onPut($id, $title, $body)
+{
+    $values = [
+        &#39;title&#39; =&gt; $title,
+        &#39;body&#39; =&gt; $body,
+        &#39;created&#39; =&gt; $this-&gt;time
+    ];
+    $this-&gt;db-&gt;update($this-&gt;table, $values, [&#39;id&#39; =&gt; $id]);
+    $this-&gt;code = Code::NO_CONTENT;
+    return $this;
+}
+
+/**
+ * @param int $id
+ *
+ * @return Posts
+ * @CacheUpdate
+ */
+public function onDelete($id)
+{
+    $this-&gt;db-&gt;delete($this-&gt;table, [&#39;id&#39; =&gt; $id]);
+    $this-&gt;code = Code::NO_CONTENT;
+    return $this;
+}
+</code></pre></div>
+<p>}
+```</p>
+
+<p>In the resource class a method that responds to the request interface is provided. In this resource if an $id is specified 1 post and if not set all posts are returned;</p>
+
+<h2 id="toc_5">Use the Resource from the Command Line</h2>
+
+<p><em>Sandbox/Resource/App/Posts.php</em>
+The URI <code>app://self/posts</code> is given to the app resource specified in the <code>Sandbox/Resource/App/Posts</code> class.</p>
+
+<p>Let&#39;s take a look at the resource we made from the command line. Lets first go back to the application mode.</p>
+
+<p>public/api.php
+<code>
+$mode = &#39;Stub&quot;;
+$app = require &#39;/path/to/script/instance.php&#39;;
+</code></p>
+
+<p>Let&#39;s make the call from the console.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php api.php get app://self/blog/posts
+
+200 OK
+[BODY]
+array (
+  0 =&gt; 
+  array (
+    &#39;id&#39; =&gt; &#39;1&#39;,
+    &#39;title&#39; =&gt; &#39;Title&#39;,
+    &#39;body&#39; =&gt; &#39;This is the article text&#39;,
+    &#39;created&#39; =&gt; &#39;2011-07-01 22:30:25&#39;,
+    &#39;modified&#39; =&gt; NULL,
+  ),
+  1 =&gt; 
+  array (
+    &#39;id&#39; =&gt; &#39;2&#39;,
+    &#39;title&#39; =&gt; &#39;This is a title&#39;,
+    &#39;body&#39; =&gt; &#39;here the text continues&#39;,
+    &#39;created&#39; =&gt; &#39;2011-07-01 22:30:25&#39;,
+    &#39;modified&#39; =&gt; NULL,
+  ),
+  2 =&gt; 
+  array (
+    &#39;id&#39; =&gt; &#39;3&#39;,
+    &#39;title&#39; =&gt; &#39;Title counter attck&#39;,
+    &#39;body&#39; =&gt; &#39;This is not really very interesting&#39;,
+    &#39;created&#39; =&gt; &#39;2011-07-01 22:30:27&#39;,
+    &#39;modified&#39; =&gt; NULL,
+  ),
+)
+</code></pre></div>
+<p>We have got the same output as to when we called the stub mode.</p>
+
+<p>By switching the mode the dummy data can be displayed anytime.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Note: `self` means a resource of the current application. In BEAR.Sunday it is possible to request a resource from another application or to set up and use resources that cross applications.
+</code></pre></div>
+<p>A query specifying parameters.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php apps/Sandbox/htdocs/api.php get &#39;app://self/posts?id=1&#39;
+</code></pre></div>
+<h2 id="toc_6">Alias Settings</h2>
+
+<p>It is handy to create an alias to the full path in your shell. </p>
+
+<p><em>~/.bash_profile</em>
+<code>
+alias api=&#39;php /path/to/apps/Sandbox/htdocs/api.php&#39;
+alias web=&#39;php /path/to/apps/Sandbox/htdocs/web.php&#39;
+</code></p>
+
+<p>Using the resource API above you can make the following web request. This is then a simple notation and you can use resource using the console from any directory. This is handy when using scripts from the OS for batch processing and the like.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// API access
+$ api get app://self/posts
+
+// web access
+$ web get /posts
+</code></pre></div>
+<h2 id="toc_7">API Driven Development</h2>
+
+<p>In this way in BEAR.Sunday internal API development is used as a base to create web applications. A resource functions as a service layer, a name(uri) is provided to access data resource or business logic which is bundled through a RESTful universal interface.</p>
+
+<p>We <em>do not</em> create/provide a web application based external API interface, we build an application as an API collection on an internal resource API base. </p>
+
+<h2 id="toc_8">Runtime Injection</h2>
+
+<p>Each time this app resource is accessed by a get request, the setDb() get previously called and the DB object is injected from outside. It is not configured for this class to use any DB object, please focus on the injected object that is being relied on. In a <em>GET</em> request a slave DB object can be injected and for the other <em>PUT</em>,*POST*,*DELETE* requests a master DB object.</p>
+
+<p>This is referred to as runtime injection. Binding between the particular method (in this case onGet) and the intercepter that is called before that method is executed (in this case DB object injector) are then acheived.</p>
+
+<p>This architecture of the DB object being injected at runtime is not a BEAR.Sunday fixed structure is is the work of <code>DotrineDbalModule</code> which you install in <code>appModule</code>. In  <code>DotrineDbalModule</code> class methods annotated with <em>@Db</em> binds the DB injector, that DB injector looks at the request method, decides whether master or slave should be used and sets the DB object.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

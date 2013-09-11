@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Interface</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li class="active"><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Application</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+			<li><a href="application.html">Introduction</a></li>
+<li><a href="application_script.html">Script</a></li>
+<li><a href="application_object.html">Object</a></li>
+<li><a href="application_instance_script.html">Instance Script</a></li>
+<li><a href="interface.html">Interface</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Interface</h1>
+
+<p>In BEAR.Sunday by changing the interface class bindings you can flexibly configure the frameworks behavior. </p>
+
+<h2 id="toc_1">Module collections</h2>
+
+<p><code>BEAR\Sunday\Module\Framework\FrameworkModule</code> carries out the BEAR.Sunday framework core bindings. By changing the application bindings you can change the particulars and indeed the whole runtime environment.</p>
+
+<h3 id="toc_2">Framework Module</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">class FrameworkModule extends AbstractModule
+{
+    protected function configure()
+    {
+        $this-&gt;install(new Module\Framework\ConstantModule);
+        $this-&gt;install(new Module\Log\ApplicationLoggerModule);
+        $this-&gt;install(new Module\Di\InjectorModule($this-&gt;dependencyInjector));
+        $this-&gt;install(new Module\Code\CachedAnnotationModule);
+        $this-&gt;install(new Module\Signal\SignalModule);
+        $this-&gt;install(new Module\Resource\ResourceModule($this-&gt;dependencyInjector));
+        $this-&gt;install(new Module\Output\ConsoleModule);
+        $this-&gt;install(new Module\Http\GuzzleModule);
+        $this-&gt;install(new Module\TemplateEngine\ProdRendererModule);
+    }
+}
+</code></pre></div>
+<p>Inside these modules the most basic defaults needed for normal framework functionality are bound.
+These framework modules, the package module that makes application decisions <code>BEAR\Package\Module\Package\PackageModule</code>, application modules and mode modules according to context are grouped and all bindings needed for the application to run are complete.</p>
+
+<h2 id="toc_3">Context Bindings</h2>
+
+<p>There are also interfaces where bindings are looked up depending on the application context. For example how a source is rendered (HTML or JSON ?), template engine used or chosen caching library. Normally <code>AppModule</code> is used.</p>
+
+<p>|| <em>Interface</em> || <em>Bound Class</em> || <em>Service</em> ||
+|| <code>BEAR\Resource\Renderable</code> || <code>BEAR\Framework\Resource\View\Renderer</code> || HTML||
+||  || <code>BEAR\Framework\Resource\View\DevRenderer</code> || Dev用HTML||
+||  || <code>BEAR\Framework\Resource\View\JsonRenderer</code> || JSON||
+||  || <code>BEAR\Framework\Resource\View\HalRenderer</code> || JSON+HAL　||
+|| <code>BEAR\Framework\Resource\View\TemplateEngineAdapter</code> || <code>BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyAdapter</code> || Smarty ||
+|| <code>Guzzle\Common\Cache\CacheAdapterInterface @Named(&quot;resource_cache&quot;)</code> || <code>BEAR\Framework\Module\Provider\ApcCacheProvider</code> ||リソースキャッシュ ||</p>
+
+<h3 id="toc_4">Overriding Module</h3>
+
+<p>To overwrite the contents of the dependency bound in the module, you pass <code>$this</code> like below.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;install(new OverRideModule($this));
+</code></pre></div>
+<p>If you do not pass <code>$this</code> as a parameter, <code>install</code> will only be able to make a binding to an interface that has no binding.
+<code>
+$this-&gt;install(new SomeModule);
+</code></p>
+
+<h2 id="toc_5">Trait Name List</h2>
+
+<h3 id="toc_6">Constants</h3>
+
+<p>|| <em>Trait Name</em> || <em>Injected Dependency</em> || Namespace ||
+|| <code>TmpDirInject</code> || Tmp Directory || BEAR\Sunday\Inject ||
+|| <code>LogDirInject</code> || Log Directory || BEAR\Sunday\Inject ||
+|| <code>AppDirInject</code> || App Directory || BEAR\Sunday\Inject ||
+|| <code>AppNameInject</code> || App Name || BEAR\Sunday\Inject ||</p>
+
+<h3 id="toc_7">Service Object</h3>
+
+<p>|| <code>LogInject</code> || [<a href="http://guzzlephp.org/api/class-Guzzle.Common.Log.LogAdapterInterface.html">http://guzzlephp.org/api/class-Guzzle.Common.Log.LogAdapterInterface.html</a> LOG Object] || BEAR\Sunday\Inject ||
+|| <code>ResourceInject</code> || [<a href="http://code.google.com/p/bearsunday/wiki/resource_client">http://code.google.com/p/bearsunday/wiki/resource_client</a> Resource Client] || BEAR\Sunday\Inject ||</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

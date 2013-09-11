@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Application Introduction</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li class="active"><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Application</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+			<li><a href="application.html">Introduction</a></li>
+<li><a href="application_script.html">Script</a></li>
+<li><a href="application_object.html">Object</a></li>
+<li><a href="application_instance_script.html">Instance Script</a></li>
+<li><a href="interface.html">Interface</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Application Introduction</h1>
+
+<p>The application object you create in the bootstrap contains all of the service objects that you need in the application script that describes the application runtime.
+All of the objects that you use are packaged up in this object or are created by the packaged factories.</p>
+
+<p>In order to create this object we first need our dependencies. However the included dependencies and 
+dependencies to be included in the factories are all finally acquired as an object graph (object mapping)</p>
+
+<h2 id="toc_1">Compile and Runtime　</h2>
+
+<p>The [module module] is a binding of an object abstract (an interface or abstract class) and the implementation (actual class or factory), and is a collection of bindings to a method and it&#39;s cross-cutting behavior.</p>
+
+<p>BEAR.Sunday is based on the <code>Dependency injection pattern</code>, in the application object there is clear separation of the construction (compile time) and execution (runtime).
+The object is split up into the object performing construction and object performing execution and are not mixed up.</p>
+
+<ul>
+<li>On boot depending on the mode (environment) the application object is created. (Compile time)</li>
+<li>After that the object execution starts. (Runtime)</li>
+<li>On execution whenever a new object is acquired the <code>Provider</code> is used. Outside of this there is no other principles for retrieving objects.</li>
+</ul>
+
+<h2 id="toc_2">Construction Reuse</h2>
+
+<p>Objects are only built up 1 single time. The object is based on the module that according to the execution mode dependencies are injected and aspects are weaved to specific methods. So in this kind of retrieving dependencies of dependencies is repeated ending up becoming the final object graph. The fully created object graph is then stored in the APC object container and are reused across requests.</p>
+
+<p>So in a BEAR.Sunday application the constructor starts the services,
+at the objects first runtime the compilation only takes place once. From the second time construction is not run the object stored in the container is reused.</p>
+
+<h2 id="toc_3">Eager Binding</h2>
+
+<p>Not depending on the application runtime, ensuring that the dependency injection that does not change for each request is complete at compile time.</p>
+
+<p>The configuration that uses the module decides how the object is built, but does not directly decide at the objects runtime.</p>
+
+<p>For example it is not recommended to look at the configuration to change behavior at runtime.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// Not recommended
+if ($config[&#39;debug&#39;] # = true) {
+    //For use in debugging
+}
+</code></pre></div>
+<p>Instead <em>at compile time upon checking the configuration bind to an object with different behavior</em>.
+The compile completed object can process just the differences at runtime. So it isn&#39;t recommended to have code that assigns strings in every request.</p>
+
+<p>Fore example in the development screen there are tools that you can check the information about many objects, because the development renderer is bound to the rendering interface, the renderer does not check the application mode to change the rendering. The application mode is not a variable that changes runtime behavior when the application is executed, instead according to that mode an object is created.</p>
+
+<p>Each of the objects that build up the <code>Sandbox</code> application are not aware of the current execution mode.</p>
+
+<h2 id="toc_4">Late Binding</h2>
+
+<p>The dependencies do not change through a request but there are things that can only be decided at runtime. For example, the log object will need to know what kind of request it is, the DB object may need to know what instance （master/slave) is needed depending on the request method, at compile time eager binding is not possible.</p>
+
+<p>Depending on the method, the cut in interceptor solves the problem through a delayed binding of the dependencies. The interceptor can inject the dependencies depending on the context right before the method is run.</p>
+
+<p>The clear separation of eager binding and delayed binding to aim for advanced software quality and performance are features of BEAR.Sunday.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

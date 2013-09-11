@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Module</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li class="active"><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>DI & AOP</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+			<li><a href="di_aop_introduction.html">Introduction</a></li>
+<li><a href="module.html">Module</a></li>
+<li><a href="injector.html">Injector</a></li>
+<li><a href="aop.html">Aspect</a></li>
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Module</h1>
+
+<p>A module is a collection of DI and AOP binding settings. Object abstracts,interfaces or abstraction classes and implementation, actual classes or factory bindings, methods and their cross-cutting behaviors, to sum up a collection of aspect bindings. We bind the class to the interface in the DI settings. We bind the interceptor to of a particular AOP methods.</p>
+
+<p>The module decides according to the binding collection how objects are built and used. The injector uses the module and creates the object. In the bound interceptor facilitates being able to use the methods of that object.</p>
+
+<p>For example in the <code>API Module</code> the JSON export class is bound to the export interface and so the output is JSON. Be careful that the behavior of the output object depending on the mode <em>is not changed</em>. The behavior is not changed according to the mode, depending on the mode the configuration of the the object is changed.</p>
+
+<p>Depending to the changes Bear Sunday opens, towards revisions closes according to <a href="http://d.hatena.ne.jp/asakichy/20090126/1232979830">(OCP)</a>.</p>
+
+<h2 id="toc_1">DSL Bindings</h2>
+
+<p>Module inherits from <code>AbstractModule</code>, the binding DSL inside the <code>configure</code> method is bound with however the injection point annotated with <code>@Inject</code> provides an instance.</p>
+
+<h2 id="toc_2">Binding Type</h2>
+
+<p>Inside the <code>configure</code> method of the module that inherits <code>AbstractModule</code> binds the however the injection point annotated with <code>@Inject</code> provides an instance.
+There are many ways of providing an instance:
+* Specify a class with no arguments <code>Linked Binding</code>.
+* Binding using a name <code>&quot;Named&quot; Binding</code>.
+* Use a custom factory called a provider - <code>Provider Bindings</code> etc.</p>
+
+<h1 id="toc_3">Binding</h1>
+
+<h2 id="toc_4">Linked Binding</h2>
+
+<p>The interface name and class name binding.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind(&#39;TransactionLog&#39;)-&gt;to(&#39;DatabaseTransactionLog&#39;);
+</code></pre></div>
+<p>Most simply this is a very general method.
+Be warned that you can&#39;t pass parameters into the constructor.
+As below an instance created by <code>new DatabaseTransactionLog();</code> is injected into the
+<code>TransactionLog</code> interface that is flagged by annotation <code>@Inject</code>.</p>
+
+<p><em>Consumer（The injected side）</em>
+<code>
+/**
+ * @Inject
+ */
+public function setLog(TransactionLog $log)
+</code></p>
+
+<h2 id="toc_5">&quot;Named&quot; Binding</h2>
+
+<p>Giving the binding a name.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text"> $this-&gt;bind(&#39;CreditCardProcessor&#39;)-&gt;annotatedWith(&#39;Checkout&#39;)-&gt;to(&#39;CheckoutCreditCardProcessor&#39;);
+</code></pre></div>
+<p><em>Consumer</em></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * @Inject
+ * @Named(&quot;serceret_key&quot;)
+ */
+public function setProcessor(CreditCardProcessor $processor)
+</code></pre></div>
+<p>The binding to the scaler type to which there is no interface will be needed to be assigned with a name in the annotation <code>@Named</code>.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text"> $this-&gt;bind()-&gt;annotatedWith(&#39;secret_key&#39;)-&gt;toInstance(1234);
+</code></pre></div>
+<p><em>Consumer</em>
+<code>
+/**
+ * @Inject
+ * @Named(&quot;serceret_key&quot;)
+ */
+public function setKey($stringKey)
+</code></p>
+
+<h2 id="toc_6">Instance Bindings</h2>
+
+<p>Binding the instance itself. This is not just class instances that are made with the <code>new</code> keyword.
+Integers and strings are also included.
+Instance bindings even though they are bindings that should avoid it can use bindings of other methods. 
+Unlike other bind() methods instances that are not actually used are also created.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind()-&gt;annotatedWith(&quot;login_timeout_seconds&quot;)-&gt;toInstance(10);
+</code></pre></div>
+<h2 id="toc_7">Provider Bindings</h2>
+
+<p>Parameters needed for object construction or when object construction is complicated you can bind a factory class called a provider.
+The provider returns the an instance of the get method that implements the <code>provider</code> interface.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind(&#39;TransactionLog&#39;)-&gt;toProvider(&#39;DatabaseTransactionLogProvider&#39;);
+</code></pre></div>
+<p>※ The TransactionLog interface is bound to the DatabaseTransactionLogProviderget provider.
+At the timing of this injection the get method is called and the instance is retrieved.</p>
+
+<h2 id="toc_8">Constructor Bindings</h2>
+
+<p>The constructor binding is a binding that is for injecting 3rd party classes (except BEAR.Sunday and the Application)
+which have injection points not marked with <code>@Inject</code></p>
+
+<p>This takes constructor variable names, specifies them as injection points and binds them.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind(&#39;TransactionLog&#39;)-&gt;toConstructor([&#39;db&#39; =&gt; new Database]);
+</code></pre></div>
+<h2 id="toc_9">Scope</h2>
+
+<p>In order to specify an object as a singleton there are 2 ways.
+The first is set an annotation on the class, the second is to specify it at bind time.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * @Scope(Scope::SINGLETON)
+ */
+public class InMemoryTransactionLog implements TransactionLog
+{
+}
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind(&#39;TransactionLog&#39;)-&gt;to(&#39;InMemoryTransactionLog&#39;)-&gt;in(Scope::Singleton);
+</code></pre></div>
+<h2 id="toc_10">Ray.DI</h2>
+
+<p>Please take a look at the [<a href="http://code.google.com/p/rayphp/wiki/Bindings">http://code.google.com/p/rayphp/wiki/Bindings</a> Ray.Di Ray.Di] Manual that BEAR.Sunday uses for it&#39;s DI Framework.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | PHP5.4 Installation</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Installation</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+   			
+<li><a href="introduction.html">About BEAR.Sunday</a></li>
+<li><a href="install.html">Installation</a></li>
+<li><a href="installphp54.html">PHP5.4 (OSX)</a></li>
+<li><a href="ubuntu.html">PHP5.4 (Unbuntu)</a></li>
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">PHP5.4 Installation</h1>
+
+<p>This is an example of how to build a PHP5.4 environment on OSX. In this example we will perform a PHP binary install from <a href="http://php-osx.liip.ch/">http://php-osx.liip.ch/</a>. The extensions we need will also be installed. We will be using <code>/usr/local/php5</code>, no other directories will be affected.</p>
+
+<h2 id="toc_1">PHP Install</h2>
+
+<p>We enter the following from a console.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ curl -s http://php-osx.liip.ch/install.sh | bash -s 5.4
+</code></pre></div>
+<p>We check the version.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ /usr/local/php5/bin/php -v
+
+PHP 5.4.2 (cli) (built: May  8 2012 09:48:57) 
+Copyright (c) 1997-2012 The PHP Group
+Zend Engine v2.4.0, Copyright (c) 1998-2012 Zend Technologies
+    with Xdebug v2.2.0rc2, Copyright (c) 2002-2012, by Derick Rethans
+</code></pre></div>
+<h2 id="toc_2">Edit the ini File</h2>
+
+<p>Check the location of the ini file.
+<code>
+$ php --ini
+</code></p>
+
+<p>Edit apc.ini and xhprof.ini.</p>
+
+<p>/usr/local/php5/php.d/50-extension-apc.ini
+<code>
+extension=/usr/local/php5/lib/php/extensions/no-debug-non-zts-20100525/apc.so
+apc.enable_cli = on
+</code></p>
+
+<p>/usr/local/php5/php.d/50-extension-xhprof.ini
+<code>
+xhprof.output_dir = /tmp
+</code></p>
+
+<h2 id="toc_3">Install MySQL</h2>
+
+<p>From [<a href="http://dev.mysql.com/downloads/mysql/">http://dev.mysql.com/downloads/mysql/</a> Download MySQL Community Server] download the DMG gile and install.</p>
+
+<h2 id="toc_4">Apache</h2>
+
+<p>Use the default version.</p>
+
+<h3 id="toc_5">Set the Mysql Socket File</h3>
+
+<p>MySQLを上記のDMGインストールでインストールしているなら、この指定は不要です。 macports等でmysqlをインストールしている場合は、下記のように指定する必要があります。
+If you have installed MySql from the DMG installer above the this setting is no needed. If you have installed MySql from MacPorts or the like you will need settings as below.</p>
+
+<p>Find the socket file using the mysqladmin command.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ mysqladmin version
+
+UNIX socket     /opt/local/var/run/mysql5/mysqld.sock
+</code></pre></div>
+<p>Edit /usr/local/php5/lib/php.ini to include this file location as below.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">pdo_mysql.default_socket= /opt/local/var/run/mysql5/mysqld.sock
+mysql.default_socket = /opt/local/var/run/mysql5/mysqld.sock
+mysqli.default_socket = /opt/local/var/run/mysql5/mysqld.sock
+</code></pre></div>
+<h2 id="toc_6">Check MySql Connection</h2>
+
+<p>If you run the following from a console and see no errors then you are good.
+<code>
+$ php -r &#39;mysql_connect(&quot;/path/to/mysqld.sock&quot;, &quot;root&quot;, &quot;&quot;);&#39;; 
+$ php -r &#39;new mysqli(&quot;localhost&quot;, &quot;root&quot;, &quot;&quot;, &quot;mysql&quot;);&#39;
+$ php -r &#39;new PDO(&quot;mysql:host# localhost;dbnamemysql&quot;, &quot;root&quot;, &quot;&quot;);&#39;
+</code></p>
+
+<p>※ Please appropriatly change /path/to/mysqld.sock. If you have installed using MacPorts it will be /opt/local/var/run/mysql5/mysqld.sock.</p>
+
+<p>※ Troubleshooting: From the console if you receive MySql Connection errors, please check that <em>MySql socket file setting</em> in php.ini has been entered correctly or not.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

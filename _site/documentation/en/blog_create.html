@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Blog Tutorial(6) Creating Posts</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li class="active"><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Blog Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">Installing BEAR</a></li>
+<li><a href="blog_db.html">DB Settings</a></li>
+<li><a href="blog_get.html">Creating a Post Resource</a></li>
+<li><a href="blog_page.html">Creating a Post Detail Page</a></li>
+<li><a href="blog_template.html">Creating a Template</a></li>
+<li><a href="blog_create.html">Adding a Post</a></li>
+<li><a href="blog_validate.html">Validation</a></li>
+<li><a href="blog_delete.html">Removing a Post</a></li>
+<li><a href="blog_update.html">Editing a Post</a></li>
+<li><a href="blog_more.html">More</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">POST Method</h1>
+
+<p>In steps up until now we have been able to show posts that have been saved in our database. Next we will go ahead and make a form however before we do that lets make it possible to add a post through a console resource operation.</p>
+
+<h2 id="toc_1">Create a Posts Resource POST Interface</h2>
+
+<p>Adding a POST interface to allow you to add posts to a posts resource that only has a GET interface method.
+<code>
+public function onPost($title, $body, $created # null, $modified  null)
+{
+    return $this;
+}
+</code></p>
+
+<p>First let try a POST even in this bare state.
+```
+$ php api.php post &#39;app://self/blog/posts&#39;</p>
+
+<p>400 Bad Request
+X-EXCEPTION-CLASS: BEAR\Resource\Exception\InvalidParameter
+X-EXCEPTION-MESSAGE: $title in Sandbox\Resource\App\Posts::onPost
+[BODY]
+You sent a request that query is not valid.
+```</p>
+
+<p>You have not specified the required parameters, a <em>400 Bad Request</em> response is returned. </p>
+
+<p>We can check what the required parameters are by using the <code>options</code> method.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$php api.php options &#39;app://self/blog/posts&#39;
+200 OK
+allow: [&quot;get&quot;,&quot;post&quot;,&quot;put&quot;,&quot;delete&quot;]
+param-get: (id)
+param-post: title,body
+param-put: id,title,body
+param-delete: id
+content-type: application/hal+json; charset=UTF-8
+</code></pre></div>
+<p>The possible methods are shown in the <code>allow</code> header, then each of the possible parameters are shown. Parameters shown in parenthesis are optional.</p>
+
+<p>For example a GET method can be requested with either no parameters or by using the <code>id</code> parameter. The POST method however <em>must</em> contain a <code>title</code> and <code>body</code> parameter.</p>
+
+<p>The required fields have now become clear. We can now add a query to make our request.
+<code>
+php api.php post &#39;app://self/posts?title# hello&amp;body&quot;this is first post&quot;&#39;
+</code>
+<code>
+200 OK
+[BODY]
+NULL
+</code>
+A status 200 OK with contents NULL has been returned.
+There is no problem, however lets change this to use the <em>more</em> accurate 204(No Content) status code.
+<code>
+public function onPost($title, $body, $created # null, $modified  null)
+{
+    $this-&gt;code = 204;
+    return $this;
+}
+</code>
+In order to change the status code we set the <code>code</code> property.</p>
+
+<p>We have now made it so that we are more accurately informed of the correct status code. This will also help us in our unit tests.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">204 No Content
+[BODY]
+NULL
+</code></pre></div>
+<p>Implementing the POST interface.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function onPost($title, $body, $created # null, $modified  null)
+{
+    $this-&gt;db-&gt;insert($this-&gt;table, [&#39;title&#39; # &gt; $title, &#39;body&#39; &gt; $body]);
+    $this-&gt;code = 204;
+    return $this;
+}
+</code></pre></div>
+<p>The interface method which picks up the POST request inserts the post into the database. In this way we are able to add posts.</p>
+
+<p>Just like the GET interface when we use this method the injected DB object is available for us to use. The difference to the GET interface is that it is not the <em>slave</em> DB object that is injected but the <em>master</em>.</p>
+
+<p>Please remember that the DB object is bound by the injecting interceptor to all method names that begin with <code>on</code>. The bound DB injector depending on the resource request injects the DB object just before the method is requested. Please take notice that the resource request <em>pays no attention to the preparation or retrieval of the required dependencies, it just uses the object. In this way BEAR.Sunday adhears to the *separation of concerns</em> principle in a consistent and unified manner.</p>
+
+<h2 id="toc_2">Post Resource Test</h2>
+
+<p>The post has been added, lets make a test to check the added content. When a resource unit test contains a DB test you write code like the following.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
+{
+    public function getConnection()
+    {
+        // DB Connection
+    }
+
+    public function getDataSet()
+    {
+        // Initial dataset
+    }
+
+    /**
+     * @test
+     */
+    public function post()
+    {
+        // +1
+        $before = $this-&gt;getConnection()-&gt;getRowCount(&#39;posts&#39;);
+        $response = $this-&gt;resource
+        -&gt;post
+        -&gt;uri(&#39;app://self/posts&#39;)
+        -&gt;withQuery([&#39;title&#39; # &gt; &#39;test_title&#39;, &#39;body&#39; &gt; &#39;test_body&#39;])
+        -&gt;eager
+        -&gt;request();
+        $this-&gt;assertEquals($before + 1, $this-&gt;getConnection()-&gt;getRowCount(&#39;posts&#39;), &quot;faild to add post&quot;);
+
+        // new post
+        $body = $this-&gt;resource
+        -&gt;get
+        -&gt;uri(&#39;app://self/posts&#39;)
+        -&gt;withQuery([&#39;id&#39; =&gt; 4])
+        -&gt;eager
+        -&gt;request()-&gt;body;
+        return $body;
+    }
+
+    /**
+     * @test
+     * @depends post
+     */
+    public function postData($body)
+    {
+        $this-&gt;assertEquals(&#39;test_title&#39;, $body[&#39;title&#39;]);
+        $this-&gt;assertEquals(&#39;test_body&#39;, $body[&#39;body&#39;]);
+    }
+</code></pre></div>
+<p>We test that the post has been created by the post post method, we then check those contents using the postData method.</p>
+
+<h2 id="toc_3">Creating the Add Post Page</h2>
+
+<p>We have created the app resource that adds a post, we will now create a page resource that grabs input from the web and requests the app resource.</p>
+
+<p>Add a form to a template.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;h1&gt;New Post&lt;/h1&gt;
+&lt;form action# &quot;/blog/posts/newpost&quot; method&quot;POST&quot;&gt;
+    &lt;input name# &quot;X-HTTP-Method-Override&quot; type=&quot;hidden&quot; value&quot;POST&quot; /&gt;
+    &lt;div class=&quot;control-group {if $errors.title}error{/if}&quot;&gt;
+        &lt;label class# &quot;control-label&quot; for&quot;title&quot;&gt;Title&lt;/label&gt;
+        &lt;div class=&quot;controls&quot;&gt;
+            &lt;input type# &quot;text&quot; id=&quot;title&quot; name=&quot;title&quot; value&quot;{$submit.title}&quot;&gt;
+            &lt;p class=&quot;help-inline&quot;&gt;{$errors.title}&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;control-group {if $errors.body}error{/if}&quot;&gt;
+        &lt;label&gt;Body&lt;/label&gt;
+        &lt;textarea name# &quot;body&quot; rows=&quot;10&quot; cols&quot;40&quot;&gt;{$submit.body}&lt;/textarea&gt;
+        &lt;p class=&quot;help-inline&quot;&gt;{$errors.body}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;input type# &quot;submit&quot; value&quot;Send&quot;&gt;
+&lt;/form&gt;
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">Note: Notice the `X-HTTP-Method-Override` hidden field. This sets the page resource request method. Even if the browser or web server only supports GET/POST, in separation to the external protocol this functions as an internal software protocol.
+
+Note: When specifying a `$_GET` query you set this with `$_GET[&#39;_method&#39;]`.
+</code></pre></div>
+<p>Implementing the page resource POST interface.
+```
+    /**
+     * Post
+     *
+     * @param string $title
+     * @param string $body
+     */
+    public function onPost($title, $body)
+    {
+        // create post
+        $this-&gt;resource
+        -&gt;post
+        -&gt;uri(&#39;app://self/posts&#39;)
+        -&gt;withQuery([&#39;title&#39; # &gt; $title, &#39;body&#39; &gt; $body])
+        -&gt;eager-&gt;request();</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    // redirect
+    $this-&gt;code = 303;
+    $this-&gt;headers # [&#39;Location&#39; &gt; &#39;/blog/posts&#39;];
+    return $this;
+}
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">Unlike with the GET interface with the `withQuery()` the parameters for the resource request are set. Note that unlike a regular PHP method there is no order values are set using named parameters. Like a web request it has been set up for the method request to be made with a `key=value` style query. (The key is the parameter name)
+
+An `*eager*-&gt;request();` shows that the resource request will be made *immediately*.
+
+From the console lets try a `POST` via a posts page resource request.
+</code></pre></div>
+<p>php api.php post &#39;page://self/posts?title# &quot;hello again&quot;&amp;body&quot;how have you been ?&quot;&#39;
+```</p>
+
+<p>Now when you make a POST request to the posts view page a post resource is added.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

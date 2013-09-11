@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Resource Introduction</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li class="active"><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Resource</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+
+		
+			<li><a href="resource.html">Introduction</a></li>
+<li><a href="resource_client.html">Resource Client</a></li>
+<li><a href="resource_object.html">Resource Object</a></li>
+<li><a href="resource_renderer.html">Resource Renderer</a></li>
+<li><a href="resource_link.html">Resource Link</a></li>
+<li><a href="resource_adapter.html">Resource Adapter</a></li>
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">summary Resource Introduction</h1>
+
+<h1 id="toc_1">Introduction</h1>
+
+<h2 id="toc_2">Representational State Transfer</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/REST">REST</a> (Representational State Transfer) was first introduced in a doctorate paper in 2000 by key creator of the HTTP specification Roy Fielding.</p>
+
+<p>A resource is a clump of information containing meaning. A representation is created from the resource state and then passed to the client. This what REST (Representational State Transfer) is. For example stock information is a resource. From that state to a HTML page representation is created then passed to a web browser and becomes a stock information page. This is REST.</p>
+
+<h2 id="toc_3">Application Resource</h2>
+
+<p>In an MVC framework just like a controller accesses a model, in BEAR.Sunday a page resource requests an application resource.</p>
+
+<p>The model does not deal with data in an object based architecture instead deals with the data as a REST resource. The resource functions as a layer, internal procedures or objects can be wrapped and served as a resource. The resource client does not deal directly with an instance, 
+the resource object retrieved using a URI is processed through a request interface. </p>
+
+<p>Object Model</p>
+
+<p>|| <em>cart:</em> || show, addItem, remoteItem, addCoupon, removeCoupon, increaseQuantity, decreaseQuantity ||</p>
+
+<p>REST</p>
+
+<p>|| <em><code>cart</code>* || get, post, put, delete || 
+|| *<code>cart/item</code>* || get, post, put, delete || 
+|| *<code>cart/coupon</code></em> || get, post, put, delete || </p>
+
+<h2 id="toc_4">ROA(Resource Orientated Architecture)</h2>
+
+<p>A BEAR resource also just like an HTTP Application carries the following 4 ROA([<a href="http://en.wikipedia.org/wiki/Resource-oriented_architecture">http://en.wikipedia.org/wiki/Resource-oriented_architecture</a> Resource Orientated Architecture） Benefits</p>
+
+<ul>
+<li>Addressability</li>
+<li>Unified Interface</li>
+<li>Statelessness</li>
+<li>Connectedness (Links)</li>
+</ul>
+
+<h3 id="toc_5">Addressability</h3>
+
+<p>A resource has a URI like a web URL.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">app://self/blog/posts/?id=3
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">page://self/index
+</code></pre></div>
+<p>The equivalent to a MVC model is an application resource. In BEAR.Sunday a resource functions as an internal API, but as it is designed using REST it also works as an external API transport. In BEAR.Sunday the <code>Page</code> that carries out the page controller role is also a resource. A page according to its URL calls an application resource and builds itself.</p>
+
+<p>A resource respects <code>the concern of each domain</code>. In order to build itself an article displaying <em>page</em> resource sets its own contents by setting its body property with an <code>Article application resource</code>. Here no concern is paid to the page article details. The role of the page is to bind part of itself to application resource request.</p>
+
+<p>The schema expresses each individual domain (data structure) such as <code>app</code>, <code>page</code> and others just like <code>http</code> is available for the user to register. For example as a specified schema <code>office://self/room/meething/reservation/?room=3</code> etc and traditional information systems can provide a new URI.</p>
+
+<p>For more information on custom schema&#39;s and other service request details then please see [resource_adapter Resource Adapter]. Furthermore <code>self</code> represents ones own service. It is an identifier to to be able to distinguish from other services.</p>
+
+<h3 id="toc_6">Uniform Interface</h3>
+
+<p>The resource state (data) operates though an interface. That operation is run by the resource client. </p>
+
+<p>Let&#39;s think of it as an HTTP Application. A resource can be requested from an HTTP client, however that it is limited to the predetermined uniform methods GET/PUT/POST...etc. No matter what the resource these methods will not change.</p>
+
+<p>BEAR.Sunday resources also have 4 interfaces conforming to the 4 HTTP methods.</p>
+
+<p>|| GET || Resource retrieval ||
+|| PUT || Resource update and creation ||
+|| POST || Resource creation ||
+|| DELETE || Resource delete ||
+|| OPTIONS || Resource access method query ||</p>
+
+<h4 id="toc_7">GET</h4>
+
+<p>Resource reading. This method does not provide any changing of the resource state. A safe method with no side affects.</p>
+
+<h4 id="toc_8">PUT</h4>
+
+<p>Performs resource updates and also creation. This method has the benefit that even if you run it once, running it many more times will have no more effect. See <a href="http://en.wikipedia.org/wiki/Idempotence">Idempotence</a>.</p>
+
+<h4 id="toc_9">POST</h4>
+
+<p>Performs resource creation. If you run the request multiple times the resource will be created that many times. A method with no idempotence.</p>
+
+<h4 id="toc_10">DELETE</h4>
+
+<p>Resource deletion. Has idempotence just as PUT.</p>
+
+<h4 id="toc_11">OPTIONS</h4>
+
+<p>Inspects which methods and parameters can be used on the resource. Just like <code>GET</code> there is no effect on the resource.</p>
+
+<h2 id="toc_12">Stateless</h2>
+
+<p>This means that there is no state involved in the resource request.</p>
+
+<p>For example there is a state in the request when accessing a model object.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$user = new User;
+$user-&gt;setUserId($id); 
+$name = $user-&gt;getName(); // Follows the premise that there is state through the setting of $id
+</code></pre></div>
+<p>In a resource request there is no state.
+<code>
+$name = $resource
+  -&gt;get
+  -&gt;uri(&#39;app://self/user&#39;)
+  -&gt;eager
+  -&gt;request([&#39;id&#39; =&gt; 1)
+  -&gt;body[&#39;name&#39;];
+</code></p>
+
+<h2 id="toc_13">Link</h2>
+
+<p>A resource can link to other resources. For example a user resource can be linked to a blog resource by a <em>blog link</em>. A blog resource can be linked to a article resource via a <em>latest articles link</em> or <em>popular posts link</em>.</p>
+
+<p>A link encapsulates the resource internals, externally from a resource you only need to follow the link. It is an just like an HTML <code>a</code> tag. The link info set by an <code>href</code> is not managed by the client but only used. Even the link location changes there is no change in the the way the link is handled.</p>
+
+<p>A DB relationship or association is independent and so for example if a specific DB data column cam be linked to a http resource using a Web API or linked to data (a resource) crossing a schema.</p>
+
+<h1 id="toc_14">REST and BEAR.Sunday</h1>
+
+<p>If all of this sounds quite abstract to you, you are right — REST in itself is a high-level style that could be implemented using many different technologies, and instantiated using different values for its abstract properties. For example, REST includes the concepts of resources and a uniform interface — i.e. the idea that every resource should respond to the same methods. But REST doesn&#39;t say which methods these should be, or how many of them there should be.</p>
+
+<p>One <code>incarnation</code> of the REST style is HTTP (and a set of related set of standards, such as URIs), or slightly more abstractly: the Web’s architecture itself. To continue the example from above, HTTP “instantiates” the REST uniform interface with a particular one, consisting of the HTTP verbs. (<a href="http://www.infoq.com/articles/rest-introduction">http://www.infoq.com/articles/rest-introduction</a>)</p>
+
+<p>At the core of BEAR.Sunday is REST. It behaves like HTTP or web architecture by retrieving a clump of data/process as a resource. BEAR.Sunday as an API or a web framework collects and builds up these resources.</p>
+
+<h2 id="toc_15">REST Reference Links</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">* [REST(Wikipedia)](http://en.wikipedia.org/wiki/REST)
+* [http://www.infoq.com/articles/rest-introduction infoQREST Introduction]
+* [http://net.tutsplus.com/tutorials/other/a-beginners-introduction-to-http-and-rest/  Introduction to HTTP and REST]
+* [http://www.ustream.tv/recorded/485516 REST &amp; ROA Best Practice]
+</code></pre></div>
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

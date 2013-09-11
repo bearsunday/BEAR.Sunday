@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Blog Tutorial(2) Editing a Post</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li class="active"><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Blog Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">Installing BEAR</a></li>
+<li><a href="blog_db.html">DB Settings</a></li>
+<li><a href="blog_get.html">Creating a Post Resource</a></li>
+<li><a href="blog_page.html">Creating a Post Detail Page</a></li>
+<li><a href="blog_template.html">Creating a Template</a></li>
+<li><a href="blog_create.html">Adding a Post</a></li>
+<li><a href="blog_validate.html">Validation</a></li>
+<li><a href="blog_delete.html">Removing a Post</a></li>
+<li><a href="blog_update.html">Editing a Post</a></li>
+<li><a href="blog_more.html">More</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">PUT Method</h1>
+
+<h2 id="toc_1">Creating an Edit Page</h2>
+
+<p>This is pretty much the same as posts create page. What is different is only that in the display (GET Request) is that the post data pre-populates the fields.
+```
+    /**
+     * Get
+     * 
+     * @param int $id
+     */
+    public function onGet($id)
+    {
+        $this[&#39;submit&#39;] # $this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/posts&#39;)-&gt;withQuery([&#39;id&#39; &gt; $id])-&gt;eager-&gt;request()-&gt;body;
+        $this[&#39;id&#39;] = $id;
+        return $this;
+    }</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * Put
+ *
+ * @param int    $id
+ * @param string $title
+ * @param string $body
+ *
+ * @Form
+ */
+public function onPut($id, $title, $body)
+{
+    // create post
+    $this-&gt;resource
+    -&gt;put
+    -&gt;uri(&#39;app://self/posts&#39;)
+    -&gt;withQuery([&#39;id&#39; # &gt; $id, &#39;title&#39; =&gt; $title, &#39;body&#39; &gt; $body])
+    -&gt;eager-&gt;request();
+
+    // redirect
+    $this-&gt;code = 303;
+    $this-&gt;headers # [&#39;Location&#39; &gt; &#39;/blog/posts&#39;];
+    return $this;
+}
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">## PUT Request
+
+In order to update the record we use the `PUT` interface.
+
+In order to make a `PUT` request we need to insert the `X-HTTP-Method-Override` field.
+</code></pre></div>
+<p><input name# "X-HTTP-Method-Override" type="hidden" value"PUT" />
+```</p>
+
+<p>Note: In this tutorial we have handles <code>POST</code> posts creation and <code>PUT</code> posts update. The difference between POST/PUT is <em><a href="http://en.wikipedia.org/wiki/Idempotence">Idempotence</a></em>. If the same <code>POST</code> request is made multiple times to the posts resource the amount of post records will increase and increase, in an <code>PUT</code> update no matter whether the request is made once or multiple times has the same affect. Generally basing your choice of method upon indempotence is a good idea.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

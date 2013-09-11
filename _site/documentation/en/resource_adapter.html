@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Resource Adapter</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li class="active"><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Resource</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+
+		
+			<li><a href="resource.html">Introduction</a></li>
+<li><a href="resource_client.html">Resource Client</a></li>
+<li><a href="resource_object.html">Resource Object</a></li>
+<li><a href="resource_renderer.html">Resource Renderer</a></li>
+<li><a href="resource_link.html">Resource Link</a></li>
+<li><a href="resource_adapter.html">Resource Adapter</a></li>
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Resource Adapter</h1>
+
+<p>Depending on the application the resource URI&#39;s schema is bound the specified resource adapter and that request is carried out.</p>
+
+<h2 id="toc_1">Binding DSL</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$schemeCollection = new SchemeCollection;
+$schemeCollection-&gt;scheme(&#39;app&#39;)-&gt;host(&#39;self&#39;)-&gt;toAdapter($appAdapter);
+$schemeCollection-&gt;scheme(&#39;page&#39;)-&gt;host(&#39;self&#39;)-&gt;toAdapter($pageAdapter);
+$schemeCollection-&gt;scheme(&#39;page&#39;)-&gt;host(&#39;*&#39;)-&gt;toAdapter($httpAdapter);
+$this-&gt;bind(&#39;BEAR\Resource\SchemeCollection&#39;)-&gt;toInstance($schemeCollection);
+</code></pre></div>
+<p>The above bindings ensure the handling of resources that begin with<code>app://self/</code>, <code>page://self/</code> and even <code>http://</code>. The actual request is handled by the resource adapter (<code>$appAdapter</code> etc).</p>
+
+<p>This kind of URI and the specified execution are not fixed, they are configured through the application binding.</p>
+
+<h2 id="toc_2">Resource Adapter</h2>
+
+<p>The resource adapter is actually a factory of the resource object. It runs the <code>BEAR\Resource\Provider</code> methods and an object is returned.</p>
+
+<p>For example if it is <code>app</code> or <code>page</code> from the URI we can find out the class name and return an instance of the resource object class. If it is <code>http</code> we can return the object returned from the <code>HTTP Client Service</code>. We also return the resource status from the method that corresponds to the request methods like <code>onGet</code> etc.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">App implements ResourceObject, Provider, Adapter
+{
+    private $injector;
+    private $namespace;
+    private $path;
+
+    /**
+     * Constructor
+     *
+     * @param InjectorInterface $injector  Application dependency injector
+     * @param string            $namespace Resource adapter namespace
+     * @param string            $path      Resource adapter path
+     *
+     * @Inject
+     */
+    public function __construct(
+        InjectorInterface $injector,
+        $namespace,
+        $path
+    ){
+        if (! is_string($namespace)) {
+            throw new RuntimeException(&#39;namespace not string&#39;);
+        }
+        $this-&gt;injector = $injector;
+        $this-&gt;namespace = $namespace;
+        $this-&gt;path = $path;
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see    BEAR\Resource.Provider::get()
+     * @return object
+     * @throws Exception\Host
+     */
+    public function get($uri)
+    {
+        $parsedUrl = parse_url($uri);
+        $path = str_replace(&#39;/&#39;, &#39; &#39;, $parsedUrl[&#39;path&#39;]);
+        $path = ucwords($path);
+        $path = str_replace(&#39; &#39;, &#39;\\&#39;, $path);
+        $host = $parsedUrl[&#39;host&#39;];
+        $className = &quot;{$this-&gt;namespace}\\{$this-&gt;path}{$path}&quot;;
+        $instance = $this-&gt;injector-&gt;getInstance($className);
+
+        return $instance;
+    }
+}
+</code></pre></div>
+<p><em>In the constructor we have injected for us the resource object  base directory and injector, and we return an instance that has those dependencies resolved. The only difference is <code>app</code>, <code>page</code> and where they are saved</em></p>
+
+<h2 id="toc_3">Multiple application resources</h2>
+
+<p>The injector contains all of the logic of how the objects are built. So if it was possible to obtain  an injector from a different application, in a unified instance you could handle multiple application resources.</p>
+
+<p>For example a project that has a crosscutting application or an authentication API for within the organization. Unlike HTTP or Thrift it does not go outside of the network, it is handles in the same instance. </p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$entries1 = $resource-&gt;get-&gt;uri(&#39;app://self/entries&#39;)-&gt;eager-&gt;request();
+$entries2 = $resource-&gt;get-&gt;uri(&#39;app://anohter_service/entries&#39;)-&gt;eager-&gt;request();
+</code></pre></div>
+<h2 id="toc_4">Wrapping Legacy API&#39;s</h2>
+
+<p>When you wrap a legacy API you can it can then be easily used for things like logging, caching or for displaying in a debug screen. It also becomes easy to refactor an abstracted API. A resource adapter can then act as an API proxy.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$entries1 = $resource-&gt;get-&gt;uri(&#39;office://self/room/resrvation/&#39;)-&gt;eager-&gt;request();
+</code></pre></div>
+<h2 id="toc_5">URI Possibilities</h2>
+
+<p>It is at the crux of BEAR.Sunday to be able to add a name (URI) to the data you are dealing with and for everything to be available as an <code>API</code>. There is no fixed schema that is dictated to you by the framework, that binding is in the application domain.</p>
+
+<p>As a resource API data that has a URI can function as hub even for badly written systems.
+Different frameworks, different languages in other words multiple types of client(Web / Mobile App / Console), or storage changes, R/W splitting of storage(CQRS) etc. With all of these at the heart of the hub this functionality is possible.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

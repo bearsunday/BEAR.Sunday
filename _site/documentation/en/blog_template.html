@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Blog Tutorial(5) Creating templates</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li class="active"><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Blog Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">Installing BEAR</a></li>
+<li><a href="blog_db.html">DB Settings</a></li>
+<li><a href="blog_get.html">Creating a Post Resource</a></li>
+<li><a href="blog_page.html">Creating a Post Detail Page</a></li>
+<li><a href="blog_template.html">Creating a Template</a></li>
+<li><a href="blog_create.html">Adding a Post</a></li>
+<li><a href="blog_validate.html">Validation</a></li>
+<li><a href="blog_delete.html">Removing a Post</a></li>
+<li><a href="blog_update.html">Editing a Post</a></li>
+<li><a href="blog_more.html">More</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Resource Rendering</h1>
+
+<p>Blog Tutorial(5) Creating templates </p>
+
+<h2 id="toc_1">Resource Renderer Displaying the Resource State</h2>
+
+<p>In the steps up until last time in the posts resource the posts data was set in the page resource by a request to the posts resource. In order to <em>display</em> this <em>resource state</em> we need to use some HTML rendering.</p>
+
+<p>A resource each internally contain their own renderer. In the sandbox application in order to output HTML a Smarty 3 template engine is injected into all of the resources.</p>
+
+<p>Note: A controller does not retrieve data from the model and pass strings for output to a template engine. In BEAR.Sunday all resources include an view renderer. The responsibility for the output of the model is held by each of the resources themselves.</p>
+
+<h2 id="toc_2">Posts Resource Template</h2>
+
+<p><em>Sandbox/Resource/App/Posts.tpl</em>
+<code>
+&lt;table class=&quot;table table-bordered table-striped&quot;&gt;
+    &lt;tr&gt;
+        &lt;th class=&quot;span1&quot;&gt;Id&lt;/th&gt;
+        &lt;th&gt;Title&lt;/th&gt;
+        &lt;th&gt;Body&lt;/th&gt;
+        &lt;th&gt;CreatedAt&lt;/th&gt;
+    &lt;/tr&gt;
+    {foreach from# $resource-&gt;body itempost}
+    &lt;tr&gt;
+        &lt;td&gt;{$post.id}&lt;/td&gt;
+        &lt;td&gt;&lt;a href# &quot;posts/post?id{$post.id}&quot;&gt;{$post.title}&lt;/a&gt;&lt;/td&gt;
+        &lt;td&gt;{$post.body|truncate:60}&lt;/td&gt;
+        &lt;td&gt;{$post.created}&lt;/td&gt;
+    &lt;/tr&gt;
+    {/foreach}    
+&lt;/table&gt;    
+</code>
+We are unfolding the contents (body property) of the posts resource ($posts).</p>
+
+<h2 id="toc_3">Posts Display Page Template</h2>
+
+<p><em>Sandbox/Resource/Resource/Posts.tpl</em></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;html&gt;
+    &lt;body&gt;
+    &lt;h1&gt;Posts&lt;/h1&gt;
+    {$posts}
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+<p>Please notice that the data details held by the posts resource is not shown in the page template. There is only a posts resource place holder, the page, page resource and page template take no notice that posts contain a &#39;title&#39; or &#39;body&#39; property etc.</p>
+
+<p>What decides how the post resource should be displayed is the template that the post resource itself contains.</p>
+
+<p>Note: The class that contains the needed information for accomplishment of the &#39;general principle for assignment of object responsibility&#39; follows the [<a href="http://en.wikipedia.org/wiki/GRASP_(object-oriented_design)#Information_Expert">http://en.wikipedia.org/wiki/GRASP_(object-oriented_design)#Information_Expert</a> Information Expert Pattern]. In this case only the posts resource has anything to do with the template, the posts index page is not concerned posts resource template or the construction of the posts resource. </p>
+
+<h2 id="toc_4">Resource Display = Resource State + Resource Template</h2>
+
+<p>Just like we have seen up to here the resource state is combined with the resource template, the rendered result is sent to the client as a resource representation.</p>
+
+<p>Lets check this through the command line. This time we won&#39;t use api.php, we will use web.php and request the web view.</p>
+
+<p>$ php web.php get page://self/blog/posts</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+...
+x-interceptors: [&quot;{\&quot;onGet\&quot;:[\&quot;BEAR\\\\Sunday\\\\Interceptor\\\\CacheLoader\&quot;]}&quot;]
+x-query: [&quot;[]&quot;]
+x-params: [&quot;[]&quot;]
+x-cache: [&quot;{\&quot;mode\&quot;:\&quot;W\&quot;,\&quot;date\&quot;:\&quot;Tue, 13 Nov 2012 10:49:19 +0100\&quot;,\&quot;life\&quot;:false}&quot;]
+x-execution-time: [0.10759687423706]
+x-memory-usage: [416528]
+x-profile-id: [&quot;50a2179f66680&quot;]
+cache-control: [&quot;no-cache&quot;]
+date: [&quot;Tue, 13 Nov 2012 09:49:19 GMT&quot;]
+content-type: [&quot;text\/html; charset=UTF-8&quot;]
+[BODY]
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;ja&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Posts &amp;laquo; BEAR.Sunday Blog&lt;/title&gt;
+</code></pre></div>
+<p>Header information that is helpful in development is output, in the [BODY] we can check the HTML of the final output.</p>
+
+<p>The request to the posts resource is made the resource request result is assigned to the posts slot.</p>
+
+<h2 id="toc_5">Lazy Request</h2>
+
+<p>In a page resource the posts resource request are set in {$posts}. This request is made at the point that the {$posts} placeholder is called inside the template.</p>
+
+<p>So if there is no call this request will never be made, it is up to template to decide whether or not this request is actually made.</p>
+
+<h2 id="toc_6">Resource Object</h2>
+
+<p>Not only are you able to handle the set resource representation you can also directly use the item component itself.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{$posts.0.title}
+</code></pre></div>
+<p>If you need it a method or property can be used an in an object.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{$posts-&gt;owner}
+{$posts-&gt;isPublic()}
+</code></pre></div>
+<ul>
+<li>Having a custom method in this way is not considered resource orientated design. </li>
+</ul>
+
+<p>The behavior of the resource assigned to the template changes depending on how it is handled. Not Whether pages need to be accessed or not, how these are assigned, are both decided in the view according to the context and not in the controller.</p>
+
+<p>This is one of the many features of BEAR.Sunday</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

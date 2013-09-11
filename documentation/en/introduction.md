@@ -1,9 +1,8 @@
 ---
 layout: default
 title: About BEAR.Sunday
-category: Test Category
+category: Installation
 ---
-
 # BEAR.Sunday
 
 ## BEAR.Sunday is an elegant, no-mess, 'Zen' inspired framework from Japan.

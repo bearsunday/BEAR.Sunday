@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Database</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li class="active"><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Others</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+			<li><a href="faq.html">FAQ</a></li>
+<li><a href="annotations.html">Annotations</a></li>
+<li><a href="database.html">Database</a></li>
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Database</h1>
+
+<p>BEAR.Sunday does not have it&#39;s own DB / ORM library but has all the underpinnings needed for you to be able to use a number of DB setups.</p>
+
+<p>Choose from <code>Doctrine DBAL, ORM</code>,<code>ZF2\Db</code>, <code>PDO</code> etc as a library and inject them into the resource object or
+intercept it and use a database.</p>
+
+<p>In the <em>sandbox application Doctrine.DBAL is used</em>.</p>
+
+<h2 id="toc_1">@Db</h2>
+
+<p>In the sandbox application, the object injector binds DB object classes annotated with <code>@Db</code> to <code>on</code> methods.
+The DB object is injected at the same time that the class annotated with @Db has its <code>onGet</code> method requested.</p>
+
+<p>The db connection and utilization concerns are separated, the utilized code knows nothing about the connection. </p>
+
+<p>Code for using a database.
+```
+/**
+ * @Db
+ <em>/
+class Posts extends ResourceObject implements DbSetterInterface
+{
+    /</em>*
+     * @var Doctrine\DBAL\Connection
+     */
+    protected $db;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function setDb(DriverConnection $db = null)
+{
+    $this-&gt;db = $db;
+}
+
+public function onGet($id)
+{
+    $sql = &quot;SELECT id, title, body, created, modified FROM {$this-&gt;table}&quot;;
+    $this-&gt;body = $this-&gt;db-&gt;query($sql)-&gt;fetchAll(PDO::FETCH_ASSOC);
+    return $this;
+}
+</code></pre></div>
+<p>}
+```
+The DB injector holds dependencies on @Named(&quot;master_db&quot;) and @Named(&quot;slave_db&quot;) for master and slave db connection information. 
+In the sandbox application, in ConstantModule their constant dependencies are installed. </p>
+
+<h3 id="toc_2">master/slave Auto selection</h3>
+
+<p>The <code>DbInjector</code> looks at the request method and chooses the DB connection (GET=slave), connects and sets the DB object.</p>
+
+<h3 id="toc_3">Partitioning</h3>
+
+<p>When it is necessary to have the DB partitioned according to ID, you can prepare and bind a separate injector to describe the choice logic.</p>
+
+<h2 id="toc_4">@!DbPager</h2>
+
+<p>When this DB injector has a method annotated with <code>@DbPager</code>, 
+the query is converted to a DB pager query, the pager meta information in stored in a header with the <em>pager</em> key.</p>
+
+<p>|| maxPerPage || Maximum Items per Page ||
+|| current || Current Page Number ||
+|| total || Total Number of Pages ||
+|| hasNext || Next Existence ||
+|| hasPrevious || Previous Existence ||
+|| html || Pager Link(twitter/bootstrap format) ||</p>
+
+<p>For example to specify pagination the template assigned to <code>$posts</code> looks like the following. </p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{$posts-&gt;headers.pager.html}
+</code></pre></div>
+<p><em>※smarty template engine example</em></p>
+
+<h2 id="toc_5">@Transactional</h2>
+
+<p>Methods annotated with <code>@Transactional</code> are bound to the transaction interceptor.
+```
+    /**
+     * @Time
+     * @Transactional
+     * @CacheUpdate
+     */
+    public function onPost($title, $body)
+    {
+        $values = [
+            &#39;title&#39; =&gt; $title,
+            &#39;body&#39; =&gt; $body,
+            &#39;created&#39; =&gt; $this-&gt;time
+        ];
+        $this-&gt;db-&gt;insert($this-&gt;table, $values);</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    return $this;
+}
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">### @Time 
+### @!CacheUpdate 
+The method uses the current time ($this-&gt;time) bound by `@Time`, 
+using a transaction performs an insert query.
+Not only is this run when committing the cache updater bound with `@CacheUpdate` runs, clearing the old cache replacing it with the new.
+
+## Hint 
+ * As a dependency for SQL and table names lets try using @Inject.
+ * Validations are not run inside the method, they are bound as an interceptor. They may be able to be combined with form validation.
+　* How would it be for example to use analysis data run the query again and have the interceptor just run `execute`.
+</code></pre></div>
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

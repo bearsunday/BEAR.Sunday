@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Annotations</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li class="active"><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Others</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+			<li><a href="faq.html">FAQ</a></li>
+<li><a href="annotations.html">Annotations</a></li>
+<li><a href="database.html">Database</a></li>
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Annotations</h1>
+
+<p>Annotations are a collection of meta data applied to a class or a method.
+In BEAR.Sunday [<a href="http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html">http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html</a> Doctrine Annotations] are used.
+Annotations written in the doc block comment of a method or class can be used to specify a DI injection point or as a marker for the AOP interceptor to bind to.</p>
+
+<h2 id="toc_1">Built-in Annotations</h2>
+
+<p>There are default annotations already created for you in <code>BEAR.Framework</code> or <code>Ray.Di</code>.
+<code>BEAR.Framework</code> annotations are pretty much for use in AOP, 
+if they are not bound to anything there is no affect at runtime.</p>
+
+<h3 id="toc_2">Ray.Di</h3>
+
+<p>|| Annotation || Meaning || Property ||
+|| <code>@Inject</code> || Injection Point || optional:Optional ||
+|| <code>@Named</code> || Injection Point Name || value:Name ||
+|| <code>@Scope</code> || Scope || value:&quot;singleton&quot; or &quot;prototype&quot;(Default) ||
+|| <code>@ImplementedBy</code> || Default Information || Class ||
+|| <code>@ProviderdBy</code> || Default Provider || Provider ||</p>
+
+<p>For details on Ray.Di please refer to the <a href="http://code.google.com/p/rayphp/wiki/Motivation?tm=6">manual</a>.</p>
+
+<h3 id="toc_3">BEAR.Framework</h3>
+
+<p>|| Annotation || Meaning || Property || Interceptor ||
+|| <code>@Cache</code> || Cache || value:キャッシュ秒数 || <code>BEAR\Framework\Interceptor\CacheLoader</code> ||
+|| <code>@CacheUpdate</code> || Cache Update || n/a || <code>BEAR\Framework\Interceptor\CacheUpdate</code> ||
+|| <code>@Db</code> || DAO Inject|| n/a ||<code>BEAR\Framework\Interceptor\DbSetter</code> ||
+|| <code>@DbPager</code> || DB Pager || n/a || n/a ||
+|| <code>@Transactional</code> || Transactional || n/a || <code>BEAR\Framework\Interceptor\Transaction</code> ||
+|| <code>@Time</code> || Time || n/a || <code>BEAR\Framework\Interceptor\TimeStamper</code> ||</p>
+
+<p><em>There is currently no detailed explanations for interceptors. Please look at the source.</em></p>
+
+<h2 id="toc_4">User Annotations</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+* @Annotation
+* @Target({&quot;METHOD&quot;,&quot;CLASS&quot;})
+*
+*/
+class Foo
+{
+    public $value;
+}
+</code></pre></div>
+<p>Here is an example of how you can attach annotations to methods and classes.
+An annotation that has only one property in called a &#39;Single Value Annotation&#39;.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * @Foo(&quot;bar&quot;)
+ */
+</code></pre></div>
+<p>In this case <code>&quot;bar&quot;</code> has been assigned to the value property.
+There are marker annotations that have no other properties. There are also <em>Full Annotations</em> that contain many properties.</p>
+
+<p>For details see the <code>Doctrine Annotation</code> <a href="http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html">manual</a></p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

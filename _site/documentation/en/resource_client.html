@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Resource Client</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li class="active"><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Resource</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+
+		
+			<li><a href="resource.html">Introduction</a></li>
+<li><a href="resource_client.html">Resource Client</a></li>
+<li><a href="resource_object.html">Resource Object</a></li>
+<li><a href="resource_renderer.html">Resource Renderer</a></li>
+<li><a href="resource_link.html">Resource Link</a></li>
+<li><a href="resource_adapter.html">Resource Adapter</a></li>
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Resource Client</h1>
+
+<p>BEAR.Sunday makes requests to each type of resource using the resource client. It sets the request method, URI, parameters builds the resource request then makes that request.</p>
+
+<h2 id="toc_1">Preperation</h2>
+
+<p>In order to inject the resource client object in the class wanting to the use the resource client from the injector, the resource client setter method is used. Using a trait is handy.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">use BEAR\Sunday\Inject\ResourceInject;
+
+class Edit extends Page
+{
+    use ResourceInject;
+</code></pre></div>
+<p>With this the the resource client is assigned to the resource property, using <code>$this-&gt;resource</code> you can access the resource client.</p>
+
+<h2 id="toc_2">Request DSL</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this
+-&gt;resource
+-&gt;get
+-&gt;uri(&#39;app://self/blog/posts&#39;)
+-&gt;withQuery([&#39;id&#39; =&gt; 1])
+-&gt;eager
+-&gt;request();
+</code></pre></div>
+<p>In this example the resource *<code>app://self/blog/posts</code>* with request <code>?id=1</code> is immediately made (eager).</p>
+
+<p>The request is created with each method, URI, query component.
+Each of those build component is used to create the request as DSL like in the example above and then executed.</p>
+
+<h3 id="toc_3">Request Method</h3>
+
+<p>There are 4 operations that can be made on the resource get, put, post and delete. If you include the <code>options</code> method that queries what operations and methods can be made on the resource then it is 5.</p>
+
+<h3 id="toc_4">Request URI</h3>
+
+<p>A BEAR.Sunday resource has the same kind of structure as a www URI.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{schema}://{application}/{path}
+</code></pre></div>
+<p>{schema} shows the resource type, {application} is itself which points to <code>self</code>. In BEAR.Sunday page controller is also handled as a page resource. The application resource schema that matches the model is <code>app</code>.</p>
+
+<p>A top page with have the following expression. (a <code>page</code> resource in ones own application <code>self</code> with the <code>index</code> path)
+<code>
+page://self/index
+</code></p>
+
+<p>The blog post application resource in the sandbox application has the following expression.
+<code>
+app://self/blog/posts
+</code></p>
+
+<p>The schema&#39;s page/app correspond to the following files, classes.</p>
+
+<p>|| URI || Class || File ||
+|| page://self/index || Sandbox\Resource\Page\Index ||Sandbox/Resource/Page/Index.php ||
+|| app://self/blog/posts || Sandbox\Resource\App\Blog\Posts || Sandbox/Resource/App/Blog/Posts.php ||</p>
+
+<p>It is possible to implement an original schema as an resource adapter on the application side. For example a pre-existing &quot;office&quot; service service is running in some shape or form. Create the office schema, then wrap that service with an adapter and then access it using <code>office://{service-path}</code>.</p>
+
+<p>When you want to use legacy data systems rather than access objects directly it is better to create a schema and a resource adapter.</p>
+
+<h3 id="toc_5">Request Query</h3>
+
+<p>In a request query you can pass named parameters. These are not standard php ordered parameters, they are parameters that are specifically named.</p>
+
+<p>A query set as [&#39;id&#39; =&gt; 1] will correspond with the following resource request method. Set the parameter names. Any ordering of them is ignored.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function onGet($id)
+{
+}
+</code></pre></div>
+<p>A request object is an object that contains all of the needed logic for the request. This can also assign to templates and assess latency.</p>
+
+<h3 id="toc_6">Request Timing</h3>
+
+<p>A resource request has <code>lazy</code> and <code>eager</code> options. Any request that is not assigned <code>lazy</code> will default to an <code>eager</code> request.</p>
+
+<h4 id="toc_7">Lazy Request</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this[&#39;posts&#39;] = $this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/posts&#39;)-&gt;request();
+</code></pre></div>
+<h4 id="toc_8">Eager Request</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this[&#39;posts&#39;] = $this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/posts&#39;)-&gt;eager-&gt;request();
+</code></pre></div>
+<p>The response of a resource request <em>with</em> eager is the result.
+The response of a request <em>with out</em> eager is a request class that implements the request interface (BEAR\Resource\Requestable）</p>
+
+<p>When this request is assigned to a template, it will only be resolved when the element is used. So if the request is not used in a view then the request is never made. This delayed evaluation we call (Lazy Evaluation).</p>
+
+<h3 id="toc_9">Link</h3>
+
+<p>You can link resources. The result of a resource links resources as the next resource input. A selfLink that replaces resources, addLink adds resources to other resource and crawlLink that links to multiple resources.</p>
+
+<p>Link functionality encapsulates the relational nature between resources. The client you use does not understand the actual relational nature, but can use the relationships. This is easy to understand if you liken it to a web <code>a</code> tag. The url of the l</p>
+
+<p>The url info of the forward links is not controlled by the client but by the service itself.
+The user just clicks the link text.</p>
+
+<h3 id="toc_10">EOR(End of Request)</h3>
+
+<p>The built up request is closed by the <code>request()</code> method. If it is an eager request then the result, if it is lazy then the request object is returned in the response.</p>
+
+<h2 id="toc_11">Resource Renderer</h2>
+
+<p>The resource status or the presentation of the resource result is the renderer that is contained in the resource&#39;s job. Not the user of the resource. For example this is different to in MVC where the controller gets data from the model and passes it the view. The resource each internally contains a resource renderer, without querying outside is set to know how to render itself.</p>
+
+<p>The renderer is injected through dependency injection. You can change the renderer to another renderer in the application module that carries out the DI configuration. For example when in development the DevRenderer that contains extra development information is injected. When creating a Web API for example the JsonRenderer is injected.</p>
+
+<h2 id="toc_12">Resource Rendering</h2>
+
+<p>The resource does contain a specific method for rendering. When evaluated as as string and when a string is returned from as a result from the renderers rendering. Below is an example. </p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$userHtml = (string) $user; // Type conversion
+echo $user;
+</code></pre></div>
+<h2 id="toc_13">Template Representation</h2>
+
+<p>|| String || {$posts} || The string of the result that has been rendered by the template engine || 
+|| Array || {$posts[&#39;id&#39;]} || Accessing the associative array result  ||
+|| Object || {$posts-&gt;header} || Accessing the object result ||</p>
+
+<p>※No matter whether eager or lazy there is no difference in template rendering.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -61,7 +61,7 @@ X-EXCEPTION-MESSAGE: typehint# '', annotate'greeting_msg' for $message in class 
 X-EXCEPTION-CODE: 0
 [BODY]
 Internal error occurred (e5f464)
-}}}
+```
 
 `Ray\Di\Exception\NotBound`例外が発生しました。
 

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Dependency Injector</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li class="active"><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>DI & AOP</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+			<li><a href="di_aop_introduction.html">Introduction</a></li>
+<li><a href="module.html">Module</a></li>
+<li><a href="injector.html">Injector</a></li>
+<li><a href="aop.html">Aspect</a></li>
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Dependency Injector</h1>
+
+<p>Objects that are needed within BEAR.Sunday objects are commonly known as dependencies and are expected to be assigned outside of the class. The injector is based on the <em>module</em> externally injects the object needed by the dependency, in other words performs the injection.</p>
+
+<p>In BEAR.Sunday&#39;s DI (<a href="http://code.google.com/p/rayphp/wiki/Motivation?tm=6">Ray.Di</a>) the dependency domain and usage domain are cleanly separated. Whether creating an object or using an object there is no rule that says you have to implement 1 class in each.</p>
+
+<p>Just like factories <code>dependency injection</code> is a design pattern. The fundamental principle being that the behavior and dependency assignment are cleanly separated.</p>
+
+<h2 id="toc_1">Dependency Inversion Principle</h2>
+
+<p>A. High-level modules should not depend on low-level modules. Both should depend on abstractions.</p>
+
+<p>B. Abstractions should not depend upon details. Details should depend upon abstractions.</p>
+
+<p>--[<a href="http://en.wikipedia.org/wiki/Dependency_inversion_principle">http://en.wikipedia.org/wiki/Dependency_inversion_principle</a> Dependency Inversion Principle (DIP)]</p>
+
+<p>All object dependencies are abstractions, in other words make dependencies to interfaces and abstractions which will then be injected.</p>
+
+<h2 id="toc_2">Object Graph</h2>
+
+<p>In dependency injection an object is received by the constructor. In order for the creation of the object to happen that dependency is needed. However in the dependency there are other dependencies are needed, and then this carries on and on.... So in order to build our object the creation of an object graph is needed. </p>
+
+<p>In BEAR.Sunday the object graph is created 1 time only upon bootstrap. This is called compiling and this is separate from object runtime behavior.</p>
+
+<h2 id="toc_3">Injector Creation</h2>
+
+<p>The injector uses the module and builds as follows.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$injector = Inject::create([new AppModule]);
+</code></pre></div>
+<p>The above script is a simplification of the following. So that the injector can manually inject it&#39;s own dependencies the injector dependencies are passed to the constructor.
+They are both dependent on the interface and can be interchanged.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">use Ray\Di;
+
+$injector = new Di\Injector(new Di\Container(new Di\Forge(new Di\ApcConfig(new Di\Annotation(new Di\Definition, new AnnotationReader)))), new AppModule);
+</code></pre></div>
+<p>You can set up several modules.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$injector = Inject::create([new OneModule, new TwoModule, ...]);
+</code></pre></div>
+<ul>
+<li>Modules are generally independent of one another. Content bound with <code>OneModule</code> will not be applied in <code>TwoModule</code>.</li>
+</ul>
+
+<h2 id="toc_4">Module</h2>
+
+<p>The module binds instance requested by <em>@Inject</em> annotated dependencies and the instance retrieval method and performs the injection settings.</p>
+
+<p>The module inherits from <code>AbstractModule</code>, in the <code>configure</code> method binds the (injection point) and the dependency (also dependency providing method) using binding DSL.</p>
+
+<p>Example) The <code>CheckoutCreditCardProcessor</code> is bound to the <code>CreditCardProcessor</code> interface.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">class AppModule extends AbstractModule
+{
+    /**
+     * Configure dependency binding
+     *
+     * @return void
+     */
+    protected function configure()
+    {
+        $this-&gt;bind(&#39;CreditCardProcessor&#39;)-&gt;to(&#39;CheckoutCreditCardProcessor&#39;);
+    }
+}
+</code></pre></div>
+<h2 id="toc_5">Module Dependencies</h2>
+
+<p>Inside the modules <code>configure</code> method in order to retrieve the dependency some DI is needed.
+At that time by using the <em>requireInjection</em> method we can perform the injection.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind()-&gt;annototatedWith(&#39;age&#39;)-&gt;toInstance(25);
+$user = $this-&gt;requireInjection(&#39;User&#39;);
+</code></pre></div>
+<p>An instance of the <code>User</code> class is created and 25 is is injected into the <code>@Named(&quot;age&quot;)</code> injection point.</p>
+
+<h2 id="toc_6">Installing Modules</h2>
+
+<p>You can also install other modules and combine them into the setup.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;install(new MySqlModule);
+</code></pre></div>
+<p>Using the configuration from your own module, when you want to retrieve the instance in the module you are installing create and pass the injector to the constructor.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind()-&gt;(&#39;socket_path&#39;)-&gt;toInstance(&#39;/tmp/mysql.sock&#39;);
+$this-&gt;install(new MySqlModule($this);
+</code></pre></div>
+<ul>
+<li>Inside the <code>MySqlModule</code> module if you add the annotation <code>@Inject @Named(&#39;socket_path&#39;)</code>  <code>&#39;/tmp/mysql.sock&#39;</code> will be injected.</li>
+</ul>
+
+<h2 id="toc_7">Combining Modules</h2>
+
+<p>In the sandbox application there are 3 modules combined and 1 application configured.</p>
+
+<h4 id="toc_8"><code>FrameworkModule</code></h4>
+
+<p>This is the framework configuration. You are free to switch in your own custom module. If you make a <code>binding</code> before installation of this module can switch the classes being using used in the framework.</p>
+
+<h4 id="toc_9">Mode Module (<code>DevModule</code>, <code>ProdModule</code>...)</h4>
+
+<p>The application configuration for runtime environment. In the sandbox application PROD(Production), DEV(Development), STUB(Stub Data) environments are prepared for you.</p>
+
+<h4 id="toc_10">Application Module(<code>AppModule</code>)</h4>
+
+<p>Application configuration not  dependent on you run mode.</p>
+
+<p>You aren&#39;t limited to these 3 modules. For example there may be team sharing modules, pattern service sharing modules, custom utility modules etc. Depending on the concern a module can be created and used universally accross the application.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

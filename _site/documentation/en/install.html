@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | BEAR.Sunday Ubuntu 12LTS setup form ZERO</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Installation</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+   			
+<li><a href="introduction.html">About BEAR.Sunday</a></li>
+<li><a href="install.html">Installation</a></li>
+<li><a href="installphp54.html">PHP5.4 (OSX)</a></li>
+<li><a href="ubuntu.html">PHP5.4 (Unbuntu)</a></li>
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">summary Installation</h1>
+
+<h1 id="toc_1">Installation</h1>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ curl -s http://getcomposer.org/installer | php
+$ php composer.phar create-project -s dev --dev bear/package ./bear
+</code></pre></div>
+<h2 id="toc_2">Prerequisites</h2>
+
+<ul>
+<li>PHP 5.4</li>
+<li><a href="http://php.net/manual/ja/book.apc.php">APC</a></li>
+<li><p><a href="http://php.net/manual/ja/book.curl.php">curl</a></p>
+
+<p>For APC PHP5.4 support please [<a href="http://jp.php.net/manual/ja/apc.setup.php">http://jp.php.net/manual/ja/apc.setup.php</a> install &gt; v3.1.10]</p></li>
+</ul>
+
+<h2 id="toc_3">Optional</h2>
+
+<ul>
+<li>Profiler　<a href="http://jp.php.net/manual/en/book.xhprof.php">xhprof</a></li>
+<li>Graph Visualization <a href="http://www.graphviz.org/">graphviz</a></li>
+</ul>
+
+<h2 id="toc_4">Environment Check</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php bin/env.php
+</code></pre></div>
+<p>Tests a correct php.ini and DB connection.</p>
+
+<h3 id="toc_5">DB Connection Check</h3>
+
+<p>If you have trouble connecting to the db please try entering the following in a console.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php -r &#39;new mysqli(&quot;localhost&quot;, &quot;root&quot;, &quot;&quot;, &quot;mysql&quot;);&#39;
+$ php -r &#39;new PDO(&quot;mysql:host# localhost;dbnamemysql&quot;, &quot;root&quot;, &quot;&quot;);&#39;
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">※ When set up with root/(no password)
+</code></pre></div>
+<h2 id="toc_6">DB</h2>
+
+<p>When you can connect to <code>localhost</code> with <code>root/(no password)</code> no further settings are needed.
+Otherwise there are 2 ways to add your database connection settings.</p>
+
+<h3 id="toc_7">1) Environment Variables</h3>
+
+<p>So that PHP can read your environment variables set the following in php.ini</p>
+
+<p>|| BEAR_DB_ID || ID || 
+|| BEAR_DB_PASSWORD || Password ||</p>
+
+<p>Optional slave DB setting is available.</p>
+
+<p>|| BEAR_DB_ID_SLAVE || (SLAVE DB) ID || 
+|| BEAR_DB_PASSWORD_SLAVE || (SLAVE DB) Password ||</p>
+
+<p>Example) Exporting with ~/.bashrc using environment variables &quot;root&quot; / &quot;password&quot;.</p>
+
+<p>~/.bashrc content</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">export BEAR_DB_ID=root
+export BEAR_DB_PASSWORD=password
+</code></pre></div>
+<p>Export with ~/.bashrc
+<code>
+. ~/.bashrc
+</code></p>
+
+<h3 id="toc_8">2) PHP File Configuration =</h3>
+
+<p>Edit <code>apps/Sandbox/Module/config.php</code> to directly set your configuration.</p>
+
+<h1 id="toc_9">Unit Tests</h1>
+
+<h2 id="toc_10">Test Environment</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ pear config-set auto_discover 1
+$ pear install pear.phpunit.de/PHPUnit
+$ pear install phpunit/DbUnit
+$ pear install phpunit/PHP_Invoker
+</code></pre></div>
+<p>Note: Depending on your environment you may need to run as root user.</p>
+
+<h2 id="toc_11">DB Setup</h2>
+
+<p>In order to run tests, you need to create the db for the tests and sandbox application.</p>
+
+<p>Run the shell script or enter manually.</p>
+
+<h3 id="toc_12">Using the shell script</h3>
+
+<p>$ apps/Sandbox/scripts/install_db.sh</p>
+
+<h3 id="toc_13">Manually</h3>
+
+<p>Create the <code>blogbear</code> Database</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">CREATE DATABASE `blogbear` DEFAULT CHARACTER SET &#39;utf8&#39;;
+</code></pre></div>
+<p>Create the posts table
+<code>
+CREATE TABLE posts (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(50),
+body TEXT,
+created DATETIME DEFAULT NULL,
+modified DATETIME DEFAULT NULL
+);
+/* Now add the test posts. */
+INSERT INTO posts (title,body,created)
+VALUES (&#39;Title&#39;, &#39;This is the post text.&#39;, NOW());
+INSERT INTO posts (title,body,created)
+VALUES (&#39;Another Title&#39;, &#39;Here the text continues&#39;, NOW());
+INSERT INTO posts (title,body,created)
+VALUES (&#39;Yet another title&#39;, &#39;This looks super amazing！Not..&#39;, NOW());
+</code></p>
+
+<h3 id="toc_14">Unit test database setting</h3>
+
+<p>Content will be populated in setup and torn down automatically so there is no need to prepare test data. </p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">CREATE DATABASE `blogbeartest` DEFAULT CHARACTER SET &#39;utf8&#39;;
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">CREATE TABLE posts (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(50),
+body TEXT,
+created DATETIME DEFAULT NULL,
+modified DATETIME DEFAULT NULL
+);
+</code></pre></div>
+<h1 id="toc_15">Running tests</h1>
+
+<p>$ phpunit</p>
+
+<h1 id="toc_16">Running the sandbox application</h1>
+
+<p>BEAR.Sunday application can be accessed via the web or CLI.
+Please see <a href="https://github.com/koriym/BEAR.package#buil-in-web-server-for-development">https://github.com/koriym/BEAR.package#buil-in-web-server-for-development</a>.</p>
+
+<h2 id="toc_17">Troubleshooting</h2>
+
+<p>Please see the [faq FAQ].</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

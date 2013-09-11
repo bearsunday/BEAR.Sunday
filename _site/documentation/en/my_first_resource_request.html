@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | My First Resource Request</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li class="active"><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>My First - Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+			<li><a href="my_first_resource.html">My First Web Resource</a></li>
+<li><a href="my_first_web_api.html">My First Web API</a></li>
+<li><a href="my_first_test.html">My First Test</a></li>
+<li><a href="my_first_web_page.html">My First Web Page</a></li>
+<li><a href="my_first_resource_request.html">My First Resource Request</a></li>
+<li><a href="my_first_di.html">My First Injection</a></li>
+<li><a href="my_first_aop.html">My First Aspect</a></li>
+<li><a href="my_first_pull.html">My First Pull</a></li>
+<li><a href="my_first_hypermedia.html">My First Hyper Media</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">My First Resource Request</h1>
+
+<h2 id="toc_1">Using the Application Resource</h2>
+
+<p>Until not in the tutorial we have been using the console or web browser to request resources, in this tutorial we will make a resource request from another resource.</p>
+
+<p>We will change the page we made in [my_first_web_page My First Web Page] to use the resource we made in [my_first_resource My First Resource].
+The page resource will request an application resource.
+The page resource is a resource primarily concerned with a page.
+Normally a page resource will request all of the necessary application resources in order to compose them together within itself.</p>
+
+<p>Note: For example a page that the controller returns &#39;Hello World&#39; to, changes into a page that the model returns &#39;Hello World&#39;.</p>
+
+<h2 id="toc_2">Resource Client Preparation</h2>
+
+<p>In BEAR.Sunday the necessary services (object) fundamentally expects everything to be injected externally. 
+In a resource request we need a resource client.
+Using the type hinted Resource client interface （<code>BEAR\Resource\ResourceInterface</code>） and mark using the @Inject annotation we can have it injected for us (external assignment).
+<code>
+use BEAR\Resource\ResourceInterface;
+use Ray\Di\Di\Inject;
+</code>
+<code>
+class User
+{
+    /**
+     * @Inject
+     */
+    public function setResource(ResourceInterface $resource)
+    {
+        $this-&gt;resource = $resource;
+    }
+</code></p>
+
+<h2 id="toc_3">Using the Trait Setter</h2>
+
+<p>This setter can be used via a trait as in the example below.
+```
+use BEAR\Sunday\Inject\ResourceInject;</p>
+
+<p>class User
+{
+    use ResourceInject;
+}
+```</p>
+
+<h2 id="toc_4">GET Request</h2>
+
+<p>A method that makes a resource request to an application resource with a URI <code>app://self/first/greeting</code> and appended query string &#39;?name=$name&#39; looks like this.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    /**
+     * Get
+     *
+     * @param  string $name
+     */
+    public function onGet($name = &#39;anonymous&#39;)
+    {
+        $this[&#39;greeting&#39;] = $this-&gt;resource
+        -&gt;get
+        -&gt;uri(&#39;app://self/first/greeting&#39;)
+        -&gt;withQuery([&#39;name&#39; =&gt; $name])
+        -&gt;request();
+
+        return $this;
+    }
+</code></pre></div>
+<h2 id="toc_5"><code>$_GET</code> Query</h2>
+
+<p>The contents of <code>$_GET[&#39;name&#39;]</code> is passed to the variable <code>$name</code>.
+When <code>$_GET[&#39;name&#39;]</code> doesn&#39;t exist &#39;anonymous&#39; is passed in.</p>
+
+<h2 id="toc_6">Checking the Page with the Command Line</h2>
+
+<p>The resource request is stored in the &#39;greeting&#39; slot <code>&#39;app://self/first/greeting&#39;</code>.</p>
+
+<h2 id="toc_7">Check as an API</h2>
+
+<p>Lets check the page resource as an API.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php api.php get &#39;page://self/first/greeting?name=BEAR&#39;
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+cache-control: no-cache
+date: Fri, 13 Jul 2012 13:47:28 GMT
+content-type: text/html; charset=UTF-8
+[BODY]
+greeting:Hello, BEAR
+</code></pre></div>
+<p>&#39;Hello, BEAR&#39; is passed into the greeting slot. If we remove the query what happens ?</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php api.php get &#39;page://self/first/greeting&#39;
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+content-type: [&quot;application\/hal+json; charset=UTF-8&quot;]
+cache-control: [&quot;no-cache&quot;]
+date: [&quot;Mon, 12 Nov 2012 01:32:07 GMT&quot;]
+[BODY]
+{
+    &quot;greeting&quot;: &quot;Hello, anonymous&quot;,
+    &quot;_links&quot;: {
+        &quot;self&quot;: {
+            &quot;href&quot;: &quot;page://self/first/greeting&quot;
+        }
+    }
+}
+</code></pre></div>
+<p>We have been able to check that the default value has been injected.</p>
+
+<h2 id="toc_8">Page Template Preparation</h2>
+
+<p>The template for the page resource is also the same.
+<code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;body&gt;
+      &lt;h1&gt;{$greeting}&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></p>
+
+<h2 id="toc_9">Check the HTML through the Command Line</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php web.php get &#39;/first/greeting?name=Sunday&#39;
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+cache-control: [&quot;no-cache&quot;]
+date: [&quot;Fri, 01 Feb 2013 14:27:46 GMT&quot;]
+[BODY]
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello, Sunday&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+<h2 id="toc_10">Testing The Page</h2>
+
+<p>The page is also a resource. The method of testing these is the same as testing page resources covered in [my_first_test My First Test] </p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

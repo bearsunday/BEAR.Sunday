@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | FAQ)</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li class="active"><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Others</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+			<li><a href="faq.html">FAQ</a></li>
+<li><a href="annotations.html">Annotations</a></li>
+<li><a href="database.html">Database</a></li>
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">FAQ</h1>
+
+<h1 id="toc_1">Problems with Installation</h1>
+
+<h2 id="toc_2">ext-curl</h2>
+
+<p>Error displayed
+<code>
+  Problem 1
+    - The requested PHP extension ext-curl * is missing from your system.
+</code></p>
+
+<p>You need cURL installed.</p>
+
+<p>Ubuntu installation example)
+<code>
+sudo apt-get install php5-curl
+</code></p>
+
+<h2 id="toc_3">svn</h2>
+
+<p>Error displayed
+<code>
+[RuntimeException]                                      
+  Package could not be downloaded, sh: 1: svn: not found
+</code></p>
+
+<p>You need SVN installed.</p>
+
+<p>Ubuntu installation example)
+<code>
+$ sudo apt-get install subversion&quot;
+</code></p>
+
+<ul>
+<li><code>PHP Fatal error:  Uncaught exception &#39;Zend\Cache\Exception\ExtensionNotLoadedException&#39; with message &#39;ext/apc is disabled - see &#39;apc.enabled&#39; and &#39;apc.enable_cli&#39;&#39;</code></li>
+</ul>
+
+<p>APC needs to be enabled.</p>
+
+<h2 id="toc_4">MySQL</h2>
+
+<ul>
+<li><code>PDOException: SQLSTATE[HY000] [2002] No such file or directory</code></li>
+</ul>
+
+<p>The socket file location has not been correctly set. Set the PHP ini file using the socket file location which is shown  using <code>mysqladmin version</code> (OSX - <code>mysqladmin5 version</code>)</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ mysqladmin version
+
+UNIX socket     /opt/local/var/run/mysql5/mysqld.sock
+</code></pre></div>
+<ul>
+<li>When mysql is installed with macports /opt/local/var/run/mysql5/mysqld.sock</li>
+</ul>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">pdo_mysql.default_socket= /opt/local/var/run/mysql5/mysqld.sock
+mysql.default_socket = /opt/local/var/run/mysql5/mysqld.sock
+mysqli.default_socket = /opt/local/var/run/mysql5/mysqld.sock
+</code></pre></div>
+<h1 id="toc_5">Runtime Problems</h1>
+
+<h2 id="toc_6">Annotations</h2>
+
+<h3 id="toc_7"><code>Semantical Error</code> annotation Exception</h3>
+
+<p>This is an exception when the annotation class is unknown.</p>
+
+<p>If there are problems in reading annotations then either the auto-loader is having problems or the <code>use</code> naming resolution is has not worked. ※The class loader used for Doctrine annotations is separate.</p>
+
+<p>Resolution
+ * Import using <code>use</code>. 
+ * In the application boot location (App.php etc) manually import the annotation class or [<a href="http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html">http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html</a> setup the autoloader].
+ * Set annotations using their full path.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

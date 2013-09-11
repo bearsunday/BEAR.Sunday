@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | My First Web Page</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li class="active"><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>My First - Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+			<li><a href="my_first_resource.html">My First Web Resource</a></li>
+<li><a href="my_first_web_api.html">My First Web API</a></li>
+<li><a href="my_first_test.html">My First Test</a></li>
+<li><a href="my_first_web_page.html">My First Web Page</a></li>
+<li><a href="my_first_resource_request.html">My First Resource Request</a></li>
+<li><a href="my_first_di.html">My First Injection</a></li>
+<li><a href="my_first_aop.html">My First Aspect</a></li>
+<li><a href="my_first_pull.html">My First Pull</a></li>
+<li><a href="my_first_hypermedia.html">My First Hyper Media</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Lets Create A Web Page</h1>
+
+<h2 id="toc_1">Page Resource</h2>
+
+<p>First without using an application resource, we will make the most basic page class possible.
+(without using a model and only using a controller to create a &#39;Hello World&#39; page)</p>
+
+<h2 id="toc_2">Starting from the Most Basic of Pages</h2>
+
+<p>Just like application resource creates the instance of a resource, 
+a page resource can also create an instance of a page resource.</p>
+
+<p>The greeting &#39;Hello&#39; is fixed in a static page.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+namespace Sandbox\Resource\Page\First;
+
+use BEAR\Resource\AbstractPage as Page;
+
+/**
+ * Greeting page
+ */
+class Greeting extends Page
+{    
+    public $body = [
+        &#39;greeting&#39; =&gt; &#39;Hello.&#39;
+    ];
+
+    public function onGet()
+    {
+        return $this;
+    }
+}
+</code></pre></div>
+<p>We store the string &#39;Hello.&#39; in the page contents &#39;greeting&#39; slot. 
+When the get request is called it does nothing but return itself.</p>
+
+<h2 id="toc_3">Lets Check the Page Resource State from the Command Line</h2>
+
+<p>Lets check this resource from the command line.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ cd apps/Sandbox/htdocs/
+$ php api.php get page://self/first/greeting
+
+200 OK
+...
+[BODY]
+greeting:Hello.
+</code></pre></div>
+<p>We have confirmed that in the greeting slot the string &#39;Hello&#39; exists.</p>
+
+<h2 id="toc_4">Render the Page Resource State</h2>
+
+<p>In order to render the state of the page resource as HTML we need a template. 
+We save this in the same place as the resource and just change the suffix.</p>
+
+<h3 id="toc_5">File Path</h3>
+
+<p>|| URI || <code>page://self/first/greeting</code> ||
+|| Resource Class || <code>apps/Sandbox/Resource/Page/First/Greeting.php</code> ||
+|| Resource Template || <code>apps/Sandbox/Resource/Page/First/Greeting.tpl</code> ||</p>
+
+<h3 id="toc_6">Template</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;body&gt;
+      &lt;h1&gt;{$greeting}&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+<h2 id="toc_7">Check the HTML from the Command Line</h2>
+
+<p>We assign the resource state to the template and the resource renders as HTML.
+This is a HTML page and can also be checked via the command line.</p>
+
+<p>Lets check.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php web.php get /first/greeting
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+cache-control: [&quot;no-cache&quot;]
+date: [&quot;Fri, 01 Feb 2013 14:21:45 GMT&quot;]
+[BODY]
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello, anonymous&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+<p>HTML all checked!</p>
+
+<p>Note: Because we are running the development environment, there are many headers prepended by <code>x-</code> that contain useful development information. </p>
+
+<h2 id="toc_8">Checking the Page HTML in a Web Browser</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">http://localhost:8088/first/greeting
+</code></pre></div>
+<p>Did you see the page OK?</p>
+
+<h2 id="toc_9">Role of the Page</h2>
+
+<p>A page gathers clusters of information (resource), and configures the page itself.
+Here a singular slot &#39;greeting&#39; has the string &#39;Hello&#39; stored in it, however many pages will need multiple slots.</p>
+
+<p>The pages role is to configure the page to gather other resources and to solidify the pages state. 
+The resource state is composed with the resource template and rendered as HTML to be passed and shown to the user.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

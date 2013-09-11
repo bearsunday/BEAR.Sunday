@@ -139,21 +139,18 @@ X-EXCEPTION-MESSAGE: typehint# &#39;&#39;, annotate&#39;greeting_msg&#39; for $m
 X-EXCEPTION-CODE: 0
 [BODY]
 Internal error occurred (e5f464)
-}}}
-
-`Ray\Di\Exception\NotBound`例外が発生しました。
-
-例外メッセージはtypehintなしで`greeting_msg`という名前で束縛されたDI設定が無い事を表してます。
-
-`greeting_msg`という名前で依存性を束縛するDI設定が必要です。
-
-### 注入設定のDSL 
-
-DI設定（注入の設定）はモジュールの`configure`メソッド内で行います。[AppModule](https://github.com/koriym/BEAR.Sunday/blob/master/apps/Sandbox/Module/AppModule.php)の`configure`メソッドのどこでもよいので下記の行を追加します。
 </code></pre></div>
-<p>$this-&gt;bind()-&gt;annotatedWith(&#39;greeting_msg&#39;)-&gt;toInstance(&#39;Hola&#39;);
-```</p>
+<p><code>Ray\Di\Exception\NotBound</code>例外が発生しました。</p>
 
+<p>例外メッセージはtypehintなしで<code>greeting_msg</code>という名前で束縛されたDI設定が無い事を表してます。</p>
+
+<p><code>greeting_msg</code>という名前で依存性を束縛するDI設定が必要です。</p>
+
+<h3 id="toc_8">注入設定のDSL</h3>
+
+<p>DI設定（注入の設定）はモジュールの<code>configure</code>メソッド内で行います。<a href="https://github.com/koriym/BEAR.Sunday/blob/master/apps/Sandbox/Module/AppModule.php">AppModule</a>の<code>configure</code>メソッドのどこでもよいので下記の行を追加します。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$this-&gt;bind()-&gt;annotatedWith(&#39;greeting_msg&#39;)-&gt;toInstance(&#39;Hola&#39;);
+</code></pre></div>
 <p>これで<code>@Inject</code>とマークし<code>@Named(&quot;greeting_msg&quot;)</code>と名前を指定したメソッド（またはコンストラクタ）に&#39;Hola&#39;が渡ります。</p>
 
 <p>ここでは何かの実体（インスタンス）を直接していますが、クラス名やファクトリークラス名を指定する事もできます。ファクトリーでは複雑なインスタンス生成が可能です。※ 生成方法は変わっても受けとる方の記述は同じです。</p>
@@ -166,7 +163,7 @@ DI設定（注入の設定）はモジュールの`configure`メソッド内で�
         $this-&gt;message = $message;
     }
 </code></pre></div>
-<h2 id="toc_8">確認します</h2>
+<h2 id="toc_9">確認します</h2>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">$ php api.php get &#39;app://self/first/greeting/di?name=BEAR&#39;
 </code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
 ...

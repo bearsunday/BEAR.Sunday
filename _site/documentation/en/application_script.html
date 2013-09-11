@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Application Script</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li class="active"><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Application</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+
+		
+			<li><a href="application.html">Introduction</a></li>
+<li><a href="application_script.html">Script</a></li>
+<li><a href="application_object.html">Object</a></li>
+<li><a href="application_instance_script.html">Instance Script</a></li>
+<li><a href="interface.html">Interface</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Application Script</h1>
+
+<p>Instead of the framework having a set execution flow, in BEAR.Sunday an application script expresses what kind of flow the application follows. </p>
+
+<p>In order to change this flow directly edit the application script.</p>
+
+<h1 id="toc_1">Application Script</h1>
+
+<p>Below is a production script for the <code>Sandbox</code> application.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// Application instance with loader
+$mode = &#39;Prod&#39;;
+$app = require dirname(__DIR__) . &#39;/scripts/instance.php&#39;;
+
+// Dispatch
+list($method, $pagePath, $query) = $app-&gt;router-&gt;match($GLOBALS);
+
+// Request
+try {
+    $app-&gt;page = $app-&gt;resource-&gt;$method-&gt;uri(&#39;page://self/&#39; . $pagePath)-&gt;withQuery($query)-&gt;eager-&gt;request();
+} catch (NotFound $e) {
+    $code = 404;
+    goto ERROR;
+} catch (BadRequest $e) {
+    $code = 400;
+    goto ERROR;
+} catch (Exception $e) {
+    $code = 503;
+    error_log((string)$e);
+    goto ERROR;
+}
+
+// Transfer
+
+OK: {
+    $app-&gt;response-&gt;setResource($app-&gt;page)-&gt;render()-&gt;prepare()-&gt;send();
+    exit(0);
+}
+
+ERROR: {
+    http_response_code($code);
+    require dirname(__DIR__) . &quot;/http/{$code}.php&quot;;
+    exit(1);
+}
+</code></pre></div>
+<p>The application object is retrieved from the the application instance script. The application object holds all of the service objects and properties needed by the application script.</p>
+
+<h2 id="toc_2">About the Script</h2>
+
+<h3 id="toc_3">Retrieve the application instance</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$mode = &#39;Prod&#39;;
+$app = require dirname(__DIR__) . &#39;/scripts/instance.php&#39;;
+</code></pre></div>
+<p>Retrieve the application object from the application instance script. In this script the class loading settings are run.</p>
+
+<h3 id="toc_4">Dispatch</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// Dispatch
+list($method, $pagePath, $query) = $app-&gt;router-&gt;match($GLOBALS);
+</code></pre></div>
+<p>The request method, URI and query for the resource are retrieved from the global variable.</p>
+
+<h3 id="toc_5">Page resource request and output</h3>
+
+<p>Then using these variables the page request is made. The page output is then different depending on wether an OK or an ERROR is reached.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

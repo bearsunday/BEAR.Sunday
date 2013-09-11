@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Blog Tutorial(2) Database Settings</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li class="active"><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Blog Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">Installing BEAR</a></li>
+<li><a href="blog_db.html">DB Settings</a></li>
+<li><a href="blog_get.html">Creating a Post Resource</a></li>
+<li><a href="blog_page.html">Creating a Post Detail Page</a></li>
+<li><a href="blog_template.html">Creating a Template</a></li>
+<li><a href="blog_create.html">Adding a Post</a></li>
+<li><a href="blog_validate.html">Validation</a></li>
+<li><a href="blog_delete.html">Removing a Post</a></li>
+<li><a href="blog_update.html">Editing a Post</a></li>
+<li><a href="blog_more.html">More</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Database</h1>
+
+<h2 id="toc_1">Before you start</h2>
+
+<p>Follow the [install#DB Installation] DB section and enable your DB, then run the test code.</p>
+
+<h2 id="toc_2">Checking</h2>
+
+<p>With the following code you can check the database connection is reading records.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">php -r &#39;$pdo# new PDO(&quot;mysql:host=localhost;dbnameblogbear&quot;, &quot;root&quot;, &quot;&quot;);foreach($pdo-&gt;query(&quot;SELECT * from posts&quot;) as $row){print_r($row);}&#39;
+</code></pre></div>
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

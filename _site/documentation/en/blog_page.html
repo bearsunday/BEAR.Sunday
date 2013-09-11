@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | Blog Tutorial(4) Creating an index page</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li class="active"><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>Blog Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+   			<li><a href="blog_install.html">Installing BEAR</a></li>
+<li><a href="blog_db.html">DB Settings</a></li>
+<li><a href="blog_get.html">Creating a Post Resource</a></li>
+<li><a href="blog_page.html">Creating a Post Detail Page</a></li>
+<li><a href="blog_template.html">Creating a Template</a></li>
+<li><a href="blog_create.html">Adding a Post</a></li>
+<li><a href="blog_validate.html">Validation</a></li>
+<li><a href="blog_delete.html">Removing a Post</a></li>
+<li><a href="blog_update.html">Editing a Post</a></li>
+<li><a href="blog_more.html">More</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">Page Resource</h1>
+
+<h2 id="toc_1">Creating a Page</h2>
+
+<p>When creating a new page in BEAR.Sunday you normally make the following.</p>
+
+<ul>
+<li>Page resource class</li>
+<li>Page resource template</li>
+</ul>
+
+<p>A page resource and application resource have the same configuration and have an interface. An application resource in its default state does not contain anything so we need to inject the DB object using dependency injection, we also need to inject dependencies into the page resource.</p>
+
+<h2 id="toc_2">Page Controller</h2>
+
+<p>The equivalent of an MVC controller in BEAR.Sunday is a page resource. The page receives the page request, requests the application resource and builds itself. The page is then handled as it is as an output object.</p>
+
+<p>Note: In BEAR.Sunday you can also use a router, however in this blog application we won&#39;t be using one.</p>
+
+<p>Note: In a BEAR.Sunday site 1 page has 1 page resource class which conforms to the  <em>[<a href="http://www.martinfowler.com/eaaCatalog/pageController.html">http://www.martinfowler.com/eaaCatalog/pageController.html</a> Page Controller]</em> principle. </p>
+
+<h2 id="toc_3">Page Class</h2>
+
+<p>The role of this posts index page is to <em>retrieve through a GET request the application API&#39;s posts resource and assign them to the pages posts slot</em>.</p>
+
+<p>In the [Application resource app_resource] section we ran the application resource from the console, however when requesting a resource in PHP we need to use a resource client. The resource client can be injected by using a trait.</p>
+
+<p>Through the <code>use</code> keyword descriptor we can use a trait as below, and then the resource client will be injected into the <code>$resource</code> property.
+<code>
+    use ResourceInject;
+</code></p>
+
+<p>In order to make a resource request using the injected resource client you do something like below.
+<code>
+$this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/posts&#39;)-&gt;request()
+</code></p>
+
+<p>When this is put together you can do the following.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+namespace Sandbox\Resource\Page\Blog;
+
+use BEAR\Resource\AbstractObject as Page;
+use BEAR\Sunday\Inject\ResourceInject;
+use BEAR\Sunday\Annotation;
+
+class Posts extends Page
+{
+    use ResourceInject;
+
+    public $body = [
+        &#39;posts&#39; =&gt; &#39;&#39;
+    ];
+
+    /**
+     * Get
+     *
+     * @Cache
+     */
+    public function onGet()
+    {
+        $this[&#39;posts&#39;] = $this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/posts&#39;)-&gt;request();
+        return $this;
+    }
+}
+</code></pre></div>
+<p>A request to <code>app://self/posts</code> is made then is stored in the posts slot of the current resource.</p>
+
+<p>Note: $this[&#39;posts&#39;] is some syntax sugar which is an abbreviation of $this-&gt;body[&#39;body&#39;].
+  Note: This is different to an MVC controller as you will notice there is no attention paid to output. There is no assignment of variables etc for a template.</p>
+
+<h2 id="toc_4">A Page as a Resource</h2>
+
+<p>So just like an application resource lets access the page resource from the console.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ php api.php get page://self/blog/posts
+
+200 OK
+...
+\[BODY]
+{
+    &quot;posts&quot;: {
+...
+</code></pre></div>
+<p>In the posts slot the result of request <em>get app://self/posts</em> is assigned.  </p>
+
+<p>As the page resource plays the role of a page controller it also plays the role of an output object. Although pays no attention to how it is displayed.</p>
+
+<h2 id="toc_5">Resource Cache</h2>
+
+<p>Where the page resource it is annotated with <code>@Cache</code>, in the sandbox application a method annotated as such is bound to the cache interceptor.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">use BEAR\Sunday\Annotation\Cache;
+
+...
+
+/**
+ * @Cache(30)
+ */
+</code></pre></div>
+<p>Note: For the cache FQN the <code>use</code> keyword descriptor is needed.</p>
+
+<h2 id="toc_6">Indefinite Caching</h2>
+
+<p>In this page resource no cache time has been set, the resources GET request is cached indefinitely and the onGet method is only run once the first time. So even if posts are added or deleted will the displayed page not change?</p>
+
+<p>The page posts index page resource role is to request the posts resource and set them in posts. That role is not dependent on the request, is immutable and this assignment is cached.</p>
+
+<p>What is setting the page resource is not the request result instead it is the actual request itself. Even if the indefinite cache is configured with @Cache the cached posts resource is run reach time, the posts resource state is then reflected. (In this case the only cost saved by <code>@Cache</code> is merely creating the request inside the <code>OnGet()</code> method)</p>
+
+<p>In other words the cache is cutting out the cost of building up the request.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | My First Resource</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li class="active"><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>My First - Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+			<li><a href="my_first_resource.html">My First Web Resource</a></li>
+<li><a href="my_first_web_api.html">My First Web API</a></li>
+<li><a href="my_first_test.html">My First Test</a></li>
+<li><a href="my_first_web_page.html">My First Web Page</a></li>
+<li><a href="my_first_resource_request.html">My First Resource Request</a></li>
+<li><a href="my_first_di.html">My First Injection</a></li>
+<li><a href="my_first_aop.html">My First Aspect</a></li>
+<li><a href="my_first_pull.html">My First Pull</a></li>
+<li><a href="my_first_hypermedia.html">My First Hyper Media</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">My First Resource</h1>
+
+<h1 id="toc_1">Application Resource</h1>
+
+<p>Here we will pass in a <code>name</code> and create a <code>greeting</code> resource which the greeting will return.
+In terms of MVC the <code>Model</code> in BEAR.Sunday is called an <code>Application Resource</code>. 
+An application resource is used as an internal API within the application.</p>
+
+<h2 id="toc_2">Resource Architecture</h2>
+
+<p>A resource is a bundle of information. 
+He we have a greeting (<code>greeting</code>) which is used as a <code>greeting resource</code>.
+In order to create the resource object class the following is needed.</p>
+
+<ul>
+<li>URI</li>
+<li>Request Interface </li>
+</ul>
+
+<p>The pattern is as follows.</p>
+
+<p>|| URI || Method || Query ||
+|| app://self/first/greeting || get || ?name=Name ||</p>
+
+<p>The expected greeting resource is as below.</p>
+
+<p>Request
+<code>
+get app://self/first/greeting?name=BEAR
+</code>
+Response
+<code>
+Hello, BEAR.
+</code></p>
+
+<h2 id="toc_3">Resource Object</h2>
+
+<p>Lets run the Sandbox application. The URI, PHP class and file layout is as follows. </p>
+
+<p>|| URI || Class || File ||
+|| <code>app://self/first/greeting</code> || <code>Sandbox\Resource\App\First\Greeting</code> || <code>apps/Sandbox/Resource/App/First/Greeting.php</code> ||</p>
+
+<p>Implementing the request interface (method).
+```
+namespace Sandbox\Resource\App\First;</p>
+
+<p>use BEAR\Resource\AbstractObject;</p>
+
+<p>/**
+ * Greeting resource
+ <em>/
+class Greeting extends AbstractObject
+{
+    /</em>*
+     * Get
+     *
+     * @param  string $name
+     * 
+     * @return string
+     *
+     */
+    public function onGet($name)
+    {
+        return &quot;Hello, {$name}&quot;;
+    }
+}
+```</p>
+
+<h2 id="toc_4">Command Line Testing</h2>
+
+<p>Lets try this out using the Command Line Interface (CLI). 
+In the console we will enter some commands, starting with a <em>failure</em>.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">php api.php get app://self/first/greeting
+</code></pre></div>
+<p>400 Bad Request　is returned in the response.
+<code>
+400 Bad Request
+...
+[BODY]
+Internal error occured (e613b4)
+</code>
+As you can see in the header information that an exception has been raised, 
+you can decipher that in the query a <code>name</code> is required. 
+Using the <em><code>OPTIONS</code>Method</em> you can more accurately examine this.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">php api.php options app://self/first/greeting?name=BEAR
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+allow: [&quot;get&quot;]
+param-get: name
+</code></pre></div>
+<p>This tells us that the resource has the <code>GET</code> method enabled and requires 1 parameter <code>name</code>.
+If this <code>name</code> parameter was to be optional you would wrap it in parenthesis <code>(name)</code>.
+Now we know about the required parameters via the options method lets try again.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">php api.php get app://self/first/greeting?name=BEAR
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">200 OK
+cache-control: no-cache
+date: Tue, 10 Jul 2012 23:55:16 GMT
+content-type: text/html; charset=UTF-8
+[BODY]
+&quot;Hello, BEAR&quot;
+</code></pre></div>
+<p>Now the correct response is returned. Success!</p>
+
+<h2 id="toc_5">The resource object is returned</h2>
+
+<p>This greeting resource returns a string when run, 
+but if you alter it as below it will be handled in the same way.
+Which ever method is used the request made by the client will return a resource object.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public function onGet($name)
+ {
+    $this-&gt;body = &quot;Hello, {$name}&quot;;
+    return $this;
+}
+</code></pre></div>
+<p>Lets change the <code>onGet</code> method like this and check that the response returned has not changed.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

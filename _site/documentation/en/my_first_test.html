@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BEAR.Sunday | My First Test</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://mackstar.github.io/BEAR.Sunday/css/main.css">
+
+    </head>
+    <body>
+    <div id="wrap">
+      <div class="container">
+        <img src="http://mackstar.github.io/BEAR.Sunday/img/logo.png" />
+
+
+        </div>
+
+
+
+<p></p>
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li><a href="install.html">Installation</a></li>
+      <li class="active"><a href="my_first_resource.html">My First - Tutorial</a></li>
+      <li><a href="blog_install.html">Blog Tutorial</a></li>
+      <li><a href="application.html">Application</a></li>
+      <li><a href="resource.html">Resource</a></li>
+      <li><a href="di_aop_introduction.html">DI & AOP</a></li>
+      <li><a href="faq.html">Others / Faq</a></li>
+    </ul>
+  </div>
+</div>
+<p></p>
+
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+	<div class="panel-heading"><strong>My First - Tutorial</strong></div>
+	<div class="panel-body">
+
+	<ul class="nav nav-pills nav-stacked">
+		
+
+		
+
+		
+			<li><a href="my_first_resource.html">My First Web Resource</a></li>
+<li><a href="my_first_web_api.html">My First Web API</a></li>
+<li><a href="my_first_test.html">My First Test</a></li>
+<li><a href="my_first_web_page.html">My First Web Page</a></li>
+<li><a href="my_first_resource_request.html">My First Resource Request</a></li>
+<li><a href="my_first_di.html">My First Injection</a></li>
+<li><a href="my_first_aop.html">My First Aspect</a></li>
+<li><a href="my_first_pull.html">My First Pull</a></li>
+<li><a href="my_first_hypermedia.html">My First Hyper Media</a></li>
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</ul>
+</div>
+</div>
+
+
+  </div>
+  <div class="col-md-9">
+
+     <h1 id="toc_0">My First Test</h1>
+
+<h2 id="toc_1">Resource Test</h2>
+
+<p>Let&#39;s test the greeting resource that we made in [my_first_resource My First Resource].</p>
+
+<h2 id="toc_2">Test File Arrangement</h2>
+
+<p>Lets create the test file structure. In relation to the greeting file it will look like the following.</p>
+
+<p>|| Resource File || <code>apps/Sandbox/Resource/App/First/Greeting.php</code> ||
+|| Test File　|| <code>apps/Sandbox/tests/Resource/App/First/GreetingTest.php</code> ||</p>
+
+<h2 id="toc_3">Creating The Test Class File</h2>
+
+<p>We will save the class as <code>apps/Sandbox/tests/Resource/App/First/GreetingTest.php</code>.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?php
+namespace Sandbox\tests\Resource\App\Blog;
+
+use Sandbox\Module\TestModule;
+use Ray\Di\Injector;
+
+class GreetingTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * Resource client
+     *
+     * @var BEAR\Resource\ResourceInterface
+     */
+    private $resource;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        if (! $this-&gt;resource) {
+            $injector = Injector::create([new TestModule]);
+            $this-&gt;resource = $injector-&gt;getInstance(&#39;BEAR\Resource\ResourceInterface&#39;);
+        }
+    }
+
+    /**
+     * resource
+     *
+     * @test
+     */
+    public function resource()
+    {
+        // resource request
+        $resource # $this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/first/greeting&#39;)-&gt;withQuery([&#39;name&#39; &gt; &#39;BEAR&#39;])-&gt;eager-&gt;request();
+        $this-&gt;assertSame(200, $resource-&gt;code);
+
+        return $resource;
+    }
+
+    /**
+     * Type ?
+     *
+     * @depends resource
+     * @test
+     */
+    public function type($resource)
+    {
+        $this-&gt;assertInternalType(&#39;string&#39;, $resource-&gt;body);
+    }
+
+    /**
+     * Renderable ?
+     *
+     * @depends resource
+     * test
+     */
+    public function render($resource)
+    {
+        $html = (string)$resource;
+        $this-&gt;assertInternalType(&#39;string&#39;, $html);
+    }
+
+    /**
+     * @depends resource
+     * @test
+     */
+    public function body($resource)
+    {
+        $this-&gt;assertSame(&#39;Hello, BEAR&#39;, $resource-&gt;body);
+    }
+}
+</code></pre></div>
+<h2 id="toc_4">Let&#39;s Run the Tests　</h2>
+
+<p>We navigate to the application directory.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">cd apps/Sandbox/
+</code></pre></div>
+<p>And run the tests.
+<code>
+phpunit tests/Resource/App/First/GreetingTest.php
+</code></p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">...
+
+Time: 2 seconds, Memory: 10.00Mb
+
+OK (3 tests, 3 assertions)
+
+Generating code coverage report in Clover XML format ... done
+
+Generating code coverage report in HTML format ... done
+</code></pre></div>
+<p>We did it!</p>
+
+<h3 id="toc_5">Coverage Report</h3>
+
+<p>In <code>build/coverage/index.html</code> we can see the scope of the tests covered.</p>
+
+<h2 id="toc_6">Let&#39;s Look At The Test Code</h2>
+
+<h3 id="toc_7">setup()</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$injector = Injector::create([new TestModule]);
+$app = $injector-&gt;getInstance(&#39;BEAR\Sunday\Extension\Application\AppInterface&#39;);
+$this-&gt;resource = $app-&gt;resource;
+</code></pre></div>
+<p>We create an injector in the test class setup method, with that interceptor we grab the application object.
+In the test the application object uses the resource client stored in a property.</p>
+
+<h3 id="toc_8">resource()</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$resource # $this-&gt;resource-&gt;get-&gt;uri(&#39;app://self/first/greeting&#39;)-&gt;withQuery([&#39;name&#39; &gt; &#39;BEAR&#39;])-&gt;eager-&gt;request();
+</code></pre></div>
+<p>We use the resource client inside the resource() method to access the resource.</p>
+
+<h3 id="toc_9">Other Test Methods</h3>
+
+<p>In other <code>@test</code> annotated methods we check the results received through the resource method.</p>
+
+  </div>
+</div>
+
+</div>
+ 
+
+			</div>
+    	</div>
+    	<div id="footer">
+      		<div class="container">
+        		<p class="text-muted credit">
+
+        			Checkout BEAR.Sunday on <a href="https://github.com/koriym/BEAR.Sunday">Github</a>.
+
+        		</p>
+      		</div>
+    	</div>
+      <script type="text/javascript" src="http://mackstar.github.io/BEAR.Sunday/js/jquery.js"></script>
+      <script type="text/javascript">
+        $('table').addClass('table');
+      </script>
+    </body>
+</html>

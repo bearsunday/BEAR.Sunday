@@ -23,11 +23,9 @@
     <log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
   </logging>
 
-  <filter>
-    <blacklist>
-      <directory suffix=".php">scripts</directory>
-      <directory suffix=".php">tests</directory>
-      <directory suffix=".php">vendor</directory>
-    </blacklist>
-  </filter>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
 </phpunit>

@@ -16,10 +16,10 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
-    },
-    "require-dev": {
-        "bear/resource": "0.7.*"
+        "php": ">=5.4.0",
+        "bear/resource": "dev-develop",
+        "ray/di": "dev-develop",
+        "ray/aop": "dev-develop"
     },
     "autoload": {
         "psr-0": {

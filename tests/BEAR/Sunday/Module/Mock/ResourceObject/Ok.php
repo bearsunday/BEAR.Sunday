@@ -7,7 +7,7 @@
  */
 namespace BEAR\Sunday\Module\Mock\ResourceObject;
 
-use BEAR\Resource\AbstractObject;
+use BEAR\Resource\ResourceObject;
 
 /**
  * Ok page

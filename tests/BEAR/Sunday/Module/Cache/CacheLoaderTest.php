@@ -2,7 +2,7 @@
 
 namespace BEAR\Sunday\Module\Cache;
 
-use BEAR\Resource\AbstractObject;
+use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Annotation\Cache as CacheAnnotation;
 use BEAR\Sunday\Module\Cqrs\Interceptor\CacheLoader;
 use BEAR\Sunday\Module\Mock\ResourceObject\MockResource;
@@ -64,9 +64,9 @@ class CacheLoaderTest extends \PHPUnit_Framework_TestCase
     /**
      * @depends testInvokeRead
      *
-     * @param AbstractObject $ro
+     * @param ResourceObject $ro
      */
-    public function testInvokeReadMode(AbstractObject $result)
+    public function testInvokeReadMode(ResourceObject $result)
     {
         $cacheInfo = json_decode($result->headers['x-cache']);
         $this->assertSame('R', $cacheInfo->mode);
@@ -75,9 +75,9 @@ class CacheLoaderTest extends \PHPUnit_Framework_TestCase
     /**
      * @depends testInvokeRead
      *
-     * @param AbstractObject $ro
+     * @param ResourceObject $ro
      */
-    public function testInvokeReadLife(AbstractObject $result)
+    public function testInvokeReadLife(ResourceObject $result)
     {
         $cacheInfo = json_decode($result->headers['x-cache']);
         $this->assertSame(self::TIME, $cacheInfo->life);

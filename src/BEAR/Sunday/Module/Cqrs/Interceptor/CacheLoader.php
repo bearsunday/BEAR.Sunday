@@ -68,7 +68,7 @@ class CacheLoader implements MethodInterceptor
     public function invoke(MethodInvocation $invocation)
     {
         $ro = $invocation->getThis();
-        /** @var $ro \BEAR\Resource\AbstractObject */
+        /** @var $ro \BEAR\Resource\ResourceObject */
         $args = $invocation->getArguments();
         $id = $this->getEtag($ro, $args);
         $ro->headers['Tag'] = $id;

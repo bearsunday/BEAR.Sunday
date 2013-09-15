@@ -1,7 +1,7 @@
 <?php
 namespace BEAR\Sunday\Module\Mock\ResourceObject;
 
-use BEAR\Resource\AbstractObject as ResourceObject;
+use BEAR\Resource\ResourceObject;
 
 class MockResource extends ResourceObject
 {

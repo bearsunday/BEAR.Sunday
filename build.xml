@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="BEAR.Sunday" default="build">
-    <target name="install-pear" description="Installs PEAR">
+<project name="BEAR" default="build">
+    <property name="composer.path" value="${basedir}/composer.phar" />
+    <available property="composer.exists" file="${composer.path}" />
+
+    <target name="build" depends="require, prepare, test, report"/>
+    <target name="build-parallel" depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
+    <target name="test" depends="lint,phpunit"/>
+    <target name="report" depends="phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpcb,apigen,phpdox"/>
+
+    <target name="require" depends="composer" description="Install QA tools">
+        <exec executable="php">
+            <arg value="composer.phar" />
+            <arg value="global" />
+            <arg value="require" />
+            <arg value="--dev" />
+            <arg value="phpunit/phpunit=*" />
+            <arg value="squizlabs/php_codesniffer:*" />
+            <arg value="phpmd/phpmd:*" />
+            <arg value="h4cc/phpqatools:*" />
+            <arg value="apigen/apigen:*" />
+            <arg value="theseer/fxsl:dev-master" />
+            <arg value="theseer/phpdox:dev-master" />
+            <arg value="phploc/phploc:*" />
+            <arg value="fabpot/php-cs-fixer:*" />
+        </exec>
+    </target>
+
+    <target name="pear" description="Install QA tools by PEAR">
         <!-- auto-discover channels -->
         <exec executable="pear">
             <arg value="config-set"/>
@@ -12,46 +38,11 @@
         <exec executable="pear">
             <arg value="install" />
             <arg value="--alldeps" />
-            <arg value="PHP_CodeSniffer" />
-            <arg value="pear.phpunit.de/PHPUnit" />
-            <arg value="pear.phpunit.de/DbUnit" />
-            <arg value="pear.phpunit.de/PHP_Invoker" />
-            <arg value="pear.pdepend.org/PHP_Depend" />
-            <arg value="pear.phpmd.org/PHP_PMD" />
             <arg value="pear.phpqatools.org/phpqatools" />
-            <arg value="pear.netpirates.net/phpDox" />
+            <arg value="pear.netpirates.net/phpDox-alpha" />
             <arg value="pear.apigen.org/apigen" />
-            <arg value="pear.docblox-project.org/docblox" />
         </exec>
     </target>
-
-    <target name="install-pecl" description="Installs PECL">
-        <exec executable="pecl">
-            <arg value="install" />
-            <arg value="xdebug"/>
-            <arg value="intl"/>
-            <arg value="xhprof-beta"/>
-        </exec>
-    </target>
-
-    <target name="composer" description="Installing dependencies">
-        <exec executable="wget" failonerror="true">
-            <arg value="-nc" />
-            <arg value="http://getcomposer.org/composer.phar" />
-        </exec>
-        <exec executable="php" failonerror="true">
-            <arg value="composer.phar" />
-            <arg value="install" />
-            <arg value="--dev" />
-        </exec>
-    </target>
-
-    <target name="build"
-            depends="install-pear,composer,prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpunit,phpcb,phpdoc,apigen"/>
-
-    <target name="build-parallel"
-            depends="composer,prepare,lint,tools-parallel,phpunit,phpcb"/>
-
 
     <target name="tools-parallel" description="Run tools in parallel">
         <parallel threadCount="2">
@@ -75,7 +66,7 @@
         <delete dir="${basedir}/build/pdepend"/>
     </target>
 
-    <target name="prepare" depends="clean" description="Prepare for build">
+    <target name="prepare" depends="clean, vendor" description="Prepare for build">
         <mkdir dir="${basedir}/build/api"/>
         <mkdir dir="${basedir}/build/docblox"/>
         <mkdir dir="${basedir}/build/code-browser"/>
@@ -83,6 +74,17 @@
         <mkdir dir="${basedir}/build/logs"/>
         <mkdir dir="${basedir}/build/pdepend"/>
         <mkdir dir="${basedir}/build/phpdox"/>
+    </target>
+
+    <target name="vendor" description="Load composer repositories" depends="composer">
+        <exec executable="${composer.path}" failonerror="true">
+            <arg value="install" />
+        </exec>
+    </target>
+
+    <target name="composer" description="Download composer" unless="composer.exists">
+        <get src="http://getcomposer.org/composer.phar" dest="${composer.path}" />
+        <chmod file="${composer.path}" perm="775" />
     </target>
 
     <target name="lint" description="Perform syntax check of sourcecode files">
@@ -123,7 +125,7 @@
         <exec executable="phpmd">
             <arg path="${basedir}/src" />
             <arg value="text" />
-            <arg value="${basedir}/cs/phpmd/phpmd.xml" />
+            <arg value="${basedir}/phpmd.xml" />
         </exec>
     </target>
 
@@ -131,7 +133,7 @@
         <exec executable="phpmd">
             <arg path="${basedir}/src" />
             <arg value="xml" />
-            <arg value="${basedir}/cs/phpmd/phpmd.xml" />
+            <arg value="${basedir}/phpmd.xml" />
             <arg value="--reportfile" />
             <arg value="${basedir}/build/logs/pmd.xml" />
         </exec>
@@ -140,7 +142,8 @@
     <target name="phpcs"
             description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
         <exec executable="phpcs">
-            <arg value="--standard=${basedir}/build/phpcs.xml" />
+            <arg value="--standard=${basedir}/phpcs.xml" />
+            <arg value="--warning-severity=0" />
             <arg path="${basedir}/src" />
         </exec>
     </target>
@@ -149,7 +152,7 @@
         <exec executable="phpcs" output="/dev/null">
             <arg value="--report=checkstyle" />
             <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
-            <arg value="--standard=${basedir}/build/phpcs.xml" />
+            <arg value="--standard=${basedir}/phpcs.xml" />
             <arg path="${basedir}/src" />
         </exec>
     </target>
@@ -160,10 +163,6 @@
             <arg value="${basedir}/build/logs/pmd-cpd.xml" />
             <arg path="${basedir}/src" />
         </exec>
-    </target>
-
-    <target name="phpdox" description="Generate API documentation using phpDox">
-        <exec executable="phpdox"/>
     </target>
 
     <target name="phpunit" description="Run unit tests with PHPUnit">
@@ -181,14 +180,13 @@
         </exec>
     </target>
 
-    <target name="phpdoc" description="Generate API documentation using Docblox">
-        <exec executable="docblox">
-            <arg line="-d src -t ${basedir}/build/docblox" />
-        </exec>
+    <target name="phpdox" description="Generate API documentation using phpDox">
+        <exec executable="phpdox"/>
     </target>
+
     <target name="apigen" description="Generate API documentation using ApiGen">
         <exec executable="apigen">
-            <arg line="--source src --destination ${basedir}/build/apigen --title 'BEAR.Sunday'" />
+            <arg line="--source src --destination ${basedir}/build/apin" />
         </exec>
     </target>
 

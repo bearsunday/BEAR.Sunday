@@ -33,6 +33,20 @@ class CacheLoader implements MethodInterceptor
      */
     const HEADER_CACHE = 'x-cache';
 
+
+    /**
+     * @var
+     */
+    private $get = [];
+
+    /**
+     * @param array $get
+     */
+    public function setGet(array $get)
+    {
+        $this->get = $get;
+    }
+
     /**
      * Constructor
      *
@@ -67,6 +81,7 @@ class CacheLoader implements MethodInterceptor
      */
     public function invoke(MethodInvocation $invocation)
     {
+        $this->get = ($this->get) ?: $_GET;
         $ro = $invocation->getThis();
         /** @var $ro \BEAR\Resource\ResourceObject */
         $args = $invocation->getArguments();
@@ -93,15 +108,12 @@ class CacheLoader implements MethodInterceptor
      */
     private function getPagerNum($saved)
     {
-        if (isset($_GET[$this->pagerKey])) {
-            $pagerNum = $_GET[$this->pagerKey];
+        if (isset($this->get[$this->pagerKey])) {
+            return $this->get[$this->pagerKey];
         } elseif (isset($saved['pager'])) {
-            $pagerNum = 1;
-        } else {
-            $pagerNum = false;
+            return 1;
         }
-
-        return $pagerNum;
+        return false;
     }
 
     /**

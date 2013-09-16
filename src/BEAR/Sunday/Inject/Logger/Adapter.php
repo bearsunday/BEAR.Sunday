@@ -50,21 +50,21 @@ class Adapter implements LoggerInterface
     {
         $paramInfo = [];
         foreach ($params as $num => $param) {
-            $str = "{$num}:";
             if (is_object($param)) {
-                $str .= get_class($param);
+                $paramInfo[] = "{$num}:" .get_class($param);
+                continue;
             } elseif (is_array($param)) {
                 $interceptorsName = [];
                 $interceptors = array_values($param);
                 foreach ($interceptors as &$interceptor) {
                     $interceptorsName[] = get_class($interceptor);
                 }
-                $str .= implode(',', $interceptorsName);
-            } else {
-                $str = json_encode($param);
+                $paramInfo[] = "{$num}:" . implode(',', $interceptorsName);
+                continue;
             }
-            $paramInfo[] = $str;
+            $paramInfo[] = "{$num}:" . json_encode($param);
         }
+
         $paramStr = implode(',', $paramInfo);
 
         return $paramStr;

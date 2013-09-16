@@ -9,7 +9,6 @@ namespace BEAR\Sunday\Module\Framework;
 use BEAR\Sunday\Module;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
-use Ray\Di\Module\InjectorModule;
 
 /**
  * Application module

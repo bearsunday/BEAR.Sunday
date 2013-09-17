@@ -12,6 +12,6 @@ namespace BEAR\Sunday\Annotation;
  * @Annotation
  * @Target({"METHOD"})
  */
-final class Form
+final class Form implements AnnotationInterface
 {
 }

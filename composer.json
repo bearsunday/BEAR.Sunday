@@ -1,11 +1,12 @@
 {
     "name": "bear/sunday",
-    "description": "BEAR.Sunday, a resource oriented framework",
+    "description": "Resource oriented framework",
     "keywords": [
         "framework",
         "DI",
         "AOP",
-        "REST"
+        "REST",
+        "Hypermedia"
     ],
     "homepage": "https://github.com/koriym/BEAR.Sunday",
     "license": "BSD-3-Clause",

@@ -17,9 +17,7 @@ use BEAR\Resource\Module\ResourceModule as BearResourceModule;
 class ResourceModule extends AbstractModule
 {
     /**
-     * Configure
-     *
-     * @return void
+     * {@inheritdoc}
      */
     protected function configure()
     {

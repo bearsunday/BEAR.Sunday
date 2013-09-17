@@ -20,6 +20,8 @@ class ApcCacheProvider implements Provide
     use TmpDirInject;
 
     /**
+     * {@inheritdoc}
+     *
      * @return CacheAdapter
      */
     public function get()

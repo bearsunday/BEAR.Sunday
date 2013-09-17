@@ -13,12 +13,14 @@ use Aura\Signal\ResultFactory;
 use Ray\Di\ProviderInterface as Provide;
 
 /**
- * Signal provider
+ * Aura.Signal provider
+ *
+ * @see https://github.com/auraphp/Aura.Signal.git
  */
 class SignalProvider implements Provide
 {
     /**
-     * Return instance
+     * {@inheritdoc}
      *
      * @return Manager
      */

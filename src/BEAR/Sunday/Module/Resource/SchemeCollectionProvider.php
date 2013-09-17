@@ -11,13 +11,11 @@ use Ray\Di\ProviderInterface;
 
 /**
  * Scheme collection
- *
- * @see     https://github.com/auraphp/Aura.Web.git
  */
 class SchemeCollectionProvider implements ProviderInterface
 {
     /**
-     * Return instance
+     * {@inheritdoc}
      *
      * @return SchemeCollection
      */

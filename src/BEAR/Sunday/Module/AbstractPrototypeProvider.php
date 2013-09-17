@@ -10,9 +10,6 @@ use Ray\Di\ProviderInterface as Provide;
 
 /**
  * Prototype Provider
- *
- *
- * @Scope("prototype")
  */
 abstract class AbstractPrototypeProvider implements Provide
 {

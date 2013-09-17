@@ -21,8 +21,6 @@ class CacheUpdater implements MethodInterceptor
     use EtagTrait;
 
     /**
-     * Constructor
-     *
      * @param CacheAdapterInterface $cache
      *
      * @Inject

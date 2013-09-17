@@ -13,6 +13,9 @@ use Ray\Di\AbstractModule;
  */
 class ApcModule extends AbstractModule
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this

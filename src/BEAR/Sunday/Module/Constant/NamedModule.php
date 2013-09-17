@@ -14,8 +14,6 @@ use Ray\Di\AbstractModule;
 class NamedModule extends AbstractModule
 {
     /**
-     * Constructor
-     *
      * @param array $names
      */
     public function __construct(array $names)

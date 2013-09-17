@@ -14,6 +14,9 @@ use Ray\Di\Scope;
  */
 class AuraWebModule extends AbstractModule
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this

@@ -13,6 +13,9 @@ use Ray\Di\AbstractModule;
  */
 class CacheModule extends AbstractModule
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $cacheLoader = $this->requestInjection(__NAMESPACE__ . '\Interceptor\CacheLoader');

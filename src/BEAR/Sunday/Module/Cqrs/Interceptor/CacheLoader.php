@@ -35,7 +35,7 @@ class CacheLoader implements MethodInterceptor
 
 
     /**
-     * @var
+     * @var array
      */
     private $get = [];
 
@@ -48,8 +48,6 @@ class CacheLoader implements MethodInterceptor
     }
 
     /**
-     * Constructor
-     *
      * @param CacheAdapterInterface $cache
      *
      * @Inject

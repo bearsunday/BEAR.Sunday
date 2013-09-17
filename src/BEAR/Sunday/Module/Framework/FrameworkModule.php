@@ -15,6 +15,9 @@ use Ray\Di\Injector;
  */
 class FrameworkModule extends AbstractModule
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this->install(new Module\Cache\CacheModule);

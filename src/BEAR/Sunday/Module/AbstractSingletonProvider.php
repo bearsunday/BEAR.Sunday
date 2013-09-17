@@ -10,9 +10,6 @@ use Ray\Di\ProviderInterface as Provide;
 
 /**
  * Singleton provider
- *
- *
- * @Scope("prototype")
  */
 abstract class AbstractSingletonProvider implements Provide
 {

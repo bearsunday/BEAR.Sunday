@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "427666756a77a9c7fcbfd415f649db24",
+    "hash": "dc2c13c7a1d9bbfad6f53cbc2cdc169f",
     "packages": [
         {
             "name": "any/serializer",
@@ -208,17 +208,74 @@
             "time": "2013-09-10 00:00:00"
         },
         {
+            "name": "aura/web",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/auraphp/Aura.Web.git",
+                "reference": "494f5082989e4a479ea3e7e5304c26ffa520cf3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/auraphp/Aura.Web/zipball/494f5082989e4a479ea3e7e5304c26ffa520cf3e",
+                "reference": "494f5082989e4a479ea3e7e5304c26ffa520cf3e",
+                "shasum": ""
+            },
+            "require": {
+                "aura/installer-default": ">=1.0.0",
+                "php": ">=5.4.0"
+            },
+            "type": "aura-package",
+            "autoload": {
+                "psr-0": {
+                    "Aura\\Web": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul M. Jones",
+                    "email": "pmjones88@gmail.com",
+                    "homepage": "http://paul-m-jones.com"
+                },
+                {
+                    "name": "Hari KT",
+                    "email": "kthari85@gmail.com",
+                    "homepage": "http://harikt.com"
+                },
+                {
+                    "name": "Aura.Web Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Web/contributors"
+                },
+                {
+                    "name": "Pascal Borrelli",
+                    "email": "pascal@borreli.com"
+                }
+            ],
+            "description": "The Aura Web package provides tools to build web page controllers, including an AbstractPage for action methods, a Context class for disovering the request environment, and a Response transfer object that describes the eventual HTTP response.",
+            "homepage": "http://auraphp.com/Aura.Web",
+            "keywords": [
+                "controller",
+                "page controller",
+                "web controller"
+            ],
+            "time": "2013-09-10 00:00:00"
+        },
+        {
             "name": "bear/resource",
             "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "f7be46684b5ee3f8bff101062a7f6b2a81e15c77"
+                "reference": "32c980d84c7747ef26d4767e54021720902e1f23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/f7be46684b5ee3f8bff101062a7f6b2a81e15c77",
-                "reference": "f7be46684b5ee3f8bff101062a7f6b2a81e15c77",
+                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/32c980d84c7747ef26d4767e54021720902e1f23",
+                "reference": "32c980d84c7747ef26d4767e54021720902e1f23",
                 "shasum": ""
             },
             "require": {
@@ -248,18 +305,21 @@
                 {
                     "name": "Akihito Koriyama",
                     "email": "akihito.koriyama@gmail.com",
-                    "homepage": "https://github.com/koriym",
                     "role": "Lead"
                 }
             ],
-            "description": "RESTful service layer framework",
+            "description": "Hypermedia framework for object as a service",
             "homepage": "https://github.com/koriym/BEAR.Resource",
             "keywords": [
                 "HATEOAS",
+                "Object as a service",
+                "framework",
+                "hypermedia",
+                "protocol",
                 "rest",
-                "service layer"
+                "stateless"
             ],
-            "time": "2013-09-15 17:52:06"
+            "time": "2013-09-17 15:29:13"
         },
         {
             "name": "doctrine/annotations",
@@ -641,12 +701,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Aop.git",
-                "reference": "7e60468fef778ac9f77024285b04ef289632ad48"
+                "reference": "0a443ea973b8a25382f6e28ecbaa6fafc050877c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/7e60468fef778ac9f77024285b04ef289632ad48",
-                "reference": "7e60468fef778ac9f77024285b04ef289632ad48",
+                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/0a443ea973b8a25382f6e28ecbaa6fafc050877c",
+                "reference": "0a443ea973b8a25382f6e28ecbaa6fafc050877c",
                 "shasum": ""
             },
             "require": {
@@ -680,7 +740,7 @@
                 "aop",
                 "aspect"
             ],
-            "time": "2013-09-15 14:23:51"
+            "time": "2013-09-16 10:45:36"
         },
         {
             "name": "ray/di",
@@ -688,12 +748,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "3bc9a6e8d231c1542094c244b2c7a3fa33c20b66"
+                "reference": "0c6324ab93dbfc7c888cad34b508d84debe801ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/3bc9a6e8d231c1542094c244b2c7a3fa33c20b66",
-                "reference": "3bc9a6e8d231c1542094c244b2c7a3fa33c20b66",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/0c6324ab93dbfc7c888cad34b508d84debe801ea",
+                "reference": "0c6324ab93dbfc7c888cad34b508d84debe801ea",
                 "shasum": ""
             },
             "require": {
@@ -738,7 +798,7 @@
                 "injection",
                 "jsr"
             ],
-            "time": "2013-09-15 17:10:29"
+            "time": "2013-09-17 14:49:53"
         },
         {
             "name": "symfony/event-dispatcher",

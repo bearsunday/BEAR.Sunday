@@ -17,13 +17,11 @@ use BEAR\Resource\Module\ResourceModule as BearResourceModule;
 class ResourceModule extends AbstractModule
 {
     /**
-     * Configure
-     *
-     * @return void
+     * {@inheritdoc}
      */
     protected function configure()
     {
+        $this->bind('BEAR\Resource\LoggerInterface')->toProvider(__NAMESPACE__ . '\ResourceLoggerProvider')->in(Scope::SINGLETON);
         $this->install(new BearResourceModule);
-        $this->bind('BEAR\Resource\LoggerInterface')->toProvider(__NAMESPACE__ . '\ResourceLoggerProvider');
     }
 }

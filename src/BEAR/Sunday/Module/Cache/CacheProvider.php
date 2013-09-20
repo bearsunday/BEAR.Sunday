@@ -28,12 +28,13 @@ class CacheProvider implements Provide
      */
     public function get()
     {
-        if (function_exists('apc_cache_info')) {
-            $cache = new CacheAdapter(new ApcCache);
-        } else {
-            $cache = new CacheAdapter(new FilesystemCache($this->tmpDir . '/cache'));
+        if (ini_get('apc.enabled')) {
+            return new CacheAdapter(new ApcCache);
         }
 
-        return $cache;
+        // @codeCoverageIgnoreStart
+        return new CacheAdapter(new FilesystemCache($this->tmpDir . '/cache'));
+        // @codeCoverageIgnoreEnd
+
     }
 }

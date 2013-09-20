@@ -7,7 +7,7 @@
 namespace BEAR\Sunday\Extension\ConsoleOutput;
 
 use BEAR\Sunday\Extension\ExtensionInterface;
-use BEAR\Resource\AbstractObject as ResourceObject;
+use BEAR\Resource\ResourceObject;
 
 /**
  * Interface for console output

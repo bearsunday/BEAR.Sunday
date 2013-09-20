@@ -8,14 +8,14 @@ namespace BEAR\Sunday\Module\Resource;
 
 use BEAR\Resource\LoggerInterface;
 use BEAR\Sunday\Extension\Application\AppInterface;
+use Ray\Di\ProviderInterface;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
-use Ray\Di\ProviderInterface;
 
 /**
  * Resource logger
  *
- * @see     https://github.com/auraphp/Aura.Web.git
+ * @see https://github.com/auraphp/Aura.Web.git
  */
 class ResourceLoggerProvider implements ProviderInterface
 {
@@ -33,7 +33,7 @@ class ResourceLoggerProvider implements ProviderInterface
 
     /**
      * Set logger name
-     *ResourceLoggerProvider
+     *
      * @param LoggerInterface $logger
      *
      * @Inject
@@ -45,7 +45,7 @@ class ResourceLoggerProvider implements ProviderInterface
     }
 
     /**
-     * Return instance
+     * {@inheritdoc}
      *
      * @return AppInterface
      */

@@ -15,9 +15,7 @@ use Ray\Di\Di\Scope;
 class CacheModule extends AbstractModule
 {
     /**
-     * Configure
-     *
-     * @return void
+     * {@inheritdoc}
      */
     protected function configure()
     {

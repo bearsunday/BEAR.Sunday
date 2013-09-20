@@ -7,11 +7,11 @@
 namespace BEAR\Sunday\Annotation;
 
 /**
- * Form
+ * Query
  *
  * @Annotation
  * @Target({"METHOD"})
  */
-final class Form implements AnnotationInterface
+final class Query implements AnnotationInterface
 {
 }

@@ -14,6 +14,9 @@ use Ray\Di\Scope;
  */
 class AnnotationModule extends AbstractModule
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this

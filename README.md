@@ -15,11 +15,11 @@ simplicity,  order and flexibility in your application. With very
 frameworks, yet offer even further benefit and beauty. 
 
 BEAR.SundayはアプリケーションをRESTアーキテクチャで構築するリソース指向フレームワークです。
-「依存性の注入」と「アスペクト指向プログラミング」を用いた粗結合なシステムは意図が読みやすく簡潔なコーディングを可能にします。
-BEAR.Sundayは独自のコンポーネントをほとんど持ちません。再発名を避け定評ある既存ライブラリを利用します。
+「依存性の注入」と「アスペクト指向プログラミング」を用いた疎結合なシステムは意図が読みやすく簡潔なコーディングを可能にします。
+BEAR.Sundayは独自のコンポーネントをほとんど持ちません。再発明を避け定評ある既存ライブラリを利用します。
 コンポーネントそのものよりそれらの接続に注目し、開発者が構成可能でSOLIDなフレームを提供します。
 
-Everythins is a resource
+Everything is a resource
 ------------------------------
 In BEAR.Sunday everything is a REST resource which leads to far simpler design and extensibility. Interactions with your database, services and even pages and sections of your app all sit comfortably in a resource which can be consumed or rendered at will. 
 
@@ -438,3 +438,8 @@ built-in web server for development
 Virtual Host for Production
 ------------
 Set up a virtual host to point to the public / directory of the application.
+
+Documentation
+-------------
+Documentation is available in English http://code.google.com/p/bearsunday/wiki/introduction?wl=en and Japanese http://code.google.com/p/bearsunday/wiki/introduction
+

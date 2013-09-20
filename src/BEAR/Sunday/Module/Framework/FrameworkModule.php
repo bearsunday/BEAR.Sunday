@@ -9,13 +9,15 @@ namespace BEAR\Sunday\Module\Framework;
 use BEAR\Sunday\Module;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
-use Ray\Di\Module\InjectorModule;
 
 /**
  * Application module
  */
 class FrameworkModule extends AbstractModule
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this->install(new Module\Cache\CacheModule);

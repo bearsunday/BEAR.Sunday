@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "dc2c13c7a1d9bbfad6f53cbc2cdc169f",
+    "hash": "2d8c9f5d0a6912bafbe4691fb6267a4f",
     "packages": [
         {
             "name": "any/serializer",
@@ -266,16 +266,16 @@
         },
         {
             "name": "bear/resource",
-            "version": "dev-develop",
+            "version": "0.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "3661035f1c1c8f018b99b8aee3612160c487a3bb"
+                "reference": "b05ccbed53098eabac6c219d0151fa72eee39a2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/3661035f1c1c8f018b99b8aee3612160c487a3bb",
-                "reference": "3661035f1c1c8f018b99b8aee3612160c487a3bb",
+                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/b05ccbed53098eabac6c219d0151fa72eee39a2d",
+                "reference": "b05ccbed53098eabac6c219d0151fa72eee39a2d",
                 "shasum": ""
             },
             "require": {
@@ -285,8 +285,8 @@
                 "guzzle/guzzle": "3.3.*",
                 "nocarrier/hal": "*",
                 "php": ">=5.4.0",
-                "ray/aop": "dev-develop",
-                "ray/di": "dev-develop"
+                "ray/aop": "1.1.*",
+                "ray/di": "1.1.*"
             },
             "require-dev": {
                 "facebook/xhprof": "dev-master"
@@ -320,7 +320,7 @@
                 "rest",
                 "stateless"
             ],
-            "time": "2013-09-18 11:08:36"
+            "time": "2013-09-17 15:30:39"
         },
         {
             "name": "doctrine/annotations",
@@ -698,16 +698,16 @@
         },
         {
             "name": "ray/aop",
-            "version": "dev-develop",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Aop.git",
-                "reference": "0a443ea973b8a25382f6e28ecbaa6fafc050877c"
+                "reference": "7e60468fef778ac9f77024285b04ef289632ad48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/0a443ea973b8a25382f6e28ecbaa6fafc050877c",
-                "reference": "0a443ea973b8a25382f6e28ecbaa6fafc050877c",
+                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/7e60468fef778ac9f77024285b04ef289632ad48",
+                "reference": "7e60468fef778ac9f77024285b04ef289632ad48",
                 "shasum": ""
             },
             "require": {
@@ -741,20 +741,20 @@
                 "aop",
                 "aspect"
             ],
-            "time": "2013-09-16 10:45:36"
+            "time": "2013-09-15 14:23:51"
         },
         {
             "name": "ray/di",
-            "version": "dev-develop",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "0c6324ab93dbfc7c888cad34b508d84debe801ea"
+                "reference": "9fe0388db52a7d5be49a8f3594aeeaaaa524a5a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/0c6324ab93dbfc7c888cad34b508d84debe801ea",
-                "reference": "0c6324ab93dbfc7c888cad34b508d84debe801ea",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/9fe0388db52a7d5be49a8f3594aeeaaaa524a5a7",
+                "reference": "9fe0388db52a7d5be49a8f3594aeeaaaa524a5a7",
                 "shasum": ""
             },
             "require": {
@@ -763,7 +763,7 @@
                 "doctrine/cache": "1.*",
                 "nikic/php-parser": "*",
                 "php": ">=5.4.0",
-                "ray/aop": "dev-develop"
+                "ray/aop": "1.1.*"
             },
             "type": "library",
             "autoload": {
@@ -799,7 +799,7 @@
                 "injection",
                 "jsr"
             ],
-            "time": "2013-09-17 14:49:53"
+            "time": "2013-09-17 14:53:41"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -863,11 +863,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "bear/resource": 20,
-        "ray/di": 20,
-        "ray/aop": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.4.0"
     },

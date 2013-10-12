@@ -417,6 +417,10 @@ Rather than reinvent the wheel and develop our own library, BEAR.Sunday are usin
 * [Zend / Log] (https://github.com/zendframework/Component_ZendLog)
 * [Zend / Db] (https://github.com/zendframework/Component_ZendDb)
 
+Resource Object Diagram
+-----------------------
+![Resource Object Diagram](http://bearsunday.github.io//images/screen/diagram.png "Resource Object Diagram")
+
 Installation
 ------------
 

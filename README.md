@@ -7,8 +7,8 @@ What's BEAR.Sunday
 ------------------
 
 This resource orientated framework has both externally and internally
- a REST centric architecture,  implementing 'Dependency Injection' and 
-'Aspect Orientated Programming' heavily to offer you surprising 
+ a **REST centric architecture**,  implementing **Dependency Injection** and 
+**Aspect Orientated Programming** heavily to offer you surprising 
 simplicity,  order and flexibility in your application. With very
  few components of its own, it is a fantastic example of how a framework
  can be built using  existing components and libraries from other 
@@ -21,7 +21,8 @@ BEAR.Sundayは独自のコンポーネントをほとんど持ちません。再
 
 Everything is a resource
 ------------------------------
-In BEAR.Sunday everything is a REST resource which leads to far simpler design and extensibility. Interactions with your database, services and even pages and sections of your app all sit comfortably in a resource which can be consumed or rendered at will. 
+In BEAR.Sunday **everything is a REST resource** which leads to far simpler design and extensibility.
+Interactions with your database, services and even pages and sections of your app all sit comfortably in a resource which can be consumed or rendered at will. 
 
 BEAR.Sundayではコントローラーもモデルも統一したリソースとして扱います。
 名前(URI)と統一インターフェイスを持った各リソースはアプリケーション内部/外部に関わらずAPIとして機能し、

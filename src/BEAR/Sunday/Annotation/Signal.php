@@ -7,11 +7,11 @@
 namespace BEAR\Sunday\Annotation;
 
 /**
- * Html
+ * Signal
  *
  * @Annotation
- * @Target({"METHOD","CLASS"})
+ * @Target("METHOD")
  */
-final class Html implements AnnotationInterface
+final class Signal implements AnnotationInterface
 {
 }

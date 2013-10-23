@@ -9,28 +9,28 @@ namespace BEAR\Sunday\Inject;
 /**
  * Inject application vendor directory path
  */
-trait VendorDirInject
+trait LibDirInject
 {
     /**
      * App vendor path
      *
      * @var string
      */
-    private $vendorDir;
+    private $libDir;
 
 
     /**
      * App directory path setter
      *
-     * @param string $vendorDir
+     * @param string $libDir
      *
      * @return void
      *
      * @Ray\Di\Di\Inject
-     * @Ray\Di\Di\Named("vendor_dir")
+     * @Ray\Di\Di\Named("lib_dir")
      */
-    public function setVendorDir($vendorDir)
+    public function setLibDir($libDir)
     {
-        $this->vendorDir = $vendorDir;
+        $this->libDir = $libDir;
     }
 }

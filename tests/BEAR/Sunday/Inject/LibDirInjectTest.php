@@ -5,25 +5,25 @@ namespace BEAR\Sunday\Inject;
 use BEAR\Sunday\Module\Constant\NamedModule;
 use Ray\Di\Injector;
 
-class VendorDirApplication
+class LibDirApplication
 {
-    use VendorDirInject;
+    use LibDirInject;
 
     public function returnDependency()
     {
-        return $this->vendorDir;
+        return $this->libDir;
     }
 
 }
 
-class VendorDirInjectTest extends \PHPUnit_Framework_TestCase
+class LibDirInjectTest extends \PHPUnit_Framework_TestCase
 {
     public function testInjectTrait()
     {
         $config = [
-            'vendor_dir' => __DIR__
+            'lib_dir' => __DIR__
         ];
-        $app = Injector::create([new NamedModule($config)])->getInstance(__NAMESPACE__ . '\VendorDirApplication');
+        $app = Injector::create([new NamedModule($config)])->getInstance(__NAMESPACE__ . '\LibDirApplication');
         $this->assertSame(__DIR__, $app->returnDependency());
     }
 }

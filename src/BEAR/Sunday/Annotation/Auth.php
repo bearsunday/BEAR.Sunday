@@ -10,7 +10,7 @@ namespace BEAR\Sunday\Annotation;
  * Authentication
  *
  * @Annotation
- * @Target("METHOD")
+ * @Target({"METHOD","CLASS"})
  */
 final class Auth implements AnnotationInterface
 {

@@ -18,10 +18,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "bear/resource": "dev-develop",
-        "ray/di": "dev-develop",
-        "ray/aop": "dev-develop",
-        "aura/web": "*"
+        "bear/resource": "dev-develop"
     },
     "autoload": {
         "psr-0": {

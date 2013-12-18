@@ -436,7 +436,7 @@ More information is availavle at [wiki:install](http://code.google.com/p/bearsun
 built-in web server for development
 ------------------
 
-    $ cd bear/apps/Sandbox/public
+    $ cd bear/apps/Demo/Sandbox/public
     $ php -S localhost:8088 web.php
     $ php -S localhost:8089 api.php
 

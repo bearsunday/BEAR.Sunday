@@ -5,6 +5,16 @@ namespace BEAR\Sunday\Module\Framework;
 use BEAR\Sunday\Module\Framework\FrameworkModule;
 use Ray\Di\Injector;
 use Ray\Di\Module\InjectorModule;
+use Ray\Di\AbstractModule;
+
+class AppNameModule extends AbstractModule
+{
+    protected function configure()
+    {
+        $this->bind()->annotatedWith('app_name')->toInstance('Vendor\App');
+    }
+}
+
 
 class FrameworkModuleTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,11 +25,7 @@ class FrameworkModuleTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->injector = Injector::create(
-            [
-                new InjectorModule(new FrameworkModule)
-            ]
-        );
+        $this->injector = Injector::create([new AppNameModule, new FrameworkModule, new InjectorModule]);
 
     }
 

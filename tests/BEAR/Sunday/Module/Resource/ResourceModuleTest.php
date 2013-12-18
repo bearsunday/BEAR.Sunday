@@ -8,6 +8,14 @@ use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 use Ray\Di\Module\InjectorModule;
 
+class AppNameModule extends AbstractModule
+{
+    protected function configure()
+    {
+        $this->bind()->annotatedWith('app_name')->toInstance('Vendor\App');
+    }
+}
+
 class ResourceModuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -17,7 +25,7 @@ class ResourceModuleTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->resource = Injector::create([new InjectorModule(new ResourceModule)])->getInstance('BEAR\Resource\ResourceInterface');
+        $this->resource = Injector::create([new AppNameModule, new InjectorModule(new ResourceModule)])->getInstance('BEAR\Resource\ResourceInterface');
     }
 
     public function testGetInstance()

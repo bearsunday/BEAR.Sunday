@@ -446,5 +446,4 @@ Set up a virtual host to point to the public / directory of the application.
 
 Documentation
 -------------
-Documentation is available in English http://bearsunday.github.io/ and Japanese http://bearsunday.github.io/ja/
-
+Documentation is available in English http://bearsunday.github.io/ and Japanese http://bearsunday.github.io/manual/ja/

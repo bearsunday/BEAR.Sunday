@@ -6,11 +6,6 @@
  */
 namespace BEAR\Sunday\Exception;
 
-use BEAR\Resource\Exception;
-
-/**
- * Body is not string exception
- */
-class ResourceBodyIsNotString extends RuntimeException
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 }

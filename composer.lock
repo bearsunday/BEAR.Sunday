@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ac3b997d0bd52e2efc022bef7792df07",
+    "hash": "97a32609c9abaa3ff4d4da182a3e3aa7",
     "packages": [
         {
             "name": "any/serializer",
@@ -214,12 +214,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "619cc0ff9734d1c1043581d61625281ffc0ef0e8"
+                "reference": "4f682997b2f90e732b47d339b7764721e16f815d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/619cc0ff9734d1c1043581d61625281ffc0ef0e8",
-                "reference": "619cc0ff9734d1c1043581d61625281ffc0ef0e8",
+                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/4f682997b2f90e732b47d339b7764721e16f815d",
+                "reference": "4f682997b2f90e732b47d339b7764721e16f815d",
                 "shasum": ""
             },
             "require": {
@@ -229,8 +229,8 @@
                 "guzzle/guzzle": "3.3.*",
                 "nocarrier/hal": "*",
                 "php": ">=5.4.0",
-                "ray/aop": "1.1.*",
-                "ray/di": "1.1.*"
+                "ray/aop": "dev-develop",
+                "ray/di": "dev-develop"
             },
             "require-dev": {
                 "facebook/xhprof": "dev-master"
@@ -250,7 +250,7 @@
                     "name": "Akihito Koriyama",
                     "email": "akihito.koriyama@gmail.com",
                     "homepage": "https://github.com/koriym",
-                    "role": "Developer"
+                    "role": "Lead"
                 }
             ],
             "description": "Hypermedia framework for object as a service",
@@ -264,7 +264,7 @@
                 "rest",
                 "stateless"
             ],
-            "time": "2013-11-06 12:41:50"
+            "time": "2014-01-12 16:24:56"
         },
         {
             "name": "doctrine/annotations",
@@ -602,16 +602,16 @@
         },
         {
             "name": "nocarrier/hal",
-            "version": "0.9.3",
+            "version": "0.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/blongden/hal.git",
-                "reference": "a15dfb2f07490e22a3faf075de0d7419fe644dec"
+                "reference": "aca65a12a718a36dcb2675eaf0cdc4d64a80f9e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blongden/hal/zipball/a15dfb2f07490e22a3faf075de0d7419fe644dec",
-                "reference": "a15dfb2f07490e22a3faf075de0d7419fe644dec",
+                "url": "https://api.github.com/repos/blongden/hal/zipball/aca65a12a718a36dcb2675eaf0cdc4d64a80f9e9",
+                "reference": "aca65a12a718a36dcb2675eaf0cdc4d64a80f9e9",
                 "shasum": ""
             },
             "require": {
@@ -659,20 +659,58 @@
                 "rest",
                 "xml"
             ],
-            "time": "2013-10-07 14:21:31"
+            "time": "2013-11-19 11:57:26"
         },
         {
-            "name": "ray/aop",
-            "version": "1.1.2",
+            "name": "psr/log",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/koriym/Ray.Aop.git",
-                "reference": "7a5164072dcc09584b67cb9d95ff077dc9517860"
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/7a5164072dcc09584b67cb9d95ff077dc9517860",
-                "reference": "7a5164072dcc09584b67cb9d95ff077dc9517860",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "ray/aop",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/koriym/Ray.Aop.git",
+                "reference": "b8b5347d913e9af2c57916b54e5146ff078a244f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/b8b5347d913e9af2c57916b54e5146ff078a244f",
+                "reference": "b8b5347d913e9af2c57916b54e5146ff078a244f",
                 "shasum": ""
             },
             "require": {
@@ -706,20 +744,20 @@
                 "aop",
                 "aspect"
             ],
-            "time": "2013-09-22 19:03:10"
+            "time": "2014-01-18 11:02:51"
         },
         {
             "name": "ray/di",
-            "version": "1.1.2",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "8406adc9af763a4db06c03934ac63156dcf907a0"
+                "reference": "eafdb09e20c58b29dd1b443e747a31f02f053cd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/8406adc9af763a4db06c03934ac63156dcf907a0",
-                "reference": "8406adc9af763a4db06c03934ac63156dcf907a0",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/eafdb09e20c58b29dd1b443e747a31f02f053cd3",
+                "reference": "eafdb09e20c58b29dd1b443e747a31f02f053cd3",
                 "shasum": ""
             },
             "require": {
@@ -728,7 +766,7 @@
                 "doctrine/cache": "1.*",
                 "nikic/php-parser": "*",
                 "php": ">=5.4.0",
-                "ray/aop": "1.1.*"
+                "ray/aop": "dev-develop"
             },
             "type": "library",
             "autoload": {
@@ -764,21 +802,21 @@
                 "injection",
                 "jsr"
             ],
-            "time": "2013-09-23 06:34:18"
+            "time": "2014-01-18 11:48:52"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.3.6",
+            "version": "v2.4.1",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "7fc72a7a346a1887d3968cc1ce5642a15cd182e9"
+                "reference": "e3ba42f6a70554ed05749e61b829550f6ac33601"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/7fc72a7a346a1887d3968cc1ce5642a15cd182e9",
-                "reference": "7fc72a7a346a1887d3968cc1ce5642a15cd182e9",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/e3ba42f6a70554ed05749e61b829550f6ac33601",
+                "reference": "e3ba42f6a70554ed05749e61b829550f6ac33601",
                 "shasum": ""
             },
             "require": {
@@ -794,7 +832,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -818,7 +856,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-19 09:45:20"
+            "time": "2013-12-28 08:12:03"
         }
     ],
     "packages-dev": [
@@ -829,7 +867,9 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "bear/resource": 20
+        "bear/resource": 20,
+        "ray/di": 20,
+        "ray/aop": 20
     },
     "platform": {
         "php": ">=5.4.0"

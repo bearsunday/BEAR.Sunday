@@ -411,7 +411,7 @@ Rather than reinvent the wheel and develop our own library, BEAR.Sunday are usin
 * [Smarty3] (http://www.smarty.net/)
 * [Twig] (http://twig.sensiolabs.org/ "Twig")
 * [Ray / Di] (https://github.com/koriym/Ray.Di) ([Aura / Di] (https://github.com/auraphp/Aura.Di))
-* [Ray / Aop] (https://github.com/koriym/Aop.Di)
+* [Ray / Aop] (https://github.com/koriym/Ray.Aop)
 * [Symfony / HttpFoundation] (https://github.com/symfony/HttpFoundation)
 * [Symfony / Routing] (https://github.com/symfony/routing)
 * [Nocarrier \ Hal] (https://github.com/blongden/hal)

@@ -37,7 +37,7 @@ class ResourceModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind('BEAR\Resource\LoggerInterface')->toProvider(__NAMESPACE__ . '\ResourceLoggerProvider')->in(Scope::SINGLETON);
+        $this->bind('BEAR\Resource\LoggerInterface')->to('BEAR\Resource\Logger')->in(Scope::SINGLETON);
         $this->install(new BearResourceModule($this->appName));
     }
 }

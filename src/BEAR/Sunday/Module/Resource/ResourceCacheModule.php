@@ -7,6 +7,7 @@
 namespace BEAR\Sunday\Module\Resource;
 
 use Ray\Di\AbstractModule;
+use Ray\Di\Scope;
 
 /**
  * Resource cache module
@@ -21,6 +22,7 @@ class ResourceCacheModule extends AbstractModule
         $this
             ->bind('Guzzle\Cache\CacheAdapterInterface')
             ->annotatedWith('resource_cache')
-            ->toProvider('BEAR\Sunday\Module\Cache\CacheProvider');
+            ->toProvider('BEAR\Sunday\Module\Cache\CacheProvider')
+            ->in(Scope::SINGLETON);
     }
 }

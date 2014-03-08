@@ -9,6 +9,6 @@ ini_set('xdebug.max_nesting_level', 300);
 $loader = require dirname(__DIR__) . '/vendor/autoload.php';
 /** @var $loader \Composer\Autoload\ClassLoader */
 AnnotationRegistry::registerLoader([$loader, 'loadClass']);
-$loader->add('BEAR\Sunday' , __DIR__);
+$loader->addPsr4('BEAR\Sunday\\' , __DIR__);
 
 $GLOBALS['TEST_TMP'] = __DIR__ . '/tmp';

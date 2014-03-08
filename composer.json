@@ -24,8 +24,8 @@
         "psr/log": "1.*"
     },
     "autoload": {
-        "psr-0": {
-            "BEAR\\Sunday": "src/"
+        "psr-4": {
+            "BEAR\\Sunday\\": "src/"
         }
     }
 }

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "97a32609c9abaa3ff4d4da182a3e3aa7",
+    "hash": "37374ab9ca97f7e9ff75771aa2dd0317",
     "packages": [
         {
             "name": "any/serializer",
@@ -214,19 +214,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "4f682997b2f90e732b47d339b7764721e16f815d"
+                "reference": "e146ef286c76b34d9ccf2c0462f8b623951daf75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/4f682997b2f90e732b47d339b7764721e16f815d",
-                "reference": "4f682997b2f90e732b47d339b7764721e16f815d",
+                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/e146ef286c76b34d9ccf2c0462f8b623951daf75",
+                "reference": "e146ef286c76b34d9ccf2c0462f8b623951daf75",
                 "shasum": ""
             },
             "require": {
                 "any/serializer": "*",
                 "aura/signal": "1.*",
                 "doctrine/cache": "1.*",
-                "guzzle/guzzle": "3.3.*",
+                "guzzle/guzzle": "3.*",
                 "nocarrier/hal": "*",
                 "php": ">=5.4.0",
                 "ray/aop": "dev-develop",
@@ -237,8 +237,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "BEAR\\Resource": "src/"
+                "psr-4": {
+                    "BEAR\\Resource\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -264,7 +264,7 @@
                 "rest",
                 "stateless"
             ],
-            "time": "2014-01-12 16:24:56"
+            "time": "2014-03-07 09:19:32"
         },
         {
             "name": "doctrine/annotations",
@@ -465,21 +465,21 @@
         },
         {
             "name": "guzzle/guzzle",
-            "version": "v3.3.1",
+            "version": "v3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "v3.3.1"
+                "reference": "4de0618a01b34aa1c8c33a3f13f396dcd3882eba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/v3.3.1",
-                "reference": "v3.3.1",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/4de0618a01b34aa1c8c33a3f13f396dcd3882eba",
+                "reference": "4de0618a01b34aa1c8c33a3f13f396dcd3882eba",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=5.3.2",
+                "php": ">=5.3.3",
                 "symfony/event-dispatcher": ">=2.1"
             },
             "replace": {
@@ -510,22 +510,21 @@
                 "doctrine/cache": "*",
                 "monolog/monolog": "1.*",
                 "phpunit/phpunit": "3.7.*",
+                "psr/log": "1.0.*",
                 "symfony/class-loader": "*",
-                "zend/zend-cache1": "1.12",
-                "zend/zend-log1": "1.12",
-                "zendframework/zend-cache": "2.0.*",
-                "zendframework/zend-log": "2.0.*"
+                "zendframework/zend-cache": "<2.3",
+                "zendframework/zend-log": "<2.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "3.8-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
-                    "Guzzle\\Tests": "tests/",
-                    "Guzzle": "src/"
+                    "Guzzle": "src/",
+                    "Guzzle\\Tests": "tests/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -554,7 +553,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-03-10 23:05:38"
+            "time": "2014-01-28 22:29:15"
         },
         {
             "name": "nikic/php-parser",
@@ -705,12 +704,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Aop.git",
-                "reference": "b8b5347d913e9af2c57916b54e5146ff078a244f"
+                "reference": "958e3c8c50e00387a095317c2e937f792d892ca0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/b8b5347d913e9af2c57916b54e5146ff078a244f",
-                "reference": "b8b5347d913e9af2c57916b54e5146ff078a244f",
+                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/958e3c8c50e00387a095317c2e937f792d892ca0",
+                "reference": "958e3c8c50e00387a095317c2e937f792d892ca0",
                 "shasum": ""
             },
             "require": {
@@ -723,8 +722,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Ray\\Aop": "src/"
+                "psr-4": {
+                    "Ray\\Aop\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -744,7 +743,7 @@
                 "aop",
                 "aspect"
             ],
-            "time": "2014-01-18 11:02:51"
+            "time": "2014-02-26 22:42:41"
         },
         {
             "name": "ray/di",
@@ -752,12 +751,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "eafdb09e20c58b29dd1b443e747a31f02f053cd3"
+                "reference": "b2d96e04431682209fdfcf9c8b814d9250cbea17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/eafdb09e20c58b29dd1b443e747a31f02f053cd3",
-                "reference": "eafdb09e20c58b29dd1b443e747a31f02f053cd3",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/b2d96e04431682209fdfcf9c8b814d9250cbea17",
+                "reference": "b2d96e04431682209fdfcf9c8b814d9250cbea17",
                 "shasum": ""
             },
             "require": {
@@ -770,8 +769,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Ray\\Di": "src/"
+                "psr-4": {
+                    "Ray\\Di\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -802,21 +801,21 @@
                 "injection",
                 "jsr"
             ],
-            "time": "2014-01-18 11:48:52"
+            "time": "2014-03-14 10:34:15"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.4.1",
+            "version": "v2.4.2",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "e3ba42f6a70554ed05749e61b829550f6ac33601"
+                "reference": "4708b8cd41984a5ba29fe7dd40716f7f761ac501"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/e3ba42f6a70554ed05749e61b829550f6ac33601",
-                "reference": "e3ba42f6a70554ed05749e61b829550f6ac33601",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/4708b8cd41984a5ba29fe7dd40716f7f761ac501",
+                "reference": "4708b8cd41984a5ba29fe7dd40716f7f761ac501",
                 "shasum": ""
             },
             "require": {
@@ -847,7 +846,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
                     "name": "Symfony Community",
@@ -856,7 +857,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-12-28 08:12:03"
+            "time": "2014-02-11 13:52:09"
         }
     ],
     "packages-dev": [

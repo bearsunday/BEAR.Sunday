@@ -20,7 +20,7 @@ class CacheModule extends AbstractModule
     protected function configure()
     {
         $this
-            ->bind('Guzzle\Cache\AbstractCacheAdapter')
+            ->bind('Guzzle\Cache\CacheAdapterInterface')
             ->toProvider('BEAR\Sunday\Module\Cache\CacheProvider')
             ->in(Scope::SINGLETON);
     }

@@ -56,15 +56,21 @@ Method-Override
 ---------------
 `Method-Override` or `_method` used for DELETE / PUT method.
 
+HTML Form
 ```html
-<input name="X-HTTP-Method-Override" type="hidden" value="PUT"/>
-<input name="X-HTTP-Method-Override" type="hidden" value="DELETE"/>
+<input name="_method" type="hidden" value="PUT"/>
 ```
 
+Ajax
+```js
+$.ajax({
+    url: '/blog/posts/post',
+    type: "POST",
+    headers: {
+        'X-HTTP-Method-Override': 'DELETE'
+    },
+    ...
 ```
-http://myapp/entry/10/?_method=DELETE
-```
-
 
 Development tools
 -----------------
@@ -145,14 +151,6 @@ Aspects like Log or cache can be specified in the annotation
  * @Cache(60)
  */
 public function onGet($name = "World")
-{
-```
-
-```php
-/**
- * @Auth("admin")
- */
-public function onGet($id)
 {
 ```
 
@@ -413,10 +411,8 @@ Rather than reinvent the wheel and develop our own library, BEAR.Sunday are usin
 * [Ray / Di] (https://github.com/koriym/Ray.Di) ([Aura / Di] (https://github.com/auraphp/Aura.Di))
 * [Ray / Aop] (https://github.com/koriym/Ray.Aop)
 * [Symfony / HttpFoundation] (https://github.com/symfony/HttpFoundation)
-* [Symfony / Routing] (https://github.com/symfony/routing)
 * [Nocarrier \ Hal] (https://github.com/blongden/hal)
 * [Zend / Log] (https://github.com/zendframework/Component_ZendLog)
-* [Zend / Db] (https://github.com/zendframework/Component_ZendDb)
 
 Resource Object Diagram
 -----------------------
@@ -424,25 +420,7 @@ Resource Object Diagram
 
 Installation
 ------------
-
-    $ curl -s http://install.bear-project.net/ | sh -s ./bear
-or
-
-    $ php -r "eval('?>'.file_get_contents('https://getcomposer.org/installer'));"
-    $ php composer.phar create-project --prefer-source --dev bear/package ./bear
-
-More information is availavle at [wiki:install](http://code.google.com/p/bearsunday/wiki/install).
-
-built-in web server for development
-------------------
-
-    $ cd bear/apps/Demo/Sandbox/public
-    $ php -S localhost:8088 web.php
-    $ php -S localhost:8089 api.php
-
-Virtual Host for Production
-------------
-Set up a virtual host to point to the public / directory of the application.
+   See [BEAR.Package#installation](https://github.com/koriym/BEAR.Package#installation)
 
 Documentation
 -------------

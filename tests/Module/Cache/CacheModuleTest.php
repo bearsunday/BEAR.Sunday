@@ -22,12 +22,12 @@ class Application
 
 class CacheModuleTest extends \PHPUnit_Framework_TestCase
 {
-    public function testCacheApc()
+    public function testCache()
     {
         $config = [
             'tmp_dir' => $GLOBALS['TEST_TMP']
         ];
         $app = Injector::create([new NamedModule($config), new CacheModule])->getInstance(__NAMESPACE__ . '\Application');
-        $this->assertInstanceOf('Guzzle\Cache\DoctrineCacheAdapter' , $app->cache);
+        $this->assertInstanceOf('Guzzle\Cache\DoctrineCacheAdapter', $app->cache);
     }
 }

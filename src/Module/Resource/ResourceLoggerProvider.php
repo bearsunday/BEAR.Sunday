@@ -12,11 +12,6 @@ use Ray\Di\ProviderInterface;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
-/**
- * Resource logger
- *
- * @see https://github.com/auraphp/Aura.Web.git
- */
 class ResourceLoggerProvider implements ProviderInterface
 {
     /**

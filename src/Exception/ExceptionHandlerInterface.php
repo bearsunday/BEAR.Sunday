@@ -8,9 +8,6 @@ namespace BEAR\Sunday\Exception;
 
 use Exception;
 
-/**
- * Interface for exception handler
- */
 interface ExceptionHandlerInterface
 {
     /**

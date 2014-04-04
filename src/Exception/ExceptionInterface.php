@@ -6,9 +6,6 @@
  */
 namespace BEAR\Sunday\Exception;
 
-/**
- * Generic exception interface
- */
 interface ExceptionInterface
 {
 }

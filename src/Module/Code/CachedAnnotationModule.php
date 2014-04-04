@@ -8,9 +8,6 @@ namespace BEAR\Sunday\Module\Code;
 
 use Ray\Di\AbstractModule;
 
-/**
- * Cached annotation reader module
- */
 class CachedAnnotationModule extends AbstractModule
 {
     /**

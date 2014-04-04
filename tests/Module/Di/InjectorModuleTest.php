@@ -12,8 +12,8 @@ use Ray\Di\Module\InjectorModule;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Ray\Di\Injector;
 
-class InjectorModuleTest extends \PHPUnit_Framework_TestCase {
-
+class InjectorModuleTest extends \PHPUnit_Framework_TestCase
+{
     private $instance;
 
     protected function setUp()

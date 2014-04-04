@@ -12,9 +12,6 @@ use BEAR\Resource\Module\ResourceModule as BearResourceModule;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 
-/**
- * Resource module
- */
 class ResourceModule extends AbstractModule
 {
     protected $appName;

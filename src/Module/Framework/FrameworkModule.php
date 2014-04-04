@@ -10,9 +10,6 @@ use BEAR\Sunday\Module;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 
-/**
- * Application module
- */
 class FrameworkModule extends AbstractModule
 {
     /**

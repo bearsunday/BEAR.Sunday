@@ -7,7 +7,7 @@
 namespace BEAR\Sunday\Inject;
 
 /**
- * Inject log dir
+ * Inject application log dir
  */
 trait LogDirInject
 {

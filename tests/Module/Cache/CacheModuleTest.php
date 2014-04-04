@@ -3,9 +3,8 @@
 namespace BEAR\Sunday\Module\Cache;
 
 use BEAR\Sunday\Module\Constant\NamedModule;
-use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
-use Guzzle\Cache\AbstractCacheAdapter;
+use Guzzle\Cache\CacheAdapterInterface;
 use Ray\Di\Di\Inject;
 
 class Application
@@ -15,7 +14,7 @@ class Application
     /**
      * @Inject
      */
-    public function setCache(AbstractCacheAdapter $cache)
+    public function setCache(CacheAdapterInterface $cache)
     {
         $this->cache = $cache;
     }

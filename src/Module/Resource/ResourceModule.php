@@ -7,12 +7,10 @@
 namespace BEAR\Sunday\Module\Resource;
 
 use Ray\Di\AbstractModule;
-use Ray\Di\Injector;
 use Ray\Di\Scope;
 use BEAR\Resource\Module\ResourceModule as BearResourceModule;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
-
 
 /**
  * Resource module

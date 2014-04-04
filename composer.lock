@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "37374ab9ca97f7e9ff75771aa2dd0317",
+    "hash": "04883c056b340a40118d3615fd091e4c",
     "packages": [
         {
             "name": "any/serializer",
@@ -34,7 +34,7 @@
                     "name": "Akihito Koriyama",
                     "email": "akihito.koriyama@gmail.com",
                     "homepage": "https://github.com/koriym",
-                    "role": "Developer"
+                    "role": "Lead"
                 }
             ],
             "description": "Serialize any value for logging",
@@ -112,13 +112,13 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/auraphp/installer-default",
-                "reference": "1.0.0"
+                "url": "https://github.com/auraphp/installer-default.git",
+                "reference": "52f8de3670cc1ef45a916f40f732937436d028c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/auraphp/installer-default/archive/1.0.0.zip",
-                "reference": "1.0.0",
+                "url": "https://api.github.com/repos/auraphp/installer-default/zipball/52f8de3670cc1ef45a916f40f732937436d028c8",
+                "reference": "52f8de3670cc1ef45a916f40f732937436d028c8",
                 "shasum": ""
             },
             "type": "composer-installer",
@@ -183,7 +183,7 @@
                     "homepage": "http://paul-m-jones.com"
                 },
                 {
-                    "name": "Hari K T",
+                    "name": "Hari KT",
                     "email": "kthari85@gmail.com",
                     "homepage": "http://harikt.com"
                 },
@@ -210,16 +210,16 @@
         },
         {
             "name": "bear/resource",
-            "version": "dev-develop",
+            "version": "0.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "e146ef286c76b34d9ccf2c0462f8b623951daf75"
+                "reference": "25169ed7922e30b763369eac6093700590f7a028"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/e146ef286c76b34d9ccf2c0462f8b623951daf75",
-                "reference": "e146ef286c76b34d9ccf2c0462f8b623951daf75",
+                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/25169ed7922e30b763369eac6093700590f7a028",
+                "reference": "25169ed7922e30b763369eac6093700590f7a028",
                 "shasum": ""
             },
             "require": {
@@ -229,8 +229,8 @@
                 "guzzle/guzzle": "3.*",
                 "nocarrier/hal": "*",
                 "php": ">=5.4.0",
-                "ray/aop": "dev-develop",
-                "ray/di": "dev-develop"
+                "ray/aop": "1.*",
+                "ray/di": "1.*"
             },
             "require-dev": {
                 "facebook/xhprof": "dev-master"
@@ -264,7 +264,7 @@
                 "rest",
                 "stateless"
             ],
-            "time": "2014-03-07 09:19:32"
+            "time": "2014-04-03 17:24:15"
         },
         {
             "name": "doctrine/annotations",
@@ -304,9 +304,10 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan Wage",
+                    "name": "Jonathan H. Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -378,7 +379,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan H. Wage",
+                    "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
                     "homepage": "http://www.jwage.com/",
                     "role": "Creator"
@@ -397,7 +398,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -417,12 +418,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "v1.0"
+                "reference": "2f708a85bb3aab5d99dab8be435abd73e0b18acb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/lexer/archive/v1.0.zip",
-                "reference": "v1.0",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/2f708a85bb3aab5d99dab8be435abd73e0b18acb",
+                "reference": "2f708a85bb3aab5d99dab8be435abd73e0b18acb",
                 "shasum": ""
             },
             "require": {
@@ -451,7 +452,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -700,7 +701,7 @@
         },
         {
             "name": "ray/aop",
-            "version": "dev-develop",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Aop.git",
@@ -747,16 +748,16 @@
         },
         {
             "name": "ray/di",
-            "version": "dev-develop",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "b2d96e04431682209fdfcf9c8b814d9250cbea17"
+                "reference": "2224d647087fe1bd0555418fc5869d9539fb4f4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/b2d96e04431682209fdfcf9c8b814d9250cbea17",
-                "reference": "b2d96e04431682209fdfcf9c8b814d9250cbea17",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/2224d647087fe1bd0555418fc5869d9539fb4f4a",
+                "reference": "2224d647087fe1bd0555418fc5869d9539fb4f4a",
                 "shasum": ""
             },
             "require": {
@@ -765,7 +766,7 @@
                 "doctrine/cache": "1.*",
                 "nikic/php-parser": "*",
                 "php": ">=5.4.0",
-                "ray/aop": "dev-develop"
+                "ray/aop": "1.*"
             },
             "type": "library",
             "autoload": {
@@ -801,7 +802,7 @@
                 "injection",
                 "jsr"
             ],
-            "time": "2014-03-14 10:34:15"
+            "time": "2014-03-31 00:06:54"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -867,11 +868,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "bear/resource": 20,
-        "ray/di": 20,
-        "ray/aop": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.4.0"
     },

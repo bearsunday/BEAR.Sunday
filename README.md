@@ -7,8 +7,8 @@ What's BEAR.Sunday
 ------------------
 
 This resource orientated framework has both externally and internally
- a REST centric architecture,  implementing 'Dependency Injection' and 
-'Aspect Orientated Programming' heavily to offer you surprising 
+ a **REST centric architecture**,  implementing **Dependency Injection** and 
+**Aspect Orientated Programming** heavily to offer you surprising 
 simplicity,  order and flexibility in your application. With very
  few components of its own, it is a fantastic example of how a framework
  can be built using  existing components and libraries from other 
@@ -21,7 +21,8 @@ BEAR.Sundayは独自のコンポーネントをほとんど持ちません。再
 
 Everything is a resource
 ------------------------------
-In BEAR.Sunday everything is a REST resource which leads to far simpler design and extensibility. Interactions with your database, services and even pages and sections of your app all sit comfortably in a resource which can be consumed or rendered at will. 
+In BEAR.Sunday **everything is a REST resource** which leads to far simpler design and extensibility.
+Interactions with your database, services and even pages and sections of your app all sit comfortably in a resource which can be consumed or rendered at will. 
 
 BEAR.Sundayではコントローラーもモデルも統一したリソースとして扱います。
 名前(URI)と統一インターフェイスを持った各リソースはアプリケーション内部/外部に関わらずAPIとして機能し、
@@ -55,15 +56,21 @@ Method-Override
 ---------------
 `Method-Override` or `_method` used for DELETE / PUT method.
 
+HTML Form
 ```html
-<input name="X-HTTP-Method-Override" type="hidden" value="PUT"/>
-<input name="X-HTTP-Method-Override" type="hidden" value="DELETE"/>
+<input name="_method" type="hidden" value="PUT"/>
 ```
 
+Ajax
+```js
+$.ajax({
+    url: '/blog/posts/post',
+    type: "POST",
+    headers: {
+        'X-HTTP-Method-Override': 'DELETE'
+    },
+    ...
 ```
-http://myapp/entry/10/?_method=DELETE
-```
-
 
 Development tools
 -----------------
@@ -144,14 +151,6 @@ Aspects like Log or cache can be specified in the annotation
  * @Cache(60)
  */
 public function onGet($name = "World")
-{
-```
-
-```php
-/**
- * @Auth("admin")
- */
-public function onGet($id)
 {
 ```
 
@@ -410,36 +409,19 @@ Rather than reinvent the wheel and develop our own library, BEAR.Sunday are usin
 * [Smarty3] (http://www.smarty.net/)
 * [Twig] (http://twig.sensiolabs.org/ "Twig")
 * [Ray / Di] (https://github.com/koriym/Ray.Di) ([Aura / Di] (https://github.com/auraphp/Aura.Di))
-* [Ray / Aop] (https://github.com/koriym/Aop.Di)
+* [Ray / Aop] (https://github.com/koriym/Ray.Aop)
 * [Symfony / HttpFoundation] (https://github.com/symfony/HttpFoundation)
-* [Symfony / Routing] (https://github.com/symfony/routing)
 * [Nocarrier \ Hal] (https://github.com/blongden/hal)
 * [Zend / Log] (https://github.com/zendframework/Component_ZendLog)
-* [Zend / Db] (https://github.com/zendframework/Component_ZendDb)
+
+Resource Object Diagram
+-----------------------
+![Resource Object Diagram](http://bearsunday.github.io//images/screen/diagram.png "Resource Object Diagram")
 
 Installation
 ------------
-
-    $ curl -s http://install.bear-project.net/ | sh -s ./bear
-or
-
-    $ php -r "eval('?>'.file_get_contents('https://getcomposer.org/installer'));"
-    $ php composer.phar create-project --prefer-source --dev bear/package ./bear
-
-More information is availavle at [wiki:install](http://code.google.com/p/bearsunday/wiki/install).
-
-built-in web server for development
-------------------
-
-    $ cd bear/apps/Sandbox/public
-    $ php -S localhost:8088 web.php
-    $ php -S localhost:8089 api.php
-
-Virtual Host for Production
-------------
-Set up a virtual host to point to the public / directory of the application.
+   See [BEAR.Package#installation](https://github.com/koriym/BEAR.Package#installation)
 
 Documentation
 -------------
-Documentation is available in English http://code.google.com/p/bearsunday/wiki/introduction?wl=en and Japanese http://code.google.com/p/bearsunday/wiki/introduction
-
+Documentation is available in English http://bearsunday.github.io/ and Japanese http://bearsunday.github.io/manual/ja/

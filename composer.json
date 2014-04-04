@@ -18,12 +18,12 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "bear/resource": "*",
-        "aura/web": "*"
+        "bear/resource": "0.*",
+        "psr/log": "1.*"
     },
     "autoload": {
-        "psr-0": {
-            "BEAR\\Sunday": "src/"
+        "psr-4": {
+            "BEAR\\Sunday\\": "src/"
         }
     }
 }

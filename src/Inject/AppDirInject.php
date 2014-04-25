@@ -7,23 +7,17 @@
 namespace BEAR\Sunday\Inject;
 
 /**
- * Inject application root directory path
+ * Application root directory path setter
  */
 trait AppDirInject
 {
     /**
-     * App directory path
-     *
      * @var string
      */
     private $appDir;
 
     /**
-     * App directory path setter
-     *
      * @param string $appDir
-     *
-     * @return void
      *
      * @Ray\Di\Di\Inject
      * @Ray\Di\Di\Named("app_dir")

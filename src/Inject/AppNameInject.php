@@ -7,20 +7,16 @@
 namespace BEAR\Sunday\Inject;
 
 /**
- * Inject application namespace
+ * Application namespace setter
  */
 trait AppNameInject
 {
     /**
-     * application namespace
-     *
      * @var string
      */
     private $appName;
 
     /**
-     * App name (=namespace) setter
-     *
      * @param string $appName
      *
      * @Ray\Di\Di\Inject

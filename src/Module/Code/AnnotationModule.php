@@ -9,9 +9,6 @@ namespace BEAR\Sunday\Module\Code;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 
-/**
- * Annotation reader module
- */
 class AnnotationModule extends AbstractModule
 {
     /**

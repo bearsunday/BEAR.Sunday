@@ -9,7 +9,7 @@ namespace BEAR\Sunday\Inject;
 use BEAR\Resource\ResourceInterface;
 
 /**
- * Inject resource client
+ * Resource client setteer
  */
 trait ResourceInject
 {
@@ -19,8 +19,6 @@ trait ResourceInject
     protected $resource;
 
     /**
-     * Set resource
-     *
      * @param ResourceInterface $resource
      *
      * @Ray\Di\Di\Inject

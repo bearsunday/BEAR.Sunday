@@ -9,20 +9,16 @@ namespace BEAR\Sunday\Inject;
 use Ray\Di\InjectorInterface;
 
 /**
- * Inject dependency injector
+ * Dependency injector setter
  */
 trait InjectorInject
 {
     /**
-     * Dependency injector
-     *
      * @var InjectorInterface
      */
     private $injector;
 
     /**
-     * Injector setter
-     *
      * @param InjectorInterface $injector
      *
      * @Ray\Di\Di\Inject

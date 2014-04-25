@@ -10,20 +10,16 @@ use Ray\Aop\NamedArgsInterface;
 use Ray\Di\Di\Inject;
 
 /**
- * Inject named parameter converter
+ * Named parameter converter setter
  */
 trait NamedArgsInject
 {
     /**
-     * Named dir
-     *
      * @var string
      */
     private $namedArgs;
 
     /**
-     * Set named arg
-     *
      * @param NamedArgsInterface $namedArgs
      * @Ray\Di\Di\Inject
      */

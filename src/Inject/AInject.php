@@ -9,23 +9,18 @@ namespace BEAR\Sunday\Inject;
 use BEAR\Resource\HrefInterface;
 
 /**
- * Inject A(anchor)
+ * Anchor setter
  */
 trait AInject
 {
     /**
-     * App directory path
-     *
      * @var HrefInterface
      */
     private $a;
 
     /**
-     * A(anchor) setter
-     *
      * @param HrefInterface $a
      *
-     * @return void
      * @Ray\Di\Di\Inject
      */
     public function setAnchor(HrefInterface $a)

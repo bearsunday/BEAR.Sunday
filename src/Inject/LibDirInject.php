@@ -7,24 +7,18 @@
 namespace BEAR\Sunday\Inject;
 
 /**
- * Inject application vendor directory path
+ * Application vendor library directory path setter
  */
 trait LibDirInject
 {
     /**
-     * App vendor path
-     *
      * @var string
      */
     private $libDir;
 
 
     /**
-     * App directory path setter
-     *
      * @param string $libDir
-     *
-     * @return void
      *
      * @Ray\Di\Di\Inject
      * @Ray\Di\Di\Named("lib_dir")

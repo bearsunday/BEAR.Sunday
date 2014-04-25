@@ -9,13 +9,11 @@ namespace BEAR\Sunday\Inject;
 use Psr\Log\LoggerInterface;
 
 /**
- * Inject PSR-logger
+ * PSR-logger setter
  */
 trait PsrLoggerInject
 {
     /**
-     * Logger
-     *
      * @var LoggerInterface
      */
     private $logger;
@@ -25,7 +23,6 @@ trait PsrLoggerInject
      *
      * @param LoggerInterface $logger
      *
-     * @return void
      * @Ray\Di\Di\Inject
      */
     public function setPsrLogger(LoggerInterface $logger)

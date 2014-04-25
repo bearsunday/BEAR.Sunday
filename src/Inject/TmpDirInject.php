@@ -7,20 +7,16 @@
 namespace BEAR\Sunday\Inject;
 
 /**
- * Inject application temporary directory path
+ * Temporary directory path setter
  */
 trait TmpDirInject
 {
     /**
-     * Tmp dir
-     *
      * @var string
      */
     private $tmpDir;
 
     /**
-     * Set tmp dir path
-     *
      * @param string $tmpDir
      *
      * @Ray\Di\Di\Inject

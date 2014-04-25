@@ -15,8 +15,6 @@ use Ray\Di\Di\Named;
 class ResourceLoggerProvider implements ProviderInterface
 {
     /**
-     * Logger instance
-     *
      * @var \BEAR\Resource\Logger
      */
     private static $instance;
@@ -27,8 +25,6 @@ class ResourceLoggerProvider implements ProviderInterface
     private $logger;
 
     /**
-     * Set logger name
-     *
      * @param LoggerInterface $logger
      *
      * @Inject

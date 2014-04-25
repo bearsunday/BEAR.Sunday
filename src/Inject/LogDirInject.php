@@ -7,20 +7,16 @@
 namespace BEAR\Sunday\Inject;
 
 /**
- * Inject application log dir
+ * Log directory path setter
  */
 trait LogDirInject
 {
     /**
-     * Tmp dir
-     *
      * @var string
      */
     private $logDir;
 
     /**
-     * Set tmp dir path
-     *
      * @param string $logDir
      *
      * @Ray\Di\Di\Inject

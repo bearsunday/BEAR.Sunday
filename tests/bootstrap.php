@@ -11,4 +11,4 @@ $loader = require dirname(__DIR__) . '/vendor/autoload.php';
 AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 $loader->addPsr4('BEAR\Sunday\\' , __DIR__);
 
-$GLOBALS['TEST_TMP'] = __DIR__ . '/tmp';
+$_ENV['TEST_DIR'] = __DIR__ . '/tmp';

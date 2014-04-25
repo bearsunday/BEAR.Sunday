@@ -26,7 +26,7 @@ class CacheModuleTest extends \PHPUnit_Framework_TestCase
     public function testCache()
     {
         $config = [
-            'tmp_dir' => $GLOBALS['TEST_TMP']
+            'tmp_dir' => $_ENV['TEST_DIR']
         ];
         $app = Injector::create([new NamedModule($config), new CacheModule])->getInstance(__NAMESPACE__ . '\CacheClient');
         $this->assertInstanceOf('Doctrine\Common\Cache\Cache', $app->cache);

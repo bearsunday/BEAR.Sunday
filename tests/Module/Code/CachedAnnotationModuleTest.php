@@ -13,7 +13,7 @@ class CachedAnnotationModuleTest extends \PHPUnit_Framework_TestCase
     public function testGetInstance()
     {
         $modules = [
-            new NamedModule(['tmp_dir' => $GLOBALS['TEST_TMP']]),
+            new NamedModule(['tmp_dir' => $_ENV['TEST_DIR']]),
             new CacheModule(),
             new CachedAnnotationModule
         ];

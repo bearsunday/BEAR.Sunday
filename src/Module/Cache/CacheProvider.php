@@ -9,32 +9,29 @@ namespace BEAR\Sunday\Module\Cache;
 use BEAR\Sunday\Inject\TmpDirInject;
 use Doctrine\Common\Cache\ApcCache;
 use Doctrine\Common\Cache\FilesystemCache;
-use Guzzle\Cache\DoctrineCacheAdapter as CacheAdapter;
-use Ray\Di\ProviderInterface as Provide;
+use Ray\Di\ProviderInterface;
 
-/**
- * Cache provider
- *
- * (primary:APC, secondary:FileCache)
- */
-class CacheProvider implements Provide
+class CacheProvider implements ProviderInterface
 {
     use TmpDirInject;
 
     /**
      * Return instance
      *
-     * @return CacheAdapter
+     * @return \Doctrine\Common\Cache\Cache
+     */
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return ApcCache|FilesystemCache
      */
     public function get()
     {
         if (ini_get('apc.enabled')) {
-            return new CacheAdapter(new ApcCache);
+            return new ApcCache;
         }
 
-        // @codeCoverageIgnoreStart
-        return new CacheAdapter(new FilesystemCache($this->tmpDir . '/cache'));
-        // @codeCoverageIgnoreEnd
-
+        return new FilesystemCache($this->tmpDir . '/cache');
     }
 }

@@ -7,7 +7,6 @@ use BEAR\Sunday\Module\Constant\NamedModule;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 
-
 class CachedAnnotationModuleTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetInstance()

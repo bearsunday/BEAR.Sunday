@@ -6,7 +6,6 @@ use BEAR\Sunday\Module\Code\AnnotationModule;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 
-
 class AnnotationModuleTest extends \PHPUnit_Framework_TestCase
 {
     private $instance;

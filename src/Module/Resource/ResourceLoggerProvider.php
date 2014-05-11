@@ -30,7 +30,7 @@ class ResourceLoggerProvider implements ProviderInterface
      * @Inject
      * @Named("resource_logger")
      */
-    public function setLoggerClassName(LoggerInterface $logger)
+    public function setResourceLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }

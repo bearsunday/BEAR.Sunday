@@ -12,6 +12,6 @@ namespace BEAR\Sunday\Annotation;
  * @Annotation
  * @Target("METHOD")
  */
-final class Etag implements AnnotationInterface
+final class ETag implements AnnotationInterface
 {
 }

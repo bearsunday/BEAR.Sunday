@@ -21,6 +21,7 @@ trait NamedArgsInject
 
     /**
      * @param NamedArgsInterface $namedArgs
+     *
      * @Ray\Di\Di\Inject
      */
     public function setNamedArgs(NamedArgsInterface $namedArgs)

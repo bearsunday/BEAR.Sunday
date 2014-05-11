@@ -16,7 +16,6 @@ trait LibDirInject
      */
     private $libDir;
 
-
     /**
      * @param string $libDir
      *

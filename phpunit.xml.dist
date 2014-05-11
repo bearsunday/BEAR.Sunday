@@ -26,6 +26,9 @@
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
+            <exclude>
+                <file>src/Module/Cache/CacheProvider.php</file>
+            </exclude>
         </whitelist>
     </filter>
 </phpunit>

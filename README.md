@@ -1,18 +1,20 @@
 BEAR, a resource oriented framework
 ===================================
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/?branch=develop)
+[![Code Coverage](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/?branch=develop)
 [![Build Status](https://secure.travis-ci.org/koriym/BEAR.Sunday.png?branch=master)](http://travis-ci.org/koriym/BEAR.Sunday)
 
 What's BEAR.Sunday
 ------------------
 
 This resource orientated framework has both externally and internally
- a **REST centric architecture**,  implementing **Dependency Injection** and 
-**Aspect Orientated Programming** heavily to offer you surprising 
+ a **REST centric architecture**,  implementing **Dependency Injection** and
+**Aspect Orientated Programming** heavily to offer you surprising
 simplicity,  order and flexibility in your application. With very
  few components of its own, it is a fantastic example of how a framework
- can be built using  existing components and libraries from other 
-frameworks, yet offer even further benefit and beauty. 
+ can be built using  existing components and libraries from other
+frameworks, yet offer even further benefit and beauty.
 
 BEAR.SundayはアプリケーションをRESTアーキテクチャで構築するリソース指向フレームワークです。
 「依存性の注入」と「アスペクト指向プログラミング」を用いた疎結合なシステムは意図が読みやすく簡潔なコーディングを可能にします。
@@ -22,7 +24,7 @@ BEAR.Sundayは独自のコンポーネントをほとんど持ちません。再
 Everything is a resource
 ------------------------------
 In BEAR.Sunday **everything is a REST resource** which leads to far simpler design and extensibility.
-Interactions with your database, services and even pages and sections of your app all sit comfortably in a resource which can be consumed or rendered at will. 
+Interactions with your database, services and even pages and sections of your app all sit comfortably in a resource which can be consumed or rendered at will.
 
 BEAR.Sundayではコントローラーもモデルも統一したリソースとして扱います。
 名前(URI)と統一インターフェイスを持った各リソースはアプリケーション内部/外部に関わらずAPIとして機能し、
@@ -145,7 +147,7 @@ greeting: Hello World
 Annotations
 -----------
 
-Aspects like Log or cache can be specified in the annotation 
+Aspects like Log or cache can be specified in the annotation
 ```php
 /**
  * @Cache(60)
@@ -234,7 +236,7 @@ ERROR: {
 
 Application Object
 ------------------
-Application is just stored in one object variable. 
+Application is just stored in one object variable.
 You can access all resource of application with resources clients, easy use from plain PHP files or CMS and other frameworks as well.
 
 ```php
@@ -343,7 +345,7 @@ class Greetings extends AbstractObject
 
 ```php
 use ResourceInject;
-    
+
 $this->resource->get->uri('app://self/greetings')->withQuery(['lang' => 'ja'])->eager->request();
 ```
 
@@ -371,7 +373,7 @@ protected function configure()
 {
     $params = ['now' => 'CurrentTime'];
     $this->install(new SignalParamModule($this, $params));
-}    
+}
 ```
 
 ### consumer

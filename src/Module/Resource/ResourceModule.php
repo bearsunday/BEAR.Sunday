@@ -9,30 +9,15 @@ namespace BEAR\Sunday\Module\Resource;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 use BEAR\Resource\Module\ResourceModule as BearResourceModule;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 
 class ResourceModule extends AbstractModule
 {
-    protected $appName;
-
-    /**
-     * @param string $appName {Vendor}\{NameSpace}
-     *
-     * @Inject
-     * @Named("app_name")
-     */
-    public function setAppName($appName)
-    {
-        $this->appName = $appName;
-    }
-
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
         $this->bind('BEAR\Resource\LoggerInterface')->to('BEAR\Resource\Logger')->in(Scope::SINGLETON);
-        $this->install(new BearResourceModule($this->appName));
+        $this->install(new BearResourceModule(''));
     }
 }

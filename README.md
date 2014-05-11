@@ -102,7 +102,7 @@ You can list for a resource of application.
 
 Object graph visualizer, you can visualize the complex structure of the object, and examine the contents.
 
-![object gragh](http://koriym.github.io/BEAR.Sunday/images/screen/object_graph.png)
+[![object gragh](http://koriym.github.io/print_o/v1/img/prop.png)](http://koriym.github.io/print_o/v1/bearsunday/prop.html)
 
 Console access
 --------------

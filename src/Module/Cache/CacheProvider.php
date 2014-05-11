@@ -28,7 +28,8 @@ class CacheProvider implements ProviderInterface
      */
     public function get()
     {
-        if (ini_get('apc.enabled')) {
+        $loaded = extension_loaded('apc') || extension_loaded('apcu');
+        if ($loaded && ini_get('apc.enabled')) {
             return new ApcCache;
         }
 

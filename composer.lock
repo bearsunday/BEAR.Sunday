@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ac3b997d0bd52e2efc022bef7792df07",
+    "hash": "65171e17ac7792ad5aefa771e3304efd",
     "packages": [
         {
             "name": "any/serializer",
@@ -214,31 +214,31 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "619cc0ff9734d1c1043581d61625281ffc0ef0e8"
+                "reference": "002daead10c8b32e38e42c198360236228d31dcb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/619cc0ff9734d1c1043581d61625281ffc0ef0e8",
-                "reference": "619cc0ff9734d1c1043581d61625281ffc0ef0e8",
+                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/002daead10c8b32e38e42c198360236228d31dcb",
+                "reference": "002daead10c8b32e38e42c198360236228d31dcb",
                 "shasum": ""
             },
             "require": {
                 "any/serializer": "*",
                 "aura/signal": "1.*",
                 "doctrine/cache": "1.*",
-                "guzzle/guzzle": "3.3.*",
+                "guzzlehttp/guzzle": "~4.0",
                 "nocarrier/hal": "*",
                 "php": ">=5.4.0",
-                "ray/aop": "1.1.*",
-                "ray/di": "1.1.*"
+                "ray/aop": "1.*",
+                "ray/di": "1.*"
             },
             "require-dev": {
                 "facebook/xhprof": "dev-master"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "BEAR\\Resource": "src/"
+                "psr-4": {
+                    "BEAR\\Resource\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -250,7 +250,7 @@
                     "name": "Akihito Koriyama",
                     "email": "akihito.koriyama@gmail.com",
                     "homepage": "https://github.com/koriym",
-                    "role": "Developer"
+                    "role": "Lead"
                 }
             ],
             "description": "Hypermedia framework for object as a service",
@@ -264,7 +264,7 @@
                 "rest",
                 "stateless"
             ],
-            "time": "2013-11-06 12:41:50"
+            "time": "2014-04-24 04:42:42"
         },
         {
             "name": "doctrine/annotations",
@@ -464,69 +464,41 @@
             "time": "2013-01-12 18:59:04"
         },
         {
-            "name": "guzzle/guzzle",
-            "version": "v3.3.1",
+            "name": "guzzlehttp/guzzle",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "v3.3.1"
+                "reference": "40db53833aaea528347994acd4578d7b9b2211ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/v3.3.1",
-                "reference": "v3.3.1",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/40db53833aaea528347994acd4578d7b9b2211ee",
+                "reference": "40db53833aaea528347994acd4578d7b9b2211ee",
                 "shasum": ""
             },
             "require": {
-                "ext-curl": "*",
-                "php": ">=5.3.2",
-                "symfony/event-dispatcher": ">=2.1"
-            },
-            "replace": {
-                "guzzle/batch": "self.version",
-                "guzzle/cache": "self.version",
-                "guzzle/common": "self.version",
-                "guzzle/http": "self.version",
-                "guzzle/inflection": "self.version",
-                "guzzle/iterator": "self.version",
-                "guzzle/log": "self.version",
-                "guzzle/parser": "self.version",
-                "guzzle/plugin": "self.version",
-                "guzzle/plugin-async": "self.version",
-                "guzzle/plugin-backoff": "self.version",
-                "guzzle/plugin-cache": "self.version",
-                "guzzle/plugin-cookie": "self.version",
-                "guzzle/plugin-curlauth": "self.version",
-                "guzzle/plugin-error-response": "self.version",
-                "guzzle/plugin-history": "self.version",
-                "guzzle/plugin-log": "self.version",
-                "guzzle/plugin-md5": "self.version",
-                "guzzle/plugin-mock": "self.version",
-                "guzzle/plugin-oauth": "self.version",
-                "guzzle/service": "self.version",
-                "guzzle/stream": "self.version"
+                "guzzlehttp/streams": "~1.0",
+                "php": ">=5.4.0"
             },
             "require-dev": {
-                "doctrine/cache": "*",
-                "monolog/monolog": "1.*",
-                "phpunit/phpunit": "3.7.*",
-                "symfony/class-loader": "*",
-                "zend/zend-cache1": "1.12",
-                "zend/zend-log1": "1.12",
-                "zendframework/zend-cache": "2.0.*",
-                "zendframework/zend-log": "2.0.*"
+                "ext-curl": "*",
+                "phpunit/phpunit": "~4.0",
+                "psr/log": "~1.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "4.0.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Guzzle\\Tests": "tests/",
-                    "Guzzle": "src/"
-                }
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -537,10 +509,6 @@
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
-                },
-                {
-                    "name": "Guzzle Community",
-                    "homepage": "https://github.com/guzzle/guzzle/contributors"
                 }
             ],
             "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
@@ -554,7 +522,60 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-03-10 23:05:38"
+            "time": "2014-04-16 17:33:22"
+        },
+        {
+            "name": "guzzlehttp/streams",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/streams.git",
+                "reference": "cf0c8c33ca95cc147efba4c714f630ee44767180"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/cf0c8c33ca95cc147efba4c714f630ee44767180",
+                "reference": "cf0c8c33ca95cc147efba4c714f630ee44767180",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Stream\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple abstraction over streams of data (Guzzle 4+)",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "stream"
+            ],
+            "time": "2014-04-03 04:48:24"
         },
         {
             "name": "nikic/php-parser",
@@ -602,16 +623,16 @@
         },
         {
             "name": "nocarrier/hal",
-            "version": "0.9.3",
+            "version": "0.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/blongden/hal.git",
-                "reference": "a15dfb2f07490e22a3faf075de0d7419fe644dec"
+                "reference": "aca65a12a718a36dcb2675eaf0cdc4d64a80f9e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blongden/hal/zipball/a15dfb2f07490e22a3faf075de0d7419fe644dec",
-                "reference": "a15dfb2f07490e22a3faf075de0d7419fe644dec",
+                "url": "https://api.github.com/repos/blongden/hal/zipball/aca65a12a718a36dcb2675eaf0cdc4d64a80f9e9",
+                "reference": "aca65a12a718a36dcb2675eaf0cdc4d64a80f9e9",
                 "shasum": ""
             },
             "require": {
@@ -659,20 +680,58 @@
                 "rest",
                 "xml"
             ],
-            "time": "2013-10-07 14:21:31"
+            "time": "2013-11-19 11:57:26"
         },
         {
-            "name": "ray/aop",
-            "version": "1.1.2",
+            "name": "psr/log",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/koriym/Ray.Aop.git",
-                "reference": "7a5164072dcc09584b67cb9d95ff077dc9517860"
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/7a5164072dcc09584b67cb9d95ff077dc9517860",
-                "reference": "7a5164072dcc09584b67cb9d95ff077dc9517860",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "ray/aop",
+            "version": "1.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/koriym/Ray.Aop.git",
+                "reference": "958e3c8c50e00387a095317c2e937f792d892ca0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/958e3c8c50e00387a095317c2e937f792d892ca0",
+                "reference": "958e3c8c50e00387a095317c2e937f792d892ca0",
                 "shasum": ""
             },
             "require": {
@@ -685,8 +744,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Ray\\Aop": "src/"
+                "psr-4": {
+                    "Ray\\Aop\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -706,20 +765,20 @@
                 "aop",
                 "aspect"
             ],
-            "time": "2013-09-22 19:03:10"
+            "time": "2014-02-26 22:42:41"
         },
         {
             "name": "ray/di",
-            "version": "1.1.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "8406adc9af763a4db06c03934ac63156dcf907a0"
+                "reference": "2224d647087fe1bd0555418fc5869d9539fb4f4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/8406adc9af763a4db06c03934ac63156dcf907a0",
-                "reference": "8406adc9af763a4db06c03934ac63156dcf907a0",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/2224d647087fe1bd0555418fc5869d9539fb4f4a",
+                "reference": "2224d647087fe1bd0555418fc5869d9539fb4f4a",
                 "shasum": ""
             },
             "require": {
@@ -728,12 +787,12 @@
                 "doctrine/cache": "1.*",
                 "nikic/php-parser": "*",
                 "php": ">=5.4.0",
-                "ray/aop": "1.1.*"
+                "ray/aop": "1.*"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Ray\\Di": "src/"
+                "psr-4": {
+                    "Ray\\Di\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -764,61 +823,7 @@
                 "injection",
                 "jsr"
             ],
-            "time": "2013-09-23 06:34:18"
-        },
-        {
-            "name": "symfony/event-dispatcher",
-            "version": "v2.3.6",
-            "target-dir": "Symfony/Component/EventDispatcher",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "7fc72a7a346a1887d3968cc1ce5642a15cd182e9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/7fc72a7a346a1887d3968cc1ce5642a15cd182e9",
-                "reference": "7fc72a7a346a1887d3968cc1ce5642a15cd182e9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "symfony/dependency-injection": "~2.0"
-            },
-            "suggest": {
-                "symfony/dependency-injection": "",
-                "symfony/http-kernel": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\EventDispatcher\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony EventDispatcher Component",
-            "homepage": "http://symfony.com",
-            "time": "2013-09-19 09:45:20"
+            "time": "2014-03-31 00:06:54"
         }
     ],
     "packages-dev": [

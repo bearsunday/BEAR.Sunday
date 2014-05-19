@@ -1,0 +1,6 @@
+imports:
+    - php
+filter:
+    paths: [src/*]
+tools:
+    external_code_coverage: true

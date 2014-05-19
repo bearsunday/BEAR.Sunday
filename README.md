@@ -1,18 +1,21 @@
 BEAR, a resource oriented framework
 ===================================
 
+[![Latest Stable Version](https://poser.pugx.org/bear/sunday/v/stable.png)](https://packagist.org/packages/bear/sunday)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/?branch=develop)
+[![Code Coverage](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/?branch=develop)
 [![Build Status](https://secure.travis-ci.org/koriym/BEAR.Sunday.png?branch=master)](http://travis-ci.org/koriym/BEAR.Sunday)
 
 What's BEAR.Sunday
 ------------------
 
 This resource orientated framework has both externally and internally
- a **REST centric architecture**,  implementing **Dependency Injection** and 
-**Aspect Orientated Programming** heavily to offer you surprising 
+ a **REST centric architecture**,  implementing **Dependency Injection** and
+**Aspect Orientated Programming** heavily to offer you surprising
 simplicity,  order and flexibility in your application. With very
  few components of its own, it is a fantastic example of how a framework
- can be built using  existing components and libraries from other 
-frameworks, yet offer even further benefit and beauty. 
+ can be built using  existing components and libraries from other
+frameworks, yet offer even further benefit and beauty.
 
 BEAR.SundayはアプリケーションをRESTアーキテクチャで構築するリソース指向フレームワークです。
 「依存性の注入」と「アスペクト指向プログラミング」を用いた疎結合なシステムは意図が読みやすく簡潔なコーディングを可能にします。
@@ -22,7 +25,7 @@ BEAR.Sundayは独自のコンポーネントをほとんど持ちません。再
 Everything is a resource
 ------------------------------
 In BEAR.Sunday **everything is a REST resource** which leads to far simpler design and extensibility.
-Interactions with your database, services and even pages and sections of your app all sit comfortably in a resource which can be consumed or rendered at will. 
+Interactions with your database, services and even pages and sections of your app all sit comfortably in a resource which can be consumed or rendered at will.
 
 BEAR.Sundayではコントローラーもモデルも統一したリソースとして扱います。
 名前(URI)と統一インターフェイスを持った各リソースはアプリケーション内部/外部に関わらずAPIとして機能し、
@@ -56,15 +59,21 @@ Method-Override
 ---------------
 `Method-Override` or `_method` used for DELETE / PUT method.
 
+HTML Form
 ```html
-<input name="X-HTTP-Method-Override" type="hidden" value="PUT"/>
-<input name="X-HTTP-Method-Override" type="hidden" value="DELETE"/>
+<input name="_method" type="hidden" value="PUT"/>
 ```
 
+Ajax
+```js
+$.ajax({
+    url: '/blog/posts/post',
+    type: "POST",
+    headers: {
+        'X-HTTP-Method-Override': 'DELETE'
+    },
+    ...
 ```
-http://myapp/entry/10/?_method=DELETE
-```
-
 
 Development tools
 -----------------
@@ -93,7 +102,7 @@ You can list for a resource of application.
 
 Object graph visualizer, you can visualize the complex structure of the object, and examine the contents.
 
-![object gragh](http://koriym.github.io/BEAR.Sunday/images/screen/object_graph.png)
+[![object gragh](http://koriym.github.io/print_o/v1/img/prop.png)](http://koriym.github.io/print_o/v1/bearsunday/prop.html)
 
 Console access
 --------------
@@ -139,20 +148,12 @@ greeting: Hello World
 Annotations
 -----------
 
-Aspects like Log or cache can be specified in the annotation 
+Aspects like Log or cache can be specified in the annotation
 ```php
 /**
  * @Cache(60)
  */
 public function onGet($name = "World")
-{
-```
-
-```php
-/**
- * @Auth("admin")
- */
-public function onGet($id)
 {
 ```
 
@@ -236,7 +237,7 @@ ERROR: {
 
 Application Object
 ------------------
-Application is just stored in one object variable. 
+Application is just stored in one object variable.
 You can access all resource of application with resources clients, easy use from plain PHP files or CMS and other frameworks as well.
 
 ```php
@@ -345,7 +346,7 @@ class Greetings extends AbstractObject
 
 ```php
 use ResourceInject;
-    
+
 $this->resource->get->uri('app://self/greetings')->withQuery(['lang' => 'ja'])->eager->request();
 ```
 
@@ -373,7 +374,7 @@ protected function configure()
 {
     $params = ['now' => 'CurrentTime'];
     $this->install(new SignalParamModule($this, $params));
-}    
+}
 ```
 
 ### consumer
@@ -411,12 +412,10 @@ Rather than reinvent the wheel and develop our own library, BEAR.Sunday are usin
 * [Smarty3] (http://www.smarty.net/)
 * [Twig] (http://twig.sensiolabs.org/ "Twig")
 * [Ray / Di] (https://github.com/koriym/Ray.Di) ([Aura / Di] (https://github.com/auraphp/Aura.Di))
-* [Ray / Aop] (https://github.com/koriym/Aop.Di)
+* [Ray / Aop] (https://github.com/koriym/Ray.Aop)
 * [Symfony / HttpFoundation] (https://github.com/symfony/HttpFoundation)
-* [Symfony / Routing] (https://github.com/symfony/routing)
 * [Nocarrier \ Hal] (https://github.com/blongden/hal)
 * [Zend / Log] (https://github.com/zendframework/Component_ZendLog)
-* [Zend / Db] (https://github.com/zendframework/Component_ZendDb)
 
 Resource Object Diagram
 -----------------------
@@ -424,27 +423,8 @@ Resource Object Diagram
 
 Installation
 ------------
-
-    $ curl -s http://install.bear-project.net/ | sh -s ./bear
-or
-
-    $ php -r "eval('?>'.file_get_contents('https://getcomposer.org/installer'));"
-    $ php composer.phar create-project --prefer-source --dev bear/package ./bear
-
-More information is availavle at [wiki:install](http://code.google.com/p/bearsunday/wiki/install).
-
-built-in web server for development
-------------------
-
-    $ cd bear/apps/Sandbox/public
-    $ php -S localhost:8088 web.php
-    $ php -S localhost:8089 api.php
-
-Virtual Host for Production
-------------
-Set up a virtual host to point to the public / directory of the application.
+   See [BEAR.Package#installation](https://github.com/koriym/BEAR.Package#installation)
 
 Documentation
 -------------
-Documentation is available in English http://bearsunday.github.io/ and Japanese http://bearsunday.github.io/ja/
-
+Documentation is available in English http://bearsunday.github.io/ and Japanese http://bearsunday.github.io/manual/ja/

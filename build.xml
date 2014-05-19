@@ -1,46 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="BEAR" default="build">
+<project default="build">
     <property name="composer.path" value="${basedir}/composer.phar" />
     <available property="composer.exists" file="${composer.path}" />
 
     <target name="build" depends="require, prepare, test, report"/>
     <target name="build-parallel" depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
     <target name="test" depends="lint,phpunit"/>
-    <target name="report" depends="phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpcb,apigen,phpdox"/>
+    <target name="report" depends="phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpcb,apigen"/>
 
     <target name="require" depends="composer" description="Install QA tools">
         <exec executable="php">
             <arg value="composer.phar" />
             <arg value="global" />
             <arg value="require" />
-            <arg value="--dev" />
-            <arg value="phpunit/phpunit=*" />
-            <arg value="squizlabs/php_codesniffer:*" />
-            <arg value="phpmd/phpmd:*" />
-            <arg value="h4cc/phpqatools:*" />
-            <arg value="apigen/apigen:*" />
-            <arg value="theseer/fxsl:dev-master" />
-            <arg value="theseer/phpdox:dev-master" />
-            <arg value="phploc/phploc:*" />
-            <arg value="fabpot/php-cs-fixer:*" />
-        </exec>
-    </target>
-
-    <target name="pear" description="Install QA tools by PEAR">
-        <!-- auto-discover channels -->
-        <exec executable="pear">
-            <arg value="config-set"/>
-            <arg value="auto_discover"/>
-            <arg value="1" />
-        </exec>
-
-        <exec executable="pear">
-            <arg value="install" />
-            <arg value="--alldeps" />
-            <arg value="pear.phpqatools.org/phpqatools" />
-            <arg value="pear.netpirates.net/phpDox-alpha" />
-            <arg value="pear.apigen.org/apigen" />
+            <arg value="h4cc/phpqatools:~1.4" />
+            <arg value="apigen/apigen:dev-master" />
+            <arg value="covex-nn/phpcb:~1.0" />
+            <arg value="fabpot/php-cs-fixer:~0.4" />
         </exec>
     </target>
 
@@ -53,13 +30,11 @@
             <antcall target="phpcpd"/>
             <antcall target="phpcs-ci"/>
             <antcall target="phploc"/>
-            <antcall target="phpdox"/>
         </parallel>
     </target>
 
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="${basedir}/build/api"/>
-        <delete dir="${basedir}/build/docblox"/>
         <delete dir="${basedir}/build/code-browser"/>
         <delete dir="${basedir}/build/coverage"/>
         <delete dir="${basedir}/build/logs"/>
@@ -73,12 +48,17 @@
         <mkdir dir="${basedir}/build/coverage"/>
         <mkdir dir="${basedir}/build/logs"/>
         <mkdir dir="${basedir}/build/pdepend"/>
-        <mkdir dir="${basedir}/build/phpdox"/>
     </target>
 
-    <target name="vendor" description="Load composer repositories" depends="composer">
+    <target name="vendor" description="Load composer repositories" depends="composer-update">
         <exec executable="${composer.path}" failonerror="true">
             <arg value="install" />
+        </exec>
+    </target>
+
+    <target name="composer-update" description="Load composer repositories" depends="composer">
+        <exec executable="${composer.path}" failonerror="true">
+            <arg value="self-update" />
         </exec>
     </target>
 
@@ -143,7 +123,6 @@
             description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
         <exec executable="phpcs">
             <arg value="--standard=${basedir}/phpcs.xml" />
-            <arg value="--warning-severity=0" />
             <arg path="${basedir}/src" />
         </exec>
     </target>
@@ -180,13 +159,9 @@
         </exec>
     </target>
 
-    <target name="phpdox" description="Generate API documentation using phpDox">
-        <exec executable="phpdox"/>
-    </target>
-
     <target name="apigen" description="Generate API documentation using ApiGen">
-        <exec executable="apigen">
-            <arg line="--source src --destination ${basedir}/build/apin" />
+        <exec executable="apigen.php">
+            <arg line="--source src --destination ${basedir}/build/api" />
         </exec>
     </target>
 

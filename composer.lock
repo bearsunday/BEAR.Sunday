@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "65171e17ac7792ad5aefa771e3304efd",
+    "hash": "c62684bb3375e9037d39f0f736753bff",
     "packages": [
         {
             "name": "any/serializer",
@@ -210,32 +210,37 @@
         },
         {
             "name": "bear/resource",
-            "version": "dev-develop",
+            "version": "0.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "002daead10c8b32e38e42c198360236228d31dcb"
+                "reference": "e1b4b86e5e271297dabc4a6470994d9ae9a7303b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/002daead10c8b32e38e42c198360236228d31dcb",
-                "reference": "002daead10c8b32e38e42c198360236228d31dcb",
+                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/e1b4b86e5e271297dabc4a6470994d9ae9a7303b",
+                "reference": "e1b4b86e5e271297dabc4a6470994d9ae9a7303b",
                 "shasum": ""
             },
             "require": {
-                "any/serializer": "*",
-                "aura/signal": "1.*",
-                "doctrine/cache": "1.*",
+                "any/serializer": "~0.1",
+                "aura/signal": "~1.0",
+                "doctrine/cache": "~1.3",
                 "guzzlehttp/guzzle": "~4.0",
-                "nocarrier/hal": "*",
+                "nocarrier/hal": "~0.9",
                 "php": ">=5.4.0",
-                "ray/aop": "1.*",
-                "ray/di": "1.*"
+                "ray/aop": "~1.2",
+                "ray/di": "~1.3"
             },
             "require-dev": {
                 "facebook/xhprof": "dev-master"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.11.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "BEAR\\Resource\\": "src/"
@@ -264,7 +269,7 @@
                 "rest",
                 "stateless"
             ],
-            "time": "2014-04-24 04:42:42"
+            "time": "2014-05-19 11:19:10"
         },
         {
             "name": "doctrine/annotations",
@@ -623,36 +628,23 @@
         },
         {
             "name": "nocarrier/hal",
-            "version": "0.9.4",
+            "version": "0.9.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/blongden/hal.git",
-                "reference": "aca65a12a718a36dcb2675eaf0cdc4d64a80f9e9"
+                "reference": "685c938e0be04236b881e1c7a62b61bde0d44dbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blongden/hal/zipball/aca65a12a718a36dcb2675eaf0cdc4d64a80f9e9",
-                "reference": "aca65a12a718a36dcb2675eaf0cdc4d64a80f9e9",
+                "url": "https://api.github.com/repos/blongden/hal/zipball/685c938e0be04236b881e1c7a62b61bde0d44dbd",
+                "reference": "685c938e0be04236b881e1c7a62b61bde0d44dbd",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "mayflower/php-codebrowser": "~1.0@dev",
-                "pdepend/pdepend": "~1.1",
-                "pear/console_commandline": "dev-trunk",
-                "pear/log": "dev-master",
-                "pear/pear_exception": "dev-master",
-                "phpdocumentor/phpdocumentor": "*",
-                "phploc/phploc": "dev-master",
-                "phpmd/phpmd": "~1.4",
-                "phpunit/phpunit": "3.7.*",
-                "sebastian/finder-facade": "dev-master",
-                "sebastian/phpcpd": "~1.4",
-                "squizlabs/php_codesniffer": "~1.4",
-                "theseer/fdomdocument": "dev-master",
-                "zetacomponents/console-tools": "dev-master"
+                "phpunit/phpunit": "4.1.*"
             },
             "type": "library",
             "autoload": {
@@ -680,7 +672,7 @@
                 "rest",
                 "xml"
             ],
-            "time": "2013-11-19 11:57:26"
+            "time": "2014-05-06 09:55:16"
         },
         {
             "name": "psr/log",
@@ -722,27 +714,32 @@
         },
         {
             "name": "ray/aop",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Aop.git",
-                "reference": "958e3c8c50e00387a095317c2e937f792d892ca0"
+                "reference": "8a6fcdb80725288b8ac6829ee138031a67d698e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/958e3c8c50e00387a095317c2e937f792d892ca0",
-                "reference": "958e3c8c50e00387a095317c2e937f792d892ca0",
+                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/8a6fcdb80725288b8ac6829ee138031a67d698e1",
+                "reference": "8a6fcdb80725288b8ac6829ee138031a67d698e1",
                 "shasum": ""
             },
             "require": {
-                "doctrine/annotations": "1.*",
-                "nikic/php-parser": "*",
+                "doctrine/annotations": "~1.1",
+                "nikic/php-parser": "~0.9",
                 "php": ">=5.4.0"
             },
             "suggest": {
                 "ray/di": "DI framework supports Ray.Aop"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Ray\\Aop\\": "src/"
@@ -765,31 +762,36 @@
                 "aop",
                 "aspect"
             ],
-            "time": "2014-02-26 22:42:41"
+            "time": "2014-05-19 10:06:55"
         },
         {
             "name": "ray/di",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "2224d647087fe1bd0555418fc5869d9539fb4f4a"
+                "reference": "cb01e44b806cc2ab19d6d3d2a55d3538bc599d50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/2224d647087fe1bd0555418fc5869d9539fb4f4a",
-                "reference": "2224d647087fe1bd0555418fc5869d9539fb4f4a",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/cb01e44b806cc2ab19d6d3d2a55d3538bc599d50",
+                "reference": "cb01e44b806cc2ab19d6d3d2a55d3538bc599d50",
                 "shasum": ""
             },
             "require": {
-                "aura/di": "1.1.*",
+                "aura/di": "1.*",
                 "doctrine/annotations": "1.*",
                 "doctrine/cache": "1.*",
-                "nikic/php-parser": "*",
+                "nikic/php-parser": "0.*",
                 "php": ">=5.4.0",
                 "ray/aop": "1.*"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Ray\\Di\\": "src/"
@@ -815,15 +817,13 @@
             "description": "Guice style annotation-driven dependency injection framework",
             "homepage": "https://github.com/koriym/Ray.Di",
             "keywords": [
-                "annotation",
+                "annotations",
                 "aop",
-                "dependency",
                 "di",
                 "guice",
-                "injection",
                 "jsr"
             ],
-            "time": "2014-03-31 00:06:54"
+            "time": "2014-05-12 15:43:58"
         }
     ],
     "packages-dev": [
@@ -833,9 +833,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "bear/resource": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.4.0"
     },

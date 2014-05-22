@@ -25,7 +25,7 @@ interface RouterInterface extends ExtensionInterface
     /**
      * Set argv
      *
-     * @param $argv array | \ArrayAccess
+     * @param mixed $argv array | \ArrayAccess
      *
      * @return mixed
      */

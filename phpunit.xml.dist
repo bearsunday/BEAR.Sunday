@@ -28,6 +28,7 @@
             <directory suffix=".php">src</directory>
             <exclude>
                 <file>src/Module/Cache/CacheProvider.php</file>
+                <directory>src/Inject</directory>
             </exclude>
         </whitelist>
     </filter>

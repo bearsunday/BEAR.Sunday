@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f13a1de1d1611d8eb9e945a923da11c6",
+    "hash": "94239791e6c25bf861513c607d1efe89",
     "packages": [
         {
             "name": "any/serializer",
@@ -211,16 +211,16 @@
         },
         {
             "name": "bear/resource",
-            "version": "0.11.0",
+            "version": "0.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "e1b4b86e5e271297dabc4a6470994d9ae9a7303b"
+                "reference": "dd0c50fc4dbf30d4ed7beff33b689a65c3e63da1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/e1b4b86e5e271297dabc4a6470994d9ae9a7303b",
-                "reference": "e1b4b86e5e271297dabc4a6470994d9ae9a7303b",
+                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/dd0c50fc4dbf30d4ed7beff33b689a65c3e63da1",
+                "reference": "dd0c50fc4dbf30d4ed7beff33b689a65c3e63da1",
                 "shasum": ""
             },
             "require": {
@@ -228,9 +228,9 @@
                 "aura/signal": "~1.0",
                 "doctrine/cache": "~1.3",
                 "guzzlehttp/guzzle": "~4.0",
+                "guzzlehttp/guzzle-services": "~0.2",
                 "nocarrier/hal": "~0.9",
                 "php": ">=5.4.0",
-                "ray/aop": "~1.2",
                 "ray/di": "~1.3"
             },
             "require-dev": {
@@ -239,7 +239,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.11.x-dev"
+                    "dev-master": "0.13.x-dev"
                 }
             },
             "autoload": {
@@ -270,7 +270,7 @@
                 "rest",
                 "stateless"
             ],
-            "time": "2014-05-19 11:19:10"
+            "time": "2014-05-26 10:56:02"
         },
         {
             "name": "doctrine/annotations",
@@ -470,6 +470,47 @@
             "time": "2013-01-12 18:59:04"
         },
         {
+            "name": "guzzlehttp/command",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/command.git",
+                "reference": "a06e799bca01ebddf46757e678ede6cf17147f9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/command/zipball/a06e799bca01ebddf46757e678ede6cf17147f9e",
+                "reference": "a06e799bca01ebddf46757e678ede6cf17147f9e",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~4.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Command\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides the foundation for building command based web service clients",
+            "time": "2014-04-30 03:48:46"
+        },
+        {
             "name": "guzzlehttp/guzzle",
             "version": "4.0.2",
             "source": {
@@ -529,6 +570,47 @@
                 "web service"
             ],
             "time": "2014-04-16 17:33:22"
+        },
+        {
+            "name": "guzzlehttp/guzzle-services",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle-services.git",
+                "reference": "e079a728689a28e9f4427264bcfc77d0dd6fa98d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle-services/zipball/e079a728689a28e9f4427264bcfc77d0dd6fa98d",
+                "reference": "e079a728689a28e9f4427264bcfc77d0dd6fa98d",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/command": "~0.2",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Command\\Guzzle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides an implementation of the Guzzle Command library that uses Guzzle service descriptions to describe web services, serialize requests, and parse responses into easy to use model structures.",
+            "time": "2014-03-30 23:24:04"
         },
         {
             "name": "guzzlehttp/streams",
@@ -767,25 +849,25 @@
         },
         {
             "name": "ray/di",
-            "version": "1.3.1",
+            "version": "1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "cb01e44b806cc2ab19d6d3d2a55d3538bc599d50"
+                "reference": "1248f8f747019424117514c2d1c0657ac44341b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/cb01e44b806cc2ab19d6d3d2a55d3538bc599d50",
-                "reference": "cb01e44b806cc2ab19d6d3d2a55d3538bc599d50",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/1248f8f747019424117514c2d1c0657ac44341b6",
+                "reference": "1248f8f747019424117514c2d1c0657ac44341b6",
                 "shasum": ""
             },
             "require": {
-                "aura/di": "1.*",
-                "doctrine/annotations": "1.*",
-                "doctrine/cache": "1.*",
-                "nikic/php-parser": "0.*",
+                "aura/di": "~1.0",
+                "doctrine/annotations": "~1.1",
+                "doctrine/cache": "~1.3",
+                "nikic/php-parser": "~0.9",
                 "php": ">=5.4.0",
-                "ray/aop": "1.*"
+                "ray/aop": "~1.2"
             },
             "type": "library",
             "extra": {
@@ -824,7 +906,7 @@
                 "guice",
                 "jsr"
             ],
-            "time": "2014-05-12 15:43:58"
+            "time": "2014-05-26 06:40:29"
         }
     ],
     "packages-dev": [
@@ -834,9 +916,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "bear/resource": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.4.0"
     },

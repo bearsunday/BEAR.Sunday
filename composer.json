@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "bear/resource": "~0.11",
+        "bear/resource": "~0.11@dev",
         "psr/log": "~1.0"
     },
     "autoload": {

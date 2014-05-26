@@ -7,6 +7,7 @@
 namespace BEAR\Sunday\Module\Code;
 
 use Ray\Di\AbstractModule;
+use Ray\Di\Scope;
 
 class CachedAnnotationModule extends AbstractModule
 {
@@ -17,9 +18,11 @@ class CachedAnnotationModule extends AbstractModule
     {
         $this
             ->bind('Doctrine\Common\Annotations\Reader')
-            ->toProvider('BEAR\Sunday\Module\Code\CachedReaderProvider');
+            ->toProvider('BEAR\Sunday\Module\Code\CachedReaderProvider')
+            ->in(Scope::SINGLETON);
         $this
             ->bind('Doctrine\Common\Annotations\CachedReader')
-            ->toProvider('BEAR\Sunday\Module\Code\CachedReaderProvider');
+            ->toProvider('BEAR\Sunday\Module\Code\CachedReaderProvider')
+            ->in(Scope::SINGLETON);
     }
 }

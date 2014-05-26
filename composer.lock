@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "c62684bb3375e9037d39f0f736753bff",
+    "hash": "f13a1de1d1611d8eb9e945a923da11c6",
     "packages": [
         {
             "name": "any/serializer",
@@ -833,9 +834,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "bear/resource": 20
+    },
     "platform": {
         "php": ">=5.4.0"
     },

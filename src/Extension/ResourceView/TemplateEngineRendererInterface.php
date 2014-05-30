@@ -14,12 +14,4 @@ use BEAR\Sunday\Extension\TemplateEngine\TemplateEngineAdapterInterface;
  */
 interface TemplateEngineRendererInterface extends RenderInterface
 {
-    /**
-     * ViewRenderer Setter
-     *
-     * @param TemplateEngineAdapterInterface $templateEngineAdapter
-     *
-     * @Inject
-     */
-    public function __construct(TemplateEngineAdapterInterface $templateEngineAdapter);
 }

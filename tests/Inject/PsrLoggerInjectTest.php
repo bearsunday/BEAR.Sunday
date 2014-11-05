@@ -61,7 +61,7 @@ class PsrLoggerInjectTest extends \PHPUnit_Framework_TestCase
 {
     public function testInjectTrait()
     {
-        $app = Injector::create([new PsrLoggerModule])->getInstance(__NAMESPACE__ . '\PsrLoggerApplication');
+        $app = (new Injector(new PsrLoggerModule))->getInstance(__NAMESPACE__ . '\PsrLoggerApplication');
         $this->assertInstanceOf( '\BEAR\Sunday\Inject\DummyLogger', $app->returnDependency());
     }
 }

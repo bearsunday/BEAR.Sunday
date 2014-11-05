@@ -23,7 +23,7 @@ class TmpDirInjectTest extends \PHPUnit_Framework_TestCase
         $config = [
             'tmp_dir' => __DIR__
         ];
-        $app = Injector::create([new NamedModule($config)])->getInstance(__NAMESPACE__ . '\TmpDirApplication');
+        $app = (new Injector(new NamedModule($config)))->getInstance(__NAMESPACE__ . '\TmpDirApplication');
         $this->assertSame(__DIR__, $app->returnDependency());
     }
 }

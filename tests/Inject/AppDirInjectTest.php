@@ -24,7 +24,7 @@ class AppDirInjectTest extends \PHPUnit_Framework_TestCase
             'app_dir' => __DIR__,
             'app_name' => 'Vendor/App'
         ];
-        $app = Injector::create([new NamedModule($config)])->getInstance(__NAMESPACE__ . '\AppDirApplication');
+        $app = (new Injector(new NamedModule($config)))->getInstance(__NAMESPACE__ . '\AppDirApplication');
         $this->assertSame(__DIR__, $app->returnDependency());
     }
 }

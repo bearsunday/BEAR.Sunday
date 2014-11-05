@@ -7,7 +7,7 @@
 namespace BEAR\Sunday\Module\Cache;
 
 use Ray\Di\AbstractModule;
-use Ray\Di\Di\Scope;
+use Ray\Di\Scope;
 
 class CacheModule extends AbstractModule
 {

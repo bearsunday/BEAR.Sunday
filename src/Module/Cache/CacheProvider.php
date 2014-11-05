@@ -16,12 +16,6 @@ class CacheProvider implements ProviderInterface
     use TmpDirInject;
 
     /**
-     * Return instance
-     *
-     * @return \Doctrine\Common\Cache\Cache
-     */
-
-    /**
      * {@inheritdoc}
      *
      * @return ApcCache|FilesystemCache

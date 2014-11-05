@@ -23,7 +23,7 @@ class LibDirInjectTest extends \PHPUnit_Framework_TestCase
         $config = [
             'lib_dir' => __DIR__
         ];
-        $app = Injector::create([new NamedModule($config)])->getInstance(__NAMESPACE__ . '\LibDirApplication');
+        $app = (new Injector(new NamedModule($config)))->getInstance(__NAMESPACE__ . '\LibDirApplication');
         $this->assertSame(__DIR__, $app->returnDependency());
     }
 }

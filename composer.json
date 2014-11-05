@@ -18,7 +18,9 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "bear/resource": "~0.13",
+        "bear/resource": "~1.0@dev",
+        "ray/di": "~2.0@dev",
+        "ray/aop": "~2.0@dev",
         "psr/log": "~1.0"
     },
     "autoload": {
@@ -28,7 +30,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.10.x-dev"
+            "dev-master": "1.0.x-dev"
         }
     }
 }

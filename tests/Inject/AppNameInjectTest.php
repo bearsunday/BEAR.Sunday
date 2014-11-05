@@ -23,7 +23,7 @@ class AppNameInjectTest extends \PHPUnit_Framework_TestCase
         $config = [
             'app_name' => __NAMESPACE__
         ];
-        $app = Injector::create([new NamedModule($config)])->getInstance(__NAMESPACE__ . '\AppNameApplication');
+        $app = (new Injector(new NamedModule($config)))->getInstance(__NAMESPACE__ . '\AppNameApplication');
         $this->assertSame(__NAMESPACE__, $app->returnDependency());
     }
 }

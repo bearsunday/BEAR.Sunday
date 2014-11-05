@@ -45,7 +45,7 @@ class ConstantModuleTest extends \PHPUnit_Framework_TestCase
             'path' => __DIR__,
             'id' => 'bear'
         ];
-        $this->app = Injector::create([new NamedModule($names)])->getInstance(__NAMESPACE__ .'\Application');
+        $this->app = (new Injector(new NamedModule($names)))->getInstance(__NAMESPACE__ .'\Application');
     }
 
     public function testNamed()

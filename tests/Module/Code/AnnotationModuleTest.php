@@ -12,11 +12,7 @@ class AnnotationModuleTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->instance = Injector::create(
-            [
-                new AnnotationModule
-            ]
-        )->getInstance('Doctrine\Common\Annotations\Reader');
+        $this->instance = (new Injector(new AnnotationModule))->getInstance('Doctrine\Common\Annotations\Reader');
     }
 
     public function testGetInstance()

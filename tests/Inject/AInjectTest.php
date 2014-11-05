@@ -20,7 +20,7 @@ class AInjectTest extends \PHPUnit_Framework_TestCase
 {
     public function testCacheApc()
     {
-        $app = Injector::create([new ResourceModule("AApplication")])->getInstance(__NAMESPACE__ . '\AApplication');
+        $app = (new Injector(new ResourceModule("AApplication")))->getInstance(__NAMESPACE__ . '\AApplication');
         $this->assertInstanceOf('BEAR\Resource\A', $app->returnDependency());
     }
 }

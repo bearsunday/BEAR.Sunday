@@ -4,7 +4,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
-namespace BEAR\Sunday\Module\Code;
+namespace BEAR\Sunday\Module\Annotation;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
@@ -14,7 +14,7 @@ use Doctrine\Common\Cache\Cache;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 
-class AnnotationModule extends AbstractModule
+class DoctrineAnnotationModule extends AbstractModule
 {
     /**
      * {@inheritdoc}

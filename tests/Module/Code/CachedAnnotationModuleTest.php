@@ -1,6 +1,6 @@
 <?php
 
-namespace BEAR\Sunday\Module\Code;
+namespace BEAR\Sunday\Module\Annotation;
 
 use BEAR\Sunday\Module\Cache\CacheModule;
 use BEAR\Sunday\Module\Constant\NamedModule;

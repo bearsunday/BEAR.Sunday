@@ -2,21 +2,16 @@
 
 namespace BEAR\Sunday\Module\Code;
 
-use BEAR\Sunday\Module\Code\AnnotationModule;
+use Doctrine\Common\Annotations\CachedReader;
+use Doctrine\Common\Annotations\Reader;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 
 class AnnotationModuleTest extends \PHPUnit_Framework_TestCase
 {
-    private $instance;
-
-    protected function setUp()
-    {
-        $this->instance = (new Injector(new AnnotationModule))->getInstance('Doctrine\Common\Annotations\Reader');
-    }
-
     public function testGetInstance()
     {
-        $this->assertInstanceOf('Doctrine\Common\Annotations\AnnotationReader', $this->instance);
+        $reader = (new Injector(new AnnotationModule))->getInstance(Reader::class);
+        $this->assertInstanceOf(CachedReader::class, $reader);
     }
 }

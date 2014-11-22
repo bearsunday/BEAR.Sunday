@@ -807,12 +807,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "3852ef6fedd239ed6abc5c54808a3b96aee11b36"
+                "reference": "22c33a6c90c35010b3e9cead67ccd403501d8857"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/3852ef6fedd239ed6abc5c54808a3b96aee11b36",
-                "reference": "3852ef6fedd239ed6abc5c54808a3b96aee11b36",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/22c33a6c90c35010b3e9cead67ccd403501d8857",
+                "reference": "22c33a6c90c35010b3e9cead67ccd403501d8857",
                 "shasum": ""
             },
             "require": {
@@ -848,7 +848,7 @@
                 "di",
                 "guice"
             ],
-            "time": "2014-11-05 10:50:34"
+            "time": "2014-11-21 10:56:18"
         }
     ],
     "packages-dev": [],

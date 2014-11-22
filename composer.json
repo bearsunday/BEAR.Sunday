@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "bear/resource": "~1.0@dev",
+        "bear/resource": "dev-develop-2",
         "ray/di": "~2.0@dev",
         "ray/aop": "~2.0@dev",
         "psr/log": "~1.0"

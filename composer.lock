@@ -4,182 +4,24 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "13c1ff4e33d74371aeeebd4194031d30",
+    "hash": "6235c7ab89fc75bb6cb1e786b33155ef",
     "packages": [
         {
-            "name": "any/serializer",
-            "version": "0.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/koriym/Any.Serializer.git",
-                "reference": "cc9ef96fa131d45d28c87818e3239c916f157a12"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Any.Serializer/zipball/cc9ef96fa131d45d28c87818e3239c916f157a12",
-                "reference": "cc9ef96fa131d45d28c87818e3239c916f157a12",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Any\\Serializer": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Akihito Koriyama",
-                    "email": "akihito.koriyama@gmail.com",
-                    "homepage": "https://github.com/koriym",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Serialize any value for logging",
-            "keywords": [
-                "make it possible",
-                "serialize"
-            ],
-            "time": "2013-09-20 05:52:42"
-        },
-        {
-            "name": "aura/installer-default",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/installer-default",
-                "reference": "1.0.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/auraphp/installer-default/archive/1.0.0.zip",
-                "reference": "1.0.0",
-                "shasum": ""
-            },
-            "type": "composer-installer",
-            "extra": {
-                "class": "Aura\\Composer\\DefaultInstaller"
-            },
-            "autoload": {
-                "psr-0": {
-                    "Aura\\Composer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Paul M. Jones",
-                    "email": "pmjones88@gmail.com",
-                    "homepage": "http://paul-m-jones.com"
-                }
-            ],
-            "description": "Installs Aura packages using the Composer defaults.",
-            "keywords": [
-                "aura",
-                "installer"
-            ],
-            "time": "2012-11-26 21:35:57"
-        },
-        {
-            "name": "aura/signal",
-            "version": "1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/Aura.Signal.git",
-                "reference": "209bec265969a51809b7202d16c76e45594c4dc5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Signal/zipball/209bec265969a51809b7202d16c76e45594c4dc5",
-                "reference": "209bec265969a51809b7202d16c76e45594c4dc5",
-                "shasum": ""
-            },
-            "require": {
-                "aura/installer-default": "1.0.*",
-                "php": ">=5.4.0"
-            },
-            "type": "aura-package",
-            "extra": {
-                "aura": {
-                    "type": "library",
-                    "config": {
-                        "common": "Aura\\Signal\\_Config\\Common"
-                    }
-                },
-                "branch-alias": {
-                    "dev-develop": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Aura\\Signal": "src/"
-                },
-                "psr-4": {
-                    "Aura\\Signal\\_Config\\": "config/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Paul M. Jones",
-                    "email": "pmjones88@gmail.com",
-                    "homepage": "http://paul-m-jones.com"
-                },
-                {
-                    "name": "Hari KT",
-                    "email": "kthari85@gmail.com",
-                    "homepage": "http://harikt.com"
-                },
-                {
-                    "name": "Aura.Signal Contributors",
-                    "homepage": "https://github.com/auraphp/Aura.Signal/contributors"
-                },
-                {
-                    "name": "Akihito Koriyama",
-                    "email": "akihito.koriyama@gmail.com",
-                    "homepage": "http://www.kumasystem.com"
-                }
-            ],
-            "description": "A SignalSlots/EventHandler implementation for PHP; with it, we can invoke handlers (\"slots\" or \"hooks\") whenever an object sends a signal (\"notification\" or \"event\") to the signal manager.",
-            "homepage": "http://auraphp.com/Aura.Signal",
-            "keywords": [
-                "event",
-                "event handler",
-                "event handling",
-                "signal",
-                "signal slots"
-            ],
-            "time": "2014-08-24 00:00:00"
-        },
-        {
             "name": "bear/resource",
-            "version": "dev-master",
+            "version": "dev-develop-2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "a9107e2deca3178706379c519eb88340aea37f3e"
+                "reference": "a570c189eb80f1236001aade504ab75c155f7b21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/a9107e2deca3178706379c519eb88340aea37f3e",
-                "reference": "a9107e2deca3178706379c519eb88340aea37f3e",
+                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/a570c189eb80f1236001aade504ab75c155f7b21",
+                "reference": "a570c189eb80f1236001aade504ab75c155f7b21",
                 "shasum": ""
             },
             "require": {
-                "any/serializer": "~0.1",
-                "aura/signal": "~1.0",
-                "doctrine/cache": "~1.3",
                 "guzzlehttp/guzzle": "~4.0",
-                "guzzlehttp/guzzle-services": "~0.2",
                 "nocarrier/hal": "~0.9",
                 "php": ">=5.4.0",
                 "ray/aop": "~2.0@dev",
@@ -191,7 +33,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-develop-2": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -220,7 +62,7 @@
                 "rest",
                 "stateless"
             ],
-            "time": "2014-11-05 07:33:52"
+            "time": "2014-11-22 03:21:44"
         },
         {
             "name": "doctrine/annotations",
@@ -291,75 +133,6 @@
             "time": "2014-09-25 16:45:30"
         },
         {
-            "name": "doctrine/cache",
-            "version": "v1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/cache.git",
-                "reference": "cf483685798a72c93bf4206e3dd6358ea07d64e7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/cf483685798a72c93bf4206e3dd6358ea07d64e7",
-                "reference": "cf483685798a72c93bf4206e3dd6358ea07d64e7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "conflict": {
-                "doctrine/common": ">2.2,<2.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": ">=3.7",
-                "satooshi/php-coveralls": "~0.6"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Doctrine\\Common\\Cache\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Roman Borschel",
-                    "email": "roman@code-factory.org"
-                },
-                {
-                    "name": "Benjamin Eberlei",
-                    "email": "kontakt@beberlei.de"
-                },
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
-                },
-                {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com"
-                },
-                {
-                    "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com"
-                }
-            ],
-            "description": "Caching library offering an object-oriented API for many cache backends",
-            "homepage": "http://www.doctrine-project.org",
-            "keywords": [
-                "cache",
-                "caching"
-            ],
-            "time": "2014-09-17 14:24:04"
-        },
-        {
             "name": "doctrine/lexer",
             "version": "v1.0",
             "source": {
@@ -410,52 +183,6 @@
                 "parser"
             ],
             "time": "2013-01-12 18:59:04"
-        },
-        {
-            "name": "guzzlehttp/command",
-            "version": "0.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/command.git",
-                "reference": "e2004b2ef217f14380f46bea9ebe8ecce3cecf7a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/command/zipball/e2004b2ef217f14380f46bea9ebe8ecce3cecf7a",
-                "reference": "e2004b2ef217f14380f46bea9ebe8ecce3cecf7a",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "~4.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.6-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Command\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Provides the foundation for building command based web service clients",
-            "time": "2014-08-08 16:41:48"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -521,47 +248,6 @@
                 "web service"
             ],
             "time": "2014-10-05 19:29:14"
-        },
-        {
-            "name": "guzzlehttp/guzzle-services",
-            "version": "0.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/guzzle-services.git",
-                "reference": "689dfa73b65e2c0a74184a5fb8c5a6ef0b160911"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle-services/zipball/689dfa73b65e2c0a74184a5fb8c5a6ef0b160911",
-                "reference": "689dfa73b65e2c0a74184a5fb8c5a6ef0b160911",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/command": "~0.2",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Command\\Guzzle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Provides an implementation of the Guzzle Command library that uses Guzzle service descriptions to describe web services, serialize requests, and parse responses into easy to use model structures.",
-            "time": "2014-06-01 20:00:25"
         },
         {
             "name": "guzzlehttp/streams",

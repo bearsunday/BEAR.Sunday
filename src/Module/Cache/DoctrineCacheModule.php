@@ -6,19 +6,19 @@
  */
 namespace BEAR\Sunday\Module\Cache;
 
+use Doctrine\Common\Cache\Cache;
+use Doctrine\Common\Cache\ArrayCache;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 
-class CacheModule extends AbstractModule
+
+class DoctrineCacheModule extends AbstractModule
 {
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
-        $this
-            ->bind('Doctrine\Common\Cache\Cache')
-            ->toProvider(__NAMESPACE__ . '\CacheProvider')
-            ->in(Scope::SINGLETON);
+        $this->bind(Cache::class)->to(ArrayCache::class)->in(Scope::SINGLETON);
     }
 }

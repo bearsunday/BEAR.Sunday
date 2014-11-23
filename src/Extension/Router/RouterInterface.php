@@ -8,33 +8,12 @@ namespace BEAR\Sunday\Extension\Router;
 
 use BEAR\Sunday\Extension\ExtensionInterface;
 
-/**
- * Interface for router
- */
 interface RouterInterface extends ExtensionInterface
 {
     /**
-     * Set globals
-     *
-     * @param mixed $globals array | \ArrayAccess
-     *
-     * @return self
-     */
-    public function setGlobals($globals);
-
-    /**
-     * Set argv
-     *
-     * @param mixed $argv array | \ArrayAccess
-     *
-     * @return mixed
-     */
-    public function setArgv($argv);
-
-    /**
      * Match route
      *
-     * @return array [$method, $pageUri, $query]
+     * @return RouterMatch
      */
-    public function match();
+    public function match(array $globals);
 }

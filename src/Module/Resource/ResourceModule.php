@@ -12,7 +12,7 @@ use BEAR\Resource\Module\EmbedResourceModule;
 
 class ResourceModule extends AbstractModule
 {
-    const DEFAULT_APP_NAME = 'MyVendor\MyApp';
+    const DEFAULT_APP_NAME = 'BEAR\Sunday';
 
     /**
      * {@inheritdoc}

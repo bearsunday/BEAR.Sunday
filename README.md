@@ -2,9 +2,9 @@ BEAR, a resource oriented framework
 ===================================
 
 [![Latest Stable Version](https://poser.pugx.org/bear/sunday/v/stable.png)](https://packagist.org/packages/bear/sunday)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/?branch=develop)
-[![Code Coverage](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/?branch=develop)
-[![Build Status](https://secure.travis-ci.org/koriym/BEAR.Sunday.png?branch=master)](http://travis-ci.org/koriym/BEAR.Sunday)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/badges/quality-score.png?b=develop-2)](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/?branch=develop)
+[![Code Coverage](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/badges/coverage.png?b=develop-2)](https://scrutinizer-ci.com/g/koriym/BEAR.Sunday/?branch=develop)
+[![Build Status](https://travis-ci.org/koriym/BEAR.Sunday.svg?branch=develop-2)](https://travis-ci.org/koriym/BEAR.Sunday)
 
 What's BEAR.Sunday
 ------------------

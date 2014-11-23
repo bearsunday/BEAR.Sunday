@@ -6,18 +6,17 @@
  */
 namespace BEAR\Sunday\Provide\Application;
 
-use BEAR\Sunday\Module\SundayModule;
 use Ray\Di\AbstractModule;
-use BEAR\Sunday\Extension\Application\AppInterface;
+use BEAR\Resource\RenderInterface;
+use BEAR\Resource\JsonRenderer;
 
-class AppModule extends AbstractModule
+class RepresentationModule extends AbstractModule
 {
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
-        $this->bind(AppInterface::class)->to(MinApp::class);
-        $this->install(new SundayModule);
+        $this->bind(RenderInterface::class)->to(JsonRenderer::class);
     }
 }

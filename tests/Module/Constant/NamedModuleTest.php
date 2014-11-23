@@ -50,7 +50,7 @@ class ConstantModuleTest extends \PHPUnit_Framework_TestCase
 
     public function testNamed()
     {
-        $this->assertSame(__DIR__ , $this->app->dir);
-        $this->assertSame('bear' , $this->app->id);
+        $this->assertSame(__DIR__, $this->app->dir);
+        $this->assertSame('bear', $this->app->id);
     }
 }

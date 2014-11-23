@@ -11,7 +11,6 @@ use Doctrine\Common\Cache\ArrayCache;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 
-
 class DoctrineCacheModule extends AbstractModule
 {
     /**

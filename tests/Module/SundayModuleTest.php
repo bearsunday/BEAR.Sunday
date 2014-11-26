@@ -9,7 +9,7 @@ use BEAR\Sunday\Extension\Transfer\TransferInterface;
 use BEAR\Sunday\Module\SundayModule;
 use BEAR\Sunday\Provide\Application\MinApp;
 use BEAR\Sunday\Provide\Router\WebRouter;
-use BEAR\Sunday\Provide\Transfer\WebTransfer;
+use BEAR\Sunday\Provide\Transfer\HttpResponder;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\Cache;
@@ -49,6 +49,6 @@ class SundayModuleTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(WebRouter::class, $router);
 
         $responder = $this->injector->getInstance(TransferInterface::class);
-        $this->assertInstanceOf(WebTransfer::class, $responder);
+        $this->assertInstanceOf(HttpResponder::class, $responder);
     }
 }

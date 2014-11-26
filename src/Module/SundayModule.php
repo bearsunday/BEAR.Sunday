@@ -10,7 +10,7 @@ use BEAR\Sunday\Module\Cache\DoctrineCacheModule;
 use BEAR\Sunday\Module\Annotation\DoctrineAnnotationModule;
 use BEAR\Sunday\Module\Resource\ResourceModule;
 use BEAR\Sunday\Provide\Router\RouterModule;
-use BEAR\Sunday\Provide\Transfer\WebTransferModule;
+use BEAR\Sunday\Provide\Transfer\HttpResponderModule;
 use Ray\Di\AbstractModule;
 use BEAR\Sunday\Extension\Application\AppInterface;
 use BEAR\Sunday\Provide\Application\MinApp;
@@ -27,6 +27,6 @@ class SundayModule extends AbstractModule
         $this->install(new DoctrineAnnotationModule);
         $this->install(new ResourceModule);
         $this->install(new RouterModule);
-        $this->install(new WebTransferModule);
+        $this->install(new HttpResponderModule);
     }
 }

@@ -9,13 +9,13 @@ namespace BEAR\Sunday\Provide\Transfer;
 use Ray\Di\AbstractModule;
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
 
-class WebTransferModule extends AbstractModule
+class HttpResponderModule extends AbstractModule
 {
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
-        $this->bind(TransferInterface::class)->to(WebTransfer::class);
+        $this->bind(TransferInterface::class)->to(HttpResponder::class);
     }
 }

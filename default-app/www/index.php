@@ -2,15 +2,15 @@
 
 use BEAR\Resource\Request;
 use BEAR\Sunday\Extension\Application\AppInterface;
-use BEAR\Sunday\Provide\Application\AppModule;
 use BEAR\Sunday\Extension\Application\AbstractApp;
+use BEAR\Sunday\Module\SundayModule;
 use Ray\Di\Injector;
 
-$loader = require dirname(__DIR__) . '/vendor/autoload.php';
+$loader = require dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 /** @var $loader \Composer\Autoload\ClassLoader */
 $loader->addPsr4('BEAR\Sunday\\', dirname(__DIR__));
 
-$app = (new Injector(new AppModule))->getInstance(AppInterface::class);
+$app = (new Injector(new SundayModule))->getInstance(AppInterface::class);
 /** @var $app AbstractApp */
 
 $request = $app->router->match($GLOBALS);
@@ -22,6 +22,7 @@ try {
         ->withQuery($request->query)
         ->request();
     /** @var $page Request */
+    echo $page->toUriWithMethod();
 
     // representation transfer
     $page()->transfer($app->responder);

@@ -16,13 +16,13 @@ class WebRouter implements RouterInterface
      */
     public function match(array $globals = [])
     {
-        $match = new RouterMatch;
-        list($match->method, $match->path, $match->query) = [
+        $request = new RouterMatch;
+        list($request->method, $request->path, $request->query) = [
             $globals['_SERVER']['REQUEST_METHOD'],
             'page://self' . $globals['_SERVER']['REQUEST_URI'],
             $globals['_SERVER']['REQUEST_METHOD'] === 'GET' ? $globals['_GET'] : $globals['_POST']
         ];
 
-        return $match;
+        return $request;
     }
 }

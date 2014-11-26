@@ -12,6 +12,8 @@ use BEAR\Sunday\Module\Resource\ResourceModule;
 use BEAR\Sunday\Provide\Router\RouterModule;
 use BEAR\Sunday\Provide\Transfer\WebTransferModule;
 use Ray\Di\AbstractModule;
+use BEAR\Sunday\Extension\Application\AppInterface;
+use BEAR\Sunday\Provide\Application\MinApp;
 
 class SundayModule extends AbstractModule
 {
@@ -20,10 +22,10 @@ class SundayModule extends AbstractModule
      */
     protected function configure()
     {
+        $this->bind(AppInterface::class)->to(MinApp::class);
         $this->install(new DoctrineCacheModule);
         $this->install(new DoctrineAnnotationModule);
         $this->install(new ResourceModule);
-//        $this->install(new AppModule);
         $this->install(new RouterModule);
         $this->install(new WebTransferModule);
     }

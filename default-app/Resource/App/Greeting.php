@@ -1,14 +1,14 @@
 <?php
-namespace BEAR\Sunday\Resource\Page;
+namespace BEAR\Sunday\Resource\App;
 
 use BEAR\Resource\ResourceObject;
 
-class Index extends ResourceObject
+class Greeting extends ResourceObject
 {
     /**
      * @param string $name
      */
-    public function onGet($name = 'world')
+    public function onGet($name)
     {
         $this['greeting'] = "Hello {$name}";
 

@@ -9,4 +9,12 @@
     <rule ref="PSR2">
         <exclude name="Generic.Files.LineLength"/>
     </rule>
+    <rule ref="PEAR.Commenting.FunctionComment">
+        <exclude name="PEAR.Commenting.FunctionComment.MissingReturn"/>
+        <exclude name="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+        <exclude name="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+        <exclude name="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+        <exclude name="PEAR.Commenting.FunctionComment.Missing"/>
+        <exclude name="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+    </rule>
 </ruleset>

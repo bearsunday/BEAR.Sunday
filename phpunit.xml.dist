@@ -12,16 +12,8 @@
     </logging>
 
     <filter>
-        <whitelist addUncoveredFilesFromWhitelist="true">
+        <whitelist>
             <directory suffix=".php">src</directory>
-            <exclude>
-                <directory>src/Inject</directory>
-            </exclude>
         </whitelist>
     </filter>
-    <php>
-        <ini name="xhprof.output_dir" value="./tests/tmp"/>
-        <ini name="error_log" value="./tests/tmp/error.log"/>
-        <ini name="xdebug.max_nesting_level" value="500"/>
-    </php>
 </phpunit>

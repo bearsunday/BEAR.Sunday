@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4c47b2ebf1504198a37dc71c7eb9e292",
+    "hash": "21c70d35eca36d96558998997674adb6",
     "packages": [
         {
             "name": "bear/resource",
@@ -610,13 +610,13 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "bear/resource": 20,
+        "ray/aop": 20,
         "ray/di": 20,
-        "ray/aop": 20
+        "bear/resource": 20
     },
     "prefer-stable": false,
     "platform": {
-        "php": ">=5.4.0"
+        "php": ">=5.5.0"
     },
     "platform-dev": []
 }

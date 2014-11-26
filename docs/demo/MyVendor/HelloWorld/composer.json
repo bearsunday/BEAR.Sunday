@@ -1,0 +1,14 @@
+{
+    "name": "my-vendor/hello-world",
+    "require": {
+        "bear/sunday": "~1.0@dev"
+
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "MyVendor\\HelloWorld\\": "src/"
+        }
+    }
+}

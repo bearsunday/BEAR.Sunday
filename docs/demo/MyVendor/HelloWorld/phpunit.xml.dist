@@ -1,0 +1,10 @@
+<phpunit bootstrap="tests/bootstrap.php">
+    <testsuites>
+        <testsuite>
+            <directory suffix="Test.php">tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+            <directory suffix=".php">src</directory>
+    </filter>
+</phpunit>

@@ -22,7 +22,6 @@ try {
         ->withQuery($request->query)
         ->request();
     /** @var $page Request */
-    echo $page->toUriWithMethod();
 
     // representation transfer
     $page()->transfer($app->responder);

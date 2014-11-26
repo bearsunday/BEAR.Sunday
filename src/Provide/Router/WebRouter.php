@@ -17,10 +17,11 @@ class WebRouter implements RouterInterface
     public function match(array $globals = [])
     {
         $request = new RouterMatch;
+        $method = strtolower($globals['_SERVER']['REQUEST_METHOD']);
         list($request->method, $request->path, $request->query) = [
-            $globals['_SERVER']['REQUEST_METHOD'],
-            'page://self' . $globals['_SERVER']['REQUEST_URI'],
-            $globals['_SERVER']['REQUEST_METHOD'] === 'GET' ? $globals['_GET'] : $globals['_POST']
+            $method,
+            'page://self' . parse_url($globals['_SERVER']['REQUEST_URI'], PHP_URL_PATH),
+            ($method === 'get') ? $globals['_GET'] : $globals['_POST']
         ];
 
         return $request;

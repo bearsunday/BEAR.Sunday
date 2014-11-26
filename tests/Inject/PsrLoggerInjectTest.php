@@ -3,9 +3,8 @@
 namespace BEAR\Sunday\Inject;
 
 use Psr\Log\LoggerInterface;
-use Ray\Di\Injector;
-use BEAR\Sunday\Inject\PsrLoggerInject;
 use Ray\Di\AbstractModule;
+use Ray\Di\Injector;
 
 class PsrLoggerApplication
 {

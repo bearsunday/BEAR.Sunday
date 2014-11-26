@@ -2,11 +2,9 @@
 
 namespace BEAR\Sunday\Module\Constant;
 
-use BEAR\Sunday\Module\Constant\NamedModule;
-use Ray\Di\AbstractModule;
-use Ray\Di\Injector;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
+use Ray\Di\Injector;
 
 class Application
 {

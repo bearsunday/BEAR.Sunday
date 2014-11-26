@@ -6,8 +6,8 @@
  */
 namespace BEAR\Sunday\Provide\Transfer;
 
-use Ray\Di\AbstractModule;
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
+use Ray\Di\AbstractModule;
 
 class HttpResponderModule extends AbstractModule
 {

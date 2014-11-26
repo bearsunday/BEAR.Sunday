@@ -6,9 +6,9 @@
  */
 namespace BEAR\Sunday\Module\Resource;
 
-use Ray\Di\AbstractModule;
-use BEAR\Resource\Module\ResourceClientModule;
 use BEAR\Resource\Module\EmbedResourceModule;
+use BEAR\Resource\Module\ResourceClientModule;
+use Ray\Di\AbstractModule;
 
 class ResourceModule extends AbstractModule
 {

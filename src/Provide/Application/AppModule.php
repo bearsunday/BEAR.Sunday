@@ -6,9 +6,9 @@
  */
 namespace BEAR\Sunday\Provide\Application;
 
+use BEAR\Sunday\Extension\Application\AppInterface;
 use BEAR\Sunday\Module\SundayModule;
 use Ray\Di\AbstractModule;
-use BEAR\Sunday\Extension\Application\AppInterface;
 
 class AppModule extends AbstractModule
 {

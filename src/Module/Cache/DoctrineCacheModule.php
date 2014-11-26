@@ -6,8 +6,8 @@
  */
 namespace BEAR\Sunday\Module\Cache;
 
-use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\Common\Cache\Cache;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 

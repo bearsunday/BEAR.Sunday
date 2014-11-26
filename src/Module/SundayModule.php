@@ -6,14 +6,14 @@
  */
 namespace BEAR\Sunday\Module;
 
-use BEAR\Sunday\Module\Cache\DoctrineCacheModule;
+use BEAR\Sunday\Extension\Application\AppInterface;
 use BEAR\Sunday\Module\Annotation\DoctrineAnnotationModule;
+use BEAR\Sunday\Module\Cache\DoctrineCacheModule;
 use BEAR\Sunday\Module\Resource\ResourceModule;
+use BEAR\Sunday\Provide\Application\MinApp;
 use BEAR\Sunday\Provide\Router\RouterModule;
 use BEAR\Sunday\Provide\Transfer\HttpResponderModule;
 use Ray\Di\AbstractModule;
-use BEAR\Sunday\Extension\Application\AppInterface;
-use BEAR\Sunday\Provide\Application\MinApp;
 
 class SundayModule extends AbstractModule
 {

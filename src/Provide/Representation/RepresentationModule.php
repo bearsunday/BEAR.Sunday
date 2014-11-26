@@ -6,9 +6,9 @@
  */
 namespace BEAR\Sunday\Provide\Representation;
 
-use Ray\Di\AbstractModule;
-use BEAR\Resource\RenderInterface;
 use BEAR\Resource\JsonRenderer;
+use BEAR\Resource\RenderInterface;
+use Ray\Di\AbstractModule;
 
 class RepresentationModule extends AbstractModule
 {

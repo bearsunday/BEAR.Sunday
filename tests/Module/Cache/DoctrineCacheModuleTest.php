@@ -3,7 +3,6 @@
 namespace BEAR\Sunday\Module\Cache;
 
 use Doctrine\Common\Cache\Cache;
-
 use Ray\Di\Injector;
 
 class DoctrineCacheModuleTest extends \PHPUnit_Framework_TestCase

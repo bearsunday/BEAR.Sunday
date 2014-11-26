@@ -27,9 +27,10 @@ class AbstractApp implements AppInterface
      */
     public $resource;
 
-    /**
+    /***
      * @param RouterInterface   $router
      * @param TransferInterface $responder
+     * @param ResourceInterface $resource
      */
     public function __construct(
         RouterInterface $router,

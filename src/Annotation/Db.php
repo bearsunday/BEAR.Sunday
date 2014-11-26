@@ -12,6 +12,6 @@ namespace BEAR\Sunday\Annotation;
  * @Annotation
  * @Target("CLASS")
  */
-final class Db implements AnnotationInterface
+final class Db
 {
 }

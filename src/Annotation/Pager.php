@@ -12,7 +12,7 @@ namespace BEAR\Sunday\Annotation;
  * @Annotation
  * @Target("METHOD")
  */
-final class Pager implements AnnotationInterface
+final class Pager
 {
     /**
      * Limit per page

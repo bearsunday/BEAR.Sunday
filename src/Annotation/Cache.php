@@ -12,7 +12,7 @@ namespace BEAR\Sunday\Annotation;
  * @Annotation
  * @Target("METHOD")
  */
-final class Cache implements AnnotationInterface
+final class Cache
 {
     /**
      * Cache time

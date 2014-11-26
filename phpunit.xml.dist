@@ -12,8 +12,11 @@
     </logging>
 
     <filter>
-        <whitelist>
+        <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
+            <exclude>
+                <directory>src/Inject</directory>
+            </exclude>
         </whitelist>
     </filter>
     <php>

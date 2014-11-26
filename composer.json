@@ -18,12 +18,12 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "ray/aop": "~2.0@dev",
-        "ray/di": "~2.0@dev",
         "bear/resource": "~1.0@dev",
         "doctrine/cache": "~1.0",
         "psr/log": "~1.0"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "BEAR\\Sunday\\": "src/"

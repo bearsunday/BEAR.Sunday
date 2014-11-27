@@ -51,15 +51,11 @@ Application execution sequence is scripted by the user-defined application scrip
 ```php
 
 
-$loader = require dirname(dirname(__DIR__)) . '/vendor/autoload.php';
-/** @var $loader \Composer\Autoload\ClassLoader */
-$loader->addPsr4('BEAR\Sunday\\', dirname(__DIR__));
-
-// Here we get the production application instance.
+// Here we get the application instance.
 $app = (new Injector(new SundayModule))->getInstance(AppInterface::class);
 /** @var $app AbstractApp */
 
-// Calling the match of a BEAR.Sunday compatible router will give us the $method, $pagePath, $query to be used in the page request.
+// Calling the match of a BEAR.Sunday compatible router will give us the $method, $path, $query to be used in the page request.
 $request = $app->router->match($GLOBALS);
 try {
     // resource request
@@ -108,7 +104,7 @@ time: <?php echo $hello['time']; ?>
 
 Dependency injection
 --------------------
-It is google guice style annotation-based DI framework.
+It is google guice style DI framework.
 
 ### Binding
 ```php

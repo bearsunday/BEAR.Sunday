@@ -8,7 +8,9 @@ ini_set('xdebug.max_nesting_level', 300);
 // loader
 $loader = require dirname(__DIR__) . '/vendor/autoload.php';
 /** @var $loader \Composer\Autoload\ClassLoader */
+$loader->addPsr4('BEAR\Sunday\\', [__DIR__, __DIR__ . '/Fake']);
+$loader->addPsr4('FakeVendor\HelloWorld\\', __DIR__ . '/Fake/Apps/FakeVendor/HelloWorld');
+$loader->addPsr4('FakeVendor\HelloWorldX\\', __DIR__ . '/Fake/Apps/FakeVendor/HelloWorldX');
 AnnotationRegistry::registerLoader([$loader, 'loadClass']);
-$loader->addPsr4('BEAR\Sunday\\', __DIR__);
 
-$_ENV['TEST_DIR'] = __DIR__ . '/tmp';
+$_ENV['TMP_DIR'] = __DIR__ . '/tmp';

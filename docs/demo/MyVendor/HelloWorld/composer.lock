@@ -70,21 +70,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Sunday.git",
-                "reference": "f3b1770ef4c376e818468ce1f1e7e1bd01d9e37b"
+                "reference": "0b33034019bf21c09ee43fe767e135c4ed88b98d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Sunday/zipball/f3b1770ef4c376e818468ce1f1e7e1bd01d9e37b",
-                "reference": "f3b1770ef4c376e818468ce1f1e7e1bd01d9e37b",
+                "url": "https://api.github.com/repos/koriym/BEAR.Sunday/zipball/0b33034019bf21c09ee43fe767e135c4ed88b98d",
+                "reference": "0b33034019bf21c09ee43fe767e135c4ed88b98d",
                 "shasum": ""
             },
             "require": {
                 "bear/resource": "~1.0@dev",
                 "doctrine/cache": "~1.0",
                 "php": ">=5.5.0",
-                "psr/log": "~1.0",
-                "ray/aop": "~2.0@dev",
-                "ray/di": "~2.0@dev"
+                "psr/log": "~1.0"
             },
             "type": "library",
             "extra": {
@@ -116,7 +114,7 @@
                 "hypermedia",
                 "rest"
             ],
-            "time": "2014-11-26 18:09:04"
+            "time": "2014-11-27 07:57:33"
         },
         {
             "name": "doctrine/annotations",

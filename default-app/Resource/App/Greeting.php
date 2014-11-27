@@ -1,4 +1,5 @@
 <?php
+
 namespace BEAR\Sunday\Resource\App;
 
 use BEAR\Resource\ResourceObject;

@@ -1,4 +1,5 @@
 <?php
+
 namespace BEAR\Sunday\Resource\Page;
 
 use BEAR\Resource\Annotation\Embed;

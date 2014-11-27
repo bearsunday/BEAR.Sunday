@@ -32,7 +32,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Index::class, $page);
         /** @var $page Index */
         $this->assertSame(200, $page->code);
-        $expect = 'hello world';
+        $expect = 'Hello World';
         $this->assertSame($expect, $page->body['greeting']);
     }
 }

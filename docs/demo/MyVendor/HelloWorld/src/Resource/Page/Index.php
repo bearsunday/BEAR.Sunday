@@ -8,8 +8,8 @@ class Index extends ResourceObject
 {
     public function onGet($name = 'World')
     {
-        $this->body['greeting'] = 'hello ' . $name;
-        
+        $this->body['greeting'] = 'Hello ' . $name;
+
         return $this;
     }
 }

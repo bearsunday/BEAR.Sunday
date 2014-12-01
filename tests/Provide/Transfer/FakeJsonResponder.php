@@ -10,7 +10,7 @@ use BEAR\Resource\ResourceObject;
 
 require_once __DIR__ . '/header.php';
 
-class FakeHttpResponder extends HttpResponder
+class FakeJsonResponder extends JsonResponder
 {
     public static $headers = [];
     public static $content;

@@ -12,23 +12,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/BEAR.Resource.git",
-                "reference": "59ee30fd720e133362c828c4b22b6ec1b21c97aa"
+                "reference": "1af48e1aa383a8fecdaf5fb2d8b3642184d01090"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/59ee30fd720e133362c828c4b22b6ec1b21c97aa",
-                "reference": "59ee30fd720e133362c828c4b22b6ec1b21c97aa",
+                "url": "https://api.github.com/repos/koriym/BEAR.Resource/zipball/1af48e1aa383a8fecdaf5fb2d8b3642184d01090",
+                "reference": "1af48e1aa383a8fecdaf5fb2d8b3642184d01090",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/guzzle": "~4.0",
                 "nocarrier/hal": "~0.9",
-                "php": ">=5.4.0",
-                "ray/aop": "~2.0@dev",
-                "ray/di": "~2.0@dev"
+                "php": ">=5.5.0",
+                "ray/di": "~2.0@dev",
+                "rize/uri-template": "~0.2.5"
             },
-            "require-dev": {
-                "facebook/xhprof": "dev-master"
+            "suggest": {
+                "ext-uri_template": "ext/uri_template for URI Template(RFC6570) specification."
             },
             "type": "library",
             "extra": {
@@ -39,7 +38,10 @@
             "autoload": {
                 "psr-4": {
                     "BEAR\\Resource\\": "src/"
-                }
+                },
+                "files": [
+                    "src-function/functions.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -56,13 +58,11 @@
             "keywords": [
                 "HATEOAS",
                 "Object as a service",
-                "framework",
                 "hypermedia",
                 "protocol",
-                "rest",
-                "stateless"
+                "rest"
             ],
-            "time": "2014-11-23 17:31:23"
+            "time": "2014-12-10 08:04:21"
         },
         {
             "name": "doctrine/annotations",
@@ -241,7 +241,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -252,124 +252,6 @@
                 "parser"
             ],
             "time": "2013-01-12 18:59:04"
-        },
-        {
-            "name": "guzzlehttp/guzzle",
-            "version": "4.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "66fd916e9f9130bc22c51450476823391cb2f67c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/66fd916e9f9130bc22c51450476823391cb2f67c",
-                "reference": "66fd916e9f9130bc22c51450476823391cb2f67c",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "guzzlehttp/streams": "~2.1",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "ext-curl": "*",
-                "phpunit/phpunit": "~4.0",
-                "psr/log": "~1.0"
-            },
-            "suggest": {
-                "ext-curl": "Guzzle will use specific adapters if cURL is present"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\": "src/"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "client",
-                "curl",
-                "framework",
-                "http",
-                "http client",
-                "rest",
-                "web service"
-            ],
-            "time": "2014-10-05 19:29:14"
-        },
-        {
-            "name": "guzzlehttp/streams",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/streams.git",
-                "reference": "f91b721d73f0e561410903b3b3c90a5d0e40b534"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/streams/zipball/f91b721d73f0e561410903b3b3c90a5d0e40b534",
-                "reference": "f91b721d73f0e561410903b3b3c90a5d0e40b534",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Stream\\": "src/"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Provides a simple abstraction over streams of data (Guzzle 4+)",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "Guzzle",
-                "stream"
-            ],
-            "time": "2014-08-17 21:15:53"
         },
         {
             "name": "nikic/php-parser",
@@ -508,12 +390,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Aop.git",
-                "reference": "b4bab490ebb273b8fc5269a904b27657a29e1ad1"
+                "reference": "f42f4925bf148f25d7e77275f07c3c6c1ef6c678"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/b4bab490ebb273b8fc5269a904b27657a29e1ad1",
-                "reference": "b4bab490ebb273b8fc5269a904b27657a29e1ad1",
+                "url": "https://api.github.com/repos/koriym/Ray.Aop/zipball/f42f4925bf148f25d7e77275f07c3c6c1ef6c678",
+                "reference": "f42f4925bf148f25d7e77275f07c3c6c1ef6c678",
                 "shasum": ""
             },
             "require": {
@@ -554,7 +436,7 @@
                 "code gen",
                 "method invocation"
             ],
-            "time": "2014-11-05 02:31:41"
+            "time": "2014-12-04 02:51:24"
         },
         {
             "name": "ray/di",
@@ -562,12 +444,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koriym/Ray.Di.git",
-                "reference": "22c33a6c90c35010b3e9cead67ccd403501d8857"
+                "reference": "d8d569fa3934d44df74bf11de250439ff54827af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/22c33a6c90c35010b3e9cead67ccd403501d8857",
-                "reference": "22c33a6c90c35010b3e9cead67ccd403501d8857",
+                "url": "https://api.github.com/repos/koriym/Ray.Di/zipball/d8d569fa3934d44df74bf11de250439ff54827af",
+                "reference": "d8d569fa3934d44df74bf11de250439ff54827af",
                 "shasum": ""
             },
             "require": {
@@ -603,7 +485,51 @@
                 "di",
                 "guice"
             ],
-            "time": "2014-11-21 10:56:18"
+            "time": "2014-12-09 10:44:33"
+        },
+        {
+            "name": "rize/uri-template",
+            "version": "0.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rize/UriTemplate.git",
+                "reference": "907ca9b59014f18f6c3f1158bdd46a3c1675e9f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rize/UriTemplate/zipball/907ca9b59014f18f6c3f1158bdd46a3c1675e9f0",
+                "reference": "907ca9b59014f18f6c3f1158bdd46a3c1675e9f0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Rize\\UriTemplate": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marut K",
+                    "homepage": "http://twitter.com/rezigned"
+                }
+            ],
+            "description": "PHP URI Template (RFC 6570) supports both expansion & extraction",
+            "keywords": [
+                "RFC 6570",
+                "template",
+                "uri"
+            ],
+            "time": "2014-06-11 06:00:32"
         }
     ],
     "packages-dev": [],

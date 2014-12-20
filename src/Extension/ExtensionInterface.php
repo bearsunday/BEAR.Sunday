@@ -6,9 +6,6 @@
  */
 namespace BEAR\Sunday\Extension;
 
-/**
- * Interface for application extension
- */
 interface ExtensionInterface
 {
 }

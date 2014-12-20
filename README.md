@@ -211,9 +211,9 @@ $ php -S 0.0.0.0:8080
 
 ## Documentation
 
-`0.*` version documentation is available in English http://bearsunday.github.io/ and Japanese http://bearsunday.github.io/manual/ja/
+`0.*` version documentation is available in [English](http://bearsunday.github.io/) and [Japanese](http://bearsunday.github.io/manual/ja/)
 
-`1.*` version is not available currently.
+`1.*` version is not currently available.
 
 ## Requirements
 

@@ -7,8 +7,6 @@
 namespace BEAR\Sunday\Annotation;
 
 /**
- * Cache
- *
  * @Annotation
  * @Target("METHOD")
  */

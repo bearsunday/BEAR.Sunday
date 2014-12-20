@@ -8,9 +8,6 @@ namespace BEAR\Sunday\Inject;
 
 use Psr\Log\LoggerInterface;
 
-/**
- * PSR-logger setter
- */
 trait PsrLoggerInject
 {
     /**

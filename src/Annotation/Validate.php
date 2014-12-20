@@ -7,8 +7,6 @@
 namespace BEAR\Sunday\Annotation;
 
 /**
- * Validation
- *
  * @Annotation
  * @Target("METHOD")
  */

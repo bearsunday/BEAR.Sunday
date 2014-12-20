@@ -8,9 +8,6 @@ namespace BEAR\Sunday\Module\Constant;
 
 use Ray\Di\AbstractModule;
 
-/**
- * Constants 'Named' module
- */
 class NamedModule extends AbstractModule
 {
     /**

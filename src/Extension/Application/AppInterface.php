@@ -8,9 +8,6 @@ namespace BEAR\Sunday\Extension\Application;
 
 use BEAR\Sunday\Extension\ExtensionInterface;
 
-/**
- * Interface for application context
- */
 interface AppInterface extends ExtensionInterface
 {
 }

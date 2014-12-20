@@ -8,9 +8,6 @@ namespace BEAR\Sunday\Inject;
 
 use BEAR\Resource\ResourceInterface;
 
-/**
- * Resource client setter
- */
 trait ResourceInject
 {
     /**

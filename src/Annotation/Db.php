@@ -7,8 +7,6 @@
 namespace BEAR\Sunday\Annotation;
 
 /**
- * Db
- *
  * @Annotation
  * @Target("CLASS")
  */

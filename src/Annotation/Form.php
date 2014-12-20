@@ -7,8 +7,6 @@
 namespace BEAR\Sunday\Annotation;
 
 /**
- * Form
- *
  * @Annotation
  * @Target({"METHOD"})
  */

@@ -7,8 +7,6 @@
 namespace BEAR\Sunday\Annotation;
 
 /**
- * Pager
- *
  * @Annotation
  * @Target("METHOD")
  */

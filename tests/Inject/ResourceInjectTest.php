@@ -2,11 +2,8 @@
 
 namespace BEAR\Sunday\Inject;
 
-use BEAR\Resource\Module\ResourceClientModule;
 use BEAR\Resource\ResourceInterface;
 use BEAR\Sunday\Module\Resource\ResourceModule;
-use Psr\Log\LoggerInterface;
-use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 
 class ResourceInjectApplication

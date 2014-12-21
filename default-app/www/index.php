@@ -1,6 +1,8 @@
 <?php
 
 use BEAR\Resource\Request;
+use BEAR\Resource\Exception\ResourceNotFoundException as NotFound;
+use BEAR\Resource\Exception\BadRequestException as BadRequest;
 use BEAR\Sunday\Extension\Application\AppInterface;
 use BEAR\Sunday\Extension\Application\AbstractApp;
 use BEAR\Sunday\Module\SundayModule;
@@ -25,10 +27,9 @@ try {
 
     // representation transfer
     $page()->transfer($app->responder);
-
+    exit(0);
 } catch (\Exception $e) {
-    $code = $e->getCode() ?: 500;
-    http_response_code($code);
-    echo $code;
-    error_log($e);
+    $errorPage = $app->error->handle($e, $request);
+    $errorPage->transfer($app->responder);
+    exit(1);
 }

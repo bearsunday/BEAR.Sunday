@@ -7,6 +7,7 @@
 namespace BEAR\Sunday\Extension\Application;
 
 use BEAR\Resource\ResourceInterface;
+use BEAR\Sunday\Extension\Error\ErrorInterface;
 use BEAR\Sunday\Extension\Router\RouterInterface;
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
 
@@ -28,6 +29,11 @@ class AbstractApp implements AppInterface
     public $resource;
 
     /**
+     * @var ErrorInterface
+     */
+    public $error;
+
+    /**
      * @param RouterInterface   $router
      * @param TransferInterface $responder
      * @param ResourceInterface $resource
@@ -35,10 +41,12 @@ class AbstractApp implements AppInterface
     public function __construct(
         RouterInterface $router,
         TransferInterface $responder,
-        ResourceInterface $resource
+        ResourceInterface $resource,
+        ErrorInterface $error
     ) {
         $this->router = $router;
         $this->responder = $responder;
         $this->resource = $resource;
+        $this->error = $error;
     }
 }

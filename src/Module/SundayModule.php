@@ -13,6 +13,7 @@ use BEAR\Sunday\Module\Resource\ResourceModule;
 use BEAR\Sunday\Provide\Application\MinApp;
 use BEAR\Sunday\Provide\Router\RouterModule;
 use BEAR\Sunday\Provide\Transfer\HttpResponderModule;
+use BEAR\Sunday\Provide\Error\ErrorModule;
 use Ray\Di\AbstractModule;
 
 class SundayModule extends AbstractModule
@@ -28,5 +29,6 @@ class SundayModule extends AbstractModule
         $this->install(new ResourceModule);
         $this->install(new RouterModule);
         $this->install(new HttpResponderModule);
+        $this->install(new ErrorModule);
     }
 }

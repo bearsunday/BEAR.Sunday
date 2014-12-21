@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the *** package
+ * This file is part of the BEAR.Sunday package
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
@@ -37,6 +37,7 @@ class AbstractApp implements AppInterface
      * @param RouterInterface   $router
      * @param TransferInterface $responder
      * @param ResourceInterface $resource
+     * @param ErrorInterface    $error
      */
     public function __construct(
         RouterInterface $router,

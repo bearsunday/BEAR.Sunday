@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the *** package
+ * This file is part of the BEAR.Sunday package
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  */
@@ -11,6 +11,9 @@ use BEAR\Sunday\Extension\Transfer\TransferInterface;
 
 class HttpResponder implements TransferInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke(ResourceObject $resourceObject)
     {
         // code

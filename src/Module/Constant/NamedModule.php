@@ -24,6 +24,9 @@ class NamedModule extends AbstractModule
         parent::__construct();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         foreach ($this->names as $annotatedWith => $instance) {

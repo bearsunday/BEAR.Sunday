@@ -16,8 +16,6 @@ trait PsrLoggerInject
     private $logger;
 
     /**
-     * PSR Logger setter
-     *
      * @param LoggerInterface $logger
      *
      * @Ray\Di\Di\Inject

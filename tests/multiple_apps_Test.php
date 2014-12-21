@@ -2,10 +2,10 @@
 
 namespace BEAR\Sunday;
 
-use Ray\Di\Injector;
+use BEAR\Resource\Request;
 use BEAR\Resource\ResourceInterface;
 use FakeVendor\HelloWorldX\Module\AppModule;
-use BEAR\Resource\Request;
+use Ray\Di\Injector;
 
 class multiple_apps_Test extends \PHPUnit_Framework_TestCase
 {

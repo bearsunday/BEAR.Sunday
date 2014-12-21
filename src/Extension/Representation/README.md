@@ -3,8 +3,4 @@
 
 ### interface
 
-BEAR\Resource\RenderInterface
-
-### file:
-
-vendor/bear/resource/BEAR/Resource/RenderInterface
+[BEAR\Resource\RenderInterface](https://github.com/koriym/BEAR.Resource/blob/develop-2/src/RenderInterface.php)

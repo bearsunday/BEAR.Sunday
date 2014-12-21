@@ -23,6 +23,9 @@ class RouterMatch
      */
     public $query = [];
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         $querySymbol = $this->query ? '?' : '';

@@ -11,9 +11,9 @@ use BEAR\Sunday\Module\Annotation\DoctrineAnnotationModule;
 use BEAR\Sunday\Module\Cache\DoctrineCacheModule;
 use BEAR\Sunday\Module\Resource\ResourceModule;
 use BEAR\Sunday\Provide\Application\MinApp;
+use BEAR\Sunday\Provide\Error\ErrorModule;
 use BEAR\Sunday\Provide\Router\RouterModule;
 use BEAR\Sunday\Provide\Transfer\HttpResponderModule;
-use BEAR\Sunday\Provide\Error\ErrorModule;
 use Ray\Di\AbstractModule;
 
 class SundayModule extends AbstractModule

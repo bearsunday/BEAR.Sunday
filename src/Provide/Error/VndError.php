@@ -9,7 +9,6 @@ namespace BEAR\Sunday\Provide\Error;
 use BEAR\Resource\Code;
 use BEAR\Resource\Exception\BadRequestException as BadRequest;
 use BEAR\Resource\Exception\ResourceNotFoundException as NotFound;
-use BEAR\Resource\Exception\ServerErrorException as ServerError;
 use BEAR\Resource\Exception\ServerErrorException;
 use BEAR\Sunday\Extension\Error\ErrorInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch as Request;
@@ -44,6 +43,11 @@ class VndError implements ErrorInterface
         return $this->serverError($e, $request);
     }
 
+    /**
+     * @param \Exception $e
+     *
+     * @return ErrorPage
+     */
     private function codeError(\Exception $e)
     {
         $code = $e->getCode();
@@ -57,6 +61,8 @@ class VndError implements ErrorInterface
     /**
      * @param \Exception $e
      * @param Request    $request
+     *
+     * @return ErrorPage
      */
     private function serverError(\Exception $e, Request $request)
     {

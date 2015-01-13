@@ -14,7 +14,7 @@ class JsonResponder implements TransferInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(ResourceObject $resourceObject)
+    public function __invoke(ResourceObject $resourceObject, array $server)
     {
         // code
         http_response_code($resourceObject->code);

@@ -11,7 +11,7 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 $app = (new Injector(new AppModule))->getInstance(AppInterface::class);
 /** @var $app AbstractApp */
 
-$request = $app->router->match($GLOBALS);
+$request = $app->router->match($GLOBALS, $_SERVER);
 try {
     // resource request
     $page = $app->resource
@@ -22,7 +22,7 @@ try {
     /** @var $page Request */
 
     // representation transfer
-    $page()->transfer($app->responder);
+    $page()->transfer($app->responder, $_SERVER);
 
 } catch (\Exception $e) {
     $code = $e->getCode() ?: 500;

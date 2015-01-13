@@ -20,10 +20,10 @@ class FakeJsonResponder extends JsonResponder
         static::$headers = [];
         static::$content = null;
     }
-    public function __invoke(ResourceObject $resourceObject)
+    public function __invoke(ResourceObject $resourceObject, array $server)
     {
         ob_start();
-        parent::__invoke($resourceObject);
+        parent::__invoke($resourceObject, $server);
         $body =  ob_get_clean();
         self::$content = $body;
     }

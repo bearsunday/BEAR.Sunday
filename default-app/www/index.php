@@ -10,7 +10,7 @@ $loader->addPsr4('BEAR\Sunday\\', dirname(__DIR__));
 
 $app = (new Injector(new SundayModule))->getInstance(AppInterface::class);
 /** @var $app \BEAR\Sunday\Extension\Application\AbstractApp */
-$request = $app->router->match($GLOBALS);
+$request = $app->router->match($GLOBALS, $_SERVER);
 
 try {
     // resource request
@@ -22,7 +22,7 @@ try {
     /** @var $page \BEAR\Resource\Request */
 
     // representation transfer
-    $page()->transfer($app->responder);
+    $page()->transfer($app->responder, $_SERVER);
     exit(0);
 } catch (\Exception $e) {
     $errorPage = $app->error->handle($e, $request);

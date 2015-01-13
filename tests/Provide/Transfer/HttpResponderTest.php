@@ -21,7 +21,7 @@ class HttpResponderTest extends \PHPUnit_Framework_TestCase
     public function testTransfer()
     {
         $ro = (new FakeResource)->onGet();
-        $ro->transfer($this->responder);
+        $ro->transfer($this->responder, []);
         $expectedArgs = [['Cache-Control: max-age=0', false]];
         $this->assertEquals($expectedArgs, FakeHttpResponder::$headers);
         $expect = '{"greeting":"hello world"}';

@@ -21,7 +21,7 @@ class JsonResponderTest extends \PHPUnit_Framework_TestCase
     public function testTransfer()
     {
         $ro = (new FakeResource)->onGet();
-        $ro->transfer($this->responder);
+        $ro->transfer($this->responder, []);
         $expect = '{"greeting":"hello world"}';
         $actual = FakeJsonResponder::$content;
         $this->assertSame($expect, $actual);
@@ -30,7 +30,7 @@ class JsonResponderTest extends \PHPUnit_Framework_TestCase
     public function testRfc4627()
     {
         $ro = (new FakeResource)->onGet();
-        $ro->transfer($this->responder);
+        $ro->transfer($this->responder, []);
         $expectedArgs = 'Content-Type: application/json; charset=utf-8';
         $this->assertEquals($expectedArgs, FakeHttpResponder::$headers[1][0]);
 

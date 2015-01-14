@@ -11,9 +11,10 @@ use BEAR\Sunday\Extension\ExtensionInterface;
 interface RouterInterface extends ExtensionInterface
 {
     /**
-     * @param array $globals
+     * @param array $globals $GLOBALS
+     * @param array $server  $_SERVER
      *
      * @return RouterMatch
      */
-    public function match(array $globals);
+    public function match(array $globals, array $server);
 }

@@ -14,13 +14,13 @@ class WebRouter implements RouterInterface
     /**
      * {@inheritdoc}
      */
-    public function match(array $globals = [])
+    public function match(array $globals, array $server)
     {
         $request = new RouterMatch;
-        $method = strtolower($globals['_SERVER']['REQUEST_METHOD']);
+        $method = strtolower($server['REQUEST_METHOD']);
         list($request->method, $request->path, $request->query) = [
             $method,
-            'page://self' . parse_url($globals['_SERVER']['REQUEST_URI'], PHP_URL_PATH),
+            'page://self' . parse_url($server['REQUEST_URI'], PHP_URL_PATH),
             ($method === 'get') ? $globals['_GET'] : $globals['_POST']
         ];
 

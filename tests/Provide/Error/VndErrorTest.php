@@ -9,40 +9,48 @@ use BEAR\Sunday\Extension\Router\RouterMatch;
 
 class VndErrorTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var FakeVndError
+     */
+    private $vndError;
+
     public function setUp()
     {
+        FakeVndError::reset();
+        $this->vndError = new FakeVndError;
         ini_set('error_log', '/dev/null');
     }
 
     public function testNotFound()
     {
-        $error = new VndError;
         $e = new ResourceNotFoundException('', 404);
-        $errorPage = $error->handle($e, new RouterMatch);
-        $this->assertSame(404, $errorPage->code);
+        $this->vndError->handle($e, new RouterMatch)->transfer();
+        $this->assertSame([404], FakeVndError::$code);
+        $this->assertSame(['Content-Type: application/vnd.error+json'], FakeVndError::$headers);
+        $this->assertSame('{"message":"Not Found"}', FakeVndError::$content);
     }
 
     public function testBadRequest()
     {
-        $error = new VndError;
         $e = new BadRequestException('invalid-method', 400);
-        $errorPage = $error->handle($e, new RouterMatch);
-        $this->assertSame(400, $errorPage->code);
+        $this->vndError->handle($e, new RouterMatch)->transfer();
+        $this->assertSame([400], FakeVndError::$code);
+        $this->assertSame('{"message":"Bad Request"}', FakeVndError::$content);
     }
 
     public function testServerError()
     {
-        $error = new VndError;
         $e = new ServerErrorException('message', 501);
-        $errorPage = $error->handle($e, new RouterMatch);
-        $this->assertSame(501, $errorPage->code);
+        $this->vndError->handle($e, new RouterMatch)->transfer();
+        $this->assertSame([501], FakeVndError::$code);
+        $this->assertSame('{"message":"Not Implemented"}', FakeVndError::$content);
     }
 
     public function testServerErrorNot50X()
     {
-        $error = new VndError;
         $e = new \RuntimeException('message', 0);
-        $errorPage = $error->handle($e, new RouterMatch);
-        $this->assertSame(500, $errorPage->code);
+        $this->vndError->handle($e, new RouterMatch)->transfer();
+        $this->assertSame([500], FakeVndError::$code);
+        $this->assertSame('{"message":"500 Server Error"}', FakeVndError::$content);
     }
 }

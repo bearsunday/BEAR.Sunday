@@ -14,66 +14,55 @@ use BEAR\Sunday\Extension\Error\ErrorInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch as Request;
 
 /**
- * vnd.error
+ * vnd.error for BEAR.Package
  *
  * @see https://github.com/blongden/vnd.error
  */
 class VndError implements ErrorInterface
 {
     /**
-     * @var ErrorPage
+     * @var int
      */
-    private $error;
+    private $code;
 
-    public function __construct()
-    {
-        $this->error = new ErrorPage;
-        $this->error->headers['Content-Type'] = 'application/vnd.error+json';
-        $this->error->headers = [];
-    }
+    /**
+     * @var string
+     */
+    const HEADER = 'Content-Type: application/vnd.error+json';
+
+    /**
+     * @var array
+     */
+    private $body = [];
 
     /**
      * {@inheritdoc}
      */
     public function handle(\Exception $e, Request $request)
     {
-        if ($e instanceof NotFound || $e instanceof BadRequest) {
-            return $this->codeError($e);
+        $isCodeError = ($e instanceof NotFound || $e instanceof BadRequest || $e instanceof ServerErrorException);
+        if ($isCodeError) {
+            $this->code = $e->getCode();
+            $this->body = ['message' => (new Code)->statusText[$this->code]];
+
+            return $this;
         }
-        return $this->serverError($e, $request);
-    }
-
-    /**
-     * @param \Exception $e
-     *
-     * @return ErrorPage
-     */
-    private function codeError(\Exception $e)
-    {
-        $code = $e->getCode();
-        $this->error->code = $code;
-        $message =  $code . ' ' . (new Code)->statusText[$code];
-        $this->error->body = ['message' => $message];
-
-        return $this->error;
-    }
-
-    /**
-     * @param \Exception $e
-     * @param Request    $request
-     *
-     * @return ErrorPage
-     */
-    private function serverError(\Exception $e, Request $request)
-    {
-        if ($e instanceof ServerErrorException) {
-            return $this->codeError($e);
-        }
-        $this->error->code = 500;
-        $this->error->body = ['message' => '500 Server Error'];
-        error_log((string) $request);
+        $this->code = 500;
+        $this->body = ['message' => '500 Server Error'];
+        error_log($request);
         error_log($e);
 
-        return $this->error;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function transfer()
+    {
+        http_response_code($this->code);
+        header(self::HEADER);
+        echo json_encode($this->body);
     }
 }
+

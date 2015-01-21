@@ -25,8 +25,5 @@ try {
     $page()->transfer($app->responder, $_SERVER);
 
 } catch (\Exception $e) {
-    $code = $e->getCode() ?: 500;
-    http_response_code($code);
-    echo $code;
-    error_log($e);
+    $app->error->handle($e, $request)->transfer();
 }

@@ -48,4 +48,10 @@ class WebRouterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('page://self/', $request->path);
         $this->assertSame(['id' => 1], $request->query);
     }
+
+    public function testGenerate()
+    {
+        $actual = $this->router->generate('', []);
+        $this->assertFalse($actual);
+    }
 }

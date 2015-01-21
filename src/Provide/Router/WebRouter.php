@@ -26,4 +26,12 @@ class WebRouter implements RouterInterface
 
         return $request;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function generate($name, $data)
+    {
+        return false;
+    }
 }

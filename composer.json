@@ -29,6 +29,9 @@
             "BEAR\\Sunday\\": "src/"
         }
     },
+    "autoload-dev": {
+        "files": ["tests/Fake/functions.php"]
+    },
     "extra": {
         "branch-alias": {
             "dev-develop-2": "1.0.x-dev"

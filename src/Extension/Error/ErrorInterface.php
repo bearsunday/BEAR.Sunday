@@ -6,16 +6,22 @@
  */
 namespace BEAR\Sunday\Extension\Error;
 
-use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Extension\Router\RouterMatch as Request;
 
 interface ErrorInterface
 {
     /**
+     * Handle exception
+     *
      * @param \Exception $e
      * @param Request    $request
      *
-     * @return ResourceObject
+     * @return $this
      */
     public function handle(\Exception $e, Request $request);
+
+    /**
+     * Error page transfer
+     */
+    public function transfer();
 }

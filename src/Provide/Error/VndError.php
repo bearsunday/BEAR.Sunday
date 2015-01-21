@@ -14,7 +14,7 @@ use BEAR\Sunday\Extension\Error\ErrorInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch as Request;
 
 /**
- * vnd.error for BEAR.Package
+ * Vnd.Error media type error
  *
  * @see https://github.com/blongden/vnd.error
  */
@@ -65,4 +65,3 @@ class VndError implements ErrorInterface
         echo json_encode($this->body);
     }
 }
-

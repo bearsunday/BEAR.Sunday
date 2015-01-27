@@ -17,12 +17,8 @@ class WebRouter implements RouterInterface
     public function match(array $globals, array $server)
     {
         $request = new RouterMatch;
-        $method = strtolower($server['REQUEST_METHOD']);
-        list($request->method, $request->path, $request->query) = [
-            $method,
-            'page://self' . parse_url($server['REQUEST_URI'], PHP_URL_PATH),
-            ($method === 'get') ? $globals['_GET'] : $globals['_POST']
-        ];
+        list($request->method, $request->query) = (new OverrideMethod)->get($server, $globals['_GET'], $globals['_POST']);
+        $request->path = 'page://self' . parse_url($server['REQUEST_URI'], PHP_URL_PATH);
 
         return $request;
     }

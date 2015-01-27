@@ -110,7 +110,7 @@ final class OverrideMethod
     private function getStdIn()
     {
         $input = file_get_contents('php://input');
-        $input ?  parse_str(file_get_contents('php://input'), $stdin) : $stdin = [];
+        $input ?  parse_str($input, $stdin) : $stdin = [];
 
         return $stdin;
     }

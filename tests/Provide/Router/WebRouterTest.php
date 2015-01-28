@@ -18,8 +18,7 @@ class WebRouterTest extends \PHPUnit_Framework_TestCase
     public function testMatchRoot()
     {
         $global = [
-            '_GET' => [],
-            '_POST' => []
+            '_GET' => []
         ];
         $server = [
             'REQUEST_METHOD' => 'GET',
@@ -37,8 +36,8 @@ class WebRouterTest extends \PHPUnit_Framework_TestCase
         $global = [
             '_GET' => [
                 'id' => 1
-            ],
-            '_POST' => []
+
+            ]
         ];
         $server = [
             'REQUEST_METHOD' => 'GET',

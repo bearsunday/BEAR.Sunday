@@ -10,8 +10,10 @@ use BEAR\Resource\Code;
 use BEAR\Resource\Exception\BadRequestException as BadRequest;
 use BEAR\Resource\Exception\ResourceNotFoundException as NotFound;
 use BEAR\Resource\Exception\ServerErrorException;
+use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Extension\Error\ErrorInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch as Request;
+use BEAR\Sunday\Extension\Transfer\TransferInterface;
 
 /**
  * Vnd.Error media type error
@@ -21,19 +23,20 @@ use BEAR\Sunday\Extension\Router\RouterMatch as Request;
 class VndError implements ErrorInterface
 {
     /**
-     * @var int
-     */
-    private $code;
-
-    /**
      * @var string
      */
-    const HEADER = 'Content-Type: application/vnd.error+json';
+    const CONTENT_TYPE = 'application/vnd.error+json';
 
     /**
-     * @var array
+     * @var TransferInterface
      */
-    private $body = [];
+    private $transfer;
+
+    public function __construct(TransferInterface $transfer)
+    {
+        $this->transfer = $transfer;
+        $this->errorPage = new ErrorPage;
+    }
 
     /**
      * {@inheritdoc}
@@ -42,13 +45,13 @@ class VndError implements ErrorInterface
     {
         $isCodeError = ($e instanceof NotFound || $e instanceof BadRequest || $e instanceof ServerErrorException);
         if ($isCodeError) {
-            $this->code = $e->getCode();
-            $this->body = ['message' => (new Code)->statusText[$this->code]];
+            $this->errorPage->code = $e->getCode();
+            $this->errorPage->body = ['message' => (new Code)->statusText[$this->code]];
 
             return $this;
         }
-        $this->code = 500;
-        $this->body = ['message' => '500 Server Error'];
+        $this->errorPage->code = 500;
+        $this->errorPage->body = ['message' => '500 Server Error'];
         error_log($request);
         error_log($e);
 
@@ -60,8 +63,7 @@ class VndError implements ErrorInterface
      */
     public function transfer()
     {
-        http_response_code($this->code);
-        header(self::HEADER);
-        echo json_encode($this->body);
+        $this->errorPage->headers['Content-Type'] = self::CONTENT_TYPE;
+        $this->transfer->__invoke($this->errorPage, []);
     }
 }

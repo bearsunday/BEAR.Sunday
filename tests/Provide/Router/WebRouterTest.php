@@ -2,6 +2,8 @@
 
 namespace BEAR\Sunday\Provide\Router;
 
+use BEAR\Sunday\Extension\Router\SchemeHost;
+
 class WebRouterTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -49,6 +51,21 @@ class WebRouterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(['id' => 1], $request->query);
     }
 
+    public function testSchemeHost()
+    {
+        $global = [
+            '_GET' => []
+        ];
+        $server = [
+            'REQUEST_METHOD' => 'GET',
+            'REQUEST_URI' => '/'
+
+        ];
+        $this->router->setSchemeHost(new SchemeHost('app://self'));
+        $request = $this->router->match($global, $server);
+        $this->assertSame('app://self/', $request->path);
+
+    }
     public function testGenerate()
     {
         $actual = $this->router->generate('', []);

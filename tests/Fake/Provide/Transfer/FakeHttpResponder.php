@@ -9,9 +9,11 @@ namespace BEAR\Sunday\Provide\Transfer;
 use BEAR\Resource\ResourceObject;
 
 require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/http_response_code.php';
 
 class FakeHttpResponder extends HttpResponder
 {
+    public static $code = [];
     public static $headers = [];
     public static $content;
 

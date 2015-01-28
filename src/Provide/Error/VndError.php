@@ -46,7 +46,7 @@ class VndError implements ErrorInterface
         $isCodeError = ($e instanceof NotFound || $e instanceof BadRequest || $e instanceof ServerErrorException);
         if ($isCodeError) {
             $this->errorPage->code = $e->getCode();
-            $this->errorPage->body = ['message' => (new Code)->statusText[$this->code]];
+            $this->errorPage->body = ['message' => (new Code)->statusText[$this->errorPage->code]];
 
             return $this;
         }

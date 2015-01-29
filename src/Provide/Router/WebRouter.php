@@ -8,27 +8,9 @@ namespace BEAR\Sunday\Provide\Router;
 
 use BEAR\Sunday\Extension\Router\RouterInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch;
-use BEAR\Sunday\Extension\Router\SchemeHost;
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 
 class WebRouter implements RouterInterface
 {
-    /**
-     * @var string
-     */
-    private $schemeHost = 'page://self';
-
-    /**
-     * @param SchemeHost $schemeHost default route scheme+host if only path is given
-     *
-     * @Inject(optional=true)
-     */
-    public function setSchemeHost(SchemeHost $schemeHost)
-    {
-        $this->schemeHost = (string) $schemeHost;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -38,7 +20,7 @@ class WebRouter implements RouterInterface
         $method = strtolower($server['REQUEST_METHOD']);
         list($request->method, $request->path, $request->query) = [
             $method,
-            $this->schemeHost . parse_url($server['REQUEST_URI'], PHP_URL_PATH),
+            'page://self' . parse_url($server['REQUEST_URI'], PHP_URL_PATH),
             ($method === 'get') ? $globals['_GET'] : $globals['_POST']
         ];
 

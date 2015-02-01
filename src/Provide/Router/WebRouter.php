@@ -22,7 +22,7 @@ class WebRouter implements RouterInterface
     /**
      * @DefaultSchemeHost
      *
-     * @param $schemeHost
+     * @param string $schemeHost
      */
     public function __construct($schemeHost)
     {

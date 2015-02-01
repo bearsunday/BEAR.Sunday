@@ -12,7 +12,7 @@ class WebRouterTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->router = new WebRouter;
+        $this->router = new WebRouter('page://self');
     }
 
     public function testMatchRoot()

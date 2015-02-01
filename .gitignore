@@ -1,8 +1,8 @@
 .idea
-templates_c
 vendor
 tmp
 *.log
 build
 cache.properties
 composer.phar
+composer.lock

@@ -6,11 +6,11 @@
  */
 namespace BEAR\Sunday\Provide\Router;
 
+use BEAR\Sunday\Annotation\DefaultSchemeHost;
 use BEAR\Sunday\Extension\Router\RouterInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch;
-use BEAR\Sunday\Extension\Router\SchemeHost;
-use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
+use Ray\Di\Di\Qualifier;
 
 class WebRouter implements RouterInterface
 {
@@ -20,13 +20,13 @@ class WebRouter implements RouterInterface
     private $schemeHost = 'page://self';
 
     /**
-     * @param SchemeHost $schemeHost default route scheme+host if only path is given
+     * @DefaultSchemeHost
      *
-     * @Inject(optional=true)
+     * @param string $schemeHost
      */
-    public function setSchemeHost(SchemeHost $schemeHost)
+    public function __construct($schemeHost)
     {
-        $this->schemeHost = (string) $schemeHost;
+        $this->schemeHost = $schemeHost;
     }
 
     /**

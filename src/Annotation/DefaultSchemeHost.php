@@ -15,4 +15,5 @@ use Ray\Di\Di\Qualifier;
  */
 final class DefaultSchemeHost
 {
+    public $value;
 }

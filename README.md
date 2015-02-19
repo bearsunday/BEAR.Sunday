@@ -44,6 +44,61 @@ class Hello extends Page
     </body>
 </html>
 ```
+## Building a Hypermedia-Driven RESTful Web Service in 1 min.
+
+Hypermedia is an important aspect of REST. It allows you to build services that decouple client and server to a large extent and allow them to evolve independently. The representations returned for REST resources contain links that indicate which further resources the client should look at and interact with. Thus the design of the representations is crucial to the design of the overall service.
+
+## Create project 
+
+    composer create-project bear/skeleton:~1.0@dev MyVendor.MyPackage
+    cd MyVendor.MyPackage
+    composer install
+
+## Create a resource class
+
+`src/Resource/App/Greeting.php`
+
+```php
+<?php
+
+namespace MyVendor\MyPackage\Resource\App;
+
+use BEAR\Resource\ResourceObject;
+
+class Greeting extends ResourceObject
+{
+    public function onGet($name = 'World')
+    {
+        $this['greeting'] = 'Hello, ' . $name;
+
+        return $this;
+    }
+}
+```
+
+That's all. 
+
+## Test the service
+
+Use the built-in PHP server.
+```
+php -S localhost:8080 bootstrap/api.php 
+```
+
+Now that the service is up, visit http://localhost:8080/greeting, where you see:
+```
+{
+    "greeting": "Hello, World",
+    "_links": {
+        "self": {
+            "href": "/greeting"
+        }
+    }
+}
+```
+JSON representation of a greeting enriched with the simplest possible hypermedia element, a link pointing to the resource itself:
+
+Congratulations! You’ve just developed a hypermedia-driven RESTful web service with BEAR.Sunday.
 
 ## Application Script
 

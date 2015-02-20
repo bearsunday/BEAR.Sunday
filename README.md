@@ -261,13 +261,13 @@ $ cd www
 $ php -S 0.0.0.0:8080
 ```
 
-## Documentation
+## Links
 
-`0.*` version documentation is available in [English](http://bearsunday.github.io/) and [Japanese](http://bearsunday.github.io/manual/ja/)
-
-`1.*` version is not currently available.
+ * [Homepage](http://bearsunday.github.io/)
+ * [BEAR.Package](https://github.com/koriym/BEAR.Package/) - a web application frame work package for BEAR.Sunday
 
 ## Requirements
 
  * PHP 5.5+
+ * hhvm
  

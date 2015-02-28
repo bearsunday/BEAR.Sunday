@@ -3,10 +3,14 @@
 use BEAR\Resource\Request;
 use BEAR\Sunday\Extension\Application\AbstractApp;
 use BEAR\Sunday\Extension\Application\AppInterface;
+use Composer\Autoload\ClassLoader;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use MyVendor\HelloWorld\AppModule;
 use Ray\Di\Injector;
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+/* @var $loader ClassLoader*/
+$loader = require dirname(__DIR__) . '/vendor/autoload.php';
+AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 
 $app = (new Injector(new AppModule))->getInstance(AppInterface::class);
 /* @var $app AbstractApp */

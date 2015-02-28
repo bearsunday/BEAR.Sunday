@@ -9,8 +9,6 @@ namespace BEAR\Sunday\Provide\Router;
 use BEAR\Sunday\Annotation\DefaultSchemeHost;
 use BEAR\Sunday\Extension\Router\RouterInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch;
-use Ray\Di\Di\Named;
-use Ray\Di\Di\Qualifier;
 
 class WebRouter implements RouterInterface
 {

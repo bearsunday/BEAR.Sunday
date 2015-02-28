@@ -9,7 +9,7 @@ use Ray\Di\Injector;
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 $app = (new Injector(new AppModule))->getInstance(AppInterface::class);
-/** @var $app AbstractApp */
+/* @var $app AbstractApp */
 
 $request = $app->router->match($GLOBALS, $_SERVER);
 try {
@@ -19,11 +19,10 @@ try {
         ->uri($request->path)
         ->withQuery($request->query)
         ->request();
-    /** @var $page Request */
+    /* @var $page Request */
 
     // representation transfer
     $page()->transfer($app->responder, $_SERVER);
-
 } catch (\Exception $e) {
     $app->error->handle($e, $request)->transfer();
 }

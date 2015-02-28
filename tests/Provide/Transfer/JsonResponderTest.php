@@ -33,6 +33,5 @@ class JsonResponderTest extends \PHPUnit_Framework_TestCase
         $ro->transfer($this->responder, []);
         $expectedArgs = 'Content-Type: application/json; charset=utf-8';
         $this->assertEquals($expectedArgs, FakeHttpResponder::$headers[1][0]);
-
     }
 }

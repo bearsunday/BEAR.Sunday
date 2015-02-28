@@ -9,6 +9,7 @@ class Greeting extends ResourceObject
     public function onGet()
     {
         $this->body['greeting'] = 'hello world';
+
         return $this;
     }
 }

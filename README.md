@@ -254,11 +254,11 @@ How to run test and HelloWorld demo
 $ composer create-project --dev bear/sunday:~1.0@dev
 $ cd sunday
 $ phpunit
-$ cd docs/demo/MyVendor/HelloWorld/
+$ cd docs/demo/MyVendor.HelloWorld/
 $ composer install
 $ phpunit
 $ cd www
-$ php -S 0.0.0.0:8080
+$ php -S 127.0.0.1:8080
 ```
 
 ## Links

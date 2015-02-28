@@ -24,5 +24,5 @@ try {
     // representation transfer
     $page()->transfer($app->responder, $_SERVER);
 } catch (\Exception $e) {
-    $app->error->handle($e, $request)->transfer();
+    error_log($e);
 }

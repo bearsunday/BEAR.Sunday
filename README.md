@@ -24,7 +24,6 @@ Interactions with your database, services and even pages and sections of your ap
 ## GET - Hello World
 
 The resource class receive a named argument over the query parameters of the URL.
-![Halo](http://koriym.github.io/BEAR.Sunday/images/screen/url.png)
 
 ```php
 class Hello extends Page
@@ -44,17 +43,17 @@ class Hello extends Page
     </body>
 </html>
 ```
-## Building a Hypermedia-Driven RESTful Web Service in 1 min.
+## Building a Hypermedia-Driven RESTful Web Service in 1 min
 
 Hypermedia is an important aspect of REST. It allows you to build services that decouple client and server to a large extent and allow them to evolve independently. The representations returned for REST resources contain links that indicate which further resources the client should look at and interact with. Thus the design of the representations is crucial to the design of the overall service.
 
-## Create project 
+### Create project
 
     composer create-project bear/skeleton:~1.0@dev MyVendor.MyPackage
     cd MyVendor.MyPackage
     composer install
 
-## Create a resource class
+### Create a resource class
 
 `src/Resource/App/Greeting.php`
 
@@ -76,13 +75,13 @@ class Greeting extends ResourceObject
 }
 ```
 
-That's all. 
+That's all.
 
-## Test the service
+### Test the service
 
 Use the built-in PHP server.
 ```
-php -S localhost:8080 bootstrap/api.php 
+php -S localhost:8080 bootstrap/api.php
 ```
 
 Now that the service is up, visit http://localhost:8080/greeting, where you see:
@@ -100,63 +99,12 @@ JSON representation of a greeting enriched with the simplest possible hypermedia
 
 Congratulations! You’ve just developed a hypermedia-driven RESTful web service with BEAR.Sunday.
 
-## Application Script
+## Application
 
-Application execution sequence is scripted by the user-defined application script.
+Application execution sequence is scripted by the user-defined [application script](https://github.com/bearsunday/BEAR.Sunday/blob/develop-2/docs/demo/MyVendor.Helloworld/www/index.php).
 
-```php
-
-
-// Here we get the application instance.
-$app = (new Injector(new SundayModule))->getInstance(AppInterface::class);
-/** @var $app AbstractApp */
-
-// Calling the match of a BEAR.Sunday compatible router will give us the $method, $path, $query to be used in the page request.
-$request = $app->router->match($GLOBALS);
-try {
-    // resource request
-    $page = $app->resource
-        ->{$request->method}
-        ->uri($request->path)
-        ->withQuery($request->query)
-        ->request();
-    /** @var $page Request */
-
-    // representation transfer
-    $page()->transfer($app->responder);
-
-} catch (\Exception $e) {
-    $code = $e->getCode() ?: 500;
-    http_response_code($code);
-    echo $code;
-    error_log($e);
-}
-```
-
-## Application Object
-Application is just stored in [one object variable](http://bearsunday.github.io/readme/print_o/app.html).
+Application services are just stored in [one object variable](http://bearsunday.github.io/readme/print_o/app.html).
 You can access all resource of application with resources clients, easy use from plain PHP files or CMS and other frameworks as well.
-
-```php
-<?php
-
-$app = require 'MyApp/scripts/instance.php';
-$hello = $app
-->resource
-->get
-->uri('app://self/hello')
-->withQuery(['name' => 'Pull world !'])
-->eager
-->request();
-
-?>
-<html>
-<body>
-greeting: <?php echo $hello['greeting']; ?>
-time: <?php echo $hello['time']; ?>
-</body>
-</html>
-```
 
 Dependency injection
 --------------------
@@ -244,12 +192,10 @@ use ResourceInject;
 
 $this->resource->get->uri('app://self/greetings')->withQuery(['lang' => 'ja'])->eager->request();
 ```
-Resource Object Diagram
------------------------
+### Resource Object Diagram
 ![Resource Object Diagram](http://bearsunday.github.io//images/screen/diagram.png "Resource Object Diagram")
 
-How to run test and HelloWorld demo
------------------------------------
+### How to run test and HelloWorld demo
 ```
 $ composer create-project --dev bear/sunday:~1.0@dev
 $ cd sunday
@@ -261,13 +207,12 @@ $ cd www
 $ php -S 127.0.0.1:8080
 ```
 
-## Links
+### Links
 
  * [Homepage](http://bearsunday.github.io/)
  * [BEAR.Package](https://github.com/koriym/BEAR.Package/) - a web application frame work package for BEAR.Sunday
 
-## Requirements
+### Requirements
 
  * PHP 5.5+
  * hhvm
- 

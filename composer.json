@@ -12,18 +12,16 @@
     "license": "BSD-3-Clause",
     "authors": [
         {
-            "name": "BEAR.Sunday Contributors",
-            "homepage": "https://github.com/koriym/BEAR.Sunday/graphs/contributors"
+            "name": "Akihito Koriyama",
+            "email": "akihito.koriyama@gmail.com"
         }
     ],
     "require": {
         "php": ">=5.5.0",
-        "bear/resource": "~1.0@dev",
+        "bear/resource": "~1.0",
         "doctrine/cache": "~1.0",
         "psr/log": "~1.0"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "BEAR\\Sunday\\": "src/"

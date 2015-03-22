@@ -31,6 +31,11 @@ class VndError implements ErrorInterface
      */
     private $transfer;
 
+    /**
+     * @var ErrorPage
+     */
+    private $errorPage;
+
     public function __construct(TransferInterface $transfer)
     {
         $this->transfer = $transfer;

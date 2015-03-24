@@ -48,7 +48,7 @@ class VndError implements ErrorInterface
     public function handle(\Exception $e, Request $request)
     {
         $isCodeError = ($e instanceof NotFound || $e instanceof BadRequest || $e instanceof ServerErrorException);
-        if ($isCodeError) {
+        if ($isCodeError && $this->isCodeExists($e->getCode())) {
             $this->errorPage->code = $e->getCode();
             $this->errorPage->body = ['message' => (new Code)->statusText[$this->errorPage->code]];
 
@@ -60,6 +60,14 @@ class VndError implements ErrorInterface
         error_log($e);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function isCodeExists($code)
+    {
+        return array_key_exists($code, (new Code)->statusText);
     }
 
     /**

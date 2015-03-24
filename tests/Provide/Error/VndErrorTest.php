@@ -49,9 +49,17 @@ class VndErrorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('{"message":"Not Implemented"}', FakeHttpResponder::$content);
     }
 
-    public function testServerErrorNot50X()
+    public function testRuntimeError()
     {
         $e = new \RuntimeException('message', 0);
+        $this->vndError->handle($e, new RouterMatch)->transfer();
+        $this->assertSame([500], FakeHttpResponder::$code);
+        $this->assertSame('{"message":"500 Server Error"}', FakeHttpResponder::$content);
+    }
+
+    public function testServerErrorNot50X()
+    {
+        $e = new ServerErrorException('message', 0);
         $this->vndError->handle($e, new RouterMatch)->transfer();
         $this->assertSame([500], FakeHttpResponder::$code);
         $this->assertSame('{"message":"500 Server Error"}', FakeHttpResponder::$content);

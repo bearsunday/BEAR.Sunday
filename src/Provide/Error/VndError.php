@@ -65,17 +65,20 @@ class VndError implements ErrorInterface
     /**
      * {@inheritdoc}
      */
-    private function isCodeExists($code)
-    {
-        return array_key_exists($code, (new Code)->statusText);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function transfer()
     {
         $this->errorPage->headers['Content-Type'] = self::CONTENT_TYPE;
         $this->transfer->__invoke($this->errorPage, []);
     }
+
+    /**
+     * @param int $code
+     *
+     * @return bool
+     */
+    private function isCodeExists($code)
+    {
+        return array_key_exists($code, (new Code)->statusText);
+    }
+
 }

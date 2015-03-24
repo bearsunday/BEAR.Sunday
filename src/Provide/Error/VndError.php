@@ -65,7 +65,7 @@ class VndError implements ErrorInterface
     /**
      * {@inheritdoc}
      */
-    protected function isCodeExists($code)
+    private function isCodeExists($code)
     {
         return array_key_exists($code, (new Code)->statusText);
     }

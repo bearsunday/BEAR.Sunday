@@ -19,7 +19,7 @@ use BEAR\Sunday\Extension\Transfer\TransferInterface;
  *
  * @see https://github.com/blongden/vnd.error
  */
-class VndError implements ErrorInterface
+final class VndError implements ErrorInterface
 {
     /**
      * @var string
@@ -65,7 +65,7 @@ class VndError implements ErrorInterface
     /**
      * {@inheritdoc}
      */
-    protected function isCodeExists($code)
+    private function isCodeExists($code)
     {
         return array_key_exists($code, (new Code)->statusText);
     }

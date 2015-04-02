@@ -9,7 +9,7 @@ namespace BEAR\Sunday\Provide\Error;
 use BEAR\Resource\Code;
 use BEAR\Resource\Exception\BadRequestException as BadRequest;
 use BEAR\Resource\Exception\ResourceNotFoundException as NotFound;
-use BEAR\Resource\Exception\ServerErrorException;
+use BEAR\Resource\Exception\ServerErrorException as ServerError;
 use BEAR\Sunday\Extension\Error\ErrorInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch as Request;
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
@@ -47,8 +47,7 @@ final class VndError implements ErrorInterface
      */
     public function handle(\Exception $e, Request $request)
     {
-        $isCodeError = ($e instanceof NotFound || $e instanceof BadRequest || $e instanceof ServerErrorException);
-        if ($isCodeError && $this->isCodeExists($e->getCode())) {
+        if ($this->isCodeExists($e)) {
             $this->errorPage->code = $e->getCode();
             $this->errorPage->body = ['message' => (new Code)->statusText[$this->errorPage->code]];
 
@@ -65,9 +64,13 @@ final class VndError implements ErrorInterface
     /**
      * {@inheritdoc}
      */
-    private function isCodeExists($code)
+    private function isCodeExists(\Exception $e)
     {
-        return array_key_exists($code, (new Code)->statusText);
+        if (! ($e instanceof NotFound || $e instanceof BadRequest || $e instanceof ServerError)) {
+            return false;
+        }
+
+        return array_key_exists($e->getCode(), (new Code)->statusText);
     }
 
     /**

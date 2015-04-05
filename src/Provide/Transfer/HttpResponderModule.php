@@ -16,6 +16,6 @@ class HttpResponderModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind(TransferInterface::class)->to(JsonResponder::class);
+        $this->bind(TransferInterface::class)->to(HttpResponder::class);
     }
 }

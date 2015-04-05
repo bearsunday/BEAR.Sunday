@@ -23,6 +23,7 @@ class HttpResponder implements TransferInterface
         foreach ($resourceObject->headers as $label => $value) {
             header("{$label}: {$value}", false);
         }
+
         // body
         echo (string) $resourceObject;
     }

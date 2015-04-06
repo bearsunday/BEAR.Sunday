@@ -14,7 +14,7 @@ require_once __DIR__ . '/http_response_code.php';
 
 class FakeHttpResponder extends HttpResponder
 {
-    public static $code = [];
+    public static $code;
     public static $headers = [];
     public static $content;
 

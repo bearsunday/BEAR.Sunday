@@ -18,9 +18,9 @@ class WebRouter implements RouterInterface
     private $schemeHost = 'page://self';
 
     /**
-     * @DefaultSchemeHost
-     *
      * @param string $schemeHost
+     *
+     * @DefaultSchemeHost
      */
     public function __construct($schemeHost)
     {

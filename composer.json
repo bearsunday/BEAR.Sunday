@@ -26,10 +26,5 @@
         "psr-4": {
             "BEAR\\Sunday\\": "src/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-develop-2": "1.0.x-dev"
-        }
     }
 }

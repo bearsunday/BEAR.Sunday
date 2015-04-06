@@ -64,6 +64,17 @@ final class VndError implements ErrorInterface
     /**
      * {@inheritdoc}
      */
+    public function transfer()
+    {
+        $this->errorPage->headers['Content-Type'] = self::CONTENT_TYPE;
+        $this->transfer->__invoke($this->errorPage, []);
+    }
+
+    /**
+     * @param \Exception $e
+     *
+     * @return bool
+     */
     private function isCodeExists(\Exception $e)
     {
         if (! ($e instanceof NotFound || $e instanceof BadRequest || $e instanceof ServerError)) {
@@ -73,12 +84,4 @@ final class VndError implements ErrorInterface
         return array_key_exists($e->getCode(), (new Code)->statusText);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function transfer()
-    {
-        $this->errorPage->headers['Content-Type'] = self::CONTENT_TYPE;
-        $this->transfer->__invoke($this->errorPage, []);
-    }
 }

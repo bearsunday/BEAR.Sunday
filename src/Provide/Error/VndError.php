@@ -82,4 +82,5 @@ final class VndError implements ErrorInterface
         }
 
         return array_key_exists($e->getCode(), (new Code)->statusText);
-    }}
+    }
+}

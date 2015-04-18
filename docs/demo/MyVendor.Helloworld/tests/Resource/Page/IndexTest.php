@@ -24,6 +24,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
     public function testInstance()
     {
         $page = $this->resource->newInstance('page://self/');
+        $this->assertInstanceOf(Index::class, $page);
     }
 
     public function testGet()

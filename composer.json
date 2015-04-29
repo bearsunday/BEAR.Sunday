@@ -1,15 +1,15 @@
 {
     "name": "bear/sunday",
-    "description": "Resource oriented framework",
+    "description": "A resource oriented framework",
     "keywords": [
         "framework",
         "DI",
         "AOP",
         "REST",
-        "Hypermedia"
+        "Hypermedia",
+        "Ray"
     ],
-    "homepage": "https://github.com/koriym/BEAR.Sunday",
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "authors": [
         {
             "name": "Akihito Koriyama",

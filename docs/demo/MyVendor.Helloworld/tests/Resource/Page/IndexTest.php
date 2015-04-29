@@ -3,8 +3,6 @@
 namespace MyVendor\HelloWorld\Resource\Page;
 
 use BEAR\Resource\ResourceInterface;
-use BEAR\Resource\ResourceObject;
-use BEAR\Sunday\Extension\Application\AppInterface;
 use MyVendor\HelloWorld\AppModule;
 use Ray\Di\Injector;
 

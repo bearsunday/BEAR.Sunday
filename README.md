@@ -2,9 +2,12 @@
 
 ## A resource oriented framework
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/badges/quality-score.png?b=develop-2)](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/?branch=develop-2)
-[![Code Coverage](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/badges/coverage.png?b=develop-2)](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/?branch=develop-2)
-[![Build Status](https://travis-ci.org/bearsunday/BEAR.Sunday.svg?branch=develop-2)](https://travis-ci.org/bearsunday/BEAR.Sunday)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/badges/quality-score.png?b=1.x)](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/?branch=1.x
+)
+[![Code Coverage](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/badges/coverage.png?b=1.x)](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/?branch=1.x
+)
+[![Build Status](https://travis-ci.org/bearsunday/BEAR.Sunday.svg?branch=1.x
+)](https://travis-ci.org/bearsunday/BEAR.Sunday)
 
 ## What's BEAR.Sunday
 

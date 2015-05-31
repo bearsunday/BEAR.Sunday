@@ -200,7 +200,7 @@ $this->resource->get->uri('app://self/greetings')->withQuery(['lang' => 'ja'])->
 
 ### How to run test and HelloWorld demo
 ```
-$ composer create-project --dev bear/sunday:~1.0@dev
+$ composer create-project bear/sunday:~1.0
 $ cd sunday
 $ phpunit
 $ cd docs/demo/MyVendor.HelloWorld/
@@ -213,7 +213,7 @@ $ php -S 127.0.0.1:8080
 ### Links
 
  * [Homepage](http://bearsunday.github.io/)
- * [BEAR.Package](https://github.com/koriym/BEAR.Package/) - a web application frame work package for BEAR.Sunday
+ * [BEAR.Package](https://github.com/bearsunday/BEAR.Package/) - a web application frame work package for BEAR.Sunday
 
 ### Requirements
 

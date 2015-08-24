@@ -22,7 +22,10 @@ class HttpResponderTest extends \PHPUnit_Framework_TestCase
     {
         $ro = (new FakeResource)->onGet();
         $ro->transfer($this->responder, []);
-        $expectedArgs = [['Cache-Control: max-age=0', false]];
+        $expectedArgs = [
+            ['Cache-Control: max-age=0', false],
+            ['content-type: application/json', false],
+        ];
         $this->assertEquals($expectedArgs, FakeHttpResponder::$headers);
         $expect = '{"greeting":"hello world"}';
         $actual = FakeHttpResponder::$content;

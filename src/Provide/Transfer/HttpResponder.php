@@ -16,6 +16,9 @@ class HttpResponder implements TransferInterface
      */
     public function __invoke(ResourceObject $resourceObject, array $server)
     {
+        // render
+        $body = (string) $resourceObject;
+
         // code
         http_response_code($resourceObject->code);
 
@@ -25,6 +28,6 @@ class HttpResponder implements TransferInterface
         }
 
         // body
-        echo (string) $resourceObject;
+        echo $body;
     }
 }

@@ -213,7 +213,7 @@ $ php -S 127.0.0.1:8080
 ### Links
 
  * [Homepage](http://bearsunday.github.io/)
- * [BEAR.Package](https://github.com/bearsunday/BEAR.Package/) - a web application frame work package for BEAR.Sunday
+ * [BEAR.Package](https://github.com/bearsunday/BEAR.Package/) - a web application framework package for BEAR.Sunday
 
 ### Requirements
 

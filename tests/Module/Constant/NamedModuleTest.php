@@ -2,38 +2,13 @@
 
 namespace BEAR\Sunday\Module\Constant;
 
-use Ray\Di\Di\Inject;
-use Ray\Di\Di\Named;
 use Ray\Di\Injector;
-
-class Application
-{
-    public $dir;
-    public $id;
-
-    /**
-     * @Inject
-     * @Named("path")
-     */
-    public function setPath($dir)
-    {
-        $this->dir = $dir;
-    }
-
-    /**
-     * @Inject
-     * @Named("id")
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-}
+use BEAR\Sunday\FakeApplication;
 
 class ConstantModuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Application
+     * @var FakeApplication
      */
     private $app;
 
@@ -43,7 +18,7 @@ class ConstantModuleTest extends \PHPUnit_Framework_TestCase
             'path' => __DIR__,
             'id' => 'bear'
         ];
-        $this->app = (new Injector(new NamedModule($names)))->getInstance(__NAMESPACE__ .'\Application');
+        $this->app = (new Injector(new NamedModule($names)))->getInstance(FakeApplication::class);
     }
 
     public function testNamed()

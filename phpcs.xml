@@ -9,7 +9,6 @@
         <exclude name="PSR2.Classes.PropertyDeclaration.Underscore"/>
         <exclude name="PSR2.Methods.MethodDeclaration.Underscore"/>
     </rule>
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
     <rule ref="PEAR.Commenting.FunctionComment">
         <exclude name="PEAR.Commenting.FunctionComment.MissingReturn"/>
         <exclude name="PEAR.Commenting.FunctionComment.MissingParamComment"/>

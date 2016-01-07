@@ -6,6 +6,7 @@
  */
 namespace BEAR\Sunday\Module\Constant;
 
+use BEAR\Sunday\FakeApplication;
 use Ray\Di\AbstractModule;
 
 class NamedModule extends AbstractModule
@@ -29,6 +30,7 @@ class NamedModule extends AbstractModule
      */
     protected function configure()
     {
+        $this->bind(FakeApplication::class);
         foreach ($this->names as $annotatedWith => $instance) {
             $this->bind()->annotatedWith($annotatedWith)->toInstance($instance);
         }

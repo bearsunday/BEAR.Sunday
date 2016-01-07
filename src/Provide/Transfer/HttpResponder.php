@@ -16,6 +16,7 @@ class HttpResponder implements TransferInterface
      */
     public function __invoke(ResourceObject $resourceObject, array $server)
     {
+        unset($server);
         // render
         $body = (string) $resourceObject;
 

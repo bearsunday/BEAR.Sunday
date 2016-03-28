@@ -1,5 +1,7 @@
 # BEAR.Sunday
 
+[![Join the chat at https://gitter.im/bearsunday/BEAR.Sunday](https://badges.gitter.im/bearsunday/BEAR.Sunday.svg)](https://gitter.im/bearsunday/BEAR.Sunday?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## A resource oriented framework
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/badges/quality-score.png?b=1.x)](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/?branch=1.x

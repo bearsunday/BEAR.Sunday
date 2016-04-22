@@ -1,1 +1,0 @@
-../../../vendor/bear/resource/src/RenderInterface.php

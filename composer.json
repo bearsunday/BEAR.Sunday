@@ -31,5 +31,8 @@
         "psr-4": {
             "BEAR\\Sunday\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "files": ["tests/functions.php"]
     }
 }

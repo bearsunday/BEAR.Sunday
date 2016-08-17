@@ -30,7 +30,6 @@ class NamedModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind(FakeApplication::class);
         foreach ($this->names as $annotatedWith => $instance) {
             $this->bind()->annotatedWith($annotatedWith)->toInstance($instance);
         }

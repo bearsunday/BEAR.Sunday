@@ -6,16 +6,6 @@ use BEAR\Resource\ResourceInterface;
 use BEAR\Sunday\Module\Resource\ResourceModule;
 use Ray\Di\Injector;
 
-class ResourceInjectApplication
-{
-    use ResourceInject;
-
-    public function returnDependency()
-    {
-        return $this->resource;
-    }
-}
-
 class ResourceInjectTest extends \PHPUnit_Framework_TestCase
 {
     public function testInjectTrait()

@@ -23,7 +23,7 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "bear/resource": "~1.0",
+        "bear/resource": "~1.3",
         "doctrine/cache": "~1.0",
         "psr/log": "~1.0"
     },

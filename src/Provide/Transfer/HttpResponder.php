@@ -18,7 +18,7 @@ class HttpResponder implements TransferInterface
     {
         unset($server);
         // render
-        $body = (string) $resourceObject;
+        $body = $resourceObject->toString();
 
         // code
         http_response_code($resourceObject->code);
@@ -32,3 +32,4 @@ class HttpResponder implements TransferInterface
         echo $body;
     }
 }
+

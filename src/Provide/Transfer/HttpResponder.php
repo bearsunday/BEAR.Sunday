@@ -32,4 +32,3 @@ class HttpResponder implements TransferInterface
         echo $body;
     }
 }
-

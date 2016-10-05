@@ -31,5 +31,27 @@
         "psr-4": {
             "BEAR\\Sunday\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "files": ["tests/functions.php"]
+    },
+    "scripts" :{
+        "test": [
+            "phpmd src text ./phpmd.xml",
+            "phpcs src tests",
+            "phpunit"
+        ],
+        "cs-fix": [
+            "php-cs-fixer fix --config-file=./.php_cs",
+            "phpcbf src"
+        ],
+        "build": [
+            "rm -rf ./build; mkdir -p ./build/logs ./build/pdepend ./build/api",
+            "pdepend --jdepend-xml=./build/logs/jdepend.xml --jdepend-chart=./build/pdepend/dependencies.svg --overview-pyramid=./build/pdepend/overview-pyramid.svg src",
+            "phploc --log-csv ./build/logs/phploc.csv src",
+            "phpcs --report=checkstyle --report-file=./build/logs/checkstyle.xml --standard=phpcs.xml src",
+            "apigen generate -s src -d build/api",
+            "@test"
+        ]
     }
 }

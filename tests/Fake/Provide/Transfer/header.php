@@ -7,10 +7,9 @@
  */
 namespace BEAR\Sunday\Provide\Transfer;
 
-function header(
-    $string,
-    $replace = true,
-    $http_response_code = null
-) {
+function header($string, $replace = true, $http_response_code = null)
+{
     FakeHttpResponder::$headers[] = func_get_args();
+
+    unset($string, $replace, $http_response_code);
 }

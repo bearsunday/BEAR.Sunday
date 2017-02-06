@@ -218,5 +218,5 @@ $ php -S 127.0.0.1:8080
 
 ### Requirements
 
- * PHP 5.5+
+ * PHP 5.6+
  * hhvm

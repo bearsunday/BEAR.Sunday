@@ -30,7 +30,7 @@ Interactions with your database, services and even pages and sections of your ap
 
 ## About this package
 
-This package is a framework core interface package that contains a very basic reference implementation. 
+This is the framework core interface package that contains a very basic reference implementation.
 
 ## Documentation
 

@@ -2,10 +2,10 @@
 
 namespace BEAR\Sunday\Module\Constant;
 
-use Ray\Di\Injector;
 use BEAR\Sunday\FakeApplication;
+use Ray\Di\Injector;
 
-class ConstantModuleTest extends \PHPUnit_Framework_TestCase
+class NamedModuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var FakeApplication

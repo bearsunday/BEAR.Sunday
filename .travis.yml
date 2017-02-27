@@ -3,6 +3,7 @@ php:
   - 5.6
   - 7.0
   - hhvm
+  - 7.1
 sudo: false
 cache:
   directories:
@@ -15,13 +16,15 @@ matrix:
       env: dependencies=lowest
     - php: 7.0
       env: dependencies=lowest
+    - php: 7.1
+      env: dependencies=lowest
 before_script:
   - composer self-update
   - if [ -z "$dependencies" ]; then composer install; fi;
   - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest; fi;
 script:
- - if [ "$TRAVIS_PHP_VERSION" != "7.0" ]; then phpunit; fi
- - if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then phpunit --coverage-text --coverage-clover=coverage.clover; fi
+ - if [ "$TRAVIS_PHP_VERSION" != "7.0" ]; then vendor/bin/phpunit; fi
+ - if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover; fi
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   - if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi

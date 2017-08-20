@@ -6,7 +6,6 @@
  */
 use BEAR\Sunday\Extension\Application\AbstractApp;
 use BEAR\Sunday\Extension\Application\AppInterface;
-use Composer\Autoload\ClassLoader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use MyVendor\HelloWorld\AppModule;
 use Ray\Di\Injector;

@@ -125,8 +125,7 @@ return \PhpCsFixer\Config::create()
     ->setFinder(
         PhpCsFixer\Finder::create()
             ->exclude('tests/Fake')
-            ->exclude('src-data')
-            ->exclude('src-deprecated')
+            ->exclude('doc')
             ->in(__DIR__)
     )->setLineEnding("\n")
     ->setUsingCache(false);

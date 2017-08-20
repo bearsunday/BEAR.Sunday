@@ -6,15 +6,14 @@
         "DI",
         "AOP",
         "REST",
-        "Hypermedia",
-        "Ray"
+        "Hypermedia"
     ],
     "license": "MIT",
     "authors": [
         {
             "name": "Akihito Koriyama",
             "email": "akihito.koriyama@gmail.com",
-            "homepage": "https://koriym.github.io/"
+            "homepage": "https://github.com/koriym"
         },
         {
             "name": "BEAR.Sunday Contributors",
@@ -32,6 +31,9 @@
   "autoload": {
         "psr-4": {
             "BEAR\\Sunday\\": "src/"
+        },
+        "autoload": {
+            "exclude-from-classmap": ["/docs/", "/tests/"]
         }
     },
     "autoload-dev": {

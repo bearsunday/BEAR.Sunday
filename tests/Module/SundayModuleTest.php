@@ -14,9 +14,10 @@ use BEAR\Sunday\Provide\Transfer\JsonResponder;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\Cache;
+use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
-class SundayModuleTest extends \PHPUnit_Framework_TestCase
+class SundayModuleTest extends TestCase
 {
     /**
      * @var Injector

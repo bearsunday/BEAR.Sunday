@@ -3,9 +3,10 @@
 namespace BEAR\Sunday\Module\Resource;
 
 use BEAR\Resource\ResourceInterface;
+use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
-class ResourceModuleTest extends \PHPUnit_Framework_TestCase
+class ResourceModuleTest extends TestCase
 {
     public function testGetInstance()
     {

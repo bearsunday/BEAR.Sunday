@@ -4,9 +4,10 @@ namespace BEAR\Sunday\Inject;
 
 use BEAR\Resource\ResourceInterface;
 use BEAR\Sunday\Module\Resource\ResourceModule;
+use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
-class ResourceInjectTest extends \PHPUnit_Framework_TestCase
+class ResourceInjectTest extends TestCase
 {
     public function testInjectTrait()
     {

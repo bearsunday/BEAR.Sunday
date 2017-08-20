@@ -16,7 +16,7 @@ interface ErrorInterface
      * @param \Exception $e
      * @param Request    $request
      *
-     * @return $this
+     * @return self
      */
     public function handle(\Exception $e, Request $request);
 

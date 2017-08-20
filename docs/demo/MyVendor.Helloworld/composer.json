@@ -1,8 +1,7 @@
 {
     "name": "my-vendor/hello-world",
     "require": {
-        "bear/sunday": "^1.1"
-
+        "bear/sunday": "^1.2"
     },
     "autoload": {
         "psr-4": {

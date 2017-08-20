@@ -7,5 +7,7 @@ This is a minimal BEAR.Sunday application without BEAR.Package.
 ```
 composer install
 ./vendor/bin/phpunit
-composer serve
+php bin/index.php    // cli
+composer serve       // web
 ```
+

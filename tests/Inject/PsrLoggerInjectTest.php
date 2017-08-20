@@ -2,9 +2,10 @@
 
 namespace BEAR\Sunday\Inject;
 
+use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
-class PsrLoggerInjectTest extends \PHPUnit_Framework_TestCase
+class PsrLoggerInjectTest extends TestCase
 {
     public function testInjectTrait()
     {

@@ -3,8 +3,9 @@
 namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Sunday\Fake\Resource\FakeResource;
+use PHPUnit\Framework\TestCase;
 
-class HttpResponderTest extends \PHPUnit_Framework_TestCase
+class HttpResponderTest extends TestCase
 {
     /**
      * @var HttpResponder

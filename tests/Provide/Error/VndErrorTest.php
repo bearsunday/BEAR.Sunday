@@ -7,8 +7,9 @@ use BEAR\Resource\Exception\ResourceNotFoundException;
 use BEAR\Resource\Exception\ServerErrorException;
 use BEAR\Sunday\Extension\Router\RouterMatch;
 use BEAR\Sunday\Provide\Transfer\FakeHttpResponder;
+use PHPUnit\Framework\TestCase;
 
-class VndErrorTest extends \PHPUnit_Framework_TestCase
+class VndErrorTest extends TestCase
 {
     public static $code;
 

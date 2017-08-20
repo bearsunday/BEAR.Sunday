@@ -37,6 +37,10 @@ class IndexTest extends TestCase
         /* @var $page Index */
         $this->assertSame(200, $page->code);
         $this->assertSame('Hello World', $page->body['greeting']);
-        $this->assertSame('{"greeting":"Hello World"}', (string) $page);
+        $expectJson = '{
+    "greeting": "Hello World"
+}
+';
+        $this->assertSame($expectJson, (string) $page);
     }
 }

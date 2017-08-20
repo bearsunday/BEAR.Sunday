@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * This file is part of the BEAR.Sunday package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace MyVendor\HelloWorld\Resource\Page;
 
 use BEAR\Resource\ResourceObject;

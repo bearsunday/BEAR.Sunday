@@ -1,11 +1,14 @@
 <?php
-
+/**
+ * This file is part of the BEAR.Sunday package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace MyVendor\HelloWorld;
 
 use BEAR\Resource\Annotation\AppName;
 use BEAR\Sunday\Extension\Application\AppInterface;
 use BEAR\Sunday\Module\SundayModule;
-use MyVendor\HelloWorld\Resource\Page\Index;
 use Ray\Di\AbstractModule;
 
 class AppModule extends AbstractModule

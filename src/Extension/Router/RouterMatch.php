@@ -9,16 +9,22 @@ namespace BEAR\Sunday\Extension\Router;
 class RouterMatch
 {
     /**
+     * Reuqest method
+     *
      * @var string
      */
     public $method;
 
     /**
+     * Request path
+     *
      * @var string
      */
     public $path;
 
     /**
+     * Request query
+     *
      * @var array
      */
     public $query = [];

@@ -1,11 +1,16 @@
 <?php
-
+/**
+ * This file is part of the BEAR.Sunday package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace BEAR\Sunday\Module\Constant;
 
 use BEAR\Sunday\FakeApplication;
+use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
-class NamedModuleTest extends \PHPUnit_Framework_TestCase
+class NamedModuleTest extends TestCase
 {
     /**
      * @var FakeApplication

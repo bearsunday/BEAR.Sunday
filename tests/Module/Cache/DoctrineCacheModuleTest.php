@@ -1,11 +1,16 @@
 <?php
-
+/**
+ * This file is part of the BEAR.Sunday package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace BEAR\Sunday\Module\Cache;
 
 use Doctrine\Common\Cache\Cache;
+use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
-class DoctrineCacheModuleTest extends \PHPUnit_Framework_TestCase
+class DoctrineCacheModuleTest extends TestCase
 {
     public function testGetInstance()
     {

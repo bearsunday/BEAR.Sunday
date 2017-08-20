@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * This file is part of the BEAR.Sunday package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace BEAR\Sunday\Provide\Error;
 
 use BEAR\Resource\Exception\BadRequestException;
@@ -7,8 +11,9 @@ use BEAR\Resource\Exception\ResourceNotFoundException;
 use BEAR\Resource\Exception\ServerErrorException;
 use BEAR\Sunday\Extension\Router\RouterMatch;
 use BEAR\Sunday\Provide\Transfer\FakeHttpResponder;
+use PHPUnit\Framework\TestCase;
 
-class VndErrorTest extends \PHPUnit_Framework_TestCase
+class VndErrorTest extends TestCase
 {
     public static $code;
 

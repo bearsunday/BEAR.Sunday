@@ -1,8 +1,14 @@
 <?php
-
+/**
+ * This file is part of the BEAR.Sunday package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace BEAR\Sunday\Provide\Router;
 
-class WebRouterTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WebRouterTest extends TestCase
 {
     /**
      * @var WebRouter
@@ -23,7 +29,6 @@ class WebRouterTest extends \PHPUnit_Framework_TestCase
         $server = [
             'REQUEST_METHOD' => 'GET',
             'REQUEST_URI' => '/'
-
         ];
         $request = $this->router->match($global, $server);
         $this->assertSame('get', $request->method);
@@ -36,7 +41,6 @@ class WebRouterTest extends \PHPUnit_Framework_TestCase
         $global = [
             '_GET' => [
                 'id' => 1
-
             ]
         ];
         $server = [

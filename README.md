@@ -30,13 +30,8 @@ Interactions with your database, services and even pages and sections of your ap
 
 ## About this package
 
-This is the framework core interface package that contains a very basic reference implementation.
+This is the framework core interface package that contains a basic reference implementation.
 
 ## Documentation
 
  * [http://bearsunday.github.io/](http://bearsunday.github.io/)
-
-## Requirements
-
- * PHP 5.6+
- * hhvm

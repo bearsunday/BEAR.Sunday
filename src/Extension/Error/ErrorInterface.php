@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the BEAR.Sunday package
+ * This file is part of the BEAR.Sunday package.
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
@@ -16,7 +16,7 @@ interface ErrorInterface
      * @param \Exception $e
      * @param Request    $request
      *
-     * @return $this
+     * @return self
      */
     public function handle(\Exception $e, Request $request);
 

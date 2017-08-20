@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the BEAR.Sunday package
+ * This file is part of the BEAR.Sunday package.
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
@@ -70,12 +70,7 @@ final class VndError implements ErrorInterface
         $this->transfer->__invoke($this->errorPage, []);
     }
 
-    /**
-     * @param \Exception $e
-     *
-     * @return bool
-     */
-    private function isCodeExists(\Exception $e)
+    private function isCodeExists(\Exception $e) : bool
     {
         if (! ($e instanceof NotFound || $e instanceof BadRequest || $e instanceof ServerError)) {
             return false;

@@ -1,12 +1,17 @@
 <?php
-
+/**
+ * This file is part of the BEAR.Sunday package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace MyVendor\HelloWorld\Resource\Page;
 
 use BEAR\Resource\ResourceInterface;
 use MyVendor\HelloWorld\AppModule;
+use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
-class IndexTest extends \PHPUnit_Framework_TestCase
+class IndexTest extends TestCase
 {
     /**
      * @var ResourceInterface
@@ -27,11 +32,11 @@ class IndexTest extends \PHPUnit_Framework_TestCase
 
     public function testGet()
     {
-        $page = $this->resource->get->uri('page://self/')->eager->request();
+        $page = $this->resource->uri('page://self/')();
         $this->assertInstanceOf(Index::class, $page);
         /* @var $page Index */
         $this->assertSame(200, $page->code);
-        $expect = 'Hello World';
-        $this->assertSame($expect, $page->body['greeting']);
+        $this->assertSame('Hello World', $page->body['greeting']);
+        $this->assertSame('{"greeting":"Hello World"}', (string) $page);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the BEAR.Sunday package
+ * This file is part of the BEAR.Sunday package.
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
@@ -34,10 +34,10 @@ class AbstractApp implements AppInterface
     public $error;
 
     /**
-     * @param RouterInterface   $router
-     * @param TransferInterface $responder
-     * @param ResourceInterface $resource
-     * @param ErrorInterface    $error
+     * @param RouterInterface   $router    Resource router
+     * @param TransferInterface $responder Resource responder
+     * @param ResourceInterface $resource  BEAR.Resource client
+     * @param ErrorInterface    $error     Error handler
      */
     public function __construct(
         RouterInterface $router,

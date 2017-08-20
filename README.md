@@ -2,7 +2,7 @@
 
 # BEAR.Sunday
 
-## A resource oriented framework
+## A resource-oriented application framework
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/badges/quality-score.png?b=1.x)](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/?branch=1.x
 )

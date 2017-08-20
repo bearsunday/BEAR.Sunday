@@ -18,19 +18,14 @@ AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 
 $app = (new Injector(new AppModule))->getInstance(AppInterface::class);
 /* @var $app AbstractApp */
-
 $request = $app->router->match($GLOBALS, $_SERVER);
 try {
-    // resource request
-    $page = $app->resource
+    $page = $app
+        ->resource
         ->{$request->method}
-        ->uri($request->path)
-        ->withQuery($request->query)
-        ->request();
-    /* @var $page Request */
-
-    // representation transfer
-    $page()->transfer($app->responder, $_SERVER);
+        ->uri($request->path)($request->query)
+        ->transfer($app->responder, $_SERVER);
 } catch (\Exception $e) {
     error_log($e);
+    exit(1);
 }

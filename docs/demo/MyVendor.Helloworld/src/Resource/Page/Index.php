@@ -10,7 +10,7 @@ use BEAR\Resource\ResourceObject;
 
 class Index extends ResourceObject
 {
-    public function onGet($name = 'World')
+    public function onGet($name = 'World') : ResourceObject
     {
         $this->body['greeting'] = 'Hello ' . $name;
 

@@ -1,10 +1,11 @@
-# MyVendor.Helloworld
+# Demo
 
 This is a minimal BEAR.Sunday application without BEAR.Package.
  
-## install and run
+## Test and run locally
 
 ```
 composer install
-php -S 127.0.0.1:8080 -t www
+./vendor/bin/phpunit
+composer serve
 ```

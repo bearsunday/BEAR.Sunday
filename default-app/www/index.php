@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * This file is part of the BEAR.Sunday package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 use BEAR\Sunday\Extension\Application\AppInterface;
 use BEAR\Sunday\Module\SundayModule;
 use Ray\Di\Injector;

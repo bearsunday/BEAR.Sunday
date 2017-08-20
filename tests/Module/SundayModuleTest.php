@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * This file is part of the BEAR.Sunday package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace BEAR\Sunday\Module\Resource;
 
 use BEAR\Resource\ResourceInterface;
@@ -10,7 +14,6 @@ use BEAR\Sunday\Module\SundayModule;
 use BEAR\Sunday\Provide\Application\MinApp;
 use BEAR\Sunday\Provide\Router\WebRouter;
 use BEAR\Sunday\Provide\Transfer\HttpResponder;
-use BEAR\Sunday\Provide\Transfer\JsonResponder;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\Cache;

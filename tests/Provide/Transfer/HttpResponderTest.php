@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * This file is part of the BEAR.Sunday package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Sunday\Fake\Resource\FakeResource;
@@ -27,7 +31,7 @@ class HttpResponderTest extends TestCase
             ['Cache-Control: max-age=0', false],
             ['content-type: application/json', false],
         ];
-        $this->assertEquals($expectedArgs, FakeHttpResponder::$headers);
+        $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
         $expect = '{"greeting":"hello world"}';
         $actual = FakeHttpResponder::$content;
         $this->assertSame($expect, $actual);

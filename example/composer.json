@@ -5,7 +5,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MyVendor\\HelloWorld\\": "src/"
+            "MyVendor\\HelloWorld\\": "src"
         }
     },
     "require-dev": {

@@ -1,6 +1,6 @@
 {
     "name": "bear/sunday",
-    "description": "A resource oriented framework",
+    "description": "A resource-oriented application framework",
     "keywords": [
         "framework",
         "DI",

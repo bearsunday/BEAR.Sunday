@@ -22,13 +22,13 @@ class HttpResponder implements TransferInterface
             $resourceObject->toString();
         }
 
-        // code
-        http_response_code($resourceObject->code);
-
         // header
         foreach ($resourceObject->headers as $label => $value) {
             header("{$label}: {$value}", false);
         }
+
+        // code
+        http_response_code($resourceObject->code);
 
         // body
         echo $resourceObject->view;

@@ -4,6 +4,4 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-use Doctrine\Common\Annotations\AnnotationRegistry;
-
 require dirname(__DIR__) . '/vendor/autoload.php';

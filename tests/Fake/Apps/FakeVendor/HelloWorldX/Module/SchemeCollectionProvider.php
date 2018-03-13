@@ -53,7 +53,7 @@ class SchemeCollectionProvider implements ProviderInterface
      */
     private function addScheme(SchemeCollection $schemeCollection, $host, $appName, InjectorInterface $injector)
     {
-        $schemeCollection->scheme('page')->host($host)->toAdapter(new AppAdapter($injector, $appName, 'Resource\Page'));
-        $schemeCollection->scheme('app')->host($host)->toAdapter(new AppAdapter($injector, $appName, 'Resource\App'));
+        $schemeCollection->scheme('page')->host($host)->toAdapter(new AppAdapter($injector, $appName));
+        $schemeCollection->scheme('app')->host($host)->toAdapter(new AppAdapter($injector, $appName));
     }
 }

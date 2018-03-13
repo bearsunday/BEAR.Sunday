@@ -18,7 +18,7 @@ class VndErrorTest extends TestCase
     public static $code;
 
     /**
-     * @var FakeVndError
+     * @var VndError
      */
     private $vndError;
 

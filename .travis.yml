@@ -1,8 +1,7 @@
 language: php
-sudo: required
-dist: trusty
+sudo: false
 php:
-  - 7.0
+  - 7
   - 7.1
   - 7.2
 cache:
@@ -16,9 +15,11 @@ env:
 before_script:
   - composer self-update
   - composer update $DEPENDENCIES
+  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then COVERAGE="--coverage-clover=coverage.clover"; else phpenv config-rm xdebug.ini; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then composer require --dev phpstan/phpstan-shim friendsofphp/php-cs-fixer; fi
 script:
-  - ./vendor/bin/phpunit --coverage-clover=coverage.clover;
-  - if [ "$TRAVIS_PHP_VERSION" = "7.1" ]; then wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.4.0/php-cs-fixer.phar && php php-cs-fixer.phar fix --config=.php_cs -v --dry-run --using-cache=no --path-mode=intersection `git diff --name-only --diff-filter=ACMRTUXB $TRAVIS_COMMIT_RANGE`; fi
-
+  - ./vendor/bin/phpunit $COVERAGE;
+  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then IFS=$'\n'; COMMIT_SCA_FILES=($(git diff --name-only --diff-filter=ACMRTUXB "${TRAVIS_COMMIT_RANGE}")); unset IFS && ./vendor/bin/php-cs-fixer fix --config=.php_cs -v --dry-run --stop-on-violation --using-cache=no --path-mode=intersection -- "${COMMIT_SCA_FILES[@]}";fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then ./vendor/bin/phpstan analyse -l max -c phpstan.neon src tests --no-progress --no-interaction; fi
 after_script:
-  - if [ "$TRAVIS_PHP_VERSION" = "7.1" ]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi

@@ -4,11 +4,9 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace BEAR\Sunday\Provide\Router;
+namespace BEAR\Sunday\Provide\Application;
 
 use BEAR\Sunday\Extension\Application\AppInterface;
-use BEAR\Sunday\Provide\Application\AppModule;
-use BEAR\Sunday\Provide\Application\MinApp;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 

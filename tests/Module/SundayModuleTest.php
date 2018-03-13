@@ -4,13 +4,12 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace BEAR\Sunday\Module\Resource;
+namespace BEAR\Sunday\Module;
 
 use BEAR\Resource\ResourceInterface;
 use BEAR\Sunday\Extension\Application\AppInterface;
 use BEAR\Sunday\Extension\Router\RouterInterface;
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
-use BEAR\Sunday\Module\SundayModule;
 use BEAR\Sunday\Provide\Application\MinApp;
 use BEAR\Sunday\Provide\Router\WebRouter;
 use BEAR\Sunday\Provide\Transfer\HttpResponder;

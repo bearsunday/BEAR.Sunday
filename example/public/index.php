@@ -11,7 +11,6 @@ use MyVendor\HelloWorld\AppModule;
 use Ray\Di\Injector;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
-AnnotationRegistry::registerLoader('class_exists');
 
 $app = (new Injector(new AppModule))->getInstance(AppInterface::class);
 /* @var $app AbstractApp */

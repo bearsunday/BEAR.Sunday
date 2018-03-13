@@ -15,7 +15,7 @@ class DoctrineAnnotationModule extends TestCase
 {
     public function testGetInstance()
     {
-        $reader = (new Injector(new self()))->getInstance(Reader::class);
+        $reader = (new Injector)->getInstance(Reader::class);
         $this->assertInstanceOf(CachedReader::class, $reader);
     }
 }

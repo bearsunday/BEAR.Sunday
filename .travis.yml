@@ -15,7 +15,7 @@ env:
 before_script:
   - composer self-update
   - composer update $DEPENDENCIES
-  - composer update --working-dir=demo $DEPENDENCIES
+  - composer update --working-dir=demo
   - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then COVERAGE="--coverage-clover=coverage.clover"; else phpenv config-rm xdebug.ini; fi
   - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then composer require --dev phpstan/phpstan-shim friendsofphp/php-cs-fixer; fi
 script:

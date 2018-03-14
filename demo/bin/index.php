@@ -4,7 +4,6 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-use BEAR\Sunday\Extension\Application\AbstractApp;
 use BEAR\Sunday\Extension\Application\AppInterface;
 use MyVendor\HelloWorld\AppModule;
 use Ray\Di\Injector;
@@ -12,13 +11,10 @@ use Ray\Di\Injector;
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 $app = (new Injector(new AppModule))->getInstance(AppInterface::class);
-/* @var $app AbstractApp */
-$request = $app->router->match($GLOBALS, $_SERVER);
 try {
-    $page = $app
-        ->resource
-        ->{$request->method}
-        ->uri($request->path)($request->query)
+    $page = $app->resource
+        ->get
+        ->uri('page://self/index')(['name' => 'BEAR.Sunday'])
         ->transfer($app->responder, $_SERVER);
 } catch (\Exception $e) {
     error_log($e);

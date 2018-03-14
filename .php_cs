@@ -21,7 +21,7 @@ return \PhpCsFixer\Config::create()
         'combine_consecutive_unsets' => true,
         'concat_space' => ['spacing' => 'one'],
         'declare_equal_normalize' => true,
-        'declare_strict_types' => false,
+        'declare_strict_types' => true,
         'dir_constant' => true,
         'ereg_to_preg' => true,
         'function_typehint_space' => true,
@@ -127,5 +127,4 @@ return \PhpCsFixer\Config::create()
             ->exclude('tests/Fake')
             ->exclude('doc')
             ->in(__DIR__)
-    )->setLineEnding("\n")
-    ->setUsingCache(false);
+    )->setLineEnding("\n");

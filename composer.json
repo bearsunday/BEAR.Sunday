@@ -1,59 +1,50 @@
 {
-    "name": "bear/sunday",
-    "description": "A resource-oriented application framework",
-    "keywords": [
-        "framework",
-        "DI",
-        "AOP",
-        "REST",
-        "Hypermedia"
-    ],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Akihito Koriyama",
-            "email": "akihito.koriyama@gmail.com",
-            "homepage": "https://github.com/koriym"
-        },
-        {
-            "name": "BEAR.Sunday Contributors",
-            "homepage": "http://bearsunday.github.io/contributors.html"
-        }
-    ],
-    "require": {
-        "php": ">=7.0.0",
-        "bear/resource": "^1.6",
-        "psr/log": "^1.0.2"
-    },
+  "name": "bear/sunday",
+  "description": "A resource-oriented application framework",
+  "keywords": [
+      "framework",
+      "DI",
+      "AOP",
+      "REST",
+      "Hypermedia"
+  ],
+  "license": "MIT",
+  "authors": [
+      {
+          "name": "Akihito Koriyama",
+          "email": "akihito.koriyama@gmail.com",
+          "homepage": "http://koriym.github.io/about/"
+      },
+      {
+          "name": "BEAR.Sunday Contributors",
+          "homepage": "http://bearsunday.github.io/contributors.html"
+      }
+  ],
+  "require": {
+      "php": ">=7.0.0",
+      "bear/resource": "^1.9.2",
+      "psr/log": "^1.0.2"
+  },
   "require-dev": {
-        "phpunit/phpunit": "^6.2"
+      "phpunit/phpunit": "^6.2"
   },
   "autoload": {
-        "psr-4": {
+      "psr-4": {
             "BEAR\\Sunday\\": "src/"
-        },
-        "exclude-from-classmap": ["/example/", "/tests/"]
-    },
-    "autoload-dev": {
-        "files": ["tests/functions.php"]
-    },
-    "scripts" :{
-        "test": [
-            "phpmd src text ./phpmd.xml",
-            "phpcs src tests",
-            "phpunit"
-        ],
-        "cs-fix": [
-            "php-cs-fixer fix --config-file=./.php_cs",
-            "phpcbf src"
-        ],
-        "build": [
-            "rm -rf ./build; mkdir -p ./build/logs ./build/pdepend ./build/api",
-            "pdepend --jdepend-xml=./build/logs/jdepend.xml --jdepend-chart=./build/pdepend/dependencies.svg --overview-pyramid=./build/pdepend/overview-pyramid.svg src",
-            "phploc --log-csv ./build/logs/phploc.csv src",
-            "phpcs --report=checkstyle --report-file=./build/logs/checkstyle.xml --standard=phpcs.xml src",
-            "apigen generate -s src -d build/api",
-            "@test"
-        ]
-    }
+        }
+  },
+  "autoload-dev": {
+      "psr-4": {
+        "BEAR\\Sunday\\": ["tests/", "tests/Fake/"],
+        "FakeVendor\\HelloWorld\\": "tests/Fake/Apps/FakeVendor/HelloWorld/",
+        "FakeVendor\\HelloWorldX\\": "tests/Fake/Apps/FakeVendor/HelloWorldX/"
+      },
+      "files": ["tests/functions.php"]
+  },
+  "scripts" :{
+      "test": ["@cs", "phpunit", "phpstan analyse -l max src tests -c phpstan.neon --no-progress"],
+      "coverage": ["php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
+      "cs": ["php-cs-fixer fix -v --dry-run", "phpcs --standard=./phpcs.xml src"],
+      "cs-fix": ["php-cs-fixer fix -v", "phpcbf src"]
+  }
 }

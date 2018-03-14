@@ -1,14 +1,15 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the BEAR.Sunday package.
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Provide\Representation;
+namespace BEAR\Sunday\Provide\Representation;
 
 use BEAR\Resource\JsonRenderer;
 use BEAR\Resource\RenderInterface;
-use BEAR\Sunday\Provide\Representation\RepresentationModule;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 

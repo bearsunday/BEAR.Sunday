@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the BEAR.Sunday package.
  *
@@ -55,8 +57,8 @@ final class VndError implements ErrorInterface
         }
         $this->errorPage->code = 500;
         $this->errorPage->body = ['message' => '500 Server Error'];
-        error_log($request);
-        error_log($e);
+        \error_log((string) $request);
+        \error_log((string) $e);
 
         return $this;
     }
@@ -76,6 +78,6 @@ final class VndError implements ErrorInterface
             return false;
         }
 
-        return array_key_exists($e->getCode(), (new Code)->statusText);
+        return \array_key_exists($e->getCode(), (new Code)->statusText);
     }
 }

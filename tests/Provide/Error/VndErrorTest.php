@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * This file is part of the BEAR.Sunday package.
  *
@@ -18,7 +20,7 @@ class VndErrorTest extends TestCase
     public static $code;
 
     /**
-     * @var FakeVndError
+     * @var VndError
      */
     private $vndError;
 

@@ -11,7 +11,7 @@ namespace BEAR\Sunday\Extension\Router;
 class RouterMatch
 {
     /**
-     * Reuqest method
+     * Request method
      *
      * @var string
      */

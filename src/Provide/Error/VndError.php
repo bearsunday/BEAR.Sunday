@@ -57,8 +57,8 @@ final class VndError implements ErrorInterface
         }
         $this->errorPage->code = 500;
         $this->errorPage->body = ['message' => '500 Server Error'];
-        \error_log((string) $request);
-        \error_log((string) $e);
+        error_log((string) $request);
+        error_log((string) $e);
 
         return $this;
     }
@@ -74,7 +74,7 @@ final class VndError implements ErrorInterface
 
     private function isCodeExists(\Exception $e) : bool
     {
-        if (! ($e instanceof NotFound || $e instanceof BadRequest || $e instanceof ServerError)) {
+        if (! ($e instanceof NotFound) && ! ($e instanceof BadRequest) && ! ($e instanceof ServerError)) {
             return false;
         }
 

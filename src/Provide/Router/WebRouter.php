@@ -17,14 +17,14 @@ class WebRouter implements RouterInterface
     /**
      * @var string
      */
-    private $schemeHost = 'page://self';
+    private $schemeHost;
 
     /**
      * @param string $schemeHost
      *
      * @DefaultSchemeHost
      */
-    public function __construct($schemeHost)
+    public function __construct(string $schemeHost)
     {
         $this->schemeHost = $schemeHost;
     }

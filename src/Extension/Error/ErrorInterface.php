@@ -24,6 +24,8 @@ interface ErrorInterface
 
     /**
      * Error page transfer
+     *
+     * @return void
      */
     public function transfer();
 }

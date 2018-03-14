@@ -11,7 +11,7 @@ namespace BEAR\Sunday\Extension\Router;
 class RouterMatch
 {
     /**
-     * Reuqest method
+     * Request method
      *
      * @var string
      */
@@ -31,9 +31,6 @@ class RouterMatch
      */
     public $query = [];
 
-    /**
-     * @return string
-     */
     public function __toString()
     {
         $querySymbol = $this->query ? '?' : '';

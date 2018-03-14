@@ -74,7 +74,7 @@ final class VndError implements ErrorInterface
 
     private function isCodeExists(\Exception $e) : bool
     {
-        if (! ($e instanceof NotFound || $e instanceof BadRequest || $e instanceof ServerError)) {
+        if (! ($e instanceof NotFound) && ! ($e instanceof BadRequest) && ! ($e instanceof ServerError)) {
             return false;
         }
 

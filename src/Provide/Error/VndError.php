@@ -57,8 +57,8 @@ final class VndError implements ErrorInterface
         }
         $this->errorPage->code = 500;
         $this->errorPage->body = ['message' => '500 Server Error'];
-        error_log((string) $request);
-        error_log((string) $e);
+        \error_log((string) $request);
+        \error_log((string) $e);
 
         return $this;
     }
@@ -78,6 +78,6 @@ final class VndError implements ErrorInterface
             return false;
         }
 
-        return array_key_exists($e->getCode(), (new Code)->statusText);
+        return \array_key_exists($e->getCode(), (new Code)->statusText);
     }
 }

@@ -35,10 +35,10 @@ class WebRouter implements RouterInterface
     public function match(array $globals, array $server)
     {
         $request = new RouterMatch;
-        $method = strtolower($server['REQUEST_METHOD']);
+        $method = \strtolower($server['REQUEST_METHOD']);
         list($request->method, $request->path, $request->query) = [
             $method,
-            $this->schemeHost . parse_url($server['REQUEST_URI'], PHP_URL_PATH),
+            $this->schemeHost . \parse_url($server['REQUEST_URI'], PHP_URL_PATH),
             ($method === 'get') ? $globals['_GET'] : $globals['_POST']
         ];
 

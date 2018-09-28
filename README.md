@@ -35,3 +35,13 @@ This is the framework core interface package that contains a basic reference imp
 ## Documentation
 
  * [http://bearsunday.github.io/](http://bearsunday.github.io/)
+ 
+## Related project
+
+ * [Ray.Di](https://github.com/ray-di/Ray.Di) - dpendency injection framework
+ * [Ray.Aop](https://github.com/ray-di/Ray.Di) - aspect oriented framework
+ * [BEAR.Resource](https://github.com/bearsunday/BEAR.Resource) - hypermedia framework for object as a service
+ * [BEAR.Package](https://github.com/bearsunday/BEAR.Package) - web application framework
+ * [BEAR.Skeleton](https://github.com/bearsunday/BEAR.Skeleton) - project skeleton
+
+<img src="http://bearsunday.github.io/BEAR.Sunday/framework_structure.png" width="400">

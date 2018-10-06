@@ -38,4 +38,25 @@ class HttpResponderTest extends TestCase
         $actual = FakeHttpResponder::$content;
         $this->assertSame($expect, $actual);
     }
+
+    public function testTransferToStringInHeader()
+    {
+        $ro = (new FakeResource)->onGet();
+        $ro->headers['Foo'] = new class {
+            public function __toString()
+            {
+                return 'foo-string';
+            }
+        };
+        $ro->transfer($this->responder, []);
+        $expectedArgs = [
+            ['Cache-Control: max-age=0', false],
+            ['Foo: foo-string', false],
+            ['content-type: application/json', false],
+        ];
+        $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
+        $expect = '{"greeting":"hello world"}';
+        $actual = FakeHttpResponder::$content;
+        $this->assertSame($expect, $actual);
+    }
 }

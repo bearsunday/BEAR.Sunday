@@ -28,14 +28,39 @@ frameworks, yet offer even further benefit and beauty.
 In BEAR.Sunday **everything is a REST resource** which leads to far simpler design and extensibility.
 Interactions with your database, services and even pages and sections of your app all sit comfortably in a resource which can be consumed or rendered at will.
 
+## Documentation
+
+ * [http://bearsunday.github.io/](http://bearsunday.github.io/)
+
 ## About this package
 
 This is the framework core interface package that contains a basic reference implementation.
 
-## Documentation
+```
+src/
+├── Annotation
+├── Exception
+├── Extension -- Framework extension interface
+│   ├── Application
+│   ├── Error
+│   ├── ExtensionInterface.php
+│   ├── Router
+│   └── Transfer
+├── Inject -- Setter trait
+├── Module -- Unchangeble module by context
+│   ├── Annotation
+│   ├── Cache
+│   ├── Constant
+│   ├── Resource
+│   └── SundayModule.php -- Root module of this package
+└── Provide  -- Changeable module by context and refference implementations
+    ├── Application
+    ├── Error
+    ├── Representation
+    ├── Router
+    └── Transfer
+```
 
- * [http://bearsunday.github.io/](http://bearsunday.github.io/)
- 
 ## Related project
 
  * [Ray.Di](https://github.com/ray-di/Ray.Di) - dpendency injection framework

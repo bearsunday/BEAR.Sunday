@@ -6,9 +6,7 @@ declare(strict_types=1);
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace BEAR\Sunday\Provide\Transfer;
-
-use BEAR\Sunday\Extension\Transfer\HttpCacheInterface;
+namespace BEAR\Sunday\Extension\Transfer;
 
 final class NullHttpCache implements HttpCacheInterface
 {

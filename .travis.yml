@@ -13,16 +13,16 @@ env:
     - DEPENDENCIES=""
     - DEPENDENCIES="--prefer-lowest --prefer-stable"
 before_script:
+  - cp $HOME/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini /tmp
+  - phpenv config-rm xdebug.ini
   - composer self-update
   - composer update $DEPENDENCIES
-  - composer update --working-dir=demo
-  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then COVERAGE="--coverage-clover=coverage.clover"; else phpenv config-rm xdebug.ini; fi
-  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then composer require --dev phpstan/phpstan-shim friendsofphp/php-cs-fixer; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.2' ]]; then composer require --dev phpstan/phpstan-shim ^0.9 friendsofphp/php-cs-fixer ^2.0 vimeo/psalm ^2.0;  fi
 script:
-  - ./vendor/bin/phpunit $COVERAGE;
-  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then IFS=$'\n'; COMMIT_SCA_FILES=($(git diff --name-only --diff-filter=ACMRTUXB "${TRAVIS_COMMIT_RANGE}")); unset IFS && ./vendor/bin/php-cs-fixer fix --config=.php_cs -v --dry-run --stop-on-violation --using-cache=no --path-mode=intersection -- "${COMMIT_SCA_FILES[@]}";fi
-  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then ./vendor/bin/phpstan analyse -l max -c phpstan.neon src tests --no-progress --no-interaction; fi
   - php demo/bin/index.php
-  - ./demo/vendor/bin/phpunit --configuration demo/phpunit.xml.dist
+  - if [[ $TRAVIS_PHP_VERSION = '7.2' ]]; then ./vendor/bin/php-cs-fixer --dry-run -v fix; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.2' ]]; then ./vendor/bin/phpstan analyse -l max -c phpstan.neon src tests --no-progress --no-interaction; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.2' ]]; then ./vendor/bin/psalm; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.2' ]]; then phpenv config-add /tmp/xdebug.ini; ./vendor/bin/phpunit --coverage-clover=coverage.clover; else ./vendor/bin/phpunit; fi
 after_script:
-  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.2' ]]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi

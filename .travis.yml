@@ -4,6 +4,7 @@ php:
   - 7
   - 7.1
   - 7.2
+  - 7.3
 cache:
   directories:
     - vendor
@@ -13,8 +14,8 @@ env:
     - DEPENDENCIES=""
     - DEPENDENCIES="--prefer-lowest --prefer-stable"
 before_script:
-  - cp $HOME/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini /tmp
-  - phpenv config-rm xdebug.ini
+  - if [[ $TRAVIS_PHP_VERSION = '7.2' ]]; then cp $HOME/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini /tmp; fi
+  - if [[ $TRAVIS_PHP_VERSION != '7.3' ]]; then phpenv config-rm xdebug.ini ; fi
   - composer self-update
   - composer update $DEPENDENCIES
   - composer update --working-dir=demo

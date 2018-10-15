@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class HttpResponderTest extends TestCase
 {
     /**
-     * @var HttpResponder
+     * @var FakeHttpResponder
      */
     private $responder;
 

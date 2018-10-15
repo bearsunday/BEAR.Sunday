@@ -31,6 +31,6 @@ class FakeHttpResponder implements TransferInterface
         foreach ($ro->headers as $label => $value) {
             header("{$label}: {$value}", false);
         }
-        self::$code = (int) $ro->code;
+        self::$code = $ro->code;
     }
 }

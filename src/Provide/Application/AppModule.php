@@ -10,7 +10,6 @@ namespace BEAR\Sunday\Provide\Application;
 
 use BEAR\Resource\Annotation\AppName;
 use BEAR\Sunday\Extension\Application\AppInterface;
-use BEAR\Sunday\Module\SundayModule;
 use Ray\Di\AbstractModule;
 
 class AppModule extends AbstractModule

@@ -11,7 +11,6 @@ namespace BEAR\Sunday\Module;
 use BEAR\Sunday\Module\Annotation\DoctrineAnnotationModule;
 use BEAR\Sunday\Module\Cache\DoctrineCacheModule;
 use BEAR\Sunday\Module\Resource\ResourceModule;
-use BEAR\Sunday\Provide\Application\App;
 use BEAR\Sunday\Provide\Application\AppModule;
 use BEAR\Sunday\Provide\Error\ErrorModule;
 use BEAR\Sunday\Provide\Router\RouterModule;

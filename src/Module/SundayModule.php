@@ -14,6 +14,7 @@ use BEAR\Sunday\Module\Resource\ResourceModule;
 use BEAR\Sunday\Provide\Application\AppModule;
 use BEAR\Sunday\Provide\Error\ErrorModule;
 use BEAR\Sunday\Provide\Router\RouterModule;
+use BEAR\Sunday\Provide\Transfer\HttpCacheModule;
 use BEAR\Sunday\Provide\Transfer\HttpResponderModule;
 use Ray\Di\AbstractModule;
 
@@ -25,6 +26,7 @@ class SundayModule extends AbstractModule
     protected function configure()
     {
         $this->install(new AppModule);
+        $this->install(new HttpCacheModule);
         $this->install(new DoctrineCacheModule);
         $this->install(new DoctrineAnnotationModule);
         $this->install(new ResourceModule);

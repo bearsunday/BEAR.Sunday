@@ -21,10 +21,10 @@ class FakeHttpResponder extends HttpResponder
         static::$content = null;
     }
 
-    public function __invoke(ResourceObject $resourceObject, array $server)
+    public function __invoke(ResourceObject $ro, array $server)
     {
         ob_start();
-        parent::__invoke($resourceObject, $server);
+        parent::__invoke($ro, $server);
         $body =  ob_get_clean();
         self::$content = $body;
     }

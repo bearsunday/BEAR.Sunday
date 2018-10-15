@@ -16,23 +16,23 @@ class HttpResponder implements TransferInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(ResourceObject $resourceObject, array $server)
+    public function __invoke(ResourceObject $ro, array $server)
     {
         unset($server);
         // render
-        if (! $resourceObject->view) {
-            $resourceObject->toString();
+        if (! $ro->view) {
+            $ro->toString();
         }
 
         // header
-        foreach ($resourceObject->headers as $label => $value) {
+        foreach ($ro->headers as $label => $value) {
             header("{$label}: {$value}", false);
         }
 
         // code
-        http_response_code($resourceObject->code);
+        http_response_code($ro->code);
 
         // body
-        echo $resourceObject->view;
+        echo $ro->view;
     }
 }

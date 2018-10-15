@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Sunday\Extension\Transfer\HttpCacheInterface;
-use BEAR\Sunday\Provide\Transfer\NullHttpCache;
 use Ray\Di\AbstractModule;
 
 class HttpCacheModule extends AbstractModule

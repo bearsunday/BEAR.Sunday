@@ -8,11 +8,11 @@ declare(strict_types=1);
  */
 namespace BEAR\Sunday\Module;
 
-use BEAR\Sunday\Extension\Application\AppInterface;
 use BEAR\Sunday\Module\Annotation\DoctrineAnnotationModule;
 use BEAR\Sunday\Module\Cache\DoctrineCacheModule;
 use BEAR\Sunday\Module\Resource\ResourceModule;
-use BEAR\Sunday\Provide\Application\MinApp;
+use BEAR\Sunday\Provide\Application\App;
+use BEAR\Sunday\Provide\Application\AppModule;
 use BEAR\Sunday\Provide\Error\ErrorModule;
 use BEAR\Sunday\Provide\Router\RouterModule;
 use BEAR\Sunday\Provide\Transfer\HttpResponderModule;
@@ -25,7 +25,7 @@ class SundayModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind(AppInterface::class)->to(MinApp::class);
+        $this->install(new AppModule);
         $this->install(new DoctrineCacheModule);
         $this->install(new DoctrineAnnotationModule);
         $this->install(new ResourceModule);

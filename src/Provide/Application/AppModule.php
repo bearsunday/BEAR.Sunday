@@ -22,6 +22,5 @@ class AppModule extends AbstractModule
     {
         $this->bind(AppInterface::class)->to(MinApp::class);
         $this->bind()->annotatedWith(AppName::class)->toInstance('BEAR\Sunday');
-        $this->install(new SundayModule);
     }
 }

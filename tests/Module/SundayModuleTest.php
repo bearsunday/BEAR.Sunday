@@ -13,7 +13,7 @@ use BEAR\Resource\ResourceInterface;
 use BEAR\Sunday\Extension\Application\AppInterface;
 use BEAR\Sunday\Extension\Router\RouterInterface;
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
-use BEAR\Sunday\Provide\Application\MinApp;
+use BEAR\Sunday\Provide\Application\App;
 use BEAR\Sunday\Provide\Router\WebRouter;
 use BEAR\Sunday\Provide\Transfer\HttpResponder;
 use Doctrine\Common\Annotations\Reader;
@@ -36,7 +36,7 @@ class SundayModuleTest extends TestCase
             protected function configure()
             {
                 $this->bind()->annotatedWith(AppName::class)->toInstance('BEAR\Sunday');
-                $this->bind(AppInterface::class)->to(MinApp::class);
+                $this->bind(AppInterface::class)->to(App::class);
             }
         }));
     }
@@ -44,7 +44,7 @@ class SundayModuleTest extends TestCase
     public function testMinApp()
     {
         $app = $this->injector->getInstance(AppInterface::class);
-        $this->assertInstanceOf(MinApp::class, $app);
+        $this->assertInstanceOf(App::class, $app);
     }
 
     public function testDependModules()

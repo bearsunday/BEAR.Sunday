@@ -10,6 +10,6 @@ namespace BEAR\Sunday\Provide\Application;
 
 use BEAR\Sunday\Extension\Application\AbstractApp;
 
-class MinApp extends AbstractApp
+class App extends AbstractApp
 {
 }

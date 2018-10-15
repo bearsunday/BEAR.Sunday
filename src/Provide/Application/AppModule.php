@@ -20,7 +20,7 @@ class AppModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind(AppInterface::class)->to(MinApp::class);
+        $this->bind(AppInterface::class)->to(App::class);
         $this->bind()->annotatedWith(AppName::class)->toInstance('BEAR\Sunday');
     }
 }

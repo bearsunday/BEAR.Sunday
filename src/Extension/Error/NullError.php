@@ -17,6 +17,7 @@ final class NullError implements ErrorInterface
      */
     public function handle(\Exception $e, Request $request)
     {
+        return $this;
     }
 
     /**

@@ -10,7 +10,6 @@ namespace BEAR\Sunday\Provide\Application;
 
 use BEAR\Resource\Annotation\AppName;
 use BEAR\Sunday\Extension\Application\AppInterface;
-use BEAR\Sunday\Module\SundayModule;
 use Ray\Di\AbstractModule;
 
 class AppModule extends AbstractModule
@@ -20,8 +19,7 @@ class AppModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind(AppInterface::class)->to(MinApp::class);
+        $this->bind(AppInterface::class)->to(App::class);
         $this->bind()->annotatedWith(AppName::class)->toInstance('BEAR\Sunday');
-        $this->install(new SundayModule);
     }
 }

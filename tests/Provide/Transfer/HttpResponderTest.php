@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class HttpResponderTest extends TestCase
 {
     /**
-     * @var HttpResponder
+     * @var FakeHttpResponder
      */
     private $responder;
 
@@ -35,7 +35,7 @@ class HttpResponderTest extends TestCase
         ];
         $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
         $expect = '{"greeting":"hello world"}';
-        $actual = FakeHttpResponder::$content;
+        $actual = FakeHttpResponder::$body;
         $this->assertSame($expect, $actual);
     }
 
@@ -56,7 +56,7 @@ class HttpResponderTest extends TestCase
         ];
         $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
         $expect = '{"greeting":"hello world"}';
-        $actual = FakeHttpResponder::$content;
+        $actual = FakeHttpResponder::$body;
         $this->assertSame($expect, $actual);
     }
 }

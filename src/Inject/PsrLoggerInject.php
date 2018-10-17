@@ -1,11 +1,7 @@
 <?php
 
 declare(strict_types=1);
-/**
- * This file is part of the BEAR.Sunday package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
 namespace BEAR\Sunday\Inject;
 
 use Psr\Log\LoggerInterface;
@@ -18,8 +14,6 @@ trait PsrLoggerInject
     private $logger;
 
     /**
-     * @param LoggerInterface $logger
-     *
      * @Ray\Di\Di\Inject
      */
     public function setPsrLogger(LoggerInterface $logger)

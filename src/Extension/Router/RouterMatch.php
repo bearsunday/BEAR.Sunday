@@ -1,11 +1,7 @@
 <?php
 
 declare(strict_types=1);
-/**
- * This file is part of the BEAR.Sunday package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
 namespace BEAR\Sunday\Extension\Router;
 
 class RouterMatch
@@ -34,8 +30,7 @@ class RouterMatch
     public function __toString()
     {
         $querySymbol = $this->query ? '?' : '';
-        $string = "{$this->method} {$this->path}{$querySymbol}" . \http_build_query($this->query);
 
-        return $string;
+        return "{$this->method} {$this->path}{$querySymbol}" . \http_build_query($this->query);
     }
 }

@@ -1,11 +1,7 @@
 <?php
 
 declare(strict_types=1);
-/**
- * This file is part of the BEAR.Sunday package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
 namespace BEAR\Sunday\Module\Constant;
 
 use Ray\Di\AbstractModule;
@@ -17,9 +13,6 @@ class NamedModule extends AbstractModule
      */
     private $names;
 
-    /**
-     * @param array $names
-     */
     public function __construct(array $names)
     {
         $this->names = $names;

@@ -1,11 +1,7 @@
 <?php
 
 declare(strict_types=1);
-/**
- * This file is part of the BEAR.Sunday package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
 namespace BEAR\Sunday\Provide\Router;
 
 use BEAR\Sunday\Annotation\DefaultSchemeHost;
@@ -20,8 +16,6 @@ class WebRouter implements RouterInterface
     private $schemeHost;
 
     /**
-     * @param string $schemeHost
-     *
      * @DefaultSchemeHost
      */
     public function __construct(string $schemeHost)

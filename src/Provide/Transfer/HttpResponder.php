@@ -14,11 +14,12 @@ class HttpResponder implements TransferInterface
      */
     public function __invoke(ResourceObject $ro, array $server)
     {
-        if ($this->respondeIfETagMatch($ro, $server)) {
+        if ($this->isNotModified($ro, $server)) {
+            $this->transfer304($ro);
+
             return;
         }
 
-        unset($server);
         // render
         if (! $ro->view) {
             $ro->toString();
@@ -36,16 +37,19 @@ class HttpResponder implements TransferInterface
         echo $ro->view;
     }
 
-    private function respondeIfETagMatch(ResourceObject $ro, array $server) : bool
+    private function isNotModified(ResourceObject $ro, array $server) : bool
     {
-        if (! isset($server['HTTP_IF_NONE_MATCH'])
-            || ! isset($ro->headers['ETag'])
-            || $server['HTTP_IF_NONE_MATCH'] !== $ro->headers['ETag']
-        ) {
-            return false;
-        }
+        return (isset($server['HTTP_IF_NONE_MATCH'])
+            && isset($ro->headers['ETag'])
+            && $server['HTTP_IF_NONE_MATCH'] === $ro->headers['ETag']
+        );
+    }
 
-        // See: https://httpwg.org/specs/rfc7232.html#status.304
+    /**
+     * @see https://httpwg.org/specs/rfc7232.html#status.304
+     */
+    private function transfer304(ResourceObject $ro)
+    {
         $mustGenerateHeaders = [
             'Cache-Control',
             'Content-Location',
@@ -66,7 +70,5 @@ class HttpResponder implements TransferInterface
 
         // code
         http_response_code(304);
-
-        return true;
     }
 }

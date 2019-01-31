@@ -16,7 +16,6 @@ class NullErrorTest extends TestCase
 {
     public function testNullError()
     {
-        (new NullError)->handle(new \Exception, new RouterMatch)->transfer();
-        $this->expectNotToPerformAssertions();
+        $this->assertNull((new NullError)->handle(new \Exception, new RouterMatch)->transfer());
     }
 }

@@ -70,7 +70,7 @@ class HttpResponderTest extends TestCase
             ['ETag: etag-x', false],
         ];
         $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
-        $expect = null;
+        $expect = '';
         $actual = FakeHttpResponder::$body;
         $this->assertSame($expect, $actual);
         $this->assertSame(304, FakeHttpResponder::$code);

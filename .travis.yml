@@ -46,10 +46,12 @@ jobs:
   - stage: Code Quality
     name: Static analysis
     php: 7.2
-    install: composer require --dev phpstan/phpstan-shim ^0.11 vimeo/psalm ^3.0;
+    install:
+      - composer require --dev phpstan/phpstan-shim ^0.11
+      - composer global require --dev vimeo/psalm ^3.0;
     script:
       - ./vendor/bin/phpstan analyse -l max -c phpstan.neon src tests --no-progress --no-interaction;
-      - ./vendor/bin/psalm --show-info=false
+      - ~/.composer/vendor/bin/psalm --show-info=false
 
   - stage: Code Quality
     name: Coding standards

@@ -59,4 +59,38 @@ class HttpResponderTest extends TestCase
         $actual = FakeHttpResponder::$body;
         $this->assertSame($expect, $actual);
     }
+
+    public function testTransferETagIsMatch()
+    {
+        $ro = (new FakeResource)->onGet();
+        $ro->headers['ETag'] = 'etag-x';
+        $ro->transfer($this->responder, ['HTTP_IF_NONE_MATCH' => 'etag-x']);
+        $expectedArgs = [
+            ['Cache-Control: max-age=0', false],
+            ['ETag: etag-x', false],
+        ];
+        $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
+        $expect = '';
+        $actual = FakeHttpResponder::$body;
+        $this->assertSame($expect, $actual);
+        $this->assertSame(304, FakeHttpResponder::$code);
+    }
+
+    public function testTransferETagIsNotMatch()
+    {
+        $ro = (new FakeResource)->onGet();
+        $ro->headers['ETag'] = 'etag-y';
+        $ro->transfer($this->responder, ['HTTP_IF_NONE_MATCH' => 'etag-x']);
+        $expectedArgs = [
+            ['Cache-Control: max-age=0', false],
+            ['ETag: etag-y', false],
+            ['content-type: application/json', false],
+        ];
+;
+        $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
+        $expect = '{"greeting":"hello world"}';
+        $actual = FakeHttpResponder::$body;
+        $this->assertSame($expect, $actual);
+        $this->assertSame(200, FakeHttpResponder::$code);
+    }
 }

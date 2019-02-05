@@ -8,9 +8,8 @@
 namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Resource\ResourceObject;
-use BEAR\Sunday\Extension\Transfer\TransferInterface;
 
-class FakeHttpResponder implements TransferInterface
+class FakeHttpResponder extends HttpResponder
 {
     public static $code;
     public static $headers = [];
@@ -18,19 +17,15 @@ class FakeHttpResponder implements TransferInterface
 
     public static function reset()
     {
+        static::$code = null;
         static::$headers = [];
         static::$body = null;
     }
 
     public function __invoke(ResourceObject $ro, array $server)
     {
-        if (! $ro->view) {
-            self::$body = $ro->toString();
-        }
-        // header
-        foreach ($ro->headers as $label => $value) {
-            header("{$label}: {$value}", false);
-        }
-        self::$code = $ro->code;
+        ob_start();
+        parent::__invoke($ro, $server);
+        self::$body = ob_get_clean();
     }
 }

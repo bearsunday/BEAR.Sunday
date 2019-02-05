@@ -46,7 +46,7 @@ final class VndError implements ErrorInterface
     public function handle(\Exception $e, Request $request)
     {
         if ($this->isCodeExists($e)) {
-            $this->errorPage->code = $e->getCode();
+            $this->errorPage->code = (int) $e->getCode();
             $this->errorPage->body = ['message' => (new Code)->statusText[$this->errorPage->code]];
 
             return $this;

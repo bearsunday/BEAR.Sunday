@@ -27,7 +27,7 @@
   },
   "require-dev": {
       "phpunit/phpunit": "^7.5",
-      "bear/cs": "1.0.0"
+      "bear/cs": "^1.0"
   },
   "autoload": {
       "psr-4": {

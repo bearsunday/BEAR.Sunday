@@ -46,11 +46,11 @@ class HttpResponder implements TransferInterface
     }
 
     /**
-     * @see https://httpwg.org/specs/rfc7232.html#status.304
+     * @see https://tools.ietf.org/html/rfc7232#section-4.1
      */
     private function transfer304(ResourceObject $ro)
     {
-        $mustGenerateHeaders = [
+        $allowedHeaderIn304 = [
             'Cache-Control',
             'Content-Location',
             'Date',
@@ -61,7 +61,7 @@ class HttpResponder implements TransferInterface
 
         // header
         foreach ($ro->headers as $label => $value) {
-            if (! in_array($label, $mustGenerateHeaders, true)) {
+            if (! in_array($label, $allowedHeaderIn304, true)) {
                 continue;
             }
 

@@ -93,4 +93,17 @@ class HttpResponderTest extends TestCase
         $this->assertSame($expect, $actual);
         $this->assertSame(200, FakeHttpResponder::$code);
     }
+
+    public function testExcludeHeaderIn304()
+    {
+        $ro = (new FakeResource)->onGet();
+        $ro->headers['ETag'] = 'etag-x';
+        $ro->headers['X-Application'] = 'this-may-exclude-in-304';
+        $ro->transfer($this->responder, ['HTTP_IF_NONE_MATCH' => 'etag-x']);
+        $expectedArgs = [
+            ['Cache-Control: max-age=0', false],
+            ['ETag: etag-x', false],
+        ];
+        $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
+    }
 }

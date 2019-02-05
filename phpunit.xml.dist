@@ -1,12 +1,18 @@
-<phpunit bootstrap="vendor/autoload.php">
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php">
     <testsuites>
-        <testsuite>
-            <directory>./tests</directory>
+        <testsuite name="all">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <ini name="error_reporting" value="-1" />
+    </php>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
+            <directory suffix=".php">src</directory>
         </whitelist>
     </filter>
 </phpunit>

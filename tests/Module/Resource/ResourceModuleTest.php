@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace BEAR\Sunday\Module\Resource;
 
 use BEAR\Resource\ResourceInterface;

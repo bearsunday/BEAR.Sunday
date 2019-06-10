@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace BEAR\Sunday\Provide\Representation;
 
 use BEAR\Resource\JsonRenderer;

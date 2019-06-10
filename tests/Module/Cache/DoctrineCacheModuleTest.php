@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace BEAR\Sunday\Module\Cache;
 
 use Doctrine\Common\Cache\Cache;

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Resource\NullResourceObject;

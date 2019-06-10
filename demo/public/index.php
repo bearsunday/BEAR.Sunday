@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 use BEAR\Resource\Exception\BadRequestException;
 use BEAR\Resource\Exception\ResourceNotFoundException;
 use BEAR\Resource\ResourceObject;

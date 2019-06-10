@@ -1,11 +1,7 @@
 <?php
 
 declare(strict_types=1);
-/**
- * This file is part of the BEAR.Sunday package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
 namespace BEAR\Sunday\Module\Constant;
 
 use BEAR\Sunday\FakeApplication;
@@ -19,7 +15,7 @@ class NamedModuleTest extends TestCase
      */
     private $app;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $names = [
             'path' => __DIR__,

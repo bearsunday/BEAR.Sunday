@@ -1,11 +1,7 @@
 <?php
 
 declare(strict_types=1);
-/**
- * This file is part of the BEAR.Sunday package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
 namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Sunday\Fake\Resource\FakeResource;
@@ -18,7 +14,7 @@ class HttpResponderTest extends TestCase
      */
     private $responder;
 
-    public function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
         $this->responder = new FakeHttpResponder;
@@ -86,7 +82,7 @@ class HttpResponderTest extends TestCase
             ['ETag: etag-y', false],
             ['content-type: application/json', false],
         ];
-;
+
         $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
         $expect = '{"greeting":"hello world"}';
         $actual = FakeHttpResponder::$body;

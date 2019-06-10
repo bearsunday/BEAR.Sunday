@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace MyVendor\HelloWorld\Resource\Page;
 
 use BEAR\Resource\ResourceInterface;
@@ -13,7 +16,7 @@ class IndexTest extends TestCase
      */
     private $resource;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
         $this->resource = (new Injector(new AppModule))->getInstance(ResourceInterface::class);

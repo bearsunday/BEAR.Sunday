@@ -15,7 +15,7 @@ class NamedModuleTest extends TestCase
      */
     private $app;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $names = [
             'path' => __DIR__,

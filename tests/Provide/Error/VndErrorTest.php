@@ -20,7 +20,7 @@ class VndErrorTest extends TestCase
      */
     private $vndError;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         FakeHttpResponder::reset();
         $this->vndError = new VndError(new FakeHttpResponder);

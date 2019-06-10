@@ -26,7 +26,7 @@ class SundayModuleTest extends TestCase
      */
     private $injector;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->injector = new Injector(new SundayModule(new class extends AbstractModule {
             protected function configure()

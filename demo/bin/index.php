@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Extension\Application\AbstractApp;
 use BEAR\Sunday\Extension\Application\AppInterface;

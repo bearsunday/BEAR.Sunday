@@ -39,10 +39,9 @@ class HttpResponder implements TransferInterface
 
     private function isNotModified(ResourceObject $ro, array $server) : bool
     {
-        return (isset($server['HTTP_IF_NONE_MATCH'])
-            && isset($ro->headers['ETag'])
-            && $server['HTTP_IF_NONE_MATCH'] === $ro->headers['ETag']
-        );
+        return isset($server['HTTP_IF_NONE_MATCH'], $ro->headers['ETag'])
+
+            && $server['HTTP_IF_NONE_MATCH'] === $ro->headers['ETag'];
     }
 
     /**

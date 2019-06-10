@@ -1,11 +1,8 @@
 <?php
 
 declare(strict_types=1);
-/**
- * This file is part of the BEAR.Sunday package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
+
 namespace BEAR\Sunday\Provide\Router;
 
 use PHPUnit\Framework\TestCase;
@@ -17,7 +14,7 @@ class WebRouterTest extends TestCase
      */
     private $router;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
         $this->router = new WebRouter('page://self');

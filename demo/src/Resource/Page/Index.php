@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace MyVendor\HelloWorld\Resource\Page;
 
 use BEAR\Resource\ResourceObject;

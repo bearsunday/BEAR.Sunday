@@ -1,11 +1,8 @@
 <?php
 
 declare(strict_types=1);
-/**
- * This file is part of the BEAR.Sunday package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
+
 namespace BEAR\Sunday\Module;
 
 use BEAR\Resource\Annotation\AppName;
@@ -30,7 +27,7 @@ class SundayModuleTest extends TestCase
      */
     private $injector;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->injector = new Injector(new SundayModule(new class extends AbstractModule {
             protected function configure()

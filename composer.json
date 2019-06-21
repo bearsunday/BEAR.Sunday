@@ -22,9 +22,8 @@
   ],
   "require": {
       "php": ">=7.1.0",
-      "bear/resource": "1.x-dev",
-      "psr/log": "^1.1",
-      "ray/aop": "^2.7"
+      "bear/resource": "^1.12",
+      "psr/log": "^1.1"
   },
   "require-dev": {
       "phpunit/phpunit": "^7.5",
@@ -48,7 +47,7 @@
   },
   "scripts" :{
       "test": ["phpunit"],
-      "tests": ["@cs", "phpstan analyse -l max src tests -c phpstan.neon --no-progress", "psalm --show-info=false", "@test"],
+      "tests": ["@cs", "phpstan analyse -l max src tests -c phpstan.neon --no-progress", "vendor/bin/psalm --show-info=false", "@test"],
       "coverage": ["php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
       "cs": ["php-cs-fixer fix -v --dry-run", "phpcs --standard=./phpcs.xml src"],
       "cs-fix": ["php-cs-fixer fix -v", "phpcbf src"]

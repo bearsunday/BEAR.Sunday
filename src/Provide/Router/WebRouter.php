@@ -34,7 +34,7 @@ final class WebRouter implements RouterInterface
         $match = new RouterMatch;
         $match->method = $method;
         $match->path = $this->schemeHost . \parse_url($server['REQUEST_URI'], PHP_URL_PATH);
-        $match->query = ($method === 'get') ? $globals['_GET'] : $this->getUnsafeQuery($method, $server, $globals);
+        $match->query = ($method === 'get') ? $globals['_GET'] : $this->getUnsafeQuery($method, $globals, $server);
 
         return $match;
     }
@@ -44,7 +44,7 @@ final class WebRouter implements RouterInterface
      */
     public function generate($name, $data)
     {
-        return $name;
+        return false;
     }
 
     /**

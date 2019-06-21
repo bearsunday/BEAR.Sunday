@@ -35,5 +35,5 @@
     <rule ref="rulesets/controversial.xml/CamelCaseMethodName"/>
     <!--cleancode-->
     <rule ref="rulesets/cleancode.xml/BooleanArgumentFlag"/>
-     <rule ref="rulesets/cleancode.xml/ElseExpression" />
+    <rule ref="rulesets/cleancode.xml/ElseExpression" />
 </ruleset>

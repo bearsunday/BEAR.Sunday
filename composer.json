@@ -48,7 +48,7 @@
   },
   "scripts" :{
       "test": ["phpunit"],
-      "tests": ["@cs", "phpstan analyse -l max src tests -c phpstan.neon --no-progress", "psalm --show-info=false", "@test"],
+      "tests": ["@cs", "phpstan analyse -l max src tests -c phpstan.neon --no-progress", "vendor/bin/psalm --show-info=false", "@test"],
       "coverage": ["php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
       "cs": ["php-cs-fixer fix -v --dry-run", "phpcs --standard=./phpcs.xml src"],
       "cs-fix": ["php-cs-fixer fix -v", "phpcbf src"]

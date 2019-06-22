@@ -27,7 +27,7 @@ class HttpResponderTest extends TestCase
         $ro->transfer($this->responder, []);
         $expectedArgs = [
             ['Cache-Control: max-age=0', false],
-            ['content-type: application/json', false],
+            ['Content-Type: application/json', false],
         ];
         $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
         $expect = '{"greeting":"hello world"}';
@@ -48,7 +48,7 @@ class HttpResponderTest extends TestCase
         $expectedArgs = [
             ['Cache-Control: max-age=0', false],
             ['Foo: foo-string', false],
-            ['content-type: application/json', false],
+            ['Content-Type: application/json', false],
         ];
         $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
         $expect = '{"greeting":"hello world"}';
@@ -80,7 +80,7 @@ class HttpResponderTest extends TestCase
         $expectedArgs = [
             ['Cache-Control: max-age=0', false],
             ['ETag: etag-y', false],
-            ['content-type: application/json', false],
+            ['Content-Type: application/json', false],
         ];
 
         $this->assertSame($expectedArgs, FakeHttpResponder::$headers);

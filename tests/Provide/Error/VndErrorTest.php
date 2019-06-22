@@ -33,7 +33,7 @@ class VndErrorTest extends TestCase
         $e = new ResourceNotFoundException('', 404);
         $this->vndError->handle($e, new RouterMatch)->transfer();
         $this->assertSame(404, FakeHttpResponder::$code);
-        $this->assertSame([['content-type: application/vnd.error+json', false]], FakeHttpResponder::$headers);
+        $this->assertSame([['Content-Type: application/vnd.error+json', false]], FakeHttpResponder::$headers);
         $this->assertSame('{"message":"Not Found"}', FakeHttpResponder::$body);
     }
 

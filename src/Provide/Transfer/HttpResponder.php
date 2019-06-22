@@ -15,11 +15,11 @@ class HttpResponder implements TransferInterface
     private $header;
 
     /**
-     * @var ConditinalResponseInterface
+     * @var ConditionalResponseInterface
      */
     private $condResponse;
 
-    public function __construct(HeaderInterface $header, ConditinalResponseInterface $condResponse)
+    public function __construct(HeaderInterface $header, ConditionalResponseInterface $condResponse)
     {
         $this->header = $header;
         $this->condResponse = $condResponse;

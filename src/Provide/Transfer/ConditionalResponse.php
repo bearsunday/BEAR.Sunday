@@ -6,7 +6,7 @@ namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Resource\ResourceObject;
 
-final class ConditinalResponse implements ConditinalResponseInterface
+final class ConditionalResponse implements ConditionalResponseInterface
 {
     /**
      * @see https://tools.ietf.org/html/rfc7232#section-4.1

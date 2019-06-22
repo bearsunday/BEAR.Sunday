@@ -17,7 +17,7 @@ class HttpResponderTest extends TestCase
     protected function setUp() : void
     {
         parent::setUp();
-        $this->responder = new FakeHttpResponder(new Header, new ConditinalResponse);
+        $this->responder = new FakeHttpResponder(new Header, new ConditionalResponse);
         FakeHttpResponder::reset();
     }
 

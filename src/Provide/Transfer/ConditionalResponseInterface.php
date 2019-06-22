@@ -6,7 +6,7 @@ namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Resource\ResourceObject;
 
-interface ConditinalResponseInterface
+interface ConditionalResponseInterface
 {
     /**
      * Is resource state modified upon conditional request

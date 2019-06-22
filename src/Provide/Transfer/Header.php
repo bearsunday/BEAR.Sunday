@@ -10,6 +10,8 @@ final class Header implements HeaderInterface
 {
     public function __invoke(ResourceObject $ro, array $server) : array
     {
+        unset($server);
+
         return $ro->headers;
     }
 }

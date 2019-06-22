@@ -10,7 +10,6 @@
 )
 [![Build Status](https://travis-ci.org/bearsunday/BEAR.Sunday.svg?branch=1.x
 )](https://travis-ci.org/bearsunday/BEAR.Sunday)
-[![Gitter](https://badges.gitter.im/bearsunday/BEAR.Sunday.svg)](https://gitter.im/bearsunday/BEAR.Sunday?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## What's BEAR.Sunday
 

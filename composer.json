@@ -22,6 +22,7 @@
   ],
   "require": {
       "php": ">=7.1.0",
+      "ext-json": "*",
       "bear/resource": "^1.12"
   },
   "require-dev": {

@@ -9,6 +9,7 @@ use BEAR\Resource\Exception\ResourceNotFoundException;
 use BEAR\Resource\Exception\ServerErrorException;
 use BEAR\Sunday\Extension\Router\RouterMatch;
 use BEAR\Sunday\Provide\Transfer\FakeHttpResponder;
+use BEAR\Sunday\Provide\Transfer\Header;
 use PHPUnit\Framework\TestCase;
 
 class VndErrorTest extends TestCase
@@ -23,7 +24,7 @@ class VndErrorTest extends TestCase
     protected function setUp() : void
     {
         FakeHttpResponder::reset();
-        $this->vndError = new VndError(new FakeHttpResponder);
+        $this->vndError = new VndError(new FakeHttpResponder(new Header));
         ini_set('error_log', '/dev/null');
     }
 

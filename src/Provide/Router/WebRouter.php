@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace BEAR\Sunday\Provide\Router;
 
-use BEAR\Resource\Exception\BadRequestException;
 use BEAR\Sunday\Annotation\DefaultSchemeHost;
+use BEAR\Sunday\Exception\BadRequestJsonException;
 use BEAR\Sunday\Extension\Router\RouterInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch;
 use function is_array;
@@ -70,7 +70,7 @@ final class WebRouter implements RouterInterface
         $content = json_decode($rawBody, true);
         $error = json_last_error();
         if ($error !== JSON_ERROR_NONE) {
-            throw new BadRequestException(json_last_error_msg());
+            throw new BadRequestJsonException(json_last_error_msg());
         }
 
         return $content;

@@ -16,5 +16,6 @@ class HttpResponderModule extends AbstractModule
     {
         $this->bind(TransferInterface::class)->to(HttpResponder::class);
         $this->bind(HeaderInterface::class)->to(Header::class);
+        $this->bind(ConditionalResponseInterface::class)->to(ConditionalResponse::class);
     }
 }

@@ -17,7 +17,7 @@ class HttpResponderTest extends TestCase
     protected function setUp() : void
     {
         parent::setUp();
-        $this->responder = new FakeHttpResponder(new Header);
+        $this->responder = new FakeHttpResponder(new Header, new ConditionalResponse);
         FakeHttpResponder::reset();
     }
 
@@ -27,9 +27,9 @@ class HttpResponderTest extends TestCase
         $ro->transfer($this->responder, []);
         $expectedArgs = [
             ['Cache-Control: max-age=0', false],
-            ['Content-Type: application/json', false],
         ];
-        $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
+        $actual = FakeHttpResponder::$headers;
+        $this->assertSame($expectedArgs, $actual);
         $expect = '{"greeting":"hello world"}';
         $actual = FakeHttpResponder::$body;
         $this->assertSame($expect, $actual);
@@ -48,7 +48,6 @@ class HttpResponderTest extends TestCase
         $expectedArgs = [
             ['Cache-Control: max-age=0', false],
             ['Foo: foo-string', false],
-            ['Content-Type: application/json', false],
         ];
         $this->assertSame($expectedArgs, FakeHttpResponder::$headers);
         $expect = '{"greeting":"hello world"}';
@@ -80,7 +79,6 @@ class HttpResponderTest extends TestCase
         $expectedArgs = [
             ['Cache-Control: max-age=0', false],
             ['ETag: etag-y', false],
-            ['Content-Type: application/json', false],
         ];
 
         $this->assertSame($expectedArgs, FakeHttpResponder::$headers);

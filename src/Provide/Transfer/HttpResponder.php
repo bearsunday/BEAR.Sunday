@@ -10,6 +10,16 @@ use BEAR\Sunday\Extension\Transfer\TransferInterface;
 class HttpResponder implements TransferInterface
 {
     /**
+     * @var HeaderInterface
+     */
+    private $header;
+
+    public function __construct(HeaderInterface $header)
+    {
+        $this->header = $header;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function __invoke(ResourceObject $ro, array $server)
@@ -26,9 +36,7 @@ class HttpResponder implements TransferInterface
         }
 
         // header
-        foreach ($ro->headers as $label => $value) {
-            header("{$label}: {$value}", false);
-        }
+        ($this->header)($ro, $server);
 
         // code
         http_response_code($ro->code);
@@ -39,9 +47,7 @@ class HttpResponder implements TransferInterface
 
     private function isNotModified(ResourceObject $ro, array $server) : bool
     {
-        return isset($server['HTTP_IF_NONE_MATCH'], $ro->headers['ETag'])
-
-            && $server['HTTP_IF_NONE_MATCH'] === $ro->headers['ETag'];
+        return isset($server['HTTP_IF_NONE_MATCH'], $ro->headers['ETag']) && $server['HTTP_IF_NONE_MATCH'] === $ro->headers['ETag'];
     }
 
     /**

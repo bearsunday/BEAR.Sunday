@@ -15,5 +15,6 @@ class HttpResponderModule extends AbstractModule
     protected function configure()
     {
         $this->bind(TransferInterface::class)->to(HttpResponder::class);
+        $this->bind(HeaderInterface::class)->to(Header::class);
     }
 }

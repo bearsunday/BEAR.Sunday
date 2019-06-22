@@ -8,5 +8,5 @@ use BEAR\Resource\ResourceObject;
 
 interface HeaderInterface
 {
-    public function __invoke(ResourceObject $ro, array $server) : void;
+    public function __invoke(ResourceObject $ro, array $server) : array;
 }

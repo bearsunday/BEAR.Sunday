@@ -64,7 +64,7 @@ final class VndError implements ErrorInterface
      */
     public function transfer()
     {
-        $this->errorPage->headers['content-type'] = self::CONTENT_TYPE;
+        $this->errorPage->headers['Content-Type'] = self::CONTENT_TYPE;
         $this->transfer->__invoke($this->errorPage, []);
     }
 

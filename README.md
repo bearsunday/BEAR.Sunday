@@ -11,7 +11,6 @@
 [![Build Status](https://travis-ci.org/bearsunday/BEAR.Sunday.svg?branch=1.x
 )](https://travis-ci.org/bearsunday/BEAR.Sunday)
 [![Gitter](https://badges.gitter.im/bearsunday/BEAR.Sunday.svg)](https://gitter.im/bearsunday/BEAR.Sunday?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Total Downloads](https://poser.pugx.org/bear/sunday/downloads)](https://packagist.org/packages/bear/sunday)
 
 ## What's BEAR.Sunday
 

@@ -14,9 +14,15 @@ class HttpResponder implements TransferInterface
      */
     private $header;
 
-    public function __construct(HeaderInterface $header)
+    /**
+     * @var ConditinalResponseInterface
+     */
+    private $condResponse;
+
+    public function __construct(HeaderInterface $header, ConditinalResponseInterface $condResponse)
     {
         $this->header = $header;
+        $this->condResponse = $condResponse;
     }
 
     /**
@@ -24,59 +30,23 @@ class HttpResponder implements TransferInterface
      */
     public function __invoke(ResourceObject $ro, array $server)
     {
-        if ($this->isNotModified($ro, $server)) {
-            $this->transfer304($ro);
-
-            return;
-        }
-
-        // render
-        if (! $ro->view) {
-            $ro->toString();
-        }
+        $isModifed = $this->condResponse->isModified($ro, $server);
+        $output = $isModifed ? $this->getOutput($ro, $server) : $this->condResponse->getOutput($ro->headers);
 
         // header
-        $headers = ($this->header)($ro, $server);
-        foreach ($headers as $label => $value) {
+        foreach ($output->headers as $label => $value) {
             header("{$label}: {$value}", false);
         }
 
         // code
-        http_response_code($ro->code);
+        http_response_code($output->code);
 
         // body
-        echo $ro->view;
+        echo $output->view;
     }
 
-    private function isNotModified(ResourceObject $ro, array $server) : bool
+    private function getOutput(ResourceObject $ro, array $server) : Output
     {
-        return isset($server['HTTP_IF_NONE_MATCH'], $ro->headers['ETag']) && $server['HTTP_IF_NONE_MATCH'] === $ro->headers['ETag'];
-    }
-
-    /**
-     * @see https://tools.ietf.org/html/rfc7232#section-4.1
-     */
-    private function transfer304(ResourceObject $ro)
-    {
-        $allowedHeaderIn304 = [
-            'Cache-Control',
-            'Content-Location',
-            'Date',
-            'ETag',
-            'Expires',
-            'Vary',
-        ];
-
-        // header
-        foreach ($ro->headers as $label => $value) {
-            if (! in_array($label, $allowedHeaderIn304, true)) {
-                continue;
-            }
-
-            header("{$label}: {$value}", false);
-        }
-
-        // code
-        http_response_code(304);
+        return new Output($ro->code, ($this->header)($ro, $server), $ro->view ?: $ro->toString());
     }
 }

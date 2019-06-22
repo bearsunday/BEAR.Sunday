@@ -8,11 +8,10 @@ use BEAR\Resource\ResourceObject;
 
 final class Header implements HeaderInterface
 {
-    public function __invoke(ResourceObject $ro, array $server) : void
+    public function __invoke(ResourceObject $ro, array $server) : array
     {
         unset($server);
-        foreach ($ro->headers as $label => $value) {
-            header("{$label}: {$value}", false);
-        }
+
+        return $ro->headers;
     }
 }

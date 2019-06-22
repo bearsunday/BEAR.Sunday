@@ -36,7 +36,10 @@ class HttpResponder implements TransferInterface
         }
 
         // header
-        ($this->header)($ro, $server);
+        $headers = ($this->header)($ro, $server);
+        foreach ($headers as $label => $value) {
+            header("{$label}: {$value}", false);
+        }
 
         // code
         http_response_code($ro->code);

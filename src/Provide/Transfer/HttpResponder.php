@@ -47,6 +47,7 @@ class HttpResponder implements TransferInterface
 
     private function getOutput(ResourceObject $ro, array $server) : Output
     {
+        $ro->toString(); // render and set headers
         return new Output($ro->code, ($this->header)($ro, $server), $ro->view ?: $ro->toString());
     }
 }

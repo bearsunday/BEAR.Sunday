@@ -34,7 +34,7 @@ Interactions with your database, services and even pages and sections of your ap
 ## Related project
 
  * [Ray.Di](https://github.com/ray-di/Ray.Di) - A dpendency injection framework
- * [Ray.Aop](https://github.com/ray-di/Ray.Di) - An aspect oriented framework
+ * [Ray.Aop](https://github.com/ray-di/Ray.Aop) - An aspect oriented framework
  * [BEAR.Resource](https://github.com/bearsunday/BEAR.Resource) - A hypermedia framework for object as a service
  * [BEAR.Package](https://github.com/bearsunday/BEAR.Package) - A web application framework
  * [BEAR.Skeleton](https://github.com/bearsunday/BEAR.Skeleton) - A BEAR.Sunday project skeleton

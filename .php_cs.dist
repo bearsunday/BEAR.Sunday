@@ -135,7 +135,7 @@ return \PhpCsFixer\Config::create()
         'phpdoc_inline_tag' => true, // @Symfony]
         'phpdoc_no_access' => true, // @Symfony]
         'phpdoc_no_alias_tag' => true, // @Symfony
-        'phpdoc_no_empty_return' => true, // @Symfony
+//      'phpdoc_no_empty_return' => true, // @Symfony
         'phpdoc_no_package' => true, // @Symfony
 //      'phpdoc_no_useless_inheritdoc' => true, // @Symfony
         'phpdoc_order' => true,

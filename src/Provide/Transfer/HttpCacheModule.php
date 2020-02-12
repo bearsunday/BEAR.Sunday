@@ -10,7 +10,7 @@ use Ray\Di\AbstractModule;
 
 class HttpCacheModule extends AbstractModule
 {
-    protected function configure()
+    protected function configure() : void
     {
         $this->bind(HttpCacheInterface::class)->to(NullHttpCache::class);
     }

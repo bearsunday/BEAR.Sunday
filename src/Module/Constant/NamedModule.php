@@ -22,7 +22,7 @@ class NamedModule extends AbstractModule
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure() : void
     {
         foreach ($this->names as $annotatedWith => $instance) {
             $this->bind()->annotatedWith($annotatedWith)->toInstance($instance);

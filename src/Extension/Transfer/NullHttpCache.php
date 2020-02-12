@@ -17,7 +17,7 @@ final class NullHttpCache implements HttpCacheInterface
     /**
      * {@inheritdoc}
      */
-    public function transfer()
+    public function transfer() : void
     {
     }
 }

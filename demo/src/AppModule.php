@@ -11,7 +11,7 @@ use Ray\Di\AbstractModule;
 
 class AppModule extends AbstractModule
 {
-    protected function configure()
+    protected function configure() : void
     {
         $this->bind()->annotatedWith(AppName::class)->toInstance(__NAMESPACE__);
         $this->bind(AppInterface::class)->to(App::class);

@@ -15,6 +15,9 @@ use PHPUnit\Framework\TestCase;
 
 class VndErrorTest extends TestCase
 {
+    /**
+     * @var int
+     */
     public static $code;
 
     /**

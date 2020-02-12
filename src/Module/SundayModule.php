@@ -19,7 +19,7 @@ class SundayModule extends AbstractModule
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure() : void
     {
         $this->install(new AppModule);
         $this->install(new HttpCacheModule);

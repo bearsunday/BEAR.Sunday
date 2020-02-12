@@ -14,7 +14,7 @@ class RepresentationModule extends AbstractModule
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure() : void
     {
         $this->bind(RenderInterface::class)->to(JsonRenderer::class)->in(Scope::SINGLETON);
     }

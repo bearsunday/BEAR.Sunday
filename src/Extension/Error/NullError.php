@@ -19,7 +19,7 @@ final class NullError implements ErrorInterface
     /**
      * {@inheritdoc}
      */
-    public function transfer()
+    public function transfer() : void
     {
     }
 }

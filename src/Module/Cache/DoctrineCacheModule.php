@@ -14,7 +14,7 @@ class DoctrineCacheModule extends AbstractModule
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure() : void
     {
         $this->bind(Cache::class)->to(ArrayCache::class)->in(Scope::SINGLETON);
     }

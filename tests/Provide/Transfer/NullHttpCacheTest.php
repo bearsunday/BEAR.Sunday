@@ -13,6 +13,6 @@ class NullHttpCacheTest extends TestCase
     {
         $httpCache = new NullHttpCache;
         $this->assertFalse($httpCache->isNotModified([]));
-        $this->assertNull($httpCache->transfer());
+        $httpCache->transfer();
     }
 }

@@ -1,0 +1,13 @@
+parameters:
+  level: max
+  paths:
+    - src
+    - tests
+  excludes_analyse:
+    - */tests/*/tmp/*
+    - */tests/Fake/*
+  ignoreErrors:
+  -
+      message: "#has no return typehint specified\\.$#"
+      path: tests/*.php
+  checkMissingIterableValueType: false

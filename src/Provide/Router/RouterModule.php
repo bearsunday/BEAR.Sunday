@@ -13,7 +13,7 @@ class RouterModule extends AbstractModule
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure() : void
     {
         $this->bind(RouterInterface::class)->to(WebRouter::class);
         $this->bind()->annotatedWith(DefaultSchemeHost::class)->toInstance('page://self');

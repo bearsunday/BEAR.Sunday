@@ -13,5 +13,8 @@ use Ray\Di\Di\Qualifier;
  */
 final class DefaultSchemeHost
 {
+    /**
+     * @var string
+     */
     public $value;
 }

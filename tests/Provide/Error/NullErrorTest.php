@@ -10,8 +10,11 @@ use PHPUnit\Framework\TestCase;
 
 class NullErrorTest extends TestCase
 {
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testNullError()
     {
-        $this->assertNull((new NullError)->handle(new \Exception, new RouterMatch)->transfer());
+        (new NullError)->handle(new \Exception, new RouterMatch)->transfer();
     }
 }

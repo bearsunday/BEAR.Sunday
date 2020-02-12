@@ -28,7 +28,7 @@ class HttpResponder implements TransferInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(ResourceObject $ro, array $server)
+    public function __invoke(ResourceObject $ro, array $server) : void
     {
         $isModifed = $this->condResponse->isModified($ro, $server);
         $output = $isModifed ? $this->getOutput($ro, $server) : $this->condResponse->getOutput($ro->headers);

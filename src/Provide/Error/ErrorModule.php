@@ -12,7 +12,7 @@ class ErrorModule extends AbstractModule
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure() : void
     {
         $this->bind(ErrorInterface::class)->to(VndError::class);
     }

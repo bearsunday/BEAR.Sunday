@@ -11,7 +11,7 @@ use Ray\Di\Injector;
 
 class ResourceInjectTest extends TestCase
 {
-    public function testInjectTrait()
+    public function testInjectTrait(): void
     {
         $app = (new Injector(new ResourceModule))->getInstance(__NAMESPACE__ . '\ResourceInjectApplication');
         $this->assertInstanceOf(ResourceInterface::class, $app->returnDependency());

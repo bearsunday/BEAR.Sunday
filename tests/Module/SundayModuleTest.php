@@ -37,13 +37,13 @@ class SundayModuleTest extends TestCase
         }));
     }
 
-    public function testMinApp()
+    public function testMinApp(): void
     {
         $app = $this->injector->getInstance(AppInterface::class);
         $this->assertInstanceOf(App::class, $app);
     }
 
-    public function testDependModules()
+    public function testDependModules(): void
     {
         $cache = $this->injector->getInstance(Cache::class);
         $this->assertInstanceOf(ArrayCache::class, $cache);

@@ -144,7 +144,7 @@ return \PhpCsFixer\Config::create()
         'phpdoc_separation' => true, // @Symfony
         'phpdoc_single_line_var_spacing' => true, // @Symfony
 //      'phpdoc_summary' => true, // @Symfony
-        'phpdoc_to_comment' => true, // @Symfony
+//      'phpdoc_to_comment' => true, // @Symfony
         'phpdoc_trim' => true, // @Symfony
         'phpdoc_trim_consecutive_blank_line_separation' => true,
         'phpdoc_types' => true, // @Symfony

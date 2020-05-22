@@ -15,7 +15,7 @@ class FakeHttpResponder extends HttpResponder
     public static $headers = [];
     public static $body;
 
-    public static function reset()
+    public static function reset(): void
     {
         static::$code = null;
         static::$headers = [];

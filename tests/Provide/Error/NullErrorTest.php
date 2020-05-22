@@ -11,11 +11,9 @@ use PHPUnit\Framework\TestCase;
 class NullErrorTest extends TestCase
 {
     /**
-     * @doesNotPerformAssertions 
-     *
-     * @return void
+     * @doesNotPerformAssertions
      */
-    public function testNullError(): void
+    public function testNullError() : void
     {
         (new NullError)->handle(new \Exception, new RouterMatch)->transfer();
     }

@@ -24,7 +24,7 @@ class NamedModuleTest extends TestCase
         $this->app = (new Injector(new NamedModule($names)))->getInstance(FakeApplication::class);
     }
 
-    public function testNamed(): void
+    public function testNamed() : void
     {
         $this->assertSame(__DIR__, $this->app->dir);
         $this->assertSame('bear', $this->app->id);

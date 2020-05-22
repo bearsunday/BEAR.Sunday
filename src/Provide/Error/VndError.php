@@ -25,6 +25,16 @@ final class VndError implements ErrorInterface
     const CONTENT_TYPE = 'application/vnd.error+json';
 
     /**
+     * @var array{Content-Type: string}
+     */
+    public $headers = ['Content-Type' => ''];
+
+    /**
+     * @var array{message: string}
+     */
+    public $body = ['message' => ''];
+
+    /**
      * @var TransferInterface
      */
     private $transfer;
@@ -42,6 +52,8 @@ final class VndError implements ErrorInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @noinspection ForgottenDebugOutputInspection
      */
     public function handle(\Exception $e, Request $request)
     {

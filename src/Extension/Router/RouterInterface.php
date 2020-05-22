@@ -9,8 +9,8 @@ use BEAR\Sunday\Extension\ExtensionInterface;
 interface RouterInterface extends ExtensionInterface
 {
     /**
-     * @param array{_GET: array<string, string>}       $globals $GLOBALS
-     * @param array{REQUEST_URI: string, _GET: string} $server  $_SERVER
+     * @param array{_GET: array<string, string>}                                $globals $GLOBALS
+     * @param array{REQUEST_URI: string, REQUEST_METHOD: string, _GET?: string} $server  $_SERVER
      *
      * @return RouterMatch
      */

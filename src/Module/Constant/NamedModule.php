@@ -9,10 +9,13 @@ use Ray\Di\AbstractModule;
 class NamedModule extends AbstractModule
 {
     /**
-     * @var array
+     * @var array<string, string>
      */
     private $names;
 
+    /**
+     * @param array<string, string> $names
+     */
     public function __construct(array $names)
     {
         $this->names = $names;

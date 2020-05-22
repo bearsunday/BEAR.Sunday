@@ -38,7 +38,7 @@ class WebRouterTest extends TestCase
     {
         $global = [
             '_GET' => [
-                'id' => 1
+                'id' => '1'
             ]
         ];
         $server = [
@@ -48,7 +48,7 @@ class WebRouterTest extends TestCase
         $request = $this->router->match($global, $server);
         $this->assertSame('get', $request->method);
         $this->assertSame('page://self/', $request->path);
-        $this->assertSame(['id' => 1], $request->query);
+        $this->assertSame(['id' => '1'], $request->query);
     }
 
     public function testGenerate() : void

@@ -39,6 +39,7 @@ class HttpResponderTest extends TestCase
     public function testTransferToStringInHeader() : void
     {
         $ro = (new FakeResource)->onGet();
+        /** @phpstan-ignore-next-line */
         $ro->headers['Foo'] = new class {
             public function __toString()
             {

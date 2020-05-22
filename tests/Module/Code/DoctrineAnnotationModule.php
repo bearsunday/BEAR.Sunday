@@ -11,7 +11,7 @@ use Ray\Di\Injector;
 
 class DoctrineAnnotationModule extends TestCase
 {
-    public function testGetInstance()
+    public function testGetInstance() : void
     {
         $reader = (new Injector)->getInstance(Reader::class);
         $this->assertInstanceOf(CachedReader::class, $reader);

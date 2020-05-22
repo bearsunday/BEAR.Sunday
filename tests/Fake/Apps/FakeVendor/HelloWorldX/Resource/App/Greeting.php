@@ -18,7 +18,7 @@ class Greeting extends ResourceObject
     /**
      * @Embed(rel="hello_rel", src="app://hello/greeting")
      */
-    public function onGet()
+    public function onGet(): ResourceObject
     {
         $this->body['greeting'] = 'hello world X';
         $this->body['hello'] = $this->resource->get->uri('app://hello/greeting')->eager->request()->body['greeting'];

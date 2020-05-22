@@ -13,7 +13,7 @@ class NullTransferTest extends TestCase
     /**
      * @doesNotPerformAssertions
      */
-    public function testNullError()
+    public function testNullError() : void
     {
         (new NullTransfer)(new NullResourceObject, []);
     }

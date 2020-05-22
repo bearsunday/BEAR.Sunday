@@ -30,6 +30,7 @@ class HttpResponder implements TransferInterface
      */
     public function __invoke(ResourceObject $ro, array $server) : void
     {
+        /** @var array{HTTP_IF_NONE_MATCH?: string} $server */
         $isModifed = $this->condResponse->isModified($ro, $server);
         $output = $isModifed ? $this->getOutput($ro, $server) : $this->condResponse->getOutput($ro->headers);
 
@@ -45,6 +46,9 @@ class HttpResponder implements TransferInterface
         echo $output->view;
     }
 
+    /**
+     * @param array<string, string> $server
+     */
     private function getOutput(ResourceObject $ro, array $server) : Output
     {
         $ro->toString(); // render and set headers

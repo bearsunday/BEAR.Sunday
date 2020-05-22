@@ -21,7 +21,7 @@ class HttpResponderTest extends TestCase
         FakeHttpResponder::reset();
     }
 
-    public function testTransfer()
+    public function testTransfer() : void
     {
         $ro = (new FakeResource)->onGet();
         $ro->transfer($this->responder, []);
@@ -36,9 +36,10 @@ class HttpResponderTest extends TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testTransferToStringInHeader()
+    public function testTransferToStringInHeader() : void
     {
         $ro = (new FakeResource)->onGet();
+        /** @phpstan-ignore-next-line */
         $ro->headers['Foo'] = new class {
             public function __toString()
             {
@@ -57,7 +58,7 @@ class HttpResponderTest extends TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testTransferETagIsMatch()
+    public function testTransferETagIsMatch() : void
     {
         $ro = (new FakeResource)->onGet();
         $ro->headers['ETag'] = 'etag-x';
@@ -73,7 +74,7 @@ class HttpResponderTest extends TestCase
         $this->assertSame(304, FakeHttpResponder::$code);
     }
 
-    public function testTransferETagIsNotMatch()
+    public function testTransferETagIsNotMatch() : void
     {
         $ro = (new FakeResource)->onGet();
         $ro->headers['ETag'] = 'etag-y';
@@ -91,7 +92,7 @@ class HttpResponderTest extends TestCase
         $this->assertSame(200, FakeHttpResponder::$code);
     }
 
-    public function testExcludeHeaderIn304()
+    public function testExcludeHeaderIn304() : void
     {
         $ro = (new FakeResource)->onGet();
         $ro->headers['ETag'] = 'etag-x';

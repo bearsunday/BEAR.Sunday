@@ -10,7 +10,7 @@ use Ray\Di\Injector;
 
 class ResourceModuleTest extends TestCase
 {
-    public function testGetInstance()
+    public function testGetInstance() : void
     {
         $resource = (new Injector(new ResourceModule))->getInstance(ResourceInterface::class);
         $this->assertInstanceOf(ResourceInterface::class, $resource);

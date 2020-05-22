@@ -14,7 +14,7 @@ class FakeApplication
      * @Inject
      * @Named("path")
      */
-    public function setPath($dir)
+    public function setPath($dir): void
     {
         $this->dir = $dir;
     }
@@ -23,7 +23,7 @@ class FakeApplication
      * @Inject
      * @Named("id")
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }

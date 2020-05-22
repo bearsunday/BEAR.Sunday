@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class NullHttpCacheTest extends TestCase
 {
-    public function testNullError()
+    public function testNullError() : void
     {
         $httpCache = new NullHttpCache;
         $this->assertFalse($httpCache->isNotModified([]));

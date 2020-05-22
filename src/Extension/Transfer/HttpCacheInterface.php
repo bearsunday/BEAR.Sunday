@@ -13,6 +13,8 @@ interface HttpCacheInterface
      * (OK) response if it were not for the fact that the condition evaluated to false.
      *
      * @https://tools.ietf.org/html/rfc7232#section-4.1
+     *
+     * @param array{HTTP_IF_NONE_MATCH?: string} $server
      */
     public function isNotModified(array $server) : bool;
 

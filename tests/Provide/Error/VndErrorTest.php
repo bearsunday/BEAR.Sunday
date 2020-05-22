@@ -32,7 +32,7 @@ class VndErrorTest extends TestCase
         ini_set('error_log', '/dev/null');
     }
 
-    public function testNotFound()
+    public function testNotFound() : void
     {
         $e = new ResourceNotFoundException('', 404);
         $this->vndError->handle($e, new RouterMatch)->transfer();
@@ -41,7 +41,7 @@ class VndErrorTest extends TestCase
         $this->assertSame('{"message":"Not Found"}', FakeHttpResponder::$body);
     }
 
-    public function testBadRequest()
+    public function testBadRequest() : void
     {
         $e = new BadRequestException('invalid-method', 400);
         $this->vndError->handle($e, new RouterMatch)->transfer();
@@ -49,7 +49,7 @@ class VndErrorTest extends TestCase
         $this->assertSame('{"message":"Bad Request"}', FakeHttpResponder::$body);
     }
 
-    public function testServerError()
+    public function testServerError() : void
     {
         $e = new ServerErrorException('message', 501);
         $this->vndError->handle($e, new RouterMatch)->transfer();
@@ -57,7 +57,7 @@ class VndErrorTest extends TestCase
         $this->assertSame('{"message":"Not Implemented"}', FakeHttpResponder::$body);
     }
 
-    public function testRuntimeError()
+    public function testRuntimeError() : void
     {
         $e = new \RuntimeException('message', 0);
         $this->vndError->handle($e, new RouterMatch)->transfer();
@@ -65,7 +65,7 @@ class VndErrorTest extends TestCase
         $this->assertSame('{"message":"500 Server Error"}', FakeHttpResponder::$body);
     }
 
-    public function testServerErrorNot50X()
+    public function testServerErrorNot50X() : void
     {
         $e = new ServerErrorException('message', 0);
         $this->vndError->handle($e, new RouterMatch)->transfer();

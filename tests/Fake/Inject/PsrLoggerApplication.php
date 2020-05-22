@@ -6,7 +6,7 @@ class PsrLoggerApplication
 {
     use PsrLoggerInject;
 
-    public function returnDependency()
+    public function returnDependency(): \Psr\Log\LoggerInterface
     {
         return $this->logger;
     }

@@ -10,7 +10,7 @@ use Ray\Di\Injector;
 
 class DoctrineCacheModuleTest extends TestCase
 {
-    public function testGetInstance()
+    public function testGetInstance() : void
     {
         $cache = (new Injector(new DoctrineCacheModule))->getInstance(Cache::class);
         $this->assertInstanceOf(Cache::class, $cache);

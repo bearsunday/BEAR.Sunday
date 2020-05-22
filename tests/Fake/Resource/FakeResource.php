@@ -6,7 +6,7 @@ use BEAR\Resource\ResourceObject;
 
 class FakeResource extends ResourceObject
 {
-    public function onGet()
+    public function onGet(): ResourceObject
     {
         $this->headers['Cache-Control'] = 'max-age=0';
         $this['greeting'] = 'hello world';

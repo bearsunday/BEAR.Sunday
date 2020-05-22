@@ -49,6 +49,11 @@ final class WebRouter implements RouterInterface
 
     /**
      * Return request query by media-type
+     *
+     * @param array{CONTENT_TYPE?: string, HTTP_CONTENT_TYPE?: string, HTTP_RAW_POST_DATA?: string} $server
+     * @param array<string, mixed>                                                                  $globals
+     *
+     * @return array<string, mixed> $globals
      */
     private function getUnsafeQuery(string $method, array $globals, array $server) : array
     {

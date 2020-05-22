@@ -22,7 +22,8 @@ class WebRouterTest extends TestCase
     public function testMatchRoot() : void
     {
         $global = [
-            '_GET' => []
+            '_GET' => [],
+            '_POST' => []
         ];
         $server = [
             'REQUEST_METHOD' => 'GET',
@@ -39,7 +40,8 @@ class WebRouterTest extends TestCase
         $global = [
             '_GET' => [
                 'id' => '1'
-            ]
+            ],
+            '_POST' => []
         ];
         $server = [
             'REQUEST_METHOD' => 'GET',

@@ -58,6 +58,7 @@ final class WebRouter implements RouterInterface
     private function getUnsafeQuery(string $method, array $globals, array $server) : array
     {
         if ($method === 'post' && is_array($globals['_POST'])) {
+            /** @var array<string, mixed> $globals['_POST'] */
             return $globals['_POST'];
         }
         $contentType = $server['CONTENT_TYPE'] ?? ($server['HTTP_CONTENT_TYPE']) ?? '';
@@ -66,6 +67,7 @@ final class WebRouter implements RouterInterface
         if ($isFormUrlEncoded) {
             \parse_str(rtrim($rawBody), $put);
 
+            /** @var array<string, mixed> $put */
             return $put;
         }
         $isApplicationJson = strpos($contentType, 'application/json') !== false;

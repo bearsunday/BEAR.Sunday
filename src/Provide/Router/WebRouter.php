@@ -72,6 +72,7 @@ final class WebRouter implements RouterInterface
         if (! $isApplicationJson) {
             return [];
         }
+        /** @var array<string, mixed> $content */
         $content = json_decode($rawBody, true);
         $error = json_last_error();
         if ($error !== JSON_ERROR_NONE) {

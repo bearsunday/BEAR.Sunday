@@ -1,5 +1,4 @@
 language: php
-sudo: false
 
 php:
   - 7.2
@@ -11,12 +10,8 @@ cache:
     - vendor
     - $HOME/.composer/cache
 
-matrix:
-  fast_finish: true
-
 before_install:
   - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{,.disabled} || echo "xdebug not available"
-  - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
   - composer self-update
 
 install:
@@ -26,34 +21,37 @@ script:
   - ./vendor/bin/phpunit;
 
 jobs:
+  fast_finish: true
   include:
-  - stage: Test
-    name: Lowest dependencies
-    php: 7.2
-    install: composer update --prefer-dist --prefer-lowest
+    - stage: Test
+      name: Lowest dependencies
+      php: 7.2
+      install: composer update --prefer-dist --prefer-lowest
 
-  - stage: Test
-    name: Code coverage
-    php: 7.2
-    before_script:
-    - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{.disabled,}
-    - if [[ ! $(php -m | grep -si xdebug) ]]; then echo "xdebug required for coverage"; exit 1; fi
-    script:
-    - ./vendor/bin/phpunit -v --coverage-clover ./build/logs/clover.xml
-    after_script:
-    - wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.clover;
+    - stage: Code Quality
+      name: Code coverage
+      php: 7.2
+      before_script:
+        - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{.disabled,}
+        - if [[ ! $(php -m | grep -si xdebug) ]]; then echo "xdebug required for coverage"; exit 1; fi
+      script:
+        - ./vendor/bin/phpunit -v --coverage-clover ./build/logs/clover.xml
+      after_script:
+        - wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.clover;
 
-  - stage: Code Quality
-    name: Static analysis
-    php: 7.2
-    install: composer global require --dev phpstan/phpstan ^0.12 vimeo/psalm ^3.7;
-    script:
-      - ~/.composer/vendor/bin/phpstan analyse -l max -c phpstan.neon src tests --no-progress --no-interaction;
-      - ~/.composer/vendor/bin/psalm --show-info=false
+    - stage: Code Quality
+      name: Static analysis
+      php: 7.2
+      install:
+        - composer global require --dev phpstan/phpstan ^0.12 vimeo/psalm ^3.11 phpmetrics/phpmetrics ^2.6;
+      script:
+        - ~/.composer/vendor/bin/phpstan analyse -c phpstan.neon --no-progress --no-interaction;
+        - ~/.composer/vendor/bin/psalm --show-info=false
+        - ~/.composer/vendor/bin/phpmetrics --exclude=Exception src
 
-  - stage: Code Quality
-    name: Coding standards
-    php: 7.2
-    install: composer global require --dev friendsofphp/php-cs-fixer ^2.0;
-    script:
-      - ~/.composer/vendor/bin/php-cs-fixer --dry-run -v fix;
+    - stage: Code Quality
+      name: Coding standards
+      php: 7.2
+      install: composer global require --dev friendsofphp/php-cs-fixer ^2.0;
+      script:
+        - ~/.composer/vendor/bin/php-cs-fixer --dry-run -v fix;

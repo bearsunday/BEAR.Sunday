@@ -30,6 +30,8 @@ final class WebRouter implements RouterInterface
      */
     public function match(array $globals, array $server)
     {
+        assert(isset($server['REQUEST_METHOD']) && is_string($server['REQUEST_METHOD']));
+        assert(isset($server['REQUEST_URI']) && is_string($server['REQUEST_URI']));
         $method = \strtolower($server['REQUEST_METHOD']);
         $match = new RouterMatch;
         $match->method = $method;
@@ -58,6 +60,7 @@ final class WebRouter implements RouterInterface
     private function getUnsafeQuery(string $method, array $globals, array $server) : array
     {
         if ($method === 'post' && is_array($globals['_POST'])) {
+            /** @var array<string, mixed> $globals['_POST'] */
             return $globals['_POST'];
         }
         $contentType = $server['CONTENT_TYPE'] ?? ($server['HTTP_CONTENT_TYPE']) ?? '';
@@ -66,12 +69,14 @@ final class WebRouter implements RouterInterface
         if ($isFormUrlEncoded) {
             \parse_str(rtrim($rawBody), $put);
 
+            /** @var array<string, mixed> $put */
             return $put;
         }
         $isApplicationJson = strpos($contentType, 'application/json') !== false;
         if (! $isApplicationJson) {
             return [];
         }
+        /** @var array<string, mixed> $content */
         $content = json_decode($rawBody, true);
         $error = json_last_error();
         if ($error !== JSON_ERROR_NONE) {

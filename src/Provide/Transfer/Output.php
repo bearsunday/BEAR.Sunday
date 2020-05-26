@@ -16,5 +16,6 @@ final class Output extends ResourceObject
         $this->code = $code;
         $this->headers = $headers;
         $this->view = $view;
+        $this->body = [];
     }
 }

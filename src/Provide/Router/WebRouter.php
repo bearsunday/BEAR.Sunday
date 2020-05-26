@@ -30,6 +30,8 @@ final class WebRouter implements RouterInterface
      */
     public function match(array $globals, array $server)
     {
+        assert(isset($server['REQUEST_METHOD']) && is_string($server['REQUEST_METHOD']));
+        assert(isset($server['REQUEST_URI']) && is_string($server['REQUEST_URI']));
         $method = \strtolower($server['REQUEST_METHOD']);
         $match = new RouterMatch;
         $match->method = $method;

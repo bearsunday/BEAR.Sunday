@@ -4,19 +4,20 @@ declare(strict_types=1);
 use BEAR\Resource\Exception\BadRequestException;
 use BEAR\Resource\Exception\ResourceNotFoundException;
 use BEAR\Resource\ResourceObject;
-use BEAR\Sunday\Extension\Application\AbstractApp;
 use BEAR\Sunday\Extension\Application\AppInterface;
+use MyVendor\HelloWorld\App;
 use MyVendor\HelloWorld\AppModule;
 use Ray\Di\Injector;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 $app = (new Injector(new AppModule))->getInstance(AppInterface::class);
-/* @var AbstractApp $app */
+assert($app instanceof App);
+
 $request = $app->router->match($GLOBALS, $_SERVER);
 try {
     $response = $app->resource->{$request->method}->uri($request->path)($request->query);
-    /* @var ResourceObject $response */
+    assert($response instanceof ResourceObject);
     $response->transfer($app->responder, $_SERVER);
 } catch (ResourceNotFoundException $e) {
     http_response_code(404);

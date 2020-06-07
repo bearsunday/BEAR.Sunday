@@ -12,6 +12,7 @@ use BEAR\Sunday\Provide\Transfer\ConditionalResponse;
 use BEAR\Sunday\Provide\Transfer\FakeHttpResponder;
 use BEAR\Sunday\Provide\Transfer\Header;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class VndErrorTest extends TestCase
 {
@@ -59,7 +60,7 @@ class VndErrorTest extends TestCase
 
     public function testRuntimeError() : void
     {
-        $e = new \RuntimeException('message', 0);
+        $e = new RuntimeException('message', 0);
         $this->vndError->handle($e, new RouterMatch)->transfer();
         $this->assertSame(500, FakeHttpResponder::$code);
         $this->assertSame('{"message":"500 Server Error"}', FakeHttpResponder::$body);

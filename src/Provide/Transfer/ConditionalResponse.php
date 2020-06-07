@@ -11,7 +11,7 @@ final class ConditionalResponse implements ConditionalResponseInterface
     /**
      * @see https://tools.ietf.org/html/rfc7232#section-4.1
      */
-    const HEADER_IN_304 = [
+    private const HEADER_IN_304 = [
         'Cache-Control',
         'Content-Location',
         'Date',

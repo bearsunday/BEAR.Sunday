@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BEAR\Sunday\Provide\Error;
 
+use function array_key_exists;
 use BEAR\Resource\Code;
 use BEAR\Resource\Exception\BadRequestException as BadRequest;
 use BEAR\Resource\Exception\ResourceNotFoundException as NotFound;
@@ -11,6 +12,7 @@ use BEAR\Resource\Exception\ServerErrorException as ServerError;
 use BEAR\Sunday\Extension\Error\ErrorInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch as Request;
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
+use Exception;
 
 /**
  * Vnd.Error media type error
@@ -22,7 +24,7 @@ final class VndError implements ErrorInterface
     /**
      * @var string
      */
-    const CONTENT_TYPE = 'application/vnd.error+json';
+    private const CONTENT_TYPE = 'application/vnd.error+json';
 
     /**
      * @var array{Content-Type: string}
@@ -55,7 +57,7 @@ final class VndError implements ErrorInterface
      *
      * @noinspection ForgottenDebugOutputInspection
      */
-    public function handle(\Exception $e, Request $request)
+    public function handle(Exception $e, Request $request)
     {
         if ($this->isCodeExists($e)) {
             $this->errorPage->code = (int) $e->getCode();
@@ -80,12 +82,12 @@ final class VndError implements ErrorInterface
         $this->transfer->__invoke($this->errorPage, []);
     }
 
-    private function isCodeExists(\Exception $e) : bool
+    private function isCodeExists(Exception $e) : bool
     {
         if (! ($e instanceof NotFound) && ! ($e instanceof BadRequest) && ! ($e instanceof ServerError)) {
             return false;
         }
 
-        return \array_key_exists($e->getCode(), (new Code)->statusText);
+        return array_key_exists($e->getCode(), (new Code)->statusText);
     }
 }

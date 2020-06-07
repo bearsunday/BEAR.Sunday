@@ -11,7 +11,7 @@ use Ray\Di\AbstractModule;
 
 class ResourceModule extends AbstractModule
 {
-    const DEFAULT_APP_NAME = 'BEAR\Sunday';
+    private const DEFAULT_APP_NAME = 'BEAR\Sunday';
 
     /**
      * {@inheritdoc}

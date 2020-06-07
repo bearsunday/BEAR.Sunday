@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BEAR\Sunday\Extension\Router;
 
+use function http_build_query;
+
 class RouterMatch
 {
     /**
@@ -31,6 +33,6 @@ class RouterMatch
     {
         $querySymbol = $this->query ? '?' : '';
 
-        return "{$this->method} {$this->path}{$querySymbol}" . \http_build_query($this->query);
+        return "{$this->method} {$this->path}{$querySymbol}" . http_build_query($this->query);
     }
 }

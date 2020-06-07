@@ -9,6 +9,9 @@ use BEAR\Sunday\Exception\BadRequestJsonException;
 use BEAR\Sunday\Extension\Router\RouterInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch;
 use function is_array;
+use function parse_str;
+use function parse_url;
+use function strtolower;
 
 final class WebRouter implements RouterInterface
 {
@@ -32,10 +35,10 @@ final class WebRouter implements RouterInterface
     {
         assert(isset($server['REQUEST_METHOD']) && is_string($server['REQUEST_METHOD']));
         assert(isset($server['REQUEST_URI']) && is_string($server['REQUEST_URI']));
-        $method = \strtolower($server['REQUEST_METHOD']);
+        $method = strtolower($server['REQUEST_METHOD']);
         $match = new RouterMatch;
         $match->method = $method;
-        $match->path = $this->schemeHost . \parse_url($server['REQUEST_URI'], PHP_URL_PATH);
+        $match->path = $this->schemeHost . parse_url($server['REQUEST_URI'], PHP_URL_PATH);
         $match->query = ($method === 'get') ? $globals['_GET'] : $this->getUnsafeQuery($method, $globals, $server);
 
         return $match;
@@ -67,7 +70,7 @@ final class WebRouter implements RouterInterface
         $isFormUrlEncoded = strpos($contentType, 'application/x-www-form-urlencoded') !== false;
         $rawBody = $server['HTTP_RAW_POST_DATA'] ?? rtrim((string) file_get_contents('php://input'));
         if ($isFormUrlEncoded) {
-            \parse_str(rtrim($rawBody), $put);
+            parse_str(rtrim($rawBody), $put);
 
             /** @var array<string, mixed> $put */
             return $put;

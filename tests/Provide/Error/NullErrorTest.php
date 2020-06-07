@@ -6,6 +6,7 @@ namespace BEAR\Sunday\Provide\Error;
 
 use BEAR\Sunday\Extension\Error\NullError;
 use BEAR\Sunday\Extension\Router\RouterMatch;
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 class NullErrorTest extends TestCase
@@ -15,6 +16,6 @@ class NullErrorTest extends TestCase
      */
     public function testNullError() : void
     {
-        (new NullError)->handle(new \Exception, new RouterMatch)->transfer();
+        (new NullError)->handle(new Exception, new RouterMatch)->transfer();
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace BEAR\Sunday\Module;
 
+use BEAR\Resource\Module\ResourceModule;
 use BEAR\Sunday\Module\Annotation\DoctrineAnnotationModule;
 use BEAR\Sunday\Module\Cache\DoctrineCacheModule;
-use BEAR\Sunday\Module\Resource\ResourceModule;
 use BEAR\Sunday\Provide\Application\AppModule;
 use BEAR\Sunday\Provide\Error\ErrorModule;
 use BEAR\Sunday\Provide\Router\RouterModule;
@@ -25,7 +25,7 @@ class SundayModule extends AbstractModule
         $this->install(new HttpCacheModule);
         $this->install(new DoctrineCacheModule);
         $this->install(new DoctrineAnnotationModule);
-        $this->install(new ResourceModule);
+        $this->install(new ResourceModule('BEAR\Sunday'));
         $this->install(new RouterModule);
         $this->install(new HttpResponderModule);
         $this->install(new ErrorModule);

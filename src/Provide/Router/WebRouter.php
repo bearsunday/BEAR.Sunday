@@ -8,11 +8,14 @@ use BEAR\Sunday\Annotation\DefaultSchemeHost;
 use BEAR\Sunday\Exception\BadRequestJsonException;
 use BEAR\Sunday\Extension\Router\RouterInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch;
-use function is_array;
 use function parse_str;
 use function parse_url;
 use function strtolower;
 
+/**
+ * @psalm-import-type Globals from RouterInterface
+ * @psalm-import-type Server from RouterInterface
+ */
 final class WebRouter implements RouterInterface
 {
     /**
@@ -33,8 +36,6 @@ final class WebRouter implements RouterInterface
      */
     public function match(array $globals, array $server)
     {
-        assert(isset($server['REQUEST_METHOD']) && is_string($server['REQUEST_METHOD']));
-        assert(isset($server['REQUEST_URI']) && is_string($server['REQUEST_URI']));
         $method = strtolower($server['REQUEST_METHOD']);
         $match = new RouterMatch;
         $match->method = $method;
@@ -55,15 +56,16 @@ final class WebRouter implements RouterInterface
     /**
      * Return request query by media-type
      *
-     * @param array{CONTENT_TYPE?: string, HTTP_CONTENT_TYPE?: string, HTTP_RAW_POST_DATA?: string} $server
-     * @param array<string, mixed>                                                                  $globals
+     * @psalm-param Server $server
+     * @psalm-param Globals $globals
+     * @phpstan-param array<string, mixed> $globals
+     * @phpstan-param array<string, mixed> $server
      *
      * @return array<string, mixed> $globals
      */
     private function getUnsafeQuery(string $method, array $globals, array $server) : array
     {
-        if ($method === 'post' && is_array($globals['_POST'])) {
-            /** @var array<string, mixed> $globals['_POST'] */
+        if ($method === 'post') {
             return $globals['_POST'];
         }
         $contentType = $server['CONTENT_TYPE'] ?? ($server['HTTP_CONTENT_TYPE']) ?? '';

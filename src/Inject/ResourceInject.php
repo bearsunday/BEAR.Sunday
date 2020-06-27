@@ -14,7 +14,7 @@ trait ResourceInject
     protected $resource;
 
     /**
-     * @Ray\Di\Di\Inject
+     * @\Ray\Di\Di\Inject
      */
     public function setResource(ResourceInterface $resource)
     {

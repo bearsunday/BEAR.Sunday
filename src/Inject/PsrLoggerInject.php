@@ -14,7 +14,7 @@ trait PsrLoggerInject
     private $logger;
 
     /**
-     * @Ray\Di\Di\Inject
+     * @\Ray\Di\Di\Inject
      */
     public function setPsrLogger(LoggerInterface $logger)
     {

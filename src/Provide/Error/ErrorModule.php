@@ -6,7 +6,6 @@ namespace BEAR\Sunday\Provide\Error;
 
 use BEAR\Sunday\Extension\Error\ErrorInterface;
 use BEAR\Sunday\Extension\Error\ThrowableHandlerInterface;
-use BEAR\Sunday\Extension\Provide\ThrowableHandler;
 use Ray\Di\AbstractModule;
 
 class ErrorModule extends AbstractModule

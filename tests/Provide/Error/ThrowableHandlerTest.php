@@ -43,10 +43,10 @@ class ThrowableHandlerTest extends TestCase
     public function testError() : void
     {
         try {
-            1 / 0;
+            1 / 0; // @phpstan-ignore-line
         } catch (Exception $e) {
         }
-        $this->throableHandler->handle($e, new RouterMatch)->transfer();
+        $this->throableHandler->handle($e, new RouterMatch)->transfer(); // @phpstan-ignore-line
         $this->assertSame(500, FakeHttpResponder::$code);
         $this->assertSame([['Content-Type: application/vnd.error+json', false]], FakeHttpResponder::$headers);
         $this->assertSame('{"message":"500 Server Error"}', FakeHttpResponder::$body);

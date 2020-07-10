@@ -7,12 +7,12 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 >
     <projectFiles>
-        <directory name="src" />
+        <directory name="src"/>
         <ignoreFiles>
-            <directory name="vendor" />
+            <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
     <issueHandlers>
-        <MissingConstructor errorLevel="suppress" />
+        <MissingConstructor errorLevel="suppress"/>
     </issueHandlers>
 </psalm>

@@ -41,7 +41,7 @@ class HttpResponderTest extends TestCase
         $ro = (new FakeResource)->onGet();
         /** @phpstan-ignore-next-line */
         $ro->headers['Foo'] = new class {
-            public function __toString()
+            public function __toString(): string
             {
                 return 'foo-string';
             }

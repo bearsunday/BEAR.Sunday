@@ -13,6 +13,11 @@ use function file_get_contents;
 use function json_decode;
 use function json_last_error;
 use function json_last_error_msg;
+use function parse_str;
+use function parse_url;
+use function rtrim;
+use function strpos;
+use function strtolower;
 
 use const JSON_ERROR_NONE;
 use const PHP_URL_PATH;

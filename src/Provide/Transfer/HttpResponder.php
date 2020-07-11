@@ -34,15 +34,14 @@ class HttpResponder implements TransferInterface
         $isModifed = $this->condResponse->isModified($ro, $server);
         $output = $isModifed ? $this->getOutput($ro, $server) : $this->condResponse->getOutput($ro->headers);
 
-        // header
         foreach ($output->headers as $label => $value) {
+            // phpcs:ignore SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFallbackGlobalName
             header("{$label}: {$value}", false);
         }
 
-        // code
+        // phpcs:ignore SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFallbackGlobalName
         http_response_code($output->code);
 
-        // body
         echo $output->view;
     }
 

@@ -11,9 +11,9 @@ use Ray\Di\Injector;
 
 class RepresentationModuleTest extends TestCase
 {
-    public function testRenderer() : void
+    public function testRenderer(): void
     {
-        $renderer = (new Injector(new RepresentationModule))->getInstance(RenderInterface::class);
+        $renderer = (new Injector(new RepresentationModule()))->getInstance(RenderInterface::class);
         $this->assertInstanceOf(JsonRenderer::class, $renderer);
     }
 }

@@ -12,6 +12,6 @@ class AppModule extends AbstractModule
     {
         $this->bind()->annotatedWith('app_name')->toInstance('FakeVendor\HelloWorldX');
         $this->bind(SchemeCollectionInterface::class)->toProvider(SchemeCollectionProvider::class);
-        $this->install(new SundayModule);
+        $this->install(new SundayModule());
     }
 }

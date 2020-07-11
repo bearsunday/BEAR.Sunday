@@ -9,9 +9,9 @@ use Ray\Di\Injector;
 
 class PsrLoggerInjectTest extends TestCase
 {
-    public function testInjectTrait() : void
+    public function testInjectTrait(): void
     {
-        $app = (new Injector(new PsrLoggerModule))->getInstance(__NAMESPACE__ . '\PsrLoggerApplication');
+        $app = (new Injector(new PsrLoggerModule()))->getInstance(__NAMESPACE__ . '\PsrLoggerApplication');
         $this->assertInstanceOf('\BEAR\Sunday\Inject\DummyLogger', $app->returnDependency());
     }
 }

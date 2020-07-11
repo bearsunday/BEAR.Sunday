@@ -17,10 +17,7 @@ final class NullError implements ErrorInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function transfer() : void
+    public function transfer(): void
     {
     }
 }

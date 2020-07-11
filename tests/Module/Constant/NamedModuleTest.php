@@ -10,21 +10,19 @@ use Ray\Di\Injector;
 
 class NamedModuleTest extends TestCase
 {
-    /**
-     * @var FakeApplication
-     */
+    /** @var FakeApplication */
     private $app;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $names = [
             'path' => __DIR__,
-            'id' => 'bear'
+            'id' => 'bear',
         ];
         $this->app = (new Injector(new NamedModule($names)))->getInstance(FakeApplication::class);
     }
 
-    public function testNamed() : void
+    public function testNamed(): void
     {
         $this->assertSame(__DIR__, $this->app->dir);
         $this->assertSame('bear', $this->app->id);

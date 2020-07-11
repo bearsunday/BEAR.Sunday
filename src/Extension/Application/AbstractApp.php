@@ -12,29 +12,19 @@ use BEAR\Sunday\Extension\Transfer\TransferInterface;
 
 class AbstractApp implements AppInterface
 {
-    /**
-     * @var HttpCacheInterface
-     */
+    /** @var HttpCacheInterface */
     public $httpCache;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     public $router;
 
-    /**
-     * @var TransferInterface
-     */
+    /** @var TransferInterface */
     public $responder;
 
-    /**
-     * @var ResourceInterface
-     */
+    /** @var ResourceInterface */
     public $resource;
 
-    /**
-     * @var ErrorInterface
-     */
+    /** @var ErrorInterface */
     public $error;
 
     /**

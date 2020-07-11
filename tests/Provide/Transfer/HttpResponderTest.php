@@ -9,21 +9,19 @@ use PHPUnit\Framework\TestCase;
 
 class HttpResponderTest extends TestCase
 {
-    /**
-     * @var FakeHttpResponder
-     */
+    /** @var FakeHttpResponder */
     private $responder;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
-        $this->responder = new FakeHttpResponder(new Header, new ConditionalResponse);
+        $this->responder = new FakeHttpResponder(new Header(), new ConditionalResponse());
         FakeHttpResponder::reset();
     }
 
-    public function testTransfer() : void
+    public function testTransfer(): void
     {
-        $ro = (new FakeResource)->onGet();
+        $ro = (new FakeResource())->onGet();
         $ro->transfer($this->responder, []);
         $expectedArgs = [
             ['Cache-Control: max-age=0', false],
@@ -36,12 +34,12 @@ class HttpResponderTest extends TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testTransferToStringInHeader() : void
+    public function testTransferToStringInHeader(): void
     {
-        $ro = (new FakeResource)->onGet();
+        $ro = (new FakeResource())->onGet();
         /** @phpstan-ignore-next-line */
         $ro->headers['Foo'] = new class {
-            public function __toString()
+            public function __toString(): string
             {
                 return 'foo-string';
             }
@@ -58,9 +56,9 @@ class HttpResponderTest extends TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testTransferETagIsMatch() : void
+    public function testTransferETagIsMatch(): void
     {
-        $ro = (new FakeResource)->onGet();
+        $ro = (new FakeResource())->onGet();
         $ro->headers['ETag'] = 'etag-x';
         $ro->transfer($this->responder, ['HTTP_IF_NONE_MATCH' => 'etag-x']);
         $expectedArgs = [
@@ -74,9 +72,9 @@ class HttpResponderTest extends TestCase
         $this->assertSame(304, FakeHttpResponder::$code);
     }
 
-    public function testTransferETagIsNotMatch() : void
+    public function testTransferETagIsNotMatch(): void
     {
-        $ro = (new FakeResource)->onGet();
+        $ro = (new FakeResource())->onGet();
         $ro->headers['ETag'] = 'etag-y';
         $ro->transfer($this->responder, ['HTTP_IF_NONE_MATCH' => 'etag-x']);
         $expectedArgs = [
@@ -92,9 +90,9 @@ class HttpResponderTest extends TestCase
         $this->assertSame(200, FakeHttpResponder::$code);
     }
 
-    public function testExcludeHeaderIn304() : void
+    public function testExcludeHeaderIn304(): void
     {
-        $ro = (new FakeResource)->onGet();
+        $ro = (new FakeResource())->onGet();
         $ro->headers['ETag'] = 'etag-x';
         $ro->headers['X-Application'] = 'this-may-exclude-in-304';
         $ro->transfer($this->responder, ['HTTP_IF_NONE_MATCH' => 'etag-x']);

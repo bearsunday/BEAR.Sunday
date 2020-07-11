@@ -12,10 +12,10 @@ interface ThrowableHandlerInterface
     /**
      * Handle Throwable
      */
-    public function handle(Throwable $e, Request $request) : self;
+    public function handle(Throwable $e, Request $request): self;
 
     /**
      * Transfer error page
      */
-    public function transfer() : void;
+    public function transfer(): void;
 }

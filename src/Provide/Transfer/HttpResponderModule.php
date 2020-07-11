@@ -9,10 +9,7 @@ use Ray\Di\AbstractModule;
 
 class HttpResponderModule extends AbstractModule
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure() : void
+    protected function configure(): void
     {
         $this->bind(TransferInterface::class)->to(HttpResponder::class);
         $this->bind(HeaderInterface::class)->to(Header::class);

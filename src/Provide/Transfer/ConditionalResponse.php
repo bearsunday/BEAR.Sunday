@@ -6,6 +6,8 @@ namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Resource\ResourceObject;
 
+use function in_array;
+
 final class ConditionalResponse implements ConditionalResponseInterface
 {
     /**
@@ -17,13 +19,13 @@ final class ConditionalResponse implements ConditionalResponseInterface
         'Date',
         'ETag',
         'Expires',
-        'Vary'
+        'Vary',
     ];
 
     /**
      * {@inheritdoc}
      */
-    public function isModified(ResourceObject $ro, array $server) : bool
+    public function isModified(ResourceObject $ro, array $server): bool
     {
         return ! (isset($server['HTTP_IF_NONE_MATCH'], $ro->headers['ETag']) && $server['HTTP_IF_NONE_MATCH'] === $ro->headers['ETag']);
     }
@@ -31,13 +33,14 @@ final class ConditionalResponse implements ConditionalResponseInterface
     /**
      * {@inheritdoc}
      */
-    public function getOutput(array $originalHeaders) : Output
+    public function getOutput(array $originalHeaders): Output
     {
         $headers = [];
         foreach ($originalHeaders as $label => $value) {
             if (! in_array($label, self::HEADER_IN_304, true)) {
                 continue;
             }
+
             $headers[$label] = $value;
         }
 

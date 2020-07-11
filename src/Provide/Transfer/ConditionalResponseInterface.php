@@ -13,12 +13,12 @@ interface ConditionalResponseInterface
      *
      * @param array{HTTP_IF_NONE_MATCH?: string} $server
      */
-    public function isModified(ResourceObject $ro, array $server) : bool;
+    public function isModified(ResourceObject $ro, array $server): bool;
 
     /**
      * Return 304 Not Modified output
      *
      * @param array<string, string> $headers
      */
-    public function getOutput(array $headers) : Output;
+    public function getOutput(array $headers): Output;
 }

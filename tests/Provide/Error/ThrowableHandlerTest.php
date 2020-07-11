@@ -12,41 +12,40 @@ use BEAR\Sunday\Provide\Transfer\Header;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
+use function ini_set;
+
 class ThrowableHandlerTest extends TestCase
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     public static $code;
 
-    /**
-     * @var ThrowableHandler
-     */
+    /** @var ThrowableHandler */
     private $throableHandler;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         FakeHttpResponder::reset();
-        $this->throableHandler = new ThrowableHandler(new VndError(new FakeHttpResponder(new Header, new ConditionalResponse)));
+        $this->throableHandler = new ThrowableHandler(new VndError(new FakeHttpResponder(new Header(), new ConditionalResponse())));
         ini_set('error_log', '/dev/null');
     }
 
-    public function testException() : void
+    public function testException(): void
     {
         $e = new ResourceNotFoundException('', 404);
-        $this->throableHandler->handle($e, new RouterMatch)->transfer();
+        $this->throableHandler->handle($e, new RouterMatch())->transfer();
         $this->assertSame(404, FakeHttpResponder::$code);
         $this->assertSame([['Content-Type: application/vnd.error+json', false]], FakeHttpResponder::$headers);
         $this->assertSame('{"message":"Not Found"}', FakeHttpResponder::$body);
     }
 
-    public function testError() : void
+    public function testError(): void
     {
         try {
             1 / 0; // @phpstan-ignore-line
         } catch (Exception $e) {
         }
-        $this->throableHandler->handle($e, new RouterMatch)->transfer(); // @phpstan-ignore-line
+
+        $this->throableHandler->handle($e, new RouterMatch())->transfer(); // @phpstan-ignore-line
         $this->assertSame(500, FakeHttpResponder::$code);
         $this->assertSame([['Content-Type: application/vnd.error+json', false]], FakeHttpResponder::$headers);
         $this->assertSame('{"message":"500 Server Error"}', FakeHttpResponder::$body);

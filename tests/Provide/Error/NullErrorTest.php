@@ -14,8 +14,8 @@ class NullErrorTest extends TestCase
     /**
      * @doesNotPerformAssertions
      */
-    public function testNullError() : void
+    public function testNullError(): void
     {
-        (new NullError)->handle(new Exception, new RouterMatch)->transfer();
+        (new NullError())->handle(new Exception(), new RouterMatch())->transfer();
     }
 }

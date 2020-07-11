@@ -10,10 +10,7 @@ use Ray\Di\AbstractModule;
 
 class ErrorModule extends AbstractModule
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure() : void
+    protected function configure(): void
     {
         $this->bind(ErrorInterface::class)->to(VndError::class);
         $this->bind(ThrowableHandlerInterface::class)->to(ThrowableHandler::class);

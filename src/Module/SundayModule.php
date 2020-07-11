@@ -16,18 +16,15 @@ use Ray\Di\AbstractModule;
 
 class SundayModule extends AbstractModule
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure() : void
+    protected function configure(): void
     {
-        $this->install(new AppModule);
-        $this->install(new HttpCacheModule);
-        $this->install(new DoctrineCacheModule);
-        $this->install(new DoctrineAnnotationModule);
+        $this->install(new AppModule());
+        $this->install(new HttpCacheModule());
+        $this->install(new DoctrineCacheModule());
+        $this->install(new DoctrineAnnotationModule());
         $this->install(new ResourceModule('BEAR\Sunday'));
-        $this->install(new RouterModule);
-        $this->install(new HttpResponderModule);
-        $this->install(new ErrorModule);
+        $this->install(new RouterModule());
+        $this->install(new HttpResponderModule());
+        $this->install(new ErrorModule());
     }
 }

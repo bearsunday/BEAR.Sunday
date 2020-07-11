@@ -21,12 +21,10 @@ use Ray\Di\Injector;
 
 class SundayModuleTest extends TestCase
 {
-    /**
-     * @var Injector
-     */
+    /** @var Injector */
     private $injector;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->injector = new Injector(new SundayModule(new class extends AbstractModule {
             protected function configure()
@@ -37,13 +35,13 @@ class SundayModuleTest extends TestCase
         }));
     }
 
-    public function testMinApp() : void
+    public function testMinApp(): void
     {
         $app = $this->injector->getInstance(AppInterface::class);
         $this->assertInstanceOf(App::class, $app);
     }
 
-    public function testDependModules() : void
+    public function testDependModules(): void
     {
         $cache = $this->injector->getInstance(Cache::class);
         $this->assertInstanceOf(ArrayCache::class, $cache);

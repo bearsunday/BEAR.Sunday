@@ -5,6 +5,7 @@
  *
  * @see https://github.com/auraphp/Aura.Web/blob/a1a4e45d14b21d40d716d341b78a050e1905cc05/tests/unit/src/FakeResponseSender.php
  */
+
 namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Resource\ResourceObject;
@@ -22,7 +23,7 @@ class FakeHttpResponder extends HttpResponder
         static::$body = null;
     }
 
-    public function __invoke(ResourceObject $ro, array $server) : void
+    public function __invoke(ResourceObject $ro, array $server): void
     {
         ob_start();
         parent::__invoke($ro, $server);

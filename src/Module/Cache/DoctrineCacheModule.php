@@ -11,10 +11,7 @@ use Ray\Di\Scope;
 
 class DoctrineCacheModule extends AbstractModule
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure() : void
+    protected function configure(): void
     {
         $this->bind(Cache::class)->to(ArrayCache::class)->in(Scope::SINGLETON);
     }

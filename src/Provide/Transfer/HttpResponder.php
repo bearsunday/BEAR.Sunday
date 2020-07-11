@@ -9,14 +9,10 @@ use BEAR\Sunday\Extension\Transfer\TransferInterface;
 
 class HttpResponder implements TransferInterface
 {
-    /**
-     * @var HeaderInterface
-     */
+    /** @var HeaderInterface */
     private $header;
 
-    /**
-     * @var ConditionalResponseInterface
-     */
+    /** @var ConditionalResponseInterface */
     private $condResponse;
 
     public function __construct(HeaderInterface $header, ConditionalResponseInterface $condResponse)
@@ -28,7 +24,7 @@ class HttpResponder implements TransferInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(ResourceObject $ro, array $server) : void
+    public function __invoke(ResourceObject $ro, array $server): void
     {
         /** @var array{HTTP_IF_NONE_MATCH?: string} $server */
         $isModifed = $this->condResponse->isModified($ro, $server);
@@ -48,7 +44,7 @@ class HttpResponder implements TransferInterface
     /**
      * @param array<string, string> $server
      */
-    private function getOutput(ResourceObject $ro, array $server) : Output
+    private function getOutput(ResourceObject $ro, array $server): Output
     {
         $ro->toString(); // render and set headers
 

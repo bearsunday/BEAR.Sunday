@@ -10,6 +10,6 @@ class AppModule extends AbstractModule
     protected function configure()
     {
         $this->bind()->annotatedWith('app_name')->toInstance('FakeVendor\HelloWorld');
-        $this->install(new SundayModule);
+        $this->install(new SundayModule());
     }
 }

@@ -8,9 +8,7 @@ use BEAR\Resource\ResourceInterface;
 
 trait ResourceInject
 {
-    /**
-     * @var ResourceInterface
-     */
+    /** @var ResourceInterface */
     protected $resource;
 
     /**

@@ -13,5 +13,5 @@ interface HeaderInterface
      *
      * @return array<string, string>
      */
-    public function __invoke(ResourceObject $ro, array $server) : array;
+    public function __invoke(ResourceObject $ro, array $server): array;
 }

@@ -10,10 +10,7 @@ use Ray\Di\AbstractModule;
 
 class AppModule extends AbstractModule
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure() : void
+    protected function configure(): void
     {
         $this->bind(AppInterface::class)->to(App::class);
         $this->bind()->annotatedWith(AppName::class)->toInstance('BEAR\Sunday');

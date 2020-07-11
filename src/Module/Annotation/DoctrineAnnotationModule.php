@@ -14,10 +14,7 @@ use Ray\Di\Scope;
 
 class DoctrineAnnotationModule extends AbstractModule
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure() : void
+    protected function configure(): void
     {
         $this->bind(Cache::class)->annotatedWith('annotation_cache')->to(ArrayCache::class)->in(Scope::SINGLETON);
         $this->bind(Reader::class)->annotatedWith('annotation_reader')->to(AnnotationReader::class)->in(Scope::SINGLETON);

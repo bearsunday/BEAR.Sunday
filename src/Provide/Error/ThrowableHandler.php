@@ -7,17 +7,18 @@ namespace BEAR\Sunday\Provide\Error;
 use BEAR\Sunday\Extension\Error\ErrorInterface;
 use BEAR\Sunday\Extension\Error\ThrowableHandlerInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch as Request;
-use const E_ERROR;
 use Error;
 use ErrorException;
 use Exception;
 use Throwable;
 
+use function assert;
+
+use const E_ERROR;
+
 final class ThrowableHandler implements ThrowableHandlerInterface
 {
-    /**
-     * @var ErrorInterface
-     */
+    /** @var ErrorInterface */
     private $error;
 
     public function __construct(ErrorInterface $error)
@@ -25,7 +26,7 @@ final class ThrowableHandler implements ThrowableHandlerInterface
         $this->error = $error;
     }
 
-    public function handle(Throwable $e, Request $request) : ThrowableHandlerInterface
+    public function handle(Throwable $e, Request $request): ThrowableHandlerInterface
     {
         $e = $e instanceof Error ? new ErrorException($e->getMessage(), (int) $e->getCode(), E_ERROR, $e->getFile(), $e->getLine()) : $e;
         assert($e instanceof Exception);
@@ -34,7 +35,7 @@ final class ThrowableHandler implements ThrowableHandlerInterface
         return $this;
     }
 
-    public function transfer() : void
+    public function transfer(): void
     {
         $this->error->transfer();
     }

@@ -38,9 +38,9 @@ class SchemeCollectionProvider implements ProviderInterface
      */
     public function get()
     {
-        $schemeCollection = new SchemeCollection;
+        $schemeCollection = new SchemeCollection();
         $this->addScheme($schemeCollection, 'self', $this->appName, $this->injector);
-        $this->addScheme($schemeCollection, 'hello', 'FakeVendor\HelloWorld', new Injector(new HelloAppModule));
+        $this->addScheme($schemeCollection, 'hello', 'FakeVendor\HelloWorld', new Injector(new HelloAppModule()));
 
         return $schemeCollection;
     }

@@ -9,26 +9,24 @@ use PHPUnit\Framework\TestCase;
 
 class WebRouterTest extends TestCase
 {
-    /**
-     * @var WebRouter
-     */
+    /** @var WebRouter */
     private $router;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->router = new WebRouter('page://self');
     }
 
-    public function testMatchRoot() : void
+    public function testMatchRoot(): void
     {
         $global = [
             '_GET' => [],
-            '_POST' => []
+            '_POST' => [],
         ];
         $server = [
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/'
+            'REQUEST_URI' => '/',
         ];
         $request = $this->router->match($global, $server);
         $this->assertSame('get', $request->method);
@@ -36,17 +34,15 @@ class WebRouterTest extends TestCase
         $this->assertSame([], $request->query);
     }
 
-    public function testMatchWithQuery() : void
+    public function testMatchWithQuery(): void
     {
         $global = [
-            '_GET' => [
-                'id' => '1'
-            ],
-            '_POST' => []
+            '_GET' => ['id' => '1'],
+            '_POST' => [],
         ];
         $server = [
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/?id=1'
+            'REQUEST_URI' => '/?id=1',
         ];
         $request = $this->router->match($global, $server);
         $this->assertSame('get', $request->method);
@@ -54,15 +50,15 @@ class WebRouterTest extends TestCase
         $this->assertSame(['id' => '1'], $request->query);
     }
 
-    public function testPost() : void
+    public function testPost(): void
     {
         $global = [
             '_GET' => [],
-            '_POST' => ['solstice' => 'eclipse']
+            '_POST' => ['solstice' => 'eclipse'],
         ];
         $server = [
             'REQUEST_METHOD' => 'POST',
-            'REQUEST_URI' => '/'
+            'REQUEST_URI' => '/',
         ];
         $request = $this->router->match($global, $server);
         $this->assertSame('post', $request->method);
@@ -70,17 +66,17 @@ class WebRouterTest extends TestCase
         $this->assertSame(['solstice' => 'eclipse'], $request->query);
     }
 
-    public function testPutFormUrlEncoded() : void
+    public function testPutFormUrlEncoded(): void
     {
         $global = [
             '_GET' => [],
-            '_POST' => []
+            '_POST' => [],
         ];
         $server = [
             'REQUEST_METHOD' => 'PUT',
             'REQUEST_URI' => '/',
             'CONTENT_TYPE' => 'application/x-www-form-urlencoded',
-            'HTTP_RAW_POST_DATA' => 'solstice=eclipse'
+            'HTTP_RAW_POST_DATA' => 'solstice=eclipse',
         ];
         $request = $this->router->match($global, $server);
         $this->assertSame('put', $request->method);
@@ -88,17 +84,17 @@ class WebRouterTest extends TestCase
         $this->assertSame(['solstice' => 'eclipse'], $request->query);
     }
 
-    public function testPutApplicationJson() : void
+    public function testPutApplicationJson(): void
     {
         $global = [
             '_GET' => [],
-            '_POST' => []
+            '_POST' => [],
         ];
         $server = [
             'REQUEST_METHOD' => 'PUT',
             'REQUEST_URI' => '/',
             'CONTENT_TYPE' => 'application/json',
-            'HTTP_RAW_POST_DATA' => '{"solstice":"eclipse"}'
+            'HTTP_RAW_POST_DATA' => '{"solstice":"eclipse"}',
         ];
         $request = $this->router->match($global, $server);
         $this->assertSame('put', $request->method);
@@ -106,17 +102,17 @@ class WebRouterTest extends TestCase
         $this->assertSame(['solstice' => 'eclipse'], $request->query);
     }
 
-    public function testPutUnknowMediaType() : void
+    public function testPutUnknowMediaType(): void
     {
         $global = [
             '_GET' => [],
-            '_POST' => []
+            '_POST' => [],
         ];
         $server = [
             'REQUEST_METHOD' => 'PUT',
             'REQUEST_URI' => '/',
             'CONTENT_TYPE' => 'application/__unknown__',
-            'HTTP_RAW_POST_DATA' => '{"solstice":"eclipse"}'
+            'HTTP_RAW_POST_DATA' => '{"solstice":"eclipse"}',
         ];
         $request = $this->router->match($global, $server);
         $this->assertSame('put', $request->method);
@@ -124,24 +120,24 @@ class WebRouterTest extends TestCase
         $this->assertSame([], $request->query);
     }
 
-    public function testPutInvalidJson() : void
+    public function testPutInvalidJson(): void
     {
         $this->expectException(BadRequestJsonException::class);
         $this->expectExceptionMessage('Syntax error');
         $global = [
             '_GET' => [],
-            '_POST' => []
+            '_POST' => [],
         ];
         $server = [
             'REQUEST_METHOD' => 'PUT',
             'REQUEST_URI' => '/',
             'CONTENT_TYPE' => 'application/json',
-            'HTTP_RAW_POST_DATA' => '{"solstice"}'
+            'HTTP_RAW_POST_DATA' => '{"solstice"}',
         ];
         $request = $this->router->match($global, $server);
     }
 
-    public function testGenerate() : void
+    public function testGenerate(): void
     {
         $actual = (bool) $this->router->generate('', []);
         $this->assertFalse($actual);

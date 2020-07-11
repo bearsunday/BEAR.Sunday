@@ -8,9 +8,7 @@ use Psr\Log\LoggerInterface;
 
 trait PsrLoggerInject
 {
-    /**
-     * @var LoggerInterface
-     */
+    /** @var LoggerInterface */
     private $logger;
 
     /**

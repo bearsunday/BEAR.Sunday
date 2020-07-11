@@ -11,7 +11,7 @@ final class Header implements HeaderInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(ResourceObject $ro, array $server) : array
+    public function __invoke(ResourceObject $ro, array $server): array
     {
         unset($server);
 

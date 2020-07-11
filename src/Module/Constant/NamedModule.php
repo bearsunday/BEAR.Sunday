@@ -8,9 +8,7 @@ use Ray\Di\AbstractModule;
 
 class NamedModule extends AbstractModule
 {
-    /**
-     * @var array<string, string>
-     */
+    /** @var array<string, string> */
     private $names;
 
     /**
@@ -22,10 +20,7 @@ class NamedModule extends AbstractModule
         parent::__construct();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure() : void
+    protected function configure(): void
     {
         foreach ($this->names as $annotatedWith => $instance) {
             $this->bind()->annotatedWith($annotatedWith)->toInstance($instance);

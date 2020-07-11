@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BEAR\Sunday\Provide\Error;
 
-use function array_key_exists;
 use BEAR\Resource\Code;
 use BEAR\Resource\Exception\BadRequestException as BadRequest;
 use BEAR\Resource\Exception\ResourceNotFoundException as NotFound;
@@ -14,6 +13,9 @@ use BEAR\Sunday\Extension\Router\RouterMatch as Request;
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
 use Exception;
 
+use function array_key_exists;
+use function error_log;
+
 /**
  * Vnd.Error media type error
  *
@@ -21,35 +23,24 @@ use Exception;
  */
 final class VndError implements ErrorInterface
 {
-    /**
-     * @var string
-     */
     private const CONTENT_TYPE = 'application/vnd.error+json';
 
-    /**
-     * @var array{Content-Type: string}
-     */
+    /** @var array{Content-Type: string} */
     public $headers = ['Content-Type' => ''];
 
-    /**
-     * @var array{message: string}
-     */
+    /** @var array{message: string} */
     public $body = ['message' => ''];
 
-    /**
-     * @var TransferInterface
-     */
+    /** @var TransferInterface */
     private $transfer;
 
-    /**
-     * @var ErrorPage
-     */
+    /** @var ErrorPage */
     private $errorPage;
 
     public function __construct(TransferInterface $transfer)
     {
         $this->transfer = $transfer;
-        $this->errorPage = new ErrorPage;
+        $this->errorPage = new ErrorPage();
     }
 
     /**
@@ -61,10 +52,11 @@ final class VndError implements ErrorInterface
     {
         if ($this->isCodeExists($e)) {
             $this->errorPage->code = (int) $e->getCode();
-            $this->errorPage->body = ['message' => (new Code)->statusText[$this->errorPage->code]];
+            $this->errorPage->body = ['message' => (new Code())->statusText[$this->errorPage->code]];
 
             return $this;
         }
+
         $this->errorPage->code = 500;
         $this->errorPage->body = ['message' => '500 Server Error'];
         error_log((string) $request);
@@ -73,21 +65,18 @@ final class VndError implements ErrorInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function transfer() : void
+    public function transfer(): void
     {
         $this->errorPage->headers['Content-Type'] = self::CONTENT_TYPE;
         $this->transfer->__invoke($this->errorPage, []);
     }
 
-    private function isCodeExists(Exception $e) : bool
+    private function isCodeExists(Exception $e): bool
     {
         if (! ($e instanceof NotFound) && ! ($e instanceof BadRequest) && ! ($e instanceof ServerError)) {
             return false;
         }
 
-        return array_key_exists($e->getCode(), (new Code)->statusText);
+        return array_key_exists($e->getCode(), (new Code())->statusText);
     }
 }

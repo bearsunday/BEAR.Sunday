@@ -9,15 +9,12 @@ final class NullHttpCache implements HttpCacheInterface
     /**
      * {@inheritdoc}
      */
-    public function isNotModified(array $server) : bool
+    public function isNotModified(array $server): bool
     {
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function transfer() : void
+    public function transfer(): void
     {
     }
 }

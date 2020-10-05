@@ -22,7 +22,7 @@ install:
 
 script:
   - ./vendor/bin/phpunit;
-  - php ./demo/run.php
+  - php ./demo/bin/index.php
 
 jobs:
   fast_finish: true

@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <ruleset
-        name ="BEAR.Sunday"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd"
->
-    <description>The BEAR.Sunday coding standard</description>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="bearcs"
+    xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
+
     <arg name="basepath" value="."/>
     <arg name="extensions" value="php"/>
     <arg name="parallel" value="80"/>
     <arg name="cache" value=".phpcs-cache"/>
-    <arg name="colors"/>
+
+    <!-- Compatibility with PHP 7.2.0 -->
+    <config name="php_version" value="70200"/>
 
     <!-- Ignore warnings, show progress of the run and show sniff names -->
     <arg value="nps"/>
@@ -24,32 +24,46 @@
 
     <!-- Doctrine Coding Standard -->
     <rule ref="Doctrine">
-
-        <!-- Inapplicable for this project -->
+    <!-- Inapplicable for this project -->
+        <!-- Base -->
         <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame"/>
         <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
         <exclude name="SlevomatCodingStandard.Classes.SuperfluousAbstractClassNaming.SuperfluousPrefix"/>
         <exclude name="SlevomatCodingStandard.Classes.SuperfluousExceptionNaming.SuperfluousSuffix"/>
         <exclude name="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming.SuperfluousSuffix"/>
         <exclude name="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.MissingVariable"/>
+        <exclude name="SlevomatCodingStandard.Commenting.UselessInheritDocComment.UselessInheritDocComment"/>
         <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint"/>
         <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint"/>
         <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint"/>
-        <exclude name="SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly.ReferencedGeneralException"/>
-
-        <!-- Directories not to be checked -->
+        <!-- /Base -->
+        <!-- Option -->
+        <exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed"/>
+        <!-- /Option -->
+        <!-- Exclude Fake files form Doctrine CS -->
         <exclude-pattern>*/tests/Fake/*</exclude-pattern>
     </rule>
-    
-    <!-- Require specific order of phpDoc annotations with empty newline between specific groups -->
+
+    <!-- Additional Rules -->
     <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
         <properties>
             <property name="annotationsGroups" type="array">
                 <element value="@param, @psalm-param, @phpstan-param"/>
                 <element value="@return, @psalm-return, @phpstan-return"/>
-                <element value="@Inject, @Named"/>
                 <element value="@throws"/>
             </property>
         </properties>
     </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint">
+        <include-pattern>tests/*</include-pattern>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.PropertySpacing">
+        <properties>
+            <property name="minLinesCountBeforeWithComment" value="1"/>
+            <property name="maxLinesCountBeforeWithComment" value="1"/>
+            <property name="maxLinesCountBeforeWithoutComment" value="0"/>
+        </properties>
+    </rule>
+    <exclude-pattern>*/Fake/*</exclude-pattern>
+    <exclude-pattern>*/tmp/*</exclude-pattern>
 </ruleset>

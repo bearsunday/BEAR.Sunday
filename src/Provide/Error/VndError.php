@@ -48,7 +48,7 @@ final class VndError implements ErrorInterface
      *
      * @noinspection ForgottenDebugOutputInspection
      */
-    public function handle(Exception $e, Request $request)
+    public function handle(Exception $e, Request $request) // phpcs:disable SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly.ReferencedGeneralException
     {
         if ($this->isCodeExists($e)) {
             $this->errorPage->code = (int) $e->getCode();

@@ -21,7 +21,7 @@
     }
   ],
   "require": {
-    "php": ">=7.2.0",
+    "php": "^7.2 || ^8.0",
     "ext-json": "*",
     "bear/resource": "^1.14.3",
     "doctrine/annotations": "^1.10",
@@ -30,7 +30,8 @@
     "ray/di": "^2.10"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8.5"
+    "phpunit/phpunit": "^8.5",
+    "psalm/plugin-phpunit": "^0.12.2"
   },
   "config": {
     "sort-packages": true
@@ -54,27 +55,14 @@
       "tests/Fake/Provide/Transfer/http_response_code.php"
     ]
   },
-  "scripts": {
-    "coverage": [
-      "php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"
-    ],
-    "cs": [
-      "phpcs"
-    ],
-    "cs-fix": [
-      "phpcbf"
-    ],
-    "metrics": [
-      "phpmetrics --report-html=build/metrics/ --extensions=php src,composer.json,composer.lock"
-    ],
-    "test": [
-      "phpunit"
-    ],
-    "tests": [
-      "@cs",
-      "phpstan analyse -c phpstan.neon",
-      "psalm --show-info=false",
-      "@test"
-    ]
+  "scripts" :{
+    "test": ["phpunit"],
+    "tests": ["@cs", "@sa", "@test"],
+    "coverage": ["php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
+    "pcov": ["php -d pcov.enabled=1 ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
+    "cs": ["phpcs"],
+    "cs-fix": ["phpcbf"],
+    "sa": ["phpstan analyse -c phpstan.neon", "psalm --show-info=true"],
+    "metrics": ["phpmetrics --report-html=build/metrics/ --extensions=php src,composer.json,composer.lock"]
   }
 }

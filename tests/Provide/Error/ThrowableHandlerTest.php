@@ -14,6 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 use function ini_set;
 
+// phpcs:disable SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly.ReferencedGeneralException
 class ThrowableHandlerTest extends TestCase
 {
     /** @var int */
@@ -41,7 +42,7 @@ class ThrowableHandlerTest extends TestCase
     public function testError(): void
     {
         try {
-            1 / 0; // @phpstan-ignore-line
+            echo hello; // @phpstan-ignore-line
         } catch (Exception $e) {
         }
 

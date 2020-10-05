@@ -14,7 +14,7 @@ interface ErrorInterface
      *
      * @return self
      */
-    public function handle(Exception $e, Request $request);
+    public function handle(Exception $e, Request $request); // phpcs:disable SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly.ReferencedGeneralException
 
     /**
      * Error page transfer

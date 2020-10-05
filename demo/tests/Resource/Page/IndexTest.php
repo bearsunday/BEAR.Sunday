@@ -11,30 +11,29 @@ use Ray\Di\Injector;
 
 class IndexTest extends TestCase
 {
-    /**
-     * @var ResourceInterface
-     */
+    /** @var ResourceInterface */
     private $resource;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
-        $this->resource = (new Injector(new AppModule))->getInstance(ResourceInterface::class);
+        /** @var ResourceInterface $this->resource */
+        $this->resource = (new Injector(new AppModule()))->getInstance(ResourceInterface::class);
     }
 
-    public function testInstance()
+    public function testInstance(): void
     {
         $page = $this->resource->newInstance('page://self/');
         $this->assertInstanceOf(Index::class, $page);
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $page = $this->resource->uri('page://self/')();
         $this->assertInstanceOf(Index::class, $page);
-        /* @var $page Index */
+        /** @var Index $page */
         $this->assertSame(200, $page->code);
-        $this->assertSame('Hello World', $page->body['greeting']);
+        $this->assertSame('Hello World', (string) $page->body['greeting']);
         $expectJson = '{
     "greeting": "Hello World"
 }

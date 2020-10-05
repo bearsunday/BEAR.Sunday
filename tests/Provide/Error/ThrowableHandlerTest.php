@@ -12,6 +12,7 @@ use BEAR\Sunday\Provide\Transfer\Header;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
+use Throwable;
 use function ini_set;
 
 // phpcs:disable SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly.ReferencedGeneralException
@@ -43,7 +44,7 @@ class ThrowableHandlerTest extends TestCase
     {
         try {
             echo hello; // @phpstan-ignore-line
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
         }
 
         $this->throableHandler->handle($e, new RouterMatch())->transfer(); // @phpstan-ignore-line

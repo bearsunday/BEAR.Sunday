@@ -1,6 +1,12 @@
 <?php
 
+/**
+ * @psalm-import-type Globals from \BEAR\Sunday\Extension\Router\RouterInterface
+ * @psalm-import-type Server from \BEAR\Sunday\Extension\Router\RouterInterface
+ */
+
 declare(strict_types=1);
+
 use BEAR\Resource\Exception\BadRequestException;
 use BEAR\Resource\Exception\ResourceNotFoundException;
 use BEAR\Resource\ResourceObject;
@@ -9,9 +15,10 @@ use MyVendor\HelloWorld\App;
 use MyVendor\HelloWorld\AppModule;
 use Ray\Di\Injector;
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+require dirname(__DIR__) . '/autoload.php';
 
-$app = (new Injector(new AppModule))->getInstance(AppInterface::class);
+
+$app = (new Injector(new AppModule()))->getInstance(AppInterface::class);
 assert($app instanceof App);
 
 $request = $app->router->match($GLOBALS, $_SERVER);
@@ -25,7 +32,7 @@ try {
 } catch (BadRequestException $e) {
     http_response_code(400);
     echo 'Bad request' . PHP_EOL;
-} catch (\Exception $e) {
+} catch (Throwable $e) {
     http_response_code(500);
     echo 'Server error' . PHP_EOL;
     error_log((string) $e);

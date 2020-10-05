@@ -11,10 +11,10 @@ use Ray\Di\AbstractModule;
 
 class AppModule extends AbstractModule
 {
-    protected function configure() : void
+    protected function configure(): void
     {
         $this->bind()->annotatedWith(AppName::class)->toInstance(__NAMESPACE__);
         $this->bind(AppInterface::class)->to(App::class);
-        $this->install(new SundayModule);
+        $this->install(new SundayModule());
     }
 }

@@ -9,10 +9,9 @@ use BEAR\Sunday\Extension\Router\RouterMatch;
 use BEAR\Sunday\Provide\Transfer\ConditionalResponse;
 use BEAR\Sunday\Provide\Transfer\FakeHttpResponder;
 use BEAR\Sunday\Provide\Transfer\Header;
-use Exception;
 use PHPUnit\Framework\TestCase;
-
 use Throwable;
+
 use function ini_set;
 
 // phpcs:disable SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly.ReferencedGeneralException

@@ -10,6 +10,7 @@ final class NullTransfer implements TransferInterface
 {
     /**
      * {@inheritdoc}
+     *
      * @codeCoverageIgnore
      */
     public function __invoke(ResourceObject $ro, array $server): void

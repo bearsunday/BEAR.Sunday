@@ -17,5 +17,5 @@ class NullErrorTest extends TestCase
         $error = (new NullError())->handle(new Exception(), new RouterMatch());
         $error->transfer();
         $this->assertInstanceOf(ErrorInterface::class, $error);
-   }
+    }
 }

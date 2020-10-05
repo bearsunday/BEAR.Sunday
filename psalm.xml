@@ -13,9 +13,10 @@
         <ignoreFiles>
             <directory name="vendor"/>
             <directory name="demo/public"/>
+            <directory name="tests"/>
         </ignoreFiles>
     </projectFiles>
     <issueHandlers>
         <MissingConstructor errorLevel="suppress"/>
     </issueHandlers>
-<plugins><pluginClass class="Psalm\PhpUnitPlugin\Plugin"/></plugins></psalm>
+</psalm>

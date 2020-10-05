@@ -13,8 +13,9 @@ trait ResourceInject
 
     /**
      * @\Ray\Di\Di\Inject
+     * @codeCoverageIgnore
      */
-    public function setResource(ResourceInterface $resource)
+    public function setResource(ResourceInterface $resource): void
     {
         $this->resource = $resource;
     }

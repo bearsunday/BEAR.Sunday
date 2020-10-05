@@ -13,8 +13,9 @@ trait PsrLoggerInject
 
     /**
      * @\Ray\Di\Di\Inject
+     * @codeCoverageIgnore
      */
-    public function setPsrLogger(LoggerInterface $logger)
+    public function setPsrLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }

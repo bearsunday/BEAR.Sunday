@@ -6,10 +6,11 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/badges/quality-score.png?b=1.x)](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/?branch=1.x
 )
-[![Code Coverage](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/badges/coverage.png?b=1.x)](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/?branch=1.x
-)
+[![codecov](https://codecov.io/gh/bearsunday/BEAR.Sunday/branch/1.x/graph/badge.svg?token=eh3c9AF4Mr)](https://codecov.io/gh/koriym/BEAR.Sunday)
+[![Type Coverage](https://shepherd.dev/github/bearsunday/BEAR.Sunday/coverage.svg)](https://shepherd.dev/github/bearsunday/BEAR.Sunday)
 [![Build Status](https://travis-ci.org/bearsunday/BEAR.Sunday.svg?branch=1.x
 )](https://travis-ci.org/bearsunday/BEAR.Sunday)
+[![Build Status](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/badges/build.png?b=1.x)](https://scrutinizer-ci.com/g/bearsunday/BEAR.Sunday/build-status/1.x)
 
 ## What's BEAR.Sunday
 

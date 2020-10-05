@@ -12,7 +12,7 @@ final class NullError implements ErrorInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(Exception $e, Request $request)
+    public function handle(Exception $e, Request $request) // phpcs:disable SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly.ReferencedGeneralException
     {
         return $this;
     }

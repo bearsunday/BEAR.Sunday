@@ -14,6 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 use function ini_set;
 
+// phpcs:disable SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly.ReferencedGeneralException
 class ThrowableHandlerTest extends TestCase
 {
     /** @var int */

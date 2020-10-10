@@ -50,18 +50,18 @@ jobs:
     - stage: Code Quality
       name: Static analysis
       php: 7.4
-      install: composer global require --dev phpstan/phpstan ^0.12 vimeo/psalm ^3.11 phpmetrics/phpmetrics ^2.6
+      install: composer global require --dev phpstan/phpstan ^0.12 vimeo/psalm ^3.11 maglnet/composer-require-checker ^2.0 phpmetrics/phpmetrics ^2.6
       script:
         - ~/.composer/vendor/bin/phpstan analyse -c phpstan.neon --no-progress --no-interaction
         - ~/.composer/vendor/bin/psalm --show-info=true --shepherd
+        - ~/.composer/vendor/bin/composer-require-checker check ./composer.json
         - ~/.composer/vendor/bin/phpmetrics --exclude=Exception src
 
     - stage: Code Quality
       name: Coding standards
       php: 7.4
-      install: composer global require --dev doctrine/coding-standard ^8.1 maglnet/composer-require-checker ^2.0
+      install: composer global require --dev doctrine/coding-standard ^8.1
       script:
         - ~/.composer/vendor/bin/phpcs --standard=./phpcs.xml src tests
-        - ~/.composer/vendor/bin/composer-require-checker check ./composer.json
   allow_failures:
     - php: nightly

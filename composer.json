@@ -23,15 +23,16 @@
   "require": {
     "php": "^7.2 || ^8.0",
     "ext-json": "*",
-    "bear/resource": "^1.14.8",
+    "bear/resource": "1.x-dev",
     "doctrine/annotations": "^1.10",
     "doctrine/cache": "^1.10",
+    "fzaninotto/faker": "1.9.x-dev",
     "psr/log": "^1.1",
-    "ray/di": "^2.10.5"
+    "ray/aop": "2.x-dev",
+    "ray/di": "2.x-dev"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8.5",
-    "psalm/plugin-phpunit": "^0.12.2"
+    "phpunit/phpunit": "^9.5"
   },
   "config": {
     "sort-packages": true

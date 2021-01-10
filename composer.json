@@ -40,7 +40,7 @@
   },
   "autoload": {
     "psr-4": {
-      "BEAR\\Sunday\\": "src/"
+      "BEAR\\Sunday\\": ["src/", "src-deprecated/"]
     }
   },
   "autoload-dev": {

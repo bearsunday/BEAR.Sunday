@@ -26,7 +26,6 @@
     "bear/resource": "1.x-dev",
     "doctrine/annotations": "^1.10",
     "doctrine/cache": "^1.10",
-    "fzaninotto/faker": "1.9.x-dev",
     "psr/log": "^1.1",
     "fzaninotto/faker": "1.9.x-dev",
     "ray/aop": "2.x-dev",

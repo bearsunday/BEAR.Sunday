@@ -31,7 +31,8 @@
     "ray/di": "2.11"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.5"
+    "phpunit/phpunit": "^9.5",
+    "bamarni/composer-bin-plugin": "^1.4"
   },
   "config": {
     "sort-packages": true
@@ -56,13 +57,18 @@
     ]
   },
   "scripts" :{
-    "test": ["phpunit"],
-    "tests": ["@cs", "@sa", "@test"],
-    "coverage": ["php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
-    "pcov": ["php -d pcov.enabled=1 ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
-    "cs": ["phpcs"],
-    "cs-fix": ["phpcbf"],
-    "sa": ["phpstan analyse -c phpstan.neon", "psalm --show-info=true"],
-    "metrics": ["phpmetrics --report-html=build/metrics/ --extensions=php src,composer.json,composer.lock"]
+    "post-install-cmd": ["@composer bin all install --ansi"],
+    "post-update-cmd": ["@composer bin all update --ansi"],
+    "test": ["./vendor/bin/phpunit"],
+    "tests": ["@cs", "@test", "@sa"],
+    "coverage": ["php -dzend_extension=xdebug.so -dxdebug.mode=coverage ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
+    "pcov": ["php -dextension=pcov.so -d pcov.enabled=1 ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage  --coverage-clover=coverage.xml"],
+    "cs": ["phpcs --standard=./phpcs.xml src tests"],
+    "cs-fix": ["./vendor/bin/phpcbf src tests"],
+    "clean": ["./vendor/bin/phpstan clear-result-cache", "./vendor/bin/psalm --clear-cache", "rm -rf tests/tmp/*.php"],
+    "sa": ["./vendor/bin/phpstan analyse -c phpstan.neon", "psalm --show-info=true"],
+    "metrics": ["./vendor/bin/phpmetrics --report-html=build/metrics --exclude=Exception --junit=build/junit.xml src"],
+    "phpmd": ["./vendor/bin/phpmd --exclude src/Annotation src text ./phpmd.xml"],
+    "build": ["@cs", "@sa", "@pcov", "@metrics"]
   }
 }

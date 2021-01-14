@@ -6,5 +6,4 @@
 /composer.lock
 /coverage.xml
 /vendor-bin/**/vendor
-.php_cs.cache
-.phpcs-cache
+/demo/vendor

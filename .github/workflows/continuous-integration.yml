@@ -46,9 +46,7 @@ jobs:
 
       - name: Install lowest dependencies
         if: ${{ matrix.dependencies == 'lowest' }}
-        run: >-
-          composer update --prefer-lowest --no-interaction --no-progress
-          --no-suggest
+        run: composer update --prefer-lowest --no-interaction --no-progress --no-suggest
 
       - name: Install highest dependencies
         if: ${{ matrix.dependencies == 'highest' }}
@@ -61,3 +59,6 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           file: ./coverage.xml
+
+      - name: Run Demo
+        run: php demo/bin/index.php

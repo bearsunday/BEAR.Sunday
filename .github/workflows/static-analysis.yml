@@ -17,27 +17,25 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.0
-          tools: phpstan, cs2pr
+          tools: cs2pr
           coverage: none
 
       - name: Get composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-      - name: Cache composer dependencies
+      - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: '${{ steps.composer-cache.outputs.dir }}'
-          key: '${{ runner.os }}-composer-${{ hashFiles(''**/composer.json'') }}'
-          restore-keys: '${{ runner.os }}-composer-'
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
         run: composer install --no-interaction --no-progress --prefer-dist
 
       - name: Run PHPStan
-        run: >-
-          phpstan analyse -c phpstan.neon --no-progress --no-interaction
-          --error-format=checkstyle | cs2pr
+        run: ./vendor/bin/phpstan analyse -c phpstan.neon --no-progress --no-interaction --error-format=checkstyle | cs2pr
 
   static-analysis-psalm:
     name: Static Analysis with Psalm
@@ -50,7 +48,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.0
-          tools: psalm, cs2pr
+          tools: cs2pr
           coverage: none
 
       - name: Get composer cache directory
@@ -61,7 +59,36 @@ jobs:
         run: composer install --no-interaction --no-progress --prefer-dist
 
       - name: Run Psalm
-        run: psalm --show-info=false --output-format=checkstyle --shepherd | cs2pr
+        run: ./vendor/bin/psalm --show-info=false --output-format=checkstyle --shepherd | cs2pr
+
+  static-analysis-phpmd:
+    name: Static Analysis with PHPMD
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Run PHP Mess Detector
+        run: ./vendor/bin/phpmd src text --exclude src/Annotation ./phpmd.xml
 
   static-analysis-php-metrics:
     name: Static Analysis with PhpMetrics
@@ -81,9 +108,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Install dependencies
-        run: |
-          composer install --no-interaction --no-progress --prefer-dist
-          composer require --dev phpmetrics/phpmetrics ^2.6
+        run: composer install --no-interaction --no-progress --prefer-dist
 
       - name: Run PhpMetrics
         run: ./vendor/bin/phpmetrics --exclude=Exception src

@@ -8,8 +8,6 @@ Install project dependencies and test tools by running the following commands.
 
 ```bash
 $ composer install
-$ composer global require bear/qatools
-$ PATH=$(composer global config bin-dir --absolute --quiet):$PATH
 ```
 
 ## Running tests

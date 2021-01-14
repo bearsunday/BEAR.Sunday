@@ -11,4 +11,4 @@ coverage:
       default:
         target: 100%
 
-comment: false
+comment: true

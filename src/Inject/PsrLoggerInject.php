@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BEAR\Sunday\Inject;
 
 use Psr\Log\LoggerInterface;
+use Ray\Di\Di\Inject;
 
 trait PsrLoggerInject
 {
@@ -15,6 +16,7 @@ trait PsrLoggerInject
      * @\Ray\Di\Di\Inject
      * @codeCoverageIgnore
      */
+    #[Inject]
     public function setPsrLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;

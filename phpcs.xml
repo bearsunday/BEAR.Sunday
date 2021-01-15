@@ -18,6 +18,8 @@
     <file>src</file>
     <file>tests</file>
     <exclude-pattern>*/tests/tmp/*</exclude-pattern>
+    <exclude-pattern>*/src/Annotation/*</exclude-pattern>
+    <exclude-pattern>*/src/Inject/*</exclude-pattern>
 
     <!-- PSR12 Coding Standard -->
     <rule ref="PSR12"/>

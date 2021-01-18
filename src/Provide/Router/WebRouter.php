@@ -34,6 +34,7 @@ final class WebRouter implements RouterInterface
     /**
      * @DefaultSchemeHost
      */
+    #[DefaultSchemeHost]
     public function __construct(string $schemeHost)
     {
         $this->schemeHost = $schemeHost;

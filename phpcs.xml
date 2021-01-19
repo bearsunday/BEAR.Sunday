@@ -41,6 +41,8 @@
         <!-- /Base -->
         <!-- Option -->
         <exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed"/>
+        <!-- PHP8 attribute -->
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.Before"/>
         <!-- /Option -->
         <!-- Exclude Fake files form Doctrine CS -->
         <exclude-pattern>*/tests/Fake/*</exclude-pattern>

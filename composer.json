@@ -24,7 +24,7 @@
     "php": "^7.2 || ^8.0",
     "ext-json": "*",
     "bear/resource": "^1.15.1",
-    "doctrine/annotations": "^1.10",
+    "doctrine/annotations": "^1.12",
     "doctrine/cache": "^1.10",
     "psr/log": "^1.1",
     "ray/aop": "^2.10.1",

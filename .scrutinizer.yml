@@ -2,14 +2,10 @@ filter:
     paths: ["src/*"]
 tools:
     php_sim: true
-    php_pdepend: true
+    php_pdepend: false
     php_analyzer: true
-    php_cpd: true
+    php_cpd: false
     php_mess_detector:
-        enabled: true
-        config:
-            ruleset: ./phpmd.xml
+        enabled: false
     php_code_sniffer:
-        enabled: true
-        config:
-            ruleset: ./phpcs.xml
+        enabled: false

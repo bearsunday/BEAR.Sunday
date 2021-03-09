@@ -5,3 +5,5 @@ checks:
         code_rating: true
 tools:
     php_analyzer: true
+    php_code_sniffer:
+        enabled: false

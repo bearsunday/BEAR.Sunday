@@ -1,9 +1,11 @@
 filter:
     paths: ["src/*"]
-checks:
-    php:
-        code_rating: true
 tools:
+    php_sim: true
+    php_pdepend: false
     php_analyzer: true
+    php_cpd: false
+    php_mess_detector:
+        enabled: false
     php_code_sniffer:
         enabled: false

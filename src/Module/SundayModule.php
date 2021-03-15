@@ -17,7 +17,6 @@ class SundayModule extends AbstractModule
 {
     protected function configure(): void
     {
-        $this->install(new AppModule());
         $this->install(new HttpCacheModule());
         $this->install(new DoctrineCacheModule());
         $this->install(new ResourceModule('BEAR\Sunday'));

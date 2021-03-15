@@ -8,6 +8,9 @@ use BEAR\Resource\Annotation\AppName;
 use BEAR\Sunday\Extension\Application\AppInterface;
 use Ray\Di\AbstractModule;
 
+/**
+ * @deprecated
+ */
 class AppModule extends AbstractModule
 {
     protected function configure(): void

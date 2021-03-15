@@ -6,7 +6,6 @@ namespace BEAR\Sunday\Module;
 
 use BEAR\Resource\Module\ResourceModule;
 use BEAR\Sunday\Module\Cache\DoctrineCacheModule;
-use BEAR\Sunday\Provide\Application\AppModule;
 use BEAR\Sunday\Provide\Error\ErrorModule;
 use BEAR\Sunday\Provide\Router\RouterModule;
 use BEAR\Sunday\Provide\Transfer\HttpCacheModule;

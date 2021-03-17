@@ -18,7 +18,7 @@ class SundayModule extends AbstractModule
     {
         $this->install(new HttpCacheModule());
         $this->install(new DoctrineCacheModule());
-        $this->install(new ResourceModule('BEAR\Sunday'));
+        $this->install(new ResourceModule());
         $this->install(new RouterModule());
         $this->install(new HttpResponderModule());
         $this->install(new ErrorModule());

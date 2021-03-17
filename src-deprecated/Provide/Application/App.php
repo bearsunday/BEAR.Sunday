@@ -6,6 +6,9 @@ namespace BEAR\Sunday\Provide\Application;
 
 use BEAR\Sunday\Extension\Application\AbstractApp;
 
+/**
+ * @deprecated
+ */
 class App extends AbstractApp
 {
 }

@@ -33,17 +33,17 @@ final class ConditionalResponse implements ConditionalResponseInterface
     /**
      * {@inheritdoc}
      */
-    public function getOutput(array $originalHeaders): Output
+    public function getOutput(array $headers): Output
     {
-        $headers = [];
-        foreach ($originalHeaders as $label => $value) {
+        $newHeaders = [];
+        foreach ($headers as $label => $value) {
             if (! in_array($label, self::HEADER_IN_304, true)) {
                 continue;
             }
 
-            $headers[$label] = $value;
+            $newHeaders[$label] = $value;
         }
 
-        return new Output(304, $headers, '');
+        return new Output(304, $newHeaders, '');
     }
 }

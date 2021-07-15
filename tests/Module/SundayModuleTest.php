@@ -13,8 +13,6 @@ use BEAR\Sunday\Provide\Application\App;
 use BEAR\Sunday\Provide\Router\WebRouter;
 use BEAR\Sunday\Provide\Transfer\HttpResponder;
 use Doctrine\Common\Annotations\Reader;
-use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Cache\Cache;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
@@ -43,9 +41,6 @@ class SundayModuleTest extends TestCase
 
     public function testDependModules(): void
     {
-        $cache = $this->injector->getInstance(Cache::class);
-        $this->assertInstanceOf(ArrayCache::class, $cache);
-
         $reader = $this->injector->getInstance(Reader::class);
         $this->assertInstanceOf(Reader::class, $reader);
 

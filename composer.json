@@ -25,6 +25,7 @@
     "ext-json": "*",
     "bear/resource": "^1.15.4",
     "doctrine/annotations": "^1.12",
+    "doctrine/cache": "^1.10",
     "psr/log": "^1.1",
     "ray/aop": "^2.10.1",
     "ray/di": "^2.11"

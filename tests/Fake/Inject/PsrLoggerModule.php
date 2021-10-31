@@ -2,12 +2,14 @@
 
 namespace BEAR\Sunday\Inject;
 
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Ray\Di\AbstractModule;
 
 class PsrLoggerModule extends AbstractModule
 {
-    protected function configure()
+    protected function configure(): void
     {
-        $this->bind('Psr\Log\LoggerInterface')->to(__NAMESPACE__ . '\DummyLogger');
+        $this->bind(LoggerInterface::class)->to(NullLogger::class);
     }
 }

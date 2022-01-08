@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Ray\Di\Injector;
 
+use function assert;
+
 class PsrLoggerInjectTest extends TestCase
 {
     public function testInjectTrait(): void

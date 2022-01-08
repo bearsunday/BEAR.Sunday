@@ -23,11 +23,11 @@
   "require": {
     "php": "^7.4 || ^8.0",
     "ext-json": "*",
-    "bear/resource": "^1.15.4",
+    "bear/resource": "^1.16",
     "doctrine/annotations": "^1.12",
     "psr/log": "^1.1",
     "ray/aop": "^2.10.1",
-    "ray/di": "^2.11"
+    "ray/di": "^2.13"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5.10",

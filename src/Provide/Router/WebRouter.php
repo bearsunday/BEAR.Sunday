@@ -28,7 +28,10 @@ use const PHP_URL_PATH;
  */
 final class WebRouter implements RouterInterface
 {
-    /** @var string */
+    /**
+     * @readonly
+     * @var string
+     */
     private $schemeHost;
 
     /**
@@ -43,33 +46,18 @@ final class WebRouter implements RouterInterface
     /**
      * {@inheritdoc}
      *
-     * @psalm-param Globals $globals
-     * @psalm-param Server  $server
+     * @param Globals $globals
+     * @param Server  $server
      */
     public function match(array $globals, array $server)
     {
         $method = strtolower($server['REQUEST_METHOD']);
-        $match = new RouterMatch();
-        $match->method = $method;
-        $match->path = $this->schemeHost . parse_url($server['REQUEST_URI'], PHP_URL_PATH);
-        $match->query = $this->getQuery($method, $globals, $server);
 
-        return $match;
-    }
-
-    /**
-     * @psalm-param Globals $globals
-     * @psalm-param Server  $server
-     *
-     * @return array<string, string|mixed>
-     */
-    private function getQuery(string $method, array $globals, array $server): array
-    {
-        if ($method === 'get') {
-            return $globals['_GET'];
-        }
-
-        return $this->getUnsafeQuery($method, $globals, $server);
+        return new RouterMatch(
+            $method,
+            $this->schemeHost . parse_url($server['REQUEST_URI'], PHP_URL_PATH),
+            $this->getQuery($method, $globals, $server)
+        );
     }
 
     /**
@@ -83,15 +71,17 @@ final class WebRouter implements RouterInterface
     /**
      * Return request query by media-type
      *
-     * @psalm-param Server $server
-     * @psalm-param Globals $globals
-     * @phpstan-param array{_POST: array<string, mixed>} $globals
-     * @phpstan-param array{CONTENT_TYPE?: string, HTTP_CONTENT_TYPE?: string, HTTP_RAW_POST_DATA?: string} $server
+     * @param Server  $server
+     * @param Globals $globals
      *
      * @return array<string, mixed>
      */
-    private function getUnsafeQuery(string $method, array $globals, array $server): array
+    private function getQuery(string $method, array $globals, array $server): array
     {
+        if ($method === 'get') {
+            return $globals['_GET'];
+        }
+
         if ($method === 'post') {
             return $globals['_POST'];
         }

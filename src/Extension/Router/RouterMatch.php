@@ -25,9 +25,19 @@ class RouterMatch
     /**
      * Request query
      *
-     * @var array<string, string|mixed>
+     * @var array<string, mixed>
      */
     public $query = [];
+
+    /**
+     * @param array<string, mixed> $query
+     */
+    public function __construct(string $method = '', string $path = '', array $query = [])
+    {
+        $this->method = $method;
+        $this->path = $path;
+        $this->query = $query;
+    }
 
     public function __toString(): string
     {

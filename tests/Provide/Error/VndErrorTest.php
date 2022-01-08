@@ -21,8 +21,7 @@ class VndErrorTest extends TestCase
     /** @var int */
     public static $code;
 
-    /** @var VndError */
-    private $vndError;
+    private \BEAR\Sunday\Provide\Error\VndError $vndError;
 
     protected function setUp(): void
     {

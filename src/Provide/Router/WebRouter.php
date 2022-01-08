@@ -30,9 +30,8 @@ final class WebRouter implements RouterInterface
 {
     /**
      * @readonly
-     * @var string
      */
-    private $schemeHost;
+    private string $schemeHost;
 
     /**
      * @DefaultSchemeHost

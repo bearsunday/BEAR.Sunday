@@ -19,8 +19,7 @@ use Ray\Di\Injector;
 
 class SundayModuleTest extends TestCase
 {
-    /** @var Injector */
-    private $injector;
+    private \Ray\Di\Injector $injector;
 
     protected function setUp(): void
     {

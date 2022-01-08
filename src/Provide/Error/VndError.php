@@ -31,11 +31,9 @@ final class VndError implements ErrorInterface
     /** @var array{message: string} */
     public $body = ['message' => ''];
 
-    /** @var TransferInterface */
-    private $transfer;
+    private \BEAR\Sunday\Extension\Transfer\TransferInterface $transfer;
 
-    /** @var ErrorPage */
-    private $errorPage;
+    private \BEAR\Sunday\Provide\Error\ErrorPage $errorPage;
 
     public function __construct(TransferInterface $transfer)
     {

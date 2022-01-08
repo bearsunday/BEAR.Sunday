@@ -10,6 +10,11 @@ use BEAR\Sunday\Extension\Router\RouterInterface;
 use BEAR\Sunday\Extension\Transfer\HttpCacheInterface;
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
 
+/**
+ * @deprecated Use AppInterface instead
+ *
+ * @see https://github.com/bearsunday/BEAR.Skeleton/blob/1.x/src/Module/App.php
+ */
 class AbstractApp implements AppInterface
 {
     /** @var HttpCacheInterface */

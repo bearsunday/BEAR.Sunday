@@ -8,8 +8,8 @@ use BEAR\Sunday\Extension\ExtensionInterface;
 
 /**
  * @psalm-type Globals = array{
- *     _GET: array<string, string|array>,
- *     _POST: array<string, string|array>
+ *     _GET: array<string, mixed>,
+ *     _POST: array<string, mixed>
  * }
  * @psalm-type Server = array{
  *     REQUEST_URI: string,
@@ -22,10 +22,8 @@ use BEAR\Sunday\Extension\ExtensionInterface;
 interface RouterInterface extends ExtensionInterface
 {
     /**
-     * @psalm-param Globals $globals
-     * @psalm-param Server  $server
-     * @phpstan-param array<string, mixed> $globals
-     * @phpstan-param array<string, mixed> $server
+     * @param Globals $globals
+     * @param Server  $server
      *
      * @return RouterMatch
      */

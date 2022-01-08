@@ -42,6 +42,9 @@ final class WebRouter implements RouterInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @psalm-param Globals $globals
+     * @psalm-param Server  $server
      */
     public function match(array $globals, array $server)
     {
@@ -49,9 +52,24 @@ final class WebRouter implements RouterInterface
         $match = new RouterMatch();
         $match->method = $method;
         $match->path = $this->schemeHost . parse_url($server['REQUEST_URI'], PHP_URL_PATH);
-        $match->query = $method === 'get' ? $globals['_GET'] : $this->getUnsafeQuery($method, $globals, $server);
+        $match->query = $this->getQuery($method, $globals, $server);
 
         return $match;
+    }
+
+    /**
+     * @psalm-param Globals $globals
+     * @psalm-param Server  $server
+     *
+     * @return array<string, string|mixed>
+     */
+    private function getQuery(string $method, array $globals, array $server): array
+    {
+        if ($method === 'get') {
+            return $globals['_GET'];
+        }
+
+        return $this->getUnsafeQuery($method, $globals, $server);
     }
 
     /**
@@ -67,10 +85,10 @@ final class WebRouter implements RouterInterface
      *
      * @psalm-param Server $server
      * @psalm-param Globals $globals
-     * @phpstan-param array<string, mixed> $globals
-     * @phpstan-param array<string, mixed> $server
+     * @phpstan-param array{_POST: array<string, mixed>} $globals
+     * @phpstan-param array{CONTENT_TYPE?: string, HTTP_CONTENT_TYPE?: string, HTTP_RAW_POST_DATA?: string} $server
      *
-     * @return array<string, mixed> $globals
+     * @return array<string, mixed>
      */
     private function getUnsafeQuery(string $method, array $globals, array $server): array
     {

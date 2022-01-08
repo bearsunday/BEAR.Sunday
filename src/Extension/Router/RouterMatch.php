@@ -25,7 +25,7 @@ class RouterMatch
     /**
      * Request query
      *
-     * @var array<string, mixed>
+     * @var array<string, string|mixed>
      */
     public $query = [];
 

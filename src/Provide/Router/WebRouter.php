@@ -28,7 +28,10 @@ use const PHP_URL_PATH;
  */
 final class WebRouter implements RouterInterface
 {
-    /** @var string */
+    /**
+     * @readonly
+     * @var string
+     */
     private $schemeHost;
 
     /**
@@ -42,16 +45,19 @@ final class WebRouter implements RouterInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @param Globals $globals
+     * @param Server  $server
      */
     public function match(array $globals, array $server)
     {
         $method = strtolower($server['REQUEST_METHOD']);
-        $match = new RouterMatch();
-        $match->method = $method;
-        $match->path = $this->schemeHost . parse_url($server['REQUEST_URI'], PHP_URL_PATH);
-        $match->query = $method === 'get' ? $globals['_GET'] : $this->getUnsafeQuery($method, $globals, $server);
 
-        return $match;
+        return new RouterMatch(
+            $method,
+            $this->schemeHost . parse_url($server['REQUEST_URI'], PHP_URL_PATH),
+            $this->getQuery($method, $globals, $server)
+        );
     }
 
     /**
@@ -65,15 +71,17 @@ final class WebRouter implements RouterInterface
     /**
      * Return request query by media-type
      *
-     * @psalm-param Server $server
-     * @psalm-param Globals $globals
-     * @phpstan-param array<string, mixed> $globals
-     * @phpstan-param array<string, mixed> $server
+     * @param Server  $server
+     * @param Globals $globals
      *
-     * @return array<string, mixed> $globals
+     * @return array<string, mixed>
      */
-    private function getUnsafeQuery(string $method, array $globals, array $server): array
+    private function getQuery(string $method, array $globals, array $server): array
     {
+        if ($method === 'get') {
+            return $globals['_GET'];
+        }
+
         if ($method === 'post') {
             return $globals['_POST'];
         }

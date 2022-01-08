@@ -1,6 +1,6 @@
 {
     "require-dev": {
-        "doctrine/coding-standard": "^8.2",
+        "doctrine/coding-standard": "^9.0",
         "phpmd/phpmd": "^2.9",
         "phpmetrics/phpmetrics": "^2.7",
         "phpstan/phpstan": "^1.3",

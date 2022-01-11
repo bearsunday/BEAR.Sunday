@@ -9,11 +9,8 @@ use BEAR\Sunday\Extension\Transfer\TransferInterface;
 
 class HttpResponder implements TransferInterface
 {
-    /** @var HeaderInterface */
-    private $header;
-
-    /** @var ConditionalResponseInterface */
-    private $condResponse;
+    private HeaderInterface $header;
+    private ConditionalResponseInterface $condResponse;
 
     public function __construct(HeaderInterface $header, ConditionalResponseInterface $condResponse)
     {

@@ -18,8 +18,7 @@ use const E_ERROR;
 
 final class ThrowableHandler implements ThrowableHandlerInterface
 {
-    /** @var ErrorInterface */
-    private $error;
+    private ErrorInterface $error;
 
     public function __construct(ErrorInterface $error)
     {

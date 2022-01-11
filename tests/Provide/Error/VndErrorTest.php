@@ -18,11 +18,8 @@ use function ini_set;
 
 class VndErrorTest extends TestCase
 {
-    /** @var int */
-    public static $code;
-
-    /** @var VndError */
-    private $vndError;
+    public static int $code;
+    private VndError $vndError;
 
     protected function setUp(): void
     {

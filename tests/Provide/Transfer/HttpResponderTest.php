@@ -9,8 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class HttpResponderTest extends TestCase
 {
-    /** @var FakeHttpResponder */
-    private $responder;
+    private FakeHttpResponder $responder;
 
     protected function setUp(): void
     {

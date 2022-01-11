@@ -18,7 +18,7 @@ use const E_ERROR;
 
 final class ThrowableHandler implements ThrowableHandlerInterface
 {
-    private \BEAR\Sunday\Extension\Error\ErrorInterface $error;
+    private ErrorInterface $error;
 
     public function __construct(ErrorInterface $error)
     {

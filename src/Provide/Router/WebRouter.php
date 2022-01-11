@@ -28,9 +28,7 @@ use const PHP_URL_PATH;
  */
 final class WebRouter implements RouterInterface
 {
-    /**
-     * @readonly
-     */
+    /** @readonly */
     private string $schemeHost;
 
     /**

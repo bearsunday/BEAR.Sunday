@@ -12,7 +12,7 @@ use function assert;
 
 class NamedModuleTest extends TestCase
 {
-    private \BEAR\Sunday\FakeApplication $app;
+    private FakeApplication $app;
 
     protected function setUp(): void
     {

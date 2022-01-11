@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class WebRouterTest extends TestCase
 {
-    private \BEAR\Sunday\Provide\Router\WebRouter $router;
+    private WebRouter $router;
 
     protected function setUp(): void
     {

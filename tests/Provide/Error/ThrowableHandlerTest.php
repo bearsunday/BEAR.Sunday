@@ -19,8 +19,7 @@ class ThrowableHandlerTest extends TestCase
 {
     /** @var int */
     public static $code;
-
-    private \BEAR\Sunday\Provide\Error\ThrowableHandler $throableHandler;
+    private ThrowableHandler $throableHandler;
 
     protected function setUp(): void
     {
@@ -42,7 +41,7 @@ class ThrowableHandlerTest extends TestCase
     {
         $e = null;
         try {
-            echo \HELLO; // @phpstan-ignore-line
+            echo HELLO; // @phpstan-ignore-line
         } catch (Throwable $e) {  // @phpstan-ignore-line create $e
         }
 

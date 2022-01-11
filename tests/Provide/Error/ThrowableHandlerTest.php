@@ -17,8 +17,7 @@ use function ini_set;
 // phpcs:disable SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly.ReferencedGeneralException
 class ThrowableHandlerTest extends TestCase
 {
-    /** @var int */
-    public static $code;
+    public static int $code;
     private ThrowableHandler $throableHandler;
 
     protected function setUp(): void
@@ -41,7 +40,7 @@ class ThrowableHandlerTest extends TestCase
     {
         $e = null;
         try {
-            echo HELLO; // @phpstan-ignore-line
+            echo hello; // @phpstan-ignore-line
         } catch (Throwable $e) {  // @phpstan-ignore-line create $e
         }
 

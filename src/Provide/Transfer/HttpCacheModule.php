@@ -8,6 +8,9 @@ use BEAR\Sunday\Extension\Transfer\HttpCacheInterface;
 use BEAR\Sunday\Extension\Transfer\NullHttpCache;
 use Ray\Di\AbstractModule;
 
+/**
+ * Provides HttpCacheInterface bindings
+ */
 class HttpCacheModule extends AbstractModule
 {
     protected function configure(): void

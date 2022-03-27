@@ -8,6 +8,14 @@ use BEAR\Sunday\Annotation\DefaultSchemeHost;
 use BEAR\Sunday\Extension\Router\RouterInterface;
 use Ray\Di\AbstractModule;
 
+/**
+ * Provides RouterInterface and derived bindings
+ *
+ * The following bindings are provided:
+ *
+ *  RouterInterface
+ *  -DefaultSchemeHost
+ */
 class RouterModule extends AbstractModule
 {
     protected function configure(): void

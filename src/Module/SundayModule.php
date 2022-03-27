@@ -11,6 +11,9 @@ use BEAR\Sunday\Provide\Transfer\HttpCacheModule;
 use BEAR\Sunday\Provide\Transfer\HttpResponderModule;
 use Ray\Di\AbstractModule;
 
+/**
+ * Provides BEAR.Sunday base bindings
+ */
 class SundayModule extends AbstractModule
 {
     protected function configure(): void

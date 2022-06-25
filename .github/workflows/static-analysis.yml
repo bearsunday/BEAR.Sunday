@@ -10,3 +10,4 @@ jobs:
     uses: ray-di/.github/.github/workflows/static-analysis.yml@v1
     with:
       php_version: 8.1
+      has_crc_config: true

@@ -6,36 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  coding-standards:
-    name: Coding Standards
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.0
-          tools: cs2pr
-          coverage: none
-
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
-      - name: Install dependencies
-        run: composer install --no-interaction --no-progress --prefer-dist
-
-      - name: Validate composer.json
-        run: composer validate --strict
-
-      - name: Run PHP_CodeSniffer
-        run: ./vendor/bin/phpcs -q --no-colors --report=checkstyle src tests | cs2pr
+  cs:
+    uses: ray-di/.github/.github/workflows/coding-standards.yml@v1
+    with:
+      php_version: 8.1

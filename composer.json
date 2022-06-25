@@ -1,76 +1,100 @@
 {
-  "name": "bear/sunday",
-  "description": "A resource-oriented application framework",
-  "keywords": [
-    "framework",
-    "DI",
-    "AOP",
-    "REST",
-    "Hypermedia"
-  ],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Akihito Koriyama",
-      "email": "akihito.koriyama@gmail.com",
-      "homepage": "http://koriym.github.io/about/"
+    "name": "bear/sunday",
+    "description": "A resource-oriented application framework",
+    "keywords": [
+        "framework",
+        "DI",
+        "AOP",
+        "REST",
+        "Hypermedia"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Akihito Koriyama",
+            "email": "akihito.koriyama@gmail.com",
+            "homepage": "http://koriym.github.io/about/"
+        },
+        {
+            "name": "BEAR.Sunday Contributors",
+            "homepage": "http://bearsunday.github.io/contributors.html"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-json": "*",
+        "bear/resource": "^1.16",
+        "doctrine/annotations": "^1.12",
+        "psr/log": "^1.1 || ^2.0 || ^3.0",
+        "ray/aop": "^2.12.3",
+        "ray/di": "^2.13"
     },
-    {
-      "name": "BEAR.Sunday Contributors",
-      "homepage": "http://bearsunday.github.io/contributors.html"
-    }
-  ],
-  "require": {
-    "php": "^7.4 || ^8.0",
-    "ext-json": "*",
-    "bear/resource": "^1.16",
-    "doctrine/annotations": "^1.12",
-    "psr/log": "^1.1 || ^2.0 || ^3.0",
-    "ray/aop": "^2.10.1",
-    "ray/di": "^2.13"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^9.5.10",
-    "bamarni/composer-bin-plugin": "^1.4"
-  },
-  "config": {
-    "sort-packages": true,
-    "allow-plugins": {
-      "bamarni/composer-bin-plugin": true
-    }
-  },
-  "autoload": {
-    "psr-4": {
-      "BEAR\\Sunday\\": ["src/", "src-deprecated/"]
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "BEAR\\Sunday\\": [
-        "tests/",
-        "tests/Fake/"
-      ],
-      "FakeVendor\\HelloWorld\\": "tests/Fake/Apps/FakeVendor/HelloWorld/",
-      "FakeVendor\\HelloWorldX\\": "tests/Fake/Apps/FakeVendor/HelloWorldX/"
+    "require-dev": {
+        "phpunit/phpunit": "^9.5.10",
+        "doctrine/coding-standard": "^9.0",
+        "phpmd/phpmd": "^2.9",
+        "phpmetrics/phpmetrics": "^2.7",
+        "phpstan/phpstan": "^1.3",
+        "psalm/plugin-phpunit": "^0.13",
+        "squizlabs/php_codesniffer": "^3.5",
+        "vimeo/psalm": "^4.2"
     },
-    "files": [
-      "tests/Fake/Provide/Transfer/header.php",
-      "tests/Fake/Provide/Transfer/http_response_code.php"
-    ]
-  },
-  "scripts" :{
-    "post-install-cmd": ["@composer bin all install --ansi"],
-    "post-update-cmd": ["@composer bin all update --ansi"],
-    "test": ["./vendor/bin/phpunit"],
-    "tests": ["@cs", "@test", "@sa"],
-    "coverage": ["php -dzend_extension=xdebug.so -dxdebug.mode=coverage ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
-    "pcov": ["php -dextension=pcov.so -d pcov.enabled=1 ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage  --coverage-clover=coverage.xml"],
-    "cs": ["phpcs --standard=./phpcs.xml src tests"],
-    "cs-fix": ["./vendor/bin/phpcbf src tests"],
-    "clean": ["./vendor/bin/phpstan clear-result-cache", "./vendor/bin/psalm --clear-cache", "rm -rf tests/tmp/*.php"],
-    "sa": ["psalm --monochrome --show-info=true", "./vendor/bin/phpstan analyse --no-ansi --no-progress -c phpstan.neon"],
-    "metrics": ["./vendor/bin/phpmetrics --report-html=build/metrics --exclude=Exception --junit=build/junit.xml src"],
-    "phpmd": ["./vendor/bin/phpmd --exclude src/Annotation src text ./phpmd.xml"],
-    "build": ["@cs", "@sa", "@pcov", "@metrics"]
-  }
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "BEAR\\Sunday\\": [
+                "src/",
+                "src-deprecated/"
+            ]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BEAR\\Sunday\\": [
+                "tests/",
+                "tests/Fake/"
+            ],
+            "FakeVendor\\HelloWorld\\": "tests/Fake/Apps/FakeVendor/HelloWorld/",
+            "FakeVendor\\HelloWorldX\\": "tests/Fake/Apps/FakeVendor/HelloWorldX/"
+        },
+        "files": [
+            "tests/Fake/Provide/Transfer/header.php",
+            "tests/Fake/Provide/Transfer/http_response_code.php"
+        ]
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit",
+        "tests": [
+            "@cs",
+            "@test",
+            "@sa"
+        ],
+        "coverage": "php -dzend_extension=xdebug.so -dxdebug.mode=coverage ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage",
+        "pcov": "php -dextension=pcov.so -d pcov.enabled=1 ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage  --coverage-clover=coverage.xml",
+        "cs": "./vendor/bin/phpcs --standard=./phpcs.xml src tests",
+        "cs-fix": "./vendor/bin/phpcbf src tests",
+        "clean": [
+            "./vendor/bin/phpstan clear-result-cache",
+            "./vendor/bin/psalm --clear-cache",
+            "rm -rf tests/tmp/*.php"
+        ],
+        "sa": [
+            "./vendor/binpsalm --monochrome --show-info=true",
+            "./vendor/bin/phpstan analyse --no-ansi --no-progress -c phpstan.neon"
+        ],
+        "metrics": "./vendor/bin/phpmetrics --report-html=build/metrics --exclude=Exception --junit=build/junit.xml src",
+        "phpmd": "./vendor/bin/phpmd --exclude src/Annotation src text ./phpmd.xml",
+        "build": [
+            "@cs",
+            "@sa",
+            "@pcov",
+            "@metrics"
+        ]
+    }
 }

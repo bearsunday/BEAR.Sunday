@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <ruleset
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="bearcs"
-    xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
 
     <arg name="basepath" value="."/>
     <arg name="extensions" value="php"/>
     <arg name="parallel" value="80"/>
     <arg name="cache" value=".phpcs-cache"/>
 
-    <!-- Compatibility with PHP 7.4.0 -->
-    <config name="php_version" value="70400"/>
+    <!-- Compatibility with PHP 8.0 -->
+    <config name="php_version" value="80000"/>
 
     <!-- Ignore warnings, show progress of the run and show sniff names -->
     <arg value="nps"/>
@@ -18,15 +18,24 @@
     <file>src</file>
     <file>tests</file>
     <exclude-pattern>*/tests/tmp/*</exclude-pattern>
-    <exclude-pattern>*/src/Annotation/*</exclude-pattern>
-    <exclude-pattern>*/src/Inject/*</exclude-pattern>
 
     <!-- PSR12 Coding Standard -->
     <rule ref="PSR12"/>
 
+    <!-- Exclude NativeTypeHintrule from interface and abstract class -->
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint">
+        <exclude-pattern>*/src/*Interface.php</exclude-pattern>
+        <exclude-pattern>*/src/Abstract*.php</exclude-pattern>
+        <exclude-pattern>*/src/ResourceObject.php</exclude-pattern>
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint">
+        <exclude-pattern>*/src/*Interface.php</exclude-pattern>
+        <exclude-pattern>*/src/Abstract*.php</exclude-pattern>
+        <exclude-pattern>*/src/ResourceObject.php</exclude-pattern>
+    </rule>
     <!-- Doctrine Coding Standard -->
     <rule ref="Doctrine">
-    <!-- Inapplicable for this project -->
+        <!-- Inapplicable for this project -->
         <!-- Base -->
         <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame"/>
         <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
@@ -35,20 +44,22 @@
         <exclude name="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming.SuperfluousSuffix"/>
         <exclude name="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.MissingVariable"/>
         <exclude name="SlevomatCodingStandard.Commenting.UselessInheritDocComment.UselessInheritDocComment"/>
-        <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint"/>
-        <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint"/>
-        <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification"/>
+        <exclude name="Squiz.Commenting.FunctionComment.InvalidNoReturn"/>
         <!-- /Base -->
         <!-- Option -->
-        <exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed"/>
-        <!-- PHP8 attribute -->
-        <exclude name="Squiz.WhiteSpace.FunctionSpacing.Before"/>
+        <!--        <exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed"/>-->
+        <exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion"/>
         <!-- /Option -->
         <!-- Exclude Fake files form Doctrine CS -->
         <exclude-pattern>*/tests/Fake/*</exclude-pattern>
     </rule>
 
     <!-- Additional Rules -->
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+        <properties>
+            <property name="searchAnnotations" value="true"/>
+        </properties>
+    </rule>
     <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
         <properties>
             <property name="annotationsGroups" type="array">
@@ -68,11 +79,15 @@
             <property name="maxLinesCountBeforeWithoutComment" value="0"/>
         </properties>
     </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing">
+        <exclude-pattern>src/ClassParam.php</exclude-pattern>
+    </rule>
     <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
         <properties>
             <property name="searchAnnotations" value="true"/>
         </properties>
     </rule>
+
     <exclude-pattern>*/Fake/*</exclude-pattern>
     <exclude-pattern>*/tmp/*</exclude-pattern>
 </ruleset>

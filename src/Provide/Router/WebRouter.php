@@ -16,7 +16,7 @@ use function json_last_error_msg;
 use function parse_str;
 use function parse_url;
 use function rtrim;
-use function strpos;
+use function str_contains;
 use function strtolower;
 
 use const JSON_ERROR_NONE;
@@ -77,7 +77,7 @@ final class WebRouter implements RouterInterface
         }
 
         $contentType = $server['CONTENT_TYPE'] ?? $server['HTTP_CONTENT_TYPE'] ?? '';
-        $isFormUrlEncoded = strpos($contentType, 'application/x-www-form-urlencoded') !== false;
+        $isFormUrlEncoded = str_contains($contentType, 'application/x-www-form-urlencoded');
         $rawBody = $server['HTTP_RAW_POST_DATA'] ?? rtrim((string) file_get_contents('php://input'));
         if ($isFormUrlEncoded) {
             parse_str(rtrim($rawBody), $put);
@@ -86,7 +86,7 @@ final class WebRouter implements RouterInterface
             return $put;
         }
 
-        $isApplicationJson = strpos($contentType, 'application/json') !== false;
+        $isApplicationJson = str_contains($contentType, 'application/json');
         if (! $isApplicationJson) {
             return [];
         }

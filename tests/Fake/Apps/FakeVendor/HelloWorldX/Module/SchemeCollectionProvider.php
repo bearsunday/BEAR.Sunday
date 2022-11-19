@@ -13,22 +13,12 @@ use Ray\Di\ProviderInterface;
 class SchemeCollectionProvider implements ProviderInterface
 {
     /**
-     * @var string
+     * @param string $appName
      */
-    protected $appName;
-
-    /**
-     * @var InjectorInterface
-     */
-    protected $injector;
-
-    /**
-     * @Named("appName=app_name")
-     */
-    public function __construct(InjectorInterface $injector, $appName)
-    {
-        $this->injector = $injector;
-        $this->appName = $appName;
+    public function __construct(
+        protected InjectorInterface $injector,
+        #[Named('app_name')] protected $appName
+    ){
     }
 
     /**
@@ -46,10 +36,8 @@ class SchemeCollectionProvider implements ProviderInterface
     }
 
     /**
-     * @param SchemeCollection  $schemeCollection
      * @param string            $host
      * @param string            $appName
-     * @param InjectorInterface $injector
      */
     private function addScheme(SchemeCollection $schemeCollection, $host, $appName, InjectorInterface $injector): void
     {

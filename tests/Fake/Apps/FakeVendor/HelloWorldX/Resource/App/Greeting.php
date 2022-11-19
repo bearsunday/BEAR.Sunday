@@ -8,11 +8,9 @@ use BEAR\Resource\ResourceObject;
 
 class Greeting extends ResourceObject
 {
-    private $resource;
-
-    public function __construct(ResourceInterface $resource)
-    {
-        $this->resource = $resource;
+    public function __construct(
+        private ResourceInterface $resource
+    ){
     }
 
     /**

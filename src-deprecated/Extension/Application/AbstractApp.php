@@ -17,21 +17,6 @@ use BEAR\Sunday\Extension\Transfer\TransferInterface;
  */
 class AbstractApp implements AppInterface
 {
-    /** @var HttpCacheInterface */
-    public $httpCache;
-
-    /** @var RouterInterface */
-    public $router;
-
-    /** @var TransferInterface */
-    public $responder;
-
-    /** @var ResourceInterface */
-    public $resource;
-
-    /** @var ErrorInterface */
-    public $error;
-
     /**
      * @param HttpCacheInterface $httpCache HTTP Cache 304 responder
      * @param RouterInterface    $router    Resource router
@@ -40,16 +25,11 @@ class AbstractApp implements AppInterface
      * @param ErrorInterface     $error     Error handler
      */
     public function __construct(
-        HttpCacheInterface $httpCache,
-        RouterInterface $router,
-        TransferInterface $responder,
-        ResourceInterface $resource,
-        ErrorInterface $error
-    ) {
-        $this->httpCache = $httpCache;
-        $this->router = $router;
-        $this->responder = $responder;
-        $this->resource = $resource;
-        $this->error = $error;
+        public HttpCacheInterface $httpCache,
+        public RouterInterface $router,
+        public TransferInterface $responder,
+        public ResourceInterface $resource,
+        public ErrorInterface $error
+    ){
     }
 }

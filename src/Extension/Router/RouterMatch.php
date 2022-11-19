@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace BEAR\Sunday\Extension\Router;
 
+use Stringable;
+
 use function http_build_query;
 
-class RouterMatch
+class RouterMatch implements Stringable
 {
     /** @param array<string, mixed> $query */
     public function __construct(

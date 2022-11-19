@@ -28,16 +28,9 @@ use const PHP_URL_PATH;
  */
 final class WebRouter implements RouterInterface
 {
-    /** @readonly */
-    private string $schemeHost;
-
-    /**
-     * @DefaultSchemeHost
-     */
-    #[DefaultSchemeHost]
-    public function __construct(string $schemeHost)
-    {
-        $this->schemeHost = $schemeHost;
+    public function __construct(
+        #[DefaultSchemeHost] private string $schemeHost,
+    ) {
     }
 
     /**
@@ -53,7 +46,7 @@ final class WebRouter implements RouterInterface
         return new RouterMatch(
             $method,
             $this->schemeHost . parse_url($server['REQUEST_URI'], PHP_URL_PATH),
-            $this->getQuery($method, $globals, $server)
+            $this->getQuery($method, $globals, $server),
         );
     }
 

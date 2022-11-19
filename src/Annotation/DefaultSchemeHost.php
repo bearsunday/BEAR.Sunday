@@ -20,7 +20,7 @@ final class DefaultSchemeHost
     /** @var ?string */
     public $value;
 
-    public function __construct(?string $value = null)
+    public function __construct(string|null $value = null)
     {
         $this->value = $value;
     }

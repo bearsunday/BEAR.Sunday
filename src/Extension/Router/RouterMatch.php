@@ -8,35 +8,12 @@ use function http_build_query;
 
 class RouterMatch
 {
-    /**
-     * Request method
-     *
-     * @var string
-     */
-    public $method;
-
-    /**
-     * Request path
-     *
-     * @var string
-     */
-    public $path;
-
-    /**
-     * Request query
-     *
-     * @var array<string, mixed>
-     */
-    public $query = [];
-
-    /**
-     * @param array<string, mixed> $query
-     */
-    public function __construct(string $method = '', string $path = '', array $query = [])
-    {
-        $this->method = $method;
-        $this->path = $path;
-        $this->query = $query;
+    /** @param array<string, mixed> $query */
+    public function __construct(
+        public string $method = '',
+        public string $path = '',
+        public array $query = [],
+    ) {
     }
 
     public function __toString(): string

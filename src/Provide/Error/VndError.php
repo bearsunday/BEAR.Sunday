@@ -30,12 +30,11 @@ final class VndError implements ErrorInterface
 
     /** @var array{message: string} */
     public $body = ['message' => ''];
-    private TransferInterface $transfer;
     private ErrorPage $errorPage;
 
-    public function __construct(TransferInterface $transfer)
-    {
-        $this->transfer = $transfer;
+    public function __construct(
+        private TransferInterface $transfer,
+    ) {
         $this->errorPage = new ErrorPage();
     }
 

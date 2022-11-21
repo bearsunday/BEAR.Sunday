@@ -8,15 +8,10 @@ use Ray\Di\AbstractModule;
 
 class NamedModule extends AbstractModule
 {
-    /** @var array<string, string> */
-    private array $names;
-
-    /**
-     * @param array<string, string> $names
-     */
-    public function __construct(array $names)
-    {
-        $this->names = $names;
+    /** @param array<string, string> $names */
+    public function __construct(
+        private array $names,
+    ) {
         parent::__construct();
     }
 

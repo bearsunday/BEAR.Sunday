@@ -21,8 +21,7 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
-        "ext-json": "*",
+        "php": "^8.0",
         "bear/resource": "^1.16",
         "doctrine/annotations": "^1.12",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
@@ -30,12 +29,14 @@
         "ray/di": "^2.13"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5.10",
-        "doctrine/coding-standard": "^9.0",
+        "doctrine/coding-standard": "^10.0",
         "phpmd/phpmd": "^2.9",
         "phpmetrics/phpmetrics": "^2.7",
         "phpstan/phpstan": "^1.3",
+        "phpunit/phpunit": "^9.5.10",
         "psalm/plugin-phpunit": "^0.13",
+        "ray/rector-ray": "^1.0",
+        "rector/rector": "^0.14.8",
         "squizlabs/php_codesniffer": "^3.5",
         "vimeo/psalm": "^4.2"
     },
@@ -85,7 +86,7 @@
             "rm -rf tests/tmp/*.php"
         ],
         "sa": [
-            "./vendor/binpsalm --monochrome --show-info=true",
+            "./vendor/bin/psalm --monochrome --show-info=true",
             "./vendor/bin/phpstan analyse --no-ansi --no-progress -c phpstan.neon"
         ],
         "metrics": "./vendor/bin/phpmetrics --report-html=build/metrics --exclude=Exception --junit=build/junit.xml src",

@@ -24,7 +24,7 @@ class SundayModuleTest extends TestCase
     protected function setUp(): void
     {
         $this->injector = new Injector(new SundayModule(new class extends AbstractModule {
-            protected function configure()
+            protected function configure(): void
             {
                 $this->bind()->annotatedWith(AppName::class)->toInstance('BEAR\Sunday');
                 $this->bind(AppInterface::class)->to(App::class);

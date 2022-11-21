@@ -10,9 +10,7 @@ use function in_array;
 
 final class ConditionalResponse implements ConditionalResponseInterface
 {
-    /**
-     * @see https://tools.ietf.org/html/rfc7232#section-4.1
-     */
+    /** @see https://tools.ietf.org/html/rfc7232#section-4.1 */
     private const HEADER_IN_304 = [
         'Cache-Control',
         'Content-Location',

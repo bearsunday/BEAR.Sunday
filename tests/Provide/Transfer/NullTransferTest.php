@@ -10,9 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class NullTransferTest extends TestCase
 {
-    /**
-     * @doesNotPerformAssertions
-     */
+    /** @doesNotPerformAssertions */
     public function testNullError(): void
     {
         (new NullTransfer())(new NullResourceObject(), []);

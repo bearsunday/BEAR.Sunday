@@ -17,11 +17,8 @@ use Ray\Di\Di\Qualifier;
 #[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_PARAMETER | Attribute::TARGET_PROPERTY), Qualifier]
 final class DefaultSchemeHost
 {
-    /** @var ?string */
-    public $value;
-
-    public function __construct(?string $value = null)
-    {
-        $this->value = $value;
+    public function __construct(
+        public string|null $value = null,
+    ) {
     }
 }

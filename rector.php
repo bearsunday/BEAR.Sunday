@@ -9,10 +9,13 @@ use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        __DIR__ . '/demo',
         __DIR__ . '/src',
         __DIR__ . '/src-deprecated',
         __DIR__ . '/tests',
+    ]);
+    $rectorConfig->skip([
+        __DIR__ . '/src/*Interface.php',
+        __DIR__ . '/tests/Provide/Error/ThrowableHandlerTest.php'
     ]);
 
     // register a single rule

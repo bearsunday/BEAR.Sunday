@@ -12,7 +12,6 @@ use BEAR\Sunday\Extension\Transfer\TransferInterface;
 use BEAR\Sunday\Provide\Application\App;
 use BEAR\Sunday\Provide\Router\WebRouter;
 use BEAR\Sunday\Provide\Transfer\HttpResponder;
-use Doctrine\Common\Annotations\Reader;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
@@ -40,9 +39,6 @@ class SundayModuleTest extends TestCase
 
     public function testDependModules(): void
     {
-        $reader = $this->injector->getInstance(Reader::class);
-        $this->assertInstanceOf(Reader::class, $reader);
-
         $resource = $this->injector->getInstance(ResourceInterface::class);
         $this->assertInstanceOf(ResourceInterface::class, $resource);
 

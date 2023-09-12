@@ -10,20 +10,16 @@ class FakeApplication
     public $dir;
     public $id;
 
-    /**
-     * @Inject
-     * @Named("path")
-     */
-    public function setPath($dir): void
+    #[Inject]
+    public function setPath(#[\Ray\Di\Di\Named('path')]
+    $dir): void
     {
         $this->dir = $dir;
     }
 
-    /**
-     * @Inject
-     * @Named("id")
-     */
-    public function setId($id): void
+    #[Inject]
+    public function setId(#[\Ray\Di\Di\Named('id')]
+    $id): void
     {
         $this->id = $id;
     }

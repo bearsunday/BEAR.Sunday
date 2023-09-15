@@ -23,7 +23,6 @@
     "require": {
         "php": "^8.0",
         "bear/resource": "^1.16",
-        "doctrine/annotations": "^1.12",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
         "ray/aop": "^2.12.3",
         "ray/di": "^2.13"

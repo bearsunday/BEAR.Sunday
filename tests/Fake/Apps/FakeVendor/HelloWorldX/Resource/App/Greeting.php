@@ -13,9 +13,7 @@ class Greeting extends ResourceObject
     ){
     }
 
-    /**
-     * @Embed(rel="hello_rel", src="app://hello/greeting")
-     */
+    #[Embed(rel: 'hello_rel', src: 'app://hello/greeting')]
     public function onGet(): ResourceObject
     {
         $this->body['greeting'] = 'hello world X';

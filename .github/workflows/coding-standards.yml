@@ -9,4 +9,4 @@ jobs:
   cs:
     uses: ray-di/.github/.github/workflows/coding-standards.yml@v1
     with:
-      php_version: 8.1
+      php_version: 8.3

@@ -28,7 +28,7 @@
         "ray/di": "^2.13"
     },
     "require-dev": {
-        "doctrine/coding-standard": "^12.0",
+        "doctrine/coding-standard": "^13.0",
         "phpmd/phpmd": "^2.9",
         "phpmetrics/phpmetrics": "^2.7",
         "phpstan/phpstan": "^1.3",

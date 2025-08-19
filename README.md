@@ -28,7 +28,6 @@ Interactions with your database, services and even pages and sections of your ap
 
  * [http://bearsunday.github.io/](http://bearsunday.github.io/)
 
-
 ## Related project
 
  * [Ray.Di](https://github.com/ray-di/Ray.Di) - A dpendency injection framework
@@ -38,3 +37,9 @@ Interactions with your database, services and even pages and sections of your ap
  * [BEAR.Skeleton](https://github.com/bearsunday/BEAR.Skeleton) - A BEAR.Sunday project skeleton
 
 <img src="http://bearsunday.github.io/BEAR.Sunday/framework_structure.png" width="400">
+
+### Powered by
+
+[![JetBrains logo.](https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg)](https://jb.gg/OpenSource)
+
+This project has been continuously supported by JetBrains since 2012.

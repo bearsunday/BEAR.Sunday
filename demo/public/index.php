@@ -26,10 +26,10 @@ try {
     $response = $app->resource->{$request->method}->uri($request->path)($request->query);
     assert($response instanceof ResourceObject);
     $response->transfer($app->responder, $_SERVER);
-} catch (ResourceNotFoundException $e) {
+} catch (ResourceNotFoundException) {
     http_response_code(404);
     echo 'Not found' . PHP_EOL;
-} catch (BadRequestException $e) {
+} catch (BadRequestException) {
     http_response_code(400);
     echo 'Bad request' . PHP_EOL;
 } catch (Throwable $e) {

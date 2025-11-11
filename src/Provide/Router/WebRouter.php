@@ -29,10 +29,13 @@ use const PHP_URL_PATH;
  */
 final class WebRouter implements RouterInterface
 {
+    private string $schemeHost;
+
     public function __construct(
         #[DefaultSchemeHost]
-        private string $schemeHost,
+        string $schemeHost,
     ) {
+        $this->schemeHost = rtrim($schemeHost, '/');
     }
 
     /**

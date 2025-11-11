@@ -29,16 +29,8 @@
         "symfony/polyfill-php83": "^1.31"
     },
     "require-dev": {
-        "doctrine/coding-standard": "^13.0",
-        "phpmd/phpmd": "^2.9",
-        "phpmetrics/phpmetrics": "^2.7",
-        "phpstan/phpstan": "^2.0",
-        "phpunit/phpunit": "^9.5.10",
-        "psalm/plugin-phpunit": "^0.19",
-        "ray/rector-ray": "^1.0",
-        "rector/rector": "^2.0",
-        "squizlabs/php_codesniffer": "^3.5",
-        "vimeo/psalm": "^6.0"
+        "bamarni/composer-bin-plugin": "^1.8.2",
+        "phpunit/phpunit": "^9.5.10"
     },
     "config": {
         "sort-packages": true,
@@ -70,6 +62,8 @@
         ]
     },
     "scripts": {
+        "post-install-cmd": ["@composer bin all install --ansi --ignore-platform-req=php"],
+        "post-update-cmd": ["@composer bin all update --ansi --ignore-platform-req=php"],
         "test": "./vendor/bin/phpunit",
         "tests": [
             "@cs",

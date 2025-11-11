@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace BEAR\Sunday\Module\Constant;
 
+use Override;
 use Ray\Di\AbstractModule;
 
-class NamedModule extends AbstractModule
+final class NamedModule extends AbstractModule
 {
     /** @param array<string, string> $names */
     public function __construct(
@@ -15,6 +16,7 @@ class NamedModule extends AbstractModule
         parent::__construct();
     }
 
+    #[Override]
     protected function configure(): void
     {
         foreach ($this->names as $annotatedWith => $instance) {

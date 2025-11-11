@@ -8,6 +8,7 @@ use BEAR\Sunday\Annotation\DefaultSchemeHost;
 use BEAR\Sunday\Exception\BadRequestJsonException;
 use BEAR\Sunday\Extension\Router\RouterInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch;
+use Override;
 
 use function file_get_contents;
 use function json_decode;
@@ -28,10 +29,13 @@ use const PHP_URL_PATH;
  */
 final class WebRouter implements RouterInterface
 {
+    private string $schemeHost;
+
     public function __construct(
         #[DefaultSchemeHost]
-        private string $schemeHost,
+        string $schemeHost,
     ) {
+        $this->schemeHost = rtrim($schemeHost, '/');
     }
 
     /**
@@ -40,13 +44,16 @@ final class WebRouter implements RouterInterface
      * @param Globals $globals
      * @param Server  $server
      */
+    #[Override]
     public function match(array $globals, array $server)
     {
         $method = strtolower($server['REQUEST_METHOD']);
+        $path = parse_url($server['REQUEST_URI'], PHP_URL_PATH);
+        $path = $path === false || $path === null ? '/' : $path;
 
         return new RouterMatch(
             $method,
-            $this->schemeHost . parse_url($server['REQUEST_URI'], PHP_URL_PATH),
+            $this->schemeHost . $path,
             $this->getQuery($method, $globals, $server),
         );
     }
@@ -54,6 +61,7 @@ final class WebRouter implements RouterInterface
     /**
      * {@inheritDoc}
      */
+    #[Override]
     public function generate($name, $data)
     {
         return false;
@@ -66,6 +74,7 @@ final class WebRouter implements RouterInterface
      * @param Globals $globals
      *
      * @return array<string, mixed>
+     * @psalm-return array<string, mixed>
      */
     private function getQuery(string $method, array $globals, array $server): array
     {
@@ -83,7 +92,7 @@ final class WebRouter implements RouterInterface
         if ($isFormUrlEncoded) {
             parse_str(rtrim($rawBody), $put);
 
-            /** @var array<string, mixed> $put */
+            /** @var array<string, mixed> $put @phpstan-ignore varTag.nativeType */
             return $put;
         }
 

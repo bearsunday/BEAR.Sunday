@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
+use Override;
 use Ray\Di\AbstractModule;
 
 /**
@@ -16,8 +17,9 @@ use Ray\Di\AbstractModule;
  *  HeaderInterface
  *  ConditionalResponseInterface
  */
-class HttpResponderModule extends AbstractModule
+final class HttpResponderModule extends AbstractModule
 {
+    #[Override]
     protected function configure(): void
     {
         $this->bind(TransferInterface::class)->to(HttpResponder::class);

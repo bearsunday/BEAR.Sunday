@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace BEAR\Sunday\Extension\Router;
 
-class NullMatch extends RouterMatch
+final class NullMatch extends RouterMatch
 {
 }

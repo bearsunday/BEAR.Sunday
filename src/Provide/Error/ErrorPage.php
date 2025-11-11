@@ -6,6 +6,6 @@ namespace BEAR\Sunday\Provide\Error;
 
 use BEAR\Resource\ResourceObject;
 
-class ErrorPage extends ResourceObject
+final class ErrorPage extends ResourceObject
 {
 }

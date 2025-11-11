@@ -1,13 +1,12 @@
-filter:
-    paths: ["src/*"]
-
-tools:
-    php_sim: true
-    php_pdepend: true
-    php_analyzer: true
 build:
+    image: default-jammy
+    environment:
+        php: 8.4
     nodes:
         analysis:
             tests:
                 override:
-                    - php-scrutinizer-run --enable-security-analysis
+                    - php-scrutinizer-run
+
+filter:
+    paths: ["src/*"]

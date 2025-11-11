@@ -12,6 +12,7 @@ use BEAR\Sunday\Extension\Error\ErrorInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch as Request;
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
 use Exception;
+use Override;
 
 use function array_key_exists;
 use function error_log;
@@ -43,6 +44,7 @@ final class VndError implements ErrorInterface
      *
      * @noinspection ForgottenDebugOutputInspection
      */
+    #[Override]
     public function handle(Exception $e, Request $request) // phpcs:disable SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly.ReferencedGeneralException
     {
         if ($this->isCodeExists($e)) {
@@ -60,6 +62,7 @@ final class VndError implements ErrorInterface
         return $this;
     }
 
+    #[Override]
     public function transfer(): void
     {
         $this->errorPage->headers['Content-Type'] = self::CONTENT_TYPE;

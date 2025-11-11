@@ -1,0 +1,22 @@
+{
+    "require-dev": {
+        "doctrine/coding-standard": "^14.0.0",
+        "phpmd/phpmd": "^2.15.0",
+        "phpmetrics/phpmetrics": "^2.9.1",
+        "phpstan/phpstan": "^2.1.31",
+        "ray/rector-ray": "^1.1.0",
+        "rector/rector": "^2.2.7",
+        "squizlabs/php_codesniffer": "^4.0.1",
+        "vimeo/psalm": "^6.13.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "bamarni/composer-bin-plugin": true
+        },
+        "sort-packages": true,
+        "platform": {
+            "php": "8.4.99"
+        }
+    }
+}

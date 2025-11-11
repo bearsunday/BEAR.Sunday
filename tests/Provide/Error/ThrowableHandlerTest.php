@@ -40,7 +40,7 @@ class ThrowableHandlerTest extends TestCase
     {
         $e = null;
         try {
-            echo hello; // @phpstan-ignore-line
+            echo HELLO; // @phpstan-ignore-line
         } catch (Throwable $e) {  // @phpstan-ignore-line create $e
         }
 

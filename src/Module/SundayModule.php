@@ -9,13 +9,15 @@ use BEAR\Sunday\Provide\Error\ErrorModule;
 use BEAR\Sunday\Provide\Router\RouterModule;
 use BEAR\Sunday\Provide\Transfer\HttpCacheModule;
 use BEAR\Sunday\Provide\Transfer\HttpResponderModule;
+use Override;
 use Ray\Di\AbstractModule;
 
 /**
  * Provides BEAR.Sunday base bindings
  */
-class SundayModule extends AbstractModule
+final class SundayModule extends AbstractModule
 {
+    #[Override]
     protected function configure(): void
     {
         $this->install(new HttpCacheModule());

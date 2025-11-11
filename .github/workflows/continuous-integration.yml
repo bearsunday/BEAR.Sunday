@@ -9,5 +9,5 @@ jobs:
   ci:
     uses: ray-di/.github/.github/workflows/continuous-integration.yml@v1
     with:
-      old_stable: '["8.1", "8.2", "8.3", "8.4"]'
+      old_stable: '["8.2", "8.3", "8.4"]'
       current_stable: 8.5

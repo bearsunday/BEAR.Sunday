@@ -10,9 +10,8 @@ use BEAR\Sunday\Extension\Router\RouterMatch as Request;
 use Error;
 use ErrorException;
 use Exception;
+use Override;
 use Throwable;
-
-use function assert;
 
 use const E_ERROR;
 
@@ -23,15 +22,20 @@ final class ThrowableHandler implements ThrowableHandlerInterface
     ) {
     }
 
+    #[Override]
     public function handle(Throwable $e, Request $request): ThrowableHandlerInterface
     {
-        $e = $e instanceof Error ? new ErrorException($e->getMessage(), $e->getCode(), E_ERROR, $e->getFile(), $e->getLine()) : $e;
-        assert($e instanceof Exception);
+        if ($e instanceof Error) {
+            $e = new ErrorException($e->getMessage(), $e->getCode(), E_ERROR, $e->getFile(), $e->getLine(), $e);
+        }
+
+        /** @var Exception $e */
         $this->error->handle($e, $request);
 
         return $this;
     }
 
+    #[Override]
     public function transfer(): void
     {
         $this->error->transfer();

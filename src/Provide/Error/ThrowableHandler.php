@@ -26,7 +26,7 @@ final class ThrowableHandler implements ThrowableHandlerInterface
     public function handle(Throwable $e, Request $request): ThrowableHandlerInterface
     {
         if ($e instanceof Error) {
-            $e = new ErrorException($e->getMessage(), $e->getCode(), E_ERROR, $e->getFile(), $e->getLine());
+            $e = new ErrorException($e->getMessage(), $e->getCode(), E_ERROR, $e->getFile(), $e->getLine(), $e);
         }
 
         /** @var Exception $e */

@@ -6,6 +6,7 @@ namespace BEAR\Sunday\Provide\Router;
 
 use BEAR\Sunday\Annotation\DefaultSchemeHost;
 use BEAR\Sunday\Extension\Router\RouterInterface;
+use Override;
 use Ray\Di\AbstractModule;
 
 /**
@@ -16,8 +17,9 @@ use Ray\Di\AbstractModule;
  *  RouterInterface
  *  -DefaultSchemeHost
  */
-class RouterModule extends AbstractModule
+final class RouterModule extends AbstractModule
 {
+    #[Override]
     protected function configure(): void
     {
         $this->bind(RouterInterface::class)->to(WebRouter::class);

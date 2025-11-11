@@ -9,7 +9,7 @@ use BEAR\Resource\ResourceObject;
 class Greeting extends ResourceObject
 {
     public function __construct(
-        private ResourceInterface $resource
+        private readonly ResourceInterface $resource
     ){
     }
 

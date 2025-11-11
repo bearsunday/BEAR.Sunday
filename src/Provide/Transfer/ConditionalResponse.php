@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Resource\ResourceObject;
+use Override;
 
 use function in_array;
 
@@ -23,6 +24,7 @@ final class ConditionalResponse implements ConditionalResponseInterface
     /**
      * {@inheritDoc}
      */
+    #[Override]
     public function isModified(ResourceObject $ro, array $server): bool
     {
         return ! (isset($server['HTTP_IF_NONE_MATCH'], $ro->headers['ETag']) && $server['HTTP_IF_NONE_MATCH'] === $ro->headers['ETag']);
@@ -31,6 +33,7 @@ final class ConditionalResponse implements ConditionalResponseInterface
     /**
      * {@inheritDoc}
      */
+    #[Override]
     public function getOutput(array $headers): Output
     {
         $newHeaders = [];

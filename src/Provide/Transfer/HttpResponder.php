@@ -6,6 +6,7 @@ namespace BEAR\Sunday\Provide\Transfer;
 
 use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
+use Override;
 
 class HttpResponder implements TransferInterface
 {
@@ -18,6 +19,7 @@ class HttpResponder implements TransferInterface
     /**
      * {@inheritDoc}
      */
+    #[Override]
     public function __invoke(ResourceObject $ro, array $server): void
     {
         /** @var array{HTTP_IF_NONE_MATCH?: string} $server */
@@ -40,6 +42,6 @@ class HttpResponder implements TransferInterface
     {
         $ro->toString(); // render and set headers
 
-        return new Output($ro->code, ($this->header)($ro, $server), $ro->view ?: $ro->toString());
+        return new Output($ro->code, ($this->header)($ro, $server), $ro->view ?? $ro->toString());
     }
 }

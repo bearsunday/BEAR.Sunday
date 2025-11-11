@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace BEAR\Sunday\Exception;
 
-class RuntimeException extends \RuntimeException implements ExceptionInterface
+final class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 }

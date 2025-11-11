@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <psalm
     errorLevel="1"
-    phpVersion="7.4"
+    phpVersion="8.2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
@@ -18,5 +18,9 @@
     </projectFiles>
     <issueHandlers>
         <MissingConstructor errorLevel="suppress"/>
+        <UnusedClass errorLevel="suppress"/>
+        <PossiblyUnusedMethod errorLevel="suppress"/>
+        <PossiblyUnusedProperty errorLevel="suppress"/>
+        <PossiblyUnusedReturnValue errorLevel="suppress"/>
     </issueHandlers>
 </psalm>

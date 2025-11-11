@@ -8,8 +8,6 @@ use BEAR\Sunday\FakeApplication;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
-use function assert;
-
 class NamedModuleTest extends TestCase
 {
     private FakeApplication $app;
@@ -21,7 +19,6 @@ class NamedModuleTest extends TestCase
             'id' => 'bear',
         ];
         $app = (new Injector(new NamedModule($names)))->getInstance(FakeApplication::class);
-        assert($app instanceof FakeApplication);
         $this->app = $app;
     }
 

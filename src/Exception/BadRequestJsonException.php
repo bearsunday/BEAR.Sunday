@@ -6,6 +6,6 @@ namespace BEAR\Sunday\Exception;
 
 use BEAR\Resource\Exception\BadRequestException;
 
-class BadRequestJsonException extends BadRequestException implements ExceptionInterface
+final class BadRequestJsonException extends BadRequestException implements ExceptionInterface
 {
 }

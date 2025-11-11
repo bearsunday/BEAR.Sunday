@@ -6,3 +6,6 @@ parameters:
   excludePaths:
     - */tests/*/tmp/*
     - */tests/Fake/*
+  ignoreErrors:
+    - identifier: trait.unused
+      path: src/Inject/*

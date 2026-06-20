@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BEAR\Sunday\Provide\Error;
 
+use BEAR\Resource\Exception\BadRequestException;
+use BEAR\Resource\Exception\JsonSchemaRequestException;
 use BEAR\Sunday\Extension\Error\ErrorInterface;
 use BEAR\Sunday\Extension\Error\ThrowableHandlerInterface;
 use BEAR\Sunday\Extension\Router\RouterMatch as Request;
@@ -27,6 +29,10 @@ final class ThrowableHandler implements ThrowableHandlerInterface
     {
         if ($e instanceof Error) {
             $e = new ErrorException($e->getMessage(), $e->getCode(), E_ERROR, $e->getFile(), $e->getLine(), $e);
+        }
+
+        if ($e instanceof JsonSchemaRequestException) {
+            $e = new BadRequestException($e->getMessage(), $e->getCode(), $e);
         }
 
         /** @var Exception $e */

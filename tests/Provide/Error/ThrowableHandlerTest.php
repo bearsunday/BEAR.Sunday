@@ -59,7 +59,7 @@ class ThrowableHandlerTest extends TestCase
         $e = null;
         try {
             echo HELLO; // @phpstan-ignore-line
-        } catch (Throwable $e) {  // @phpstan-ignore-line create $e
+        } catch (Throwable $e) {
         }
 
         $this->throableHandler->handle($e, new RouterMatch())->transfer(); // @phpstan-ignore-line

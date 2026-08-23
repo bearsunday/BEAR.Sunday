@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "bear/resource": "^1.16",
+        "bear/resource": "^1.33",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
         "ray/aop": "^2.12.3",
         "ray/di": "^2.13",

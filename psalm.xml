@@ -17,13 +17,15 @@
         </ignoreFiles>
     </projectFiles>
     <issueHandlers>
+        <!-- Framework extension points: callers live in Ray.Di/AOP and downstream apps, invisible to standalone analysis -->
         <UnusedClass errorLevel="suppress"/>
         <PossiblyUnusedMethod errorLevel="suppress"/>
+        <PossiblyUnusedReturnValue errorLevel="suppress"/>
+        <!-- DefaultSchemeHost::$value is read by Ray.Di via the qualifier, not this repo; promoted properties ignore @psalm-suppress -->
         <PossiblyUnusedProperty>
             <errorLevel type="suppress">
                 <file name="src/Annotation/DefaultSchemeHost.php"/>
             </errorLevel>
         </PossiblyUnusedProperty>
-        <PossiblyUnusedReturnValue errorLevel="suppress"/>
     </issueHandlers>
 </psalm>

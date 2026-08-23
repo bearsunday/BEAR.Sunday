@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BEAR\Sunday\Provide\Error;
 
+use BEAR\Resource\Code;
 use BEAR\Resource\Exception\JsonSchemaRequestException;
 use BEAR\Resource\Exception\JsonSchemaResponseException;
 use BEAR\Resource\Exception\ResourceNotFoundException;
@@ -47,11 +48,22 @@ class ThrowableHandlerTest extends TestCase
         $this->assertSame('{"message":"Bad Request"}', FakeHttpResponder::$body);
     }
 
+    public function testJsonSchemaRequestExceptionWithCustomCode(): void
+    {
+        $e = new JsonSchemaRequestException('forbidden', Code::FORBIDDEN);
+        $this->throableHandler->handle($e, new RouterMatch())->transfer();
+        $this->assertSame(403, FakeHttpResponder::$code);
+        $this->assertSame([['Content-Type: application/vnd.error+json', false]], FakeHttpResponder::$headers);
+        $this->assertSame('{"message":"Forbidden"}', FakeHttpResponder::$body);
+    }
+
     public function testJsonSchemaResponseException(): void
     {
         $e = new JsonSchemaResponseException('response does not match schema');
         $this->throableHandler->handle($e, new RouterMatch())->transfer();
         $this->assertSame(500, FakeHttpResponder::$code);
+        $this->assertSame([['Content-Type: application/vnd.error+json', false]], FakeHttpResponder::$headers);
+        $this->assertSame('{"message":"500 Server Error"}', FakeHttpResponder::$body);
     }
 
     public function testError(): void

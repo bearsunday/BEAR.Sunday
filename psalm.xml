@@ -17,10 +17,13 @@
         </ignoreFiles>
     </projectFiles>
     <issueHandlers>
-        <MissingConstructor errorLevel="suppress"/>
         <UnusedClass errorLevel="suppress"/>
         <PossiblyUnusedMethod errorLevel="suppress"/>
-        <PossiblyUnusedProperty errorLevel="suppress"/>
+        <PossiblyUnusedProperty>
+            <errorLevel type="suppress">
+                <file name="src/Annotation/DefaultSchemeHost.php"/>
+            </errorLevel>
+        </PossiblyUnusedProperty>
         <PossiblyUnusedReturnValue errorLevel="suppress"/>
     </issueHandlers>
 </psalm>

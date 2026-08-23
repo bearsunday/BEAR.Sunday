@@ -26,11 +26,6 @@ final class VndError implements ErrorInterface
 {
     private const CONTENT_TYPE = 'application/vnd.error+json';
 
-    /** @var array{Content-Type: string} */
-    public $headers = ['Content-Type' => ''];
-
-    /** @var array{message: string} */
-    public $body = ['message' => ''];
     private ErrorPage $errorPage;
 
     public function __construct(

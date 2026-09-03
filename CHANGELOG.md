@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+
+- Deprecate `ResourceInject`; use constructor injection instead — automated migration: https://github.com/bearsunday/rector-bearsunday
+
 ## [1.9.0]
 
 - Add CompileStepInterface — compile-phase vocabulary for renderer modules; madapaja/twig-module and bear/qiq-module are waiting on this release

@@ -7,6 +7,7 @@ namespace BEAR\Sunday\Inject;
 use BEAR\Resource\ResourceInterface;
 use Ray\Di\Di\Inject;
 
+/** @deprecated Use constructor injection instead */
 trait ResourceInject
 {
     /** @var ResourceInterface */

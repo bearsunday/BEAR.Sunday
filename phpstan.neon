@@ -6,7 +6,3 @@ parameters:
   excludePaths:
     - */tests/*/tmp/*
     - */tests/Fake/*
-  ignoreErrors:
-    # Inject traits are the public API for downstream apps; their `use` sites live outside this repo
-    - identifier: trait.unused
-      path: src/Inject/*

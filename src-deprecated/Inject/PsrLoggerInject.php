@@ -7,6 +7,7 @@ namespace BEAR\Sunday\Inject;
 use Psr\Log\LoggerInterface;
 use Ray\Di\Di\Inject;
 
+/** @deprecated Use constructor injection instead */
 trait PsrLoggerInject
 {
     /** @var LoggerInterface */

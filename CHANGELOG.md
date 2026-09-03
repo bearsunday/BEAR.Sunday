@@ -3,7 +3,7 @@
 ## [Unreleased]
 
 - Deprecate `ResourceInject`; use constructor injection instead — automated migration: https://github.com/bearsunday/rector-bearsunday
-- Deprecate `PsrLoggerInject`; use constructor injection instead
+- Deprecate `PsrLoggerInject`; use constructor injection instead — automated migration: https://github.com/bearsunday/rector-bearsunday
 
 ## [1.9.0]
 

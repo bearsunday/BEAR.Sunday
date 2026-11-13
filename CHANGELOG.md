@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+
+- `RouterMatch::__toString()` puts the query string before a URI fragment instead of after it, so a path carrying a `#link=...` fragment still produces a valid URI with query.
+
 ## [1.9.1]
 
 - Deprecate `ResourceInject`; use constructor injection instead — automated migration: https://github.com/bearsunday/rector-bearsunday

@@ -92,7 +92,7 @@ final class WebRouter implements RouterInterface
         if ($isFormUrlEncoded) {
             parse_str(rtrim($rawBody), $put);
 
-            /** @var array<string, mixed> $put @phpstan-ignore varTag.nativeType */
+            /** @var array<string, mixed> $put */
             return $put;
         }
 

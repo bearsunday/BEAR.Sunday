@@ -62,8 +62,8 @@
         ]
     },
     "scripts": {
-        "post-install-cmd": ["@composer bin all install --ansi --ignore-platform-req=php"],
-        "post-update-cmd": ["@composer bin all update --ansi --ignore-platform-req=php"],
+        "post-install-cmd": ["@composer bin all install --ansi --ignore-platform-req=php+"],
+        "post-update-cmd": ["@composer bin all update --ansi --ignore-platform-req=php+"],
         "test": "./vendor/bin/phpunit",
         "tests": [
             "@cs",

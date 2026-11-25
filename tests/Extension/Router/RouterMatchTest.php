@@ -35,4 +35,11 @@ class RouterMatchTest extends TestCase
 
         $this->assertSame('get page://self/user#link=self:blog', (string) $match);
     }
+
+    public function testToStringSplitsAtFirstHash(): void
+    {
+        $match = new RouterMatch('get', 'page://self/a#b#c', ['id' => '1']);
+
+        $this->assertSame('get page://self/a?id=1#b#c', (string) $match);
+    }
 }

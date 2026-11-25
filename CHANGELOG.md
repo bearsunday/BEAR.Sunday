@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-- `RouterMatch::__toString()` puts the query string before a URI fragment instead of after it, so a path carrying a `#link=...` fragment still produces a valid URI with query.
+- `RouterMatch::__toString()` puts the query string before the URI fragment of the path: `get page://self/user?id=1#link=self:blog`.
 
 ## [1.9.1]
 

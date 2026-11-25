@@ -13,7 +13,6 @@ use BEAR\Sunday\Provide\Transfer\HttpCacheModule;
 use BEAR\Sunday\Provide\Transfer\HttpResponderModule;
 use Override;
 use Ray\Di\AbstractModule;
-use Ray\Di\Scope;
 
 /**
  * Provides BEAR.Sunday base bindings
@@ -28,6 +27,6 @@ final class SundayModule extends AbstractModule
         $this->install(new RouterModule());
         $this->install(new HttpResponderModule());
         $this->install(new ErrorModule());
-        $this->bind(ServerContextInterface::class)->to(GlobalServerContext::class)->in(Scope::SINGLETON);
+        $this->bind(ServerContextInterface::class)->to(GlobalServerContext::class);
     }
 }

@@ -21,10 +21,4 @@ final class GlobalServerContext implements ServerContextInterface
 
         return is_string($value) ? $value : null;
     }
-
-    #[Override]
-    public function has(string $key): bool
-    {
-        return $this->get($key) !== null;
-    }
 }

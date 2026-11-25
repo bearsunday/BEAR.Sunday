@@ -25,18 +25,15 @@ class GlobalServerContextTest extends TestCase
     public function testGetString(): void
     {
         $this->assertSame('value', $this->context->get('X_TEST_STRING'));
-        $this->assertTrue($this->context->has('X_TEST_STRING'));
     }
 
     public function testGetMissing(): void
     {
         $this->assertNull($this->context->get('X_TEST_MISSING'));
-        $this->assertFalse($this->context->has('X_TEST_MISSING'));
     }
 
     public function testGetNonString(): void
     {
         $this->assertNull($this->context->get('X_TEST_INT'));
-        $this->assertFalse($this->context->has('X_TEST_INT'));
     }
 }

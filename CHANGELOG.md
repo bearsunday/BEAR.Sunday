@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-- `RouterMatch::__toString()` puts the query string before the URI fragment of the path: `get page://self/user?id=1#link=self:blog`.
+- `RouterMatch::__toString()` puts the query string before the URI fragment of the path: `get page://self/user?id=1#link=self:blog`. It omits the `?` when the query encodes to nothing, as with `['a' => null]`.
 - Add `ServerContextInterface` for reading request server values, bound by `SundayModule` to `GlobalServerContext` (reads `$_SERVER`). A long-running worker binds its own request-scoped implementation.
 
 ## [1.9.1]

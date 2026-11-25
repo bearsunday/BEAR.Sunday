@@ -22,6 +22,13 @@ class RouterMatchTest extends TestCase
         $this->assertSame('get page://self/user', (string) $match);
     }
 
+    public function testToStringWithQueryThatEncodesToNothing(): void
+    {
+        $match = new RouterMatch('get', 'page://self/user', ['a' => null]);
+
+        $this->assertSame('get page://self/user', (string) $match);
+    }
+
     public function testToStringWithFragmentAndQuery(): void
     {
         $match = new RouterMatch('get', 'page://self/user#link=self:blog', ['id' => '1']);

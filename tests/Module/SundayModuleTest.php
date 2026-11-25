@@ -8,9 +8,11 @@ use BEAR\Resource\Annotation\AppName;
 use BEAR\Resource\ResourceInterface;
 use BEAR\Sunday\Extension\Application\AppInterface;
 use BEAR\Sunday\Extension\Router\RouterInterface;
+use BEAR\Sunday\Extension\Server\ServerContextInterface;
 use BEAR\Sunday\Extension\Transfer\TransferInterface;
 use BEAR\Sunday\Provide\Application\App;
 use BEAR\Sunday\Provide\Router\WebRouter;
+use BEAR\Sunday\Provide\Server\GlobalServerContext;
 use BEAR\Sunday\Provide\Transfer\HttpResponder;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\AbstractModule;
@@ -47,5 +49,8 @@ class SundayModuleTest extends TestCase
 
         $responder = $this->injector->getInstance(TransferInterface::class);
         $this->assertInstanceOf(HttpResponder::class, $responder);
+
+        $serverContext = $this->injector->getInstance(ServerContextInterface::class);
+        $this->assertInstanceOf(GlobalServerContext::class, $serverContext);
     }
 }

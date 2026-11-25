@@ -9,9 +9,7 @@ use Override;
 
 use function is_string;
 
-/**
- * Reads $_SERVER; safe only where a worker serves one request at a time (PHP-FPM)
- */
+/** Safe only where a worker serves one request at a time (PHP-FPM) */
 final class GlobalServerContext implements ServerContextInterface
 {
     #[Override]

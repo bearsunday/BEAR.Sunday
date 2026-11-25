@@ -7,11 +7,10 @@ namespace BEAR\Sunday\Extension\Server;
 /**
  * Request server values, keyed as PHP-FPM fills $_SERVER
  *
- * Request headers are HTTP_* (Content-Type and Content-Length are CONTENT_TYPE and CONTENT_LENGTH).
- * A long-running worker (Swoole, RoadRunner) binds a request-scoped implementation.
+ * Request headers are HTTP_*; Content-Type and Content-Length are CONTENT_TYPE and CONTENT_LENGTH.
  */
 interface ServerContextInterface
 {
-    /** Returns null when the key is missing or its value is not a string */
+    /** Null also when the value is not a string, such as REQUEST_TIME */
     public function get(string $key): string|null;
 }

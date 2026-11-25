@@ -32,8 +32,9 @@ class RouterMatch implements Stringable
             $path = substr($path, 0, $fragmentPos);
         }
 
-        $querySymbol = $this->query ? '?' : '';
+        $query = http_build_query($this->query);
+        $queryString = $query === '' ? '' : '?' . $query;
 
-        return "{$this->method} {$path}{$querySymbol}" . http_build_query($this->query) . $fragment;
+        return "{$this->method} {$path}{$queryString}{$fragment}";
     }
 }

@@ -10,17 +10,22 @@ class GlobalServerContextTest extends TestCase
 {
     private GlobalServerContext $context;
 
+    /** @var array<mixed> */
+    private array $server;
+
     protected function setUp(): void
     {
+        $this->server = $_SERVER;
         $this->context = new GlobalServerContext();
         $_SERVER['X_TEST_STRING'] = 'value';
         $_SERVER['X_TEST_INT'] = 1;
         $_SERVER['HTTP_X_TEST_HEADER'] = 'from-client';
+        unset($_SERVER['X_TEST_HEADER'], $_SERVER['X_TEST_MISSING']);
     }
 
     protected function tearDown(): void
     {
-        unset($_SERVER['X_TEST_STRING'], $_SERVER['X_TEST_INT'], $_SERVER['HTTP_X_TEST_HEADER']);
+        $_SERVER = $this->server;
     }
 
     public function testGetString(): void

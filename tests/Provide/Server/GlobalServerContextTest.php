@@ -20,7 +20,6 @@ class GlobalServerContextTest extends TestCase
         $_SERVER['X_TEST_STRING'] = 'value';
         $_SERVER['X_TEST_INT'] = 1;
         $_SERVER['HTTP_X_TEST_HEADER'] = 'from-client';
-        unset($_SERVER['X_TEST_HEADER'], $_SERVER['X_TEST_MISSING']);
     }
 
     protected function tearDown(): void

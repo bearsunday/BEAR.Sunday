@@ -37,5 +37,6 @@ class GlobalServerContextTest extends TestCase
     public function testGetNonString(): void
     {
         $this->assertNull($this->context->get('X_TEST_INT'));
+        $this->assertFalse($this->context->has('X_TEST_INT'));
     }
 }

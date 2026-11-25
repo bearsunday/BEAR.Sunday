@@ -14,5 +14,6 @@ interface ServerContextInterface
     /** Returns null when the key is missing or its value is not a string */
     public function get(string $key): string|null;
 
+    /** True exactly when get() returns a string */
     public function has(string $key): bool;
 }

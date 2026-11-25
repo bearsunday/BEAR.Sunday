@@ -11,6 +11,6 @@ namespace BEAR\Sunday\Extension\Server;
  */
 interface ServerContextInterface
 {
-    /** Null also when the value is not a string, such as REQUEST_TIME */
+    /** Null when the key is absent or the value is not a string, such as REQUEST_TIME */
     public function get(string $key): string|null;
 }

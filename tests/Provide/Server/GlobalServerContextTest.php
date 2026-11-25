@@ -15,11 +15,12 @@ class GlobalServerContextTest extends TestCase
         $this->context = new GlobalServerContext();
         $_SERVER['X_TEST_STRING'] = 'value';
         $_SERVER['X_TEST_INT'] = 1;
+        $_SERVER['HTTP_X_TEST_HEADER'] = 'from-client';
     }
 
     protected function tearDown(): void
     {
-        unset($_SERVER['X_TEST_STRING'], $_SERVER['X_TEST_INT']);
+        unset($_SERVER['X_TEST_STRING'], $_SERVER['X_TEST_INT'], $_SERVER['HTTP_X_TEST_HEADER']);
     }
 
     public function testGetString(): void
@@ -35,5 +36,10 @@ class GlobalServerContextTest extends TestCase
     public function testGetNonString(): void
     {
         $this->assertNull($this->context->get('X_TEST_INT'));
+    }
+
+    public function testRequestHeaderDoesNotStandInForServerKey(): void
+    {
+        $this->assertNull($this->context->get('X_TEST_HEADER'));
     }
 }

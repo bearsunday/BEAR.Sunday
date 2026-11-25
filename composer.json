@@ -84,7 +84,7 @@
             "./vendor/bin/phpstan analyse --no-ansi --no-progress -c phpstan.neon"
         ],
         "metrics": "./vendor/bin/phpmetrics --report-html=build/metrics --exclude=Exception --junit=build/junit.xml src",
-        "phpmd": "./vendor/bin/phpmd --exclude src/Annotation src text ./phpmd.xml",
+        "phpmd": "./vendor/bin/phpmd analyze src --format text --ruleset ./phpmd.xml --exclude '*src/Annotation/*'",
         "build": [
             "@cs",
             "@sa",
